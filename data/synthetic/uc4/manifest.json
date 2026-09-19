@@ -1,0 +1,1501 @@
+{
+  "annotation_status": {
+    "unreviewed": 853
+  },
+  "config_file_hashes": {
+    "eval/eval.v1.yaml": "bccb9c2d81e8a21549f8e7d83080e988c86416765d1daf6b27a5e4143890197c",
+    "taxonomy/high_risk.v1.yaml": "5ba1edd95b8acbac149a5c1abb072e4587b1a1cf5a645896e9587769fdc03c24",
+    "taxonomy/taxonomy.v1.yaml": "4cd881ce5e62fed7c7b447b2e5313e415a22de864c98f552a085245b43e344bf"
+  },
+  "dataset_id": "dataguard-uc4-synthetic",
+  "dataset_sha256": "bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa",
+  "dataset_version": "1.0.0",
+  "families": [
+    {
+      "family_id": "adv_code_comment_injection",
+      "group_id": "adv_code_comment_injection",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_downgrade_card_export",
+      "group_id": "adv_downgrade_card_export",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_downgrade_hr_record",
+      "group_id": "adv_downgrade_hr_record",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_exfil_env_file",
+      "group_id": "adv_exfil_env_file",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_exfil_trade_secret",
+      "group_id": "adv_exfil_trade_secret",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_hidden_markup_clinical",
+      "group_id": "adv_hidden_markup_clinical",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_json_field_injection",
+      "group_id": "adv_json_field_injection",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_multilingual_notice",
+      "group_id": "adv_multilingual_notice",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_role_override_design_doc",
+      "group_id": "adv_role_override_design_doc",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_role_override_strategy_memo",
+      "group_id": "adv_role_override_strategy_memo",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T5"
+    },
+    {
+      "family_id": "adv_upgrade_benign_notes",
+      "group_id": "adv_upgrade_benign_notes",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T5"
+    },
+    {
+      "family_id": "amb_acquisition_rumor_notes",
+      "group_id": "amb_acquisition_rumor_notes",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_aggregate_health_stats",
+      "group_id": "amb_aggregate_health_stats",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_board_minutes_routine",
+      "group_id": "amb_board_minutes_routine",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_conference_talk_draft",
+      "group_id": "amb_conference_talk_draft",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_customer_case_study_draft",
+      "group_id": "amb_customer_case_study_draft",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_employee_directory",
+      "group_id": "amb_employee_directory",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_hashed_password_dump",
+      "group_id": "amb_hashed_password_dump",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_incident_postmortem_internal",
+      "group_id": "amb_incident_postmortem_internal",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_internal_tooling_source",
+      "group_id": "amb_internal_tooling_source",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_product_roadmap_high_level",
+      "group_id": "amb_product_roadmap_high_level",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_research_paper_draft",
+      "group_id": "amb_research_paper_draft",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_salary_bands",
+      "group_id": "amb_salary_bands",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_ticket_first_names_only",
+      "group_id": "amb_ticket_first_names_only",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_unpublished_policy_draft",
+      "group_id": "amb_unpublished_policy_draft",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T3"
+    },
+    {
+      "family_id": "amb_vendor_contract_summary",
+      "group_id": "amb_vendor_contract_summary",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T3"
+    },
+    {
+      "family_id": "conf_customer_escalation_summary",
+      "group_id": "conf_customer_escalation_summary",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "conf_vendor_negotiation_status",
+      "group_id": "conf_vendor_negotiation_status",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "cred_chat_password_paste",
+      "group_id": "cred_chat_password_paste",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_ci_pipeline_token",
+      "group_id": "cred_ci_pipeline_token",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_db_connection_string",
+      "group_id": "cred_db_connection_string",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_email_shares_api_key",
+      "group_id": "cred_email_shares_api_key",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_env_file",
+      "group_id": "cred_env_file",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_jwt_in_log",
+      "group_id": "cred_jwt_in_log",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_kubeconfig_token",
+      "group_id": "cred_kubeconfig_token",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_python_hardcoded_key",
+      "group_id": "cred_python_hardcoded_key",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_readme_admin_login",
+      "group_id": "cred_readme_admin_login",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_registry_login_config",
+      "group_id": "cred_registry_login_config",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_terraform_tfvars",
+      "group_id": "cred_terraform_tfvars",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_vpn_credentials_email",
+      "group_id": "cred_vpn_credentials_email",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "cred_wiki_service_accounts",
+      "group_id": "cred_wiki_service_accounts",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_ach_batch_file",
+      "group_id": "fin_ach_batch_file",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_bank_statement",
+      "group_id": "fin_bank_statement",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_board_forecast_notes",
+      "group_id": "fin_board_forecast_notes",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "fin_corp_card_statement",
+      "group_id": "fin_corp_card_statement",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_covenant_breach_memo",
+      "group_id": "fin_covenant_breach_memo",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "fin_investor_update_unreleased",
+      "group_id": "fin_investor_update_unreleased",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T2"
+    },
+    {
+      "family_id": "fin_invoice_bank_details",
+      "group_id": "fin_invoice_bank_details",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_loan_application_financials",
+      "group_id": "fin_loan_application_financials",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_merchant_settlement",
+      "group_id": "fin_merchant_settlement",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_payment_export_cards",
+      "group_id": "fin_payment_export_cards",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "fin_preannouncement_earnings",
+      "group_id": "fin_preannouncement_earnings",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "fin_wire_instructions_iban",
+      "group_id": "fin_wire_instructions_iban",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "hn_announced_acquisition_news",
+      "group_id": "hn_announced_acquisition_news",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_awareness_doc_explains_ssn",
+      "group_id": "hn_awareness_doc_explains_ssn",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_blank_hr_form_template",
+      "group_id": "hn_blank_hr_form_template",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_business_case_study",
+      "group_id": "hn_business_case_study",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_code_reads_env_secrets",
+      "group_id": "hn_code_reads_env_secrets",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_confidential_word_menu",
+      "group_id": "hn_confidential_word_menu",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_dept_expense_summary",
+      "group_id": "hn_dept_expense_summary",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_masked_card_receipt",
+      "group_id": "hn_masked_card_receipt",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_notes_mentioning_confidentiality",
+      "group_id": "hn_notes_mentioning_confidentiality",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_open_source_code",
+      "group_id": "hn_open_source_code",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_password_policy_doc",
+      "group_id": "hn_password_policy_doc",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_public_api_docs_placeholder_keys",
+      "group_id": "hn_public_api_docs_placeholder_keys",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_public_financial_statements",
+      "group_id": "hn_public_financial_statements",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_public_health_article",
+      "group_id": "hn_public_health_article",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_published_patent",
+      "group_id": "hn_published_patent",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_sku_lookalike_ssn",
+      "group_id": "hn_sku_lookalike_ssn",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_synthetic_test_fixtures",
+      "group_id": "hn_synthetic_test_fixtures",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_test_card_numbers_doc",
+      "group_id": "hn_test_card_numbers_doc",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T4"
+    },
+    {
+      "family_id": "hn_tracking_numbers_lookalike_card",
+      "group_id": "hn_tracking_numbers_lookalike_card",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T4"
+    },
+    {
+      "family_id": "int_all_hands_notes",
+      "group_id": "int_all_hands_notes",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_expense_policy_summary",
+      "group_id": "int_expense_policy_summary",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_it_helpdesk_howto",
+      "group_id": "int_it_helpdesk_howto",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_office_holiday_schedule",
+      "group_id": "int_office_holiday_schedule",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_project_status_update",
+      "group_id": "int_project_status_update",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_team_meeting_notes",
+      "group_id": "int_team_meeting_notes",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "int_training_schedule",
+      "group_id": "int_training_schedule",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ip_design_doc_patent_pending",
+      "group_id": "ip_design_doc_patent_pending",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ip_design_spec_new_component",
+      "group_id": "ip_design_spec_new_component",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_invention_disclosure_form",
+      "group_id": "ip_invention_disclosure_form",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ip_patent_draft_claims",
+      "group_id": "ip_patent_draft_claims",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ip_prototype_test_results",
+      "group_id": "ip_prototype_test_results",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_provisional_application_notes",
+      "group_id": "ip_provisional_application_notes",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ip_research_notebook_novel_method",
+      "group_id": "ip_research_notebook_novel_method",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_ts_algorithm_disclosure",
+      "group_id": "ip_ts_algorithm_disclosure",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_ts_process_patent_pending",
+      "group_id": "ip_ts_process_patent_pending",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_ui_design_new_product",
+      "group_id": "ip_ui_design_new_product",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ip_unreleased_creative_work",
+      "group_id": "ip_unreleased_creative_work",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_acquisition_target_list",
+      "group_id": "ma_acquisition_target_list",
+      "n_docs": 7,
+      "split": "calibration",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_activist_response_plan",
+      "group_id": "ma_activist_response_plan",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_board_strategy_memo",
+      "group_id": "ma_board_strategy_memo",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_dd_checklist_labeled",
+      "group_id": "ma_dd_checklist_labeled",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ma_divestiture_plan_email",
+      "group_id": "ma_divestiture_plan_email",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_investment_committee_notes",
+      "group_id": "ma_investment_committee_notes",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_loi_labeled",
+      "group_id": "ma_loi_labeled",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ma_market_exit_plan",
+      "group_id": "ma_market_exit_plan",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_partnership_negotiation_notes",
+      "group_id": "ma_partnership_negotiation_notes",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_reorg_restructuring_plan",
+      "group_id": "ma_reorg_restructuring_plan",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ma_term_sheet_labeled",
+      "group_id": "ma_term_sheet_labeled",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "meta_public_label_on_card_refunds",
+      "group_id": "meta_public_label_on_card_refunds",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "meta_public_label_on_strategy",
+      "group_id": "meta_public_label_on_strategy",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "phi_clinician_narrative",
+      "group_id": "phi_clinician_narrative",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "phi_discharge_summary",
+      "group_id": "phi_discharge_summary",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_hl7_message",
+      "group_id": "phi_hl7_message",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_immunization_registry",
+      "group_id": "phi_immunization_registry",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_insurance_claim",
+      "group_id": "phi_insurance_claim",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_lab_results",
+      "group_id": "phi_lab_results",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_occupational_health_note",
+      "group_id": "phi_occupational_health_note",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "phi_pathology_report",
+      "group_id": "phi_pathology_report",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_patient_visit_note",
+      "group_id": "phi_patient_visit_note",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_prescription_record",
+      "group_id": "phi_prescription_record",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_radiology_report",
+      "group_id": "phi_radiology_report",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "phi_therapy_session_notes",
+      "group_id": "phi_therapy_session_notes",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "phi_workplace_injury_report",
+      "group_id": "phi_workplace_injury_report",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_customer_contact_list",
+      "group_id": "pii_customer_contact_list",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_donor_list",
+      "group_id": "pii_donor_list",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_exit_interview_personal",
+      "group_id": "pii_exit_interview_personal",
+      "n_docs": 6,
+      "split": "calibration",
+      "tier": "T2"
+    },
+    {
+      "family_id": "pii_hr_investigation_summary",
+      "group_id": "pii_hr_investigation_summary",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "pii_hr_record_ssn",
+      "group_id": "pii_hr_record_ssn",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_kyc_passport",
+      "group_id": "pii_kyc_passport",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_manager_notes_private",
+      "group_id": "pii_manager_notes_private",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T2"
+    },
+    {
+      "family_id": "pii_payroll_register",
+      "group_id": "pii_payroll_register",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_support_export",
+      "group_id": "pii_support_export",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pii_visa_application",
+      "group_id": "pii_visa_application",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_careers_faq",
+      "group_id": "pub_careers_faq",
+      "n_docs": 5,
+      "split": "dev",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_engineering_blog_post",
+      "group_id": "pub_engineering_blog_post",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_event_agenda",
+      "group_id": "pub_event_agenda",
+      "n_docs": 5,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_press_release_announced",
+      "group_id": "pub_press_release_announced",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_product_datasheet",
+      "group_id": "pub_product_datasheet",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_public_newsletter",
+      "group_id": "pub_public_newsletter",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "pub_support_faq",
+      "group_id": "pub_support_faq",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_code_review_comments",
+      "group_id": "sc_code_review_comments",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "sc_csharp_class",
+      "group_id": "sc_csharp_class",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_docker_compose",
+      "group_id": "sc_docker_compose",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_go_handler",
+      "group_id": "sc_go_handler",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_java_class",
+      "group_id": "sc_java_class",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_js_service",
+      "group_id": "sc_js_service",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_python_module",
+      "group_id": "sc_python_module",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_shell_deploy_script",
+      "group_id": "sc_shell_deploy_script",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_snippet_in_chat",
+      "group_id": "sc_snippet_in_chat",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "sc_sql_migration",
+      "group_id": "sc_sql_migration",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "sc_terraform_module",
+      "group_id": "sc_terraform_module",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ts_algorithm_design_writeup",
+      "group_id": "ts_algorithm_design_writeup",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_customer_list_labeled",
+      "group_id": "ts_customer_list_labeled",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ts_customer_pricing_intel",
+      "group_id": "ts_customer_pricing_intel",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_formula_labeled",
+      "group_id": "ts_formula_labeled",
+      "n_docs": 5,
+      "split": "calibration",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ts_fraud_model_feature_logic",
+      "group_id": "ts_fraud_model_feature_logic",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_lab_protocol_yield",
+      "group_id": "ts_lab_protocol_yield",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_manufacturing_process",
+      "group_id": "ts_manufacturing_process",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_pricing_algorithm_labeled",
+      "group_id": "ts_pricing_algorithm_labeled",
+      "n_docs": 5,
+      "split": "train",
+      "tier": "T1"
+    },
+    {
+      "family_id": "ts_recipe_formulation_notes",
+      "group_id": "ts_recipe_formulation_notes",
+      "n_docs": 6,
+      "split": "train",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_sales_playbook_pricing_floors",
+      "group_id": "ts_sales_playbook_pricing_floors",
+      "n_docs": 6,
+      "split": "test",
+      "tier": "T2"
+    },
+    {
+      "family_id": "ts_supplier_yield_terms",
+      "group_id": "ts_supplier_yield_terms",
+      "n_docs": 6,
+      "split": "dev",
+      "tier": "T2"
+    }
+  ],
+  "files": {
+    "calibration": {
+      "n_docs": 103,
+      "path": "docs/calibration.jsonl",
+      "sha256": "48ed286c4b919a67867ef2bbd23755ee35bcd383864695bb97928e71653a7f24"
+    },
+    "dev": {
+      "n_docs": 107,
+      "path": "docs/dev.jsonl",
+      "sha256": "4c66cd66efee97fd58919dda30e9fd7c422367a082c99e61adc9e1f5a29afdb7"
+    },
+    "test": {
+      "n_docs": 227,
+      "path": "docs/test.jsonl",
+      "sha256": "fbc708312d91124c12e25bba307c16a0d9d499d476c1c22b523498ea1c84c7b4"
+    },
+    "train": {
+      "n_docs": 416,
+      "path": "docs/train.jsonl",
+      "sha256": "a37bca169fd63e595de5854fb119a726bce8935bfbff125b87842d9bafede47e"
+    }
+  },
+  "generator_name": "template-v1",
+  "generator_version": "1.0.0",
+  "high_risk_version": "1.0.0",
+  "integrity": {
+    "errors": [],
+    "ok": true,
+    "small_sample_flags": [
+      {
+        "axis": "level",
+        "label": "PUBLIC",
+        "min_required": 40,
+        "positives": 32,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "PHI",
+        "min_required": 40,
+        "positives": 33,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "FINANCIAL_PCI",
+        "min_required": 40,
+        "positives": 39,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "CREDENTIALS_SECRETS",
+        "min_required": 40,
+        "positives": 32,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "INTELLECTUAL_PROPERTY",
+        "min_required": 40,
+        "positives": 33,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "TRADE_SECRET",
+        "min_required": 40,
+        "positives": 35,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "MA_CORP_STRATEGY",
+        "min_required": 40,
+        "positives": 34,
+        "split": "train"
+      },
+      {
+        "axis": "category",
+        "label": "MA_CORP_STRATEGY",
+        "min_required": 8,
+        "positives": 7,
+        "split": "calibration"
+      },
+      {
+        "axis": "level",
+        "label": "PUBLIC",
+        "min_required": 25,
+        "positives": 22,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "PHI",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "FINANCIAL_PCI",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "SOURCE_CODE",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "CREDENTIALS_SECRETS",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "INTELLECTUAL_PROPERTY",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "TRADE_SECRET",
+        "min_required": 25,
+        "positives": 24,
+        "split": "test"
+      },
+      {
+        "axis": "category",
+        "label": "MA_CORP_STRATEGY",
+        "min_required": 25,
+        "positives": 23,
+        "split": "test"
+      }
+    ],
+    "stats": {
+      "cross_split_max_jaccard": 0.2889,
+      "cross_split_pairs_checked": 240483,
+      "cross_split_pairs_over_threshold": 0,
+      "cross_split_shared_evidence_values": 0,
+      "n_documents": 853,
+      "near_duplicate_threshold": 0.5,
+      "within_family_max_jaccard": 0.9692,
+      "within_family_mean_jaccard": 0.3388
+    },
+    "warnings": []
+  },
+  "n_documents": 853,
+  "seed": 20260918,
+  "spec_hash": "4cd80684c6d221ae82858acad1717628899d8ca6f892229e86a4fe39f5c3eb4b",
+  "stats": {
+    "adversarial_types": {
+      "prompt_injection_downgrade": 20,
+      "prompt_injection_exfiltration": 10,
+      "prompt_injection_hidden_markup": 5,
+      "prompt_injection_multilingual": 5,
+      "prompt_injection_role_override": 10,
+      "prompt_injection_upgrade": 5
+    },
+    "by_split": {
+      "calibration": {
+        "ambiguous_docs": 12,
+        "categories": {
+          "CREDENTIALS_SECRETS": 10,
+          "FINANCIAL_PCI": 11,
+          "INTELLECTUAL_PROPERTY": 11,
+          "MA_CORP_STRATEGY": 7,
+          "PHI": 10,
+          "PII": 11,
+          "SOURCE_CODE": 11,
+          "TRADE_SECRET": 10
+        },
+        "content_chars": {
+          "max": 655,
+          "mean": 326,
+          "median": 308,
+          "min": 168
+        },
+        "docs_with_multiple_categories": 5,
+        "docs_with_no_category": 27,
+        "high_risk_docs": 60,
+        "levels": {
+          "CONFIDENTIAL": 28,
+          "HIGHLY_CONFIDENTIAL": 54,
+          "INTERNAL": 11,
+          "PUBLIC": 10
+        },
+        "n_docs": 103,
+        "n_families": 19,
+        "tiers": {
+          "T1": 51,
+          "T2": 25,
+          "T3": 12,
+          "T4": 10,
+          "T5": 5
+        }
+      },
+      "dev": {
+        "ambiguous_docs": 12,
+        "categories": {
+          "CREDENTIALS_SECRETS": 10,
+          "FINANCIAL_PCI": 10,
+          "INTELLECTUAL_PROPERTY": 12,
+          "MA_CORP_STRATEGY": 11,
+          "PHI": 10,
+          "PII": 11,
+          "SOURCE_CODE": 10,
+          "TRADE_SECRET": 11
+        },
+        "content_chars": {
+          "max": 530,
+          "mean": 322,
+          "median": 336,
+          "min": 181
+        },
+        "docs_with_multiple_categories": 10,
+        "docs_with_no_category": 32,
+        "high_risk_docs": 58,
+        "levels": {
+          "CONFIDENTIAL": 29,
+          "HIGHLY_CONFIDENTIAL": 52,
+          "INTERNAL": 16,
+          "PUBLIC": 10
+        },
+        "n_docs": 107,
+        "n_families": 20,
+        "tiers": {
+          "T1": 46,
+          "T2": 24,
+          "T3": 12,
+          "T4": 15,
+          "T5": 10
+        }
+      },
+      "test": {
+        "ambiguous_docs": 24,
+        "categories": {
+          "CREDENTIALS_SECRETS": 23,
+          "FINANCIAL_PCI": 23,
+          "INTELLECTUAL_PROPERTY": 23,
+          "MA_CORP_STRATEGY": 23,
+          "PHI": 23,
+          "PII": 28,
+          "SOURCE_CODE": 23,
+          "TRADE_SECRET": 24
+        },
+        "content_chars": {
+          "max": 863,
+          "mean": 329,
+          "median": 331,
+          "min": 142
+        },
+        "docs_with_multiple_categories": 35,
+        "docs_with_no_category": 72,
+        "high_risk_docs": 121,
+        "levels": {
+          "CONFIDENTIAL": 63,
+          "HIGHLY_CONFIDENTIAL": 116,
+          "INTERNAL": 26,
+          "PUBLIC": 22
+        },
+        "n_docs": 227,
+        "n_families": 40,
+        "tiers": {
+          "T1": 97,
+          "T2": 66,
+          "T3": 24,
+          "T4": 25,
+          "T5": 15
+        }
+      },
+      "train": {
+        "ambiguous_docs": 42,
+        "categories": {
+          "CREDENTIALS_SECRETS": 32,
+          "FINANCIAL_PCI": 39,
+          "INTELLECTUAL_PROPERTY": 33,
+          "MA_CORP_STRATEGY": 34,
+          "PHI": 33,
+          "PII": 56,
+          "SOURCE_CODE": 42,
+          "TRADE_SECRET": 35
+        },
+        "content_chars": {
+          "max": 527,
+          "mean": 315,
+          "median": 316,
+          "min": 133
+        },
+        "docs_with_multiple_categories": 20,
+        "docs_with_no_category": 132,
+        "high_risk_docs": 226,
+        "levels": {
+          "CONFIDENTIAL": 122,
+          "HIGHLY_CONFIDENTIAL": 210,
+          "INTERNAL": 52,
+          "PUBLIC": 32
+        },
+        "n_docs": 416,
+        "n_families": 76,
+        "tiers": {
+          "T1": 190,
+          "T2": 114,
+          "T3": 42,
+          "T4": 45,
+          "T5": 25
+        }
+      }
+    },
+    "existing_label_schemes": {
+      "banner": 39,
+      "sensitivity_label": 21
+    },
+    "formats": {
+      "agenda": 5,
+      "blog_post": 10,
+      "chat": 11,
+      "checklist": 5,
+      "claim": 5,
+      "clinical_note": 46,
+      "config_file": 38,
+      "csv_table": 82,
+      "datasheet": 6,
+      "design_doc": 22,
+      "draft": 36,
+      "email": 22,
+      "form": 36,
+      "how_to": 11,
+      "invoice": 5,
+      "json": 5,
+      "legal_doc": 5,
+      "legal_draft": 15,
+      "log": 5,
+      "markdown": 10,
+      "meeting_notes": 28,
+      "memo": 53,
+      "message": 5,
+      "newsletter": 6,
+      "notes": 65,
+      "notice": 21,
+      "policy_doc": 21,
+      "press_release": 11,
+      "record": 5,
+      "report": 83,
+      "review": 6,
+      "source_code": 74,
+      "statement": 10,
+      "technical_doc": 57,
+      "ticket": 11,
+      "web_page": 11,
+      "wiki_page": 6
+    },
+    "generators": {
+      "template-v1": 853
+    },
+    "overall": {
+      "ambiguous_docs": 90,
+      "categories": {
+        "CREDENTIALS_SECRETS": 75,
+        "FINANCIAL_PCI": 83,
+        "INTELLECTUAL_PROPERTY": 79,
+        "MA_CORP_STRATEGY": 75,
+        "PHI": 76,
+        "PII": 106,
+        "SOURCE_CODE": 86,
+        "TRADE_SECRET": 80
+      },
+      "content_chars": {
+        "max": 863,
+        "mean": 321,
+        "median": 319,
+        "min": 133
+      },
+      "docs_with_multiple_categories": 70,
+      "docs_with_no_category": 263,
+      "high_risk_docs": 465,
+      "levels": {
+        "CONFIDENTIAL": 242,
+        "HIGHLY_CONFIDENTIAL": 432,
+        "INTERNAL": 105,
+        "PUBLIC": 74
+      },
+      "n_docs": 853,
+      "n_families": 155,
+      "tiers": {
+        "T1": 384,
+        "T2": 229,
+        "T3": 90,
+        "T4": 95,
+        "T5": 55
+      }
+    }
+  },
+  "taxonomy_version": "1.0.0"
+}
