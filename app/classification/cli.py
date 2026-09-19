@@ -449,7 +449,8 @@ def _cmd_llm_report(args: argparse.Namespace) -> int:
 
         dev = by_split["dev"]
         rules = evaluate(build_rules_classifier(bundle, args.config_dir), dev, bundle, manifest)
-        ml = evaluate(build_ml_classifier(bundle, **common), dev, bundle, manifest)
+        ml_clf = build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+        ml = evaluate(ml_clf, dev, bundle, manifest)
         return rules, ml
 
     text = build_llm_report(

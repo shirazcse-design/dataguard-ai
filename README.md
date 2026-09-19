@@ -21,7 +21,7 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | 2 | Evaluation harness | done |
 | 3 | Rules Engine (deterministic baseline) | done; merged (development splits only) |
 | 4 | Supervised ML classifier | done; merged (development splits only) |
-| 5 | LLM classifier | built and tested with mock/replay; **no model benchmarked (blocked on Azure access)**; awaiting review |
+| 5 | LLM classifier | done; benchmarked on dev against three Foundry deployments (recorded, replayable); awaiting review |
 | 6+ | Hybrid routing, observability, service surface | **not started; requires explicit approval** |
 
 Out of scope for this stage: RAG, MCP, autonomous agents, UI, repository crawling, document

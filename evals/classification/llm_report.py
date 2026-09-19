@@ -29,7 +29,7 @@ from .reporting import _ci, _f, _table
 TIERS = ("small", "mid", "large")
 BUCKETS = ("low", "medium", "high")
 RUN_COMMAND = (
-    "DATAGUARD_FOUNDRY_ENDPOINT=... DATAGUARD_FOUNDRY_API_VERSION=... DATAGUARD_FOUNDRY_API_KEY=... "
+    "DATAGUARD_FOUNDRY_ENDPOINT=... DATAGUARD_FOUNDRY_API_KEY=... "
     "DATAGUARD_LLM_DEPLOYMENT_SMALL=<your deployment> dataguard-uc4 eval run --classifier llm "
     "--llm-tier small --llm-mode record --split dev"
 )
@@ -130,6 +130,8 @@ def _summary_table(ran, results, tiers) -> list[str]:
         quotes = sum(r.evidence_total for r in recs)
         ver = sum(r.evidence_verified for r in recs)
         served = ", ".join(sorted(clf.served_models)) or "not recorded"
+        if served == clf.params()["model_id"]:
+            served += " (provider echoes only the deployment name)"
         rows.append(
             [
                 t,
@@ -424,16 +426,27 @@ def build_llm_report(
     add("")
     add(_table(["tier", "status"], [[t, status[t]] for t in TIERS]))
     add("")
-    add(
-        "The Foundry adapter is **unverified against a real endpoint** (tested only against a local "
-        "fake server). The PRD requires at least three model configurations to be benchmarked; that "
-        "remains blocked on access and deployment names supplied by the product owner."
-    )
+    if ran:
+        add(
+            "The Foundry adapter was exercised with real calls against the project's deployments "
+            "(2026-09-19); its request shape follows the Foundry REST reference, and per-deployment "
+            "quirks (API mode, temperature support) are in `config/llm/llm.v1.yaml`. Results below "
+            "come from **recorded provider responses** replayed from `data/llm_cache`."
+        )
+    else:
+        add(
+            "The Foundry adapter has **never been run against a real endpoint here** (tested only "
+            "against a local fake server). The PRD requires at least three model configurations to "
+            "be benchmarked; that remains blocked on access and deployment names."
+        )
     add("")
-    add("To run a tier once access exists (records a replayable cache; then re-run this report):")
-    add("")
-    add(f"    {RUN_COMMAND}")
-    add("")
+    if len(ran) < len(TIERS):
+        add(
+            "To run a tier once access exists (records a replayable cache; then re-run this report):"
+        )
+        add("")
+        add(f"    {RUN_COMMAND}")
+        add("")
     add("## Provenance and protocol")
     add("")
     add("* pre-registered plan: `docs/uc4/llm-plan.md` (committed before any LLM code)")
@@ -549,7 +562,8 @@ def build_llm_report(
         "* Synthetic, template-generated, AI-authored labels not yet human reviewed; dev has 18 families."
     )
     add(
-        "* The Foundry adapter was verified against the project's deployments on 2026-09-19 (see docs/uc4/llm-engine.md); no model names are assumed in the code."
+        "* No model names are assumed in code; the provider-reported model is shown where it reports one."
+        + ("" if ran else " The Foundry adapter has not been run against a real endpoint here.")
     )
     if ran:
         add(
@@ -560,7 +574,10 @@ def build_llm_report(
             "messy documents, and human review of the gold labels is still outstanding."
         )
         add(
-            "* Concurrent recording, no temperature on some tiers and a single sample per document: a fresh run could differ; the replay cache is the reproducible record."
+            "* No temperature on some tiers and a single sample per document: a fresh run could differ; the replay cache is the reproducible record."
+        )
+        add(
+            "* Recorded latency reflects the concurrency the recorder used (see the recording log in docs/uc4/llm-engine.md); it is not a controlled latency benchmark."
         )
     add(
         "* Replayed runs use RECORDED responses and latency; a changed prompt, few-shot set or schema invalidates the cache key by design."

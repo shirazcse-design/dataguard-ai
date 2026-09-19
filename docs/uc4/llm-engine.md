@@ -1,19 +1,24 @@
 # UC4 LLM classifier (Approach C)
 
 > Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.**
-> Plan (pre-registered before any code): [`llm-plan.md`](llm-plan.md). Generated status and
-> measurements: [`results/llm-baseline.md`](results/llm-baseline.md).
+> Plan (pre-registered before any code): [`llm-plan.md`](llm-plan.md) (deviations are listed below).
+> Generated results: [`results/llm-baseline.md`](results/llm-baseline.md).
 
-## Status in one paragraph
+## Status
 
-The whole LLM path exists and is tested against mock and replay providers: provider interface, replay
-cache, prompt assembly, strict output validation, code-based evidence verification, injection guard,
-failure handling, harness integration and a report generator. **No model has been run.** There is no
-Azure AI Foundry project, credential or approved deployment name in this environment, so there are
-**no LLM accuracy, calibration, latency or cost results**, and the PRD's three-model benchmark is
-**blocked** until the product owner supplies access. The Foundry adapter has never talked to a real
-service. What *was* measured is model-independent (prompt sizes, few-shot leakage, the local injection
-guard).
+The whole LLM path exists, is tested (mock/replay/local fake server), and has now been **run against
+the project's three deployments on the dev split**. The generated report is
+[`results/llm-baseline.md`](results/llm-baseline.md); every number below comes from it.
+
+| tier | deployment | served model (provider-reported) | level macro-F1 | category macro-F1 | HR precision | HR recall | HR FPR | quotes verified | P50 latency (s) | tokens / doc |
+|---|---|---|---|---|---|---|---|---|---|---|
+| small | uc4-llm-small | gpt-5-mini-2025-08-07 | 0.918 [0.787, 1.000] | 0.932 [0.881, 1.000] | 0.883 | 1.000 [1.000, 1.000] | 0.159 | 1.000 (194/194) | 6.4 | 5985 |
+| mid | uc4-llm-medium | gpt-5.4-2026-03-05 | 0.870 [0.631, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 | 1.000 (169/169) | 2.4 | 5329 |
+| large | uc4-llm-large | uc4-llm-large (provider echoes only the deployment name) | 0.870 [0.631, 1.000] | 0.990 [0.958, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 | 1.000 (162/162) | 78.3 | 5896 |
+
+All three tiers returned schema-valid output for 107/107 dev documents (no provider failures, no
+review cases), and every evidence quote was found in the input. Read this table with the caveats
+below: **near-perfect scores on this dataset should not be taken as evidence of real-world accuracy.**
 
 ## Architecture
 
@@ -93,33 +98,94 @@ Five T5 families in train and 3-4 in dev make these rates anecdotal. The guard i
 delimiting and the prompt rules are the primary defence, and whether they work can only be measured
 with a real model.
 
+## Recording log, verification and deviations from the pre-registered plan
+
+Recorded 2026-09-19 against a Foundry resource, prompt `classifier.v1`, dev split only (107
+documents per deployment), 4,000 output-token cap, records committed under `data/llm_cache/`.
+* `small` and `mid`: sequential runs (`eval run --classifier llm --llm-mode record`).
+* `large`: a concurrent driver (8 workers) in record mode, because a single call took about 87 s
+  and a sequential run would have taken hours; its recorded latencies may include queueing. The
+  official numbers come from a sequential **replay** of the recorded responses and reproduce the
+  live runs' metrics fingerprints for `small` and `mid` exactly.
+* The adapter was verified live: the v1 route with the deployment name in `model`; a project
+  endpoint reduced to its resource host; `api-key` header. Probes on a trivial, document-free
+  prompt found deployment quirks now recorded in `config/llm/llm.v1.yaml`: `small` rejects a
+  temperature of 0 and `large` rejects the parameter altogether (both reasoning models), so neither
+  sends one; `large` supports only the Responses API. Their runs are therefore not guaranteed
+  reproducible by re-calling the model; the replay cache is the reproducible record.
+* Deviations from `llm-plan.md`: output cap 700 to 4000 tokens (reasoning tokens count against it);
+  timeout 10 s to 300 s (the reasoning deployments exceed 10 s, so 10 s made calls fail); temperature
+  omitted on two tiers. The prompt and few-shot set were not changed after seeing any dev result.
+* The provider reports `gpt-5-mini-2025-08-07` and `gpt-5.4-2026-03-05` as the served model for
+  `small` and `mid`; for `large` it echoes only the deployment name.
+
+## Findings (dev; see the generated report for every number)
+
+1. **Structured output and evidence are reliable here:** 107/107 schema-valid per tier and 100% of
+   quotes verified. The verification and masking code was therefore not stressed by real
+   hallucination on this dataset.
+2. **Categories are near-saturated for `mid` (F1 1.000) and `large` (0.990); `small` is at 0.932**
+   with its errors concentrated in one T2 family where it added Trade Secret (and Highly
+   Confidential) to Intellectual Property documents, exactly the IP-versus-Trade-Secret overlap the
+   guidelines call out. Its high-risk precision is 0.883 (FPR 0.159).
+3. **The single remaining level error for `mid` and `large` is one T4 family**
+   (`hn_public_api_docs_placeholder_keys`, gold PUBLIC, predicted INTERNAL for all 5 documents). With
+   10 PUBLIC documents in dev this alone caps level macro-F1 at 0.870. It is a candidate for the
+   human gold-label review.
+4. **Verbalized confidence is informative for one tier only.** `small` and `mid` say `high` for all
+   107 documents (so their reliability tables are degenerate: `small` is right on 92.5% of levels,
+   `mid` on 95.3%). `large` uses `medium` on 15 documents, which are correct 66.7% (10/15) of the
+   time versus 100% (92/92) for its `high` calls. That is a real signal, but from one tier and 15
+   documents, and the buckets are never calibrated probabilities. Do not use them alone as a routing
+   signal.
+5. **Prompt injection:** 0 of 10 dev injection documents were under-classified by any tier, while the
+   local lexicon flagged only 3 of them. Two families; anecdotal.
+6. **Latency misses the PRD's 10 s tool-call limit for `large` (every call; P50 78 s) and for `small`
+   at the tail (P95 9.4 s, 2 of 107 over 10 s); `mid` is well inside (P50 2.4 s, max 3.7 s).**
+7. **Token cost per document is about 5.3-6.0k tokens, dominated by the 20.7k-character system
+   prompt (13 few-shot examples).** Prices were not supplied, so no cost is estimated.
+
+## Caveats that matter more than the scores
+
+* **Optimism / circularity.** The dataset was authored by an AI following the same labeling
+  guidelines that the prompt states (level procedure, overlap rules, "choose the higher level" tie
+  break). Documents are short, templated and semantically explicit. A strong LLM can recover that
+  logic. These results say little about real, messy documents, and the gold labels are still
+  pending human review.
+* 18 dev families; per-tier intervals are wide and category supports are small (SMALL_SAMPLE).
+* One sample per document; two tiers have no temperature.
+* Rules were developed against dev; the LLM prompt was not tuned on dev, but the prompt does encode
+  the labeling guidelines.
+* The locked test split has never been evaluated.
+
 ## What was NOT done, and why
 
 | Item | State |
 |---|---|
-| Three-tier benchmark on dev (PRD 6.3), reliability table, cost, latency, evidence rates | **Blocked:** no Azure access or deployment names (open decision 4) |
-| Verification of the Foundry adapter against a real endpoint | **Blocked:** same; tested only against a local fake server |
-| Foundry content-safety supplement | Not started; optional and only if available |
-| Pre-LLM redaction option | Deferred: its effect can only be measured with a real model |
+| Calibration of LLM confidence | Not possible from verbalized buckets (all `high`); no logprob calibration was attempted |
+| Foundry content-safety supplement | Not started; optional |
+| Pre-LLM redaction option | Deferred; its effect can now be measured, but was not in scope |
 | Injection "raise but not lower" rule | Phase 6: it needs Rules/ML outputs |
-| Hybrid routing, fusion, thresholds, locked-test report | Phase 6, not approved yet |
+| Hybrid routing, fusion, thresholds, locked-test report | Phase 6, not approved |
+| Cost estimate | Prices not supplied |
 
-## To run a tier once access exists
+## To run or re-record a tier
 
 ```
-export DATAGUARD_FOUNDRY_ENDPOINT=...  DATAGUARD_FOUNDRY_API_VERSION=...  DATAGUARD_FOUNDRY_API_KEY=...
-export DATAGUARD_LLM_DEPLOYMENT_SMALL=<your deployment name>
+export DATAGUARD_FOUNDRY_ENDPOINT=...   # resource or project endpoint
+export DATAGUARD_FOUNDRY_API_KEY=...    # never commit; use a secret store in CI
+export DATAGUARD_LLM_DEPLOYMENT_SMALL=<deployment>   # likewise _MID and _LARGE
 dataguard-uc4 eval run --classifier llm --llm-tier small --llm-mode record --split dev
-dataguard-uc4 llm report --tier small=<your deployment name> --out docs/uc4/results/llm-baseline.md
+dataguard-uc4 llm report --tier small=<deployment> --tier mid=<deployment> --tier large=<deployment> \
+    --out docs/uc4/results/llm-baseline.md
 ```
 
-Recording stores each real response under `data/llm_cache/<model>/<prompt_version>/<hash>.json`, so
-the same run can then be replayed in CI with no network or credentials. Confirm the adapter's URL
-shape, API version, token parameter and authentication against current Foundry documentation first
-(`config/llm/llm.v1.yaml`, section `foundry`).
+Replaying needs no credentials: `--llm-mode replay --llm-model-id <deployment>`. Any change to the
+prompt, few-shot set, schema, temperature or token cap changes the cache key, so a stale cache
+shows up as `replay_miss` rather than silently reusing old answers.
 
 ## Limits
 
 Synthetic, template-generated, AI-authored labels not yet human reviewed; 18 dev families; a model
-may have seen similar public text; the Foundry adapter is unverified; nothing here transfers to real
+may have seen similar public text; two tiers omit temperature; nothing here transfers to real
 data without validation.

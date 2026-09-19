@@ -136,3 +136,15 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D5.13 | Harness 1.3.0: records carry verbalized buckets, evidence counts, guardrail types and tokens; an LLM few-shot note in run reports; `config validate` covers the LLM and guardrail configs. | Needed to report LLM metrics for any run. |
 | D5.14 | Pre-LLM redaction was not implemented. | Its effect can only be measured with a real model. |
 | D5.15 | The LLM path was NOT evaluated on the locked test split. | Not approved; the test split has never been evaluated. |
+
+## Implementation decisions (Phase 5 - real deployments, added after credentials were provided)
+
+| # | Decision | Why |
+|---|---|---|
+| D5.16 | The Foundry adapter follows the current Microsoft Foundry REST reference (v1 route, deployment in `model`, `api-key`); a project endpoint is reduced to its resource host; api-version is optional. Verified live on 2026-09-19. | The pre-registered adapter used an older per-deployment path and was explicitly unverified. |
+| D5.17 | Per-tier `api` (`chat_completions` or `responses`) and `send_temperature` record what each deployment accepts (found by document-free probes): the `large` deployment supports only the Responses API; `small` and `large` reject a temperature. | Approved: temperature 0 only "where the deployment allows". |
+| D5.18 | Deviations from the pre-registered values, made because of measured provider behaviour and not because of any dev result: output cap 700 to 4000 tokens (reasoning tokens count against it), timeout 10 s to 300 s. Latency against the PRD 10 s limit is reported, not hidden. | Otherwise calls fail and the benchmark measures timeouts, not capability. |
+| D5.19 | The benchmark was recorded once on dev (107 documents per deployment) and committed under `data/llm_cache/` so it is replayable in CI without credentials; the official numbers come from a sequential replay. `large` was recorded with 8 concurrent workers. | Reproducibility without secrets; a sequential `large` run would have taken hours. |
+| D5.20 | The prompt, few-shot set and guardrail were NOT changed after seeing any dev result. | Avoids tuning on dev. |
+| D5.21 | The credentials were supplied in conversation, used only through environment variables from a private temp file outside the repository, never written to the repository, and should be rotated. | Secrets hygiene. |
+| D5.22 | The locked test split was NOT used for any LLM run. | Not approved. |

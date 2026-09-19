@@ -94,7 +94,8 @@ def test_report_with_no_models_says_nothing_was_run_and_shows_no_model_numbers(e
         assert f"| {t} | NOT RUN (no model configured for this tier) |" in text
     assert "## Tier `" not in text and "macro-F1" not in text
     assert (
-        "unverified against a real endpoint" in text and "pending human gold-label review" in text
+        "never been run against a real endpoint here" in text
+        and "pending human gold-label review" in text
     )
     assert "The locked test split was not read" in text
     assert "eval run --classifier llm" in text
@@ -211,3 +212,15 @@ def test_config_validate_covers_the_llm_and_guardrail_configs(capsys):
     out = json.loads(capsys.readouterr().out)
     assert out["versions"]["llm"] == "1.0.0" and out["versions"]["prompt"] == "classifier.v1"
     assert out["versions"]["injection_guardrail"] and len(out["llm_config_sha256"]) == 64
+
+
+def test_cli_report_replays_the_committed_real_recordings_and_compares_with_rules_and_ml(tmp_path):
+    """Exercises the whole CLI path (replay of data/llm_cache, Rules and ML comparison)."""
+    out = tmp_path / "llm.md"
+    rc = main(["llm", "report", "--tier", "small=uc4-llm-small", "--tier", "mid=uc4-llm-medium",
+               "--tier", "large=uc4-llm-large", "--out", str(out)])  # fmt: skip
+    text = out.read_text()
+    assert rc == 0 and "| small | RUN (complete) |" in text
+    assert "| large | RUN (complete) |" in text and "NO LLM BENCHMARK HAS BEEN RUN" not in text
+    assert "Rules 1.0.3 (frozen)" in text and "| ML |" in text
+    assert text.count("## Tier `") == 3 and "## Summary of tiers run" in text
