@@ -70,6 +70,21 @@ def render_run_report(result: EvaluationResult) -> str:
         "There is no combined headline score; each metric stands alone."
     )
     add("")
+    params = man["classifier"]["params"]
+    fit = set(params.get("fit_splits", [])) & set(ds["splits_evaluated"])
+    calib = set(params.get("calibration_splits", [])) & set(ds["splits_evaluated"])
+    if fit or calib:
+        add(
+            "> **IN-SAMPLE WARNING.** This run evaluates data the classifier was "
+            + (f"**fitted on** ({', '.join(sorted(fit))}) " if fit else "")
+            + (
+                f"and/or **used to fit its calibrators** ({', '.join(sorted(calib))}) "
+                if calib
+                else ""
+            )
+            + "so these numbers are optimistic and are NOT held-out performance."
+        )
+        add("")
     add("## Provenance")
     add("")
     add(f"* **dataset labels: {ds['label_status']}** (not independently human-validated)")
@@ -189,6 +204,52 @@ def render_run_report(result: EvaluationResult) -> str:
     add("Per-label counts are preserved in the `support` columns of the tables below.")
     add("")
 
+    cal = head.get("calibration")
+    if cal:
+        add("### Calibration (probabilities reported by the classifier)")
+        add("")
+        claim = "claims calibration" if cal["calibrated_claim"] else "does NOT claim calibration"
+        add(
+            f"The classifier {claim}. Reliability is measured on this evaluation subset with "
+            f"{man['eval_settings'].get('calibration_bins', 5)} equal-width bins; with so few "
+            "documents per bin these numbers are indicative only."
+        )
+        add("")
+        lv_c = cal["level"]
+        add(
+            f"**Level (top-label confidence):** ECE {_f(lv_c['ece'])}, multiclass Brier {_f(lv_c['brier_multiclass'])}, n={lv_c['n']}."
+        )
+        add("")
+        add(
+            _table(
+                ["confidence bin", "n", "mean confidence", "accuracy"],
+                [[b["bin"], b["n"], b["mean_confidence"], b["accuracy"]] for b in lv_c["bins"]],
+            )
+        )
+        add("")
+        cc = cal["categories"]
+        if cc:
+            add(
+                f"**Categories (all document-category pairs):** ECE {_f(cc['ece'])}, Brier {_f(cc['brier'])}, n={cc['n']}."
+            )
+            add("")
+            add(
+                _table(
+                    ["probability bin", "n", "mean probability", "observed rate"],
+                    [[b["bin"], b["n"], b["mean_confidence"], b["accuracy"]] for b in cc["bins"]],
+                )
+            )
+            add("")
+            add(
+                _table(
+                    ["category", "gold positives", "mean probability", "prevalence", "Brier"],
+                    [
+                        [k, v["n_positive"], v["mean_probability"], v["prevalence"], v["brier"]]
+                        for k, v in cc["per_category"].items()
+                    ],
+                )
+            )
+            add("")
     add("### Sensitivity level")
     add("")
     lv = hm["level"]

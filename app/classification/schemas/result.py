@@ -98,6 +98,28 @@ class Telemetry(StrictModel):
     est_cost_usd: float | None = None
 
 
+class Scores(StrictModel):
+    """Per-label probabilities/scores behind the decision (for calibration and threshold analysis).
+
+    `calibrated` states whether they are calibrated probabilities; `calibration_ref` names the
+    artifact that calibrated them. Uncalibrated scores must say so.
+    """
+
+    level: dict[str, float] | None = None
+    categories: dict[str, float] | None = None
+    calibrated: bool = False
+    calibration_ref: str | None = None
+
+    @model_validator(mode="after")
+    def _consistent(self) -> Scores:
+        if self.calibrated and not self.calibration_ref:
+            raise ValueError("calibrated scores require a calibration_ref")
+        for group in (self.level, self.categories):
+            if group and any(not 0.0 <= v <= 1.0 for v in group.values()):
+                raise ValueError("scores must lie within [0, 1]")
+        return self
+
+
 class GuardrailEvent(StrictModel):
     type: str
     trigger: str
@@ -119,6 +141,7 @@ class ClassificationResult(StrictModel):
     routing: Routing = Field(default_factory=Routing)
     versions: Versions = Field(default_factory=Versions)
     telemetry: Telemetry = Field(default_factory=Telemetry)
+    scores: Scores | None = None
     guardrail_events: list[GuardrailEvent] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
 

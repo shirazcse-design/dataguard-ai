@@ -42,6 +42,9 @@ class PredictionRecord(StrictModel):
     pred_high_risk: bool = False  # ALWAYS re-derived by the harness from the configured definition
     review_required: bool = False
     abstained: bool = False  # the approach reported no decisive level signal
+    level_probs: dict[str, float] | None = None
+    category_probs: dict[str, float] | None = None
+    scores_calibrated: bool = False
     classifier_high_risk_mismatch: bool = False  # classifier's own high_risk disagreed with ours
 
     # cost / time

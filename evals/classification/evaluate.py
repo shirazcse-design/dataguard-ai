@@ -19,13 +19,14 @@ from app.classification.config_loader import ConfigBundle
 from app.classification.interfaces import Classifier
 
 from .bootstrap import bootstrap_intervals
+from .calibration import calibration_metrics
 from .dataset.schema import DatasetDocument
 from .lock import LockedTestAuthorization, check_access
 from .metrics import compact, compute_metrics, hard_negative_metrics, round_floats
 from .records import PredictionRecord
 from .runner import run_classifier
 
-HARNESS_VERSION = "1.1.0"
+HARNESS_VERSION = "1.2.0"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -140,8 +141,10 @@ def build_metrics(records: list[PredictionRecord], bundle: ConfigBundle) -> dict
             if m["support"] < cfg.min_support_flag
         },
     }
+    calibration = calibration_metrics(headline, levels, cats, cfg.calibration_bins)
     return {
         "headline": {
+            "calibration": calibration,
             "tiers": sorted(headline_tiers),
             "note": "T5 (adversarial) is excluded here and reported as its own slice.",
             "metrics": primary,
@@ -236,6 +239,7 @@ def build_run_manifest(
             "headline_tiers": bundle.eval.headline_tiers,
             "bootstrap": bundle.eval.bootstrap.model_dump(),
             "min_support_flag": bundle.eval.min_support_flag,
+            "calibration_bins": bundle.eval.calibration_bins,
             "reference_targets": bundle.eval.reference_targets,
         },
         "cli_args": cli_args or {},
