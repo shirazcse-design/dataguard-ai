@@ -1,0 +1,265 @@
+# T1 additions chosen to raise test-split support for thinly represented labels
+# (Credentials, PHI, Financial/PCI, Source Code) and to balance the level mix (Public, Internal).
+families:
+  - family_id: cred_kubeconfig_token
+    description: Kubernetes-style client configuration with an embedded user token.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 6
+    filenames: ["kubeconfig", "config-«region».yaml", "cluster_access.yaml"]
+    metadata: {source_system: "Shared file server"}
+    bodies:
+      - |
+        apiVersion: v1
+        kind: Config
+        clusters:
+        - name: «codeword»-prod
+          cluster:
+            server: https://«@host»:6443
+        users:
+        - name: deploy-bot
+          user:
+            token: ⟦CREDENTIALS_SECRETS§«@token»⟧
+        contexts:
+        - name: «codeword»
+          context: {cluster: «codeword»-prod, user: deploy-bot}
+  - family_id: cred_registry_login_config
+    description: Container registry login configuration with a plaintext password.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 6
+    filenames: ["registry-auth.yaml", "ci_settings.yml", "pull-secret.yaml"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        registry:
+          url: registry.corp.example
+          username: ci-bot-«codeword»
+          password: ⟦CREDENTIALS_SECRETS§«@password»⟧
+        cache:
+          enabled: true
+          ttl_minutes: «@int:10-120»
+      - |
+        # image pull credentials for «region»
+        [registry "primary"]
+        user = svc_pull_«codeword»
+        pass = ⟦CREDENTIALS_SECRETS§«@password»⟧
+        mirror = registry-«region».corp.example
+  - family_id: cred_wiki_service_accounts
+    description: Wiki page listing shared service accounts with their passwords.
+    tier: T1
+    format: wiki_page
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 6
+    filenames: ["Service_Accounts.html", "Shared_Logins_«dept».md", "Ops_Cheat_Sheet.txt"]
+    metadata: {source_system: "Confluence"}
+    bodies:
+      - |
+        Service accounts (ops team only)
+
+        | system | login | password |
+        | billing console | svc-billing | ⟦CREDENTIALS_SECRETS§«@password»⟧ |
+        | reporting db | svc-report | ⟦CREDENTIALS_SECRETS§«@password#2»⟧ |
+        | vendor portal | «person.first» | ⟦CREDENTIALS_SECRETS§«@password#3»⟧ |
+
+        Please do not change these without telling «person».
+  - family_id: cred_email_shares_api_key
+    description: Email sharing a vendor API key and secret in the body.
+    tier: T1
+    format: email
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 6
+    filenames: ["FW_API_access.eml", "RE_integration_keys.eml"]
+    metadata: {source_system: "Email"}
+    bodies:
+      - |
+        From: «person.workemail»
+        To: «person#2.workemail»
+        Subject: keys for the «product_noun» integration
+
+        Here you go. API key: ⟦CREDENTIALS_SECRETS§«@apikey»⟧
+        Webhook signing secret: ⟦CREDENTIALS_SECRETS§«@hex:40»⟧
+        Please keep these out of the repo.
+  - family_id: phi_radiology_report
+    description: Radiology report with patient name, MRN and findings.
+    tier: T1
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 6
+    filenames: ["Radiology_«@mrn».pdf", "Imaging_Report_«person.last».docx"]
+    metadata: {source_system: "RIS export"}
+    bodies:
+      - |
+        RADIOLOGY REPORT - «clinic»
+        Patient: «person»   «@mrn»
+        Exam: «CT abdomen|MRI lumbar spine|Chest X-ray|Ultrasound abdomen» on «@date»
+        ⟦PHI§Findings: «mild degenerative change|no acute abnormality|a small nodule, follow-up advised» consistent with «diagnosis».⟧
+        Radiologist: Dr. «person#2.last»
+  - family_id: phi_pathology_report
+    description: Pathology report with patient name and diagnosis.
+    tier: T1
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 6
+    filenames: ["Pathology_«@int:1000-9999».pdf", "Biopsy_Result_«person.last».docx"]
+    metadata: {source_system: "Laboratory system"}
+    bodies:
+      - |
+        SURGICAL PATHOLOGY REPORT
+        Patient: «person»   Specimen: «skin punch biopsy|colon polyp|breast core biopsy|thyroid nodule»
+        Collected: «@date»
+        ⟦PHI§Diagnosis: «benign|atypical|malignant» findings; «diagnosis_coded» noted in history.⟧
+        Pathologist: Dr. «person#2.last»
+  - family_id: fin_ach_batch_file
+    description: ACH payment batch with routing and account numbers.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["ACH_Batch_«@int:1-99».csv", "Payments_File_«month».txt"]
+    metadata: {source_system: "Treasury portal", author_department: "Finance"}
+    bodies:
+      - |
+        batch,«@date»,«@int:3-9» entries
+        payee,routing,account,amount
+        «company#2»,⟦FINANCIAL_PCI§«@routing»,«@acct»⟧,«@usd:500-40000»
+        «company#3»,⟦FINANCIAL_PCI§«@routing#2»,«@acct#2»⟧,«@usd:500-40000»
+        «company#4»,⟦FINANCIAL_PCI§«@routing#3»,«@acct#3»⟧,«@usd:500-40000»
+  - family_id: fin_loan_application_financials
+    description: Loan application with bank account number, balance and national ID.
+    tier: T1
+    format: form
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI, PII]
+    n_docs: 6
+    filenames: ["Loan_Application_«person.last».pdf", "Credit_Request_«@int:100-999».docx"]
+    metadata: {source_system: "Lending system"}
+    bodies:
+      - |
+        LOAN APPLICATION
+        Applicant: «person»    Tax ID: ⟦PII§«@ssn»⟧
+        Requested amount: «@usd:5000-90000»
+        Primary account: ⟦FINANCIAL_PCI§«@acct»⟧ at routing ⟦FINANCIAL_PCI§«@routing»⟧
+        Balance: «@usd:1000-80000»
+        Employer: «company»
+  - family_id: sc_csharp_class
+    description: Proprietary C# domain class.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 6
+    filenames: ["OrderValidator.cs", "InvoiceCalculator.cs", "«codeword»Service.cs"]
+    metadata: {source_system: "Git repository", source_path: "/src/Domain/"}
+    bodies:
+      - |
+        // Copyright «@year» «company». Confidential - internal use only.
+        namespace Corp.«codeword»
+        {
+            ⟦SOURCE_CODE§public class InvoiceCalculator
+            {
+                private readonly ITaxTable _taxes;
+                public InvoiceCalculator(ITaxTable taxes) { _taxes = taxes; }
+
+                public decimal Total(decimal net, string region)
+                {
+                    return net + net * _taxes.RateFor(region);
+                }
+            }⟧
+        }
+  - family_id: sc_terraform_module
+    description: Internal infrastructure-as-code module.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 6
+    filenames: ["main.tf", "network.tf", "«codeword»_module.tf"]
+    metadata: {source_system: "Git repository", source_path: "/infra/"}
+    bodies:
+      - |
+        # internal module: «codeword» network
+        ⟦SOURCE_CODE§resource "aws_vpc" "main" {
+          cidr_block = "10.«@int:0-255».0.0/16"
+          tags = { Name = "«codeword»-«region»" }
+        }
+
+        resource "aws_subnet" "private" {
+          vpc_id     = aws_vpc.main.id
+          cidr_block = "10.«@int:0-255».1.0/24"
+        }⟧
+  - family_id: pub_public_newsletter
+    description: Public customer newsletter.
+    tier: T1
+    format: newsletter
+    gold_level: PUBLIC
+    n_docs: 6
+    filenames: ["Newsletter_«month»_«@year».html", "Customer_Update_«quarter».txt"]
+    metadata: {source_system: "Marketing platform"}
+    existing_labels:
+      - {scheme: sensitivity_label, value: "PUBLIC", p: 0.5}
+    bodies:
+      - |
+        «company» customer newsletter - «month» «@year»
+
+        What's new: version «@int:2-9».«@int:0-9» of the «product_noun» adds faster setup and a refreshed dashboard. Read the release notes on our website.
+        Tips: three ways to get more from your reports.
+        Events: join our «city» meetup on «weekday» - open to everyone.
+        Follow us for updates. To unsubscribe, use the link at the bottom of this message.
+  - family_id: pub_support_faq
+    description: Public product support FAQ.
+    tier: T1
+    format: web_page
+    gold_level: PUBLIC
+    n_docs: 6
+    filenames: ["Support_FAQ.html", "Help_Center_«product_noun».md"]
+    metadata: {source_system: "Corporate website"}
+    bodies:
+      - |
+        «product_noun» - Help Center
+
+        How do I reset my «product_noun»? Hold the reset button for «@int:5-15» seconds until the light blinks.
+        Where can I download the manual? On the support page of our public website.
+        Is my device covered by warranty? All devices include a «@int:1-3»-year limited warranty; see the terms online.
+        How do I contact support? Use the chat on our website or call during business hours.
+  - family_id: int_project_status_update
+    description: Routine internal project status update.
+    tier: T1
+    format: report
+    gold_level: INTERNAL
+    n_docs: 6
+    filenames: ["Status_«codeword».docx", "Weekly_Status_«@int:1-52».md"]
+    metadata: {source_system: "Confluence", author_department: "«dept»"}
+    bodies:
+      - |
+        Project «codeword» - weekly status
+
+        Overall: green. Milestone «@int:1-6» is on track for «month».
+        Done this week: reviewed vendor quotes, finished the test plan, updated the project wiki.
+        Next week: schedule the user walkthrough with «dept#2», book the meeting room, share the agenda.
+        Risks: one team member on leave in «month#2».
+  - family_id: int_training_schedule
+    description: Internal training calendar.
+    tier: T1
+    format: notice
+    gold_level: INTERNAL
+    n_docs: 6
+    filenames: ["Training_Calendar_«@year».docx", "Learning_Sessions_«quarter».txt"]
+    metadata: {source_system: "Intranet", author_department: "Human Resources"}
+    bodies:
+      - |
+        Internal learning sessions - «quarter»
+
+        «weekday»: presentation skills workshop («city» office, «@int:10-25» seats)
+        «weekday#2»: introduction to data analysis (online)
+        «weekday#3»: manager essentials, part «@int:1-3»
+        Register through the learning portal on the intranet. Sessions are open to all employees.
