@@ -102,7 +102,12 @@ class LLMClassifier:
             "calibration_splits": [],
             "guardrail_version": self.scanner.version,
             "guardrail_config_sha256": self._guard_sha,
-            "temperature": self.cfg.generation.temperature,
+            "temperature": (
+                self.cfg.generation.temperature
+                if self.cfg.tiers[self.tier].send_temperature
+                else None
+            ),
+            "api": self.cfg.tiers[self.tier].api,
             "max_output_tokens": self.cfg.generation.max_output_tokens,
             "schema_repair_retries": self.cfg.generation.schema_repair_retries,
             "max_input_chars": self.cfg.input.max_input_chars,
@@ -116,7 +121,7 @@ class LLMClassifier:
             user=prompt.user + user_suffix,
             json_schema=self._schema,
             prompt_version=self.builder.version,
-            temperature=g.temperature,
+            temperature=g.temperature if self.cfg.tiers[self.tier].send_temperature else None,
             max_output_tokens=g.max_output_tokens,
             timeout_s=g.timeout_s,
         )
@@ -370,7 +375,7 @@ def build_llm_classifier(
                 "not_configured",
                 f"environment variable {cfg.tiers[tier].deployment_env} is not set",
             )
-        return FoundryClient(cfg.foundry, deployment)
+        return FoundryClient(cfg.foundry, deployment, api=cfg.tiers[tier].api)
 
     if client is None:
         if mode == "foundry":

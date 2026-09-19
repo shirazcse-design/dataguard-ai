@@ -37,7 +37,7 @@ class LLMRequest(StrictModel):
     schema_name: str = "classification"
     json_schema: dict[str, Any]
     prompt_version: str
-    temperature: float = 0.0
+    temperature: float | None = 0.0  # None = the parameter is not sent (provider default)
     max_output_tokens: int = Field(gt=0)
     timeout_s: float = Field(gt=0)
 
@@ -60,6 +60,7 @@ class LLMRequest(StrictModel):
 class LLMResponse(StrictModel):
     text: str
     model_id: str
+    served_model: str | None = None  # what the provider says actually answered (provenance)
     prompt_tokens: int | None = Field(default=None, ge=0)
     completion_tokens: int | None = Field(default=None, ge=0)
     latency_ms: float = Field(ge=0)

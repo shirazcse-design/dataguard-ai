@@ -52,6 +52,7 @@ class ReplayLLMClient(LLMClient):
             return LLMResponse(
                 text=data["text"],
                 model_id=self.model_id,
+                served_model=data.get("served_model"),
                 prompt_tokens=data.get("prompt_tokens"),
                 completion_tokens=data.get("completion_tokens"),
                 latency_ms=float(data.get("latency_ms", 0.0)),
@@ -69,6 +70,7 @@ class ReplayLLMClient(LLMClient):
                     "model_id": self.model_id,
                     "input_hash": request.input_hash(),
                     "text": live.text,
+                    "served_model": live.served_model,
                     "prompt_tokens": live.prompt_tokens,
                     "completion_tokens": live.completion_tokens,
                     "latency_ms": live.latency_ms,

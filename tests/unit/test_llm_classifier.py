@@ -309,7 +309,7 @@ def test_the_same_request_produces_the_same_prompt_and_replay_key(parts):
     clf.classify(request())
     clf.classify(request())
     a, b = clf.client.calls
-    assert a.input_hash() == b.input_hash() and a.temperature == 0.0
+    assert a.input_hash() == b.input_hash() and a.temperature is None  # small: not sent
 
 
 def test_params_record_provenance_and_no_credentials(parts):
@@ -424,3 +424,21 @@ def test_construction_errors_are_clear(parts, monkeypatch):
         build_llm_classifier(parts.bundle, tier="huge", mode="replay", **common)
     with pytest.raises(ValueError, match="unknown llm mode"):
         build_llm_classifier(parts.bundle, tier="small", mode="bogus", model_id="m", **common)
+
+
+def test_a_tier_whose_deployment_rejects_temperature_does_not_send_one(parts):
+    tiers = {
+        **parts.cfg.tiers,
+        "small": parts.cfg.tiers["small"].model_copy(update={"send_temperature": False}),
+    }
+    clf = make(parts, [ans()], cfg=parts.cfg.model_copy(update={"tiers": tiers}))
+    clf.classify(request())
+    assert clf.client.calls[0].temperature is None and clf.params()["temperature"] is None
+
+
+def test_the_real_config_records_what_each_deployment_accepts(parts):
+    t = parts.cfg.tiers
+    assert (t["small"].api, t["small"].send_temperature) == ("chat_completions", False)
+    assert (t["mid"].api, t["mid"].send_temperature) == ("chat_completions", True)
+    assert (t["large"].api, t["large"].send_temperature) == ("responses", False)
+    assert parts.cfg.generation.max_output_tokens >= 2000  # reasoning models need headroom

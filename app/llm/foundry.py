@@ -1,10 +1,13 @@
 """Azure AI Foundry chat-completions adapter (stdlib HTTP only).
 
-**UNVERIFIED against a real endpoint.** It is written from general knowledge of chat-completion
-HTTP APIs; endpoint, API version, URL shape, token parameter name and auth are configuration
-(`config/llm/llm.v1.yaml` and environment variables), never code, and no model names are assumed.
-It is exercised in tests only against a local fake server. Confirm against current Foundry
-documentation before any real run (architecture plan section 17).
+Shape follows the current Microsoft Foundry REST reference (Azure OpenAI v1 route):
+`POST {endpoint}/openai/v1/chat/completions`, deployment name in the body's `model` field, key in
+the `api-key` header, `max_completion_tokens`, `response_format` json_schema. A Foundry PROJECT
+endpoint (`https://<resource>.services.ai.azure.com/api/projects/<project>`) is reduced to its
+resource host, which the docs list as an accepted base for `/openai/v1/`. Endpoint, URL template,
+token parameter name and auth remain configuration (`config/llm/llm.v1.yaml` and environment
+variables), and no model names are assumed. Tests use a local fake server; a live run records the
+provider's `served_model` for provenance.
 
 Safety: credentials come from the environment or a token provider, are never logged, and are never
 sent over plain HTTP to a non-loopback host.
@@ -36,12 +39,14 @@ class FoundryClient(LLMClient):
         cfg: FoundryConfig,
         deployment: str,
         *,
+        api: str = "chat_completions",
         env: Mapping[str, str] | None = None,
         token_provider: Callable[[], str] | None = None,
         opener: Callable[..., Any] = urllib.request.urlopen,
     ) -> None:
         self.cfg = cfg
         self.model_id = deployment
+        self.api = api
         self._env = env if env is not None else os.environ
         self._token_provider = token_provider
         self._opener = opener
@@ -53,16 +58,28 @@ class FoundryClient(LLMClient):
             raise LLMError("not_configured", f"environment variable {var} is not set")
         return value
 
-    def _url(self) -> str:
+    def _base(self) -> str:
+        """The resource base URL. A project endpoint (`.../api/projects/<p>`) is cut back to the
+        resource host; anything else is used as given."""
         endpoint = self._required(self.cfg.endpoint_env).rstrip("/")
         parsed = urlparse(endpoint)
         if parsed.scheme != "https" and parsed.hostname not in _LOOPBACK:
             raise LLMError("not_configured", "the endpoint must be https (or loopback for tests)")
-        return self.cfg.url_template.format(
-            endpoint=endpoint,
-            deployment=self.model_id,
-            api_version=self._required(self.cfg.api_version_env),
+        cut = parsed.path.find("/api/projects")
+        if cut >= 0:
+            return f"{parsed.scheme}://{parsed.netloc}{parsed.path[:cut]}"
+        return endpoint
+
+    def _url(self) -> str:
+        template = (
+            self.cfg.responses_url_template if self.api == "responses" else self.cfg.url_template
         )
+        values = {"endpoint": self._base(), "deployment": self.model_id}
+        if "{api_version}" in template:
+            if not self.cfg.api_version_env:
+                raise LLMError("not_configured", "url_template needs api_version_env")
+            values["api_version"] = self._required(self.cfg.api_version_env)
+        return template.format(**values)
 
     def _headers(self) -> dict[str, str]:
         headers = {"Content-Type": "application/json"}
@@ -86,14 +103,35 @@ class FoundryClient(LLMClient):
 
     # -- request -------------------------------------------------------------------------------
     def _body(self, request: LLMRequest) -> dict[str, Any]:
-        body: dict[str, Any] = {
-            "messages": [
-                {"role": "system", "content": request.system},
-                {"role": "user", "content": request.user},
-            ],
-            "temperature": request.temperature,
+        messages = [
+            {"role": "system", "content": request.system},
+            {"role": "user", "content": request.user},
+        ]
+        if self.api == "responses":
+            body: dict[str, Any] = {
+                "model": self.model_id,
+                "input": messages,
+                "max_output_tokens": request.max_output_tokens,
+            }
+            if request.temperature is not None:
+                body["temperature"] = request.temperature
+            if self.cfg.json_schema_response_format:
+                body["text"] = {
+                    "format": {
+                        "type": "json_schema",
+                        "name": request.schema_name,
+                        "schema": request.json_schema,
+                        "strict": True,
+                    }
+                }
+            return body
+        body = {
+            "model": self.model_id,  # the deployment name (v1 route)
+            "messages": messages,
             self.cfg.max_tokens_param: request.max_output_tokens,
         }
+        if request.temperature is not None:
+            body["temperature"] = request.temperature
         if self.cfg.json_schema_response_format:
             body["response_format"] = {
                 "type": "json_schema",
@@ -126,7 +164,37 @@ class FoundryClient(LLMClient):
         latency_ms = (time.perf_counter() - started) * 1000
         return self._parse(payload, latency_ms)
 
+    def _parse_responses(self, payload: Any, latency_ms: float) -> LLMResponse:
+        try:
+            if payload.get("status") == "incomplete":
+                reason = (payload.get("incomplete_details") or {}).get("reason")
+                if reason == "content_filter":
+                    raise LLMError("content_filtered", "the provider filtered the response")
+            texts = [
+                part["text"]
+                for item in payload["output"]
+                if item.get("type") == "message"
+                for part in item["content"]
+                if part.get("type") == "output_text" and isinstance(part.get("text"), str)
+            ]
+        except LLMError:
+            raise
+        except (KeyError, IndexError, TypeError, AttributeError):
+            raise LLMError("transport", "unexpected response shape") from None
+        usage = payload.get("usage") or {}
+        served = payload.get("model")
+        return LLMResponse(
+            text="".join(texts),  # empty when the model ran out of tokens before answering
+            model_id=self.model_id,
+            served_model=served if isinstance(served, str) else None,
+            prompt_tokens=usage.get("input_tokens"),
+            completion_tokens=usage.get("output_tokens"),
+            latency_ms=latency_ms,
+        )
+
     def _parse(self, payload: Any, latency_ms: float) -> LLMResponse:
+        if self.api == "responses":
+            return self._parse_responses(payload, latency_ms)
         try:
             choice = payload["choices"][0]
             if choice.get("finish_reason") == "content_filter":
@@ -139,9 +207,11 @@ class FoundryClient(LLMClient):
         except (KeyError, IndexError, TypeError, AttributeError):
             raise LLMError("transport", "unexpected response shape") from None
         usage = payload.get("usage") or {}
+        served = payload.get("model")
         return LLMResponse(
             text=text,
             model_id=self.model_id,
+            served_model=served if isinstance(served, str) else None,
             prompt_tokens=usage.get("prompt_tokens"),
             completion_tokens=usage.get("completion_tokens"),
             latency_ms=latency_ms,

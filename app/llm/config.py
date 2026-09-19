@@ -73,12 +73,16 @@ class TierConfig(StrictModel):
     alias: str
     deployment_env: str
     price: Price
+    api: Literal["chat_completions", "responses"] = "chat_completions"
+    # False when the deployment rejects a temperature parameter (some reasoning models do).
+    send_temperature: bool = True
 
 
 class FoundryConfig(StrictModel):
     endpoint_env: str
-    api_version_env: str
+    api_version_env: str | None = None  # only needed if url_template contains {api_version}
     url_template: str
+    responses_url_template: str = "{endpoint}/openai/v1/responses"
     auth: Literal["api_key", "entra"]
     api_key_env: str
     entra_scope: str | None = None

@@ -222,8 +222,8 @@ def server():
 
 def fcfg(**over) -> FoundryConfig:
     base = dict(
-        endpoint_env="EP", api_version_env="AV",
-        url_template="{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}",
+        endpoint_env="EP", api_version_env=None,
+        url_template="{endpoint}/openai/v1/chat/completions",
         auth="api_key", api_key_env="KEY", entra_scope=None,
         max_tokens_param="max_completion_tokens", json_schema_response_format=True,
     )  # fmt: skip
@@ -243,7 +243,8 @@ def test_foundry_request_shape_headers_and_response_parsing(server):
     assert r.text == '{"ok": true}' and r.prompt_tokens == 12 and r.completion_tokens == 5
     assert r.model_id == "my-deployment" and r.cached is False and r.latency_ms >= 0
     seen = h.seen[0]
-    assert seen["path"] == "/openai/deployments/my-deployment/chat/completions?api-version=v-test"
+    assert seen["path"] == "/openai/v1/chat/completions"
+    assert seen["body"]["model"] == "my-deployment"
     assert seen["headers"]["api-key"] == "sekrit-key-123"
     body = seen["body"]
     assert body["messages"] == [
@@ -330,7 +331,7 @@ def test_foundry_connection_failure_is_a_transport_error():
     assert exc.value.kind in ("transport", "timeout")
 
 
-@pytest.mark.parametrize("missing", ["EP", "AV", "KEY"])
+@pytest.mark.parametrize("missing", ["EP", "KEY"])
 def test_foundry_fails_clearly_when_configuration_is_missing(server, missing):
     url, _ = server
     e = env(url)
@@ -387,3 +388,106 @@ def test_entra_without_the_optional_sdk_fails_clearly(server, monkeypatch):
 def test_http_error_object_is_a_urlerror_subclass_we_handle():
     # documents the assumption behind the adapter's exception ordering
     assert issubclass(urllib.error.HTTPError, urllib.error.URLError)
+
+
+def test_a_project_endpoint_is_reduced_to_the_resource_host(server):
+    url, h = server
+    project = url + "/api/projects/my-project"
+    FoundryClient(fcfg(), "d", env=env(project)).complete_structured(req())
+    assert h.seen[0]["path"] == "/openai/v1/chat/completions"  # no /api/projects prefix
+
+
+def test_a_legacy_template_with_an_api_version_still_works_and_requires_it(server):
+    url, h = server
+    cfg = fcfg(
+        api_version_env="AV",
+        url_template="{endpoint}/openai/deployments/{deployment}/chat/completions?api-version={api_version}",
+    )
+    FoundryClient(cfg, "dep", env=env(url, AV="v-test")).complete_structured(req())
+    assert h.seen[0]["path"] == "/openai/deployments/dep/chat/completions?api-version=v-test"
+    with pytest.raises(LLMError) as exc:
+        FoundryClient(
+            cfg, "dep", env={k: v for k, v in env(url).items() if k != "AV"}
+        ).complete_structured(req())
+    assert exc.value.kind == "not_configured" and "AV" in str(exc.value)
+
+
+def test_the_served_model_is_captured_for_provenance_and_survives_replay(server, tmp_path):
+    url, h = server
+    h.behaviour = {"status": 200, "headers": {}, "delay": 0.0,
+                   "body": {"model": "provider-reported-name", "choices": [{"message": {"content": "{}"}, "finish_reason": "stop"}]}}  # fmt: skip
+    live = ReplayLLMClient(tmp_path, "m", inner=FoundryClient(fcfg(), "d", env=env(url)))
+    assert live.complete_structured(req()).served_model == "provider-reported-name"
+    assert (
+        ReplayLLMClient(tmp_path, "m").complete_structured(req()).served_model
+        == "provider-reported-name"
+    )
+
+
+RESPONSES_OK = {
+    "model": "served-x", "status": "completed",
+    "output": [
+        {"type": "reasoning", "summary": []},
+        {"type": "message", "content": [{"type": "output_text", "text": '{"ok": true}'}]},
+    ],
+    "usage": {"input_tokens": 42, "output_tokens": 48, "total_tokens": 90},
+}  # fmt: skip
+
+
+def test_responses_api_request_shape_and_parsing(server):
+    url, h = server
+    h.behaviour = {"status": 200, "body": RESPONSES_OK, "headers": {}, "delay": 0.0}
+    r = FoundryClient(fcfg(), "dep", api="responses", env=env(url)).complete_structured(
+        req(temperature=None)
+    )
+    assert r.text == '{"ok": true}' and r.prompt_tokens == 42 and r.completion_tokens == 48
+    assert r.served_model == "served-x"
+    seen = h.seen[0]
+    assert seen["path"] == "/openai/v1/responses"
+    body = seen["body"]
+    assert body["model"] == "dep" and body["max_output_tokens"] == 100 and "temperature" not in body
+    assert body["input"][0] == {"role": "system", "content": "sys"}
+    fmt = body["text"]["format"]
+    assert (
+        fmt["type"] == "json_schema"
+        and fmt["strict"] is True
+        and fmt["schema"] == {"type": "object"}
+    )
+    assert "messages" not in body and "response_format" not in body
+
+
+def test_temperature_is_sent_only_when_requested(server):
+    url, h = server
+    FoundryClient(fcfg(), "d", env=env(url)).complete_structured(req(temperature=None))
+    assert "temperature" not in h.seen[0]["body"]
+    FoundryClient(fcfg(), "d", env=env(url)).complete_structured(req(temperature=0.0))
+    assert h.seen[1]["body"]["temperature"] == 0.0
+
+
+def test_responses_api_incomplete_without_an_answer_yields_empty_text_and_content_filter_is_an_error(
+    server,
+):
+    url, h = server
+    out_of_tokens = {"status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"},
+                     "output": [{"type": "reasoning"}], "usage": {"input_tokens": 5, "output_tokens": 100}}  # fmt: skip
+    h.behaviour = {"status": 200, "body": out_of_tokens, "headers": {}, "delay": 0.0}
+    r = FoundryClient(fcfg(), "d", api="responses", env=env(url)).complete_structured(req())
+    assert r.text == "" and r.completion_tokens == 100
+    filtered = {
+        "status": "incomplete",
+        "incomplete_details": {"reason": "content_filter"},
+        "output": [],
+    }
+    h.behaviour = {"status": 200, "body": filtered, "headers": {}, "delay": 0.0}
+    with pytest.raises(LLMError) as exc:
+        FoundryClient(fcfg(), "d", api="responses", env=env(url)).complete_structured(req())
+    assert exc.value.kind == "content_filtered"
+
+
+@pytest.mark.parametrize("body", [{"nope": 1}, {"output": [{"type": "message"}]}, {"output": 5}])
+def test_responses_api_rejects_unexpected_shapes(server, body):
+    url, h = server
+    h.behaviour = {"status": 200, "body": body, "headers": {}, "delay": 0.0}
+    with pytest.raises(LLMError) as exc:
+        FoundryClient(fcfg(), "d", api="responses", env=env(url)).complete_structured(req())
+    assert exc.value.kind == "transport"
