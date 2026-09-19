@@ -1,0 +1,21 @@
+# High-risk definition for the initial UC4 evaluation.  [approved DEC-3]
+#
+# Configurable, not hard-coded: the evaluation harness and (later) the service derive `high_risk`
+# from a classification using this file. It can evolve independently of the taxonomy, but it must
+# reference the taxonomy version it was written against (checked at load time).
+
+high_risk_version: 1.0.0
+taxonomy_version: 1.0.0
+
+categories:
+  - PII
+  - PHI
+  - FINANCIAL_PCI
+  - CREDENTIALS_SECRETS
+  - TRADE_SECRET
+
+levels:
+  - HIGHLY_CONFIDENTIAL
+
+# A document is high-risk if ANY listed category is present OR its level is listed.
+combine: any

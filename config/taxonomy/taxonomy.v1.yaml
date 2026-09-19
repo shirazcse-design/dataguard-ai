@@ -1,0 +1,161 @@
+# UC4 classification taxonomy (two-axis model).  [approved DEC-1, DEC-5]
+#
+# Axis 1 - Sensitivity Level: exactly one per document.
+# Axis 2 - Data Categories:   zero or more per document.
+#
+# Definitions live here (version-controlled configuration), NOT in a retrieval system [DEC-5].
+# The LLM prompt (Phase 5) will be generated from this file so there is one source of truth.
+#
+# IMPORTANT: every `level_floor` below is an INITIAL, CONFIGURABLE DATAGUARD SYNTHETIC POLICY DEFAULT.
+# They are not universal security requirements and may change after evaluation. Change them here
+# (and bump taxonomy_version) rather than in code.
+
+taxonomy_version: 1.0.0
+
+policy_defaults_notice: >-
+  Level floors are initial configurable DataGuard synthetic-policy defaults, not universal
+  security requirements. They are expected to be revised after evaluation.
+
+levels:
+  - id: PUBLIC
+    rank: 0
+    name: Public
+    description: >-
+      Approved for, or already in, public release. Disclosure causes no harm.
+  - id: INTERNAL
+    rank: 1
+    name: Internal
+    description: >-
+      General business information intended for employees. Limited harm if disclosed externally;
+      contains no regulated, strategic or credential content.
+  - id: CONFIDENTIAL
+    rank: 2
+    name: Confidential
+    description: >-
+      Non-public business or personal information whose external disclosure could harm the
+      organization or individuals. Need-to-know within the organization.
+  - id: HIGHLY_CONFIDENTIAL
+    rank: 3
+    name: Highly Confidential
+    description: >-
+      Regulated data, credentials, or strategically critical information whose disclosure could
+      cause severe legal, financial, competitive or personal harm.
+
+categories:
+  - id: PII
+    name: PII
+    level_floor: CONFIDENTIAL
+    description: >-
+      Information that identifies, or can be used to identify, an individual: government IDs,
+      personal contact details, dates of birth, or personal circumstances about a named person.
+      Business contact details alone (name, title, work email) are NOT PII under this policy.
+    positive_examples:
+      - Employee record containing a national identification number and date of birth
+      - Customer list with names, personal email addresses and home addresses
+      - Manager notes about a named employee's private family or immigration circumstances
+    counter_examples:
+      - Corporate directory listing name, job title and work email
+      - Masked identifiers such as XXX-XX-1234
+      - A blank onboarding form template with empty fields
+  - id: PHI
+    name: PHI
+    level_floor: HIGHLY_CONFIDENTIAL
+    description: >-
+      Individually identifiable health information: diagnoses, treatments, test results, or
+      insurance and claim details linked to an identifiable person. If a name is the only
+      identifier, label PHI only; add PII when other direct identifiers also appear.
+    positive_examples:
+      - Clinic visit note naming the patient with diagnosis and prescribed medication
+      - Lab results table keyed by medical record number
+    counter_examples:
+      - Public health article about a condition
+      - Aggregated, de-identified patient statistics
+      - Blank patient intake form
+  - id: FINANCIAL_PCI
+    name: Financial / PCI
+    level_floor: HIGHLY_CONFIDENTIAL
+    description: >-
+      Payment-card and bank-account data (card numbers, IBANs, account and routing numbers) and
+      material non-public company financial information such as unreleased earnings or forecasts.
+    positive_examples:
+      - Payment export listing full card numbers
+      - Wire instructions with a bank account number
+      - Draft quarterly earnings narrative not yet released
+    counter_examples:
+      - Receipt showing only the last four digits of a card
+      - Published financial statements
+      - Departmental expense summary
+      - Sixteen-digit shipment or serial numbers that are not card numbers
+  - id: SOURCE_CODE
+    name: Source Code
+    level_floor: CONFIDENTIAL
+    description: >-
+      Non-public source code, queries, and build or configuration logic owned by the organization.
+      Publicly licensed open-source code is NOT Source Code under this policy.
+    positive_examples:
+      - Proprietary service module with an internal license header
+      - Internal SQL migration scripts
+    counter_examples:
+      - Open-source code published under a public license
+      - Code snippets in a public tutorial
+  - id: CREDENTIALS_SECRETS
+    name: Credentials / Secrets
+    level_floor: HIGHLY_CONFIDENTIAL
+    description: >-
+      Live-looking authentication material: passwords, API keys, tokens, private keys, and
+      connection strings with embedded secrets.
+    positive_examples:
+      - .env file containing a database password and API key
+      - Chat message pasting a service account password
+    counter_examples:
+      - Placeholders such as YOUR_API_KEY_HERE
+      - Code that reads a secret from an environment variable
+      - Vendor-documented example keys
+      - A description of the password-rotation policy
+  - id: INTELLECTUAL_PROPERTY
+    name: Intellectual Property
+    level_floor: CONFIDENTIAL
+    description: >-
+      Non-public descriptions of inventions, designs, research results and creative works owned by
+      the organization, such as invention disclosures, draft patent claims and unpublished research.
+      If the content is a secret proprietary process, prefer Trade Secret (they may co-occur).
+    positive_examples:
+      - Invention disclosure form
+      - Draft patent claims
+      - Unpublished research notebook describing a novel method
+    counter_examples:
+      - Published patent or journal paper
+      - Public product documentation
+  - id: TRADE_SECRET
+    name: Trade Secret
+    level_floor: HIGHLY_CONFIDENTIAL
+    description: >-
+      Non-public know-how that derives value from secrecy: proprietary processes, formulations,
+      internal logic of proprietary algorithms, and compiled customer or pricing intelligence.
+    positive_examples:
+      - Manufacturing process parameters and tolerances
+      - Compiled customer list with negotiated margins
+      - Internal logic of a proprietary pricing algorithm
+    counter_examples:
+      - Generic industry practice described in a textbook
+      - Published method
+  - id: MA_CORP_STRATEGY
+    name: M&A / Corporate Strategy
+    level_floor: HIGHLY_CONFIDENTIAL
+    description: >-
+      Non-public mergers, acquisitions, divestitures, investments, restructurings, major
+      partnership negotiations and board-level strategic plans.
+    positive_examples:
+      - Spreadsheet of acquisition targets with rationale and valuation ranges
+      - Board memo on an unannounced divestiture
+    counter_examples:
+      - Press release about an already-announced deal
+      - Historical or public business-school case study
+      - Routine quarterly operating plan
+
+constraints:
+  level_cardinality: exactly_one
+  category_cardinality: zero_or_more
+  # When true, a predicted or gold level below the highest floor of the document's categories is
+  # a consistency violation. Toggleable so the effect can be benchmarked.
+  enforce_level_floors: true

@@ -1,0 +1,21 @@
+# Evaluation harness settings for UC4.  [approved architecture section 12, DEC-8]
+
+eval_config_version: 1.0.0
+
+# Difficulty tiers that make up the headline numbers. T5 (adversarial / prompt-injection) is
+# always reported separately as its own slice and excluded from the headline.
+headline_tiers: [T1, T2, T3, T4]
+
+# Fields of a dataset document to slice metrics by (in addition to the headline view).
+slice_fields: [tier, format, generator, ambiguity_flag]
+
+bootstrap:
+  n_resamples: 1000
+  confidence_level: 0.95
+  seed: 20260918
+
+# Labels with fewer gold positives than this in the evaluated subset are flagged as small-sample.
+min_support_flag: 25
+
+# Latency percentiles reported by the harness.
+latency_percentiles: [50, 95]
