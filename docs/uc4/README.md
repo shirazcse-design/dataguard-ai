@@ -10,5 +10,9 @@
 | [`dataset-report.md`](dataset-report.md) | Generated dataset statistics and integrity results |
 | [`evaluation-harness.md`](evaluation-harness.md) | How the harness measures, its conventions, and how it is validated |
 | [`results/harness-validation.md`](results/harness-validation.md) | Generated evidence that the harness measures correctly |
+| [`rules-catalog.md`](rules-catalog.md) | Pre-registered Rules Engine detector catalog (written before implementation) |
+| [`rules-engine.md`](rules-engine.md) | Rules Engine architecture, detectors, limitations |
+| [`rules-changelog.md`](rules-changelog.md) | Every change after the first evaluation, classified |
+| [`results/rules-baseline.md`](results/rules-baseline.md) | Generated Rules baseline results (development splits) |
 
 Later phases add: the evaluation-harness guide and generated results under `results/`.
