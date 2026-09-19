@@ -101,3 +101,18 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D3.9 | Scan cap lowered to 100,000 characters after measuring a 732 ms adversarial case; content beyond it is not scanned. | Meet the PRD 500 ms pre-check target for hostile input; stated limitation. |
 | D3.10 | Harness additions: `abstained` and `decoy_for` on records, abstention rate, and a hard-negative block (decoy-hit rate). | Needed to report abstention, coverage and hard-negative failures for any approach. |
 | D3.11 | The Rules Engine was NOT evaluated on the locked test split. | The user approved train/dev development only; a single audited report-only test run can be requested once the ruleset is frozen. |
+
+## Implementation decisions (Phase 4 - supervised ML)
+
+| # | Decision | Why |
+|---|---|---|
+| D4.1 | The plan (`ml-plan.md`) was committed before any model was trained; deviations are reported, not hidden. | Limits shaping the protocol after seeing results. |
+| D4.2 | Fit on train, calibrate on calibration, evaluate on dev; the ML loader reads development splits only and never passes locked-test authorization. | A21. |
+| D4.3 | Features are TF-IDF word + char + filename. No rule outputs and no embedded labels. | Keeps Rules and ML independent (stacking is a later, explicit Hybrid experiment); labels are spoofable. |
+| D4.4 | `C` chosen per head by grouped (by family) CV on train; ties go to the smaller `C`. Dev evaluated once for the selected config. | Random folds leak templates (measured: 0.98 vs 0.31). |
+| D4.5 | Platt calibration on the calibration split; below 5 positives or negatives the score is labeled `uncalibrated_score`. | The confidence contract forbids calling an unfitted score calibrated. |
+| D4.6 | Category threshold is 0.5 for all categories; no operating point is chosen. The report shows a dev sweep. | A23: selected later on dev after Rules and ML are both evaluated. |
+| D4.7 | Evidence is inferred `feature_attribution`, restricted to short alphabetic words. | Attribution is not observed evidence, and must not leak identifiers. |
+| D4.8 | The harness gained `Scores`, calibration metrics (ECE, Brier, reliability), a threshold sweep and an in-sample warning (`HARNESS_VERSION 1.2.0`). | Needed to report calibration honestly for any approach. |
+| D4.9 | The report states that ML high-risk recall is inflated by over-flagging and that the ML-vs-Rules comparison flatters Rules. | A23 and the no-single-headline rule. |
+| D4.10 | The ML model was NOT evaluated on the locked test split. | Not approved; the test split has never been evaluated. |

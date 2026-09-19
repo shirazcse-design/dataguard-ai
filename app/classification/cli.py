@@ -194,6 +194,10 @@ def _build_classifier(args: argparse.Namespace, bundle, docs):
     )
 
     policy = bundle.policy
+    if args.classifier == "ml":
+        from ml.classification import build_ml_classifier
+
+        return build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
     if args.classifier == "rules":
         from rules import build_rules_classifier
 
@@ -315,6 +319,60 @@ def _cmd_rules_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_ml_select(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from ml.classification import load_ml_config
+    from ml.classification.selection import cross_validate, select_c
+
+    bundle = load_config(args.config_dir)
+    cfg, _ = load_ml_config(bundle.policy, args.config_dir)
+    from evals.classification.dataset.build import load_documents
+
+    train = load_documents(args.data_dir, splits=["train"])
+    assert all(d.split in DEVELOPMENT_SPLITS for d in train)
+    rows = cross_validate(cfg, train, bundle.policy.level_ids, bundle.policy.category_ids)
+    result = {
+        "protocol": "grouped 5-fold CV on TRAIN only (folds group by scenario family)",
+        "n_train_documents": len(train),
+        "n_train_families": len({d.group_id for d in train}),
+        "rows": rows,
+        "selected": {
+            "level_head_C": select_c(rows, "level_macro_f1"),
+            "category_head_C": select_c(rows, "category_macro_f1"),
+        },
+    }
+    text = json.dumps(result, indent=2)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+        print(f"wrote {args.out}")
+    print(text)
+    return 0
+
+
+def _cmd_ml_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.ml_report import build_ml_report
+    from ml.classification import build_ml_classifier
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    by_split = {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
+    clf = build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+    text = build_ml_report(bundle, clf, by_split, load_manifest(args.data_dir), git_info())
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/ml-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_eval_validate(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -402,7 +460,7 @@ def build_parser() -> argparse.ArgumentParser:
     ev_sub = ev.add_subparsers(dest="eval_command", required=True)
     run = ev_sub.add_parser("run", help="evaluate a sanity classifier on dataset splits")
     run.add_argument(
-        "--classifier", choices=["oracle", "majority", "random", "rules"], required=True
+        "--classifier", choices=["oracle", "majority", "random", "rules", "ml"], required=True
     )
     run.add_argument(
         "--split",
@@ -431,6 +489,19 @@ def build_parser() -> argparse.ArgumentParser:
     an.add_argument("--config-dir", default=None)
     an.add_argument("--data-dir", default=None)
     an.set_defaults(func=_cmd_rules_analyze)
+    ml = sub.add_parser("ml", help="supervised ML classifier commands")
+    ml_sub = ml.add_subparsers(dest="ml_command", required=True)
+    sel = ml_sub.add_parser("select", help="grouped CV hyperparameter selection on train")
+    sel.add_argument("--out", default=None)
+    sel.add_argument("--config-dir", default=None)
+    sel.add_argument("--data-dir", default=None)
+    sel.set_defaults(func=_cmd_ml_select)
+    mrp = ml_sub.add_parser("report", help="write the ML baseline results (development splits)")
+    mrp.add_argument("--out", default=None)
+    mrp.add_argument("--config-dir", default=None)
+    mrp.add_argument("--data-dir", default=None)
+    mrp.set_defaults(func=_cmd_ml_report)
+
     rp = rules_sub.add_parser(
         "report", help="write the Rules baseline results (development splits)"
     )

@@ -96,6 +96,9 @@ def _record_from_result(
         pred_high_risk=derived.value,  # never trust the classifier's own field
         review_required=result.review.required,
         abstained=result.routing.abstained,
+        level_probs=result.scores.level if result.scores else None,
+        category_probs=result.scores.categories if result.scores else None,
+        scores_calibrated=bool(result.scores and result.scores.calibrated),
         classifier_high_risk_mismatch=mismatch,
         latency_ms=latency_ms,
         reported_latency_ms=result.telemetry.latency_ms.get("total"),

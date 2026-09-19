@@ -27,5 +27,8 @@ reference_targets:
 # Labels with fewer gold positives than this in the evaluated subset are flagged SMALL_SAMPLE.
 min_support_flag: 25
 
+# Equal-width bins for reliability tables / ECE (kept small: the dataset is small).
+calibration_bins: 5
+
 # Latency percentiles reported by the harness.
 latency_percentiles: [50, 95]

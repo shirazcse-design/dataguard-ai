@@ -1,0 +1,55 @@
+{
+  "protocol": "grouped 5-fold CV on TRAIN only (folds group by scenario family)",
+  "n_train_documents": 416,
+  "n_train_families": 76,
+  "rows": [
+    {
+      "C": 0.3,
+      "level_macro_f1": 0.3121307606358437,
+      "level_accuracy": 0.4855769230769231,
+      "category_macro_f1": 0.14194139194139194,
+      "category_micro_f1": 0.21606648199445982
+    },
+    {
+      "C": 1.0,
+      "level_macro_f1": 0.3024286628793442,
+      "level_accuracy": 0.4951923076923077,
+      "category_macro_f1": 0.14267776896642875,
+      "category_micro_f1": 0.21666666666666667
+    },
+    {
+      "C": 3.0,
+      "level_macro_f1": 0.3031422200275064,
+      "level_accuracy": 0.49759615384615385,
+      "category_macro_f1": 0.13392626410543546,
+      "category_micro_f1": 0.20224719101123595
+    },
+    {
+      "C": 10.0,
+      "level_macro_f1": 0.3031422200275064,
+      "level_accuracy": 0.49759615384615385,
+      "category_macro_f1": 0.13466980105350224,
+      "category_micro_f1": 0.2028169014084507
+    }
+  ],
+  "selected": {
+    "level_head_C": 0.3,
+    "category_head_C": 1.0
+  },
+  "diagnostic_note": "Not part of selection. A non-grouped (random) 5-fold CV and in-sample fit both score ~1.0, so the low grouped-CV scores reflect the model memorising scenario-family templates rather than a pipeline bug.",
+  "diagnostic": {
+    "in_sample": {
+      "level_macro_f1": 1.0,
+      "category_macro_f1": 1.0
+    },
+    "random_kfold_leaky": {
+      "level_macro_f1": 1.0,
+      "category_macro_f1": 0.994
+    },
+    "grouped_kfold": {
+      "level_macro_f1": 0.302,
+      "category_macro_f1": 0.143
+    },
+    "grouped_kfold_note": "C=1.0 row"
+  }
+}

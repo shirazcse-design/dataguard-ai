@@ -1,0 +1,46 @@
+# UC4 supervised ML classifier configuration (Approach B). See docs/uc4/ml-plan.md.
+# Definitions of the classes live in config/taxonomy; this file only controls the model.
+
+ml_version: 1.0.0
+taxonomy_version: 1.0.0
+seed: 20260918
+
+features:
+  max_chars: 20000            # content is truncated before vectorising
+  sublinear_tf: true
+  word_ngram_range: [1, 2]
+  word_min_df: 2
+  word_max_features: 30000
+  char_ngram_range: [3, 5]
+  char_min_df: 2
+  char_max_features: 60000
+  filename_block: true        # separate TF-IDF block over filename tokens (ablated in the report)
+
+# Heads. C is chosen by grouped cross-validation on TRAIN only (see `dataguard-uc4 ml select`).
+level_head:
+  C: 0.3      # selected by grouped CV on train (docs/uc4/results/ml-cv.json)
+  class_weight: balanced
+  max_iter: 2000
+category_head:
+  C: 1.0     # selected by grouped CV on train (docs/uc4/results/ml-cv.json)
+  class_weight: balanced
+  max_iter: 2000
+
+calibration:
+  method: sigmoid            # Platt scaling on the calibration split
+  min_positives: 5           # below this a label is NOT calibrated (and says so)
+  min_negatives: 5
+
+decision:
+  # A category is asserted at calibrated probability >= threshold. NO operating point is chosen in
+  # this phase; per-category overrides stay empty until it is selected on the development set.
+  category_threshold: 0.5
+  category_thresholds: {}
+
+evidence:
+  top_features: 5            # word features listed per decision
+  max_token_chars: 25        # longer tokens are never shown
+
+selection:
+  c_grid: [0.3, 1.0, 3.0, 10.0]
+  cv_folds: 5

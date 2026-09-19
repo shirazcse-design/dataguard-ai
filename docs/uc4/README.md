@@ -14,5 +14,9 @@
 | [`rules-engine.md`](rules-engine.md) | Rules Engine architecture, detectors, limitations |
 | [`rules-changelog.md`](rules-changelog.md) | Every change after the first evaluation, classified |
 | [`results/rules-baseline.md`](results/rules-baseline.md) | Generated Rules baseline results (development splits) |
+| [`ml-plan.md`](ml-plan.md) | Pre-registered ML plan (written before any model was trained) |
+| [`ml-engine.md`](ml-engine.md) | ML classifier architecture, protocol, findings, limits |
+| [`results/ml-baseline.md`](results/ml-baseline.md) | Generated ML results vs Rules (development splits) |
+| [`results/ml-cv.json`](results/ml-cv.json) | Grouped cross-validation used for model selection |
 
 Later phases add: the evaluation-harness guide and generated results under `results/`.

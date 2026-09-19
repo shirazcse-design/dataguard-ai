@@ -25,7 +25,7 @@ dev = [
 dataguard-uc4 = "app.classification.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["app*", "rules*", "evals*", "guardrails*", "observability*"]
+include = ["app*", "rules*", "ml*", "evals*", "guardrails*", "observability*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -46,3 +46,4 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/classification/validation.py" = ["E501"]
 "evals/classification/reporting.py" = ["E501"]
 "evals/classification/rules_report.py" = ["E501"]
+"evals/classification/ml_report.py" = ["E501"]

@@ -29,6 +29,7 @@ from .result import (
     LevelPrediction,
     ReviewDecision,
     Routing,
+    Scores,
     Telemetry,
     Versions,
 )
@@ -59,6 +60,7 @@ __all__ = [
     "Options",
     "ReviewDecision",
     "Routing",
+    "Scores",
     "Supports",
     "TaxonomyConfig",
     "TaxonomyConstraints",
