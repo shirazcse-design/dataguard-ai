@@ -114,6 +114,8 @@ class BootstrapConfig(StrictModel):
     n_resamples: int = Field(ge=1)
     confidence_level: float = Field(gt=0, lt=1)
     seed: int
+    # Resample scenario families ("group") because documents within a family are correlated.
+    unit: Literal["group", "document"] = "group"
 
 
 class EvalConfig(StrictModel):

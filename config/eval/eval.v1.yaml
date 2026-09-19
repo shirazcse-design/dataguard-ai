@@ -13,6 +13,9 @@ bootstrap:
   n_resamples: 1000
   confidence_level: 0.95
   seed: 20260918
+  # Documents in a scenario family are variations of one template, so families (groups) are the
+  # effective independent units. Resampling documents would understate uncertainty.
+  unit: group
 
 # Labels with fewer gold positives than this in the evaluated subset are flagged as small-sample.
 min_support_flag: 25
