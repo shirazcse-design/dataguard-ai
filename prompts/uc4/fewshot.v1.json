@@ -1,0 +1,98 @@
+{
+  "version": "fewshot.v1",
+  "selection_rule": "From train: per category (taxonomy order) the alphabetically-first family whose T1 documents are single-category and <= 600 characters (first doc_id); the alphabetically-first PUBLIC and INTERNAL T1 families; two T4 hard negatives from different families with different decoy_for; one multi-category T1 document. Order is by sha256(seed:doc_id).",
+  "seed": 20260919,
+  "examples": [
+    {
+      "doc_id": "uc4-815df87cff",
+      "family_id": "cred_chat_password_paste",
+      "tier": "T1",
+      "content_hash": "9bda879f7a12639dc6516eeda5a7441a00d429c207b156632112e69423d851b0",
+      "role": "category:CREDENTIALS_SECRETS"
+    },
+    {
+      "doc_id": "uc4-6557052089",
+      "family_id": "sc_docker_compose",
+      "tier": "T1",
+      "content_hash": "824c291c61758e637194b4098b34e04589ac6c9f384327ef4fc43202ad5fdc97",
+      "role": "category:SOURCE_CODE"
+    },
+    {
+      "doc_id": "uc4-208535806a",
+      "family_id": "int_expense_policy_summary",
+      "tier": "T1",
+      "content_hash": "468c5721be35ec4793b2dbc5ab2b1cb7f06f267b779b920f0e0280a2dc36ad13",
+      "role": "level:INTERNAL"
+    },
+    {
+      "doc_id": "uc4-310a0dd682",
+      "family_id": "hn_announced_acquisition_news",
+      "tier": "T4",
+      "content_hash": "7549946bf0de7157252795f12c4ad7ffbf5cca5755ca7b96ff5aa29980dd84f9",
+      "role": "hard_negative"
+    },
+    {
+      "doc_id": "uc4-12ec39f4fd",
+      "family_id": "pii_customer_contact_list",
+      "tier": "T1",
+      "content_hash": "03ebd6d4b6fe27ef164d4066852eb3ecbe51219f7583422adce2be36bb8266ec",
+      "role": "category:PII"
+    },
+    {
+      "doc_id": "uc4-10f4c1c40d",
+      "family_id": "hn_awareness_doc_explains_ssn",
+      "tier": "T4",
+      "content_hash": "1c71588214edfc8d4133f431f632386849a6e1199db1af74ce866fbb8bf94d97",
+      "role": "hard_negative"
+    },
+    {
+      "doc_id": "uc4-23bdd468ad",
+      "family_id": "ip_design_doc_patent_pending",
+      "tier": "T1",
+      "content_hash": "2e83425915308f2ab2fd41ff6f014dc22ba5de5bb4035100e4b9cce8a5049382",
+      "role": "category:INTELLECTUAL_PROPERTY"
+    },
+    {
+      "doc_id": "uc4-0f7af28770",
+      "family_id": "fin_corp_card_statement",
+      "tier": "T1",
+      "content_hash": "f4319e8f6947bfe24865856a075f8bc71f44e7b4753fa00cd96af3cc0f0c38a7",
+      "role": "category:FINANCIAL_PCI"
+    },
+    {
+      "doc_id": "uc4-11cc75b15f",
+      "family_id": "ma_loi_labeled",
+      "tier": "T1",
+      "content_hash": "51ce74ff007f4089d29b35faa17f034b1743a222b67d0131971f955f32db98e4",
+      "role": "category:MA_CORP_STRATEGY"
+    },
+    {
+      "doc_id": "uc4-290d3a979d",
+      "family_id": "phi_lab_results",
+      "tier": "T1",
+      "content_hash": "485eddd3e2490bece27ca34549d31afd162e5504dd9cffa46f45fde616af37a9",
+      "role": "category:PHI"
+    },
+    {
+      "doc_id": "uc4-07a2a15e56",
+      "family_id": "ts_pricing_algorithm_labeled",
+      "tier": "T1",
+      "content_hash": "52309ca5de4a8055cf2039f1508b688e61cad612fd8155c7b74c5a64d5e8261f",
+      "role": "category:TRADE_SECRET"
+    },
+    {
+      "doc_id": "uc4-23efa45a39",
+      "family_id": "cred_python_hardcoded_key",
+      "tier": "T1",
+      "content_hash": "713e1e66f611d53b17efeaff56d92b9509361cf559d643120cbe0c715e7d8d71",
+      "role": "multi_category"
+    },
+    {
+      "doc_id": "uc4-24f4890ccf",
+      "family_id": "pub_product_datasheet",
+      "tier": "T1",
+      "content_hash": "0b6ee4bc609da3d18d71935b9523bf50797bd1225619f99bab2a2476898fecc2",
+      "role": "level:PUBLIC"
+    }
+  ]
+}

@@ -47,6 +47,15 @@ class PredictionRecord(StrictModel):
     scores_calibrated: bool = False
     classifier_high_risk_mismatch: bool = False  # classifier's own high_risk disagreed with ours
 
+    # LLM-specific accounting (empty/zero for other approaches)
+    level_confidence: str | None = None  # verbalized bucket; never a calibrated probability
+    category_confidence: str | None = None
+    tokens_in: int | None = None
+    tokens_out: int | None = None
+    evidence_total: int = 0  # llm_excerpt quotes returned
+    evidence_verified: int = 0  # of those, found in the text that was sent
+    guardrail_types: list[str] = Field(default_factory=list)
+
     # cost / time
     latency_ms: float  # wall-clock around classify(), measured by the harness
     reported_latency_ms: float | None = None  # what the classifier says it spent

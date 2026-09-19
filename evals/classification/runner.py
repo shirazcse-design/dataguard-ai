@@ -72,11 +72,34 @@ def _record_from_result(
         if vocabulary_errors:
             return _failure_record(doc, policy, latency_ms, "error", "invalid_labels")
 
+    quotes = [e for e in result.evidence if e.type == "llm_excerpt"]
+    extras = {
+        "level_confidence": (
+            str(result.level.confidence.raw)
+            if result.level and result.level.confidence.kind == "verbalized_bucket"
+            else None
+        ),
+        "category_confidence": next(
+            (
+                str(c.confidence.raw)
+                for c in result.categories
+                if c.confidence.kind == "verbalized_bucket"
+            ),
+            None,
+        ),
+        "tokens_in": result.telemetry.tokens.get("prompt"),
+        "tokens_out": result.telemetry.tokens.get("completion"),
+        "evidence_total": len(quotes),
+        "evidence_verified": sum(e.verified for e in quotes),
+        "guardrail_types": sorted({g.type for g in result.guardrail_events}),
+    }
     if not usable:
+        cause = next((w for w in result.warnings if w.startswith("llm_")), None)
         return PredictionRecord(
             **_base_fields(doc, policy),
+            **extras,
             status=status,
-            failure=f"no_label:{status}",
+            failure=f"no_label:{status}" + (f":{cause}" if cause else ""),
             has_prediction=False,
             review_required=result.review.required,
             abstained=result.routing.abstained,
@@ -91,6 +114,7 @@ def _record_from_result(
         **_base_fields(doc, policy),
         status=status,
         has_prediction=True,
+        **extras,
         pred_level=level,
         pred_categories=cats,
         pred_high_risk=derived.value,  # never trust the classifier's own field

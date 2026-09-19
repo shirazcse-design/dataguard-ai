@@ -26,7 +26,7 @@ from .metrics import compact, compute_metrics, hard_negative_metrics, round_floa
 from .records import PredictionRecord
 from .runner import run_classifier
 
-HARNESS_VERSION = "1.2.0"
+HARNESS_VERSION = "1.3.0"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
