@@ -1,0 +1,166 @@
+# T1 (easy) credential/secret families: live-looking passwords, keys, tokens and connection strings.
+families:
+  - family_id: cred_env_file
+    description: Application .env file with database password and API keys.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 6
+    filenames: [".env", ".env.production", "app.env", "secrets.env"]
+    metadata: {source_system: "Git repository", source_path: "/services/«codeword»/"}
+    bodies:
+      - |
+        # service configuration
+        APP_ENV=production
+        DB_HOST=«@host»
+        DB_USER=svc_«codeword»
+        DB_PASSWORD=⟦CREDENTIALS_SECRETS§«@password»⟧
+        PAYMENTS_API_KEY=⟦CREDENTIALS_SECRETS§«@apikey»⟧
+        SESSION_SECRET=⟦CREDENTIALS_SECRETS§«@hex:32»⟧
+      - |
+        NODE_ENV=production
+        PORT=«@int:3000-9000»
+        REDIS_URL=redis://:⟦CREDENTIALS_SECRETS§«@password»⟧@«@host»:6379
+        SERVICE_TOKEN=⟦CREDENTIALS_SECRETS§«@token»⟧
+  - family_id: cred_chat_password_paste
+    description: Chat conversation where a colleague pastes a password and a token.
+    tier: T1
+    format: chat
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["chat_export_«@int:1-999».txt", "Slack_«weekday».json"]
+    metadata: {source_system: "Slack export"}
+    bodies:
+      - |
+        [10:42] «person.first»: can you get into the «product_noun» admin console? locked out again
+        [10:43] «person#2.first»: yes. login is admin and the password is ⟦CREDENTIALS_SECRETS§«@password»⟧
+        [10:43] «person.first»: thanks!! will change it after
+        [10:44] «person#2.first»: staging token in case you need it: ⟦CREDENTIALS_SECRETS§«@token»⟧
+  - family_id: cred_ci_pipeline_token
+    description: CI pipeline definition with an inline deploy token and build scripts.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS, SOURCE_CODE]
+    n_docs: 5
+    filenames: [".gitlab-ci.yml", "deploy-pipeline.yaml", "azure-pipelines.yml"]
+    metadata: {source_system: "Git repository"}
+    notes: Build logic (Source Code) that embeds a live-looking deploy token.
+    bodies:
+      - |
+        name: deploy-«codeword»
+        on: push
+        jobs:
+          build:
+            steps:
+              - run: ⟦SOURCE_CODE§make build && ./scripts/package.sh --target «region»⟧
+              - run: curl -H "Authorization: Bearer ⟦CREDENTIALS_SECRETS§«@token»⟧" https://deploy.corp.example/api/release
+  - family_id: cred_db_connection_string
+    description: Application config with connection strings containing embedded passwords.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["database.toml", "appsettings.Production.json", "db_config.ini"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        [database]
+        primary = "postgres://«codeword»_app:⟦CREDENTIALS_SECRETS§«@password»⟧@«@host»:5432/orders"
+        replica = "postgres://«codeword»_ro:⟦CREDENTIALS_SECRETS§«@password#2»⟧@«@host#2»:5432/orders"
+        pool_size = «@int:5-40»
+  - family_id: cred_terraform_tfvars
+    description: Terraform variable file with an admin password and API token.
+    tier: T1
+    format: config_file
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["prod.tfvars", "terraform.tfvars", "secrets.auto.tfvars"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        region             = "«region»"
+        instance_count     = «@int:2-12»
+        db_admin_password  = "⟦CREDENTIALS_SECRETS§«@password»⟧"
+        monitoring_api_key = "⟦CREDENTIALS_SECRETS§«@apikey»⟧"
+  - family_id: cred_readme_admin_login
+    description: README that documents an admin username and password.
+    tier: T1
+    format: markdown
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["README.md", "SETUP.md", "runbook_«codeword».md"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        # «codeword» admin console
+
+        ## Getting started
+        1. Open https://admin.corp.example
+        2. Sign in with the shared account: user `ops-admin`, password `⟦CREDENTIALS_SECRETS§«@password»⟧`
+        3. Rotate the password when you are done.
+
+        ## Notes
+        The console talks to «@host». Ask «person» for access to the dashboards.
+  - family_id: cred_jwt_in_log
+    description: Application log capturing a bearer token in a request header.
+    tier: T1
+    format: log
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["api-gateway.log", "debug_«@date».log", "app_trace_«@int:1-99».txt"]
+    metadata: {source_system: "Log archive"}
+    bodies:
+      - |
+        «@date» 09:14:02 INFO  request GET /v1/accounts status=200 user=svc-billing
+        «@date» 09:14:02 DEBUG auth header Authorization: Bearer ⟦CREDENTIALS_SECRETS§«@jwt»⟧
+        «@date» 09:14:03 INFO  request POST /v1/transfers status=202 user=svc-billing
+  - family_id: cred_vpn_credentials_email
+    description: Email that sends a temporary password.
+    tier: T1
+    format: email
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["Your_new_account.eml", "Welcome_to_the_team.eml"]
+    metadata: {source_system: "Email"}
+    bodies:
+      - |
+        From: «person.workemail»
+        To: «person#2.workemail»
+        Subject: Your new account
+
+        Hi «person#2.first»,
+
+        Your accounts are ready. Username: «person#2.first». Temporary password: ⟦CREDENTIALS_SECRETS§«@password»⟧
+        Please change it at first login.
+
+        Thanks,
+        «person.first»
+  - family_id: cred_python_hardcoded_key
+    description: Proprietary Python module with a hard-coded API key.
+    tier: T1
+    format: source_code
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [SOURCE_CODE, CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["orders_client.py", "billing_sync.py", "«codeword»_export.py"]
+    metadata: {source_system: "Git repository"}
+    notes: Proprietary code (Source Code) that also embeds a live-looking key (Credentials).
+    bodies:
+      - |
+        # Copyright «company». Proprietary and confidential.
+        import requests
+
+        API_KEY = "⟦CREDENTIALS_SECRETS§«@apikey»⟧"
+
+        ⟦SOURCE_CODE§def fetch_orders(customer_id):
+            resp = requests.get("https://api.corp.example/v2/orders", headers={"X-Api-Key": API_KEY}, params={"customer": customer_id})
+            resp.raise_for_status()
+            return resp.json()⟧

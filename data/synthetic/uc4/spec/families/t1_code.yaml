@@ -1,0 +1,185 @@
+# T1 (easy) proprietary source code across languages. No secrets (credentials live in t1_cred).
+families:
+  - family_id: sc_python_module
+    description: Proprietary Python service module with an internal license header.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 6
+    filenames: ["inventory_service.py", "ledger.py", "scheduler_«codeword».py", "pricing_engine.py"]
+    metadata: {source_system: "Git repository", source_path: "/src/«codeword»/"}
+    bodies:
+      - |
+        # Copyright (c) «@year» «company». All rights reserved.
+        # Proprietary and confidential. Do not distribute.
+        ⟦SOURCE_CODE§class InventoryService:
+            def __init__(self, repo, clock):
+                self._repo = repo
+                self._clock = clock
+
+            def reserve(self, sku, quantity):
+                stock = self._repo.get_stock(sku)
+                if stock < quantity:
+                    raise ValueError("insufficient stock")
+                self._repo.set_stock(sku, stock - quantity)
+                return {"sku": sku, "reserved": quantity, "at": self._clock.now().isoformat()}⟧
+      - |
+        # Internal use only - «company»
+        import math
+
+        ⟦SOURCE_CODE§def blended_rate(base, volume, tier_thresholds, tier_discounts):
+            discount = 0.0
+            for threshold, tier_discount in zip(tier_thresholds, tier_discounts):
+                if volume >= threshold:
+                    discount = tier_discount
+            return round(base * (1 - discount), 4)
+
+        def projected_revenue(base, volumes, tiers, discounts):
+            return sum(volume * blended_rate(base, volume, tiers, discounts) for volume in volumes)⟧
+  - family_id: sc_sql_migration
+    description: Internal SQL schema migration for a proprietary data model.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["V«@int:10-99»__add_orders_table.sql", "migration_«@int:100-999».sql", "schema_update_«codeword».sql"]
+    metadata: {source_system: "Git repository", source_path: "/db/migrations/"}
+    bodies:
+      - |
+        -- Migration «@int:10-99»: order fulfilment tracking (internal)
+        ⟦SOURCE_CODE§CREATE TABLE fulfilment_events (
+            event_id BIGSERIAL PRIMARY KEY,
+            order_id BIGINT NOT NULL REFERENCES orders(order_id),
+            state TEXT NOT NULL,
+            warehouse_code TEXT,
+            created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+        );
+        CREATE INDEX idx_fulfilment_order ON fulfilment_events (order_id, created_at DESC);⟧
+      - |
+        -- add margin tracking for the «codeword» pricing model
+        ⟦SOURCE_CODE§ALTER TABLE price_rules ADD COLUMN floor_margin NUMERIC(5,2) NOT NULL DEFAULT 0;
+        UPDATE price_rules SET floor_margin = 12.5 WHERE segment = 'enterprise';
+        CREATE VIEW v_effective_prices AS
+          SELECT sku, segment, base_price * (1 - discount) AS net_price, floor_margin
+          FROM price_rules WHERE active;⟧
+  - family_id: sc_js_service
+    description: Internal Node.js service handler.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["orders.controller.js", "handlers/«codeword».js", "server.js"]
+    metadata: {source_system: "Git repository", source_path: "/services/api/"}
+    bodies:
+      - |
+        // «company» internal - not for distribution
+        ⟦SOURCE_CODE§const express = require('express');
+        const router = express.Router();
+
+        router.post('/orders/:id/cancel', async (req, res) => {
+          const order = await repo.findOrder(req.params.id);
+          if (!order) return res.status(404).json({ error: 'not found' });
+          if (order.state === 'shipped') return res.status(409).json({ error: 'already shipped' });
+          await repo.updateState(order.id, 'cancelled');
+          res.json({ id: order.id, state: 'cancelled' });
+        });
+
+        module.exports = router;⟧
+  - family_id: sc_java_class
+    description: Proprietary Java domain class.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["RiskScorer.java", "ShipmentPlanner.java", "«codeword»Repository.java"]
+    metadata: {source_system: "Git repository", source_path: "/src/main/java/"}
+    bodies:
+      - |
+        /* Copyright «@year» «company». Confidential and proprietary. */
+        package corp.«codeword»;
+
+        ⟦SOURCE_CODE§public class ShipmentPlanner {
+            private final RouteRepository routes;
+
+            public ShipmentPlanner(RouteRepository routes) {
+                this.routes = routes;
+            }
+
+            public int estimateDays(String origin, String destination, double weightKg) {
+                int base = routes.baseDays(origin, destination);
+                return weightKg > 500 ? base + 2 : base;
+            }
+        }⟧
+  - family_id: sc_go_handler
+    description: Proprietary Go HTTP handler.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["handler.go", "quota.go", "«codeword»_worker.go"]
+    metadata: {source_system: "Git repository", source_path: "/internal/"}
+    bodies:
+      - |
+        // Copyright «@year» «company». Internal use only.
+        package quota
+
+        ⟦SOURCE_CODE§func (s *Service) Allow(tenant string, cost int) bool {
+            s.mu.Lock()
+            defer s.mu.Unlock()
+            used := s.usage[tenant]
+            if used+cost > s.limits[tenant] {
+                return false
+            }
+            s.usage[tenant] = used + cost
+            return true
+        }⟧
+  - family_id: sc_shell_deploy_script
+    description: Internal deployment shell script referencing internal hosts.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["deploy.sh", "rollout_«codeword».sh", "backup_cron.sh"]
+    metadata: {source_system: "Git repository", source_path: "/ops/scripts/"}
+    bodies:
+      - |
+        #!/usr/bin/env bash
+        # Internal: rolling deploy for «codeword»
+        ⟦SOURCE_CODE§set -euo pipefail
+        for host in «@host» «@host#2» «@host#3»; do
+          ssh deploy@"$host" "sudo systemctl stop «codeword» && sudo cp /releases/current/«codeword» /opt/«codeword»/ && sudo systemctl start «codeword»"
+          sleep 5
+        done
+        echo "rollout complete"⟧
+  - family_id: sc_docker_compose
+    description: Internal Dockerfile / compose configuration for a proprietary service.
+    tier: T1
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["Dockerfile", "docker-compose.yml", "compose.«codeword».yaml"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        # internal image for the «codeword» pipeline
+        ⟦SOURCE_CODE§FROM registry.corp.example/base/python:3.12-slim
+        WORKDIR /app
+        COPY requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        COPY src/ ./src/
+        ENV WORKERS=«@int:2-16»
+        CMD ["python", "-m", "«codeword»_worker"]⟧
+      - |
+        services:
+          «codeword»-api:
+            image: registry.corp.example/«codeword»/api:«@int:1-9».«@int:0-20»
+            ports: ["«@int:8000-8999»:8080"]
+          «codeword»-cache:
+            image: registry.corp.example/base/redis:7

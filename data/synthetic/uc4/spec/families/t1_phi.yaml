@@ -1,0 +1,140 @@
+# T1 (easy) PHI families: identifiable health information with explicit clinical markers.
+families:
+  - family_id: phi_patient_visit_note
+    description: Clinic visit note naming the patient with DOB, MRN, diagnosis and medication.
+    tier: T1
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI, PII]
+    n_docs: 6
+    filenames: ["Visit_Note_«person.last».docx", "Encounter_«@mrn».pdf", "Progress_Note_«@date».txt"]
+    metadata: {source_system: "EHR export"}
+    notes: Identifiable patient with diagnosis (PHI) and date of birth (PII).
+    bodies:
+      - |
+        CLINIC VISIT NOTE - «clinic»
+        Patient: «person»   DOB: ⟦PII§«@dob:us»⟧   «@mrn»
+        Date of visit: «@date»
+        Assessment: ⟦PHI§«diagnosis_coded»⟧
+        Plan: continue ⟦PHI§«medication»⟧; recheck labs in «@int:2-12» weeks.
+        Provider: Dr. «person#2.last»
+      - |
+        Progress note («@date») - «clinic»
+        «person», DOB ⟦PII§«@dob»⟧
+        Dx: ⟦PHI§«diagnosis_coded»⟧. Rx: ⟦PHI§«medication»⟧.
+        Patient reports «improvement|no change|worsening symptoms» since last visit.
+  - family_id: phi_lab_results
+    description: Lab results table keyed by medical record number.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 5
+    filenames: ["Lab_Results_«@date».csv", "Pathology_Batch_«@int:1-99».xlsx"]
+    metadata: {source_system: "Laboratory system"}
+    notes: MRN-linked clinical results, no other direct identifiers.
+    bodies:
+      - |
+        mrn,test,result,flag
+        ⟦PHI§«@mrn»,«lab_test»,«@int:3-190»,«normal|high|low»
+        «@mrn#2»,«lab_test#2»,«@int:3-190»,«normal|high|low»
+        «@mrn#3»,«lab_test#3»,«@int:3-190»,«normal|high|low»
+        «@mrn#4»,«lab_test#4»,«@int:3-190»,«normal|high|low»⟧
+  - family_id: phi_insurance_claim
+    description: Health insurance claim with member identity, DOB and diagnosis codes.
+    tier: T1
+    format: claim
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI, PII]
+    n_docs: 5
+    filenames: ["Claim_«@claim».pdf", "EOB_«person.last».pdf"]
+    metadata: {source_system: "Claims system"}
+    bodies:
+      - |
+        HEALTH CLAIM «@claim»
+        Member: «person»   DOB: ⟦PII§«@dob:us»⟧
+        Address: «@int:10-999» «street», «city»
+        Diagnosis: ⟦PHI§«diagnosis_coded»⟧
+        Provider: «clinic»
+        Billed: «@usd:80-9000»   Allowed: «@usd:60-7000»
+  - family_id: phi_prescription_record
+    description: Pharmacy record linking a patient to a prescribed medication.
+    tier: T1
+    format: record
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 5
+    filenames: ["Rx_Record_«@int:10000-99999».txt", "Pharmacy_Log_«month».csv"]
+    metadata: {source_system: "Pharmacy system"}
+    notes: Patient name and MRN with medication; name is the only direct identifier so PHI only.
+    bodies:
+      - |
+        PRESCRIPTION RECORD
+        Patient: «person»  («@mrn»)
+        Filled: «@date»
+        ⟦PHI§Medication: «medication» - «@int:14-90» day supply, indication «diagnosis»⟧
+        Pharmacist: «person#2»
+  - family_id: phi_discharge_summary
+    description: Hospital discharge summary with patient identifiers, diagnosis and discharge medications.
+    tier: T1
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI, PII]
+    n_docs: 5
+    filenames: ["Discharge_Summary_«person.last».pdf", "Discharge_«@mrn».docx"]
+    metadata: {source_system: "EHR export"}
+    bodies:
+      - |
+        DISCHARGE SUMMARY - «clinic»
+        Name: «person»    Phone: ⟦PII§«@phone»⟧    DOB: ⟦PII§«@dob:long»⟧
+        Admission: «@date»    Discharge: «@date»
+        Principal diagnosis: ⟦PHI§«diagnosis»⟧
+        Discharge medications: ⟦PHI§«medication», «medication#2»⟧
+        Follow up with primary care in «@int:1-4» weeks.
+  - family_id: phi_hl7_message
+    description: HL7-style message with patient segment and diagnosis segment.
+    tier: T1
+    format: message
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 5
+    filenames: ["ADT_Message_«@int:1000-9999».hl7", "HL7_Feed_«@alnum:5».txt"]
+    metadata: {source_system: "Interface engine"}
+    bodies:
+      - |
+        MSH|^~\&|REGISTRATION|«clinic»|EHR|«clinic#2»|«@date»||ADT^A01|«@int:10000-99999»|P|2.5
+        ⟦PHI§PID|1||«@mrn»||«person.last»^«person.first»||F|||||||||||||||
+        DG1|1||«diagnosis_coded»⟧
+        PV1|1|I|«@int:1-9»West^«@int:100-499»^A
+  - family_id: phi_immunization_registry
+    description: Immunization registry extract with names, DOB and vaccines.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI, PII]
+    n_docs: 5
+    filenames: ["Immunization_Registry_«@year».csv", "Vaccination_Records_«city».xlsx"]
+    metadata: {source_system: "Public health registry export"}
+    bodies:
+      - |
+        patient,dob,vaccine,date_given
+        «person»,⟦PII§«@dob»⟧,⟦PHI§«vaccine»⟧,«@date»
+        «person#2»,⟦PII§«@dob#2»⟧,⟦PHI§«vaccine#2»⟧,«@date»
+        «person#3»,⟦PII§«@dob#3»⟧,⟦PHI§«vaccine#3»⟧,«@date»
+  - family_id: phi_workplace_injury_report
+    description: Workplace injury report with employee contact details and injury diagnosis.
+    tier: T1
+    format: report
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI, PII]
+    n_docs: 5
+    filenames: ["Injury_Report_«person.last».docx", "Incident_«@int:100-999»_Medical.pdf"]
+    metadata: {source_system: "EHS system", author_department: "Human Resources"}
+    bodies:
+      - |
+        WORKPLACE INJURY REPORT
+        Employee: «person» (ID «@empid»), personal phone ⟦PII§«@phone»⟧
+        Date of incident: «@date»
+        Location: «city» warehouse
+        ⟦PHI§Injury: «fracture of the left wrist|lumbar strain|second-degree burn to the forearm|concussion»; treating physician noted «medication» prescribed.⟧
+        Manager: «person#2»

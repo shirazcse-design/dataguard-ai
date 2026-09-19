@@ -1,0 +1,260 @@
+# T1 (easy) PII and Financial/PCI families: explicit identifiers and account/card data.
+families:
+  - family_id: pii_customer_contact_list
+    description: Bulk export of customer personal contact details (no government IDs).
+    tier: T1
+    format: csv_table
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["Customer_Contacts_Export_«@year».csv", "Newsletter_Subscribers_«month».csv", "CRM_Extract_«region».xlsx"]
+    metadata: {source_system: "CRM export"}
+    notes: Personal contact details for many individuals, no government identifiers. Confidential (floor).
+    bodies:
+      - |
+        full_name,personal_email,mobile,home_address
+        ⟦PII§«person»,«person.email»,«@phone»,«@int:10-999» «street» «city»
+        «person#2»,«person#2.email»,«@phone#2»,«@int:10-999» «street#2» «city#2»
+        «person#3»,«person#3.email»,«@phone#3»,«@int:10-999» «street#3» «city#3»
+        «person#4»,«person#4.email»,«@phone#4»,«@int:10-999» «street#4» «city#4»⟧
+      - |
+        Subscriber export («month» «@year»)
+        Name | Email | Phone | City
+        ⟦PII§«person» | «person.email» | «@phone» | «city»
+        «person#2» | «person#2.email» | «@phone#2» | «city#2»
+        «person#3» | «person#3.email» | «@phone#3» | «city#3»⟧
+        Total rows: «@int:200-9000»
+  - family_id: pii_hr_record_ssn
+    description: Employee HR record with government ID, DOB and home address.
+    tier: T1
+    format: form
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["HR_Record_«person.last».pdf", "Employee_File_«@empid».docx", "Personnel_Record_«@int:1000-9999».pdf"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    notes: Government identifier plus DOB and address; aggravated above the PII floor to Highly Confidential.
+    bodies:
+      - |
+        EMPLOYEE PERSONNEL RECORD
+        Employee: «person»   ID: «@empid»
+        Department: «dept»   Title: «job_title»
+        Social Security Number: ⟦PII§«@ssn»⟧
+        Date of birth: ⟦PII§«@dob»⟧
+        Home address: «@int:10-999» «street», «city»
+        Emergency contact: «person#2» «@phone»
+        Hire date: «@date:us:2005-2024»
+      - |
+        HR file - «person»
+        SSN: ⟦PII§«@ssn»⟧ | DOB: ⟦PII§«@dob:us»⟧
+        Address on file: «@int:10-999» «street», «city»
+        Manager: «person#2» («dept»)
+  - family_id: pii_kyc_passport
+    description: KYC customer file with passport number and date of birth.
+    tier: T1
+    format: form
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["KYC_«person.last»_«@int:100-999».pdf", "Customer_Verification_«@alnum:6».docx"]
+    metadata: {source_system: "Compliance case system", author_department: "Compliance"}
+    notes: Passport number plus DOB; Highly Confidential.
+    bodies:
+      - |
+        KNOW-YOUR-CUSTOMER VERIFICATION
+        Customer: «person»
+        Nationality: «region»
+        Passport number: ⟦PII§«@passport»⟧
+        Date of birth: ⟦PII§«@dob:long»⟧
+        Residential address: «@int:10-999» «street», «city»
+        Verification status: «Approved|Pending|Approved with conditions»
+        Reviewer: «person#2»
+      - |
+        Onboarding check - «person»
+        ID document: passport ⟦PII§«@passport»⟧, issued «@year»
+        DOB ⟦PII§«@dob»⟧
+        Phone «@phone»   Email «person.email»
+  - family_id: pii_payroll_register
+    description: Payroll register with SSNs and bank account numbers.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PII, FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Payroll_Register_«month»_«@year».xlsx", "Payroll_«dept».csv", "Salary_Run_«@int:1-26».csv"]
+    metadata: {source_system: "Payroll system", author_department: "Finance"}
+    notes: Government IDs (PII) plus bank routing/account numbers (Financial).
+    bodies:
+      - |
+        employee,ssn,routing,account,net_pay
+        «person»,⟦PII§«@ssn»⟧,⟦FINANCIAL_PCI§«@routing»,«@acct»⟧,«@usd:1800-6200»
+        «person#2»,⟦PII§«@ssn#2»⟧,⟦FINANCIAL_PCI§«@routing#2»,«@acct#2»⟧,«@usd:1800-6200»
+        «person#3»,⟦PII§«@ssn#3»⟧,⟦FINANCIAL_PCI§«@routing#3»,«@acct#3»⟧,«@usd:1800-6200»
+  - family_id: pii_visa_application
+    description: Visa/immigration application data with passport and DOB.
+    tier: T1
+    format: form
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["Visa_Application_«person.last».pdf", "Relocation_Case_«@int:100-999».docx"]
+    metadata: {source_system: "Global mobility portal", author_department: "Human Resources"}
+    bodies:
+      - |
+        Work visa application summary
+        Applicant: «person»
+        Passport no.: ⟦PII§«@passport»⟧   Expiry: «@date:iso:2027-2034»
+        Date of birth: ⟦PII§«@dob:us»⟧
+        Current address: «@int:10-999» «street», «city»
+        Employer: «company»
+        Sponsor contact: «person#2», «@phone»
+  - family_id: pii_donor_list
+    description: Donor list with names, personal emails and home addresses.
+    tier: T1
+    format: csv_table
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["Donor_List_«@year».csv", "Fundraising_Contacts_«city».xlsx"]
+    metadata: {source_system: "Fundraising CRM"}
+    bodies:
+      - |
+        donor,email,address,total_given
+        ⟦PII§«person»,«person.email»,«@int:10-999» «street» «city»
+        «person#2»,«person#2.email»,«@int:10-999» «street#2» «city#2»
+        «person#3»,«person#3.email»,«@int:10-999» «street#3» «city#3»⟧,«@usd:50-5000»
+  - family_id: pii_support_export
+    description: Support ticket export containing customers' full names, home addresses and phones.
+    tier: T1
+    format: ticket
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 5
+    filenames: ["Support_Export_«@int:1-500».csv", "Tickets_«month»_«@year».json"]
+    metadata: {source_system: "Helpdesk"}
+    bodies:
+      - |
+        Ticket «@ticket» - status: «Open|Resolved|Pending»
+        Customer: ⟦PII§«person», «@int:10-999» «street», «city», phone «@phone»⟧
+        Issue: the «product_noun» stopped responding after the last update.
+        Agent note: replaced unit, customer confirmed delivery.
+
+        Ticket «@ticket#2» - status: «Open|Resolved|Pending»
+        Customer: ⟦PII§«person#2», «@int:10-999» «street#2», «city#2», phone «@phone#2»⟧
+        Issue: billing address needs updating.
+  - family_id: fin_payment_export_cards
+    description: Payment export with full card numbers, expiry and billing address.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI, PII]
+    n_docs: 6
+    filenames: ["Payments_Export_«month».csv", "Card_Transactions_«@year».xlsx", "Settlement_Batch_«@int:1-99».csv"]
+    metadata: {source_system: "Payments platform", author_department: "Finance"}
+    notes: Full PANs (Financial/PCI) with billing addresses and emails (PII).
+    bodies:
+      - |
+        name,card_number,expiry,cvv,billing_address,email
+        «person»,⟦FINANCIAL_PCI§«@card»⟧,«@expiry»,«@cvv»,⟦PII§«@int:10-999» «street», «city»⟧,«person.email»
+        «person#2»,⟦FINANCIAL_PCI§«@card#2»⟧,«@expiry#2»,«@cvv#2»,⟦PII§«@int:10-999» «street#2», «city#2»⟧,«person#2.email»
+        «person#3»,⟦FINANCIAL_PCI§«@card#3»⟧,«@expiry#3»,«@cvv#3»,⟦PII§«@int:10-999» «street#3», «city#3»⟧,«person#3.email»
+      - |
+        Cardholder data extract («month» «@year»)
+        1) «person» - PAN ⟦FINANCIAL_PCI§«@card»⟧ exp «@expiry» - «@usd:20-900»
+        2) «person#2» - PAN ⟦FINANCIAL_PCI§«@card#2»⟧ exp «@expiry#2» - «@usd:20-900»
+        Billing contact: «person#3», «@int:10-999» «street», «city», «person#3.email»
+  - family_id: fin_wire_instructions_iban
+    description: Email with wire transfer instructions including IBAN.
+    tier: T1
+    format: email
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Wire_Instructions_«company.short».eml", "RE_Payment_details.eml"]
+    metadata: {source_system: "Email"}
+    bodies:
+      - |
+        From: «person.workemail»
+        To: «person#2.workemail»
+        Subject: Wire instructions for invoice «@invoice»
+
+        Hi «person#2.first»,
+
+        Please send the payment of «@usd:5000-90000» to the account below.
+
+        Beneficiary: «company#2»
+        IBAN: ⟦FINANCIAL_PCI§«@iban»⟧
+        Bank: Dunmore Trust Bank
+
+        Let me know once it has gone out.
+        «person.first»
+  - family_id: fin_bank_statement
+    description: Bank statement text with account and routing numbers and balances.
+    tier: T1
+    format: statement
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Bank_Statement_«month»_«@year».pdf", "Account_Statement_«@int:1-99».txt"]
+    metadata: {source_system: "Treasury portal", author_department: "Finance"}
+    bodies:
+      - |
+        BUSINESS CHECKING STATEMENT
+        Account holder: «company»
+        Routing number: ⟦FINANCIAL_PCI§«@routing»⟧
+        Account number: ⟦FINANCIAL_PCI§«@acct»⟧
+        Statement period: «month» «@year»
+        Opening balance: «@usd:20000-900000»
+        Closing balance: «@usd:20000-900000»
+  - family_id: fin_invoice_bank_details
+    description: Invoice that includes the payee's bank routing and account numbers.
+    tier: T1
+    format: invoice
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Invoice_«@invoice».pdf", "Vendor_Invoice_«company#2.short».pdf"]
+    metadata: {source_system: "Accounts payable", author_department: "Finance"}
+    bodies:
+      - |
+        INVOICE «@invoice»
+        From: «company#2»
+        To: «company»
+        Date: «@date»
+        Services: consulting, «@int:20-200» hours
+        Amount due: «@usd:2000-80000»
+
+        Remit payment by bank transfer:
+        Routing: ⟦FINANCIAL_PCI§«@routing»⟧  Account: ⟦FINANCIAL_PCI§«@acct»⟧
+  - family_id: fin_merchant_settlement
+    description: Merchant settlement report listing full card numbers.
+    tier: T1
+    format: report
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Merchant_Settlement_«@int:1-31».txt", "Chargebacks_«month».csv"]
+    metadata: {source_system: "Payments platform"}
+    bodies:
+      - |
+        Chargeback review - «month» «@year»
+        case «@int:1000-9999»: card ⟦FINANCIAL_PCI§«@card»⟧ amount «@usd:15-800» reason: «fraud|item not received|duplicate charge»
+        case «@int:1000-9999»: card ⟦FINANCIAL_PCI§«@card#2»⟧ amount «@usd:15-800» reason: «fraud|item not received|duplicate charge»
+        case «@int:1000-9999»: card ⟦FINANCIAL_PCI§«@card#3»⟧ amount «@usd:15-800» reason: «fraud|item not received|duplicate charge»
+  - family_id: fin_corp_card_statement
+    description: Corporate card statement with the full card number.
+    tier: T1
+    format: statement
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Corporate_Card_«month».pdf", "Card_Statement_«person.last».pdf"]
+    metadata: {source_system: "Expense system", author_department: "Finance"}
+    bodies:
+      - |
+        CORPORATE CARD STATEMENT
+        Cardholder: «person» («dept»)
+        Card: ⟦FINANCIAL_PCI§«@card:spaces»⟧
+        Statement date: «@date»
+        Charges: airline «@usd:200-900», hotel «@usd:150-700», meals «@usd:30-150»
+        Please reconcile within 30 days.
