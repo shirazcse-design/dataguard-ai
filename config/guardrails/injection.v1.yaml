@@ -1,0 +1,51 @@
+# Local prompt-injection lexicon (instruction-override patterns). Guardrail version 1.0.0.
+#
+# Developed against the TRAIN split only, evaluated on dev. v1.0.0 -> 1.0.1 added patterns for
+# phrasings seen in TRAIN misses (see docs/uc4/llm-engine.md); nothing was derived from dev/calibration. It is a lexicon: paraphrased or
+# encoded attacks will be missed, and legitimate security-awareness text may match. A hit only
+# raises a guardrail event; it never blocks and never lowers anything.
+guardrail_version: 1.0.1
+max_scan_chars: 100000
+patterns:
+  - id: inj.ignore_instructions
+    description: Tells the reader to ignore or void earlier instructions.
+    regex: '\b(?:ignore|disregard|forget|override|void)\b[^.\n]{0,40}\b(?:previous|prior|above|earlier|preceding|safety|all|any)\b[^.\n]{0,30}\b(?:instructions?|rules|prompts?|guidelines|directions)\b'
+  - id: inj.instructions_void
+    description: States that instructions are void or overridden.
+    regex: '\b(?:instructions?|rules|guidelines)\b[^.\n]{0,30}\b(?:are|is)\s+(?:now\s+)?(?:void|null|revoked|overridden|cancell?ed)\b'
+  - id: inj.system_override
+    description: Fake system, assistant or admin override banner.
+    regex: '\b(?:system|assistant|admin(?:istrator)?|developer)\s+(?:override|instruction|message|prompt|mode)\b'
+  - id: inj.bypass_rules
+    description: Tells the reader to ignore, skip or bypass its rules, policy, taxonomy or checks.
+    regex: '\b(?:ignore|disregard|bypass|skip|circumvent)\b[^.\n]{0,40}\b(?:rules|instructions|taxonomy|guidelines|polic(?:y|ies)|guardrails|safeguards|checks|filters)\b'
+  - id: inj.guardrails_disabled
+    description: Claims that guardrails or checks are disabled or suspended.
+    regex: '\b(?:guardrails?|safeguards?|filters?|checks?|safety\s+(?:checks?|rules?))\b[^.\n]{0,30}\b(?:are|is|have\s+been)\s+(?:now\s+)?(?:disabled|off|bypassed|suspended|turned\s+off)\b'
+  - id: inj.claims_authority
+    description: Claims elevated authority or clearance for the reader.
+    regex: '\b(?:is|are|as)\s+an?\s+(?:admin(?:istrator)?|root|superuser|authori[sz]ed\s+\w+)\b[^.\n]{0,40}\b(?:clearance|access|privileges?|permissions?)\b'
+  - id: inj.mode_switch
+    description: Tries to put the model into a different role or mode.
+    regex: '\byou\s+are\s+(?:now|no\s+longer)\b'
+  - id: inj.addressed_to_ai
+    description: Text addressed to an automated reviewer, classifier or model.
+    regex: '\b(?:note|message|instructions?|attention)\s+(?:to|for)\s+(?:the\s+)?(?:automated\s+)?(?:ai|a\.i\.|llm|model|assistant|classifier|reviewers?|scanners?|bots?)\b|\bai\s+(?:reviewers?|assistants?|systems?)\s*:'
+  - id: inj.dictates_label
+    description: Dictates the classification or sensitivity output.
+    regex: '\b(?:classify|label|mark|tag|treat|rate|output|respond|return|set|answer)\b[^.\n]{0,60}\b(?:(?:as|with|to|=)\s*[:=]?\s*)?(?:level\s*[:=]?\s*)?(?:public|internal|non[- ]?sensitive|not\s+sensitive|unrestricted|approved)\b'
+  - id: inj.sensitivity_assignment
+    description: Field-style assignment of the sensitivity output.
+    regex: '\b(?:sensitivity|classification|label)(?:_level)?\s*[:=]\s*["'']?(?:public|internal)\b'
+  - id: inj.suppress_flag
+    description: Asks the reviewer not to flag, report or escalate.
+    regex: '\b(?:do\s+not|don''t|never)\s+(?:flag|report|escalate|classify|mark|block|redact)\b'
+  - id: inj.cleared_for_release
+    description: Claims the file was cleared or approved for release.
+    regex: '\b(?:has\s+been|is|was|already)\s+(?:cleared|approved|authori[sz]ed)\s+for\s+(?:public\s+)?(?:release|publication|sharing|distribution)\b'
+  - id: inj.multilingual_ignore
+    description: Ignore-previous-instructions phrasing in common languages.
+    regex: '(?i:\b(?:ignora|ignore|ignorez|ignoriere|ignorer|ignorar|ignorare|ignoreer)\b[^.\n]{0,30}\b(?:instrucciones|instru[cç][oõ]es|instructions|anweisungen|instrukcje|istruzioni|instructies)\b)'
+  - id: inj.multilingual_classify
+    description: Classify-as-public phrasing in common languages.
+    regex: '(?i:\b(?:clasifica|classifica|classifiez|klassifiziere|classificar)\b[^.\n]{0,60}\b(?:p[uú]blic[oa]?|publik|public)\b)'
