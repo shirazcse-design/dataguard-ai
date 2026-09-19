@@ -89,3 +89,14 @@ diagnosis_coded: [E11.9 - type 2 diabetes mellitus, I10 - essential hypertension
   N18.3 - chronic kidney disease stage 3, K21.9 - reflux disease, G43.909 - migraine,
   E03.9 - hypothyroidism, I48.91 - atrial fibrillation, M06.9 - rheumatoid arthritis,
   F41.1 - generalized anxiety disorder]
+
+# ---- semantic-tier vocabulary ----
+sector: [industrial sensors, cloud security software, specialty chemicals, diagnostic devices,
+  logistics software, battery materials, payments infrastructure, precision components,
+  clinical analytics, packaged foods, satellite imaging, industrial automation]
+strategy_rationale: [closes a gap in our product line, gives us a foothold in a new region,
+  brings a team we have failed to hire organically, removes a competitor from key accounts,
+  secures a scarce supply relationship, adds recurring revenue at a healthy margin]
+site_type: [plant, distribution hub, data center, research campus, regional office, call center]
+pressure: [margin compression, slowing demand, a lost anchor customer, rising input costs,
+  an expiring licence, regulatory pressure]

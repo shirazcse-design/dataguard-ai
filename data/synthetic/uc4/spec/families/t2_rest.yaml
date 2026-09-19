@@ -1,0 +1,354 @@
+# T2 (semantic) families: IP, PHI, PII, Financial, Source Code and level-only Confidential content.
+families:
+  - family_id: ip_research_notebook_novel_method
+    description: Unpublished research notes describing a novel method.
+    tier: T2
+    format: notes
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 6
+    filenames: ["Lab_Notebook_«@int:1-60».docx", "Research_Notes_«codeword».txt"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    bodies:
+      - |
+        Research notebook - week «@int:1-52»
+
+        ⟦INTELLECTUAL_PROPERTY§Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference. Error dropped by about «@pct:20-70» in all «@int:6-30» test runs. To our knowledge nobody has reported this approach.⟧
+        Next: repeat on the second prototype, then talk to «person» in Legal about protecting it before we present anywhere.
+  - family_id: ip_design_spec_new_component
+    description: Design specification for a new component or architecture.
+    tier: T2
+    format: design_doc
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 6
+    filenames: ["Component_Spec_«codeword».docx", "Architecture_Concept.md"]
+    metadata: {source_system: "Confluence", author_department: "Engineering"}
+    bodies:
+      - |
+        «codeword» concept design
+
+        ⟦INTELLECTUAL_PROPERTY§The new «product_noun» replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna. This removes two parts and cuts weight by roughly «@pct:15-40», and it is a departure from anything in our current or competing products.⟧
+        Open questions: materials for the lattice, and how to test long-term fatigue.
+  - family_id: ip_prototype_test_results
+    description: Unpublished prototype test results.
+    tier: T2
+    format: report
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 6
+    filenames: ["Prototype_Results_«@int:1-30».docx", "Bench_Test_Summary.docx"]
+    metadata: {source_system: "R&D repository", author_department: "Engineering"}
+    bodies:
+      - |
+        Bench test summary - prototype «@int:1-9»
+
+        ⟦INTELLECTUAL_PROPERTY§The prototype met the accuracy target for the first time, holding within «@pct:1-4» across the full temperature range. The result depends on the new filtering approach we developed this year and has not been shared outside the team.⟧
+        We recommend freezing the design and starting durability testing.
+  - family_id: ip_ui_design_new_product
+    description: Unreleased product design concept (creative work).
+    tier: T2
+    format: design_doc
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 6
+    filenames: ["Design_Concept_«codeword».docx", "Industrial_Design_Brief.docx"]
+    metadata: {source_system: "SharePoint", author_department: "Product"}
+    bodies:
+      - |
+        Industrial design brief - «codeword»
+
+        ⟦INTELLECTUAL_PROPERTY§The concept is a single-surface device with no visible seams, a matte finish and a physical slider replacing the usual buttons. The look is deliberately unlike anything on the market and will be our signature for the next «@int:3-6» years.⟧
+        Renderings are attached to the internal wiki only.
+  - family_id: ip_ts_process_patent_pending
+    description: Novel process that is both an invention and a secret know-how.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY, TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Process_Invention_«codeword».docx", "Novel_Process_Writeup.docx"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    notes: An invention (IP) whose operating parameters we deliberately keep secret (Trade Secret).
+    bodies:
+      - |
+        Novel process - internal write-up
+
+        ⟦INTELLECTUAL_PROPERTY§We have invented a way to grow the film at room temperature using a pulsed feed, which nobody has shown before.⟧ ⟦TRADE_SECRET§The exact pulse timing and the ratio of the two feed gases are what make it work, and we intend to keep those settings out of the patent application and run them as a shop secret.⟧ Owner: «person» («dept»), «@int:3-12» pilot batches so far, review in «month».
+      - |
+        «codeword» process - status for the steering group
+
+        ⟦INTELLECTUAL_PROPERTY§The team has developed a new way to bond «sector» components without heat, using a two-layer adhesive that self-aligns under light pressure.⟧ We will file a patent on the general method in «month». ⟦TRADE_SECRET§The layer thicknesses and the surface treatment before bonding stay out of the filing, because they are what make the bond hold and would be easy for a competitor to copy.⟧
+        Lead: «person». «@int:4-14» pilot runs completed.
+      - |
+        Invention note
+
+        ⟦INTELLECTUAL_PROPERTY§Our new approach to «sector» separates the mixture with a membrane whose pores are shaped by the process itself, a concept not seen in published work.⟧ We will describe the concept in the patent application. ⟦TRADE_SECRET§The membrane casting conditions we settled on after «@int:15-60» experiments are our know-how, and will be run as a trade secret rather than disclosed.⟧
+  - family_id: ip_ts_algorithm_disclosure
+    description: Algorithmic invention whose tuning stays secret.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY, TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Algorithm_Note_«codeword».docx", "Method_Description.docx"]
+    metadata: {source_system: "Confluence", author_department: "Data Science"}
+    bodies:
+      - |
+        Method description
+
+        ⟦INTELLECTUAL_PROPERTY§Our new compression scheme predicts each block from a learned dictionary that is updated as data streams in, something the literature has not described.⟧ ⟦TRADE_SECRET§The dictionary update rule and the pruning schedule we use in production are tuned over «@int:6-30» months of data and are not part of any filing; they stay internal.⟧
+      - |
+        Design note - «codeword»
+
+        ⟦INTELLECTUAL_PROPERTY§We have come up with a scheduler that learns each job's runtime from its first few seconds and reassigns work on the fly, which we believe is new.⟧ We intend to protect the concept by patent. ⟦TRADE_SECRET§The features we use for the runtime prediction and the reassignment thresholds, tuned on «@int:6-30» months of production traces, are not going in the application and will remain confidential know-how.⟧
+  - family_id: ip_unreleased_creative_work
+    description: Unreleased creative or documentation work owned by the company.
+    tier: T2
+    format: draft
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 6
+    filenames: ["Draft_Manual_«codeword».docx", "Unreleased_Course_Material.docx"]
+    metadata: {source_system: "SharePoint", author_department: "Product"}
+    bodies:
+      - |
+        Draft - not for release
+
+        ⟦INTELLECTUAL_PROPERTY§This chapter introduces our proprietary framework for planning maintenance in three stages: observe, forecast and schedule. The framework, including its worked examples and the decision diagrams, is an original work of the company and will ship with the next edition of the training programme.⟧ Draft «@int:1-9» prepared by «person» for the «codeword» programme, «@int:8-40» pages.
+      - |
+        Draft - «codeword» handbook, chapter «@int:2-9»
+
+        ⟦INTELLECTUAL_PROPERTY§In this chapter we describe our original method for onboarding field engineers: a four-week apprenticeship with paired shifts, a competency map and a graded practical exam. The map, exam questions and coaching scripts were written by our own trainers and have not been shared outside the company.⟧
+        Review comments due to «person» by «weekday».
+      - |
+        Unreleased content - internal review copy
+
+        ⟦INTELLECTUAL_PROPERTY§This module contains new illustrations, a set of case exercises and a scoring rubric created for the «codeword» curriculum. The exercises are entirely our own work and are scheduled for release with the «quarter» course update.⟧
+        Please do not upload to public sites before release.
+  - family_id: phi_clinician_narrative
+    description: Clinician narrative about a named patient's condition, without codes.
+    tier: T2
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 6
+    filenames: ["Case_Summary_«person.last».docx", "Clinical_Narrative.txt"]
+    metadata: {source_system: "EHR export"}
+    notes: The patient is identified by name only; no codes, MRN or other direct identifiers, so PHI without PII.
+    bodies:
+      - |
+        Case summary
+
+        ⟦PHI§«person» has been managing «diagnosis» for several years but has struggled to keep to the treatment plan since starting shift work. At the last review the patient described missing doses and feeling low, and we agreed to adjust the regimen and involve a counsellor.⟧
+        Follow-up planned in «@int:2-8» weeks.
+      - |
+        Letter to the referring physician
+
+        Thank you for referring «person». ⟦PHI§On examination the patient has poorly controlled «diagnosis» and reports «worsening symptoms|new side effects|difficulty sleeping». I have started a change in medication and will update you after the next visit.⟧
+  - family_id: phi_therapy_session_notes
+    description: Therapy session notes about a named client.
+    tier: T2
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 6
+    filenames: ["Session_Notes_«person.first».docx", "Counselling_Note_«@int:1-40».txt"]
+    metadata: {source_system: "EHR export"}
+    bodies:
+      - |
+        Session «@int:2-30» - «person»
+
+        ⟦PHI§«person.first» reported an increase in anxiety and low mood over the past month and disclosed a previous hospital stay for depression. We reviewed coping strategies and agreed to continue weekly sessions; a referral for medication review was discussed.⟧
+  - family_id: phi_occupational_health_note
+    description: Occupational-health note about an employee's medical condition.
+    tier: T2
+    format: clinical_note
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [PHI]
+    n_docs: 6
+    filenames: ["OH_Referral_«person.last».docx", "Fitness_for_Work_Note.docx"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    bodies:
+      - |
+        Occupational health assessment
+
+        ⟦PHI§«person» is returning to work after treatment for «diagnosis». The specialist advises a phased return, avoidance of night shifts for «@int:4-12» weeks, and regular breaks. The employee has asked that the detail of the condition is not shared with colleagues.⟧
+  - family_id: pii_manager_notes_private
+    description: Manager notes about a named employee's private circumstances.
+    tier: T2
+    format: notes
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 6
+    filenames: ["1on1_Notes_«person.first».docx", "Manager_Notes_«month».txt"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    bodies:
+      - |
+        One-to-one notes - «person» («dept»)
+
+        ⟦PII§«person.first» told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from «city#2» for a few months.⟧
+        I said I would keep this between us and HR. Agreed a lighter workload until «month».
+  - family_id: pii_hr_investigation_summary
+    description: HR investigation summary containing personal circumstances of named people.
+    tier: T2
+    format: report
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 6
+    filenames: ["Case_Summary_HR_«@int:100-999».docx", "Workplace_Review_«person.last».docx"]
+    metadata: {source_system: "HR case system", author_department: "Human Resources"}
+    bodies:
+      - |
+        Workplace review - summary of findings
+
+        ⟦PII§The complainant, «person», described how their financial difficulties and a recent bereavement affected their attendance. The respondent, «person#2», acknowledged the pressure and said their own family situation had contributed.⟧
+        Recommendation: informal resolution with coaching, and a check-in from HR in «@int:4-12» weeks.
+  - family_id: pii_exit_interview_personal
+    description: Exit interview notes with personal reasons for leaving.
+    tier: T2
+    format: notes
+    gold_level: CONFIDENTIAL
+    gold_categories: [PII]
+    n_docs: 6
+    filenames: ["Exit_Interview_«person.last».docx", "Leaver_Notes_«month».docx"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    bodies:
+      - |
+        Exit interview - «person», «job_title»
+
+        ⟦PII§«person.first» is leaving to care for a parent with a serious illness and to move back to «city#2» where their partner has found work. They asked that the reason not be given to the wider team.⟧
+        Feedback on the role was positive; the main frustration was the unclear promotion path.
+  - family_id: fin_preannouncement_earnings
+    description: Draft narrative of unreleased quarterly results.
+    tier: T2
+    format: draft
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["Earnings_Narrative_Draft_«quarter».docx", "Results_Commentary_«@year».docx"]
+    metadata: {source_system: "Finance share", author_department: "Investor Relations"}
+    bodies:
+      - |
+        DRAFT results commentary - not yet released
+
+        ⟦FINANCIAL_PCI§Revenue for the quarter is expected to come in about «@pct:3-12» below the guidance we gave in the last call, driven by delayed orders in «region». Operating margin will also fall short of expectations, and we plan to lower full-year guidance when we report.⟧
+        Release date to be confirmed. Do not discuss with analysts before the announcement.
+  - family_id: fin_board_forecast_notes
+    description: Board notes on an internal revenue and cash forecast.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["Forecast_Discussion_«quarter».docx", "CFO_Update_«month».docx"]
+    metadata: {source_system: "Board portal", author_department: "Finance"}
+    bodies:
+      - |
+        CFO update to the audit committee
+
+        ⟦FINANCIAL_PCI§Our latest forecast shows cash reserves falling to about «@usdm:200-900» by the end of «quarter» if the delayed contract slips again. Full-year revenue is now projected at «@usdm:2000-9000», a shortfall against the plan the committee approved.⟧
+        We are considering a draw on the credit facility as a precaution.
+  - family_id: fin_covenant_breach_memo
+    description: Memo on a likely debt covenant breach.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["Lender_Discussion_Prep.docx", "Covenant_Headroom_Analysis.docx"]
+    metadata: {source_system: "Finance share", author_department: "Treasury"}
+    bodies:
+      - |
+        Covenant headroom - treasury note
+
+        ⟦FINANCIAL_PCI§On current trends we expect to breach the leverage covenant at the end of «quarter». We plan to approach the lenders early to seek a waiver, ahead of any public disclosure of the shortfall.⟧
+        Legal is reviewing whether a disclosure obligation is triggered. Prepared by «person» on «@date», headroom currently «@pct:2-9».
+      - |
+        Note from the treasurer to the CFO
+
+        ⟦FINANCIAL_PCI§Based on the latest numbers our net debt will exceed the agreed multiple of earnings by about «@pct:3-15» at the next test date, so we are likely to breach the covenant unless the disposal closes first. Lenders have not been told.⟧
+        Suggested approach: brief the lead bank on «weekday» and ask for a temporary waiver of «@int:2-4» quarters.
+  - family_id: fin_investor_update_unreleased
+    description: Investor update draft containing unreleased performance metrics.
+    tier: T2
+    format: draft
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["Investor_Update_Draft_«month».docx", "Shareholder_Letter_Draft.docx"]
+    metadata: {source_system: "Finance share", author_department: "Investor Relations"}
+    bodies:
+      - |
+        Investor update - DRAFT, not for circulation
+
+        ⟦FINANCIAL_PCI§Annual recurring revenue grew «@pct:20-70» year on year to about «@usdm:1000-9000», and net revenue retention improved. Gross margin reached «@pct:55-80», ahead of what we have told the market so far.⟧
+        Hold until the results are approved by the board.
+  - family_id: sc_snippet_in_chat
+    description: Developers pasting proprietary code into a chat while debugging.
+    tier: T2
+    format: chat
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 6
+    filenames: ["dev_chat_export_«@int:1-99».txt", "debugging_thread.txt"]
+    metadata: {source_system: "Slack export"}
+    bodies:
+      - |
+        [14:02] «person.first»: the retry logic in our ledger sync is dropping the last batch, any idea why?
+        [14:03] «person.first»: this is what I have:
+        ⟦SOURCE_CODE§def sync_batches(batches, client):
+            for batch in batches[:-1]:
+                client.push(batch)
+            client.flush()⟧
+        [14:05] «person#2.first»: you slice off the last element. Use the whole list and flush after the loop.
+        [14:06] «person.first»: doh, thanks
+  - family_id: sc_code_review_comments
+    description: Code review comments quoting proprietary code.
+    tier: T2
+    format: review
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    n_docs: 6
+    filenames: ["review_comments_«@int:1-999».md", "PR_review_«codeword».txt"]
+    metadata: {source_system: "Git repository"}
+    bodies:
+      - |
+        Review of change «@int:100-999» - pricing rules
+
+        In the current version:
+        ⟦SOURCE_CODE§    if customer.tier == "enterprise" and volume > threshold:
+            price = base * (1 - enterprise_discount(volume))
+        else:
+            price = base⟧
+        Suggest extracting the discount lookup into its own function so we can test the boundaries. Also the enterprise branch never applies the regional adjustment.
+  - family_id: conf_customer_escalation_summary
+    description: Internal summary of a customer escalation with commercial detail but no personal data.
+    tier: T2
+    format: report
+    gold_level: CONFIDENTIAL
+    gold_categories: []
+    n_docs: 6
+    filenames: ["Escalation_«company#2.short».docx", "Account_Review_«quarter».docx"]
+    metadata: {source_system: "CRM", author_department: "Customer Success"}
+    notes: Non-public commercial detail about a named customer; no sensitive category applies. Confidential.
+    bodies:
+      - |
+        Escalation summary - «company#2»
+
+        The customer's leadership is unhappy about repeated outages and has warned that they will not renew when the contract ends in «month» unless we commit to a service credit and a named engineer. Their renewal is worth roughly «@usdm:20-300» a year. Recommended: executive call this week, credit of up to «@pct:5-15», and a joint reliability plan.
+        Sales and Success leads only; do not forward outside the account team.
+  - family_id: conf_vendor_negotiation_status
+    description: Status of an ordinary vendor negotiation with commercial terms.
+    tier: T2
+    format: notes
+    gold_level: CONFIDENTIAL
+    gold_categories: []
+    n_docs: 6
+    filenames: ["Vendor_Negotiation_«company#2.short».docx", "Procurement_Update_«month».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Procurement"}
+    bodies:
+      - |
+        Procurement update - «company#2»
+
+        The vendor has offered a «@int:2-5»-year renewal at a «@pct:3-9» increase; we countered with flat pricing and a shorter notice period. They are unlikely to move on price but may concede on support hours. Our fallback is to run a competitive process in the next quarter, which we have not mentioned to them.
