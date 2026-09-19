@@ -226,7 +226,7 @@
     },
     {
       "expected": true,
-      "name": "bootstrap intervals collapse to [1, 1]",
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
       "observed": true,
       "passed": true,
       "split": "train",
@@ -1013,9 +1013,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "f1f0a36dfef011f5b3b6621c4e3dfaac4de950f3375919cb8dd70883e18f9055",
+      "expected": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
       "name": "same seed reproduces identical predictions",
-      "observed": "f1f0a36dfef011f5b3b6621c4e3dfaac4de950f3375919cb8dd70883e18f9055",
+      "observed": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
       "passed": true,
       "split": "train",
       "suite": "random"
@@ -1246,7 +1246,7 @@
     },
     {
       "expected": true,
-      "name": "bootstrap intervals collapse to [1, 1]",
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
       "observed": true,
       "passed": true,
       "split": "calibration",
@@ -2025,9 +2025,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "d1944b14a48a425f6d2bbb9eb1fe00c5a0f5df7ddaed972c1f3a9a5d7b16918e",
+      "expected": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
       "name": "same seed reproduces identical predictions",
-      "observed": "d1944b14a48a425f6d2bbb9eb1fe00c5a0f5df7ddaed972c1f3a9a5d7b16918e",
+      "observed": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
       "passed": true,
       "split": "calibration",
       "suite": "random"
@@ -2258,7 +2258,7 @@
     },
     {
       "expected": true,
-      "name": "bootstrap intervals collapse to [1, 1]",
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
       "observed": true,
       "passed": true,
       "split": "dev",
@@ -3045,1031 +3045,11 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "6b445cf9906b91d5aeac24b660518eb4fc6adfd240647ee6ddb4f6a25385712b",
+      "expected": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
       "name": "same seed reproduces identical predictions",
-      "observed": "6b445cf9906b91d5aeac24b660518eb4fc6adfd240647ee6ddb4f6a25385712b",
+      "observed": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
       "passed": true,
       "split": "dev",
-      "suite": "random"
-    },
-    {
-      "expected": 1.0,
-      "name": "level accuracy == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro precision == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro recall == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "level micro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": [
-        [
-          22,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          26,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          58,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          106,
-          0
-        ]
-      ],
-      "name": "confusion matrix is purely diagonal",
-      "observed": [
-        [
-          22,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          26,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          58,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          106,
-          0
-        ]
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": true,
-      "name": "every supported level has P=R=F1=1",
-      "observed": true,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "name": "no under/over-classification",
-      "observed": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "category macro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "category micro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "category exact-match == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 0,
-      "name": "no false-positive categories",
-      "observed": 0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": true,
-      "name": "every category has FP=FN=0",
-      "observed": true,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk recall == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk precision == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 0.0,
-      "name": "high-risk FPR == 0",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": [
-        0,
-        0
-      ],
-      "name": "high-risk has no FP/FN",
-      "observed": [
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": [
-        0,
-        0,
-        0
-      ],
-      "name": "no failures, deferrals or mismatches",
-      "observed": [
-        0,
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": true,
-      "name": "bootstrap intervals collapse to [1, 1]",
-      "observed": true,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/headline"
-    },
-    {
-      "expected": 212,
-      "name": "documents evaluated",
-      "observed": 212,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.5,
-      "name": "level accuracy",
-      "observed": 0.5,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.16666666666666666,
-      "name": "level macro F1",
-      "observed": 0.16666666666666666,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.125,
-      "name": "level macro precision",
-      "observed": 0.125,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.25,
-      "name": "level macro recall",
-      "observed": 0.25,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.5,
-      "name": "level micro F1",
-      "observed": 0.5,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": {
-        "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
-        "INTERNAL": 0.0,
-        "PUBLIC": 0.0
-      },
-      "name": "level per-class F1",
-      "observed": {
-        "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
-        "INTERNAL": 0.0,
-        "PUBLIC": 0.0
-      },
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.0,
-      "name": "under-classification rate",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.0,
-      "name": "severe under-classification rate",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.5,
-      "name": "over-classification rate",
-      "observed": 0.5,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.0,
-      "name": "category macro F1",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.0,
-      "name": "category macro recall",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": {
-        "CREDENTIALS_SECRETS": 0.0,
-        "FINANCIAL_PCI": 0.0,
-        "INTELLECTUAL_PROPERTY": 0.0,
-        "MA_CORP_STRATEGY": 0.0,
-        "PHI": 0.0,
-        "PII": 0.0,
-        "SOURCE_CODE": 0.0,
-        "TRADE_SECRET": 0.0
-      },
-      "name": "category per-label recall",
-      "observed": {
-        "CREDENTIALS_SECRETS": 0.0,
-        "FINANCIAL_PCI": 0.0,
-        "INTELLECTUAL_PROPERTY": 0.0,
-        "MA_CORP_STRATEGY": 0.0,
-        "PHI": 0.0,
-        "PII": 0.0,
-        "SOURCE_CODE": 0.0,
-        "TRADE_SECRET": 0.0
-      },
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.33962264150943394,
-      "name": "category exact-match",
-      "observed": 0.33962264150943394,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": [
-        111,
-        101,
-        0,
-        0
-      ],
-      "name": "high-risk confusion counts",
-      "observed": [
-        111,
-        101,
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk recall",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 0.5235849056603774,
-      "name": "high-risk precision",
-      "observed": 0.5235849056603774,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk false-positive rate",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/headline"
-    },
-    {
-      "expected": 1.0,
-      "name": "level accuracy == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro precision == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "level macro recall == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "level micro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": [
-        [
-          22,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          26,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          63,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          116,
-          0
-        ]
-      ],
-      "name": "confusion matrix is purely diagonal",
-      "observed": [
-        [
-          22,
-          0,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          26,
-          0,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          63,
-          0,
-          0
-        ],
-        [
-          0,
-          0,
-          0,
-          116,
-          0
-        ]
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": true,
-      "name": "every supported level has P=R=F1=1",
-      "observed": true,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "name": "no under/over-classification",
-      "observed": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "category macro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "category micro F1 == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "category exact-match == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 0,
-      "name": "no false-positive categories",
-      "observed": 0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": true,
-      "name": "every category has FP=FN=0",
-      "observed": true,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk recall == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk precision == 1",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 0.0,
-      "name": "high-risk FPR == 0",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": [
-        0,
-        0
-      ],
-      "name": "high-risk has no FP/FN",
-      "observed": [
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": [
-        0,
-        0,
-        0
-      ],
-      "name": "no failures, deferrals or mismatches",
-      "observed": [
-        0,
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "oracle/all_tiers"
-    },
-    {
-      "expected": 227,
-      "name": "documents evaluated",
-      "observed": 227,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.5110132158590308,
-      "name": "level accuracy",
-      "observed": 0.5110132158590308,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.16909620991253643,
-      "name": "level macro F1",
-      "observed": 0.16909620991253643,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.1277533039647577,
-      "name": "level macro precision",
-      "observed": 0.1277533039647577,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.25,
-      "name": "level macro recall",
-      "observed": 0.25,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.5110132158590308,
-      "name": "level micro F1",
-      "observed": 0.5110132158590308,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": {
-        "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6763848396501457,
-        "INTERNAL": 0.0,
-        "PUBLIC": 0.0
-      },
-      "name": "level per-class F1",
-      "observed": {
-        "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6763848396501457,
-        "INTERNAL": 0.0,
-        "PUBLIC": 0.0
-      },
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.0,
-      "name": "under-classification rate",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.0,
-      "name": "severe under-classification rate",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.4889867841409692,
-      "name": "over-classification rate",
-      "observed": 0.4889867841409692,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.0,
-      "name": "category macro F1",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.0,
-      "name": "category macro recall",
-      "observed": 0.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": {
-        "CREDENTIALS_SECRETS": 0.0,
-        "FINANCIAL_PCI": 0.0,
-        "INTELLECTUAL_PROPERTY": 0.0,
-        "MA_CORP_STRATEGY": 0.0,
-        "PHI": 0.0,
-        "PII": 0.0,
-        "SOURCE_CODE": 0.0,
-        "TRADE_SECRET": 0.0
-      },
-      "name": "category per-label recall",
-      "observed": {
-        "CREDENTIALS_SECRETS": 0.0,
-        "FINANCIAL_PCI": 0.0,
-        "INTELLECTUAL_PROPERTY": 0.0,
-        "MA_CORP_STRATEGY": 0.0,
-        "PHI": 0.0,
-        "PII": 0.0,
-        "SOURCE_CODE": 0.0,
-        "TRADE_SECRET": 0.0
-      },
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.31718061674008813,
-      "name": "category exact-match",
-      "observed": 0.31718061674008813,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": [
-        121,
-        106,
-        0,
-        0
-      ],
-      "name": "high-risk confusion counts",
-      "observed": [
-        121,
-        106,
-        0,
-        0
-      ],
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk recall",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 0.5330396475770925,
-      "name": "high-risk precision",
-      "observed": 0.5330396475770925,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": 1.0,
-      "name": "high-risk false-positive rate",
-      "observed": 1.0,
-      "passed": true,
-      "split": "test",
-      "suite": "majority/all_tiers"
-    },
-    {
-      "expected": "0.2500 +/- 4.5*0.0287",
-      "name": "level accuracy ~ 1/levels",
-      "observed": 0.28634361233480177,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.2500 +/- 4.5*0.0923",
-      "name": "level recall[PUBLIC] ~ 1/levels",
-      "observed": 0.3181818181818182,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.2500 +/- 4.5*0.0849",
-      "name": "level recall[INTERNAL] ~ 1/levels",
-      "observed": 0.23076923076923078,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.2500 +/- 4.5*0.0546",
-      "name": "level recall[CONFIDENTIAL] ~ 1/levels",
-      "observed": 0.2698412698412698,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.2500 +/- 4.5*0.0402",
-      "name": "level recall[HIGHLY_CONFIDENTIAL] ~ 1/levels",
-      "observed": 0.3017241379310345,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0945",
-      "name": "category recall[PII] ~ 0.5",
-      "observed": 0.39285714285714285,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0354",
-      "name": "category FPR[PII] ~ 0.5",
-      "observed": 0.4221105527638191,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[PHI] ~ 0.5",
-      "observed": 0.391304347826087,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[PHI] ~ 0.5",
-      "observed": 0.4950980392156863,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[FINANCIAL_PCI] ~ 0.5",
-      "observed": 0.43478260869565216,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[FINANCIAL_PCI] ~ 0.5",
-      "observed": 0.553921568627451,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[SOURCE_CODE] ~ 0.5",
-      "observed": 0.5217391304347826,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[SOURCE_CODE] ~ 0.5",
-      "observed": 0.5098039215686274,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[CREDENTIALS_SECRETS] ~ 0.5",
-      "observed": 0.6086956521739131,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[CREDENTIALS_SECRETS] ~ 0.5",
-      "observed": 0.5049019607843137,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[INTELLECTUAL_PROPERTY] ~ 0.5",
-      "observed": 0.5217391304347826,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[INTELLECTUAL_PROPERTY] ~ 0.5",
-      "observed": 0.49019607843137253,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1021",
-      "name": "category recall[TRADE_SECRET] ~ 0.5",
-      "observed": 0.375,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0351",
-      "name": "category FPR[TRADE_SECRET] ~ 0.5",
-      "observed": 0.5073891625615764,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.1043",
-      "name": "category recall[MA_CORP_STRATEGY] ~ 0.5",
-      "observed": 0.6086956521739131,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5000 +/- 4.5*0.0350",
-      "name": "category FPR[MA_CORP_STRATEGY] ~ 0.5",
-      "observed": 0.5049019607843137,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.9766 +/- 4.5*0.0138",
-      "name": "high-risk recall ~ P(pred high-risk)",
-      "observed": 0.9586776859504132,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.9766 +/- 4.5*0.0147",
-      "name": "high-risk FPR ~ P(pred high-risk)",
-      "observed": 0.9811320754716981,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "0.5330 +/- 4.5*0.0336",
-      "name": "high-risk precision ~ prevalence",
-      "observed": 0.5272727272727272,
-      "passed": true,
-      "split": "test",
-      "suite": "random/all_tiers"
-    },
-    {
-      "expected": "45b56aff60777c49f904256762b9921a679dfb6be088f2ad9062d8adcda4029e",
-      "name": "same seed reproduces identical predictions",
-      "observed": "45b56aff60777c49f904256762b9921a679dfb6be088f2ad9062d8adcda4029e",
-      "passed": true,
-      "split": "test",
       "suite": "random"
     },
     {
@@ -4077,7 +3057,7 @@
       "name": "exceptions: every document still has a record",
       "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4085,7 +3065,7 @@
       "name": "exceptions: all counted as failures",
       "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4097,7 +3077,7 @@
         "exception:RuntimeError": 40
       },
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4105,7 +3085,7 @@
       "name": "exceptions: scored as misses (level accuracy 0)",
       "observed": 0.0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4113,7 +3093,7 @@
       "name": "exceptions: no-prediction column filled",
       "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4121,39 +3101,39 @@
       "name": "latency: captured for every document",
       "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
       "expected": ">= 2.9 ms",
       "name": "latency: p50 reflects the injected 3 ms",
-      "observed": 4.572,
+      "observed": 3.819,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
       "expected": ">=",
       "name": "latency: p95 >= p50",
-      "observed": 4.696,
+      "observed": 3.851,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "934ea89e710cca06d1ddae1c97ac1daab6522f671031a98f3c31cb47a74b2051",
+      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
       "name": "latency does not change the metrics fingerprint",
-      "observed": "934ea89e710cca06d1ddae1c97ac1daab6522f671031a98f3c31cb47a74b2051",
+      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "934ea89e710cca06d1ddae1c97ac1daab6522f671031a98f3c31cb47a74b2051",
+      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
       "name": "identical runs give identical fingerprints",
-      "observed": "934ea89e710cca06d1ddae1c97ac1daab6522f671031a98f3c31cb47a74b2051",
+      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4161,7 +3141,7 @@
       "name": "different random seeds give different fingerprints",
       "observed": "differ",
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4169,7 +3149,7 @@
       "name": "lying high_risk: every mismatch is flagged",
       "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4177,15 +3157,15 @@
       "name": "lying high_risk: harness re-derives it (no predicted positives)",
       "observed": 0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": 39,
+      "expected": 40,
       "name": "deferral: every headline document reported as deferred",
-      "observed": 39,
+      "observed": 40,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4193,7 +3173,7 @@
       "name": "deferral: perfect-reviewer view level macro F1 (hypothetical) == 1",
       "observed": 1.0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4201,7 +3181,7 @@
       "name": "deferral: deferred-as-errors view scores zero",
       "observed": 0.0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4209,7 +3189,7 @@
       "name": "deferral: auto-only view has no documents",
       "observed": 0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     },
     {
@@ -4217,145 +3197,112 @@
       "name": "deferral: primary view scores the provisional (gold) label",
       "observed": 1.0,
       "passed": true,
-      "split": "test",
+      "split": "all",
       "suite": "robustness"
     }
   ],
-  "n_checks": 409,
-  "n_passed": 409,
+  "n_checks": 311,
+  "n_passed": 311,
   "ok": true,
   "runs": [
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "4f56186cec6b89fb49c61de2a7bb5fd0830fd67ca2f6032ad30c2b8c3a3852f0",
+      "fingerprint": "783d3f7a929de9bd92dd81e817b4f2cdc50a17cbe234504db2c69211950c9172",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 391,
-      "run_id": "oracle-train-20260919T065029Z-4f56186c",
+      "run_id": "oracle-train-20260919T071104Z-783d3f7a",
       "split": "train"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "6477b0985d5183443accc627aed81e2151b28cedb3771b066dd71739b6fcf6b6",
+      "fingerprint": "bd78ea2dbafddce7cbe89310c0d6d39d926290a62c6a67e45f8d28c1e856761d",
       "high_risk_precision": 0.5396419437340153,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16638225255972697,
       "n_headline_docs": 391,
-      "run_id": "majority-train-20260919T065029Z-6477b098",
+      "run_id": "majority-train-20260919T071104Z-bd78ea2d",
       "split": "train"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16020679046371936,
-      "fingerprint": "f1f0a36dfef011f5b3b6621c4e3dfaac4de950f3375919cb8dd70883e18f9055",
+      "fingerprint": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
       "high_risk_precision": 0.5442708333333334,
       "high_risk_recall": 0.990521327014218,
       "level_macro_f1": 0.2684601469562624,
       "n_headline_docs": 391,
-      "run_id": "random-train-20260919T065029Z-f1f0a36d",
+      "run_id": "random-train-20260919T071104Z-f1176d27",
       "split": "train"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "d4ed05e248b5eeca313ce39933c271149df48690c7e1bc84801379eb7424322c",
+      "fingerprint": "024f24cbec3ae1f49ff3f1ac3d90db51616a1c57cff53e0e0dc77ee936e3fb9a",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 98,
-      "run_id": "oracle-calibration-20260919T065030Z-d4ed05e2",
+      "run_id": "oracle-calibration-20260919T071105Z-024f24cb",
       "split": "calibration"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "a9f0af43070f961b21b33e574a8e55a431ffb84bb4473e3cec6b95eb4f5bfa57",
+      "fingerprint": "512442a2a8e6087d98ffb5b71a4900fd184ea7f788ca9c4b02ff587c03d74b90",
       "high_risk_precision": 0.5612244897959183,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16666666666666666,
       "n_headline_docs": 98,
-      "run_id": "majority-calibration-20260919T065030Z-a9f0af43",
+      "run_id": "majority-calibration-20260919T071105Z-512442a2",
       "split": "calibration"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16009765837489026,
-      "fingerprint": "d1944b14a48a425f6d2bbb9eb1fe00c5a0f5df7ddaed972c1f3a9a5d7b16918e",
+      "fingerprint": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
       "high_risk_precision": 0.5612244897959183,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.2078494447098161,
       "n_headline_docs": 98,
-      "run_id": "random-calibration-20260919T065030Z-d1944b14",
+      "run_id": "random-calibration-20260919T071105Z-fb60fbe4",
       "split": "calibration"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "77d2ea0c115aa978d3fa5a059e26174db049d51aaeae25a63db6e7862d57633e",
+      "fingerprint": "887bc3ace8367833dee959a59d59d97a87d75f2380573fb4062d8b27268b6e68",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 97,
-      "run_id": "oracle-dev-20260919T065030Z-77d2ea0c",
+      "run_id": "oracle-dev-20260919T071105Z-887bc3ac",
       "split": "dev"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "e8c29c3f17b487d38d8a5ec17f9cd6fde84dcffea71311466d68e87c0177bff8",
+      "fingerprint": "b63d38bb3f217a6e58d39bb8cb9ebab467c52d23da1f8d673e3466d83568dd13",
       "high_risk_precision": 0.5463917525773195,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16319444444444445,
       "n_headline_docs": 97,
-      "run_id": "majority-dev-20260919T065030Z-e8c29c3f",
+      "run_id": "majority-dev-20260919T071105Z-b63d38bb",
       "split": "dev"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.1635446515973488,
-      "fingerprint": "6b445cf9906b91d5aeac24b660518eb4fc6adfd240647ee6ddb4f6a25385712b",
+      "fingerprint": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
       "high_risk_precision": 0.5425531914893617,
       "high_risk_recall": 0.9622641509433962,
       "level_macro_f1": 0.2283140283140283,
       "n_headline_docs": 97,
-      "run_id": "random-dev-20260919T065030Z-6b445cf9",
+      "run_id": "random-dev-20260919T071105Z-7fb20973",
       "split": "dev"
-    },
-    {
-      "baseline": "oracle",
-      "category_macro_f1": 1.0,
-      "fingerprint": "0b9cb490837ca85ee9c1301dfb7f9e3b935f35b3486d2644524f0de010cb9203",
-      "high_risk_precision": 1.0,
-      "high_risk_recall": 1.0,
-      "level_macro_f1": 1.0,
-      "n_headline_docs": 212,
-      "run_id": "oracle-test-20260919T065030Z-0b9cb490",
-      "split": "test"
-    },
-    {
-      "baseline": "majority",
-      "category_macro_f1": 0.0,
-      "fingerprint": "71bc103044766241b7a2562bf257d0c6342c4e8a9416f2bfa13f6e86db93a34f",
-      "high_risk_precision": 0.5235849056603774,
-      "high_risk_recall": 1.0,
-      "level_macro_f1": 0.16666666666666666,
-      "n_headline_docs": 212,
-      "run_id": "majority-test-20260919T065031Z-71bc1030",
-      "split": "test"
-    },
-    {
-      "baseline": "random",
-      "category_macro_f1": 0.1607954593691463,
-      "fingerprint": "45b56aff60777c49f904256762b9921a679dfb6be088f2ad9062d8adcda4029e",
-      "high_risk_precision": 0.5194174757281553,
-      "high_risk_recall": 0.963963963963964,
-      "level_macro_f1": 0.24631039775090985,
-      "n_headline_docs": 212,
-      "run_id": "random-test-20260919T065031Z-45b56aff",
-      "split": "test"
     }
   ]
 }
