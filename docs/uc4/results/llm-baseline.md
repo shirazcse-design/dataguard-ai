@@ -18,7 +18,7 @@ The Foundry adapter was exercised with real calls against the project's deployme
 * prompt `classifier.v1` sha256 `44404a014cc703c8...`; llm config sha256 `8bc1281a5ccb22cc...`
 * 13 few-shot examples, all from `train`; temperature None; max output tokens 4000
 * injection guardrail `1.0.1` sha256 `556e1d3df18fa137...`
-* git `76e2fa20ffc4` on `uc4/phase-5-llm` (dirty: False)
+* git `92a0b80bd2e1` on `uc4/phase-5-llm` (dirty: False)
 * embedded labels and metadata are NOT shown to the model; the filename is
 
 ## Prompt audit (no model involved)
@@ -158,7 +158,7 @@ Latency is the RECORDED per-call latency from the run that captured the response
 
 ### Latency, tokens, cost
 
-Reported latency P50 6434.826 ms, P95 9425.275 ms over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 555182 prompt + 85265 completion. Estimated cost: not estimated (no price configured).
+Reported latency P50 6.4 s, P95 9.4 s over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 555182 prompt + 85265 completion. Estimated cost: not estimated (no price configured).
 
 ## Tier `mid`: model `uc4-llm-medium` (replay adapter)
 
@@ -245,7 +245,7 @@ Latency is the RECORDED per-call latency from the run that captured the response
 
 ### Latency, tokens, cost
 
-Reported latency P50 2401.307 ms, P95 3046.331 ms over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 555182 prompt + 14980 completion. Estimated cost: not estimated (no price configured).
+Reported latency P50 2.4 s, P95 3.0 s over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 555182 prompt + 14980 completion. Estimated cost: not estimated (no price configured).
 
 ## Tier `large`: model `uc4-llm-large` (replay adapter)
 
@@ -312,7 +312,7 @@ T5 (adversarial) is a slice and is excluded from the headline.
 
 | P50 (s) | P95 (s) | max (s) | documents over 10 s |
 |---|---|---|---|
-| 78.3 | 179.3 | 248.6 | 1.000 (107/107) |
+| 78.3 | 181.7 | 248.6 | 1.000 (107/107) |
 
 Latency is the RECORDED per-call latency from the run that captured the responses (sequential or concurrent, single sample, no retries counted separately). Generation is without a temperature parameter, so this run is not guaranteed to be reproducible by re-calling the model; only the replay cache makes it reproducible.
 
@@ -342,7 +342,7 @@ Latency is the RECORDED per-call latency from the run that captured the response
 
 ### Latency, tokens, cost
 
-Reported latency P50 78325.256 ms, P95 181731.429 ms over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 554861 prompt + 76048 completion. Estimated cost: not estimated (no price configured).
+Reported latency P50 78.3 s, P95 181.7 s over 107 documents; **for replayed runs this is the latency recorded when the responses were captured**. Tokens: 554861 prompt + 76048 completion. Estimated cost: not estimated (no price configured).
 
 ## Caveats
 
