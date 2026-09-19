@@ -85,6 +85,13 @@ def render_run_report(result: EvaluationResult) -> str:
             + "so these numbers are optimistic and are NOT held-out performance."
         )
         add("")
+    if params.get("few_shot_doc_ids") and "train" in ds["splits_evaluated"]:
+        add(
+            f"> **FEW-SHOT NOTE.** {len(params['few_shot_doc_ids'])} `train` documents are shown to "
+            "the model as prompt examples, so `train` results include examples it has seen and are "
+            "not held-out. Read `dev`."
+        )
+        add("")
     add("## Provenance")
     add("")
     add(f"* **dataset labels: {ds['label_status']}** (not independently human-validated)")
