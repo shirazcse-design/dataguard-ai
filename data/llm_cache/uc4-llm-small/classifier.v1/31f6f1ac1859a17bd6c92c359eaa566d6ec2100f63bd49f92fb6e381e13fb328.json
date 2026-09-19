@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 579,
+ "input_hash": "31f6f1ac1859a17bd6c92c359eaa566d6ec2100f63bd49f92fb6e381e13fb328",
+ "latency_ms": 4972.352624987252,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5224,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.mistralmobility.example/careers.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"We have offices in Pittsburgh, Calgary and Austin, and many roles can be done remotely.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public-facing careers FAQ containing general hiring and office-location information and an application URL, with no personal, financial, technical or strategic secrets.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

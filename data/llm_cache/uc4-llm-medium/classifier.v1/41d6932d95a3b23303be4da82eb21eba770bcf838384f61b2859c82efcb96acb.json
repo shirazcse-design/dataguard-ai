@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 129,
+ "input_hash": "41d6932d95a3b23303be4da82eb21eba770bcf838384f61b2859c82efcb96acb",
+ "latency_ms": 2251.735582947731,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft marketing/customer-story document pending approval, so external disclosure could plausibly cause some business harm, but it contains no regulated or highly sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

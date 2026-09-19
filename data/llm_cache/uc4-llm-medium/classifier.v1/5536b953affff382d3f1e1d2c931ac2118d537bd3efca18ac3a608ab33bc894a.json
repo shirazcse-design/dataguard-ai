@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 97,
+ "input_hash": "5536b953affff382d3f1e1d2c931ac2118d537bd3efca18ac3a608ab33bc894a",
+ "latency_ms": 2251.003500074148,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5224,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.mistralmobility.example/careers. We are an equal opportunity employer.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a careers FAQ and application link clearly intended for external job candidates and public release. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

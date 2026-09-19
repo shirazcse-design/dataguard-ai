@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 810,
+ "input_hash": "523520bf0833497b4a4994f9321c6a9ac32b61c5041b1793dee31cd58b8b9f62",
+ "latency_ms": 6610.478625050746,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Zane Oduya (Marketing)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Zane told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Lyon for a few months.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains a named employee and private personal circumstances (divorce and immigration application), which are personal identifiers and sensitive; this meets the PII definition and is non-public, so Confidential.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

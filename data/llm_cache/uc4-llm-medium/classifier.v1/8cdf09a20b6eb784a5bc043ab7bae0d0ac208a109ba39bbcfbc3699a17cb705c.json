@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "8cdf09a20b6eb784a5bc043ab7bae0d0ac208a109ba39bbcfbc3699a17cb705c",
+ "latency_ms": 2473.3237910550088,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\\n    return connect(host=host, user=user, password=password)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public source code implementing database connection logic. It references environment variables for secrets but does not disclose any live secret values, so Credentials / Secrets does not clearly apply.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

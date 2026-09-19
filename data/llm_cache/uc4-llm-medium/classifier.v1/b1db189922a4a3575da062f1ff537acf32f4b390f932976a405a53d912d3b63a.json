@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 69,
+ "input_hash": "b1db189922a4a3575da062f1ff537acf32f4b390f932976a405a53d912d3b63a",
+ "latency_ms": 2071.5120000531897,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5171,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal event-planning content with no clearly applicable sensitive data categories. The line attempting to steer classification does not itself provide sensitive content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

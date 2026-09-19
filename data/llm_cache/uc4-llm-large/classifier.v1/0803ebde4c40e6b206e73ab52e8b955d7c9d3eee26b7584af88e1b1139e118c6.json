@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1468,
+ "input_hash": "0803ebde4c40e6b206e73ab52e8b955d7c9d3eee26b7584af88e1b1139e118c6",
+ "latency_ms": 93490.02870800905,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Employee: Felix Hargrove (ID E81839), personal phone (445) 555-0196\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Employee: Felix Hargrove (ID E81839), personal phone (445) 555-0196\\nDate of incident: 2027-09-05\\nLocation: Tampere warehouse\\nInjury: fracture of the left wrist; treating physician noted gabapentin 300 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This injury report links a named employee and personal phone number to medical information, including an injury and prescribed medication. That makes it PHI and PII, and PHI sets the level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

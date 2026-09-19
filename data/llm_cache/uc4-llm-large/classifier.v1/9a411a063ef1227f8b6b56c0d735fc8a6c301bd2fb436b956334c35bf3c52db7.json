@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 510,
+ "input_hash": "9a411a063ef1227f8b6b56c0d735fc8a6c301bd2fb436b956334c35bf3c52db7",
+ "latency_ms": 74024.26500001457,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:33:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 3.6% of our shares and has signalled, through an intermediary, that it wants the satellite imaging business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by May whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential separation or sale of a business unit and related response planning. Disclosure could materially affect negotiations, market perceptions, and strategic positioning.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

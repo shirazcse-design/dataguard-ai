@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 871,
+ "input_hash": "1b3652145e1a94b985159430aafc06e9398175936ab1127c58f76e364077c3eb",
+ "latency_ms": 7063.25483310502,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:29:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Project Glacier - Due Diligence Checklist (STRICTLY CONFIDENTIAL)\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Target: Kingfisher Capital. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due-diligence checklist for an acquisition (target, workstreams and action items), which is M&A / corporate strategy and therefore highly confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

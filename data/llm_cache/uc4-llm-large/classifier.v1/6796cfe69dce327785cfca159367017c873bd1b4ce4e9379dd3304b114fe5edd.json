@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 375,
+ "input_hash": "6796cfe69dce327785cfca159367017c873bd1b4ce4e9379dd3304b114fe5edd",
+ "latency_ms": 50696.85704191215,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:39:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\\n    return connect(host=host, user=user, password=password)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public proprietary Python code implementing connection logic, which clearly meets the Source Code category. It references environment variables for secrets but does not include any live secret values.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

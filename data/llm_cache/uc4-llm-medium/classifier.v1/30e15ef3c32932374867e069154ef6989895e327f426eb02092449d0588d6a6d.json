@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 91,
+ "input_hash": "30e15ef3c32932374867e069154ef6989895e327f426eb02092449d0588d6a6d",
+ "latency_ms": 2419.1266669658944,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5223,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.pinecrestlabs.example/careers. We are an equal opportunity employer.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a careers FAQ with recruiting information and an application URL, indicating content intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

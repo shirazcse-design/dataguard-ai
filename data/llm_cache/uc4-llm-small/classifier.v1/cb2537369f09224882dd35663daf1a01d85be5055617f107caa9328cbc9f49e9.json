@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 738,
+ "input_hash": "cb2537369f09224882dd35663daf1a01d85be5055617f107caa9328cbc9f49e9",
+ "latency_ms": 6285.133207915351,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5190,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Project Lighthouse - Due Diligence Checklist (STRICTLY CONFIDENTIAL)\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"Target: Ravenscar Foods. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This document is a due-diligence checklist describing a proposed acquisition target and related workstreams, which is non-public M&A/corporate strategy information.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 360,
+ "input_hash": "d45770af0c3eb9fd37df40cac010a64a25ebd60bb9f490716ce56aa01069ec10",
+ "latency_ms": 77988.69687493425,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5149,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:29:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"const apiKey = process.env.PAYMENTS_API_KEY;\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"const client = new PaymentsClient({ apiKey });\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public application configuration/source code. It references an environment variable for a key but does not expose a live secret, so Source Code applies without Credentials.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

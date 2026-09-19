@@ -18,5 +18,8 @@
 | [`ml-engine.md`](ml-engine.md) | ML classifier architecture, protocol, findings, limits |
 | [`results/ml-baseline.md`](results/ml-baseline.md) | Generated ML results vs Rules (development splits) |
 | [`results/ml-cv.json`](results/ml-cv.json) | Grouped cross-validation used for model selection |
+| [`llm-plan.md`](llm-plan.md) | Pre-registered LLM plan (written before any LLM code) |
+| [`llm-engine.md`](llm-engine.md) | LLM classifier architecture, rules, what was and was not measured |
+| [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
 
 Later phases add: the evaluation-harness guide and generated results under `results/`.

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 142,
+ "input_hash": "687e5e87472b115a2d68ee84da7310693b5de9148880042748d67e72cfbb0045",
+ "latency_ms": 2207.7270000008866,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5164,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Felix Iglesias  (MRN-0984219)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: ibuprofen 400 mg - 46 day supply, indication essential hypertension\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an individually identifiable prescription record containing a patient identifier plus medication and medical indication, which is PHI. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

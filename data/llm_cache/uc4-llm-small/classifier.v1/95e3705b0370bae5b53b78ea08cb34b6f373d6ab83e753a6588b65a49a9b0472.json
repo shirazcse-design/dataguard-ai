@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 598,
+ "input_hash": "95e3705b0370bae5b53b78ea08cb34b6f373d6ab83e753a6588b65a49a9b0472",
+ "latency_ms": 5744.7667500237,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"FINANCIAL_PCI\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Routing: 384823165  Account: 004075183568\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"FINANCIAL_PCI\"\n    }\n  ],\n  \"rationale\": \"The document is an invoice that includes bank routing and account numbers, which are Financial/PCI data and warrant a Highly Confidential classification.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

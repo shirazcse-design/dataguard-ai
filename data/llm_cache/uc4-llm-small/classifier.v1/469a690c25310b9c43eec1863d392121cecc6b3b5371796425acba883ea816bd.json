@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 744,
+ "input_hash": "469a690c25310b9c43eec1863d392121cecc6b3b5371796425acba883ea816bd",
+ "latency_ms": 5748.802375048399,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Employee: Jasmine Nwosu (ID E95402), personal phone (744) 555-0192\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Injury: concussion; treating physician noted lisinopril 10 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information (diagnosis and prescribed medication) linked to a named employee, plus personal contact details and an employee ID; this meets PHI and PII definitions and warrants HIGHLY_CONFIDENTIAL handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

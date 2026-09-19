@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "260c2b5acad6b61b7cb0b372ef10f1e07efef79986d8109809d1606581e0828e",
+ "latency_ms": 2595.6088750390336,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Project Meridian - Due Diligence Checklist (STRICTLY CONFIDENTIAL)\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"Target: Alderbrook Payments. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due diligence checklist for a proposed acquisition target, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

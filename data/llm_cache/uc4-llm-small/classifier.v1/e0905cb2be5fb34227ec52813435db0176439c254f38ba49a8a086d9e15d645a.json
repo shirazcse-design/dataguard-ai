@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 813,
+ "input_hash": "e0905cb2be5fb34227ec52813435db0176439c254f38ba49a8a086d9e15d645a",
+ "latency_ms": 6806.831249967217,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"INTERNAL\",\n  \"categories\": [],\n  \"evidence\": [],\n  \"rationale\": \"Ordinary internal offsite logistics (venue, headcount, schedule) intended for employees; it names a staff member to collect dietary needs but contains no contact details, health data, credentials, financials or proprietary information.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

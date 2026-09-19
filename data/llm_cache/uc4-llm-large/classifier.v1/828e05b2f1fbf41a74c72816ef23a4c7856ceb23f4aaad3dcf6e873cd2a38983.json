@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 2514,
+ "input_hash": "828e05b2f1fbf41a74c72816ef23a4c7856ceb23f4aaad3dcf6e873cd2a38983",
+ "latency_ms": 171177.0201670006,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5214,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:31:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"export API_KEY=YOUR_API_KEY_HERE\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"these are documented examples, not real credentials.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is developer quickstart documentation with placeholders and explicitly documented example keys rather than live credentials. It contains no clearly sensitive category data and lacks clear evidence of public release, so INTERNAL is the conservative choice.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

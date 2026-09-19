@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 297,
+ "input_hash": "e5f20c904ba1eef0b7921e246798cb2133a85d8b9d56e5a6b605979220bb6436",
+ "latency_ms": 44276.69700002298,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5230,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:43:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.yewtreeretail.example/careers.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a general recruiting FAQ with a public careers link, indicating content intended for external candidates and public release. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1011,
+ "input_hash": "46808443e3ddb7a5cd72e8d22dd8bd68fef0873aaf5fa77877641096b3487601",
+ "latency_ms": 7942.397249978967,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Marisol Halvorsen (Marketing)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"they are going through a divorce\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"I said I would keep this between us and HR.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document names an employee and records sensitive personal circumstances (divorce, immigration status) discussed in confidence; this is personal identifying information and should be treated as Confidential.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

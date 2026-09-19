@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 982,
+ "input_hash": "3c392d584bf10cb8e18feecf6bd795cdda8724e76034ec1af71c61f040c1b416",
+ "latency_ms": 182771.66787500028,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5199,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:40:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Next: repeat on the second prototype, then talk to Chiara Delacroix in Legal about protecting it before we present anywhere.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public research notebook describing a novel method and experimental results, which clearly fits Intellectual Property. Disclosure could plausibly harm the organization, but the content does not clearly meet a higher-floor category such as Trade Secret, credentials, or regulated data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

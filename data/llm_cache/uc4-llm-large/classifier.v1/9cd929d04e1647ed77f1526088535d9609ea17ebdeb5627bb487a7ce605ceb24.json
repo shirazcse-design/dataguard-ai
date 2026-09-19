@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 473,
+ "input_hash": "9cd929d04e1647ed77f1526088535d9609ea17ebdeb5627bb487a7ce605ceb24",
+ "latency_ms": 75797.55212494638,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5153,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"const apiKey = process.env.PAYMENTS_API_KEY;\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"const client = new PaymentsClient({ apiKey });\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public application code for creating a payments client. It references an environment variable for a secret but does not expose the secret itself, so Source Code applies without Credentials / Secrets.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

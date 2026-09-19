@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 142,
+ "input_hash": "9c5292afa3239635e614febe8adb53b850903d3ab3e25358535579faf73b29eb",
+ "latency_ms": 2658.5572080221027,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5197,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Target: Marlowe Payments.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document describes non-public acquisition due diligence for a named target, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

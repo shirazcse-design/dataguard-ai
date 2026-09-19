@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1237,
+ "input_hash": "0479bed38869b9477c44a34fcec9cd39bd030ce61d2ad32f22b13bd397dbde10",
+ "latency_ms": 129312.9425829975,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:30:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 16.5% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document reveals non-public supplier exclusivity, negotiated below-market commercial terms, and margin-protecting pricing intelligence. That is trade-secret commercial know-how whose disclosure could cause severe competitive harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

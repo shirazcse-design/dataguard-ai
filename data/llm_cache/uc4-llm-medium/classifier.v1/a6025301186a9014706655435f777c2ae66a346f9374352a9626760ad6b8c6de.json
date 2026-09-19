@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 206,
+ "input_hash": "a6025301186a9014706655435f777c2ae66a346f9374352a9626760ad6b8c6de",
+ "latency_ms": 2887.9806669428945,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 3.6% of our shares and has signalled, through an intermediary, that it wants the satellite imaging business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by May whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Until then, no comment to analysts, staff or the press.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential separation or sale of a business and planned response to investor pressure. Disclosure could materially affect negotiations and market perception, fitting M&A / Corporate Strategy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

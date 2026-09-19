@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 510,
+ "input_hash": "e3d08c0cf7bbd8a0c02a32cace00ed5c30e7d1a796927766a8fe7cbd7453f7d5",
+ "latency_ms": 56795.73083401192,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5214,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:40:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary developer documentation with placeholder values and explicitly documented example keys, not live credentials or other sensitive data. It is not clearly intended for public release, so Internal is the conservative classification.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

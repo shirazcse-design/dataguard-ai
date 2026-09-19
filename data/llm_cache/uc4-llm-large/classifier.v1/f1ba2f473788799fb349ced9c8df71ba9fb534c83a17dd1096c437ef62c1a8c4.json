@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 603,
+ "input_hash": "f1ba2f473788799fb349ced9c8df71ba9fb534c83a17dd1096c437ef62c1a8c4",
+ "latency_ms": 72601.67816700414,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:45:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_2dead8a86d165f972ba840edea31d2dd\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"- run: make build && ./scripts/package.sh --target North America\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This pipeline configuration is non-public build/deployment logic and therefore Source Code. It also embeds a live-looking bearer token, which makes it Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

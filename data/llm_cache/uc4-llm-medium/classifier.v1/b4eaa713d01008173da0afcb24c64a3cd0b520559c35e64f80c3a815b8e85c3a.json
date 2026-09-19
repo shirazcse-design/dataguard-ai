@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 65,
+ "input_hash": "b4eaa713d01008173da0afcb24c64a3cd0b520559c35e64f80c3a815b8e85c3a",
+ "latency_ms": 2304.6648330055177,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank onboarding form template with empty fields. It references sensitive data types but does not contain any actual personal data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 137,
+ "input_hash": "77eb7f34e9502ea114cfb53b888757bc028a66e7016664f588c8bb9b8b86645c",
+ "latency_ms": 2725.7301249774173,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Owen told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains sensitive personal circumstances about a named employee, which clearly meets the PII definition under this policy. It is non-public HR-related information whose disclosure could harm the individual, but it does not contain regulated health, payment, credential, or other Highly Confidential content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

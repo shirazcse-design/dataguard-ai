@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 492,
+ "input_hash": "ba90535cc3b9570577662d61fff35058233c840043f82bb6f1bb294ff9ffdbe8",
+ "latency_ms": 4400.431459071115,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:13+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"An investment firm has quietly built a holding in the company and is expected to push for a breakup of the satellite imaging division.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Do not discuss outside the working group. A holding statement is drafted in case the position becomes public.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document describes non-public, board- or deal-level corporate strategy and activist investor activity and internal contingency planning, which qualifies as M&A / Corporate Strategy and warrants Highly Confidential treatment.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

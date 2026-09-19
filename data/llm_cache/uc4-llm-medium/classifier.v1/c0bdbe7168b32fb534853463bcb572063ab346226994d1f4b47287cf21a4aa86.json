@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 77,
+ "input_hash": "c0bdbe7168b32fb534853463bcb572063ab346226994d1f4b47287cf21a4aa86",
+ "latency_ms": 1676.8621250521392,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank employee data form template with empty fields and no actual personal, financial, or other sensitive data filled in. It is ordinary internal business content rather than a completed record.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

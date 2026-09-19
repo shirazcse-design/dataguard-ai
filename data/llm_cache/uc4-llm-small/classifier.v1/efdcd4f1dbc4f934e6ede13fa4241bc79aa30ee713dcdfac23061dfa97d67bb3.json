@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 534,
+ "input_hash": "efdcd4f1dbc4f934e6ede13fa4241bc79aa30ee713dcdfac23061dfa97d67bb3",
+ "latency_ms": 4684.118665987626,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5164,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"A blank contractor intake template with empty fields (Name, Government ID number, Date of birth, Contact phone) is internal HR/business content but contains no actual personal or regulated data in this copy.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

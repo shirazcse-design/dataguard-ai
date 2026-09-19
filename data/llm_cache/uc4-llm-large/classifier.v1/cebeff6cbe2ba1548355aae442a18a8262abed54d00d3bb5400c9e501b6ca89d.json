@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 413,
+ "input_hash": "cebeff6cbe2ba1548355aae442a18a8262abed54d00d3bb5400c9e501b6ca89d",
+ "latency_ms": 70124.82087500393,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5220,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:36:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Careers at Pinecrest Labs - Frequently Asked Questions\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Apply at www.pinecrestlabs.example/careers. We are an equal opportunity employer.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public-facing careers FAQ with an application URL and recruiting information intended for external audiences. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

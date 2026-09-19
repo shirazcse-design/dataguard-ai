@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 969,
+ "input_hash": "828e05b2f1fbf41a74c72816ef23a4c7856ceb23f4aaad3dcf6e873cd2a38983",
+ "latency_ms": 7503.2581250416115,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5217,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"# Quickstart\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"export API_KEY=YOUR_API_KEY_HERE\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"these are documented examples, not real credentials.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a README quickstart meant as example documentation containing placeholder API key values and clearly labeled example AWS keys; it contains no real credentials or personal data.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

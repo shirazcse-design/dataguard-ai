@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 149,
+ "input_hash": "5221b6f2c28a323478ab0d5f9138d81b32c581fdc7db54fc4987feb9b839cd6c",
+ "latency_ms": 2272.4542500218377,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Employee: Ulrich Montgomery (ID E97884), personal phone (965) 555-0153\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Injury: fracture of the left wrist; treating physician noted metformin 500 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains identifiable personal contact information and individually identifiable medical information about a named employee. PHI requires a Highly Confidential classification, and PII also clearly applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

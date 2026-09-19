@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 745,
+ "input_hash": "0803ebde4c40e6b206e73ab52e8b955d7c9d3eee26b7584af88e1b1139e118c6",
+ "latency_ms": 6054.393084021285,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:28:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Employee: Felix Hargrove (ID E81839), personal phone (445) 555-0196\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Injury: fracture of the left wrist; treating physician noted gabapentin 300 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information (diagnosis and prescribed medication) and direct personal identifiers (name, employee ID, personal phone), so it qualifies as PHI and PII and must be treated as Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

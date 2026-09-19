@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 991,
+ "input_hash": "a26d197653df8cadacf875e16393befefc3896532d9ef6e269d7cc776041c6f5",
+ "latency_ms": 8207.247250014916,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5171,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:29:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"We are booking the Porto venue for 76 people. Coffee at 9, sessions at 10, lunch at 12.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Please send dietary needs to Joaquin Grigoryan by Friday.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is routine internal event logistics for an offsite (venue, schedule, attendee count, and a staff contact). It contains no regulated personal health data, financial data, credentials, source code, trade secrets, or other sensitive categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

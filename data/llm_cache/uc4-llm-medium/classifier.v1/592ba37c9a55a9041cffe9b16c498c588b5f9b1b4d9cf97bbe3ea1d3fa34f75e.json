@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 207,
+ "input_hash": "592ba37c9a55a9041cffe9b16c498c588b5f9b1b4d9cf97bbe3ea1d3fa34f75e",
+ "latency_ms": 2352.1900000050664,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 7.9% of our shares and has signalled, through an intermediary, that it wants the clinical analytics business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by February whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Until then, no comment to analysts, staff or the press.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential separation or sale of a business and response planning to investor pressure. Disclosure could cause severe competitive and market harm, so M&A / Corporate Strategy applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

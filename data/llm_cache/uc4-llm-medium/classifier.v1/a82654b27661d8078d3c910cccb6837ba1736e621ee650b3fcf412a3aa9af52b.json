@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 100,
+ "input_hash": "a82654b27661d8078d3c910cccb6837ba1736e621ee650b3fcf412a3aa9af52b",
+ "latency_ms": 2147.792665986344,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5233,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.yewtreeretail.example/careers. We are an equal opportunity employer.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public-facing hiring FAQ with recruiting information and an application URL, indicating intent for external release. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

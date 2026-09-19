@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 265,
+ "input_hash": "631118add1c104f6b0dfc0c9fc896f7a982502b6d20d4c700a514be7f7c35795",
+ "latency_ms": 81279.6647080686,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:33:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"How to apply: send a short note and your resume through our public careers page.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a hiring notice intended for public distribution, as indicated by the reference to a public careers page. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

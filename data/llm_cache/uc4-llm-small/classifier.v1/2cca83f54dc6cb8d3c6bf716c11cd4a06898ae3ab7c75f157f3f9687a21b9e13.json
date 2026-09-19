@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 851,
+ "input_hash": "2cca83f54dc6cb8d3c6bf716c11cd4a06898ae3ab7c75f157f3f9687a21b9e13",
+ "latency_ms": 7427.095125080086,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public proprietary source code that reads database connection credentials from environment variables; it contains no embedded live secrets but is source code (CONFIDENTIAL floor).\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

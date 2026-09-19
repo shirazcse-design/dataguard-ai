@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 635,
+ "input_hash": "765e4892b17874f9d82c48dedb2ea4e9b0d39796fa3073a2428c89be5587e46a",
+ "latency_ms": 5003.663499956019,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Operations team sync - Tuesday\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Present: Leila Underwood, Vikram Yamada, Uma Eriksen\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is routine internal meeting notes listing attendees and operational tasks with no regulated data, credentials, or proprietary strategy; it is intended for employees.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

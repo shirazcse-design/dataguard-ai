@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 205,
+ "input_hash": "d049cdba62d66c2e20e97074e071bd2701ad50d8c07e5e1b06a810c5ed98d486",
+ "latency_ms": 2684.846541029401,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:57+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"An investment firm has quietly built a holding in the company and is expected to push for a breakup of the packaged foods division.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We should be ready with a standalone-value analysis and a shortlist of alternatives, including a spin-off or sale.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"A holding statement is drafted in case the position becomes public.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential breakup, spin-off, or sale of a division, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and market harm, so the level should be Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

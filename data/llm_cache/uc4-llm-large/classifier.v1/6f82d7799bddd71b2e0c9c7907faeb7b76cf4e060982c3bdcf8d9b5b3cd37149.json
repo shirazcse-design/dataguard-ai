@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 237,
+ "input_hash": "6f82d7799bddd71b2e0c9c7907faeb7b76cf4e060982c3bdcf8d9b5b3cd37149",
+ "latency_ms": 68378.66079201922,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:41:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal team meeting notes about routine facilities work and planning, with no sensitive data category clearly present. It is not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

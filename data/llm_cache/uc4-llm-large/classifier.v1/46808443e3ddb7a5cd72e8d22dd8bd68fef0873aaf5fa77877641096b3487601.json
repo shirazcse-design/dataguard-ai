@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 854,
+ "input_hash": "46808443e3ddb7a5cd72e8d22dd8bd68fef0873aaf5fa77877641096b3487601",
+ "latency_ms": 77059.0829589637,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:35:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Marisol Halvorsen (Marketing)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Marisol told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains a named employee's private family and immigration circumstances, which clearly meets the PII definition. External disclosure would harm the individual and the organization, but it does not contain higher-floor regulated data such as health, payment, government identifiers, or credentials.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

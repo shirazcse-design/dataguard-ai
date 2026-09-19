@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 481,
+ "input_hash": "839aca66164c8471dab16fa07677c6ea7ae25f4a0101f61582b43c300184c761",
+ "latency_ms": 4462.025625049137,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"An investment firm has quietly built a holding in the company and is expected to push for a breakup of the packaged foods division.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Do not discuss outside the working group.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"Non-public, board-/strategy-level content about an activist investor position and potential breakup options; disclosure could cause severe competitive or financial harm. The note is explicitly restricted to a working group.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

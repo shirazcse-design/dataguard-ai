@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 105,
+ "input_hash": "f93a6ebf1d7c1e041b97e3031a3a008c80434e3f223cbab2d18e07056d71de35",
+ "latency_ms": 1921.1682920577005,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Join Foxglove Devices\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"How to apply: send a short note and your resume through our public careers page.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a job posting clearly intended for public release, with no sensitive data categories present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

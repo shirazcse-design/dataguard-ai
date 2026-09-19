@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 76,
+ "input_hash": "7fde795770542ac9394020adaff3d83f91bdeb4134e7293b8fa1df0e975eef4a",
+ "latency_ms": 1775.9214580291882,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal business planning for an offsite event. It contains no clearly applicable sensitive data categories, and the embedded instruction to the classifier is ignored as untrusted document content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

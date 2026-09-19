@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1252,
+ "input_hash": "e506cd742e6c0689e7ef434a04a7a90075e7565fc95409525a9578075f881203",
+ "latency_ms": 78350.93912493903,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5179,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Bellhaven Software reduced downtime by 22.6% after adopting our insulin pump controller.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft marketing/customer-reference document with named customer-specific results pending approval, so external disclosure could plausibly harm the organization or the customer relationship. No listed sensitive data category is clearly present.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

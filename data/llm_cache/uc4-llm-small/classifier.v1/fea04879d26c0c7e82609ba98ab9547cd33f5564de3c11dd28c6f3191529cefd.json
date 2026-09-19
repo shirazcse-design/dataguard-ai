@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1076,
+ "input_hash": "fea04879d26c0c7e82609ba98ab9547cd33f5564de3c11dd28c6f3191529cefd",
+ "latency_ms": 7951.793916989118,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Patient: Theo Bianchi  (MRN-9952462)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Patient: Theo Bianchi  (MRN-9952462)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Medication: sertraline 50 mg - 18 day supply, indication generalized anxiety disorder\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains an identified patient name and medical record number plus medication and diagnosis details, which are individually identifiable health information (PHI) and include personal identifiers (PII).\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

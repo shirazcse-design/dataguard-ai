@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 129,
+ "input_hash": "10ab7a84a77bdddab3cb1e86afedaf8f1760870f035fd7484c1da9e73e546bdb",
+ "latency_ms": 3505.7347919791937,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is non-public source code. It references a password via environment variables, but does not disclose any live secret value, so Credentials / Secrets does not clearly apply.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

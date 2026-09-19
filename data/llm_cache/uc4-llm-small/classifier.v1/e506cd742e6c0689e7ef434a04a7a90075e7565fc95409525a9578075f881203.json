@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1012,
+ "input_hash": "e506cd742e6c0689e7ef434a04a7a90075e7565fc95409525a9578075f881203",
+ "latency_ms": 7419.75616698619,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:29:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"\\\"We expected a long rollout, but the team was live in weeks,\\\" said Liam Grigoryan, Manager at Bellhaven Software.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer testimonial that names a customer and an individual and is explicitly marked as awaiting customer approval, so external disclosure could harm customer relationships or the company’s marketing process.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

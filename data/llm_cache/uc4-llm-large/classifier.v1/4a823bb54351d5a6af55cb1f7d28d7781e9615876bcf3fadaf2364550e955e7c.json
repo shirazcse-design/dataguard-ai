@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1057,
+ "input_hash": "4a823bb54351d5a6af55cb1f7d28d7781e9615876bcf3fadaf2364550e955e7c",
+ "latency_ms": 185407.44612494018,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Silverpine Devices reduced downtime by 28.5% after adopting our billing portal.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer story with customer-specific performance claims that are still awaiting approval, so external disclosure could plausibly harm the organization or its customer relationship. No listed sensitive data category clearly applies.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

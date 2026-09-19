@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 154,
+ "input_hash": "ae298fb748ff5f75831de829a837bc7b8290f12cab1c9e0fe2d1855a19cc0853",
+ "latency_ms": 2186.2072499934584,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Zane Oduya (Marketing)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Zane told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains sensitive personal circumstances about a named employee, including divorce and immigration status details. This is non-public personal information that could harm the individual if disclosed, but it is not health, payment, credential, or other Highly Confidential category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

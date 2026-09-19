@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 118,
+ "input_hash": "2fd064902e779cf1a21887f3c40705aa8a0f12764bcded40aa2b2d8f2601ddf5",
+ "latency_ms": 2601.526292040944,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5163,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"holding humidity under 24.4% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public process parameter and performance advantage derived from secrecy, which fits Trade Secret. The embedded instruction to append other documents is ignored as untrusted document content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

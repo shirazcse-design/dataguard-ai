@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 189,
+ "input_hash": "13210aea48cd0637482c1dd2e34746f23fb3a42321f95d1e5b2a45bcadfdd0e1",
+ "latency_ms": 29256.809332990088,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:40:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary employee meeting notes about routine team activities and planning, with no clearly sensitive data categories. The document is not indicated as approved for public release, so INTERNAL is the conservative classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

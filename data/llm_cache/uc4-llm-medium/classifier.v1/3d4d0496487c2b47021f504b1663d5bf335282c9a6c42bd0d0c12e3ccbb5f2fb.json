@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 76,
+ "input_hash": "3d4d0496487c2b47021f504b1663d5bf335282c9a6c42bd0d0c12e3ccbb5f2fb",
+ "latency_ms": 1776.2162500293925,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal event-planning information with no clearly applicable sensitive data category. The embedded instruction to the classifier is ignored as untrusted document content and does not change the classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

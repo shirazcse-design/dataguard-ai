@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 425,
+ "input_hash": "cb2537369f09224882dd35663daf1a01d85be5055617f107caa9328cbc9f49e9",
+ "latency_ms": 51344.272374990396,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:44:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Target: Ravenscar Foods. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due diligence checklist for a proposed acquisition target, which is M&A / Corporate Strategy content. That category carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

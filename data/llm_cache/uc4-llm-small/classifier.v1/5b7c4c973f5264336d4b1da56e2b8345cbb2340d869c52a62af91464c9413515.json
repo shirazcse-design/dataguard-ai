@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 599,
+ "input_hash": "5b7c4c973f5264336d4b1da56e2b8345cbb2340d869c52a62af91464c9413515",
+ "latency_ms": 5629.5619159936905,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5179,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an HR new-hire onboarding template with blank fields (SSN, date of birth, address) but contains no actual personal data; it is internal employee-facing paperwork not intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

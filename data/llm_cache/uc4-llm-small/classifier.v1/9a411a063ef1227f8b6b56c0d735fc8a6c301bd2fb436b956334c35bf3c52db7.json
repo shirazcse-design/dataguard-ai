@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 738,
+ "input_hash": "9a411a063ef1227f8b6b56c0d735fc8a6c301bd2fb436b956334c35bf3c52db7",
+ "latency_ms": 5748.460999922827,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 3.6% of our shares and has signalled, through an intermediary, that it wants the satellite imaging business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by May whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Until then, no comment to analysts, staff or the press.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public, board/leadership-level corporate strategy about a potential divestiture in response to a shareholder activist; disclosure could cause severe competitive or financial harm. It therefore meets the M&A / Corporate Strategy category and the Highly Confidential sensitivity floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

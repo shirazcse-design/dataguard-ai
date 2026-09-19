@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 71,
+ "input_hash": "0bd8f17855f3d78e04f0ec841afbbdc87ab938ef7a79e1560d73e4c836f0f53c",
+ "latency_ms": 1837.0155000593513,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal business meeting content about team progress, blockers, and planning, with no clearly regulated, strategic, credential, or other sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

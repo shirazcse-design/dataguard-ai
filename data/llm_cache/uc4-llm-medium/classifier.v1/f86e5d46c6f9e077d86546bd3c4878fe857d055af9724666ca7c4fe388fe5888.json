@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 82,
+ "input_hash": "f86e5d46c6f9e077d86546bd3c4878fe857d055af9724666ca7c4fe388fe5888",
+ "latency_ms": 1822.6214579772204,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Routine internal team meeting notes about ordinary operational work, with no clearly regulated, strategic, credential, or other sensitive-category data. The content is not clearly intended for public release, so Internal is the best fit.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

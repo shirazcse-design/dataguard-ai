@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 79,
+ "input_hash": "2b793186847a77b56f0063121777abd4add993843cef752fd40b04c708b6db71",
+ "latency_ms": 2365.3124580159783,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5225,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is instructional quickstart content with placeholder and explicitly documented example credentials, not live secrets or other clearly sensitive data. It is not clearly intended for public release, so Internal is the conservative choice.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

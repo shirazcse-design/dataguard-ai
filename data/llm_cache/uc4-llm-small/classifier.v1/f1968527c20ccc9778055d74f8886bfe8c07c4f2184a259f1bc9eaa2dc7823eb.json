@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 748,
+ "input_hash": "f1968527c20ccc9778055d74f8886bfe8c07c4f2184a259f1bc9eaa2dc7823eb",
+ "latency_ms": 6066.309790941887,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Employee: Nadia Yamada (ID E18283), personal phone (879) 555-0175\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Injury: fracture of the left wrist; treating physician noted gabapentin 300 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information (diagnosis and prescribed medication) linked to a named employee and direct personal identifiers (phone number and employee ID), so it meets PHI and PII definitions and requires HIGHLY_CONFIDENTIAL handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

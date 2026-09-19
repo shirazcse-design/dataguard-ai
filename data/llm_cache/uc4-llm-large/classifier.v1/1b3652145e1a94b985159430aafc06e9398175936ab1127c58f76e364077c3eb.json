@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 373,
+ "input_hash": "1b3652145e1a94b985159430aafc06e9398175936ab1127c58f76e364077c3eb",
+ "latency_ms": 52641.32120797876,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Target: Kingfisher Capital. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due diligence checklist for a proposed acquisition target, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

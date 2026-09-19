@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 250,
+ "input_hash": "e0905cb2be5fb34227ec52813435db0176439c254f38ba49a8a086d9e15d645a",
+ "latency_ms": 109534.28470902145,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5165,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:35:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal event-planning content (venue, schedule, lunch logistics) with no clearly applicable sensitive data category. The line attempting to direct the classifier is ignored as untrusted document content and does not change the classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1038,
+ "input_hash": "eb86e1508eb1ff680860d4e32579efa4529e3e66a251fe3dd20ab35bed99e5fa",
+ "latency_ms": 106680.84316595923,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5198,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:30:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"To our knowledge nobody has reported this approach.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Next: repeat on the second prototype, then talk to Rafaela Uzun in Legal about protecting it before we present anywhere.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public research note describing a novel technical approach and experimental results, which clearly fits Intellectual Property. External disclosure would plausibly harm the organization competitively, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

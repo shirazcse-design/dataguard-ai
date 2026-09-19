@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 451,
+ "input_hash": "d45770af0c3eb9fd37df40cac010a64a25ebd60bb9f490716ce56aa01069ec10",
+ "latency_ms": 4373.850167030469,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5152,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"const apiKey = process.env.PAYMENTS_API_KEY;\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"const client = new PaymentsClient({ apiKey });\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This file is non-public source code that configures a payments client and references an API key environment variable; it is proprietary code (Source Code).\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 393,
+ "input_hash": "c51c2be0e82a0e2ce4bc3b0a93dd1124bad201013cbf3d7bc9f2e8dfe95986f7",
+ "latency_ms": 53476.94645903539,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:40:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\\n    return connect(host=host, user=user, password=password)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public proprietary code, so Source Code clearly applies. It references environment variables for secrets but does not disclose any live credential value.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

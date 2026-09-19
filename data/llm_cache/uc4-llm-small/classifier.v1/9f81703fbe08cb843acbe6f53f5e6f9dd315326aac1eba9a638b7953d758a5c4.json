@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1311,
+ "input_hash": "9f81703fbe08cb843acbe6f53f5e6f9dd315326aac1eba9a638b7953d758a5c4",
+ "latency_ms": 9861.647665966302,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"\\\"We expected a long rollout, but the team was live in weeks,\\\" said Priya Espinoza, Senior Analyst at Redwater Biosciences.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer case study awaiting customer sign-off and contains a named customer spokesperson and company; premature external disclosure could harm customer relations. It contains no regulated identifiers, credentials, or other sensitive categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

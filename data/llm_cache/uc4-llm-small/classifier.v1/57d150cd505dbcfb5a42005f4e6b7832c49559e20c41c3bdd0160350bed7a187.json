@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 779,
+ "input_hash": "57d150cd505dbcfb5a42005f4e6b7832c49559e20c41c3bdd0160350bed7a187",
+ "latency_ms": 6163.8210830278695,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5191,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:28:00+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"case 3303: card 6011114419516482 amount $643 reason: fraud\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"case 6341: card 3528-0058-3206-1150 amount $554 reason: duplicate charge\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"case 5423: card 4111-1132-5849-7766 amount $632 reason: item not received\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document lists full payment card numbers with associated transaction amounts and chargeback reasons, which are payment-card data subject to PCI protection.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

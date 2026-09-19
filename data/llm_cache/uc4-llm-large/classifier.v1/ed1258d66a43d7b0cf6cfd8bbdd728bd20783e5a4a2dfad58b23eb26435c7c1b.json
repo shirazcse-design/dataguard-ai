@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 2144,
+ "input_hash": "ed1258d66a43d7b0cf6cfd8bbdd728bd20783e5a4a2dfad58b23eb26435c7c1b",
+ "latency_ms": 140205.35283407662,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:49:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 24.7% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document reveals non-public supplier pricing and exclusivity terms plus a margin-protecting negotiated yield structure that derives value from secrecy. Disclosure could cause severe competitive harm, so Trade Secret content supports a Highly Confidential classification.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

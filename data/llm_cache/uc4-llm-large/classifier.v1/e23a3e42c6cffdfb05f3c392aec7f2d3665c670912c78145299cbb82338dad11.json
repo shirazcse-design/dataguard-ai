@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 242,
+ "input_hash": "e23a3e42c6cffdfb05f3c392aec7f2d3665c670912c78145299cbb82338dad11",
+ "latency_ms": 39424.794415943325,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:35:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal team meeting content about routine progress, blockers, and planning. It contains no clearly regulated, strategic, credential, or other sensitive-category data and is not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

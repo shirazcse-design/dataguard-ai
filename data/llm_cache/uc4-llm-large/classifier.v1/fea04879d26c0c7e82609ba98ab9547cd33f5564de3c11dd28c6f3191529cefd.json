@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 831,
+ "input_hash": "fea04879d26c0c7e82609ba98ab9547cd33f5564de3c11dd28c6f3191529cefd",
+ "latency_ms": 137787.85495797638,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5158,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:32:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Theo Bianchi  (MRN-9952462)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: sertraline 50 mg - 18 day supply, indication generalized anxiety disorder\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable prescription record containing a patient identifier together with medication and diagnosis-related information, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

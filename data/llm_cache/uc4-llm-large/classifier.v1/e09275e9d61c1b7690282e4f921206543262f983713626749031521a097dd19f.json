@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 518,
+ "input_hash": "e09275e9d61c1b7690282e4f921206543262f983713626749031521a097dd19f",
+ "latency_ms": 73578.09299998917,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:43:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_4ea44d38176bf1f4065d55316ca942b7\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"jobs:\\n  build:\\n    steps:\\n      - run: make build && ./scripts/package.sh --target DACH\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This CI configuration is non-public build/deployment logic and therefore Source Code. It also contains a live-looking bearer token, which makes the document Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

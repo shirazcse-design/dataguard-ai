@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 844,
+ "input_hash": "8596a6c6107813819c00ac8d8937cfd1fdd182c8b6f8473859ce78dcd9c3d116",
+ "latency_ms": 7160.912082996219,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"MA_CORP_STRATEGY\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"A fund now owns about 5.3% of our shares and has signalled, through an intermediary, that it wants the industrial automation business separated or sold.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"MA_CORP_STRATEGY\"\n    },\n    {\n      \"quote\": \"We are preparing an independent valuation of each division and will decide by June whether to engage or to resist.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"MA_CORP_STRATEGY\"\n    },\n    {\n      \"quote\": \"Until then, no comment to analysts, staff or the press.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"MA_CORP_STRATEGY\"\n    }\n  ],\n  \"rationale\": \"The note describes non-public shareholder activity and potential divestiture and valuation plans, which are board/strategy-level M&A content and therefore Highly Confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

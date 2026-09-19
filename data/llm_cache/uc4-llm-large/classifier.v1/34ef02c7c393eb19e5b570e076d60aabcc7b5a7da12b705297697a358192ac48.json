@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 578,
+ "input_hash": "34ef02c7c393eb19e5b570e076d60aabcc7b5a7da12b705297697a358192ac48",
+ "latency_ms": 124619.82258292846,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:44:13+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Theo Hoffmann  (MRN-1711661)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: amlodipine 5 mg - 20 day supply, indication rheumatoid arthritis\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document links an identifiable patient to medication and a medical indication, which is individually identifiable health information. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

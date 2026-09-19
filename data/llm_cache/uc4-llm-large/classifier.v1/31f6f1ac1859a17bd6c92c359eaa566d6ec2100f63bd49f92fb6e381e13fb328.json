@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 206,
+ "input_hash": "31f6f1ac1859a17bd6c92c359eaa566d6ec2100f63bd49f92fb6e381e13fb328",
+ "latency_ms": 65618.7645419268,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5221,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:36:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Apply at www.mistralmobility.example/careers.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public-facing careers FAQ with an application URL and general recruiting information intended for external audiences. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

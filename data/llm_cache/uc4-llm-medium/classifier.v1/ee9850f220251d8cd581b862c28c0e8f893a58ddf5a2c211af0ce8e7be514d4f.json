@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 159,
+ "input_hash": "ee9850f220251d8cd581b862c28c0e8f893a58ddf5a2c211af0ce8e7be514d4f",
+ "latency_ms": 2249.7137499740347,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"We propose a self-calibrating estimator for low-cost sensors and show that it reduces drift by 59.0% on a benchmark of 17 devices.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Draft manuscript - not yet submitted\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is an unpublished draft describing novel research results and a proposed method, which clearly fits Intellectual Property. Because it is not yet submitted or publicly released, external disclosure could harm the organization but is not clearly severe.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

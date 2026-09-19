@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 617,
+ "input_hash": "d5c3404948db814406e32947c039719c55f5c3195b01922d7b90eeb240155822",
+ "latency_ms": 5217.231999966316,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Owen Xu (Finance)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Owen told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Austin for a few months.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains non-public personal information about a named employee, including sensitive personal circumstances (divorce, immigration status) that can identify and affect an individual, so it should be treated as Confidential PII.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

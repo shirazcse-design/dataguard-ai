@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 2046,
+ "input_hash": "25a6229f9a2c525487bc3f5097ee34715d613f088f0ea9bcff55128e90308b47",
+ "latency_ms": 114160.36020801403,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 18.6% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public, competitively valuable supplier pricing and exclusivity terms, plus margin-protecting negotiated commercial logic. That fits Trade Secret content and could cause severe competitive harm if disclosed externally.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

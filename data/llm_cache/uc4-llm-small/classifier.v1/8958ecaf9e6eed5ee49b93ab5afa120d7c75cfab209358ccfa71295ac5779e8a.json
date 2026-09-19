@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1026,
+ "input_hash": "8958ecaf9e6eed5ee49b93ab5afa120d7c75cfab209358ccfa71295ac5779e8a",
+ "latency_ms": 7781.3214579364285,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_beab1df3c1761348e62a8a9f2d680032\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"- run: curl -H \\\"Authorization: Bearer dgtok_beab1df3c1761348e62a8a9f2d680032\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This pipeline YAML is non-public build/deploy configuration (source code) and embeds a live-looking bearer token, which is a credential/secret; disclosure would be highly sensitive.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

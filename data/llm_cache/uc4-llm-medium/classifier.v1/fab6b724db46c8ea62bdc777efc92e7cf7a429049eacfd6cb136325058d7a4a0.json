@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 146,
+ "input_hash": "fab6b724db46c8ea62bdc777efc92e7cf7a429049eacfd6cb136325058d7a4a0",
+ "latency_ms": 2056.0235829325393,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Olivia Ibrahim  (MRN-3845359)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: sumatriptan 50 mg - 66 day supply, indication moderate persistent asthma\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable prescription record containing a patient name/MRN plus medication and medical indication, which is PHI. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

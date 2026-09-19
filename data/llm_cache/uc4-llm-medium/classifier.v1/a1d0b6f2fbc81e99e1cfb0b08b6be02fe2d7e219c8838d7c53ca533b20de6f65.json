@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "a1d0b6f2fbc81e99e1cfb0b08b6be02fe2d7e219c8838d7c53ca533b20de6f65",
+ "latency_ms": 2622.5794999627396,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Oluwaseun Hargrove\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains named employee personal circumstances, including divorce and immigration status details, which are non-public personal information. Disclosure could harm the individual, but it does not contain regulated health, payment, credential, or similar highly confidential data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

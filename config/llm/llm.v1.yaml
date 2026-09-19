@@ -1,0 +1,82 @@
+# UC4 LLM classifier configuration (Approach C). Version-controlled; the hash is recorded in every run.
+#
+# NO MODEL NAMES appear here or anywhere in the repository: each tier names an ENVIRONMENT VARIABLE
+# that holds the deployment name. Prices are null until a dated, sourced price is entered;
+# with no price, cost is reported as "not estimated".
+llm_version: 1.0.0
+taxonomy_version: 1.0.0
+seed: 20260919
+
+prompt:
+  version: classifier.v1
+  file: prompts/uc4/classifier.v1.md
+  fewshot_file: prompts/uc4/fewshot.v1.json
+
+input:
+  max_input_chars: 20000      # head truncation; the result carries a `truncated` warning
+  include_filename: true
+  # Embedded labels and metadata are spoofable and are NOT shown to the model (same rule as ML).
+  include_existing_labels: false
+  include_metadata: false
+
+generation:
+  temperature: 0.0
+  # Reasoning deployments spend output tokens on hidden reasoning before answering, so the cap must
+  # be generous (measured 2026-09-19: 64 of 81 tokens on a trivial call). 700 was the pre-registered value.
+  max_output_tokens: 4000
+  # The PRD's tool-call limit is 10 s, but the reasoning deployments in use take 8-10 s (small) and
+  # more (large) per call, so 10 s made calls time out (observed 2026-09-19). The
+  # benchmark uses 300 s (large took up to ~90 s per call) to measure capability; latency against the 10 s limit is REPORTED, not hidden.
+  timeout_s: 300.0
+  schema_repair_retries: 1    # one repair retry on malformed output, then LLM_UNAVAILABLE
+
+retry:                        # transport errors only (timeout, 429, 5xx); never for bad output
+  max_attempts: 3
+  base_delay_s: 0.5
+  max_delay_s: 4.0
+  jitter: 0.5
+
+evidence:
+  max_quotes: 8
+  max_quote_chars: 300
+  excerpt_chars: 120
+
+# Per-tier `api` and `send_temperature` record what the deployments in use actually accept (probed
+# 2026-09-19): `send_temperature: false` because the deployment rejects the parameter; `responses`
+# because the deployment does not support chat completions. Runs without a temperature are not
+# guaranteed deterministic; the replay cache is what makes a recorded run reproducible.
+tiers:
+  small:
+    alias: llm_small
+    deployment_env: DATAGUARD_LLM_DEPLOYMENT_SMALL
+    api: chat_completions
+    send_temperature: false
+    price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}
+  mid:
+    alias: llm_mid
+    deployment_env: DATAGUARD_LLM_DEPLOYMENT_MID
+    api: chat_completions
+    send_temperature: true
+    price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}
+  large:
+    alias: llm_large
+    deployment_env: DATAGUARD_LLM_DEPLOYMENT_LARGE
+    api: responses
+    send_temperature: false
+    price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}
+
+# Adapter settings, following the Microsoft Foundry REST reference (Azure OpenAI v1 route:
+# POST {endpoint}/openai/v1/chat/completions, deployment name in the body's `model`). A project
+# endpoint (.../api/projects/<p>) is reduced to its resource host. No api-version is needed.
+foundry:
+  endpoint_env: DATAGUARD_FOUNDRY_ENDPOINT
+  api_version_env: null
+  url_template: "{endpoint}/openai/v1/chat/completions"
+  auth: api_key                  # api_key | entra
+  api_key_env: DATAGUARD_FOUNDRY_API_KEY
+  entra_scope: null              # required when auth = entra; not assumed
+  max_tokens_param: max_completion_tokens
+  json_schema_response_format: true
+
+cache:
+  dir: data/llm_cache

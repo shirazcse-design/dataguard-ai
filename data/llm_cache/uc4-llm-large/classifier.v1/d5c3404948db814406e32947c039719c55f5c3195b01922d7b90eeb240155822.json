@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 803,
+ "input_hash": "d5c3404948db814406e32947c039719c55f5c3195b01922d7b90eeb240155822",
+ "latency_ms": 79258.98887496442,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:41:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Owen Xu (Finance)\\n\\nOwen told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"These are non-public manager notes about a named employee's private family and immigration circumstances, which clearly qualifies as PII under the policy. External disclosure could harm the individual and the organization, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

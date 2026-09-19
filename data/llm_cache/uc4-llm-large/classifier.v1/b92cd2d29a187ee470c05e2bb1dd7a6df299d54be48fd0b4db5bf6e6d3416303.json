@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1099,
+ "input_hash": "b92cd2d29a187ee470c05e2bb1dd7a6df299d54be48fd0b4db5bf6e6d3416303",
+ "latency_ms": 117247.535625007,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:46:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"it wants the clinical analytics business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by February whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Until then, no comment to analysts, staff or the press.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This leadership note describes a non-public potential separation or sale of a business unit, related valuation work, and the company's planned response. That fits M&A / Corporate Strategy and warrants HIGHLY_CONFIDENTIAL treatment.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

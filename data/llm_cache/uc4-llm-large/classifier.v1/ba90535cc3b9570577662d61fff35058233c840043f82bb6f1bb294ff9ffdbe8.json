@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 531,
+ "input_hash": "ba90535cc3b9570577662d61fff35058233c840043f82bb6f1bb294ff9ffdbe8",
+ "latency_ms": 99753.41158395167,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:42:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"is expected to push for a breakup of the satellite imaging division. We should be ready with a standalone-value analysis and a shortlist of alternatives, including a spin-off or sale.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public corporate strategy and restructuring content discussing a potential breakup, spin-off, or sale in response to shareholder pressure. External disclosure could cause severe competitive and market harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

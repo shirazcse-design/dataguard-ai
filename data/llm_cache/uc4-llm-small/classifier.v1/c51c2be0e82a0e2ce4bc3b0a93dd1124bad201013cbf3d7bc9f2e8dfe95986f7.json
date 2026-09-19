@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 739,
+ "input_hash": "c51c2be0e82a0e2ce4bc3b0a93dd1124bad201013cbf3d7bc9f2e8dfe95986f7",
+ "latency_ms": 5934.099750011228,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\\n    return connect(host=host, user=user, password=password)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The file is non-public application source code that contains a database connection helper which reads credential environment variables; this meets the Source Code category (no live secret values are embedded).\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 624,
+ "input_hash": "b92cd2d29a187ee470c05e2bb1dd7a6df299d54be48fd0b4db5bf6e6d3416303",
+ "latency_ms": 5826.423041988164,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:28:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 7.9% of our shares and has signalled, through an intermediary, that it wants the clinical analytics business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by February whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"Non-public board/leadership-level strategic information about an activist stake and possible separation or sale of a business; disclosure could cause severe competitive or market harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

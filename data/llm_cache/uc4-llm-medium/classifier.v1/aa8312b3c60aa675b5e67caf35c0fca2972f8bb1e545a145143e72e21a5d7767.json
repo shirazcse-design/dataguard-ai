@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 156,
+ "input_hash": "aa8312b3c60aa675b5e67caf35c0fca2972f8bb1e545a145143e72e21a5d7767",
+ "latency_ms": 2871.3387079769745,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Employee: Rohan Choudhury (ID E20408), personal phone (287) 555-0146\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Injury: fracture of the left wrist; treating physician noted sertraline 50 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains identifiable employee personal contact information and individually identifiable health information about an injury and medication. PHI sets a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

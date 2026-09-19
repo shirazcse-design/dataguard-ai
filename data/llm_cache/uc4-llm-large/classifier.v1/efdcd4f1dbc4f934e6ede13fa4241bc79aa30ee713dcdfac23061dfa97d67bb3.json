@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 197,
+ "input_hash": "efdcd4f1dbc4f934e6ede13fa4241bc79aa30ee713dcdfac23061dfa97d67bb3",
+ "latency_ms": 29346.41570795793,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:32:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank contractor intake form template with intentionally empty fields, so it does not contain actual personal data. It is ordinary internal business content and not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

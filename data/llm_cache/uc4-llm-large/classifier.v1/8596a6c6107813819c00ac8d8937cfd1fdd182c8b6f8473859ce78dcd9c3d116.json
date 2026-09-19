@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 885,
+ "input_hash": "8596a6c6107813819c00ac8d8937cfd1fdd182c8b6f8473859ce78dcd9c3d116",
+ "latency_ms": 74194.52324998565,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:42:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 5.3% of our shares and has signalled, through an intermediary, that it wants the industrial automation business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by June whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document discusses a non-public potential separation or sale of a business unit and the company's planned strategic response. That is M&A / Corporate Strategy content, which carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

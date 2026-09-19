@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1036,
+ "input_hash": "401536e28175770b92ee50bc541c00fc11a489babe02c957ce5a9d9e896bdc69",
+ "latency_ms": 89415.45445797965,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:31:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Jadewater Pharma reduced downtime by 34.4% after adopting our water-quality probe.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer case study with customer-specific performance claims that have not yet been approved for publication, so external disclosure could plausibly harm the organization or the customer relationship. No listed sensitive data category clearly applies.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

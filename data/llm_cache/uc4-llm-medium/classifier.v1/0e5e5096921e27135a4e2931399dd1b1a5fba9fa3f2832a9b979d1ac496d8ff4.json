@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "0e5e5096921e27135a4e2931399dd1b1a5fba9fa3f2832a9b979d1ac496d8ff4",
+ "latency_ms": 2611.4529579645023,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5156,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"const apiKey = process.env.PAYMENTS_API_KEY; if (!apiKey) { throw new Error(\\\"PAYMENTS_API_KEY is not set\\\"); } const client = new PaymentsClient({ apiKey });\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public source code. It references an environment variable for a key but does not disclose any live secret value, so Credentials / Secrets does not clearly apply.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 136,
+ "input_hash": "cd0f045c9ae86111f6efa8503554ae16a2305c751daa86ecc5d4b81e6558ac95",
+ "latency_ms": 2401.2394580058753,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5159,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The cure schedule uses a slow ramp followed by a brief spike, and holding humidity under 30.9% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes non-public process know-how with specific operating parameters that derive value from secrecy and competitive advantage, which fits Trade Secret. The embedded instruction-like sentence is ignored as untrusted document content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

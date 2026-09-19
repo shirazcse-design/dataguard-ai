@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 881,
+ "input_hash": "db7fc2abc809e2975af34e51a6e4de54cb493f1aa048899e09d28d5c2176c711",
+ "latency_ms": 117636.5784589434,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:34:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Dunmore Systems reduced downtime by 34.3% after adopting our scheduling app.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer story with named-customer results and wording still awaiting approval. It is not yet approved for public release, and premature disclosure could plausibly harm the organization or the customer relationship.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

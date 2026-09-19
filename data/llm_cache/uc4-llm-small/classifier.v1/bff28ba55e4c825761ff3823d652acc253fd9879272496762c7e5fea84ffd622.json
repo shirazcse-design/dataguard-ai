@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 674,
+ "input_hash": "bff28ba55e4c825761ff3823d652acc253fd9879272496762c7e5fea84ffd622",
+ "latency_ms": 5629.16337500792,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Dmitri Farrow (Operations)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Dmitri told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Singapore for a few months.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This document names an individual and describes sensitive personal circumstances (divorce and immigration status) about a named employee, which constitutes PII and warrants Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

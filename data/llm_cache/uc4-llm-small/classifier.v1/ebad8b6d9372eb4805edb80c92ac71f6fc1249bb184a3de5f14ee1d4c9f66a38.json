@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 981,
+ "input_hash": "ebad8b6d9372eb4805edb80c92ac71f6fc1249bb184a3de5f14ee1d4c9f66a38",
+ "latency_ms": 8245.056750020012,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5197,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"INTELLECTUAL_PROPERTY\",\n    \"TRADE_SECRET\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"INTELLECTUAL_PROPERTY\"\n    },\n    {\n      \"quote\": \"To our knowledge nobody has reported this approach.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"INTELLECTUAL_PROPERTY\"\n    },\n    {\n      \"quote\": \"Next: repeat on the second prototype, then talk to Willa Nakamura in Legal about protecting it before we present anywhere.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    }\n  ],\n  \"rationale\": \"This is an internal, unpublished research notebook describing a novel technical method and noting intent to legally protect it, constituting both intellectual property and non-public proprietary know-how (trade secret).\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

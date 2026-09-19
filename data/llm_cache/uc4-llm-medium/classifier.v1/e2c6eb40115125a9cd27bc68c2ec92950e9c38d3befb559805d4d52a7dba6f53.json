@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 70,
+ "input_hash": "e2c6eb40115125a9cd27bc68c2ec92950e9c38d3befb559805d4d52a7dba6f53",
+ "latency_ms": 1863.340042065829,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5217,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is instructional documentation showing placeholder and vendor-documented example credentials rather than live secrets. It is ordinary business content and not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

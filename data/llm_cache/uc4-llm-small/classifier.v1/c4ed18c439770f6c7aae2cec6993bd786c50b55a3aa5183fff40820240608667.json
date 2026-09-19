@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 823,
+ "input_hash": "c4ed18c439770f6c7aae2cec6993bd786c50b55a3aa5183fff40820240608667",
+ "latency_ms": 6679.734458914027,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_8b562c4a9d1a2bb819945bacb6988c90\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"curl -H \\\"Authorization: Bearer dgtok_8b562c4a9d1a2bb819945bacb6988c90\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The CI configuration file contains a live-looking bearer token (a secret) and is a pipeline configuration script (source code).\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

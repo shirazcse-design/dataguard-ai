@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 857,
+ "input_hash": "096e2551e48c663f2eaff6cfc1c342c59bd37cc8576418f2e6af5d35a0646db1",
+ "latency_ms": 60003.93470795825,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:33:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Employee: Ulrich Montgomery (ID E97884), personal phone (965) 555-0153\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Employee: Ulrich Montgomery (ID E97884), personal phone (965) 555-0153\\nDate of incident: 2026-09-18\\nLocation: Bristol warehouse\\nInjury: fracture of the left wrist; treating physician noted metformin 500 mg prescribed.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document links a named employee and personal phone number to an injury and prescribed medication, so it contains identifiable health information and personal data. PHI raises the overall level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

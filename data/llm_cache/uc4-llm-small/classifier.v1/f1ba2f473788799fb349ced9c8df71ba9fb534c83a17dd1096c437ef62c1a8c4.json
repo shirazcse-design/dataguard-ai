@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1451,
+ "input_hash": "f1ba2f473788799fb349ced9c8df71ba9fb534c83a17dd1096c437ef62c1a8c4",
+ "latency_ms": 10822.428042069077,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5176,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_2dead8a86d165f972ba840edea31d2dd\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"name: deploy-Dune\\non: push\\njobs:\\n  build:\\n    steps:\\n      - run: make build && ./scripts/package.sh --target North America\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The YAML is pipeline/source code and it embeds a live-looking bearer token (credential), which is highly sensitive.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 213,
+ "input_hash": "632075c197614680d5096e0597cc81060d9189c95eb0e759a227bc1b4c1e634b",
+ "latency_ms": 2576.375582953915,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\",\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"dgtok_0b1510ec384fb14a85933de2686313cd\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"name: deploy-Kestrel\\non: push\\njobs:\\n  build:\\n    steps:\\n      - run: make build && ./scripts/package.sh --target APAC\\n      - run: curl -H \\\"Authorization: Bearer dgtok_0b1510ec384fb14a85933de2686313cd\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is a non-public deployment pipeline configuration and it embeds a live-looking bearer token. The credentials category raises the sensitivity to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -16,10 +16,32 @@ def _cmd_config_validate(args: argparse.Namespace) -> int:
         print(f"CONFIG INVALID: {exc}", file=sys.stderr)
         return 2
     policy = bundle.policy
+    try:
+        from pathlib import Path
+
+        from app.llm.config import load_llm_config
+        from guardrails.injection import load_injection_config
+
+        llm_cfg, llm_sha = load_llm_config(policy, args.config_dir)
+        guard_cfg, guard_sha = load_injection_config(args.config_dir)
+        root = Path(__file__).resolve().parents[2]
+        for rel in (llm_cfg.prompt.file, llm_cfg.prompt.fewshot_file):
+            if not (root / rel).exists():
+                raise ConfigError(f"missing referenced file {rel}")
+    except ConfigError as exc:
+        print(f"CONFIG INVALID: {exc}", file=sys.stderr)
+        return 2
     summary = {
         "status": "ok",
         "config_dir": str(bundle.config_dir),
-        "versions": bundle.versions(),
+        "versions": {
+            **bundle.versions(),
+            "llm": llm_cfg.llm_version,
+            "prompt": llm_cfg.prompt.version,
+            "injection_guardrail": guard_cfg.guardrail_version,
+        },
+        "llm_config_sha256": llm_sha,
+        "guardrail_config_sha256": guard_sha,
         "levels": policy.level_ids,
         "categories": policy.category_ids,
         "file_hashes": bundle.file_hashes,
@@ -198,6 +220,18 @@ def _build_classifier(args: argparse.Namespace, bundle, docs):
         from ml.classification import build_ml_classifier
 
         return build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+    if args.classifier == "llm":
+        from app.llm import build_llm_classifier
+
+        return build_llm_classifier(
+            bundle,
+            tier=args.llm_tier,
+            mode=args.llm_mode,
+            model_id=args.llm_model_id,
+            cache_dir=args.llm_cache_dir,
+            data_dir=args.data_dir,
+            config_dir=args.config_dir,
+        )
     if args.classifier == "rules":
         from rules import build_rules_classifier
 
@@ -373,6 +407,84 @@ def _cmd_ml_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _parse_tier_models(pairs: list[str]) -> dict[str, str] | None:
+    out: dict[str, str] = {}
+    for item in pairs:
+        tier, sep, model = item.partition("=")
+        if not sep or tier not in ("small", "mid", "large") or not model:
+            print(f"--tier expects small|mid|large=<model-id>, got {item!r}", file=sys.stderr)
+            return None
+        out[tier] = model
+    return out
+
+
+def _cmd_llm_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from app.llm import MockLLMClient, build_llm_classifier
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import evaluate, git_info
+    from evals.classification.llm_report import build_llm_report
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+
+    models = _parse_tier_models(args.tier)
+    if models is None:
+        return 2
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    by_split = {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
+    manifest = load_manifest(args.data_dir)
+    common = dict(data_dir=args.data_dir, config_dir=args.config_dir, cache_dir=args.llm_cache_dir)
+    probe = build_llm_classifier(
+        bundle, tier="small", mode="replay", client=MockLLMClient([]), **common
+    )
+    tiers = {
+        t: build_llm_classifier(bundle, tier=t, mode="replay", model_id=m, **common)
+        for t, m in models.items()
+    }
+
+    def rules_ml():
+        from ml.classification import build_ml_classifier
+        from rules import build_rules_classifier
+
+        dev = by_split["dev"]
+        rules = evaluate(build_rules_classifier(bundle, args.config_dir), dev, bundle, manifest)
+        ml_clf = build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+        ml = evaluate(ml_clf, dev, bundle, manifest)
+        return rules, ml
+
+    text = build_llm_report(
+        bundle, probe, tiers, by_split, manifest, git_info(), rules_ml_factory=rules_ml
+    )
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/llm-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
+def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
+    """Regenerate the few-shot id file from the pre-registered rule (train only)."""
+    from pathlib import Path
+
+    from app.llm.config import load_llm_config
+    from app.llm.fewshot import build_fewshot_file, write_fewshot_file
+
+    bundle = load_config(args.config_dir)
+    cfg, _ = load_llm_config(bundle.policy, args.config_dir)
+    train = _load_split_docs(args, ["train"])
+    fs = build_fewshot_file(train, bundle.policy.category_ids, cfg.seed)
+    out = (
+        Path(args.out)
+        if args.out
+        else Path(__file__).resolve().parents[2] / cfg.prompt.fewshot_file
+    )
+    write_fewshot_file(fs, out)
+    print(f"wrote {out} ({len(fs.examples)} examples, all from train)")
+    return 0
+
+
 def _cmd_eval_validate(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -460,8 +572,20 @@ def build_parser() -> argparse.ArgumentParser:
     ev_sub = ev.add_subparsers(dest="eval_command", required=True)
     run = ev_sub.add_parser("run", help="evaluate a sanity classifier on dataset splits")
     run.add_argument(
-        "--classifier", choices=["oracle", "majority", "random", "rules", "ml"], required=True
+        "--classifier",
+        choices=["oracle", "majority", "random", "rules", "ml", "llm"],
+        required=True,
     )
+    run.add_argument("--llm-tier", choices=["small", "mid", "large"], default="small")
+    run.add_argument(
+        "--llm-mode",
+        choices=["replay", "record", "foundry"],
+        default="replay",
+        help="replay = recorded responses only (no network); record = call the provider and store "
+        "the responses for replay; foundry = call the provider without storing",
+    )
+    run.add_argument("--llm-model-id", default=None, help="replay/record cache model id")
+    run.add_argument("--llm-cache-dir", default=None, help="replay cache (default data/llm_cache)")
     run.add_argument(
         "--split",
         default="dev",
@@ -501,6 +625,27 @@ def build_parser() -> argparse.ArgumentParser:
     mrp.add_argument("--config-dir", default=None)
     mrp.add_argument("--data-dir", default=None)
     mrp.set_defaults(func=_cmd_ml_report)
+
+    llm = sub.add_parser("llm", help="LLM classifier commands (Approach C)")
+    llm_sub = llm.add_subparsers(dest="llm_command", required=True)
+    lrp = llm_sub.add_parser("report", help="write the LLM status/results (development splits)")
+    lrp.add_argument(
+        "--tier",
+        action="append",
+        default=[],
+        metavar="TIER=MODEL_ID",
+        help="replay a recorded run: small|mid|large=<model id in the cache> (repeatable)",
+    )
+    lrp.add_argument("--llm-cache-dir", default=None)
+    lrp.add_argument("--out", default=None)
+    lrp.add_argument("--config-dir", default=None)
+    lrp.add_argument("--data-dir", default=None)
+    lrp.set_defaults(func=_cmd_llm_report)
+    lfs = llm_sub.add_parser("fewshot", help="regenerate the few-shot id file (train only)")
+    lfs.add_argument("--out", default=None)
+    lfs.add_argument("--config-dir", default=None)
+    lfs.add_argument("--data-dir", default=None)
+    lfs.set_defaults(func=_cmd_llm_fewshot)
 
     rp = rules_sub.add_parser(
         "report", help="write the Rules baseline results (development splits)"

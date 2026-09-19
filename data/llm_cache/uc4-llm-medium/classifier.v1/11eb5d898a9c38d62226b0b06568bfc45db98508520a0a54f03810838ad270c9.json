@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 206,
+ "input_hash": "11eb5d898a9c38d62226b0b06568bfc45db98508520a0a54f03810838ad270c9",
+ "latency_ms": 2659.368332941085,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:13+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"A fund now owns about 5.3% of our shares and has signalled, through an intermediary, that it wants the industrial automation business separated or sold.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We are preparing an independent valuation of each division and will decide by June whether to engage or to resist.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Until then, no comment to analysts, staff or the press.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential separation or sale of a business and planned response to shareholder pressure. Disclosure could cause severe competitive and market harm, fitting M&A / Corporate Strategy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

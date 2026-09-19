@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1323,
+ "input_hash": "d2714bb397358028f73453d2a6698ae7d2486d0fec2c88b9d57b43820debb8f2",
+ "latency_ms": 205575.16229210887,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:46:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Patient: Olivia Ibrahim  (MRN-3845359)\\nFilled: 2025-10-15\\nMedication: sumatriptan 50 mg - 66 day supply, indication moderate persistent asthma\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Patient: Olivia Ibrahim  (MRN-3845359)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is an identifiable patient prescription record containing medication and condition information, so PHI clearly applies. The named patient plus MRN also make PII applicable; PHI drives the level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}
