@@ -42,7 +42,9 @@ def render_report(
     add(f"* dataset sha256: `{m['dataset_sha256']}`")
     n_fam = stats["overall"]["n_families"]
     add(f"* documents: **{m['n_documents']}** in **{n_fam}** scenario families")
-    add(f"* annotation status: {m['annotation_status']} (AI-authored; not human-reviewed)")
+    add(f"* **label status: {m['label_status']}**")
+    add(f"* per-document annotation status: {m['annotation_status']}")
+    add("* the gold labels are NOT independently human-validated")
     add("")
     add("## Splits")
     add("")

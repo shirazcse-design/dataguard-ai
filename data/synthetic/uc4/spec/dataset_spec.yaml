@@ -10,6 +10,11 @@ generator_version: 1.0.0
 seed: 20260918
 taxonomy_version: 1.0.0
 
+# How much the gold labels can be trusted. This string is copied into the dataset manifest, every
+# dataset report and every evaluation run manifest/report. Change it ONLY after a human reviewer has
+# signed off (and then also change annotation_status of the reviewed documents).
+label_status: "AI-generated synthetic dataset — pending human gold-label review"
+
 target_total_docs: 800
 split_fractions:
   train: 0.50

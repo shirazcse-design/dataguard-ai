@@ -11,6 +11,7 @@ from typing import Any
 from app.classification.config_loader import HIGH_RISK_FILE, TAXONOMY_FILE, ConfigBundle
 from app.classification.schemas.common import sha256_text
 
+from ..lock import DEVELOPMENT_SPLITS, LockedTestAuthorization, check_access
 from .generator import generate_dataset
 from .integrity import IntegrityReport, check_dataset
 from .schema import SPLIT_NAMES, DatasetDocument
@@ -94,6 +95,7 @@ def build_dataset(config: ConfigBundle, spec_dir: Path | str | None = None) -> B
         "generator_version": spec.dataset.generator_version,
         "seed": spec.dataset.seed,
         "taxonomy_version": policy.taxonomy_version,
+        "label_status": spec.dataset.label_status,
         "high_risk_version": policy.high_risk_version,
         # Only the configuration the dataset depends on. The evaluation config is deliberately
         # excluded: changing evaluation settings must not invalidate the dataset.
@@ -130,13 +132,23 @@ def load_manifest(data_dir: Path | str | None = None) -> dict[str, Any]:
 
 
 def load_documents(
-    data_dir: Path | str | None = None, splits: list[str] | None = None, verify: bool = True
+    data_dir: Path | str | None = None,
+    splits: list[str] | None = None,
+    verify: bool = True,
+    locked_test_authorization: LockedTestAuthorization | None = None,
 ) -> list[DatasetDocument]:
-    """Load documents for `splits` (default: all), verifying file hashes against the manifest."""
+    """Load documents, verifying file hashes against the manifest.
+
+    By default only the DEVELOPMENT splits (train, calibration, dev) are returned. Asking for the
+    locked `test` split requires an explicit `locked_test_authorization`; dataset tooling that
+    legitimately needs every split (integrity checks, the review sheet) passes one.
+    """
     base = Path(data_dir) if data_dir is not None else DEFAULT_DATA_DIR
+    wanted = list(splits) if splits is not None else list(DEVELOPMENT_SPLITS)
+    check_access(wanted, locked_test_authorization)
     manifest = load_manifest(base)
     docs: list[DatasetDocument] = []
-    for split in splits or list(SPLIT_NAMES):
+    for split in wanted:
         meta = manifest["files"][split]
         text = (base / meta["path"]).read_text(encoding="utf-8")
         if verify and sha256_text(text) != meta["sha256"]:

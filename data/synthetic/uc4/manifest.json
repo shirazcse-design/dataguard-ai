@@ -1250,9 +1250,10 @@
     },
     "warnings": []
   },
+  "label_status": "AI-generated synthetic dataset — pending human gold-label review",
   "n_documents": 853,
   "seed": 20260918,
-  "spec_hash": "4cd80684c6d221ae82858acad1717628899d8ca6f892229e86a4fe39f5c3eb4b",
+  "spec_hash": "85e57f22fdee069b249fcbc0b166ad91489ab9121684f599beb5f08b9cd1ccbd",
   "stats": {
     "adversarial_types": {
       "prompt_injection_downgrade": 20,

@@ -9,7 +9,7 @@ import pytest
 from app.classification.cli import main
 from evals.classification import metrics as metrics_module
 from evals.classification.dataset.build import load_documents, load_manifest
-from evals.classification.dataset.schema import SPLIT_NAMES
+from evals.classification.lock import DEVELOPMENT_SPLITS
 from evals.classification.validation import (
     HarnessValidation,
     expected_constant_prediction,
@@ -25,7 +25,7 @@ P, I, C, H = "PUBLIC", "INTERNAL", "CONFIDENTIAL", "HIGHLY_CONFIDENTIAL"  # noqa
 @pytest.fixture(scope="module")
 def by_split():
     docs = load_documents()
-    return {s: [d for d in docs if d.split == s] for s in SPLIT_NAMES}
+    return {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
 
 
 @pytest.fixture(scope="module")
@@ -44,7 +44,7 @@ def test_the_harness_passes_its_own_validation_on_the_real_dataset(real_validati
 def test_validation_covers_every_suite_on_every_split(real_validation):
     suites = {c.suite.split("/")[0] for c in real_validation.checks}
     assert suites == {"oracle", "majority", "random", "robustness"}
-    for split in SPLIT_NAMES:
+    for split in DEVELOPMENT_SPLITS:
         for suite in (
             "oracle/headline",
             "oracle/all_tiers",
@@ -56,7 +56,7 @@ def test_validation_covers_every_suite_on_every_split(real_validation):
                 split,
             )
     assert {(r["baseline"], r["split"]) for r in real_validation.runs} == {
-        (b, s) for b in ("oracle", "majority", "random") for s in SPLIT_NAMES
+        (b, s) for b in ("oracle", "majority", "random") for s in DEVELOPMENT_SPLITS
     }
 
 
@@ -77,7 +77,7 @@ def test_validation_can_fail_a_broken_metric_is_detected(bundle, by_split, monke
 
     monkeypatch.setattr(metrics_module, "_prf", broken)
     result = validate_harness(
-        {"train": by_split["train"], "test": by_split["test"]}, bundle, load_manifest()
+        {"train": by_split["train"], "dev": by_split["dev"]}, bundle, load_manifest()
     )
     assert not result.ok and any("F1" in c.name for c in result.checks if not c.passed)
 
@@ -137,9 +137,7 @@ def test_report_and_json_render_from_the_results(real_validation):
     assert "## Failures\n\nNone." in text and "Limits of this validation" in text
     assert all(r["run_id"] in text for r in real_validation.runs)
     data = validation_to_json(real_validation)
-    assert (
-        data["ok"] and data["n_checks"] == n and data["n_passed"] == n and len(data["runs"]) == 12
-    )
+    assert data["ok"] and data["n_checks"] == n and data["n_passed"] == n and len(data["runs"]) == 9
 
 
 def test_report_lists_failures():
@@ -189,7 +187,7 @@ def test_cli_eval_run_other_baselines(tmp_path, capsys, clf):
     )
 
 
-def test_cli_warns_when_touching_the_locked_test_split(tmp_path, capsys):
+def test_cli_refuses_the_locked_test_split_without_the_flag(tmp_path, capsys):
     assert (
         main(
             [
@@ -203,9 +201,9 @@ def test_cli_warns_when_touching_the_locked_test_split(tmp_path, capsys):
                 str(tmp_path),
             ]
         )
-        == 0
+        == 2
     )
-    assert "locked test split" in capsys.readouterr().err
+    assert "locked" in capsys.readouterr().err and list(tmp_path.iterdir()) == []
 
 
 def test_cli_rejects_unknown_split(tmp_path, capsys):

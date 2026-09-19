@@ -10,7 +10,9 @@
 * taxonomy: v1.0.0; high-risk config: v1.0.0
 * dataset sha256: `bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa`
 * documents: **853** in **155** scenario families
-* annotation status: {'unreviewed': 853} (AI-authored; not human-reviewed)
+* **label status: AI-generated synthetic dataset — pending human gold-label review**
+* per-document annotation status: {'unreviewed': 853}
+* the gold labels are NOT independently human-validated
 
 ## Splits
 

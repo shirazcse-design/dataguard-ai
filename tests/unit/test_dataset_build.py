@@ -24,11 +24,19 @@ from evals.classification.dataset.build import (
 )
 from evals.classification.dataset.report import REVIEW_COLUMNS, render_report, render_review_sheet
 from evals.classification.dataset.schema import SPLIT_NAMES, TIERS
+from evals.classification.lock import LockedTestAuthorization, LockedTestSplitError
+
+# Dataset-STRUCTURE tests validate the dataset itself; they never tune anything on the test split.
+AUTH = LockedTestAuthorization.now("test-suite: dataset structure validation")
+
+
+def load_all(data_dir=None, **kw):
+    return load_documents(data_dir, splits=list(SPLIT_NAMES), locked_test_authorization=AUTH, **kw)
 
 
 @pytest.fixture(scope="module")
 def docs():
-    return load_documents()
+    return load_all()
 
 
 @pytest.fixture(scope="module")
@@ -71,9 +79,9 @@ def test_tampering_with_a_gold_label_is_detected(data_copy):
         text.replace('"gold_level": "INTERNAL"', '"gold_level": "PUBLIC"', 1), encoding="utf-8"
     )
     with pytest.raises(DatasetIntegrityError, match="manifest hash"):
-        load_documents(data_copy)
-    tampered = load_documents(data_copy, verify=False)  # explicit opt-out still loads
-    assert len(tampered) == sum(1 for _ in load_documents())
+        load_all(data_copy)
+    tampered = load_all(data_copy, verify=False)  # explicit opt-out still loads
+    assert len(tampered) == len(load_all())
 
 
 def test_dropping_a_document_is_detected(data_copy):
@@ -84,13 +92,22 @@ def test_dropping_a_document_is_detected(data_copy):
     manifest["files"]["dev"]["sha256"] = sha256_text(path.read_text())  # attacker fixes the hash
     (data_copy / "manifest.json").write_text(json.dumps(manifest))
     with pytest.raises(DatasetIntegrityError, match="document count"):
-        load_documents(data_copy)
+        load_all(data_copy)
 
 
-def test_load_documents_can_select_splits(docs):
-    test_only = load_documents(splits=["test"])
+def test_default_loading_excludes_the_locked_test_split(docs):
+    default = load_documents()
+    assert {d.split for d in default} == {"train", "calibration", "dev"}
+    assert len(default) == sum(d.split != "test" for d in docs)
+
+
+def test_requesting_the_locked_split_without_authorisation_is_refused():
+    with pytest.raises(LockedTestSplitError, match="locked"):
+        load_documents(splits=["test"])
+    with pytest.raises(LockedTestSplitError):
+        load_documents(splits=["dev", "test"])
+    test_only = load_documents(splits=["test"], locked_test_authorization=AUTH)
     assert test_only and {d.split for d in test_only} == {"test"}
-    assert len(docs) == sum(1 for _ in docs)
 
 
 # ---- structural invariants over the real data -----------------------------------------------
@@ -261,7 +278,8 @@ def test_report_numbers_come_from_the_manifest(manifest, bundle):
     assert f"**{manifest['n_documents']}**" in text and manifest["dataset_sha256"] in text
     for split in SPLIT_NAMES:
         assert f"| {split} | {manifest['stats']['by_split'][split]['n_docs']} |" in text
-    assert "not human-reviewed" in text
+    assert "pending human gold-label review" in text
+    assert "NOT independently human-validated" in text
 
 
 def test_review_sheet_has_one_row_per_family(docs):
@@ -321,3 +339,13 @@ def test_cli_generate_refuses_to_write_when_integrity_fails(tmp_path, capsys):
     assert main(["dataset", "generate", "--spec-dir", str(spec), "--out-dir", str(out)]) == 3
     assert not out.exists()  # nothing written on integrity errors
     assert "INTEGRITY ERRORS" in capsys.readouterr().err
+
+
+LABEL_STATUS = "AI-generated synthetic dataset — pending human gold-label review"
+
+
+def test_dataset_is_marked_pending_human_review_everywhere(docs, manifest):
+    """Approved: never represent the gold labels as independently human-validated."""
+    assert manifest["label_status"] == LABEL_STATUS
+    assert manifest["annotation_status"] == {"unreviewed": len(docs)}
+    assert all(d.annotation_status == "unreviewed" for d in docs)

@@ -16,6 +16,7 @@ MANIFEST = {
     "dataset_version": "1.0.0",
     "dataset_sha256": "a" * 64,
     "spec_hash": "b" * 64,
+    "label_status": "AI-generated synthetic dataset — pending human gold-label review",
 }
 
 
@@ -36,7 +37,7 @@ def make_docs():
                 "acceptable_alternative_levels": ["CONFIDENTIAL"],
             }
         docs.append(
-            mkdoc(f"d{i}", level=level, cats=cats, group=g, tier=tier, split="test", **extra)
+            mkdoc(f"d{i}", level=level, cats=cats, group=g, tier=tier, split="dev", **extra)
         )
     return docs
 
@@ -81,12 +82,12 @@ def test_no_combined_headline_score_anywhere(bundle, docs):
 def test_manifest_records_provenance(bundle, docs):
     res = run(MajorityClassifier.from_docs(docs, bundle.policy), docs, bundle)
     m = res.manifest
-    assert m["run_id"].startswith("majority-test-") and m["run_id"].endswith(res.fingerprint[:8])
+    assert m["run_id"].startswith("majority-dev-") and m["run_id"].endswith(res.fingerprint[:8])
     assert m["harness_version"] == HARNESS_VERSION and m["cli_args"] == {"x": 1}
-    assert (
-        m["dataset"]["dataset_sha256"] == "a" * 64
-        and m["dataset"]["evaluated_locked_test_split"] is True
-    )
+    assert m["dataset"]["dataset_sha256"] == "a" * 64
+    assert m["dataset"]["evaluated_locked_test_split"] is False
+    assert m["dataset"]["locked_test_authorization"] is None and "locked_test_access" not in m
+    assert m["dataset"]["label_status"].endswith("pending human gold-label review")
     assert m["dataset"]["n_documents"] == 8 and m["dataset"]["n_groups"] == 6
     assert m["classifier"]["name"] == "majority" and "level" in m["classifier"]["params"]
     assert m["config"]["versions"] == bundle.versions() and set(m["config"]["file_hashes"]) == set(
@@ -126,7 +127,8 @@ def test_small_sample_labels_are_listed(bundle, docs):
     sm = run(OracleClassifier.from_docs(docs, bundle.policy), docs, bundle).metrics["headline"][
         "small_sample_labels"
     ]
-    assert sm["min_support_flag"] == 25 and "PUBLIC" in sm["levels"] and "PHI" in sm["categories"]
+    assert sm["warning_code"] == "SMALL_SAMPLE" and sm["min_support_flag"] == 25
+    assert sm["levels"]["PUBLIC"] == 1 and sm["categories"]["TRADE_SECRET"] == 1  # counts preserved
 
 
 def test_no_deferrals_note(bundle, docs):
@@ -154,12 +156,13 @@ def test_write_run_creates_artifacts_and_report_is_grounded(bundle, docs, tmp_pa
         and res.fingerprint in report
         and "no combined headline score" in report.lower()
     )
+    assert "Confusion matrix" in report and "**by tier**" in report and "SMALL_SAMPLE" in report
     assert (
-        "Confusion matrix" in report
-        and "**by tier**" in report
-        and "Small-sample caveats" in report
+        "pending human gold-label review" in report
+        and "not independently human-validated" in report
     )
-    assert "locked test split" in report  # the docs are in the test split
+    assert "independent families" in report  # the family count accompanies every interval
+    assert "LOCKED TEST SPLIT" not in report  # dev-only run
 
 
 def test_write_run_leaves_nothing_behind_if_serialisation_fails(bundle, docs, tmp_path):
@@ -176,3 +179,40 @@ def test_report_shows_undefined_as_na_not_zero(bundle):
     report = render_run_report(res)
     assert "n/a" in report  # high-risk recall etc. are undefined with no positives
     assert res.metrics["headline"]["metrics"]["high_risk"]["recall"] is None
+
+
+# ---- decision 2/3/4: sample-size warnings, high-risk companions, family counts --------------
+def test_report_states_sample_counts_family_count_and_high_risk_companions(bundle, docs):
+    res = run(RandomClassifier(4, bundle.policy), docs, bundle)
+    report = render_run_report(res)
+    n_fam = res.metrics["headline"]["confidence_intervals"]["n_units"]
+    assert f"rest on {n_fam} independent families" in report
+    for row in (
+        "High-risk: recall",
+        "High-risk: precision",
+        "High-risk: F1",
+        "High-risk: false-positive rate",
+        "Review rate",
+    ):
+        assert row in report, row
+    assert "informational, not a pass/fail gate" in report
+    assert "no minimum precision or false-positive threshold has been chosen yet" in report
+    stats = res.metrics["headline"]["confidence_intervals"]["statistics"]
+    assert {
+        "high_risk_recall",
+        "high_risk_precision",
+        "high_risk_f1",
+        "high_risk_false_positive_rate",
+    } <= set(stats)
+    assert res.metrics["all_tiers"]["coverage"]["review_rate"] == 0.0
+
+
+def test_review_rate_counts_documents_that_need_review(bundle, docs):
+    from evals.classification.validation import _Deferring
+
+    clf = _Deferring({d.doc_id: d.gold_level for d in docs})
+    res = run(clf, docs, bundle)
+    cov = res.metrics["all_tiers"]["coverage"]
+    assert cov["n_review_required"] == 8 and cov["review_rate"] == 1.0
+    assert res.metrics["headline"]["metrics"]["coverage"]["review_rate"] == 1.0
+    assert "Review rate (headline documents) | 1.000" in render_run_report(res)

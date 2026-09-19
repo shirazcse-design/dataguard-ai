@@ -104,6 +104,7 @@ class DatasetSpec(StrictModel):
     generator_name: str
     seed: int
     taxonomy_version: str
+    label_status: str
     target_total_docs: int = Field(ge=1)
     split_fractions: SplitSizeSpec
     min_positives_per_label: dict[str, int]

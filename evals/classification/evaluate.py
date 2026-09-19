@@ -20,6 +20,7 @@ from app.classification.interfaces import Classifier
 
 from .bootstrap import bootstrap_intervals
 from .dataset.schema import DatasetDocument
+from .lock import LockedTestAuthorization, check_access
 from .metrics import compact, compute_metrics, round_floats
 from .records import PredictionRecord
 from .runner import run_classifier
@@ -124,17 +125,20 @@ def build_metrics(records: list[PredictionRecord], bundle: ConfigBundle) -> dict
         }
 
     small = {
+        "warning_code": "SMALL_SAMPLE",
         "min_support_flag": cfg.min_support_flag,
-        "levels": [
-            lv
+        # label -> number of gold positives in the evaluated headline subset (only labels below
+        # the threshold are listed; full per-label counts are in the per_class / per_label tables)
+        "levels": {
+            lv: m["support"]
             for lv, m in primary["level"]["per_class"].items()
             if m["support"] < cfg.min_support_flag
-        ],
-        "categories": [
-            c
+        },
+        "categories": {
+            c: m["support"]
             for c, m in primary["categories"]["per_label"].items()
             if m["support"] < cfg.min_support_flag
-        ],
+        },
     }
     return {
         "headline": {
@@ -188,16 +192,19 @@ def build_run_manifest(
     finished_at: datetime,
     metrics_fingerprint: str,
     cli_args: dict[str, Any] | None,
+    locked_test_authorization: LockedTestAuthorization | None = None,
 ) -> dict[str, Any]:
     splits = sorted({d.split for d in docs})
     stamp = f"{started_at:%Y%m%dT%H%M%SZ}"
     run_id = f"{classifier.name}-{'+'.join(splits)}-{stamp}-{metrics_fingerprint[:8]}"
-    return {
+    git = git_info()
+    locked = "test" in splits
+    manifest = {
         "run_id": run_id,
         "harness_version": HARNESS_VERSION,
         "started_at": started_at.isoformat(),
         "finished_at": finished_at.isoformat(),
-        "git": git_info(),
+        "git": git,
         "environment": {
             "python": sys.version.split()[0],
             "platform": platform.platform(),
@@ -214,16 +221,21 @@ def build_run_manifest(
             "dataset_version": dataset_manifest["dataset_version"],
             "dataset_sha256": dataset_manifest["dataset_sha256"],
             "spec_hash": dataset_manifest["spec_hash"],
+            "label_status": dataset_manifest["label_status"],
             "splits_evaluated": splits,
             "n_documents": len(docs),
             "n_groups": len({d.group_id for d in docs}),
-            "evaluated_locked_test_split": "test" in splits,
+            "evaluated_locked_test_split": locked,
+            "locked_test_authorization": (
+                locked_test_authorization.to_dict() if locked_test_authorization else None
+            ),
         },
         "config": {"versions": bundle.versions(), "file_hashes": bundle.file_hashes},
         "eval_settings": {
             "headline_tiers": bundle.eval.headline_tiers,
             "bootstrap": bundle.eval.bootstrap.model_dump(),
             "min_support_flag": bundle.eval.min_support_flag,
+            "reference_targets": bundle.eval.reference_targets,
         },
         "cli_args": cli_args or {},
         "metrics_fingerprint": metrics_fingerprint,
@@ -233,6 +245,23 @@ def build_run_manifest(
             "metrics_fingerprint is the SHA-256 of that deterministic content."
         ),
     }
+    if locked:
+        # A consolidated audit record: everything needed to answer "who touched the locked test
+        # split, with what, when, and under which authorisation".
+        manifest["locked_test_access"] = {
+            "authorized": locked_test_authorization is not None,
+            "authorization": locked_test_authorization.to_dict()
+            if locked_test_authorization
+            else None,
+            "git_commit": git["commit"],
+            "git_dirty": git["dirty"],
+            "dataset_sha256": dataset_manifest["dataset_sha256"],
+            "config_versions": bundle.versions(),
+            "classifier": f"{classifier.name}@{classifier.version}",
+            "classifier_params": classifier.params(),
+            "timestamp": started_at.isoformat(),
+        }
+    return manifest
 
 
 # ---------------------------------------------------------------------------------------------
@@ -253,7 +282,14 @@ def evaluate(
     bundle: ConfigBundle,
     dataset_manifest: dict[str, Any],
     cli_args: dict[str, Any] | None = None,
+    locked_test_authorization: LockedTestAuthorization | None = None,
 ) -> EvaluationResult:
+    """Evaluate `classifier` on `docs`.
+
+    Raises LockedTestSplitError if any document belongs to the locked test split and no
+    `locked_test_authorization` is supplied.
+    """
+    check_access({d.split for d in docs}, locked_test_authorization)
     started = datetime.now(UTC)
     records = run_classifier(classifier, docs, bundle.policy)
     deterministic = build_metrics(records, bundle)
@@ -288,5 +324,6 @@ def evaluate(
         finished_at=finished,
         metrics_fingerprint=fp,
         cli_args=cli_args,
+        locked_test_authorization=locked_test_authorization,
     )
     return EvaluationResult(manifest["run_id"], records, metrics, fp, manifest)

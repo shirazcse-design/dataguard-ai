@@ -44,3 +44,4 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "tests/**" = ["E501"]
 # The validation report is prose-heavy generated text; wrapping it would hurt readability.
 "evals/classification/validation.py" = ["E501"]
+"evals/classification/reporting.py" = ["E501"]

@@ -13,6 +13,11 @@ from typing import Any
 from .evaluate import EvaluationResult
 
 DEFAULT_RUNS_DIR = Path(__file__).resolve().parent / "runs"
+# Append-only audit trail of every authorised read of the locked test split. It is a TRACKED file on
+# purpose: each entry appears in `git diff`, which discourages repeated peeking.
+DEFAULT_ACCESS_LOG = (
+    Path(__file__).resolve().parents[2] / "data/synthetic/uc4/locked_test_access.jsonl"
+)
 
 
 def _f(x: Any, digits: int = 3) -> str:
@@ -35,17 +40,31 @@ def _table(headers: list[str], rows: list[list[Any]]) -> str:
     return "\n".join(out)
 
 
+def _flag(support: int, threshold: int) -> str:
+    return "SMALL_SAMPLE" if support < threshold else ""
+
+
 def render_run_report(result: EvaluationResult) -> str:
     m, man = result.metrics, result.manifest
     head = m["headline"]
     hm = head["metrics"]
     ci = head["confidence_intervals"]
     stats = ci["statistics"]
+    ds = man["dataset"]
+    threshold = man["eval_settings"]["min_support_flag"]
     L: list[str] = []
     add = L.append
 
     add(f"# Evaluation run `{man['run_id']}`")
     add("")
+    if ds["evaluated_locked_test_split"]:
+        auth = ds["locked_test_authorization"] or {}
+        add(
+            "> **LOCKED TEST SPLIT EVALUATED - REPORT-ONLY.** Authorised via "
+            f"`{auth.get('mechanism')}` at {auth.get('authorized_at')}. These results must not be "
+            "used to tune rules, thresholds, prompts or models."
+        )
+        add("")
     add(
         "> Every number below was computed by this run from the classifier's actual outputs. "
         "There is no combined headline score; each metric stands alone."
@@ -53,7 +72,7 @@ def render_run_report(result: EvaluationResult) -> str:
     add("")
     add("## Provenance")
     add("")
-    ds = man["dataset"]
+    add(f"* **dataset labels: {ds['label_status']}** (not independently human-validated)")
     add(
         f"* classifier: `{man['classifier']['name']}` v{man['classifier']['version']} "
         f"params `{json.dumps(man['classifier']['params'], sort_keys=True)}`"
@@ -65,7 +84,6 @@ def render_run_report(result: EvaluationResult) -> str:
     add(
         f"* splits evaluated: {', '.join(ds['splits_evaluated'])} "
         f"({ds['n_documents']} documents, {ds['n_groups']} families)"
-        + ("  **(includes the locked test split)**" if ds["evaluated_locked_test_split"] else "")
     )
     add(
         f"* git: `{(man['git']['commit'] or 'unknown')[:12]}` on `{man['git']['branch']}` "
@@ -79,13 +97,21 @@ def render_run_report(result: EvaluationResult) -> str:
     cov = m["all_tiers"]["coverage"]
     add(
         _table(
-            ["documents", "with prediction", "failed", "deferred to review", "auto-decided"],
+            [
+                "documents",
+                "with prediction",
+                "failed",
+                "review required",
+                "review rate",
+                "auto-decided",
+            ],
             [
                 [
                     cov["n_docs"],
                     cov["n_with_prediction"],
                     cov["n_failed"],
-                    cov["n_deferred_to_review"],
+                    cov["n_review_required"],
+                    cov["review_rate"],
                     cov["n_auto_decided"],
                 ]
             ],
@@ -102,34 +128,63 @@ def render_run_report(result: EvaluationResult) -> str:
         )
     add("")
 
+    n_docs, n_fam = hm["coverage"]["n_docs"], hm["coverage"]["n_groups"]
     add(
-        f"## Headline metrics (tiers {', '.join(head['tiers'])}; "
-        f"{hm['coverage']['n_docs']} documents, "
-        f"{hm['coverage']['n_groups']} families)"
+        f"## Headline metrics (tiers {', '.join(head['tiers'])}; {n_docs} documents, {n_fam} families)"
     )
     add("")
     add(
-        f"Point estimate with {int(ci['confidence_level'] * 100)}% percentile interval from "
-        f"{ci['n_resamples']} bootstrap resamples of **{ci['unit']}s** "
-        f"({ci['n_units']} units, seed "
-        f"{ci['seed']}). Families are resampled because documents in a family are correlated."
+        f"Intervals are {int(ci['confidence_level'] * 100)}% percentile bootstrap intervals from "
+        f"{ci['n_resamples']} resamples (seed {ci['seed']}) of **{ci['unit']}s**. "
+        f"**They rest on {ci['n_units']} independent families** ({n_docs} documents), because "
+        "documents within a family are variations of one template and are correlated. Read the "
+        "intervals, not just the point estimates."
     )
     add("")
     hr = hm["high_risk"]
     add(
         _table(
-            ["metric", "value [CI]"],
+            ["metric", "value [95% CI]"],
             [
                 ["Sensitivity level: macro-F1", _ci(stats["level_macro_f1"])],
                 ["Data categories: macro-F1", _ci(stats["category_macro_f1"])],
                 ["High-risk: recall", _ci(stats["high_risk_recall"])],
                 ["High-risk: precision", _ci(stats["high_risk_precision"])],
-                ["High-risk: false-positive rate", _f(hr["false_positive_rate"])],
+                ["High-risk: F1", _ci(stats["high_risk_f1"])],
+                ["High-risk: false-positive rate", _ci(stats["high_risk_false_positive_rate"])],
+                ["Review rate (headline documents)", _f(hm["coverage"]["review_rate"])],
             ],
         )
     )
     add("")
+    ref = man["eval_settings"].get("reference_targets", {}).get("high_risk_recall")
+    if ref is not None:
+        got = stats["high_risk_recall"]["point"]
+        verdict = "n/a" if got is None else ("at or above" if got >= ref else "below")
+        add(
+            f"Initial safety-oriented reference: high-risk recall >= {ref:.2f}; observed "
+            f"{_f(got)} ({verdict} the reference). **This is informational, not a pass/fail gate:** "
+            "recall alone does not determine success, and no minimum precision or false-positive "
+            "threshold has been chosen yet. That operating point will be selected on the "
+            "development set; never tune against the locked test split."
+        )
+        add("")
     add(f"Macro convention: {hm['level']['macro_convention']}.")
+    add("")
+
+    sm = head["small_sample_labels"]
+    add(
+        f"## Sample-size warnings (SMALL_SAMPLE: fewer than {sm['min_support_flag']} gold positives)"
+    )
+    add("")
+    if sm["levels"] or sm["categories"]:
+        rows = [["level", k, v, "SMALL_SAMPLE"] for k, v in sm["levels"].items()]
+        rows += [["category", k, v, "SMALL_SAMPLE"] for k, v in sm["categories"].items()]
+        add(_table(["axis", "label", "gold positives (headline subset)", "warning"], rows))
+    else:
+        add("None: every label has enough positives in the headline subset.")
+    add("")
+    add("Per-label counts are preserved in the `support` columns of the tables below.")
     add("")
 
     add("### Sensitivity level")
@@ -147,22 +202,22 @@ def render_run_report(result: EvaluationResult) -> str:
     add("")
     add(
         _table(
-            ["level", "precision", "recall", "F1", "support", "predicted"],
+            ["level", "precision", "recall", "F1", "support", "predicted", "warning"],
             [
-                [k, v["precision"], v["recall"], v["f1"], v["support"], v["predicted"]]
+                [k, v["precision"], v["recall"], v["f1"], v["support"], v["predicted"],
+                 _flag(v["support"], threshold)]
                 for k, v in lv["per_class"].items()
             ],
         )
-    )
+    )  # fmt: skip
     add("")
     o = lv["ordinal_errors"]
     add(
         f"macro P/R/F1: {_f(lv['macro']['precision'])} / {_f(lv['macro']['recall'])} / "
         f"{_f(lv['macro']['f1'])}; micro F1 {_f(lv['micro']['f1'])}; "
-        f"accuracy {_f(lv['accuracy'])}. "
-        f"Under-classification {_f(o['under_classification_rate'])} "
-        f"(severe {_f(o['severe_under_classification_rate'])}), over-classification "
-        f"{_f(o['over_classification_rate'])}."
+        f"accuracy {_f(lv['accuracy'])}. Under-classification "
+        f"{_f(o['under_classification_rate'])} (severe {_f(o['severe_under_classification_rate'])}), "
+        f"over-classification {_f(o['over_classification_rate'])}."
     )
     add("")
 
@@ -171,23 +226,14 @@ def render_run_report(result: EvaluationResult) -> str:
     cat = hm["categories"]
     add(
         _table(
-            ["category", "precision", "recall", "F1", "support", "TP", "FP", "FN", "TN"],
+            ["category", "precision", "recall", "F1", "support", "TP", "FP", "FN", "TN", "warning"],
             [
-                [
-                    k,
-                    v["precision"],
-                    v["recall"],
-                    v["f1"],
-                    v["support"],
-                    v["tp"],
-                    v["fp"],
-                    v["fn"],
-                    v["tn"],
-                ]
+                [k, v["precision"], v["recall"], v["f1"], v["support"], v["tp"], v["fp"], v["fn"],
+                 v["tn"], _flag(v["support"], threshold)]
                 for k, v in cat["per_label"].items()
             ],
         )
-    )
+    )  # fmt: skip
     add("")
     add(
         f"macro P/R/F1: {_f(cat['macro']['precision'])} / {_f(cat['macro']['recall'])} / "
@@ -202,20 +248,11 @@ def render_run_report(result: EvaluationResult) -> str:
         _table(
             ["TP", "FP", "FN", "TN", "precision", "recall", "F1", "FPR", "prevalence"],
             [
-                [
-                    hr["tp"],
-                    hr["fp"],
-                    hr["fn"],
-                    hr["tn"],
-                    hr["precision"],
-                    hr["recall"],
-                    hr["f1"],
-                    hr["false_positive_rate"],
-                    hr["prevalence"],
-                ]
+                [hr["tp"], hr["fp"], hr["fn"], hr["tn"], hr["precision"], hr["recall"], hr["f1"],
+                 hr["false_positive_rate"], hr["prevalence"]]
             ],
         )
-    )
+    )  # fmt: skip
     add("")
 
     dv = head["deferral_views"]
@@ -226,26 +263,20 @@ def render_run_report(result: EvaluationResult) -> str:
     else:
         add(
             f"{dv['n_deferred']} documents were deferred. Primary metrics score deferred "
-            "documents on "
-            "their provisional label. Alternative views:"
+            "documents on their provisional label. Alternative views:"
         )
         add("")
         add(
             _table(
                 ["view", "level macro-F1", "category macro-F1", "high-risk recall", "documents"],
                 [
-                    [
-                        name,
-                        v["level_macro_f1"],
-                        v["category_macro_f1"],
-                        v["high_risk_recall"],
-                        v["n_docs"],
-                    ]
+                    [name, v["level_macro_f1"], v["category_macro_f1"], v["high_risk_recall"],
+                     v["n_docs"]]
                     for name, v in dv.items()
                     if isinstance(v, dict)
                 ],
             )
-        )
+        )  # fmt: skip
         add("")
         add("The perfect-reviewer row is HYPOTHETICAL and is not a measured result.")
     add("")
@@ -253,8 +284,8 @@ def render_run_report(result: EvaluationResult) -> str:
     add("## Slices")
     add("")
     add(
-        "Computed over all tiers (so T5 appears here). `small` marks slices with fewer documents "
-        "than the small-sample threshold; macro-F1 covers only labels with support in the slice."
+        "Computed over all tiers (so T5 appears here). Macro-F1 covers only labels with support in "
+        "the slice; slices with fewer documents than the threshold are marked SMALL_SAMPLE."
     )
     for field, values in m["slices"].items():
         add("")
@@ -262,58 +293,30 @@ def render_run_report(result: EvaluationResult) -> str:
         add("")
         add(
             _table(
+                [field, "docs", "families", "level macro-F1", "category macro-F1",
+                 "high-risk recall", "high-risk precision", "high-risk FPR", "warning"],
                 [
-                    field,
-                    "docs",
-                    "families",
-                    "level macro-F1",
-                    "category macro-F1",
-                    "high-risk recall",
-                    "high-risk FPR",
-                    "small",
-                ],
-                [
-                    [
-                        v_name,
-                        v["n_docs"],
-                        v["n_groups"],
-                        v["level_macro_f1"],
-                        v["category_macro_f1"],
-                        v["high_risk_recall"],
-                        v["high_risk_false_positive_rate"],
-                        "yes" if v["small_sample"] else "",
-                    ]
-                    for v_name, v in values.items()
+                    [name, v["n_docs"], v["n_groups"], v["level_macro_f1"], v["category_macro_f1"],
+                     v["high_risk_recall"], v["high_risk_precision"],
+                     v["high_risk_false_positive_rate"], "SMALL_SAMPLE" if v["small_sample"] else ""]
+                    for name, v in values.items()
                 ],
             )
-        )
-    add("")
-    sm = head["small_sample_labels"]
-    add("## Small-sample caveats")
-    add("")
-    add(
-        f"Headline labels with fewer than {sm['min_support_flag']} gold positives: "
-        f"levels {sm['levels'] or 'none'}, categories {sm['categories'] or 'none'}."
-    )
+        )  # fmt: skip
     add("")
     lat = m["latency"]["wall_clock"]
     add("## Latency (wall clock per document; not part of the reproducible fingerprint)")
     add("")
     if lat["n"]:
+        pcols = [k for k in lat if k.startswith("p")]
         add(
             _table(
-                [
-                    "n",
-                    "mean ms",
-                    *[k.replace("_ms", " ms") for k in lat if k.startswith("p")],
-                    "max ms",
-                    "total ms",
-                ],
+                ["n", "mean ms", *[k.replace("_ms", " ms") for k in pcols], "max ms", "total ms"],
                 [
                     [
                         lat["n"],
                         lat["mean_ms"],
-                        *[lat[k] for k in lat if k.startswith("p")],
+                        *[lat[k] for k in pcols],
                         lat["max_ms"],
                         lat["total_ms"],
                     ]
@@ -323,16 +326,12 @@ def render_run_report(result: EvaluationResult) -> str:
     add("")
     add("## Caveats")
     add("")
-    add(
-        "* The dataset is synthetic, AI-authored and not human-reviewed; "
-        "see docs/uc4/dataset-spec.md."
-    )
+    add(f"* Dataset labels: {ds['label_status']}. Nothing here is human-validated.")
     add(
         "* Documents in a family are variations of one template; treat families as the sample size."
     )
     add(
-        "* Precision and accuracy depend on this dataset's class balance, "
-        "not production base rates."
+        "* Precision and accuracy depend on this dataset's class balance, not production base rates."
     )
     return "\n".join(L) + "\n"
 
@@ -355,3 +354,26 @@ def write_run(result: EvaluationResult, runs_dir: Path | str | None = None) -> P
     for name, text in files.items():
         (out / name).write_text(text, encoding="utf-8")
     return out
+
+
+def append_access_log(result: EvaluationResult, log_path: Path | str | None = None) -> Path:
+    """Append one audit entry for a run that read the locked test split."""
+    access = result.manifest.get("locked_test_access")
+    if access is None:
+        raise ValueError("run did not touch the locked test split; nothing to log")
+    path = Path(log_path) if log_path is not None else DEFAULT_ACCESS_LOG
+    path.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "run_id": result.run_id,
+        "timestamp": access["timestamp"],
+        "git_commit": access["git_commit"],
+        "git_dirty": access["git_dirty"],
+        "dataset_sha256": access["dataset_sha256"],
+        "config_versions": access["config_versions"],
+        "classifier": access["classifier"],
+        "authorization": access["authorization"],
+        "metrics_fingerprint": result.fingerprint,
+    }
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, sort_keys=True) + "\n")
+    return path

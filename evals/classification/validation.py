@@ -15,6 +15,7 @@ from __future__ import annotations
 import math
 import time
 from dataclasses import dataclass, field
+from functools import partial
 from typing import Any
 
 from app.classification.config_loader import ConfigBundle
@@ -29,6 +30,7 @@ from app.classification.schemas import (
 from .baselines import MajorityClassifier, OracleClassifier, RandomClassifier
 from .dataset.schema import DatasetDocument
 from .evaluate import EvaluationResult, evaluate
+from .lock import LockedTestAuthorization
 
 RANDOM_SEED = 20260918
 SIGMAS = 4.5
@@ -141,13 +143,14 @@ def _check_oracle(v: HarnessValidation, split: str, res: EvaluationResult, view:
     )
     if view == "headline":
         stats = res.metrics["headline"]["confidence_intervals"]["statistics"]
+        expected = {k: (0.0 if k.endswith("false_positive_rate") else 1.0) for k in stats}
+        collapsed = {
+            k: (x["ci_low"], x["ci_high"]) == (expected[k], expected[k]) for k, x in stats.items()
+        }
         v.eq(
-            s,
-            split,
-            "bootstrap intervals collapse to [1, 1]",
-            True,
-            all(x["ci_low"] == 1.0 and x["ci_high"] == 1.0 for x in stats.values()),
-        )
+            s, split, "bootstrap intervals collapse to the perfect value (1; FPR 0)",
+            True, all(collapsed.values()),
+        )  # fmt: skip
 
 
 # ---------------------------------------------------------------------------------------------
@@ -449,12 +452,13 @@ def _check_robustness(
     docs: list[DatasetDocument],
     bundle: ConfigBundle,
     manifest: dict[str, Any],
+    ev: Any,
 ) -> None:
-    split = "test"
+    split = "all"
     sample = sorted(docs, key=lambda d: d.doc_id)[:40]
     n = len(sample)
 
-    failing = evaluate(_Raising(), sample, bundle, manifest)
+    failing = ev(_Raising(), sample, bundle, manifest)
     cov = failing.metrics["all_tiers"]["coverage"]
     v.eq(
         "robustness",
@@ -487,7 +491,7 @@ def _check_robustness(
     )
 
     oracle = OracleClassifier.from_docs(sample, bundle.policy)
-    slow = evaluate(_Sleeping(oracle, 0.003), sample, bundle, manifest)
+    slow = ev(_Sleeping(oracle, 0.003), sample, bundle, manifest)
     wall = slow.metrics["latency"]["wall_clock"]
     v.add("robustness", split, "latency: captured for every document", wall["n"] == n, n, wall["n"])
     v.add(
@@ -507,7 +511,7 @@ def _check_robustness(
         round(wall["p95_ms"], 3),
     )
 
-    fast = evaluate(oracle, sample, bundle, manifest)
+    fast = ev(oracle, sample, bundle, manifest)
     v.eq(
         "robustness",
         split,
@@ -515,7 +519,7 @@ def _check_robustness(
         fast.fingerprint,
         slow.fingerprint,
     )
-    again = evaluate(OracleClassifier.from_docs(sample, bundle.policy), sample, bundle, manifest)
+    again = ev(OracleClassifier.from_docs(sample, bundle.policy), sample, bundle, manifest)
     v.eq(
         "robustness",
         split,
@@ -523,8 +527,8 @@ def _check_robustness(
         fast.fingerprint,
         again.fingerprint,
     )
-    rand_a = evaluate(RandomClassifier(1, bundle.policy), sample, bundle, manifest)
-    rand_b = evaluate(RandomClassifier(2, bundle.policy), sample, bundle, manifest)
+    rand_a = ev(RandomClassifier(1, bundle.policy), sample, bundle, manifest)
+    rand_b = ev(RandomClassifier(2, bundle.policy), sample, bundle, manifest)
     v.add(
         "robustness",
         split,
@@ -534,7 +538,7 @@ def _check_robustness(
         "differ" if rand_a.fingerprint != rand_b.fingerprint else "equal",
     )
 
-    liar = evaluate(_Lying(bundle.policy), sample, bundle, manifest)
+    liar = ev(_Lying(bundle.policy), sample, bundle, manifest)
     liar_cov = liar.metrics["all_tiers"]["coverage"]
     liar_hr = liar.metrics["all_tiers"]["high_risk"]
     v.eq(
@@ -546,9 +550,7 @@ def _check_robustness(
         0, liar_hr["tp"] + liar_hr["fp"],
     )  # fmt: skip
 
-    deferring = evaluate(
-        _Deferring({d.doc_id: d.gold_level for d in sample}), sample, bundle, manifest
-    )
+    deferring = ev(_Deferring({d.doc_id: d.gold_level for d in sample}), sample, bundle, manifest)
     dv = deferring.metrics["headline"]["deferral_views"]
     head_n = deferring.metrics["headline"]["metrics"]["coverage"]["n_docs"]
     v.eq(
@@ -593,7 +595,11 @@ def validate_harness(
     bundle: ConfigBundle,
     dataset_manifest: dict[str, Any],
     random_seed: int = RANDOM_SEED,
+    locked_test_authorization: LockedTestAuthorization | None = None,
 ) -> HarnessValidation:
+    """Validate the harness. `docs_by_split` may include the locked test split only with a
+    `locked_test_authorization` (evaluate() enforces this)."""
+    ev = partial(evaluate, locked_test_authorization=locked_test_authorization)
     v = HarnessValidation()
     policy = bundle.policy
     train_docs = docs_by_split["train"]
@@ -602,13 +608,9 @@ def validate_harness(
 
     for split, docs in docs_by_split.items():
         runs = {
-            "oracle": evaluate(
-                OracleClassifier.from_docs(docs, policy), docs, bundle, dataset_manifest
-            ),
-            "majority": evaluate(majority, docs, bundle, dataset_manifest),
-            "random": evaluate(
-                RandomClassifier(random_seed, policy), docs, bundle, dataset_manifest
-            ),
+            "oracle": ev(OracleClassifier.from_docs(docs, policy), docs, bundle, dataset_manifest),
+            "majority": ev(majority, docs, bundle, dataset_manifest),
+            "random": ev(RandomClassifier(random_seed, policy), docs, bundle, dataset_manifest),
         }
         for name, res in runs.items():
             h = res.metrics["headline"]["metrics"]
@@ -634,12 +636,10 @@ def validate_harness(
             split,
             "same seed reproduces identical predictions",
             runs["random"].fingerprint,
-            evaluate(
-                RandomClassifier(random_seed, policy), docs, bundle, dataset_manifest
-            ).fingerprint,
+            ev(RandomClassifier(random_seed, policy), docs, bundle, dataset_manifest).fingerprint,
         )
     all_docs = [d for docs in docs_by_split.values() for d in docs]
-    _check_robustness(v, all_docs, bundle, dataset_manifest)
+    _check_robustness(v, all_docs, bundle, dataset_manifest, ev)
     return v
 
 
@@ -686,6 +686,11 @@ def render_validation_report(
     add(f"* git commit: `{env.get('commit')}` (dirty: {env.get('dirty')})")
     add(
         f"* python {env.get('python')}, numpy {env.get('numpy')}, scikit-learn {env.get('scikit_learn')}"
+    )
+    add(f"* dataset labels: {dataset_manifest['label_status']}")
+    add(
+        f"* splits validated: {', '.join(env.get('splits', []))} "
+        "(the locked test split is excluded unless explicitly authorised)"
     )
     add(
         f"* random-baseline seed: {RANDOM_SEED}; tolerance for chance-rate checks: {SIGMAS} binomial standard deviations"
@@ -782,7 +787,8 @@ def render_validation_report(
     else:
         add("None.")
     add("")
-    add("## Expected vs observed on the locked test split")
+    shown = "test" if "test" in env.get("splits", []) else "dev"
+    add(f"## Expected vs observed on the {shown} split")
     add("")
     add(
         "Majority baseline (headline view) and random baseline (all tiers). The 'expected' column for "
@@ -793,7 +799,7 @@ def render_validation_report(
     show = [
         c
         for c in v.checks
-        if c.split == "test" and c.suite in ("majority/headline", "random/all_tiers")
+        if c.split == shown and c.suite in ("majority/headline", "random/all_tiers")
     ]
     add(
         _md_table(
