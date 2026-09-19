@@ -101,6 +101,20 @@ jobs:
       - run: dataguard-uc4 eval run --classifier ml --split all --runs-dir "$RUNNER_TEMP/runs"
       - run: dataguard-uc4 ml report --out "$RUNNER_TEMP/ml-baseline.md"
 
+  llm-status:
+    name: LLM status report (mock/replay only, no Azure)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      # No credentials and no network: reports NOT RUN for any tier without a recorded cache.
+      - run: dataguard-uc4 llm report --out "$RUNNER_TEMP/llm-baseline.md"
+      - run: dataguard-uc4 eval run --classifier llm --split dev --llm-model-id none --llm-cache-dir "$RUNNER_TEMP/empty-cache" --runs-dir "$RUNNER_TEMP/runs"
+
   # ---------------------------------------------------------------------------------------------
   # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):
   #   Phase 5: full LLM + hybrid eval on release/dispatch, via OIDC (no long-lived secrets)

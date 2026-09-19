@@ -116,3 +116,23 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D4.8 | The harness gained `Scores`, calibration metrics (ECE, Brier, reliability), a threshold sweep and an in-sample warning (`HARNESS_VERSION 1.2.0`). | Needed to report calibration honestly for any approach. |
 | D4.9 | The report states that ML high-risk recall is inflated by over-flagging and that the ML-vs-Rules comparison flatters Rules. | A23 and the no-single-headline rule. |
 | D4.10 | The ML model was NOT evaluated on the locked test split. | Not approved; the test split has never been evaluated. |
+
+## Implementation decisions (Phase 5 - LLM classifier)
+
+| # | Decision | Why |
+|---|---|---|
+| D5.1 | `llm-plan.md` was committed before any LLM code; the Azure blocker and the no-fabricated-results rule were stated in it. | Pre-registration; no model exists to measure yet. |
+| D5.2 | No LLM accuracy, calibration, latency or cost number is reported. Tiers without a complete recorded run are "NOT RUN"/"INCOMPLETE" and show no results. The three-model benchmark is blocked on access and deployment names. | Approved: actual results only; open decision 4 (Azure access) was never resolved. |
+| D5.3 | No model names in the repository: tiers name environment variables holding deployment names. Prices are null until a dated price is entered. | Approved: do not assume model names; never invent prices. |
+| D5.4 | The Foundry adapter is stdlib HTTP, configuration-driven, and marked UNVERIFIED; tested only against a local fake server. Credentials never go over plain HTTP to a remote host. Entra auth uses an optional, unrequired SDK and an explicit scope. | Foundry details are unverified (architecture section 17). |
+| D5.5 | Replay/record adapter keyed by `(prompt_version, model_id, input_hash)`; a miss is an error, never a fallback. | A silent fallback would fabricate a result. |
+| D5.6 | Few-shot examples: a pre-registered rule over train only; the file stores ids and hashes; the loader and a test enforce train-only and hash integrity. | Prevents leakage of dev/calibration/test into the prompt. |
+| D5.7 | The prompt's taxonomy section is generated from `taxonomy.v1.yaml`; embedded labels and metadata are not shown; the filename is. | One source of truth; labels are spoofable (same rule as ML). |
+| D5.8 | Evidence quotes are verified against the text sent; unverified quotes are `inferred` and cap confidence; an unverified high-risk call requests review. Excerpts are masked. | Anti-hallucination and no raw sensitive values in results. |
+| D5.9 | Confidence is `verbalized_bucket` only; reliability is reported from a measured table. | DEC-10. |
+| D5.10 | Failures return `review_required` (`LLM_UNAVAILABLE`) with no level; there is one repair retry for malformed output and bounded retry only for transport errors. | Architecture section 19: never silently default to a lower sensitivity. |
+| D5.11 | Output models are strict (no coercion). | A test showed pydantic accepted `"no"` as `false`. |
+| D5.12 | The injection lexicon was developed on train; v1.0.1 added patterns for train misses. Held-out detection stayed low (calibration 1/5, dev 3/10) with no false positives. The "raise but not lower" rule is deferred to Phase 6. | Honest report; the rule needs Rules/ML outputs. |
+| D5.13 | Harness 1.3.0: records carry verbalized buckets, evidence counts, guardrail types and tokens; an LLM few-shot note in run reports; `config validate` covers the LLM and guardrail configs. | Needed to report LLM metrics for any run. |
+| D5.14 | Pre-LLM redaction was not implemented. | Its effect can only be measured with a real model. |
+| D5.15 | The LLM path was NOT evaluated on the locked test split. | Not approved; the test split has never been evaluated. |
