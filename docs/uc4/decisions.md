@@ -148,3 +148,21 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D5.20 | The prompt, few-shot set and guardrail were NOT changed after seeing any dev result. | Avoids tuning on dev. |
 | D5.21 | The credentials were supplied in conversation, used only through environment variables from a private temp file outside the repository, never written to the repository, and should be rotated. | Secrets hygiene. |
 | D5.22 | The locked test split was NOT used for any LLM run. | Not approved. |
+
+## Implementation decisions (Phase 6 - Hybrid routing)
+
+| # | Decision | Why |
+|---|---|---|
+| D6.1 | `hybrid-plan.md` (design, the fixed variant grid, selection rule, gates, expectations) was committed before any router code. | Pre-registration. |
+| D6.2 | The hybrid composes the stages only through their public result contract; a stage that raises or breaks the contract is skipped and recorded, never propagated. | Harness owns control flow (PRD 11.1); failures are values. |
+| D6.3 | Nothing falls back to a low sensitivity: an undecidable document is `review_required`, with the highest level any usable stage produced as a provisional label, or no label. | Architecture section 19. |
+| D6.4 | Rules sufficiency = decisive level at rule strength >= strong; a Rules abstention is never "Public". ML is accepted only with calibrated scores reliable on all axes. LLM acceptance uses the verbalized bucket as an ordinal, never as a probability. | Confidence contract (DEC-10). |
+| D6.5 | Conflict = high-risk disagreement or a level gap of more than one rank; a conflict escalates to the next tier and, if it survives, goes to review. | Architecture section 11. |
+| D6.6 | Fusion: union of categories with per-category provenance; level from the most authoritative semantic stage; Rules level and category floors are toggleable floors; injection restriction raises but never lowers; high-risk derived. | Architecture section 11; each toggle is a benchmarked variant. |
+| D6.7 | No minimum precision was chosen. The recommended variant follows a pre-registered rule (recall, severe-under-classification and no-missing-prediction filters; dominance with 0.02 ties; then lowest tokens, latency, stages). The choice remains the product owner's. | A23. |
+| D6.8 | Dev was used to select and to evaluate; the report says so beside every affected number. No locked-test run was made or authorised. | A21; avoids a false sense of validation. |
+| D6.9 | Report latency is the sum of RECORDED LLM stage latencies; local Rules/ML time is excluded and rounding is applied to deterministic inputs only. | A first version let live microseconds decide a tie-break. |
+| D6.10 | `llm_mid_only` is a pass-through sanity check, excluded from the recommendation; the call budget may be smaller than the tier count; the injection second opinion was not implemented. | See the clarifications in `hybrid-engine.md`. |
+| D6.11 | Fault-injection scenarios (tiers unavailable) are part of the report, because real recorded outputs never trigger escalation, conflict or review on dev. | Safety paths must be shown to work. |
+| D6.12 | Harness 1.4.0: records carry routing accounting (stop reason, stages run, escalations, review reasons, routing flags, per-stage latency). | Needed to report stage coverage and cost for any approach. |
+| D6.13 | `replay_model_id` per LLM tier in `llm.v1.yaml` names the recorded benchmark (a deployment name, not a secret) so replay needs no flag. | CI and the hybrid replay without configuration. |

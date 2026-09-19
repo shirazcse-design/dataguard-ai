@@ -20,6 +20,9 @@
 | [`results/ml-cv.json`](results/ml-cv.json) | Grouped cross-validation used for model selection |
 | [`llm-plan.md`](llm-plan.md) | Pre-registered LLM plan (written before any LLM code) |
 | [`llm-engine.md`](llm-engine.md) | LLM classifier architecture, rules, what was and was not measured |
+| [`hybrid-plan.md`](hybrid-plan.md) | Pre-registered Hybrid routing plan (written before any router code) |
+| [`hybrid-engine.md`](hybrid-engine.md) | Hybrid architecture, findings, recommendation, what was not done |
+| [`results/hybrid-baseline.md`](results/hybrid-baseline.md) | Generated Hybrid results: all variants, gates, fault injection (dev, replayed) |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
 
 Later phases add: the evaluation-harness guide and generated results under `results/`.
