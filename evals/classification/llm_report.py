@@ -143,7 +143,12 @@ def _summary_table(ran, results, tiers) -> list[str]:
                 _ci(st["high_risk_recall"]),
                 _f(hm["high_risk"]["false_positive_rate"]),
                 _rate(ver, quotes),
-                _f(lat[len(lat) // 2] / 1000 if lat else None, 1),
+                _f(
+                    (res.metrics["latency"]["classifier_reported"].get("p50_ms") or 0) / 1000
+                    if lat
+                    else None,
+                    1,
+                ),
                 _f(sum((r.tokens_in or 0) + (r.tokens_out or 0) for r in recs) / max(n, 1), 0),
             ]
         )
@@ -159,13 +164,14 @@ def _extra_sections(clf, res) -> list[str]:
     recs = res.records
     lat = sorted(r.reported_latency_ms for r in recs if r.reported_latency_ms is not None)
     if lat:
+        hp95 = res.metrics["latency"]["classifier_reported"]["p95_ms"]  # the harness's percentile
         over = sum(x > PRD_TOOL_LIMIT_MS for x in lat)
         add("### Latency against the PRD tool-call limit (10 s)")
         add("")
         add(
             _table(
                 ["P50 (s)", "P95 (s)", "max (s)", "documents over 10 s"],
-                [[_f(lat[len(lat) // 2] / 1000, 1), _f(lat[int(0.95 * (len(lat) - 1))] / 1000, 1),
+                [[_f(res.metrics['latency']['classifier_reported']['p50_ms'] / 1000, 1), _f(hp95 / 1000, 1),
                   _f(lat[-1] / 1000, 1), _rate(over, len(lat))]],
             )
         )  # fmt: skip
@@ -364,7 +370,7 @@ def _tier_section(
     add("### Latency, tokens, cost")
     add("")
     add(
-        f"Reported latency P50 {_f(lat.get('p50_ms'))} ms, P95 {_f(lat.get('p95_ms'))} ms over "
+        f"Reported latency P50 {lat.get('p50_ms', 0) / 1000:.1f} s, P95 {lat.get('p95_ms', 0) / 1000:.1f} s over "
         f"{lat.get('n', 0)} documents; **for replayed runs this is the latency recorded when the responses were "
         f"captured**. Tokens: {ti} prompt + {to} completion. Estimated cost: "
         + (f"${cost:.4f}" if cost is not None else "not estimated (no price configured)")
