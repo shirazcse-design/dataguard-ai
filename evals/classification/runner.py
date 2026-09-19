@@ -30,6 +30,7 @@ def _base_fields(doc: DatasetDocument, policy: TaxonomyPolicy) -> dict:
         "format": doc.format,
         "generator": doc.generator,
         "ambiguity_flag": doc.ambiguity_flag,
+        "decoy_for": sorted(doc.decoy_for),
         "gold_level": doc.gold_level,
         "gold_categories": sorted(doc.gold_categories),
         "gold_high_risk": policy.derive_high_risk(doc.gold_level, doc.gold_categories).value,
@@ -78,6 +79,7 @@ def _record_from_result(
             failure=f"no_label:{status}",
             has_prediction=False,
             review_required=result.review.required,
+            abstained=result.routing.abstained,
             latency_ms=latency_ms,
             reported_latency_ms=result.telemetry.latency_ms.get("total"),
             est_cost_usd=result.telemetry.est_cost_usd,
@@ -93,6 +95,7 @@ def _record_from_result(
         pred_categories=cats,
         pred_high_risk=derived.value,  # never trust the classifier's own field
         review_required=result.review.required,
+        abstained=result.routing.abstained,
         classifier_high_risk_mismatch=mismatch,
         latency_ms=latency_ms,
         reported_latency_ms=result.telemetry.latency_ms.get("total"),

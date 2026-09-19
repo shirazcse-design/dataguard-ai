@@ -76,6 +76,9 @@ class Routing(StrictModel):
     stop_reason: str | None = None
     escalations: int = Field(default=0, ge=0)
     short_circuited: bool = False
+    # True when the approach found NO decisive signal for the level: the level shown is then a
+    # configured default (standalone benchmarks) or a provisional value, not a positive finding.
+    abstained: bool = False
 
 
 class Versions(StrictModel):
