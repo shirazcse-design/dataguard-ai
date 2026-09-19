@@ -5,6 +5,8 @@
 | [`../UC4_Technical_Architecture_and_Implementation_Plan.txt`](../UC4_Technical_Architecture_and_Implementation_Plan.txt) | Approved architecture and phased plan |
 | [`decisions.md`](decisions.md) | Decision log: approved product decisions vs. implementation decisions |
 | [`phase-0-foundations.md`](phase-0-foundations.md) | Phase 0: schemas, configuration, CI skeleton |
+| [`labeling-guidelines.md`](labeling-guidelines.md) | How gold labels are decided (levels, categories, overlaps, tie-break) |
+| [`dataset-spec.md`](dataset-spec.md) | How the synthetic dataset is built, checked, and its known limitations |
+| [`dataset-report.md`](dataset-report.md) | Generated dataset statistics and integrity results |
 
-Later phases add: labeling guidelines, dataset specification, evaluation-harness guide, and
-generated results under `results/`.
+Later phases add: the evaluation-harness guide and generated results under `results/`.

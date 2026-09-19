@@ -47,9 +47,21 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: dataguard-uc4 config validate
 
+  dataset-validation:
+    name: Regenerate + validate synthetic dataset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      # Regenerates from spec + seed and requires byte-identical output plus clean integrity checks.
+      - run: dataguard-uc4 dataset validate
+
   # ---------------------------------------------------------------------------------------------
   # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):
-  #   Phase 1: dataset regeneration + split-integrity / near-duplicate checks
   #   Phase 2: evaluation-harness validation (oracle / majority / random baselines)
   #   Phase 3: rules eval + <=500 ms latency budget        (requires explicit approval)
   #   Phase 4: seeded ML retrain + eval

@@ -17,7 +17,7 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | Phase | Scope | State |
 |---|---|---|
 | 0 | Foundations: schemas, configuration, CI skeleton | done |
-| 1 | Synthetic dataset | in progress |
+| 1 | Synthetic dataset | done |
 | 2 | Evaluation harness | pending |
 | 3+ | Rules, ML, LLM, Hybrid | **not started; requires explicit approval** |
 

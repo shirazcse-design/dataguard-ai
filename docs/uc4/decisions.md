@@ -38,3 +38,18 @@ during build, open to review.
 | D0.5 | Strict YAML loading rejects duplicate keys. | PyYAML silently keeps the last duplicate, which could hide a config error. |
 | D0.6 | Work is on branch `uc4/phases-0-2`, not `main`. | `main` is the default branch; nothing is pushed. |
 | D0.7 | `rules_default_level: INTERNAL` (A16) is recorded but not yet a config key. | It has no consumer until Phase 3 (Rules), which is not approved yet. |
+
+## Implementation decisions (Phase 1)
+
+| # | Decision | Why |
+|---|---|---|
+| D1.1 | The dataset is generated from a spec + seed by a deterministic template engine; no external LLM is used to write data. | Reproducibility, zero cost, no Azure dependency (A14), and no provider-specific stylistic bias baked into the benchmark. Cost: less linguistic variety. |
+| D1.2 | Splits are assigned by scenario family (group), not by document. | Prevents template leakage across splits. Consequence: the effective sample size is the number of families. |
+| D1.3 | Small-sample shortfalls are recorded as manifest flags, not build errors. | Matches the approved plan ("report with a small-sample flag"). Hard errors are reserved for unsound data (leakage, invalid labels, missing test coverage). |
+| D1.4 | Gold labels follow a fail-safe tie-break: on a level tie the higher level is gold and the lower is an `acceptable_alternative_level`; contested categories are omitted. | Deterministic, protective of high-impact data, and documented in the labeling guidelines. |
+| D1.5 | Generated size is 853 documents (target ~800) with 227 in the test split (target ~200); 155 families. | Additional families were added after the first build showed thin test support (for example 16 Credentials positives) and level imbalance. The result is +6.6% over target. |
+| D1.6 | Evidence spans that are exactly a shared vocabulary term are exempt from the cross-split leak check. | Domain vocabulary (for example diagnoses) is legitimately shared; identifiers and sentences are not. |
+| D1.7 | SSN-like test values use area 900-999 / group 01-49; the same digit format is reused in T4 part numbers. | Never issuable, and the format alone is not a label cue. Rules detectors must use format + context. |
+| D1.8 | T5 (adversarial) documents are reported separately and excluded from the headline metrics. | As approved in the architecture plan. |
+| D1.9 | A one-document-per-family review sheet is provided for human label review. | All labels are AI-authored; reviewing one rendered document per family covers every family. |
+| D1.10 | Open-source code is `PUBLIC` with no category (Source Code means non-public, organization-owned code). | Keeps the Source Code category consistent with its level floor. |
