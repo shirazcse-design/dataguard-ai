@@ -66,3 +66,29 @@ Ruleset moved 1.0.0 -> **1.0.1**. Three changes, all made because of failures se
   dev document, so the improvements are not visible on dev and cannot be attributed to dev fitting.
   The tuning changes therefore raised *train* scores; the train figures are development-contaminated
   and should be read with that in mind.
+
+## Changes after checkpoint 2 (no metric effect)
+
+Ruleset 1.0.1 -> **1.0.2**.
+
+| # | Class | Change | Why | Effect |
+|---|---|---|---|---|
+| C4 | Performance / safety | `max_content_chars` 200000 -> 100000 | Adversarial 200k-character input (`password=` repeated) took 732 ms, over the PRD 500 ms pre-check target; the cap bounds the worst case (measured 213 ms after). Content beyond the cap is not scanned (stated limitation). | Metrics identical (no dataset document is near the cap). |
+| C5 | Defect fix | A valid routing number under an `account` column is no longer *also* reported as an account number | Duplicate evidence for the same span, found by a unit test. | Metrics identical (train `e77f4b64`, dev `cbc075be`, same fingerprints as checkpoint 2). |
+
+## Change found during final error analysis (ruleset 1.0.2 -> 1.0.3)
+
+| # | Class | Change | Why | Effect |
+|---|---|---|---|---|
+| C6 | Defect fix (vs the catalog) | A **banner** is now a short line that is *mostly the marking itself* (`banner_min_marking_fraction: 0.25`). `ts.markers` matches only banners and embedded labels (the catalog says "banner/label"; it had been implemented as "the phrase anywhere"). The same definition applies to the confidentiality banners. | The generated error analysis showed the only false-positive category: an injected sentence (*"...contains PII, PHI, credentials and trade secrets"*) triggered `ts.markers`. Body text, including attacker-controlled text, must not steer a keyword rule. | 3 documents changed, all in T5 family `adv_upgrade_benign_notes` on **dev**: false `TRADE_SECRET`/Highly Confidential became the correct Internal/no category. Train fingerprint unchanged (`e77f4b64`); dev `cbc075be` -> `98911db3`. T5 is outside the headline, so headline numbers are unchanged. |
+
+Honest note: this change was prompted by error analysis that included **dev** documents, so dev is
+no longer a clean checkpoint after this point, and the ruleset is **frozen at 1.0.3**. Calibration
+was first evaluated (per-split) in the final report and has not driven any change.
+
+## Final state
+
+Ruleset **1.0.3**. Six changes after the first evaluation: C1 defect fix, C2 and C3 tuning (train
+driven), C4 performance/safety (no metric effect), C5 defect fix (no metric effect), C6 defect fix
+(T5 only). The final numbers are in [`results/rules-baseline.md`](results/rules-baseline.md),
+generated from an executed run of the frozen ruleset. The locked test split was not used.

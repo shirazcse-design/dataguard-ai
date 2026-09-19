@@ -293,6 +293,28 @@ def _cmd_rules_analyze(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_rules_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.rules_report import build_rules_report
+    from rules import build_rules_classifier
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    by_split = {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
+    clf = build_rules_classifier(bundle, args.config_dir)
+    text = build_rules_report(bundle, clf, by_split, load_manifest(args.data_dir), git_info())
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/rules-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_eval_validate(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -409,6 +431,13 @@ def build_parser() -> argparse.ArgumentParser:
     an.add_argument("--config-dir", default=None)
     an.add_argument("--data-dir", default=None)
     an.set_defaults(func=_cmd_rules_analyze)
+    rp = rules_sub.add_parser(
+        "report", help="write the Rules baseline results (development splits)"
+    )
+    rp.add_argument("--out", default=None)
+    rp.add_argument("--config-dir", default=None)
+    rp.add_argument("--data-dir", default=None)
+    rp.set_defaults(func=_cmd_rules_report)
 
     val = ev_sub.add_parser(
         "validate-harness", help="validate the harness with oracle/majority/random"

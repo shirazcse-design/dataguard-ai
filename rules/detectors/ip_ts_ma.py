@@ -9,9 +9,11 @@ from __future__ import annotations
 
 import re
 
+from ..context import term_regex
 from ..masking import phrase
 from ..types import DetectorOutput
 from .base import Detector, ScanContext
+from .markings import banner_lines, marking_fraction
 
 _CLAIM = re.compile(r"(?im)^[ \t]*1\.[ \t]+A[ \t]+(?:system|method|device|apparatus|composition)\b")
 
@@ -68,30 +70,45 @@ class IpNovelty(Detector):
 
 
 class TsMarkers(Detector):
+    """A "trade secret" BANNER or embedded label (the catalog's marker), not the phrase anywhere.
+
+    Restricting the marker to the banner zone matters: attacker- or author-controlled body text can
+    contain the words "trade secret" (for example a prompt-injection sentence) and must not steer a
+    keyword rule into asserting the category.
+    """
+
     id, category = "ts.markers", "TRADE_SECRET"
 
+    def setup(self) -> None:
+        self._rx = term_regex(self.cfg.lexicons["ts_markers"])
+        self._neg = term_regex(self.cfg.lexicons["ts_negative_terms"])
+
     def detect(self, c: ScanContext) -> DetectorOutput:
-        out, d, m = DetectorOutput(), c.doc, c.matcher
-        hits = m.distinct_terms(d, "ts_markers")
-        if not hits:
-            return out
-        pos = min(hits.values())
-        negative = m.distinct_terms(d, "ts_negative_terms")
-        if negative:
-            out.suppressions.append(
-                self.suppressed(f"legal_discussion:{sorted(negative)[0]}", pos, pos + 1)
+        out, d = DetectorOutput(), c.doc
+        min_fraction = c.cfg.existing_labels.banner_min_marking_fraction
+        candidates = [
+            (text, pos)
+            for text, pos in banner_lines(c)
+            if marking_fraction(self._rx, text) >= min_fraction
+        ]
+        candidates += [(value, 0) for _scheme, value in d.existing_labels]  # dedicated label fields
+        for text, pos in candidates:
+            if not self._rx.search(text):
+                continue
+            if self._neg.search(text):
+                out.suppressions.append(self.suppressed("legal_discussion", pos, pos + 1))
+                continue
+            out.detections.append(
+                self.found(
+                    c,
+                    strength="strong",
+                    kind="dictionary_hit",
+                    start=max(pos, 0),
+                    end=max(pos, 0) + 1,
+                    masked="[TRADE-SECRET-MARKER]",
+                )
             )
-            return out
-        out.detections.append(
-            self.found(
-                c,
-                strength="strong",
-                kind="dictionary_hit",
-                start=pos,
-                end=pos + 1,
-                masked="[TRADE-SECRET-MARKER]",
-            )
-        )
+            break
         return out
 
 

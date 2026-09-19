@@ -3,7 +3,7 @@
 # Lexicons and thresholds live here (version-controlled); regexes and validators live in code
 # (rules/detectors/). Bump ruleset_version on ANY change here or to a detector.
 
-ruleset_version: 1.0.1
+ruleset_version: 1.0.3
 taxonomy_version: 1.0.0
 
 # ---------------------------------------------------------------------------------------------
@@ -13,8 +13,10 @@ taxonomy_version: 1.0.0
 # ---------------------------------------------------------------------------------------------
 standalone_default_level: INTERNAL
 
-# Inputs larger than this are truncated before scanning (bounds latency; a warning is recorded).
-max_content_chars: 200000
+# Inputs larger than this are truncated before scanning (bounds worst-case latency for hostile or
+# huge inputs against the PRD 500 ms pre-check target; a warning is recorded). Sensitive content
+# beyond the cap is NOT scanned - a stated limitation.
+max_content_chars: 100000
 
 # Minimum strength for a detection to ASSERT a category. Weaker evidence is retained but abstains.
 emit_min_strength:
@@ -39,6 +41,9 @@ existing_labels:
   # INTERNAL labels are not evidence of low sensitivity.
   banner_max_line_chars: 100   # a banner line is a short line among the first few lines
   banner_lines: 3
+  # A banner is a short line that is MOSTLY the marking itself (`TRADE SECRET - RESTRICTED`), not a
+  # sentence that merely contains the words. Guards against injected or incidental text.
+  banner_min_marking_fraction: 0.25
   levels:
     HIGHLY_CONFIDENTIAL: ["strictly confidential", "highly confidential", "top secret", restricted, "deal team only"]
     CONFIDENTIAL: [confidential, "proprietary and confidential"]

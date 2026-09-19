@@ -99,6 +99,7 @@ class UsBankAccount(Detector):
     def detect(self, c: ScanContext) -> DetectorOutput:
         out, d, m = DetectorOutput(), c.doc, c.matcher
         doc_neg = m.doc_negative(d)
+        routing_spans: set[tuple[int, int]] = set()
         for hit in _NINE.finditer(d.text):
             s, e = hit.span()
             if not aba_valid(hit.group(1)) or not m.near_positive(d, s, e, "routing_keywords"):
@@ -107,6 +108,7 @@ class UsBankAccount(Detector):
             if neg:
                 out.suppressions.append(self.suppressed(neg, s, e))
                 continue
+            routing_spans.add((s, e))
             out.detections.append(
                 self.found(
                     c,
@@ -119,6 +121,8 @@ class UsBankAccount(Detector):
             )
         for hit in _ACCT.finditer(d.text):
             s, e = hit.span()
+            if (s, e) in routing_spans:  # already reported as a routing number
+                continue
             if not m.near_positive(d, s, e, "account_keywords"):
                 continue
             neg = doc_neg or m.near_negative(d, s, e, _NEG)

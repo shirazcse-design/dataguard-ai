@@ -68,6 +68,7 @@ class ContextConfig(StrictModel):
 class ExistingLabelsConfig(StrictModel):
     banner_max_line_chars: int = Field(ge=1)
     banner_lines: int = Field(ge=1)
+    banner_min_marking_fraction: float = Field(gt=0, le=1)
     levels: dict[str, list[str]]
 
 
