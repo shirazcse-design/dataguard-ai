@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import random
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -84,6 +85,7 @@ class LLMClassifier:
         self._guard_sha = guardrail_sha256
         self._sleep = sleep
         self._rng = random.Random(cfg.seed)
+        self.served_models: Counter[str] = Counter()  # what the provider says answered (provenance)
         self._schema = build_json_schema(policy.level_ids, policy.category_ids)
 
     # -- interface -----------------------------------------------------------------------------
@@ -183,6 +185,8 @@ class LLMClassifier:
                 failure = f"llm_error:{err.kind}"
                 break
             llm_ms += resp.latency_ms
+            if resp.served_model:
+                self.served_models[resp.served_model] += 1
             self._add_tokens(tokens, resp)
             try:
                 out = parse_llm_output(

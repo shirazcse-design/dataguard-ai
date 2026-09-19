@@ -25,9 +25,9 @@ generation:
   # be generous (measured 2026-09-19: 64 of 81 tokens on a trivial call). 700 was the pre-registered value.
   max_output_tokens: 4000
   # The PRD's tool-call limit is 10 s, but the reasoning deployments in use take 8-10 s (small) and
-  # more (large) per call, so 10 s made calls time out (observed 2026-09-19 on 2 documents). The
-  # benchmark uses 90 s to measure capability; latency against the 10 s limit is REPORTED, not hidden.
-  timeout_s: 90.0
+  # more (large) per call, so 10 s made calls time out (observed 2026-09-19). The
+  # benchmark uses 300 s (large took up to ~90 s per call) to measure capability; latency against the 10 s limit is REPORTED, not hidden.
+  timeout_s: 300.0
   schema_repair_retries: 1    # one repair retry on malformed output, then LLM_UNAVAILABLE
 
 retry:                        # transport errors only (timeout, 429, 5xx); never for bad output

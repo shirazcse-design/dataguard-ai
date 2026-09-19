@@ -22,6 +22,7 @@ from guardrails.injection import InjectionScanner
 
 from .dataset.schema import DatasetDocument
 from .evaluate import EvaluationResult, evaluate
+from .ml_report import _family_errors
 from .records import PredictionRecord
 from .reporting import _ci, _f, _table
 
@@ -112,6 +113,115 @@ _ORDER = ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "HIGHLY_CONFIDENTIAL"]
 
 def _rank(level: str) -> int:
     return _ORDER.index(level)
+
+
+PRD_TOOL_LIMIT_MS = 10_000  # PRD tool-call limit (architecture section 19)
+
+
+def _summary_table(ran, results, tiers) -> list[str]:
+    rows = []
+    for t in ran:
+        res, clf = results[t], tiers[t]
+        hm = res.metrics["headline"]["metrics"]
+        st = res.metrics["headline"]["confidence_intervals"]["statistics"]
+        recs = res.records
+        n = len(recs)
+        lat = sorted(r.reported_latency_ms for r in recs if r.reported_latency_ms is not None)
+        quotes = sum(r.evidence_total for r in recs)
+        ver = sum(r.evidence_verified for r in recs)
+        served = ", ".join(sorted(clf.served_models)) or "not recorded"
+        rows.append(
+            [
+                t,
+                clf.params()["model_id"],
+                served,
+                _ci(st["level_macro_f1"]),
+                _ci(st["category_macro_f1"]),
+                _f(hm["high_risk"]["precision"]),
+                _ci(st["high_risk_recall"]),
+                _f(hm["high_risk"]["false_positive_rate"]),
+                _rate(ver, quotes),
+                _f(lat[len(lat) // 2] / 1000 if lat else None, 1),
+                _f(sum((r.tokens_in or 0) + (r.tokens_out or 0) for r in recs) / max(n, 1), 0),
+            ]
+        )
+    head = ["tier", "deployment", "served model (provider-reported)", "level macro-F1", "category macro-F1",
+            "HR precision", "HR recall", "HR FPR", "quotes verified", "P50 latency (s)", "tokens / doc"]  # fmt: skip
+    return [_table(head, rows), ""]
+
+
+def _extra_sections(clf, res) -> list[str]:
+    """Latency vs the PRD limit, hard negatives, adversarial slice, level errors, error analysis."""
+    L: list[str] = []
+    add = L.append
+    recs = res.records
+    lat = sorted(r.reported_latency_ms for r in recs if r.reported_latency_ms is not None)
+    if lat:
+        over = sum(x > PRD_TOOL_LIMIT_MS for x in lat)
+        add("### Latency against the PRD tool-call limit (10 s)")
+        add("")
+        add(
+            _table(
+                ["P50 (s)", "P95 (s)", "max (s)", "documents over 10 s"],
+                [[_f(lat[len(lat) // 2] / 1000, 1), _f(lat[int(0.95 * (len(lat) - 1))] / 1000, 1),
+                  _f(lat[-1] / 1000, 1), _rate(over, len(lat))]],
+            )
+        )  # fmt: skip
+        add("")
+        add(
+            "Latency is the RECORDED per-call latency from the run that captured the responses "
+            f"(sequential or concurrent, single sample, no retries counted separately). "
+            f"Generation is {'with' if clf.params()['temperature'] is not None else 'without'} a "
+            "temperature parameter, so this run is not guaranteed to be reproducible by re-calling the "
+            "model; only the replay cache makes it reproducible."
+        )
+        add("")
+    hn = res.metrics["hard_negatives"]
+    add("### Hard negatives (T4)")
+    add("")
+    add(
+        f"{hn['n_docs']} documents / {hn['n_families']} families: decoy-hit rate {_f(hn['decoy_hit_rate'])}; "
+        f"any false-positive category {_f(hn['any_false_positive_category_rate'])}; "
+        f"predicted high-risk though not {_f(hn['high_risk_false_positive_rate'])}. "
+        f"Families with decoy hits: `{hn['families_with_decoy_hits'] or 'none'}`"
+    )  # fmt: skip
+    add("")
+    t5 = [r for r in recs if r.tier == "T5"]
+    if t5:
+        ok = sum(r.has_prediction and r.pred_level == r.gold_level for r in t5)
+        under = sum(r.has_prediction and _rank(r.pred_level) < _rank(r.gold_level) for r in t5)
+        flagged = sum("prompt_injection_suspected" in r.guardrail_types for r in t5)
+        add("### Adversarial documents (T5, prompt injection)")
+        add("")
+        add(
+            f"{len(t5)} documents / {len({r.family_id for r in t5})} families: level correct "
+            f"{_rate(ok, len(t5))}; **under-classified (the attack's goal) {_rate(under, len(t5))}**; "
+            f"local guard flagged {_rate(flagged, len(t5))}. Tiny sample: anecdotal."
+        )
+        add("")
+    wrong = [r for r in recs if r.has_prediction and r.pred_level != r.gold_level]
+    if wrong:
+        add("### Level errors (dev, all tiers)")
+        add("")
+        by: dict[tuple[str, str, str, str], int] = Counter(
+            (r.family_id, r.tier, r.gold_level, r.pred_level) for r in wrong
+        )
+        add(
+            _table(
+                ["family", "tier", "gold", "predicted", "docs"],
+                [[f, t, g, p, n] for (f, t, g, p), n in sorted(by.items())],
+            )
+        )
+        add("")
+    fn, fp = _family_errors(res)
+    if fn or fp:
+        add("### Category errors (dev, all tiers; top families)")
+        add("")
+        add("**Missed:**\n\n" + ("\n".join(fn) or "- none"))
+        add("")
+        add("**Wrongly asserted:**\n\n" + ("\n".join(fp) or "- none"))
+        add("")
+    return L
 
 
 def _tier_section(
@@ -248,6 +358,7 @@ def _tier_section(
     ti = sum(r.tokens_in or 0 for r in recs)
     to = sum(r.tokens_out or 0 for r in recs)
     cost = res.metrics["cost"]["est_cost_usd_total"]
+    L.extend(_extra_sections(clf, res))
     add("### Latency, tokens, cost")
     add("")
     add(
@@ -422,6 +533,14 @@ def build_llm_report(
     # ---- per-tier results ----------------------------------------------------------------------
     if ran:
         rules_res, ml_res = rules_ml_factory() if rules_ml_factory else (None, None)
+        add("## Summary of tiers run (held-out dev, T1-T4 headline)")
+        add("")
+        add(
+            "Each metric stands alone; there is no combined score. High-risk recall is read with "
+            "precision and FPR. No operating point has been chosen."
+        )
+        add("")
+        L.extend(_summary_table(ran, results, tiers))
         for t in ran:
             L.extend(_tier_section(t, tiers[t], results[t], rules_res, ml_res, policy, threshold))
     add("## Caveats")
@@ -429,7 +548,20 @@ def build_llm_report(
     add(
         "* Synthetic, template-generated, AI-authored labels not yet human reviewed; dev has 18 families."
     )
-    add("* The Foundry adapter is unverified against a real service; no model names are assumed.")
+    add(
+        "* The Foundry adapter was verified against the project's deployments on 2026-09-19 (see docs/uc4/llm-engine.md); no model names are assumed in the code."
+    )
+    if ran:
+        add(
+            "* **Optimism warning.** The dataset was authored by an AI following the same labeling "
+            "guidelines the prompt states (its level procedure, overlap rules and fail-safe tie-break), "
+            "and the documents are short, templated and semantically explicit. A strong LLM can "
+            "recover that labeling logic; near-perfect scores here do NOT predict performance on real, "
+            "messy documents, and human review of the gold labels is still outstanding."
+        )
+        add(
+            "* Concurrent recording, no temperature on some tiers and a single sample per document: a fresh run could differ; the replay cache is the reproducible record."
+        )
     add(
         "* Replayed runs use RECORDED responses and latency; a changed prompt, few-shot set or schema invalidates the cache key by design."
     )

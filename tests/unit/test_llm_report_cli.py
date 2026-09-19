@@ -125,7 +125,9 @@ def test_a_complete_recorded_tier_gets_a_results_section(env, tmp_path):
     assert "| small | RUN (complete) |" in text and "| mid | NOT RUN" in text
     assert "NO LLM BENCHMARK HAS BEEN RUN" not in text
     for h in ("## Tier `small`", "### Output validity and evidence", "### Reliability of the model's verbalized confidence",
-              "### Per category F1", "### By tier", "### Latency, tokens, cost"):  # fmt: skip
+              "### Per category F1", "### By tier", "### Latency, tokens, cost",
+              "## Summary of tiers run", "### Latency against the PRD tool-call limit", "### Hard negatives (T4)",
+              "### Adversarial documents (T5, prompt injection)", "Optimism warning", "served model (provider-reported)"):  # fmt: skip
         assert h in text, h
     assert "family-level bootstrap" in text and "independent families" in text
     assert "SMALL_SAMPLE" in text and "not estimated (no price configured)" in text
