@@ -1,1 +1,13 @@
 .DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Evaluation run artifacts are local by default; curated summaries live in docs/uc4/results/
+evals/classification/runs/
