@@ -11,7 +11,7 @@ from ml.classification.calibration import PlattScaler, sigmoid
 from ml.classification.config import load_ml_config
 from ml.classification.features import FeatureBuilder, content_text, filename_text
 from ml.classification.model import MLModel
-from ml.classification.selection import cross_validate, select_c
+from ml.classification.selection import cross_validate, leakage_diagnostic, select_c
 from tests.helpers import mkdoc
 
 SEED = 7
@@ -268,3 +268,17 @@ def test_discriminative_digit_and_email_tokens_are_never_shown_as_evidence(bundl
     shown = [t for t, _ in m.explain_level(docs[-1], "HIGHLY_CONFIDENTIAL")]
     assert shown and all(t.replace(" ", "").isalpha() for t in shown)
     assert not any("leak" in t and any(ch.isdigit() for ch in t) for t in shown)
+
+
+def test_leakage_diagnostic_exposes_template_memorisation(bundle):
+    """Random folds put a family on both sides (near-perfect); grouped folds do not."""
+    cfg, _ = load_ml_config(bundle.policy)
+    small = cfg.model_copy(update={"selection": cfg.selection.model_copy(update={"cv_folds": 4})})
+    out = leakage_diagnostic(small, family_corpus(), LEVELS, CATS)
+    assert set(out) == {"in_sample", "random_kfold_leaky", "grouped_kfold_honest"}
+    assert out["in_sample"]["level_macro_f1"] > 0.95
+    assert (
+        out["random_kfold_leaky"]["level_macro_f1"]
+        > out["grouped_kfold_honest"]["level_macro_f1"] + 0.3
+    )
+    assert out["grouped_kfold_honest"]["level_macro_f1"] < 0.6

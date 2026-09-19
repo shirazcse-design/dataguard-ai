@@ -351,6 +351,28 @@ def _cmd_ml_select(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_ml_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.ml_report import build_ml_report
+    from ml.classification import build_ml_classifier
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    by_split = {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
+    clf = build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+    text = build_ml_report(bundle, clf, by_split, load_manifest(args.data_dir), git_info())
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/ml-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_eval_validate(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -474,6 +496,11 @@ def build_parser() -> argparse.ArgumentParser:
     sel.add_argument("--config-dir", default=None)
     sel.add_argument("--data-dir", default=None)
     sel.set_defaults(func=_cmd_ml_select)
+    mrp = ml_sub.add_parser("report", help="write the ML baseline results (development splits)")
+    mrp.add_argument("--out", default=None)
+    mrp.add_argument("--config-dir", default=None)
+    mrp.add_argument("--data-dir", default=None)
+    mrp.set_defaults(func=_cmd_ml_report)
 
     rp = rules_sub.add_parser(
         "report", help="write the Rules baseline results (development splits)"

@@ -93,3 +93,63 @@ def select_c(rows: list[dict[str, Any]], key: str) -> float:
 
 def document_view(d: DatasetDocument) -> Document:
     return d.to_request().document
+
+
+def leakage_diagnostic(
+    cfg: MLConfig, train_docs: list[DatasetDocument], level_ids: list[str], category_ids: list[str]
+) -> dict[str, Any]:
+    """Not used for selection: in-sample vs random (leaky) vs grouped CV at the configured C.
+
+    Documents in a family are variations of one template, so random folds put the same template on
+    both sides and score near-perfectly; grouped folds are the honest estimate.
+    """
+    from sklearn.model_selection import KFold
+
+    docs = [d.to_request().document for d in train_docs]
+    n = len(docs)
+    gl = [d.gold_level for d in train_docs]
+    gc = [d.gold_categories for d in train_docs]
+
+    def fit_predict(tr, va):
+        fb = FeatureBuilder(cfg.features, cfg.seed).fit([docs[i] for i in tr])
+        x_tr, x_va = fb.transform([docs[i] for i in tr]), fb.transform([docs[i] for i in va])
+        lv = _lr(cfg.level_head, cfg.seed).fit(x_tr, [gl[i] for i in tr]).predict(x_va)
+        cats = [[] for _ in va]
+        for cat in category_ids:
+            y = np.array([cat in gc[i] for i in tr], dtype=int)
+            if y.sum() < 2 or len(y) - y.sum() < 2:
+                continue
+            for j, sc in enumerate(
+                _lr(cfg.category_head, cfg.seed).fit(x_tr, y).decision_function(x_va)
+            ):
+                if sc > 0:
+                    cats[j].append(cat)
+        return list(lv), cats
+
+    def score(pred_level, pred_cats):
+        return {
+            "level_macro_f1": level_metrics(gl, pred_level, level_ids)["macro"]["f1"],
+            "category_macro_f1": category_metrics(gc, pred_cats, category_ids)["macro"]["f1"],
+        }
+
+    out = {"in_sample": score(*fit_predict(list(range(n)), list(range(n))))}
+    for name, splitter, groups in (
+        (
+            "random_kfold_leaky",
+            KFold(cfg.selection.cv_folds, shuffle=True, random_state=cfg.seed),
+            None,
+        ),
+        (
+            "grouped_kfold_honest",
+            GroupKFold(n_splits=cfg.selection.cv_folds),
+            [d.group_id for d in train_docs],
+        ),
+    ):
+        pl, pc = [None] * n, [[] for _ in range(n)]
+        it = splitter.split(np.zeros(n), groups=groups) if groups else splitter.split(np.zeros(n))
+        for tr, va in it:
+            lv, cats = fit_predict(list(tr), list(va))
+            for i, a, b in zip(va, lv, cats, strict=True):
+                pl[i], pc[i] = a, b
+        out[name] = score(pl, pc)
+    return out
