@@ -220,6 +220,17 @@ def _build_classifier(args: argparse.Namespace, bundle, docs):
         from ml.classification import build_ml_classifier
 
         return build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir)
+    if args.classifier == "hybrid":
+        from app.classification.hybrid import build_hybrid_classifier
+
+        return build_hybrid_classifier(
+            bundle,
+            variant=args.hybrid_variant,
+            data_dir=args.data_dir,
+            config_dir=args.config_dir,
+            llm_mode=args.llm_mode,
+            cache_dir=args.llm_cache_dir,
+        )
     if args.classifier == "llm":
         from app.llm import build_llm_classifier
 
@@ -464,6 +475,56 @@ def _cmd_llm_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_hybrid_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from app.classification.hybrid import HybridClassifier, build_hybrid_classifier
+    from app.classification.routing_config import load_gates, load_routing_config
+    from app.llm import build_llm_classifier
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import git_info
+    from evals.classification.hybrid_report import build_hybrid_report
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from guardrails.injection import InjectionScanner, load_injection_config
+    from ml.classification import build_ml_classifier
+    from rules import build_rules_classifier
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    dev = [d for d in docs if d.split == "dev"]
+    routing, sha = load_routing_config(bundle.policy, args.config_dir)
+    gates, _ = load_gates(args.config_dir)
+    data_dir = args.data_dir or DEFAULT_DATA_DIR
+    comp = {
+        "rules": build_rules_classifier(bundle, args.config_dir),
+        "ml": build_ml_classifier(bundle, data_dir=args.data_dir, config_dir=args.config_dir),
+        "llms": {
+            t: build_llm_classifier(
+                bundle, tier=t, mode="replay", data_dir=data_dir, config_dir=args.config_dir,
+                cache_dir=args.llm_cache_dir,
+            )
+            for t in ("small", "mid", "large")
+        },
+        "scanner": InjectionScanner(load_injection_config(args.config_dir)[0]),
+    }  # fmt: skip
+
+    def make(name: str, components: dict | None = None) -> HybridClassifier:
+        return build_hybrid_classifier(
+            bundle, variant=name, data_dir=args.data_dir, config_dir=args.config_dir,
+            cache_dir=args.llm_cache_dir, components=components or comp,
+        )  # fmt: skip
+
+    text = build_hybrid_report(
+        bundle, routing, sha, gates, comp, dev, load_manifest(args.data_dir), git_info(), make
+    )
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/hybrid-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -573,8 +634,13 @@ def build_parser() -> argparse.ArgumentParser:
     run = ev_sub.add_parser("run", help="evaluate a sanity classifier on dataset splits")
     run.add_argument(
         "--classifier",
-        choices=["oracle", "majority", "random", "rules", "ml", "llm"],
+        choices=["oracle", "majority", "random", "rules", "ml", "llm", "hybrid"],
         required=True,
+    )
+    run.add_argument(
+        "--hybrid-variant",
+        default=None,
+        help="named variant from config/routing/routing.v1.yaml (default: the configured default)",
     )
     run.add_argument("--llm-tier", choices=["small", "mid", "large"], default="small")
     run.add_argument(
@@ -641,6 +707,14 @@ def build_parser() -> argparse.ArgumentParser:
     lrp.add_argument("--config-dir", default=None)
     lrp.add_argument("--data-dir", default=None)
     lrp.set_defaults(func=_cmd_llm_report)
+    hyb = sub.add_parser("hybrid", help="hybrid routing commands (Approach D)")
+    hyb_sub = hyb.add_subparsers(dest="hybrid_command", required=True)
+    hrp = hyb_sub.add_parser("report", help="write the hybrid results (development split, replay)")
+    hrp.add_argument("--llm-cache-dir", default=None)
+    hrp.add_argument("--out", default=None)
+    hrp.add_argument("--config-dir", default=None)
+    hrp.add_argument("--data-dir", default=None)
+    hrp.set_defaults(func=_cmd_hybrid_report)
     lfs = llm_sub.add_parser("fewshot", help="regenerate the few-shot id file (train only)")
     lfs.add_argument("--out", default=None)
     lfs.add_argument("--config-dir", default=None)

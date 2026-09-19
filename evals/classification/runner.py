@@ -89,6 +89,17 @@ def _record_from_result(
         ),
         "tokens_in": result.telemetry.tokens.get("prompt"),
         "tokens_out": result.telemetry.tokens.get("completion"),
+        "stage_latency_ms": {
+            k: float(v) for k, v in result.telemetry.latency_ms.items() if k != "total"
+        },
+        "stop_reason": result.routing.stop_reason,
+        "stages_run": list(result.routing.stages_run),
+        "escalations": result.routing.escalations,
+        "short_circuited": result.routing.short_circuited,
+        "review_reasons": list(result.review.reason_codes),
+        "routing_flags": [
+            w for w in result.warnings if w.startswith(("fusion:", "conflict:", "budget"))
+        ],
         "evidence_total": len(quotes),
         "evidence_verified": sum(e.verified for e in quotes),
         "guardrail_types": sorted({g.type for g in result.guardrail_events}),
