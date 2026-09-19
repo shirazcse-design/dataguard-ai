@@ -1,0 +1,3308 @@
+{
+  "checks": [
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        [
+          32,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          47,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          117,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          195,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          32,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          47,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          117,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          195,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
+      "observed": true,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 391,
+      "name": "documents evaluated",
+      "observed": 391,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.49872122762148335,
+      "name": "level accuracy",
+      "observed": 0.49872122762148335,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.16638225255972697,
+      "name": "level macro F1",
+      "observed": 0.16638225255972697,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.12468030690537084,
+      "name": "level macro precision",
+      "observed": 0.12468030690537084,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.49872122762148335,
+      "name": "level micro F1",
+      "observed": 0.49872122762148335,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6655290102389079,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6655290102389079,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5012787723785166,
+      "name": "over-classification rate",
+      "observed": 0.5012787723785166,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.3248081841432225,
+      "name": "category exact-match",
+      "observed": 0.3248081841432225,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": [
+        211,
+        180,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        211,
+        180,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5396419437340153,
+      "name": "high-risk precision",
+      "observed": 0.5396419437340153,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        [
+          32,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          52,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          122,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          210,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          32,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          52,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          122,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          210,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 416,
+      "name": "documents evaluated",
+      "observed": 416,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5048076923076923,
+      "name": "level accuracy",
+      "observed": 0.5048076923076923,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.16773162939297126,
+      "name": "level macro F1",
+      "observed": 0.16773162939297126,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.12620192307692307,
+      "name": "level macro precision",
+      "observed": 0.12620192307692307,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5048076923076923,
+      "name": "level micro F1",
+      "observed": 0.5048076923076923,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.670926517571885,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.670926517571885,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.4951923076923077,
+      "name": "over-classification rate",
+      "observed": 0.4951923076923077,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.3173076923076923,
+      "name": "category exact-match",
+      "observed": 0.3173076923076923,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": [
+        226,
+        190,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        226,
+        190,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5432692307692307,
+      "name": "high-risk precision",
+      "observed": 0.5432692307692307,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "train",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0212",
+      "name": "level accuracy ~ 1/levels",
+      "observed": 0.29086538461538464,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0765",
+      "name": "level recall[PUBLIC] ~ 1/levels",
+      "observed": 0.375,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0600",
+      "name": "level recall[INTERNAL] ~ 1/levels",
+      "observed": 0.4230769230769231,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0392",
+      "name": "level recall[CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.28688524590163933,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0299",
+      "name": "level recall[HIGHLY_CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.24761904761904763,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0668",
+      "name": "category recall[PII] ~ 0.5",
+      "observed": 0.625,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0264",
+      "name": "category FPR[PII] ~ 0.5",
+      "observed": 0.475,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0870",
+      "name": "category recall[PHI] ~ 0.5",
+      "observed": 0.45454545454545453,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0255",
+      "name": "category FPR[PHI] ~ 0.5",
+      "observed": 0.5221932114882507,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0801",
+      "name": "category recall[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.6923076923076923,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0258",
+      "name": "category FPR[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.5145888594164456,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0772",
+      "name": "category recall[SOURCE_CODE] ~ 0.5",
+      "observed": 0.40476190476190477,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0259",
+      "name": "category FPR[SOURCE_CODE] ~ 0.5",
+      "observed": 0.5802139037433155,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0884",
+      "name": "category recall[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.3125,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0255",
+      "name": "category FPR[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.5494791666666666,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0870",
+      "name": "category recall[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.6060606060606061,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0255",
+      "name": "category FPR[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.4908616187989556,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0845",
+      "name": "category recall[TRADE_SECRET] ~ 0.5",
+      "observed": 0.6,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0256",
+      "name": "category FPR[TRADE_SECRET] ~ 0.5",
+      "observed": 0.49343832020997375,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0857",
+      "name": "category recall[MA_CORP_STRATEGY] ~ 0.5",
+      "observed": 0.5294117647058824,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0256",
+      "name": "category FPR[MA_CORP_STRATEGY] ~ 0.5",
+      "observed": 0.4895287958115183,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0101",
+      "name": "high-risk recall ~ P(pred high-risk)",
+      "observed": 0.9867256637168141,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0110",
+      "name": "high-risk FPR ~ P(pred high-risk)",
+      "observed": 0.9631578947368421,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5433 +/- 4.5*0.0247",
+      "name": "high-risk precision ~ prevalence",
+      "observed": 0.5492610837438424,
+      "passed": true,
+      "split": "train",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "name": "same seed reproduces identical predictions",
+      "observed": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "passed": true,
+      "split": "train",
+      "suite": "random"
+    },
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          28,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          49,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          28,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          49,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
+      "observed": true,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 98,
+      "name": "documents evaluated",
+      "observed": 98,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5,
+      "name": "level accuracy",
+      "observed": 0.5,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.16666666666666666,
+      "name": "level macro F1",
+      "observed": 0.16666666666666666,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.125,
+      "name": "level macro precision",
+      "observed": 0.125,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5,
+      "name": "level micro F1",
+      "observed": 0.5,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5,
+      "name": "over-classification rate",
+      "observed": 0.5,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.2755102040816326,
+      "name": "category exact-match",
+      "observed": 0.2755102040816326,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": [
+        55,
+        43,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        55,
+        43,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5612244897959183,
+      "name": "high-risk precision",
+      "observed": 0.5612244897959183,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          28,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          54,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          28,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          54,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 103,
+      "name": "documents evaluated",
+      "observed": 103,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5242718446601942,
+      "name": "level accuracy",
+      "observed": 0.5242718446601942,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.17197452229299362,
+      "name": "level macro F1",
+      "observed": 0.17197452229299362,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.13106796116504854,
+      "name": "level macro precision",
+      "observed": 0.13106796116504854,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5242718446601942,
+      "name": "level micro F1",
+      "observed": 0.5242718446601942,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6878980891719745,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6878980891719745,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.47572815533980584,
+      "name": "over-classification rate",
+      "observed": 0.47572815533980584,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.2621359223300971,
+      "name": "category exact-match",
+      "observed": 0.2621359223300971,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": [
+        60,
+        43,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        60,
+        43,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5825242718446602,
+      "name": "high-risk precision",
+      "observed": 0.5825242718446602,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0427",
+      "name": "level accuracy ~ 1/levels",
+      "observed": 0.27184466019417475,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.1369",
+      "name": "level recall[PUBLIC] ~ 1/levels",
+      "observed": 0.3,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.1306",
+      "name": "level recall[INTERNAL] ~ 1/levels",
+      "observed": 0.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0818",
+      "name": "level recall[CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.25,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0589",
+      "name": "level recall[HIGHLY_CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.3333333333333333,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[PII] ~ 0.5",
+      "observed": 0.6363636363636364,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0521",
+      "name": "category FPR[PII] ~ 0.5",
+      "observed": 0.5434782608695652,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[PHI] ~ 0.5",
+      "observed": 0.3,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0518",
+      "name": "category FPR[PHI] ~ 0.5",
+      "observed": 0.5161290322580645,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.7272727272727273,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0521",
+      "name": "category FPR[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.43478260869565216,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[SOURCE_CODE] ~ 0.5",
+      "observed": 0.7272727272727273,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0521",
+      "name": "category FPR[SOURCE_CODE] ~ 0.5",
+      "observed": 0.4673913043478261,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.6,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0518",
+      "name": "category FPR[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.5268817204301075,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.45454545454545453,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0521",
+      "name": "category FPR[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.4891304347826087,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[TRADE_SECRET] ~ 0.5",
+      "observed": 0.3,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0518",
+      "name": "category FPR[TRADE_SECRET] ~ 0.5",
+      "observed": 0.4838709677419355,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0510",
+      "name": "category FPR[MA_CORP_STRATEGY] ~ 0.5",
+      "observed": 0.53125,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0195",
+      "name": "high-risk recall ~ P(pred high-risk)",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0231",
+      "name": "high-risk FPR ~ P(pred high-risk)",
+      "observed": 1.0,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5825 +/- 4.5*0.0486",
+      "name": "high-risk precision ~ prevalence",
+      "observed": 0.5825242718446602,
+      "passed": true,
+      "split": "calibration",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "name": "same seed reproduces identical predictions",
+      "observed": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "passed": true,
+      "split": "calibration",
+      "suite": "random"
+    },
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          47,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          47,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": true,
+      "name": "bootstrap intervals collapse to the perfect value (1; FPR 0)",
+      "observed": true,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/headline"
+    },
+    {
+      "expected": 97,
+      "name": "documents evaluated",
+      "observed": 97,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.4845360824742268,
+      "name": "level accuracy",
+      "observed": 0.4845360824742268,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.16319444444444445,
+      "name": "level macro F1",
+      "observed": 0.16319444444444445,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.1211340206185567,
+      "name": "level macro precision",
+      "observed": 0.1211340206185567,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.4845360824742268,
+      "name": "level micro F1",
+      "observed": 0.4845360824742268,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6527777777777778,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6527777777777778,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5154639175257731,
+      "name": "over-classification rate",
+      "observed": 0.5154639175257731,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.27835051546391754,
+      "name": "category exact-match",
+      "observed": 0.27835051546391754,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": [
+        53,
+        44,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        53,
+        44,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 0.5463917525773195,
+      "name": "high-risk precision",
+      "observed": 0.5463917525773195,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/headline"
+    },
+    {
+      "expected": 1.0,
+      "name": "level accuracy == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level macro recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "level micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          52,
+          0
+        ]
+      ],
+      "name": "confusion matrix is purely diagonal",
+      "observed": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          52,
+          0
+        ]
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every supported level has P=R=F1=1",
+      "observed": true,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "no under/over-classification",
+      "observed": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category macro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category micro F1 == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "category exact-match == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0,
+      "name": "no false-positive categories",
+      "observed": 0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": true,
+      "name": "every category has FP=FN=0",
+      "observed": true,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk precision == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "high-risk FPR == 0",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0
+      ],
+      "name": "high-risk has no FP/FN",
+      "observed": [
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "name": "no failures, deferrals or mismatches",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "oracle/all_tiers"
+    },
+    {
+      "expected": 107,
+      "name": "documents evaluated",
+      "observed": 107,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.48598130841121495,
+      "name": "level accuracy",
+      "observed": 0.48598130841121495,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.16352201257861634,
+      "name": "level macro F1",
+      "observed": 0.16352201257861634,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.12149532710280374,
+      "name": "level macro precision",
+      "observed": 0.12149532710280374,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.25,
+      "name": "level macro recall",
+      "observed": 0.25,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.48598130841121495,
+      "name": "level micro F1",
+      "observed": 0.48598130841121495,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6540880503144654,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "name": "level per-class F1",
+      "observed": {
+        "CONFIDENTIAL": 0.0,
+        "HIGHLY_CONFIDENTIAL": 0.6540880503144654,
+        "INTERNAL": 0.0,
+        "PUBLIC": 0.0
+      },
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "severe under-classification rate",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.514018691588785,
+      "name": "over-classification rate",
+      "observed": 0.514018691588785,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro F1",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.0,
+      "name": "category macro recall",
+      "observed": 0.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "name": "category per-label recall",
+      "observed": {
+        "CREDENTIALS_SECRETS": 0.0,
+        "FINANCIAL_PCI": 0.0,
+        "INTELLECTUAL_PROPERTY": 0.0,
+        "MA_CORP_STRATEGY": 0.0,
+        "PHI": 0.0,
+        "PII": 0.0,
+        "SOURCE_CODE": 0.0,
+        "TRADE_SECRET": 0.0
+      },
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.29906542056074764,
+      "name": "category exact-match",
+      "observed": 0.29906542056074764,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": [
+        58,
+        49,
+        0,
+        0
+      ],
+      "name": "high-risk confusion counts",
+      "observed": [
+        58,
+        49,
+        0,
+        0
+      ],
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk recall",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 0.5420560747663551,
+      "name": "high-risk precision",
+      "observed": 0.5420560747663551,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": 1.0,
+      "name": "high-risk false-positive rate",
+      "observed": 1.0,
+      "passed": true,
+      "split": "dev",
+      "suite": "majority/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0419",
+      "name": "level accuracy ~ 1/levels",
+      "observed": 0.2616822429906542,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.1369",
+      "name": "level recall[PUBLIC] ~ 1/levels",
+      "observed": 0.4,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.1083",
+      "name": "level recall[INTERNAL] ~ 1/levels",
+      "observed": 0.0625,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0804",
+      "name": "level recall[CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.3103448275862069,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.2500 +/- 4.5*0.0600",
+      "name": "level recall[HIGHLY_CONFIDENTIAL] ~ 1/levels",
+      "observed": 0.2692307692307692,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[PII] ~ 0.5",
+      "observed": 0.6363636363636364,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0510",
+      "name": "category FPR[PII] ~ 0.5",
+      "observed": 0.4375,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[PHI] ~ 0.5",
+      "observed": 0.6,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0508",
+      "name": "category FPR[PHI] ~ 0.5",
+      "observed": 0.4948453608247423,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.4,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0508",
+      "name": "category FPR[FINANCIAL_PCI] ~ 0.5",
+      "observed": 0.4948453608247423,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[SOURCE_CODE] ~ 0.5",
+      "observed": 0.2,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0508",
+      "name": "category FPR[SOURCE_CODE] ~ 0.5",
+      "observed": 0.38144329896907214,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1581",
+      "name": "category recall[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.5,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0508",
+      "name": "category FPR[CREDENTIALS_SECRETS] ~ 0.5",
+      "observed": 0.5463917525773195,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1443",
+      "name": "category recall[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.25,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0513",
+      "name": "category FPR[INTELLECTUAL_PROPERTY] ~ 0.5",
+      "observed": 0.47368421052631576,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[TRADE_SECRET] ~ 0.5",
+      "observed": 0.6363636363636364,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0510",
+      "name": "category FPR[TRADE_SECRET] ~ 0.5",
+      "observed": 0.4791666666666667,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.1508",
+      "name": "category recall[MA_CORP_STRATEGY] ~ 0.5",
+      "observed": 0.5454545454545454,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5000 +/- 4.5*0.0510",
+      "name": "category FPR[MA_CORP_STRATEGY] ~ 0.5",
+      "observed": 0.5520833333333334,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0199",
+      "name": "high-risk recall ~ P(pred high-risk)",
+      "observed": 0.9655172413793104,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.9766 +/- 4.5*0.0216",
+      "name": "high-risk FPR ~ P(pred high-risk)",
+      "observed": 0.9795918367346939,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "0.5421 +/- 4.5*0.0489",
+      "name": "high-risk precision ~ prevalence",
+      "observed": 0.5384615384615384,
+      "passed": true,
+      "split": "dev",
+      "suite": "random/all_tiers"
+    },
+    {
+      "expected": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "name": "same seed reproduces identical predictions",
+      "observed": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "passed": true,
+      "split": "dev",
+      "suite": "random"
+    },
+    {
+      "expected": 40,
+      "name": "exceptions: every document still has a record",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 40,
+      "name": "exceptions: all counted as failures",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": {
+        "exception:RuntimeError": 40
+      },
+      "name": "exceptions: failure reason recorded",
+      "observed": {
+        "exception:RuntimeError": 40
+      },
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 0.0,
+      "name": "exceptions: scored as misses (level accuracy 0)",
+      "observed": 0.0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 40,
+      "name": "exceptions: no-prediction column filled",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 40,
+      "name": "latency: captured for every document",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": ">= 2.9 ms",
+      "name": "latency: p50 reflects the injected 3 ms",
+      "observed": 3.819,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": ">=",
+      "name": "latency: p95 >= p50",
+      "observed": 3.851,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "name": "latency does not change the metrics fingerprint",
+      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "name": "identical runs give identical fingerprints",
+      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": "!=",
+      "name": "different random seeds give different fingerprints",
+      "observed": "differ",
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 40,
+      "name": "lying high_risk: every mismatch is flagged",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 0,
+      "name": "lying high_risk: harness re-derives it (no predicted positives)",
+      "observed": 0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 40,
+      "name": "deferral: every headline document reported as deferred",
+      "observed": 40,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 1.0,
+      "name": "deferral: perfect-reviewer view level macro F1 (hypothetical) == 1",
+      "observed": 1.0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 0.0,
+      "name": "deferral: deferred-as-errors view scores zero",
+      "observed": 0.0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 0,
+      "name": "deferral: auto-only view has no documents",
+      "observed": 0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    },
+    {
+      "expected": 1.0,
+      "name": "deferral: primary view scores the provisional (gold) label",
+      "observed": 1.0,
+      "passed": true,
+      "split": "all",
+      "suite": "robustness"
+    }
+  ],
+  "n_checks": 311,
+  "n_passed": 311,
+  "ok": true,
+  "runs": [
+    {
+      "baseline": "oracle",
+      "category_macro_f1": 1.0,
+      "fingerprint": "783d3f7a929de9bd92dd81e817b4f2cdc50a17cbe234504db2c69211950c9172",
+      "high_risk_precision": 1.0,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 1.0,
+      "n_headline_docs": 391,
+      "run_id": "oracle-train-20260919T071104Z-783d3f7a",
+      "split": "train"
+    },
+    {
+      "baseline": "majority",
+      "category_macro_f1": 0.0,
+      "fingerprint": "bd78ea2dbafddce7cbe89310c0d6d39d926290a62c6a67e45f8d28c1e856761d",
+      "high_risk_precision": 0.5396419437340153,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 0.16638225255972697,
+      "n_headline_docs": 391,
+      "run_id": "majority-train-20260919T071104Z-bd78ea2d",
+      "split": "train"
+    },
+    {
+      "baseline": "random",
+      "category_macro_f1": 0.16020679046371936,
+      "fingerprint": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "high_risk_precision": 0.5442708333333334,
+      "high_risk_recall": 0.990521327014218,
+      "level_macro_f1": 0.2684601469562624,
+      "n_headline_docs": 391,
+      "run_id": "random-train-20260919T071104Z-f1176d27",
+      "split": "train"
+    },
+    {
+      "baseline": "oracle",
+      "category_macro_f1": 1.0,
+      "fingerprint": "024f24cbec3ae1f49ff3f1ac3d90db51616a1c57cff53e0e0dc77ee936e3fb9a",
+      "high_risk_precision": 1.0,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 1.0,
+      "n_headline_docs": 98,
+      "run_id": "oracle-calibration-20260919T071105Z-024f24cb",
+      "split": "calibration"
+    },
+    {
+      "baseline": "majority",
+      "category_macro_f1": 0.0,
+      "fingerprint": "512442a2a8e6087d98ffb5b71a4900fd184ea7f788ca9c4b02ff587c03d74b90",
+      "high_risk_precision": 0.5612244897959183,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 0.16666666666666666,
+      "n_headline_docs": 98,
+      "run_id": "majority-calibration-20260919T071105Z-512442a2",
+      "split": "calibration"
+    },
+    {
+      "baseline": "random",
+      "category_macro_f1": 0.16009765837489026,
+      "fingerprint": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "high_risk_precision": 0.5612244897959183,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 0.2078494447098161,
+      "n_headline_docs": 98,
+      "run_id": "random-calibration-20260919T071105Z-fb60fbe4",
+      "split": "calibration"
+    },
+    {
+      "baseline": "oracle",
+      "category_macro_f1": 1.0,
+      "fingerprint": "887bc3ace8367833dee959a59d59d97a87d75f2380573fb4062d8b27268b6e68",
+      "high_risk_precision": 1.0,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 1.0,
+      "n_headline_docs": 97,
+      "run_id": "oracle-dev-20260919T071105Z-887bc3ac",
+      "split": "dev"
+    },
+    {
+      "baseline": "majority",
+      "category_macro_f1": 0.0,
+      "fingerprint": "b63d38bb3f217a6e58d39bb8cb9ebab467c52d23da1f8d673e3466d83568dd13",
+      "high_risk_precision": 0.5463917525773195,
+      "high_risk_recall": 1.0,
+      "level_macro_f1": 0.16319444444444445,
+      "n_headline_docs": 97,
+      "run_id": "majority-dev-20260919T071105Z-b63d38bb",
+      "split": "dev"
+    },
+    {
+      "baseline": "random",
+      "category_macro_f1": 0.1635446515973488,
+      "fingerprint": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "high_risk_precision": 0.5425531914893617,
+      "high_risk_recall": 0.9622641509433962,
+      "level_macro_f1": 0.2283140283140283,
+      "n_headline_docs": 97,
+      "run_id": "random-dev-20260919T071105Z-7fb20973",
+      "split": "dev"
+    }
+  ]
+}

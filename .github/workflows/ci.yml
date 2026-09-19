@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "uc4/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    name: Lint + unit tests (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Unit tests
+        run: pytest
+
+  config-validation:
+    name: Validate taxonomy / high-risk / eval config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: dataguard-uc4 config validate
+
+  dataset-validation:
+    name: Regenerate + validate synthetic dataset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      # Regenerates from spec + seed and requires byte-identical output plus clean integrity checks.
+      - run: dataguard-uc4 dataset validate
+
+  harness-validation:
+    name: Validate the evaluation harness (oracle / majority / random)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      # Exits non-zero if any of the harness self-checks fails.
+      - run: dataguard-uc4 eval validate-harness --out-dir "$RUNNER_TEMP/harness-validation"
+
+  # ---------------------------------------------------------------------------------------------
+  # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):
+  #   Phase 3: rules eval + <=500 ms latency budget        (requires explicit approval)
+  #   Phase 4: seeded ML retrain + eval
+  #   Phase 5: full LLM + hybrid eval on release/dispatch, via OIDC (no long-lived secrets)
+  #   Security: dependency scan, secret scanning (with fake-secret allowlist), CodeQL
+  # ---------------------------------------------------------------------------------------------

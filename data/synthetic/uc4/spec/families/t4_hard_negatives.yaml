@@ -1,0 +1,404 @@
+# T4 (hard negative) families: content that resembles a higher-sensitivity class but is NOT.
+# `decoy_for` lists what each family resembles; the gold label must not contain any of it.
+families:
+  - family_id: hn_awareness_doc_explains_ssn
+    description: Security awareness guidance that shows what an SSN looks like using dummy and masked values.
+    tier: T4
+    format: policy_doc
+    gold_level: INTERNAL
+    decoy_for: [PII]
+    n_docs: 5
+    filenames: ["Security_Awareness_PII_Basics.docx", "Data_Handling_Training_«@year».pdf"]
+    metadata: {source_system: "Intranet", author_department: "Security"}
+    notes: Teaches employees to recognise SSNs using the canonical dummy value and masked examples; no real person is identified.
+    bodies:
+      - |
+        Recognising personal identifiers - awareness training
+
+        A US Social Security number has nine digits in the pattern 3-2-4, for example 123-45-6789 (a placeholder, not a real number). When you must reference one in a ticket, mask it: «@ssn_masked».
+
+        Rules of thumb:
+        - Never paste a full number into chat or email.
+        - Store identifiers only in approved systems.
+        - Report accidental exposure to the security team within one business day.
+  - family_id: hn_test_card_numbers_doc
+    description: Internal QA doc listing the payment processor's public test card numbers.
+    tier: T4
+    format: how_to
+    gold_level: INTERNAL
+    decoy_for: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Payments_Testing_Guide.md", "QA_Test_Cards.txt", "Sandbox_Test_Data_«@year».docx"]
+    metadata: {source_system: "Confluence", author_department: "Engineering"}
+    notes: These are the public, documented test PANs that never move real money.
+    bodies:
+      - |
+        Payments sandbox - test cards
+
+        Use these published test numbers in the sandbox only. They are not real cards and never move funds.
+        Visa test: 4111 1111 1111 1111
+        Mastercard test: 5555 5555 5555 4444
+        Amex test: 3782 822463 10005
+        Any future expiry date and any three-digit code will work. Declined-payment scenarios are listed on the vendor's public test page. Guide maintained by «person» («dept»), updated «@date».
+      - |
+        QA notes for the «codeword» checkout - «@date»
+
+        When testing the «product_noun» store, pay with the processor's documented sandbox cards, for example 4242 4242 4242 4242 (approve) or 4000 0000 0000 0002 (decline). These come from the vendor's public docs and cannot charge anyone.
+        Owner: «person». Sandbox only; never use a real card in test environments.
+      - |
+        How to test payment failures
+
+        The gateway publishes a list of test numbers. Visa 4111111111111111 succeeds; use the decline number from the public sandbox page to trigger an error and check that our retry screen appears. Every number in the list is a well-known test value.
+        Last reviewed «month» «@year» by «person».
+  - family_id: hn_open_source_code
+    description: Open-source code released under the MIT licence.
+    tier: T4
+    format: source_code
+    gold_level: PUBLIC
+    decoy_for: [SOURCE_CODE]
+    n_docs: 5
+    filenames: ["utils.py", "slugify.js", "retry.go", "LICENSE_and_helpers.py"]
+    metadata: {source_system: "Public repository", source_path: "/oss/«codeword»/"}
+    notes: Publicly licensed open-source code is not Source Code under this policy.
+    bodies:
+      - |
+        # MIT License - Copyright (c) «@year» «company» contributors
+        # Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+        # and associated documentation files, to deal in the Software without restriction.
+
+        def slugify(text):
+            out = []
+            for ch in text.lower():
+                out.append(ch if ch.isalnum() else "-")
+            return "-".join(part for part in "".join(out).split("-") if part)
+
+        def chunk(items, size):
+            for i in range(0, len(items), size):
+                yield items[i : i + size]
+      - |
+        /* MIT License - Copyright (c) «@year» «company» contributors. Published on the public package registry. */
+        function retry(fn, attempts = 3) {
+          return async (...args) => {
+            let lastError;
+            for (let i = 0; i < attempts; i++) {
+              try { return await fn(...args); } catch (e) { lastError = e; }
+            }
+            throw lastError;
+          };
+        }
+  - family_id: hn_code_reads_env_secrets
+    description: Proprietary code that reads its credentials from the environment (no secret present).
+    tier: T4
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    decoy_for: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["db_client.py", "settings.py", "payments_gateway.py"]
+    metadata: {source_system: "Git repository", source_path: "/src/«codeword»/"}
+    notes: Mentions passwords and keys, but only reads them from environment variables; no secret value is present.
+    bodies:
+      - |
+        # Copyright «@year» «company». Internal.
+        import os
+
+        ⟦SOURCE_CODE§def get_connection():
+            host = os.environ["DB_HOST"]
+            user = os.environ["DB_USER"]
+            password = os.environ["DB_PASSWORD"]  # injected by the secret manager at runtime
+            return connect(host=host, user=user, password=password)⟧
+      - |
+        // Internal - «company»
+        ⟦SOURCE_CODE§const apiKey = process.env.PAYMENTS_API_KEY;
+        if (!apiKey) {
+          throw new Error("PAYMENTS_API_KEY is not set");
+        }
+        const client = new PaymentsClient({ apiKey });⟧
+  - family_id: hn_announced_acquisition_news
+    description: News article about an already-announced acquisition.
+    tier: T4
+    format: press_release
+    gold_level: PUBLIC
+    decoy_for: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["News_Acquisition_«company#2.short».html", "Deal_Announcement_«@year».txt"]
+    metadata: {source_system: "Public news feed"}
+    notes: The deal was announced publicly; it is not non-public M&A information.
+    bodies:
+      - |
+        «company» to acquire «company#2» for «@usdm:2000-90000»
+
+        «city» - «company» announced today that it has agreed to acquire «company#2», a maker of «sector», in a deal valued at approximately «@usdm:2000-90000». The boards of both companies have approved the transaction, which is expected to close in «quarter» subject to regulatory approval.
+
+        «person», chief executive of «company», said the purchase "strengthens our position in «region»". Shares of «company#2» rose «@pct:5-40» in early trading.
+  - family_id: hn_confidential_word_menu
+    description: Cafeteria menu with 'Confidential' in the filename and a banner.
+    tier: T4
+    format: notice
+    gold_level: INTERNAL
+    decoy_for: [HIGHLY_CONFIDENTIAL]
+    n_docs: 5
+    filenames: ["Confidential_Lunch_Menu.docx", "STRICTLY_CONFIDENTIAL_Cafeteria_«month».docx", "Confidential_Snack_Order.txt"]
+    metadata: {source_system: "SharePoint", author_department: "Facilities"}
+    existing_labels:
+      - {scheme: banner, value: "STRICTLY CONFIDENTIAL", p: 1.0}
+    notes: A banner and filename that say 'confidential' on a menu; the content is ordinary internal information.
+    bodies:
+      - |
+        STRICTLY CONFIDENTIAL - do not forward
+
+        This week's cafeteria menu
+        Monday: «vegetable soup, grilled cheese|lentil stew, garlic bread|minestrone and focaccia»
+        Tuesday: «chicken curry with rice|beef chilli and cornbread|mushroom risotto»
+        Wednesday: «pasta bar|noodle bowls|baked potato bar»
+        Thursday: «fish tacos|falafel wraps|roast vegetable tart»
+        Friday: «pizza day|burger day|sushi platters»
+
+        «Vegetarian and gluten-free options are available every day.|Vegan options are marked on the counter.|Allergen information is posted at the till.» Please bring your own reusable cup. Menu prepared by «person» in Facilities for the «city» office.
+  - family_id: hn_masked_card_receipt
+    description: Receipt data showing only the last four digits of the card.
+    tier: T4
+    format: report
+    gold_level: INTERNAL
+    decoy_for: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Order_Receipts_«month».csv", "Receipt_Log_«@int:1-99».txt"]
+    metadata: {source_system: "Storefront"}
+    notes: Truncated card data (last four only) is not cardholder data under this policy.
+    bodies:
+      - |
+        order,date,card,amount
+        «@int:100000-999999»,«@date»,«@card_masked»,«@usd:10-400»
+        «@int:100000-999999»,«@date»,«@card_masked»,«@usd:10-400»
+        «@int:100000-999999»,«@date»,«@card_masked»,«@usd:10-400»
+  - family_id: hn_sku_lookalike_ssn
+    description: Inventory list whose part numbers use the same digit pattern as SSN-like values.
+    tier: T4
+    format: csv_table
+    gold_level: INTERNAL
+    decoy_for: [PII]
+    n_docs: 5
+    filenames: ["Inventory_«month».csv", "Parts_List_«@int:1-99».xlsx"]
+    metadata: {source_system: "ERP export", author_department: "Operations"}
+    notes: Part numbers formatted 3-2-4 to resemble SSNs; they identify products, not people.
+    bodies:
+      - |
+        part_no,description,qty,location
+        «@ssn»,mounting bracket,«@int:10-900»,«city»
+        «@ssn#2»,gasket set,«@int:10-900»,«city»
+        «@ssn#3»,replacement fan,«@int:10-900»,«city#2»
+        «@ssn#4»,control board,«@int:10-900»,«city#2»
+  - family_id: hn_tracking_numbers_lookalike_card
+    description: Shipment tracking numbers of sixteen digits that fail card validation.
+    tier: T4
+    format: report
+    gold_level: INTERNAL
+    decoy_for: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Shipments_«weekday».csv", "Tracking_Report_«@int:1-99».txt"]
+    metadata: {source_system: "Logistics system", author_department: "Operations"}
+    notes: Sixteen-digit shipment identifiers that fail the card checksum.
+    bodies:
+      - |
+        Shipment tracking report
+        «@tracking16» - «city» to «city#2» - «weekday»
+        «@tracking16#b» - «city» to «city#3» - «weekday»
+        «@tracking16#c» - «city#2» to «city#3» - «weekday»
+        Delayed shipments are escalated to the carrier each morning.
+  - family_id: hn_public_api_docs_placeholder_keys
+    description: Public API documentation with placeholder keys and a vendor-documented example key.
+    tier: T4
+    format: markdown
+    gold_level: PUBLIC
+    decoy_for: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["api_quickstart.md", "README_sdk.md", "authentication.md"]
+    metadata: {source_system: "Public developer portal"}
+    notes: Placeholders and the vendor's documented example key are not live credentials.
+    bodies:
+      - |
+        # Quickstart
+
+        Create an API key in your dashboard, then export it:
+
+            export API_KEY=YOUR_API_KEY_HERE
+
+        Example request:
+
+            curl -H "Authorization: Bearer YOUR_API_KEY_HERE" https://api.«company.domain»/v1/status
+
+        For AWS integration you will see keys like «@aws_example_key» and «@aws_example_secret» in the vendor's own documentation; these are documented examples, not real credentials.
+  - family_id: hn_public_health_article
+    description: Public wellness article about a health condition.
+    tier: T4
+    format: blog_post
+    gold_level: PUBLIC
+    decoy_for: [PHI]
+    n_docs: 5
+    filenames: ["Wellness_Tips_«month».html", "Living_with_diabetes.md", "Health_Newsletter_«@year».html"]
+    metadata: {source_system: "Corporate website"}
+    notes: General public health information; no individual patient is described.
+    bodies:
+      - |
+        Living well with «diagnosis»
+
+        Millions of people manage «diagnosis» every day. Regular checkups, a balanced diet and consistent medication are the foundation of good control. Speak with your doctor before changing any treatment.
+
+        Our wellness programme offers free webinars every «weekday». Register on our public website.
+  - family_id: hn_blank_hr_form_template
+    description: Blank HR onboarding form template.
+    tier: T4
+    format: form
+    gold_level: INTERNAL
+    decoy_for: [PII]
+    n_docs: 5
+    filenames: ["Onboarding_Form_Template.docx", "New_Hire_Form_«@year».pdf"]
+    metadata: {source_system: "SharePoint", author_department: "Human Resources"}
+    notes: Field labels for personal data with no values filled in.
+    bodies:
+      - |
+        NEW HIRE ONBOARDING FORM (TEMPLATE)
+        Full name: ______________________
+        Social Security Number: ______________________
+        Date of birth: ______________________
+        Home address: ______________________
+        Emergency contact: ______________________
+        Complete this form and return it to «person» in Human Resources on your first day («@date»).
+      - |
+        «company» - Employee Data Sheet (blank template, revision «@int:1-9»)
+        Legal name ............................
+        Tax identification no. ................
+        Birth date ............................
+        Residential address ...................
+        Bank details for payroll ..............
+        Please fill in every line and hand the form to «person» in HR. Do not email completed forms.
+      - |
+        Contractor intake form - to be completed by the contractor
+        [ ] Name: 
+        [ ] Government ID number: 
+        [ ] Date of birth: 
+        [ ] Contact phone: 
+        Return to the «city» office. This is a template; the fields are intentionally empty.
+  - family_id: hn_dept_expense_summary
+    description: Departmental expense summary with totals only.
+    tier: T4
+    format: report
+    gold_level: INTERNAL
+    decoy_for: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Dept_Expenses_«quarter».xlsx", "Spend_Summary_«dept».docx"]
+    metadata: {source_system: "Finance share", author_department: "Finance"}
+    notes: Routine departmental spend, not company-level non-public financial results or account data.
+    bodies:
+      - |
+        «dept» expenses - «quarter»
+        Travel: «@usd:2000-40000»
+        Software subscriptions: «@usd:2000-40000»
+        Training: «@usd:1000-15000»
+        Office supplies: «@usd:200-4000»
+        Total: «@usd:8000-90000»
+        Within budget; no action required.
+  - family_id: hn_published_patent
+    description: Published patent abstract.
+    tier: T4
+    format: legal_doc
+    gold_level: PUBLIC
+    decoy_for: [INTELLECTUAL_PROPERTY, TRADE_SECRET]
+    n_docs: 5
+    filenames: ["Patent_WO_«@int:100000-999999».pdf", "Published_Application_«codeword».txt"]
+    metadata: {source_system: "Public patent office"}
+    notes: A published patent is public by definition; no longer confidential IP or secret.
+    bodies:
+      - |
+        PUBLICATION WO/«@year»/«@int:100000-999999» - PUBLISHED APPLICATION
+        Applicant: «company»
+        Title: Method and apparatus for self-calibrating a «product_noun»
+        Abstract: A system includes a sensor and a processor configured to estimate a drift value and adjust a sampling rate in response. The disclosed approach reduces false alarms and energy consumption.
+        Published «month» «@year» by the patent office.
+  - family_id: hn_business_case_study
+    description: Historical business case study about a public acquisition (fictional companies).
+    tier: T4
+    format: report
+    gold_level: PUBLIC
+    decoy_for: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["Case_Study_Merger_«codeword».pdf", "Teaching_Case_«company#2.short».pdf"]
+    metadata: {source_system: "Public teaching materials"}
+    notes: A historical, public case study of a completed deal, used for teaching.
+    bodies:
+      - |
+        Case study: the «company»-«company#2» merger
+
+        In «@int:2005-2018», «company» acquired «company#2» in one of the largest deals in the «sector» industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
+
+        Discussion questions: Was the price justified? What would you have done differently in integration?
+  - family_id: hn_notes_mentioning_confidentiality
+    description: Meeting notes that discuss confidentiality and NDA process in general terms.
+    tier: T4
+    format: meeting_notes
+    gold_level: INTERNAL
+    decoy_for: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["Legal_Training_Notes.docx", "NDA_Process_Overview.docx"]
+    metadata: {source_system: "Confluence", author_department: "Legal"}
+    notes: Talks about acquisitions and confidentiality as a process; describes no actual deal.
+    bodies:
+      - |
+        Legal training notes - handling confidential deal information
+
+        Reminder for anyone who may work on acquisitions, mergers or investments in future: sign an NDA before receiving any non-public material, use the deal room rather than email, and never discuss rumours about deals at conferences. If you are unsure whether something is confidential, ask Legal first. Session run by «person» on «@date», attended by «@int:8-60» staff.
+      - |
+        NDA process - quick guide for employees
+
+        Before sharing any non-public information with an outside party, check whether an NDA is in place. Requests go through the Legal intake form and normally take «@int:2-5» working days. Do not sign an NDA yourself, and remember that confidentiality duties continue after a project ends. This guide is general and does not refer to any specific transaction.
+      - |
+        Onboarding session: working with sensitive information
+
+        The session covered how to label documents, when to use the deal room, and why speculating about mergers or acquisitions in public is discouraged. «person» from Legal answered questions about insider-trading rules. Slides are on the intranet.
+  - family_id: hn_synthetic_test_fixtures
+    description: QA test fixtures clearly labeled as fully synthetic.
+    tier: T4
+    format: csv_table
+    gold_level: INTERNAL
+    decoy_for: [PII]
+    n_docs: 5
+    filenames: ["test_fixtures_users.csv", "qa_seed_data_«@int:1-99».csv"]
+    metadata: {source_system: "Git repository", source_path: "/tests/fixtures/"}
+    notes: The document itself states the values are generated test data with no real individuals.
+    bodies:
+      - |
+        # TEST FIXTURES - fully synthetic data generated for QA. No real people or accounts.
+        name,email,phone
+        «person»,«person.email»,«@phone»
+        «person#2»,«person#2.email»,«@phone#2»
+        «person#3»,«person#3.email»,«@phone#3»
+  - family_id: hn_public_financial_statements
+    description: Published annual report excerpt.
+    tier: T4
+    format: report
+    gold_level: PUBLIC
+    decoy_for: [FINANCIAL_PCI]
+    n_docs: 5
+    filenames: ["Annual_Report_«@year»_excerpt.pdf", "Investor_Relations_Results_«quarter».pdf"]
+    metadata: {source_system: "Investor relations website"}
+    notes: Published financial results are public information.
+    bodies:
+      - |
+        «company» - Annual Report «@year» (published)
+
+        Revenue for the year was «@usdb:5-40» compared with «@usdb:5-40» in the prior year. Operating income was «@usdm:2000-9000». The board has recommended a dividend of «@usd:1-3» per share, subject to shareholder approval at the annual meeting.
+  - family_id: hn_password_policy_doc
+    description: Password rotation and handling policy (no passwords).
+    tier: T4
+    format: policy_doc
+    gold_level: INTERNAL
+    decoy_for: [CREDENTIALS_SECRETS]
+    n_docs: 5
+    filenames: ["Password_Policy.docx", "Credential_Handling_Standard.pdf"]
+    metadata: {source_system: "Intranet", author_department: "Security"}
+    notes: Describes rules for passwords and keys without containing any.
+    bodies:
+      - |
+        Password and secret handling standard
+
+        Passwords must be at least «@int:12-16» characters and changed when compromise is suspected. Never share passwords or API keys by email or chat; use the approved secret manager. Rotate service keys every «@int:60-180» days. Report lost credentials to the security desk immediately.

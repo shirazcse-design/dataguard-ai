@@ -1,0 +1,253 @@
+# T1 (easy) families whose label is a Sensitivity Level with no data category.
+families:
+  - family_id: pub_press_release_announced
+    description: Announced product press release. Already public.
+    tier: T1
+    format: press_release
+    gold_level: PUBLIC
+    n_docs: 6
+    filenames: ["Press_Release_«company.short»_«@year».docx", "PR_«codename»_Launch.pdf", "News_«company.short».txt"]
+    metadata: {source_system: "Corporate website"}
+    existing_labels:
+      - {scheme: banner, value: "«FOR IMMEDIATE RELEASE|PUBLIC»", p: 0.6}
+    bodies:
+      - |
+        FOR IMMEDIATE RELEASE
+
+        «company» Announces General Availability of «product_noun» for «region» Customers
+
+        «city», «month» «@int:1-28», «@year» - «company» today announced that its new «product_noun» is generally available to customers in «region». First previewed at last year's industry conference, the product has been adopted by more than «@int:40-400» organizations during its pilot program.
+
+        "Customers told us they wanted something that works out of the box," said «person», «job_title» at «company». "Today's release delivers exactly that."
+
+        Pricing and availability are published at www.«company.domain». Media inquiries: press@«company.domain».
+
+        About «company»
+        «company» builds software and devices for mid-sized organizations. Learn more at www.«company.domain».
+      - |
+        PRESS RELEASE - Published «month» «@year»
+
+        «company» and «company#2» Announce Strategic Partnership
+
+        «city» - «company» and «company#2» today announced a multi-year partnership to bring «product_noun» capabilities to customers across «region». The agreement was signed this week and is effective immediately.
+
+        «person», «job_title» at «company», said the collaboration «will speed up delivery|expands what customers can do|reflects growing demand» for connected products. Both companies will share a joint roadmap on their public websites.
+
+        Contact: media@«company.domain»
+  - family_id: pub_careers_faq
+    description: Public careers page FAQ.
+    tier: T1
+    format: web_page
+    gold_level: PUBLIC
+    n_docs: 5
+    filenames: ["Careers_FAQ.html", "Join_«company.short».txt", "Hiring_FAQ_«@year».md"]
+    metadata: {source_system: "Corporate website"}
+    bodies:
+      - |
+        Careers at «company» - Frequently Asked Questions
+
+        Q: Where are your offices?
+        A: We have offices in «city», «city#2» and «city#3», and many roles can be done remotely.
+
+        Q: How long does the hiring process take?
+        A: Most candidates hear from us within «@int:3-10» business days of applying, and the full process typically takes «@int:2-5» weeks.
+
+        Q: Do you sponsor work visas?
+        A: Yes, for many engineering and research roles. Ask your recruiter for details.
+
+        Apply at www.«company.domain»/careers. We are an equal opportunity employer.
+      - |
+        Join «company»
+
+        We are hiring a «job_title» in «dept» to work with a small team on «product_noun» products. You will collaborate with customers, ship features and help shape our roadmap.
+
+        What we offer: flexible working, learning budget, and a friendly team in «city».
+        How to apply: send a short note and your resume through our public careers page.
+  - family_id: pub_product_datasheet
+    description: Public product datasheet with specifications.
+    tier: T1
+    format: datasheet
+    gold_level: PUBLIC
+    n_docs: 6
+    filenames: ["Datasheet_«company.short»_«@alnum:4».pdf", "Spec_Sheet_«product_noun».pdf"]
+    metadata: {source_system: "Corporate website"}
+    existing_labels:
+      - {scheme: banner, value: "PUBLIC", p: 0.5}
+    bodies:
+      - |
+        «company» «product_noun» - Product Datasheet
+
+        Overview: The «product_noun» is designed for «region» deployments and ships with a «@int:1-5»-year limited warranty.
+
+        Specifications
+        - Operating temperature: -«@int:5-30» to «@int:45-70» C
+        - Power: «@int:5-24» V DC
+        - Connectivity: Ethernet, Wi-Fi, Bluetooth
+        - Dimensions: «@int:60-300» x «@int:40-200» x «@int:20-90» mm
+        - Certifications: CE, FCC
+
+        Ordering: contact sales via www.«company.domain» or your authorized reseller.
+  - family_id: pub_engineering_blog_post
+    description: Published engineering blog post about general practices.
+    tier: T1
+    format: blog_post
+    gold_level: PUBLIC
+    n_docs: 5
+    filenames: ["blog_post_«@alnum:6».md", "Engineering_Blog_«@year».html"]
+    metadata: {source_system: "Corporate website"}
+    bodies:
+      - |
+        # Lessons from running «@int:2-9» years of on-call rotations
+
+        By «person», «job_title»
+
+        Published «month» «@int:1-28», «@year»
+
+        When we first set up on-call, everyone dreaded it. Over time we learned three things that made it sustainable: keep alerts actionable, write short runbooks, and rotate fairly.
+
+        **1. Alerts should be actionable.** If nobody knows what to do when a page fires, delete the alert or fix the runbook.
+
+        **2. Runbooks beat heroics.** A ten-line checklist saves more time than a brilliant engineer at 3 a.m.
+
+        **3. Rotate fairly.** Share the load, and always compensate people for their time.
+
+        Thanks for reading. Comments and questions are welcome.
+  - family_id: pub_event_agenda
+    description: Public conference or webinar agenda.
+    tier: T1
+    format: agenda
+    gold_level: PUBLIC
+    n_docs: 5
+    filenames: ["Agenda_«city»_Summit.pdf", "Webinar_Agenda_«month».txt"]
+    metadata: {source_system: "Corporate website"}
+    bodies:
+      - |
+        «company» Customer Summit - «city» - Public Agenda
+
+        09:00  Doors open and coffee
+        09:30  Welcome from «person», «job_title»
+        10:00  Keynote: The future of «product_noun» technology
+        11:15  Breakout sessions: getting started, integrations, best practices
+        12:30  Lunch and networking
+        14:00  Panel: customers share what worked
+        16:00  Close
+
+        Registration is free at www.«company.domain»/summit. Sessions will be recorded and posted publicly.
+  - family_id: int_all_hands_notes
+    description: Ordinary internal all-hands meeting notes; nothing sensitive.
+    tier: T1
+    format: meeting_notes
+    gold_level: INTERNAL
+    n_docs: 6
+    filenames: ["All_Hands_«month»_«@year».docx", "AllHands_Notes_«@int:1-52».txt", "Town_Hall_Summary.docx"]
+    metadata: {source_system: "SharePoint", author_department: "«dept»"}
+    bodies:
+      - |
+        All-Hands Notes - «weekday», «month» «@int:1-28»
+
+        Attendees: about «@int:80-400» employees (in person and remote)
+
+        - «person» welcomed everyone and reviewed the agenda.
+        - Office news: the «city» office kitchen is being refurbished; expect noise on «weekday».
+        - Reminder: annual compliance training is due by end of the quarter.
+        - Recognition: thanks to the «dept» team for a smooth quarter-end.
+        - Questions: parking for the new visitor lot, remote-work equipment stipend, the summer social.
+
+        Next all-hands is scheduled for «month#2».
+      - |
+        Town Hall summary («city»)
+
+        Topics covered: hackathon results, the new employee wellness challenge, updated visitor badge process, and the calendar of company events.
+
+        Action items:
+        1. «person» to circulate the slide deck.
+        2. «dept» to post updated FAQ on the intranet.
+        3. Facilities to confirm room bookings for next month.
+  - family_id: int_it_helpdesk_howto
+    description: Internal IT how-to (VPN, printers). Internal hostnames but no secrets.
+    tier: T1
+    format: how_to
+    gold_level: INTERNAL
+    n_docs: 6
+    filenames: ["IT_HowTo_«@alnum:5».docx", "VPN_Setup_Guide.md", "Printer_Setup_«city».txt"]
+    metadata: {source_system: "Confluence", author_department: "IT"}
+    bodies:
+      - |
+        How to connect to the corporate VPN
+
+        1. Install the company VPN client from the software portal.
+        2. Open the client and choose the gateway for your region («region»).
+        3. Sign in with your normal single sign-on account; you will be asked for your authenticator app code.
+        4. Once connected you can reach internal tools such as the intranet at intranet.corp.example.
+
+        Troubleshooting: if the connection drops, restart the client and check your Wi-Fi. Still stuck? Open a ticket with the IT service desk and mention the error message you see.
+      - |
+        Setting up a network printer in the «city» office
+
+        - Open Settings > Printers and choose "Add a printer".
+        - Select the printer named «city»-Floor-«@int:1-6» from the list.
+        - Print a test page. If colors look off, ask facilities to replace the toner.
+
+        Printers are for business use only. Report jams to the service desk.
+  - family_id: int_team_meeting_notes
+    description: Routine team stand-up notes.
+    tier: T1
+    format: meeting_notes
+    gold_level: INTERNAL
+    n_docs: 6
+    filenames: ["Standup_«weekday».txt", "Team_Sync_«month»_«@int:1-28».md", "Weekly_Notes_«dept».docx"]
+    metadata: {source_system: "Confluence", author_department: "«dept»"}
+    bodies:
+      - |
+        «dept» team sync - «weekday»
+
+        Present: «person», «person#2», «person#3»
+
+        Progress
+        - Finished the quarterly report template
+        - Updated the onboarding checklist
+        - Fixed the broken link on the internal wiki
+
+        Blockers
+        - Waiting on a review of the vendor evaluation checklist
+
+        Next week: plan the team offsite in «city», schedule the process retrospective.
+  - family_id: int_expense_policy_summary
+    description: Internal summary of the expense policy.
+    tier: T1
+    format: policy_doc
+    gold_level: INTERNAL
+    n_docs: 5
+    filenames: ["Expense_Policy_Summary.docx", "Travel_and_Expense_FAQ.pdf"]
+    metadata: {source_system: "SharePoint", author_department: "Finance"}
+    bodies:
+      - |
+        Travel and Expense Policy - Quick Summary
+
+        - Book flights at least «@int:7-21» days in advance where possible.
+        - Hotel nightly limits depend on city tier; see the intranet table.
+        - Meals: keep receipts for anything over «@usd:20-40».
+        - Submit expense reports within «@int:15-45» days of travel.
+        - Questions? Contact the Finance help desk.
+
+        This summary is for employees only. The full policy is available on the intranet.
+  - family_id: int_office_holiday_schedule
+    description: Internal office holiday and closure schedule.
+    tier: T1
+    format: notice
+    gold_level: INTERNAL
+    n_docs: 5
+    filenames: ["Holiday_Schedule_«@year».pdf", "Office_Closures_«city».txt"]
+    metadata: {source_system: "SharePoint", author_department: "Facilities"}
+    bodies:
+      - |
+        Office holiday schedule for «@year» - «city» office
+
+        The office will be closed on the following days:
+        - «month» «@int:1-28»
+        - «month#2» «@int:1-28»
+        - «month#3» «@int:1-28»
+
+        Building access on closure days is limited to security staff. If you need to collect equipment, contact Facilities by email at least two working days ahead.
+
+        Wishing everyone a restful break.

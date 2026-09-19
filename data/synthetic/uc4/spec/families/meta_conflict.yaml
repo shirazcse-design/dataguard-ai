@@ -1,0 +1,39 @@
+# Metadata-conflict families: an embedded label says PUBLIC but the content is sensitive.
+# Labels are evidence, never truth (docs/uc4/labeling-guidelines.md section 1).
+families:
+  - family_id: meta_public_label_on_card_refunds
+    description: Refund batch containing full card numbers, wrongly labeled PUBLIC.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [FINANCIAL_PCI]
+    n_docs: 6
+    filenames: ["Refunds_Public_«month».csv", "Website_Refunds_«@int:1-99».csv"]
+    metadata: {source_system: "Shared file server"}
+    existing_labels:
+      - {scheme: sensitivity_label, value: "PUBLIC", p: 1.0}
+    notes: A stale PUBLIC label on a document containing full card numbers.
+    bodies:
+      - |
+        REFUND QUEUE («month»)
+        ref «@int:1000-9999»: refund «@usd:15-500» to card ⟦FINANCIAL_PCI§«@card:dashes»⟧
+        ref «@int:1000-9999»: refund «@usd:15-500» to card ⟦FINANCIAL_PCI§«@card#2:dashes»⟧
+        ref «@int:1000-9999»: refund «@usd:15-500» to card ⟦FINANCIAL_PCI§«@card#3:dashes»⟧
+  - family_id: meta_public_label_on_strategy
+    description: Unannounced strategy note wrongly labeled PUBLIC.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Plan_for_Growth_«@year».docx", "Team_Update_«quarter».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Strategy"}
+    existing_labels:
+      - {scheme: sensitivity_label, value: "PUBLIC", p: 1.0}
+    notes: A PUBLIC label on content that describes a confidential, unannounced transaction.
+    bodies:
+      - |
+        Team update
+
+        ⟦MA_CORP_STRATEGY§We have agreed heads of terms to sell the «sector» division to «company#2» for around «@usdm:3000-60000», and the announcement is planned for «month». Staff and customers will be told only on the day.⟧
+        Please keep this within the leadership group until then.

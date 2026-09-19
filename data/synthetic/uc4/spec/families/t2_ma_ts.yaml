@@ -1,0 +1,283 @@
+# T2 (semantic) families: M&A / corporate strategy and Trade Secret content with no obvious
+# identifiers. Sensitivity is carried by meaning. (The T2 lint forbids emails, phone numbers, ID
+# patterns and key-like strings in these documents.)
+families:
+  - family_id: ma_acquisition_target_list
+    description: Spreadsheet-style shortlist of acquisition targets with rationale (the Acquisition_Targets example).
+    tier: T2
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 7
+    filenames: ["Acquisition_Targets_«@year».xlsx", "Target_Shortlist_«quarter».xlsx", "Inorganic_Growth_Options.xlsx"]
+    metadata: {source_system: "Shared file server", author_department: "Corporate Development"}
+    existing_labels:
+      - {scheme: sensitivity_label, value: "INTERNAL", p: 0.4}
+    notes: The canonical example - no simple pattern, but semantically an unannounced acquisition plan.
+    bodies:
+      - |
+        Sheet: Targets
+        company,sector,indicative_value,fit,priority
+        ⟦MA_CORP_STRATEGY§«company#2»,«sector»,«@usdm:3000-90000»,«strategy_rationale»,1
+        «company#3»,«sector#2»,«@usdm:3000-90000»,«strategy_rationale#2»,2
+        «company#4»,«sector#3»,«@usdm:3000-90000»,«strategy_rationale#3»,3⟧
+        Notes: approach «company#2» first, before their next funding round. Do not contact any target directly.
+      - |
+        Inorganic growth options - working draft
+        Option A: buy «company#2» («sector»). Rationale: it «strategy_rationale». Rough price «@usdm:3000-90000».
+        Option B: buy «company#3» («sector#2»). Rationale: it «strategy_rationale#2». Rough price «@usdm:3000-90000».
+        ⟦MA_CORP_STRATEGY§Recommendation: open confidential talks with option A this quarter and keep option B as the fallback if pricing moves.⟧
+  - family_id: ma_board_strategy_memo
+    description: Board memo on an unannounced strategic acquisition.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Board_Memo_«month».docx", "Strategy_Update_for_Directors.docx", "Board_Pre-read_«quarter».pdf"]
+    metadata: {source_system: "Board portal", author_department: "Office of the CEO"}
+    bodies:
+      - |
+        To: Board of Directors
+        From: «person», Chief Executive
+        Re: Proposed transaction
+
+        Management seeks the Board's approval to make an offer for «company#2». ⟦MA_CORP_STRATEGY§If accepted, the combined business would be the clear leader in «sector» across «region», and we expect to fund the purchase of roughly «@usdm:5000-90000» with a mix of cash and new debt.⟧
+
+        The deal has not been discussed outside the executive team and our advisers. Please do not mention it to anyone, including colleagues at other portfolio companies. We would like a decision at the meeting on «weekday».
+      - |
+        Strategy update - pre-read for directors
+
+        Since the last meeting we have completed a preliminary review of «company#2». ⟦MA_CORP_STRATEGY§The team believes an acquisition at a modest premium is achievable if we move before they open a sale process. Advisers recommend an approach in the next «@int:2-6» weeks.⟧
+        Risks: integration of the two engineering teams, antitrust review in «region», and customer overlap.
+  - family_id: ma_divestiture_plan_email
+    description: Email discussing an unannounced divestiture.
+    tier: T2
+    format: email
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["RE_Portfolio_review.eml", "FW_Next_steps_on_«codeword».eml"]
+    metadata: {source_system: "Email"}
+    bodies:
+      - |
+        Subject: Next steps on «codeword»
+
+        Team,
+
+        Following the leadership offsite, we agreed the «sector» unit no longer fits our core strategy. ⟦MA_CORP_STRATEGY§We will quietly explore a sale of the whole unit, and «person» has asked two advisory firms to prepare a list of likely buyers.⟧ Nothing is to be shared with the unit's staff until a buyer is lined up.
+
+        I will send a short timeline next week.
+        «person#2»
+      - |
+        Subject: RE: portfolio review
+
+        Agree with your read. The unit has struggled with «pressure» for two years. ⟦MA_CORP_STRATEGY§I would rather sell it to a strategic buyer in «region» than keep funding it, but we cannot signal that to employees or customers yet.⟧ Let's keep the circle tiny until the board signs off.
+  - family_id: ma_partnership_negotiation_notes
+    description: Notes from a confidential major partnership negotiation.
+    tier: T2
+    format: notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Negotiation_Notes_«codename».docx", "Call_Notes_«company#2.short».txt"]
+    metadata: {source_system: "Confluence", author_department: "Corporate Development"}
+    bodies:
+      - |
+        Call notes - «weekday», «codename»
+
+        Present: «person», «person#2», counsel
+        ⟦MA_CORP_STRATEGY§«company#2» is willing to take a minority stake of about «@pct:10-30» in our «sector» business in exchange for exclusive distribution across «region». They asked for a board seat, which we have not agreed to.⟧
+        Next: counsel to draft a term outline. We should decide our walk-away position before the next call and avoid discussing this on email.
+  - family_id: ma_reorg_restructuring_plan
+    description: Unannounced restructuring / site-closure plan.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Restructuring_Options_«@year».docx", "Footprint_Review.docx"]
+    metadata: {source_system: "SharePoint", author_department: "Operations"}
+    bodies:
+      - |
+        Footprint review - options for the leadership team
+
+        Driven by «pressure», the working group compared three scenarios. ⟦MA_CORP_STRATEGY§Scenario B, the group's preference, closes the «city» «site_type» by the end of «quarter» and consolidates work in «city#2», affecting about «@int:150-1200» roles. Announcement would follow the works council consultation.⟧
+        Annual savings are estimated at «@usdm:100-900». Communications must not begin until the leadership team agrees the sequence and timing.
+  - family_id: ma_market_exit_plan
+    description: Plan to exit or enter a market, not yet announced.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Market_Strategy_«region».docx", "Go_to_Market_Shift.pptx.txt"]
+    metadata: {source_system: "SharePoint", author_department: "Strategy"}
+    bodies:
+      - |
+        Regional strategy - proposal
+
+        ⟦MA_CORP_STRATEGY§We propose to withdraw from «region» by the end of «@year» and redeploy the budget to expand direct sales in «region#2». Existing customers would be transitioned to a partner, which has expressed informal interest.⟧
+        This will not be announced until partner discussions are complete. Field teams have not been told.
+  - family_id: ma_investment_committee_notes
+    description: Investment committee notes on a strategic minority investment.
+    tier: T2
+    format: notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["IC_Notes_«month».docx", "Venture_Committee_«codeword».txt"]
+    metadata: {source_system: "Confluence", author_department: "Corporate Development"}
+    bodies:
+      - |
+        Investment committee - «weekday» notes
+
+        ⟦MA_CORP_STRATEGY§The committee reviewed a proposal to invest «@usdm:200-3000» for a «@pct:5-20» stake in «company#2», a «sector» start-up, with an option to acquire the rest within «@int:2-4» years.⟧ Members asked for a clearer view of dilution and a comparison to building the capability in-house. Decision deferred to the next meeting.
+  - family_id: ma_activist_response_plan
+    description: Response plan to an unpublicised activist investor approach.
+    tier: T2
+    format: memo
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 6
+    filenames: ["Shareholder_Engagement_Plan.docx", "Defense_Readiness_«quarter».docx"]
+    metadata: {source_system: "Legal deal room", author_department: "Office of the General Counsel"}
+    bodies:
+      - |
+        Shareholder engagement - preparation note
+
+        ⟦MA_CORP_STRATEGY§An investment firm has quietly built a holding in the company and is expected to push for a breakup of the «sector» division. We should be ready with a standalone-value analysis and a shortlist of alternatives, including a spin-off or sale.⟧
+        Do not discuss outside the working group. A holding statement is drafted in case the position becomes public.
+      - |
+        Note to the leadership team
+
+        ⟦MA_CORP_STRATEGY§A fund now owns about «@pct:3-9» of our shares and has signalled, through an intermediary, that it wants the «sector» business separated or sold. We are preparing an independent valuation of each division and will decide by «month» whether to engage or to resist.⟧
+        Until then, no comment to analysts, staff or the press. Adviser call scheduled for «weekday».
+  - family_id: ts_manufacturing_process
+    description: Description of a proprietary manufacturing process.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Process_Notes_«codeword».docx", "Line_«@int:1-9»_Recipe.docx", "Yield_Improvement_Summary.docx"]
+    metadata: {source_system: "R&D repository", author_department: "Operations"}
+    bodies:
+      - |
+        Process notes - line «@int:1-9»
+
+        ⟦TRADE_SECRET§The step that gives our coating its durability is a two-stage cure: a slow ramp to about «@int:70-120» degrees, then a brief spike held for «@int:2-9» minutes. Competitors cure in one stage and see cracking after a few months. Keeping the humidity below «@pct:20-45» during the spike is what lifts first-pass yield.⟧
+        Operators should not discuss the ramp profile with visitors or suppliers.
+      - |
+        Yield improvement summary
+
+        After «@int:6-20» trial runs on line «@int:1-9», the team found that pre-conditioning the substrate for «@int:30-90» minutes before coating removes most defects, cutting scrap by «@pct:10-40». ⟦TRADE_SECRET§The pre-conditioning temperature and dwell time are the core of our advantage, and no one in the industry has published them.⟧
+        Trial owner: «person» («dept»).
+  - family_id: ts_algorithm_design_writeup
+    description: Design writeup explaining the internal logic of a proprietary algorithm.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Ranking_Algorithm_Overview.docx", "Matching_Engine_Design.md", "Routing_Logic_«codeword».docx"]
+    metadata: {source_system: "Confluence", author_department: "Data Science"}
+    bodies:
+      - |
+        How our matching engine works (internal)
+
+        ⟦TRADE_SECRET§Unlike the textbook approach, we score candidates in two passes. The first pass uses a cheap proxy trained on historic outcomes; the second reweights the top results using the customer's own feedback signal, decayed over «@int:14-90» days. This reweighting step is the reason our acceptance rate is well above the market.⟧
+        The details of the reweighting are the most valuable part of the system.
+  - family_id: ts_customer_pricing_intel
+    description: Compiled customer intelligence with negotiated terms (no banner).
+    tier: T2
+    format: notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Key_Account_Notes.docx", "Renewal_Playbook_«@year».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Sales"}
+    bodies:
+      - |
+        Key account notes - «region»
+
+        ⟦TRADE_SECRET§«company#2» pays about «@pct:15-35» less than list because of a volume commitment, and their renewal is the one to watch. «company#3» is price-insensitive but expects a dedicated engineer. «company#4» has a competing offer and will walk if we do not match.⟧
+        Nothing in this note should go outside the account team.
+  - family_id: ts_recipe_formulation_notes
+    description: Prose description of a proprietary product formulation.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Flavor_Base_Notes.docx", "Formulation_Log_«codeword».docx"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    bodies:
+      - |
+        Formulation log - «codeword»
+
+        ⟦TRADE_SECRET§The signature taste comes from roasting the base ingredient in two batches at different temperatures and blending them just before packing. Blending in the ratio we settled on after «@int:20-90» trials is what nobody else has replicated.⟧
+        Suppliers only ever see the ingredient list, never the roasting profile.
+  - family_id: ts_supplier_yield_terms
+    description: Sourcing know-how - preferred suppliers, yields and terms.
+    tier: T2
+    format: notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Sourcing_Advantage_Notes.docx", "Supplier_Terms_Summary.docx"]
+    metadata: {source_system: "SharePoint", author_department: "Procurement"}
+    bodies:
+      - |
+        Sourcing notes (internal)
+
+        ⟦TRADE_SECRET§We secured an exclusive, multi-year supply of the key input at roughly «@pct:10-25» below market by co-investing in the supplier's second line. In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.⟧
+        Procurement leads only; do not forward to suppliers.
+  - family_id: ts_fraud_model_feature_logic
+    description: Explanation of proprietary fraud-model features and thresholds.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Risk_Model_Design.docx", "Feature_Logic_Overview.md"]
+    metadata: {source_system: "Confluence", author_department: "Data Science"}
+    bodies:
+      - |
+        Risk model - feature logic
+
+        ⟦TRADE_SECRET§The strongest signal is not any single attribute but how quickly a new account changes its behaviour after the first «@int:3-10» days. We combine that velocity with a proprietary device-reputation score, and only flag when both agree, which keeps false positives very low.⟧
+        Publishing this would let fraudsters tune around it, so it stays inside the team. Model owner: «person» («dept»), reviewed «@date».
+      - |
+        Internal note on why our detection works
+
+        ⟦TRADE_SECRET§Most vendors threshold on transaction size. We instead watch the gap between a customer's typical basket and the current one, weighted by how new the payment method is, and only escalate when the gap persists across «@int:2-6» sessions. That combination, plus the way we age the weights, is proprietary.⟧
+        Owner: «person». Do not include this in customer-facing documentation or sales decks.
+  - family_id: ts_lab_protocol_yield
+    description: Lab protocol improvements that materially raise yield.
+    tier: T2
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Protocol_Optimization_«codeword».docx", "Lab_Notes_Yield.docx"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    bodies:
+      - |
+        Protocol optimisation - summary for the core team
+
+        ⟦TRADE_SECRET§Adding a short chilling step before purification and switching to a gentler agitation profile raised our yield from roughly «@pct:40-55» to «@pct:70-90» without new equipment. We have not published this and do not plan to.⟧
+  - family_id: ts_sales_playbook_pricing_floors
+    description: Sales playbook stating internal discount floors and tactics.
+    tier: T2
+    format: notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 6
+    filenames: ["Enterprise_Sales_Playbook.docx", "Deal_Desk_Guidance.docx"]
+    metadata: {source_system: "SharePoint", author_department: "Sales"}
+    bodies:
+      - |
+        Deal desk guidance (do not share with customers)
+
+        ⟦TRADE_SECRET§Reps may discount up to «@pct:10-20» without approval. Between «@pct:20-30» and the hard floor, approval from the regional head is required, and we never go below the floor even for strategic logos. If a competitor quotes lower, lead with support quality and multi-year terms rather than price.⟧

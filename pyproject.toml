@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dataguard-ai"
+version = "0.1.0"
+description = "DataGuard AI: Agentic Data Security & Insider Risk platform (UC4: Sensitive Data Discovery & Classification)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+dataguard-uc4 = "app.classification.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["app*", "rules*", "evals*", "guardrails*", "observability*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Test fixtures are hand-formatted tables; long lines there aid readability.
+"tests/**" = ["E501"]
+# The validation report is prose-heavy generated text; wrapping it would hurt readability.
+"evals/classification/validation.py" = ["E501"]
+"evals/classification/reporting.py" = ["E501"]

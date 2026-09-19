@@ -1,0 +1,283 @@
+# T3 (ambiguous) families. A careful reviewer could reasonably disagree.
+# Gold follows docs/uc4/labeling-guidelines.md section 2: on a level tie the HIGHER level is gold and
+# the lower level is recorded in acceptable_alternative_levels; a category is applied only when its
+# definition is clearly met, and contested categories are omitted and explained in `notes`.
+families:
+  - family_id: amb_product_roadmap_high_level
+    description: High-level next-year product themes, no dates or customers.
+    tier: T3
+    format: memo
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Roadmap_Themes_«@year».pptx.txt", "Product_Themes_«quarter».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Product"}
+    notes: Internal vs Confidential. Themes are broad and undated, so no IP/Strategy category is clearly met; tie-break to the higher level.
+    bodies:
+      - |
+        Product themes for the year ahead
+
+        1. Make the «product_noun» easier to set up.
+        2. Improve reliability and reduce support load.
+        3. Expand integrations with partner platforms.
+        4. Explore a lighter tier for smaller customers.
+
+        These are directional themes only; specific features and dates are not yet decided. Shared with department heads.
+  - family_id: amb_employee_directory
+    description: Internal directory with names, titles, work emails and office locations.
+    tier: T3
+    format: csv_table
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Employee_Directory_«@year».xlsx", "Org_Chart_«dept».csv", "Staff_List_«city».csv"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    notes: Business contact details are not PII under this policy, but a full staff list is more than Internal for many reviewers. PII omitted (not clearly met); level tie-break to Confidential.
+    bodies:
+      - |
+        name,title,department,work_email,office
+        «person»,«job_title»,«dept»,«person.workemail»,«city»
+        «person#2»,«job_title#2»,«dept#2»,«person#2.workemail»,«city»
+        «person#3»,«job_title#3»,«dept#3»,«person#3.workemail»,«city#2»
+        «person#4»,«job_title#4»,«dept#4»,«person#4.workemail»,«city#2»
+  - family_id: amb_aggregate_health_stats
+    description: Aggregated, de-identified patient statistics with small cell counts.
+    tier: T3
+    format: report
+    gold_level: HIGHLY_CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [CONFIDENTIAL]
+    n_docs: 6
+    filenames: ["Programme_Outcomes_«quarter».docx", "Cohort_Summary_«@year».pdf"]
+    metadata: {source_system: "Analytics share", author_department: "Data Science"}
+    notes: No individual is named, so PHI is not clearly met, but small cell counts could allow re-identification. Level tie-break to Highly Confidential; PHI omitted.
+    bodies:
+      - |
+        «clinic» programme outcomes - «quarter»
+
+        Of «@int:200-900» enrolled patients, «@int:3-9» in the under-30 group had a hospital admission and «@int:2-7» in the over-80 group discontinued treatment. In the «city» site the smallest subgroup (n=«@int:3-8») showed the largest improvement.
+
+        Data are aggregated and contain no names or identifiers.
+  - family_id: amb_ticket_first_names_only
+    description: Support ticket summaries with first names only and product issues.
+    tier: T3
+    format: ticket
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Ticket_Digest_«weekday».txt", "Support_Weekly_Digest.docx"]
+    metadata: {source_system: "Helpdesk"}
+    notes: First names plus issues without contact details; PII not clearly met. Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Support digest
+
+        - «person.first» could not pair the «product_noun» after the update; asked to reboot.
+        - «person#2.first» reports the dashboard is slow in the mornings.
+        - «person#3.first» wants to move to the annual plan; routed to sales.
+        - «person#4.first» reported a warranty claim; awaiting photos.
+  - family_id: amb_hashed_password_dump
+    description: Table of usernames with salted password hashes.
+    tier: T3
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [CONFIDENTIAL]
+    n_docs: 6
+    filenames: ["users_export.csv", "auth_table_dump.txt", "legacy_accounts_«@int:1-99».csv"]
+    metadata: {source_system: "Database export"}
+    notes: Password hashes are credential material but are not directly usable, so Credentials is not clearly met and is omitted; a breach of hashes is still serious, so the level tie-break is Highly Confidential.
+    bodies:
+      - |
+        username,password_hash
+        «person.first»_«@int:10-99»,$2b$12$«@alnum:53»
+        «person#2.first»_«@int:10-99»,$2b$12$«@alnum:53#b»
+        «person#3.first»_«@int:10-99»,$2b$12$«@alnum:53#c»
+  - family_id: amb_research_paper_draft
+    description: Draft academic-style paper to be submitted for publication.
+    tier: T3
+    format: draft
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Paper_Draft_v«@int:1-6».docx", "Manuscript_«codeword».docx"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    notes: Unpublished research (IP) that is intended for publication. Level Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Draft manuscript - not yet submitted
+
+        Abstract. ⟦INTELLECTUAL_PROPERTY§We propose a self-calibrating estimator for low-cost sensors and show that it reduces drift by «@pct:20-60» on a benchmark of «@int:8-40» devices. The method requires no reference standard and runs on commodity hardware.⟧
+        We plan to submit to a peer-reviewed venue once co-authors have approved the text.
+  - family_id: amb_internal_tooling_source
+    description: Small internal tooling scripts with internal hostnames.
+    tier: T3
+    format: source_code
+    gold_level: CONFIDENTIAL
+    gold_categories: [SOURCE_CODE]
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["cleanup_tool.py", "report_helper.py", "ops_utils_«codeword».py"]
+    metadata: {source_system: "Git repository", source_path: "/tools/"}
+    notes: Trivial glue scripts that reference internal hosts. Source Code applies (non-public, org-owned) but sensitivity is low; Internal vs Confidential, tie-break to Confidential.
+    bodies:
+      - |
+        # helper for the weekly ops report
+        ⟦SOURCE_CODE§import csv
+        HOST = "«@host»"
+
+        def load_rows(path):
+            with open(path) as f:
+                return list(csv.DictReader(f))
+
+        def summarise(rows):
+            return {"count": len(rows), "hosts": sorted({r["host"] for r in rows})}⟧
+  - family_id: amb_board_minutes_routine
+    description: Routine board minutes with general discussion of strategy.
+    tier: T3
+    format: meeting_notes
+    gold_level: HIGHLY_CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [CONFIDENTIAL]
+    n_docs: 6
+    filenames: ["Board_Minutes_«month».docx", "Directors_Meeting_«quarter».docx"]
+    metadata: {source_system: "Board portal", author_department: "Office of the General Counsel"}
+    notes: General strategy talk without a concrete unannounced transaction, so M&A / Strategy is not clearly met and is omitted. Board minutes are Confidential to Highly Confidential; tie-break to Highly Confidential.
+    bodies:
+      - |
+        Minutes of the board meeting
+
+        Present: all directors and «person», secretary.
+        1. Minutes of the previous meeting approved.
+        2. The CEO reported on progress against the annual plan and the competitive landscape in «region».
+        3. The committee chairs gave their updates. The audit committee noted no material issues.
+        4. Directors discussed long-term priorities and agreed to revisit strategy at the next meeting.
+        5. Any other business: none.
+  - family_id: amb_salary_bands
+    description: Compensation bands by level, no named individuals.
+    tier: T3
+    format: report
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Compensation_Bands_«@year».xlsx", "Pay_Ranges_«dept».docx"]
+    metadata: {source_system: "HRIS", author_department: "Human Resources"}
+    notes: Aggregate bands, no individuals (no PII) and not account data (no Financial). Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Compensation bands - «@year»
+
+        Level 3: «@usd:60000-80000» to «@usd:80001-100000»
+        Level 4: «@usd:80000-100000» to «@usd:100001-130000»
+        Level 5: «@usd:100000-130000» to «@usd:130001-170000»
+
+        Managers may share the band for their own team's roles when hiring.
+  - family_id: amb_vendor_contract_summary
+    description: Summary of a vendor contract with headline commercial terms.
+    tier: T3
+    format: report
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Contract_Summary_«company#2.short».docx", "Vendor_Terms_«@year».docx"]
+    metadata: {source_system: "Contract system", author_department: "Legal"}
+    notes: Ordinary commercial contract terms. Internal vs Confidential; tie-break to Confidential. No category clearly met.
+    bodies:
+      - |
+        Contract summary - «company#2»
+
+        Term: «@int:1-5» years from «month» «@year». Annual fee: «@usdm:1-40». Payment: net «@int:30-60» days. Termination for convenience with «@int:60-180» days' notice. Liability capped at annual fees. Auto-renews unless notice is given «@int:60-120» days before expiry.
+  - family_id: amb_incident_postmortem_internal
+    description: Incident postmortem naming internal systems but no secrets.
+    tier: T3
+    format: report
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Postmortem_«@int:100-999».docx", "Incident_Review_«weekday».md"]
+    metadata: {source_system: "Confluence", author_department: "Engineering"}
+    notes: Reveals internal architecture but no credentials or customer data. Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Postmortem - partial outage on «weekday»
+
+        Summary: the primary database host «@host» ran out of disk after a batch job wrote unexpected temporary files. Failover to «@host#2» took «@int:4-40» minutes because the replica lagged.
+        Impact: about «@pct:5-40» of requests failed for «@int:10-90» minutes.
+        Actions: add disk alerts, cap batch temp usage, rehearse failover quarterly.
+  - family_id: amb_customer_case_study_draft
+    description: Draft customer case study not yet approved for publication.
+    tier: T3
+    format: draft
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [PUBLIC]
+    n_docs: 6
+    filenames: ["Case_Study_Draft_«company#2.short».docx", "Customer_Story_«@year».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Marketing"}
+    notes: Intended for publication but awaiting the customer's approval, so not yet public. Public vs Confidential (Internal lies between); tie-break to the higher level.
+    bodies:
+      - |
+        DRAFT customer story - awaiting customer approval
+
+        «company#2» reduced downtime by «@pct:20-60» after adopting our «product_noun». "We expected a long rollout, but the team was live in weeks," said «person#2», «job_title» at «company#2».
+        Marketing will publish once the customer signs off on the wording and the figures.
+  - family_id: amb_conference_talk_draft
+    description: Draft conference talk describing a method to be presented soon.
+    tier: T3
+    format: draft
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Talk_Draft_«city».docx", "Slides_Outline_«codeword».txt"]
+    metadata: {source_system: "SharePoint", author_department: "Research"}
+    notes: The method is unpublished (IP) but about to be disclosed publicly. Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Talk outline for the «city» conference
+
+        ⟦INTELLECTUAL_PROPERTY§We will present our approach to on-device calibration, including the feedback structure and the accuracy gains we measured across «@int:8-40» units.⟧
+        Legal has cleared a general description; the detailed algorithm is not to be shown. Slides due «month».
+  - family_id: amb_acquisition_rumor_notes
+    description: Notes discussing publicly reported speculation about a competitor's deal.
+    tier: T3
+    format: notes
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Market_Watch_«weekday».txt", "Competitor_Chatter_Notes.docx"]
+    metadata: {source_system: "Confluence", author_department: "Strategy"}
+    notes: Discusses press speculation about a competitor, not a non-public deal of ours, so M&A is not clearly met. Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        Market watch notes
+
+        Trade press reports that «company#2» may be exploring a sale, and analysts think «company#3» could be a buyer. If true, the combined firm would compete with us in «region». We should watch for pricing changes and think about how to respond, but nothing has been confirmed by either company.
+  - family_id: amb_unpublished_policy_draft
+    description: Draft internal policy not yet announced to staff.
+    tier: T3
+    format: policy_doc
+    gold_level: CONFIDENTIAL
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
+    n_docs: 6
+    filenames: ["Policy_Draft_«dept».docx", "Hybrid_Work_Policy_v«@int:1-5».docx"]
+    metadata: {source_system: "SharePoint", author_department: "Human Resources"}
+    notes: Employee-facing content that is still draft. Internal vs Confidential; tie-break to Confidential.
+    bodies:
+      - |
+        DRAFT - not yet announced
+
+        Proposed hybrid working policy. Employees would be expected in the office «@int:2-4» days a week, with core hours between 10:00 and 15:00. Exceptions require manager approval. Equipment stipends would change from «@usd:300-800» to a smaller annual amount.
+        Feedback from department heads is requested before the announcement.

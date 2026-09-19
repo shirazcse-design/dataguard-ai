@@ -1,0 +1,171 @@
+# T1 (easy) IP / Trade Secret / M&A families that carry explicit structural markers or banners.
+families:
+  - family_id: ip_invention_disclosure_form
+    description: Invention disclosure form (explicit IP document type).
+    tier: T1
+    format: form
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 5
+    filenames: ["Invention_Disclosure_«@int:100-999».docx", "IDF_«codeword».pdf"]
+    metadata: {source_system: "Legal IP portal", author_department: "Research"}
+    bodies:
+      - |
+        INVENTION DISCLOSURE FORM - CONFIDENTIAL
+        Inventors: «person», «person#2»
+        Title: «Adaptive|Self-calibrating|Low-power|Predictive» control method for a «product_noun»
+        Date conceived: «@date»
+        ⟦INTELLECTUAL_PROPERTY§Description of the invention: the method adjusts sensing thresholds using a rolling estimate of drift, reducing false alarms by an estimated «@pct:10-60» while lowering energy use. Novelty: existing approaches use fixed thresholds set at installation.⟧
+        Public disclosure to date: none. Patent counsel: «person#3».
+  - family_id: ip_patent_draft_claims
+    description: Draft patent claims marked not yet filed.
+    tier: T1
+    format: legal_draft
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 5
+    filenames: ["Draft_Claims_«codeword».docx", "Patent_Draft_v«@int:1-9».docx"]
+    metadata: {source_system: "Legal IP portal", author_department: "Legal"}
+    bodies:
+      - |
+        DRAFT - NOT YET FILED - ATTORNEY WORK PRODUCT
+        Application: «codeword» «product_noun»
+
+        ⟦INTELLECTUAL_PROPERTY§1. A system comprising: a sensor configured to sample a signal at a variable rate; a processor configured to estimate a drift value and to adjust the sample rate in response to the drift value; and a memory storing calibration parameters.
+        2. The system of claim 1, wherein the processor is further configured to reduce the sample rate when the drift value is below a threshold.⟧
+  - family_id: ip_provisional_application_notes
+    description: Provisional patent application working notes.
+    tier: T1
+    format: notes
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 5
+    filenames: ["Provisional_Notes_«@int:1-99».txt", "Patent_Strategy_«codeword».docx"]
+    metadata: {source_system: "Legal IP portal"}
+    bodies:
+      - |
+        Provisional patent application - working notes (do not circulate)
+        Filing target: «month» «@year»
+        ⟦INTELLECTUAL_PROPERTY§Inventive concept: combine a low-cost sensor with a learned correction model so the «product_noun» can self-calibrate in the field. Prior art search found no reference that teaches on-device correction without a reference standard.⟧
+        Open items: confirm inventorship with «person»; add three dependent claims.
+  - family_id: ip_design_doc_patent_pending
+    description: Design document marked proprietary / patent pending.
+    tier: T1
+    format: design_doc
+    gold_level: CONFIDENTIAL
+    gold_categories: [INTELLECTUAL_PROPERTY]
+    n_docs: 5
+    filenames: ["Design_Doc_«codeword».docx", "Architecture_«product_noun».pdf"]
+    metadata: {source_system: "Confluence", author_department: "Engineering"}
+    bodies:
+      - |
+        PROPRIETARY DESIGN - PATENT PENDING
+        «codeword» «product_noun» - design overview
+        ⟦INTELLECTUAL_PROPERTY§The device uses a dual-stage filter whose coefficients are updated online from a short calibration burst. The second stage suppresses residual drift, allowing a cheaper sensor to meet the accuracy target.⟧
+        Owner: «person», «dept»
+  - family_id: ts_formula_labeled
+    description: Formulation document explicitly labeled Trade Secret.
+    tier: T1
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 5
+    filenames: ["Formulation_«codeword».pdf", "Recipe_Card_«@int:1-99».docx"]
+    metadata: {source_system: "R&D repository", author_department: "Research"}
+    existing_labels:
+      - {scheme: banner, value: "TRADE SECRET", p: 1.0}
+    bodies:
+      - |
+        TRADE SECRET - RESTRICTED - DO NOT COPY
+        Formulation «codeword»-«@int:1-99»
+
+        ⟦TRADE_SECRET§Base: «@pct:40-60» solvent A, «@pct:10-25» stabilizer B, «@pct:5-15» additive C. Cure at «@int:60-140» C for «@int:20-90» minutes with a two-step ramp. The additive C ratio is the critical parameter; deviations above «@pct:1-3» reduce yield sharply.⟧
+        Access limited to the formulation team.
+  - family_id: ts_customer_list_labeled
+    description: Customer list with margins marked Trade Secret.
+    tier: T1
+    format: csv_table
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 5
+    filenames: ["Key_Accounts_Margins.xlsx", "Customer_Terms_«@year».csv"]
+    metadata: {source_system: "Sales operations", author_department: "Sales"}
+    existing_labels:
+      - {scheme: banner, value: "TRADE SECRET", p: 1.0}
+    bodies:
+      - |
+        TRADE SECRET - SALES LEADERSHIP ONLY
+        account,annual_volume,negotiated_margin,contract_end
+        ⟦TRADE_SECRET§«company#2»,«@usdm:20-900»,«@pct:8-32»,«@year»
+        «company#3»,«@usdm:20-900»,«@pct:8-32»,«@year»
+        «company#4»,«@usdm:20-900»,«@pct:8-32»,«@year»⟧
+  - family_id: ts_pricing_algorithm_labeled
+    description: Pricing algorithm coefficients marked Trade Secret.
+    tier: T1
+    format: technical_doc
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [TRADE_SECRET]
+    n_docs: 5
+    filenames: ["Pricing_Model_Coefficients.docx", "Yield_Algorithm_«codeword».pdf"]
+    metadata: {source_system: "Data science repository", author_department: "Data Science"}
+    existing_labels:
+      - {scheme: banner, value: "TRADE SECRET", p: 1.0}
+    bodies:
+      - |
+        TRADE SECRET - RESTRICTED
+        Dynamic pricing model «codeword» - internal parameters
+
+        ⟦TRADE_SECRET§Price = base * (1 + 0.«@int:10-40» * demand_index) * (1 - 0.«@int:1-9» * inventory_days / 30). Demand index is a weighted blend of search volume («@pct:30-60»), cart adds («@pct:20-40») and competitor price gap. The blend weights are retrained weekly and must not be disclosed.⟧
+  - family_id: ma_loi_labeled
+    description: Letter of intent marked strictly confidential with a project codename.
+    tier: T1
+    format: legal_draft
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["LOI_«codename».docx", "Letter_of_Intent_«company#2.short».pdf"]
+    metadata: {source_system: "Legal deal room", author_department: "Corporate Development"}
+    existing_labels:
+      - {scheme: banner, value: "STRICTLY CONFIDENTIAL", p: 1.0}
+    bodies:
+      - |
+        STRICTLY CONFIDENTIAL - «codename»
+        Non-binding Letter of Intent
+
+        ⟦MA_CORP_STRATEGY§«company» proposes to acquire all outstanding shares of «company#2» for an enterprise value of approximately «@usdm:2000-90000». Exclusivity period: «@int:30-90» days from countersignature.⟧
+        The parties will keep the existence and terms of this letter confidential. Signed: «person», «job_title».
+  - family_id: ma_term_sheet_labeled
+    description: Acquisition term sheet marked confidential.
+    tier: T1
+    format: legal_draft
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["Term_Sheet_«codename».docx", "Draft_TS_«@int:1-99».pdf"]
+    metadata: {source_system: "Legal deal room", author_department: "Corporate Development"}
+    existing_labels:
+      - {scheme: banner, value: "CONFIDENTIAL - DEAL TEAM ONLY", p: 1.0}
+    bodies:
+      - |
+        «codename» - Draft Term Sheet (Confidential - Deal Team Only)
+        ⟦MA_CORP_STRATEGY§Transaction: acquisition of «company#2» by «company». Consideration: «@usdm:1000-50000» in cash and stock. Closing conditions: regulatory approval in «region», completion of due diligence, key-employee retention.⟧
+        Target closing: «quarter» «@year».
+  - family_id: ma_dd_checklist_labeled
+    description: Due diligence checklist for a named acquisition project.
+    tier: T1
+    format: checklist
+    gold_level: HIGHLY_CONFIDENTIAL
+    gold_categories: [MA_CORP_STRATEGY]
+    n_docs: 5
+    filenames: ["Due_Diligence_«codename».xlsx", "DD_Checklist_«@int:1-99».docx"]
+    metadata: {source_system: "Legal deal room", author_department: "Corporate Development"}
+    existing_labels:
+      - {scheme: banner, value: "STRICTLY CONFIDENTIAL", p: 1.0}
+    bodies:
+      - |
+        «codename» - Due Diligence Checklist (STRICTLY CONFIDENTIAL)
+        ⟦MA_CORP_STRATEGY§Target: «company#2». Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.⟧
+        [x] Data room access requested
+        [ ] Customer concentration analysis (owner: «person»)
+        [ ] Open litigation review (owner: «person#2»)
+        [ ] Integration cost estimate
