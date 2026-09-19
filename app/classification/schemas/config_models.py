@@ -124,6 +124,8 @@ class EvalConfig(StrictModel):
     slice_fields: list[str]
     bootstrap: BootstrapConfig
     min_support_flag: int = Field(ge=1)
+    # Informational reference values shown in reports. They are NOT pass/fail gates.
+    reference_targets: dict[str, float] = Field(default_factory=dict)
     latency_percentiles: list[int]
 
     @field_validator("eval_config_version")

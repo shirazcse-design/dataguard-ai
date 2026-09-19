@@ -205,6 +205,8 @@ def coverage(records: Sequence[PredictionRecord]) -> dict[str, Any]:
         "n_with_prediction": sum(r.has_prediction for r in records),
         "n_failed": sum(r.failed for r in records),
         "n_deferred_to_review": sum(r.deferred for r in records),
+        "n_review_required": sum(r.deferred or r.review_required for r in records),
+        "review_rate": _div(sum(r.deferred or r.review_required for r in records), n),
         "n_auto_decided": sum(r.status in ("ok", "degraded") and r.has_prediction for r in records),
         "failure_reasons": dict(sorted(reasons.items())),
         "classifier_high_risk_mismatches": sum(r.classifier_high_risk_mismatch for r in records),
@@ -247,6 +249,8 @@ def compact(metrics: dict[str, Any]) -> dict[str, Any]:
         "category_labels_supported": metrics["categories"]["macro"]["n_labels"],
         "high_risk_recall": hr["recall"],
         "high_risk_precision": hr["precision"],
+        "high_risk_f1": hr["f1"],
+        "review_rate": metrics["coverage"]["review_rate"],
         "high_risk_false_positive_rate": hr["false_positive_rate"],
         "high_risk_positives": hr["tp"] + hr["fn"],
         "docs_with_false_positive_category": metrics["categories"][

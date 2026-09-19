@@ -17,7 +17,14 @@ bootstrap:
   # effective independent units. Resampling documents would understate uncertainty.
   unit: group
 
-# Labels with fewer gold positives than this in the evaluated subset are flagged as small-sample.
+# Initial safety-oriented reference target for high-risk recall. It is shown in reports for context
+# ONLY: recall alone must never determine success, and no minimum precision/FPR threshold has been
+# chosen yet (the operating point will be selected on the development set after Rules and ML are
+# evaluated). Never tune anything against the locked test split.
+reference_targets:
+  high_risk_recall: 0.90
+
+# Labels with fewer gold positives than this in the evaluated subset are flagged SMALL_SAMPLE.
 min_support_flag: 25
 
 # Latency percentiles reported by the harness.

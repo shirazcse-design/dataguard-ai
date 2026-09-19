@@ -67,11 +67,18 @@ def _stats(a: _Arrays, ix: np.ndarray) -> dict[str, float]:
 
     gh, ph = a.g_hr[ix], a.p_hr[ix]
     tp_h, fn_h, fp_h = np.sum(gh & ph), np.sum(gh & ~ph), np.sum(~gh & ph)
+    tn_h = np.sum(~gh & ~ph)
     return {
         "level_macro_f1": level_f1,
         "category_macro_f1": cat_f1,
         "high_risk_recall": float(tp_h / (tp_h + fn_h)) if tp_h + fn_h else float("nan"),
         "high_risk_precision": float(tp_h / (tp_h + fp_h)) if tp_h + fp_h else float("nan"),
+        "high_risk_f1": float(2 * tp_h / (2 * tp_h + fp_h + fn_h))
+        if 2 * tp_h + fp_h + fn_h
+        else float("nan"),
+        "high_risk_false_positive_rate": float(fp_h / (fp_h + tn_h))
+        if fp_h + tn_h
+        else float("nan"),
     }
 
 
