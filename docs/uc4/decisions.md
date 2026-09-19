@@ -53,3 +53,22 @@ during build, open to review.
 | D1.8 | T5 (adversarial) documents are reported separately and excluded from the headline metrics. | As approved in the architecture plan. |
 | D1.9 | A one-document-per-family review sheet is provided for human label review. | All labels are AI-authored; reviewing one rendered document per family covers every family. |
 | D1.10 | Open-source code is `PUBLIC` with no category (Source Code means non-public, organization-owned code). | Keeps the Source Code category consistent with its level floor. |
+
+## Implementation decisions (Phase 2)
+
+| # | Decision | Why |
+|---|---|---|
+| D2.1 | Confusion structures come from scikit-learn; P/R/F1 are derived from the counts so undefined values are `null`, not 0. Macro averages cover labels with gold support; an undefined precision of a supported label counts as 0. | Honest reporting of empty denominators while matching scikit-learn's convention where it is defined. |
+| D2.2 | A missing prediction is a miss (level: `NO_PREDICTION` column and severe under-classification; categories: empty set; high-risk: negative). Failures are never dropped. Exception messages are not recorded, only the class. | No silent optimism; messages could contain document text. |
+| D2.3 | `high_risk` is always re-derived by the harness from `high_risk.v1.yaml`; the classifier's own field is checked and disagreements are flagged. | Keeps A3 (configurable, never predicted directly) enforceable in evaluation. |
+| D2.4 | A level below a category floor is measured as an error, not rejected as invalid. | Floor consistency is a classifier-quality question. |
+| D2.5 | Confidence intervals resample scenario families by default (`bootstrap.unit: group`, new defaulted field in `eval.v1.yaml`, config version unchanged). | Documents in a family are correlated; document-level intervals are overconfident. |
+| D2.6 | Headline = tiers T1-T4; T5 is its own slice. Slices by tier, format, generator and ambiguity. | As approved in the architecture plan. |
+| D2.7 | Deferred documents are scored on their provisional label; three alternative views are computed (auto-only, deferred-as-errors, hypothetical perfect reviewer, labeled as hypothetical). | The plan promised all views; only synthetic deferring classifiers exercise them so far. |
+| D2.8 | The metrics fingerprint excludes latency and cost and rounds floats to 12 places. | Latency varies run to run; last-digit float noise must not break reproducibility. |
+| D2.9 | The dataset manifest records only the taxonomy and high-risk config hashes, not the eval config. | Found when editing eval settings invalidated the dataset manifest; the dataset does not depend on them. |
+| D2.10 | The validation suite includes a "lying classifier" check. | Mutation testing showed a harness that trusts a classifier's `high_risk` escaped the original checks. |
+| D2.11 | Run artifacts are git-ignored under `evals/classification/runs/`; only `docs/uc4/results/` is committed. | Runs contain per-document predictions and timestamps and are reproducible from the manifest. |
+| D2.12 | The CLI defaults to `dev`; `--split test` prints a notice. This is a convention, not a hard lock. | Lightweight guard; a hard lock is easy to add if wanted. |
+| D2.13 | `rules_default_level: INTERNAL` (A16) is still not a config key: there is no consumer until Phase 3. | Avoids dead configuration. |
+| D2.14 | Verified on Python 3.11.16 and 3.12.14; the dataset regenerates byte-identically on both. | CI covers 3.11 and 3.12 but could not be executed locally. |

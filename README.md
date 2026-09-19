@@ -18,7 +18,7 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 |---|---|---|
 | 0 | Foundations: schemas, configuration, CI skeleton | done |
 | 1 | Synthetic dataset | done |
-| 2 | Evaluation harness | pending |
+| 2 | Evaluation harness | done |
 | 3+ | Rules, ML, LLM, Hybrid | **not started; requires explicit approval** |
 
 Out of scope for this stage: RAG, MCP, autonomous agents, UI, repository crawling, document

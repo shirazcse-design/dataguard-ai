@@ -8,5 +8,7 @@
 | [`labeling-guidelines.md`](labeling-guidelines.md) | How gold labels are decided (levels, categories, overlaps, tie-break) |
 | [`dataset-spec.md`](dataset-spec.md) | How the synthetic dataset is built, checked, and its known limitations |
 | [`dataset-report.md`](dataset-report.md) | Generated dataset statistics and integrity results |
+| [`evaluation-harness.md`](evaluation-harness.md) | How the harness measures, its conventions, and how it is validated |
+| [`results/harness-validation.md`](results/harness-validation.md) | Generated evidence that the harness measures correctly |
 
 Later phases add: the evaluation-harness guide and generated results under `results/`.
