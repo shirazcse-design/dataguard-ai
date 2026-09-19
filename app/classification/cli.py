@@ -99,6 +99,45 @@ def _cmd_dataset_stats(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_dataset_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_manifest
+    from evals.classification.dataset.report import render_report
+
+    bundle = load_config(args.config_dir)
+    text = render_report(
+        load_manifest(args.data_dir), bundle.policy.level_ids, bundle.policy.category_ids
+    )
+    out = (
+        Path(args.out)
+        if args.out
+        else Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/dataset-report.md"
+    )
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
+def _cmd_dataset_review_sheet(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
+    from evals.classification.dataset.report import render_review_sheet
+
+    docs = load_documents(args.data_dir)
+    out = (
+        Path(args.out)
+        if args.out
+        else Path(args.data_dir or DEFAULT_DATA_DIR) / "review/family_review_sheet.csv"
+    )
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(render_review_sheet(docs), encoding="utf-8")
+    print(f"wrote {out} ({len({d.family_id for d in docs})} families)")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="dataguard-uc4", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -115,6 +154,12 @@ def build_parser() -> argparse.ArgumentParser:
         ("generate", _cmd_dataset_generate, "generate the dataset from spec + seed"),
         ("validate", _cmd_dataset_validate, "regenerate and verify integrity + reproducibility"),
         ("stats", _cmd_dataset_stats, "print statistics from the committed manifest"),
+        ("report", _cmd_dataset_report, "write the generated dataset report (markdown)"),
+        (
+            "review-sheet",
+            _cmd_dataset_review_sheet,
+            "write a one-doc-per-family CSV for human review",
+        ),
     ]:
         sp = ds_sub.add_parser(name, help=helptext)
         sp.add_argument("--config-dir", default=None)
@@ -122,6 +167,8 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--data-dir", default=None)
         if name == "generate":
             sp.add_argument("--out-dir", default=None)
+        if name in ("report", "review-sheet"):
+            sp.add_argument("--out", default=None)
         sp.set_defaults(func=func)
     return parser
 

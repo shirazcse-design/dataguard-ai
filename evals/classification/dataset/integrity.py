@@ -165,7 +165,14 @@ def check_dataset(
     spec: DatasetSpec,
     policy: TaxonomyPolicy,
     injection_snippets: list[str],
+    shared_vocabulary: frozenset[str] | set[str] = frozenset(),
 ) -> IntegrityReport:
+    """Dataset-level checks.
+
+    `shared_vocabulary` is the set of vocabulary-pool items (e.g. diagnosis terms). An evidence span
+    that is *exactly* one such item may legitimately appear in several splits (domain vocabulary is
+    shared knowledge); any other repeated evidence text (identifiers, sentences) is leakage.
+    """
     report = IntegrityReport()
     err, warn = report.errors, report.warnings
 
@@ -204,7 +211,7 @@ def check_dataset(
     span_splits: dict[str, set[str]] = defaultdict(set)
     for d in docs:
         for sp in d.gold_evidence_spans:
-            if len(sp.text) >= MIN_LEAK_SPAN_CHARS:
+            if len(sp.text) >= MIN_LEAK_SPAN_CHARS and sp.text not in shared_vocabulary:
                 span_splits[sp.text].add(d.split)
     leaked = sorted(t for t, s in span_splits.items() if len(s) > 1)
     if leaked:

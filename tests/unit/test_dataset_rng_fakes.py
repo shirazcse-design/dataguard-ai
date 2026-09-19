@@ -131,6 +131,8 @@ def test_dates_money_and_ranges(rng):
     assert re.fullmatch(r"[A-Z][a-z]+ \d{1,2}, \d{4}", fakes.make_date(rng, "long"))
     assert re.fullmatch(r"\$\d{1,3}(,\d{3})*", fakes.make_usd(rng, "1000-9000000"))
     assert re.fullmatch(r"\$\d+\.\dM", fakes.make_usdm(rng))
+    assert re.fullmatch(r"\$\d+\.\dB", fakes.make_usdm(rng, "20000-90000"))  # >= $1B renders as B
+    assert re.fullmatch(r"\$\d+\.\dM", fakes.make_usdm(rng, "10-9990"))  # < $1B stays in M
     assert re.fullmatch(r"\$\d+\.\dB", fakes.make_usdb(rng))
     for _ in range(200):
         assert 5 <= int(fakes.make_int(rng, "5-9")) <= 9

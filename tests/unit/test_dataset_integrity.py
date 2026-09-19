@@ -264,3 +264,22 @@ def test_report_serialises_deterministically(spec, policy):
     a = _dataset([mk()], spec, policy).to_dict()
     b = _dataset([mk()], spec, policy).to_dict()
     assert a == b and a["ok"] is False
+
+
+def test_shared_vocabulary_spans_are_exempt_from_the_leak_check_but_identifiers_are_not(
+    spec, policy
+):
+    term = "K21.9 - reflux disease"
+    docs = []
+    for i, split in enumerate(["train", "test"]):
+        content = BASE + f"Unique filler {i} words alpha beta gamma delta. Dx {term} noted."
+        docs.append(
+            mk(doc_id=f"v{i}", split=split, group_id=f"g{i}", family_id=f"f{i}", content=content,
+               gold_level="HIGHLY_CONFIDENTIAL", gold_categories=["PHI"], gold_evidence_spans=[span(content, term, "PHI")])
+        )  # fmt: skip
+    # Pool vocabulary shared across splits is fine ...
+    assert not has(
+        check_dataset(docs, spec, policy, INJECTION, {term}).errors, "more than one split"
+    )
+    # ... but the very same text is leakage when it is NOT known shared vocabulary.
+    assert has(check_dataset(docs, spec, policy, INJECTION).errors, "more than one split")

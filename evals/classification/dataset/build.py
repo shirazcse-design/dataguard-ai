@@ -52,7 +52,8 @@ def build_dataset(config: ConfigBundle, spec_dir: Path | str | None = None) -> B
             f"{policy.taxonomy_version}"
         )
     docs, group_to_split = generate_dataset(spec)
-    report = check_dataset(docs, spec.dataset, policy, injection_snippets(spec))
+    vocabulary = {item for items in spec.pools.values() for item in items}
+    report = check_dataset(docs, spec.dataset, policy, injection_snippets(spec), vocabulary)
 
     files: dict[str, str] = {}
     file_meta: dict[str, Any] = {}

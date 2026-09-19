@@ -132,10 +132,15 @@ def make_usd(rng: DetRandom, arg: str = "") -> str:
 
 
 def make_usdm(rng: DetRandom, arg: str = "") -> str:
-    """Millions with one decimal, e.g. $42.5M (arg is a range in tenths of millions)."""
+    """Millions with one decimal, e.g. $42.5M; a billion or more renders as $1.9B.
+
+    The argument is a range in tenths of millions.
+    """
     lo, hi = _range(arg, (10, 900))
-    tenths = rng.randint(lo, hi)
-    return f"${tenths / 10:.1f}M"
+    millions = rng.randint(lo, hi) / 10
+    if millions >= 1000:
+        return f"${millions / 1000:.1f}B"
+    return f"${millions:.1f}M"
 
 
 def make_usdb(rng: DetRandom, arg: str = "") -> str:
