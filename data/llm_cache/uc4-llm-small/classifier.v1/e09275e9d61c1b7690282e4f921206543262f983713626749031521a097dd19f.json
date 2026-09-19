@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1528,
+ "input_hash": "e09275e9d61c1b7690282e4f921206543262f983713626749031521a097dd19f",
+ "latency_ms": 10406.128917005844,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"- run: curl -H \\\"Authorization: Bearer dgtok_4ea44d38176bf1f4065d55316ca942b7\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"name: deploy-Harvest\\non: push\\njobs:\\n  build:\\n    steps:\\n      - run: make build && ./scripts/package.sh --target DACH\\n      - run: curl -H \\\"Authorization: Bearer dgtok_4ea44d38176bf1f4065d55316ca942b7\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This CI configuration file contains an embedded bearer token (a live-looking secret) and is non-public source/configuration code; secrets elevate it to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

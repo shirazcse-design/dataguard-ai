@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "8858f2d8c491569f0f10601b86c8b69245a676353ce22384493436b01578a3a4",
+ "latency_ms": 2543.497125036083,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\",\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"- run: curl -H \\\"Authorization: Bearer dgtok_beab1df3c1761348e62a8a9f2d680032\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"dgtok_beab1df3c1761348e62a8a9f2d680032\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"This is non-public pipeline/build configuration, and it contains a live-looking bearer token. The embedded credential raises the classification to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

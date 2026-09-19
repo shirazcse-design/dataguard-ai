@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1038,
+ "input_hash": "27f8e6aa30e050e2566d5e95f4c08b3894ca52b06e366b63a36dc4807140c8b3",
+ "latency_ms": 8094.417999964207,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an internal HR new-hire onboarding form template with empty fields; it contains no actual personal data or regulated identifiers, so it's ordinary internal business content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

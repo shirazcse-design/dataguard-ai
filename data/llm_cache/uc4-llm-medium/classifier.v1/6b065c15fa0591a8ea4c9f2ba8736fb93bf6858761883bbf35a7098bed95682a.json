@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 113,
+ "input_hash": "6b065c15fa0591a8ea4c9f2ba8736fb93bf6858761883bbf35a7098bed95682a",
+ "latency_ms": 1994.843415915966,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"holding humidity under 39.3% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public process parameter that appears to derive competitive value from secrecy, which fits Trade Secret. That category carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

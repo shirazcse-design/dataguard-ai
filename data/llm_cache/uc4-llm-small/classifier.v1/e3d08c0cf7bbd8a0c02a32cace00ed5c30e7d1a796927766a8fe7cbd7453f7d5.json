@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1272,
+ "input_hash": "e3d08c0cf7bbd8a0c02a32cace00ed5c30e7d1a796927766a8fe7cbd7453f7d5",
+ "latency_ms": 9215.83279198967,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5217,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"export API_KEY=YOUR_API_KEY_HERE\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is a quickstart documentation snippet using placeholders and documented example keys; it contains no real credentials, personal data, financials, source code, or strategic information. It reads like ordinary internal technical documentation rather than sensitive material.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

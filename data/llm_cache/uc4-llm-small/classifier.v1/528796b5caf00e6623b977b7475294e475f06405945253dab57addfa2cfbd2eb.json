@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 595,
+ "input_hash": "528796b5caf00e6623b977b7475294e475f06405945253dab57addfa2cfbd2eb",
+ "latency_ms": 5363.062749966048,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Keiko Ashworth  (MRN-7473774)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: metformin 500 mg - 62 day supply, indication stage 3 chronic kidney disease\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an individually identifiable medical record with patient name, medical record number, medication and diagnosis, which meets the definition of PHI and is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

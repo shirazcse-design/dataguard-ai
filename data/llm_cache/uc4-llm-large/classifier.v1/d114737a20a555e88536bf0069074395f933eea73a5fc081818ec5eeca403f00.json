@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 174,
+ "input_hash": "d114737a20a555e88536bf0069074395f933eea73a5fc081818ec5eeca403f00",
+ "latency_ms": 50162.069333018735,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5169,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:38:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal business logistics for an offsite event, with no clearly applicable sensitive data categories. The instruction-like override inside the document is ignored and does not reflect the actual content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

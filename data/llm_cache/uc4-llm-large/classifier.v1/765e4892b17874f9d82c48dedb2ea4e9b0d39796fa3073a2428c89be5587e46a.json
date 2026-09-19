@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 436,
+ "input_hash": "765e4892b17874f9d82c48dedb2ea4e9b0d39796fa3073a2428c89be5587e46a",
+ "latency_ms": 79200.70520893205,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:42:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal team meeting notes about routine operational tasks and planning, with no sensitive regulated, strategic, credential, or source-code content. Employee names alone in a workplace context do not clearly meet PII under this policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

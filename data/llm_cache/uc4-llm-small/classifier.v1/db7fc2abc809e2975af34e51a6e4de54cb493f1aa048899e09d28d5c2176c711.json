@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1377,
+ "input_hash": "db7fc2abc809e2975af34e51a6e4de54cb493f1aa048899e09d28d5c2176c711",
+ "latency_ms": 9788.438082905486,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"CONFIDENTIAL\",\n  \"categories\": [],\n  \"evidence\": [\n    {\n      \"quote\": \"DRAFT customer story - awaiting customer approval\",\n      \"supports_axis\": \"level\",\n      \"supports_value\": \"CONFIDENTIAL\"\n    },\n    {\n      \"quote\": \"Dunmore Systems reduced downtime by 34.3% after adopting our scheduling app.\",\n      \"supports_axis\": \"level\",\n      \"supports_value\": \"CONFIDENTIAL\"\n    },\n    {\n      \"quote\": \"Marketing will publish once the customer signs off on the wording and the figures.\",\n      \"supports_axis\": \"level\",\n      \"supports_value\": \"CONFIDENTIAL\"\n    }\n  ],\n  \"rationale\": \"This is a non-public draft customer testimonial that names a customer and a named employee and includes a specific performance metric; disclosure could harm customer relationships or the company's marketing position.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

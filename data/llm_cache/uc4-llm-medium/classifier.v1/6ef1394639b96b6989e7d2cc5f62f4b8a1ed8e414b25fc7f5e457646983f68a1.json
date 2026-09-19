@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "6ef1394639b96b6989e7d2cc5f62f4b8a1ed8e414b25fc7f5e457646983f68a1",
+ "latency_ms": 2367.153791943565,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 19.7% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public commercially valuable supply and pricing intelligence whose value derives from secrecy, including exclusive terms and negotiated margin-protecting details. Disclosure could cause severe competitive harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

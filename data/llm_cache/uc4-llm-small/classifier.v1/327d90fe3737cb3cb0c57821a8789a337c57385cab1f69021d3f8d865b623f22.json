@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 786,
+ "input_hash": "327d90fe3737cb3cb0c57821a8789a337c57385cab1f69021d3f8d865b623f22",
+ "latency_ms": 6434.616500046104,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5195,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"case 3239: card 6011-1184-2343-8732 amount $82 reason: item not received\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"case 6464: card 3528 0091 6597 7255 amount $621 reason: duplicate charge\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"case 4617: card 6011-1196-6150-8038 amount $369 reason: duplicate charge\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document lists full payment-card numbers with associated amounts and dispute reasons, which is Financial/PCI data and meets the Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

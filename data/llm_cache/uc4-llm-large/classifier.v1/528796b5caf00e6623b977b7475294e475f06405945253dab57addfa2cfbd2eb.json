@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 2279,
+ "input_hash": "528796b5caf00e6623b977b7475294e475f06405945253dab57addfa2cfbd2eb",
+ "latency_ms": 248614.85720798373,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\",\"PII\"],\"evidence\":[{\"quote\":\"Patient: Keiko Ashworth  (MRN-7473774)\\nFilled: 2027-12-01\\nMedication: metformin 500 mg - 62 day supply, indication stage 3 chronic kidney disease\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Patient: Keiko Ashworth  (MRN-7473774)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is an identifiable prescription record containing a patient's name/MRN together with medication and diagnosis information. PHI makes the document Highly Confidential, and the name plus MRN also qualifies as PII.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

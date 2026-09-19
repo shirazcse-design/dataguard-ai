@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 600,
+ "input_hash": "889ba2729695cda1708e62fa3b9584123ab9d0812d1032508552aa1fe03ddd90",
+ "latency_ms": 5117.8721660980955,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"FINANCIAL_PCI\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Routing: 214452402  Account: 17393309859\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"FINANCIAL_PCI\"\n    }\n  ],\n  \"rationale\": \"The invoice contains bank account and routing numbers for payment remittance, which are financial account details (Financial/PCI) and therefore Highly Confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

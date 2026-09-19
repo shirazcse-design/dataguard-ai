@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 563,
+ "input_hash": "2cca83f54dc6cb8d3c6bf716c11cd4a06898ae3ab7c75f157f3f9687a21b9e13",
+ "latency_ms": 77720.2494579833,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:39:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def get_connection():\\n    host = os.environ[\\\"DB_HOST\\\"]\\n    user = os.environ[\\\"DB_USER\\\"]\\n    password = os.environ[\\\"DB_PASSWORD\\\"]  # injected by the secret manager at runtime\\n    return connect(host=host, user=user, password=password)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public source code implementing a database connection. It references a password via environment variables but does not disclose a live secret, so Source Code applies without Credentials / Secrets.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

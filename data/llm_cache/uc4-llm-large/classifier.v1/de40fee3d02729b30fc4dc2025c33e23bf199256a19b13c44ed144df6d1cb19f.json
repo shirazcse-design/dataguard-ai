@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1180,
+ "input_hash": "de40fee3d02729b30fc4dc2025c33e23bf199256a19b13c44ed144df6d1cb19f",
+ "latency_ms": 179303.07379201986,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 24.6% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public negotiated supply pricing, exclusivity, and margin-protecting commercial terms that derive value from secrecy, which fits Trade Secret. Disclosure could cause severe competitive harm, so the appropriate level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

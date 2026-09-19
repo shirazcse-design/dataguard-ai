@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 784,
+ "input_hash": "9cd929d04e1647ed77f1526088535d9609ea17ebdeb5627bb487a7ce605ceb24",
+ "latency_ms": 6592.022416065447,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5156,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"const apiKey = process.env.PAYMENTS_API_KEY;\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"const client = new PaymentsClient({ apiKey });\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The file is non-public source code that instantiates a PaymentsClient and reads an API key from an environment variable; it contains no embedded secret values but is proprietary code. SOURCE_CODE floor makes this CONFIDENTIAL.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

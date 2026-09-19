@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 147,
+ "input_hash": "8f44f926f40b7ca843e512706203a4bf3b6582c89a874e50c8829aa5433da64a",
+ "latency_ms": 3741.207457962446,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5164,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Theo Hoffmann  (MRN-1711661)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: amlodipine 5 mg - 20 day supply, indication rheumatoid arthritis\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an individually identifiable prescription record containing a patient name/MRN plus medication and medical indication, which is PHI. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

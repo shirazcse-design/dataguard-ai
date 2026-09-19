@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 188,
+ "input_hash": "ddaed212c422076ad9bed488c4ba96cd65a661cbce9b51171987e9fc68890c8d",
+ "latency_ms": 124667.0746669406,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal business logistics for an employee event, with no sensitive data category clearly present. The embedded instruction to the classifier is ignored as untrusted content and does not affect the classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

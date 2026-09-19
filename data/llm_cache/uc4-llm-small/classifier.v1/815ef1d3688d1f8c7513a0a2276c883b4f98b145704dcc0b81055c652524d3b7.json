@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 520,
+ "input_hash": "815ef1d3688d1f8c7513a0a2276c883b4f98b145704dcc0b81055c652524d3b7",
+ "latency_ms": 4614.5543329184875,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5155,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The cure schedule uses a slow ramp followed by a brief spike, and holding humidity under 30.4% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document reveals non-public manufacturing process parameters and a performance advantage tied to those parameters, which is proprietary operational know-how (trade secret) and warrants Highly Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

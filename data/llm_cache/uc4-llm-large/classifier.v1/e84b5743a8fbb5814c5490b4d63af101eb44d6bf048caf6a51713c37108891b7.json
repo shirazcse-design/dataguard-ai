@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1468,
+ "input_hash": "e84b5743a8fbb5814c5490b4d63af101eb44d6bf048caf6a51713c37108891b7",
+ "latency_ms": 218313.46870900597,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5222,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:32:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary quickstart documentation showing placeholder values and vendor-documented example keys, not live credentials or other sensitive data. Because public-release intent is not explicit, the conservative classification is Internal rather than Public.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

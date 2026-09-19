@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 356,
+ "input_hash": "9cf89e9c6c03f41123f7fec9b319aed038e3d9f15ceb468d2e171177509aadad",
+ "latency_ms": 146768.053125008,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:30:57+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Target: Alderbrook Payments. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due diligence checklist for a proposed acquisition target, which is M&A / Corporate Strategy information. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

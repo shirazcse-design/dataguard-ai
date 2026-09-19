@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 629,
+ "input_hash": "c4ed18c439770f6c7aae2cec6993bd786c50b55a3aa5183fff40820240608667",
+ "latency_ms": 99295.43066699989,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:43:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_8b562c4a9d1a2bb819945bacb6988c90\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"- run: make build && ./scripts/package.sh --target North America\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This CI configuration is non-public build/configuration logic and includes a live-looking bearer token. The embedded secret raises the document to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 393,
+ "input_hash": "ccf9a4a2cbb594a1f3644198c80844738069cd045639d92a1fd253882486ed17",
+ "latency_ms": 3712.6454170793295,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:00+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Routine internal facilities team meeting notes listing attendees and operational items; no regulated data, credentials, financials, or proprietary strategy are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

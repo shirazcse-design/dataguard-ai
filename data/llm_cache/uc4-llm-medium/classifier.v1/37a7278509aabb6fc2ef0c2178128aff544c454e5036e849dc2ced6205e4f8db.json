@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 178,
+ "input_hash": "37a7278509aabb6fc2ef0c2178128aff544c454e5036e849dc2ced6205e4f8db",
+ "latency_ms": 2681.7830830113962,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\",\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"name: deploy-Indigo\\non: push\\njobs:\\n  build:\\n    steps:\\n      - run: make build && ./scripts/package.sh --target North America\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"dgtok_8b562c4a9d1a2bb819945bacb6988c90\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"This is non-public CI/build configuration, which is Source Code, and it embeds a live-looking bearer token. The credentials content drives the classification to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

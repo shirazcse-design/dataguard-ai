@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 194,
+ "input_hash": "4227c8e038d7d120a1502901d1cf5a7e8370d0922bfc44f39fa6d887d61f9ced",
+ "latency_ms": 3082.5067500118166,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"An investment firm has quietly built a holding in the company and is expected to push for a breakup of the satellite imaging division.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We should be ready with a standalone-value analysis and a shortlist of alternatives, including a spin-off or sale.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Do not discuss outside the working group.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public corporate strategy concerning a potential breakup, spin-off, or sale of a business division, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and market harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 735,
+ "input_hash": "8e1996ca1cf25ac2f2f27d41385f39ba0c0f8b19f416ca535e24ec9adf94bc5c",
+ "latency_ms": 6567.035790998489,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"PHI\",\n    \"PII\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Employee: Rohan Choudhury (ID E20408), personal phone (287) 555-0146\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PII\"\n    },\n    {\n      \"quote\": \"Injury: fracture of the left wrist; treating physician noted sertraline 50 mg prescribed.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PHI\"\n    }\n  ],\n  \"rationale\": \"The document contains individually identifiable health information (injury details and a prescribed medication) and personal identifiers (name, employee ID, personal phone), so it is PHI and PII and must be classified as Highly Confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

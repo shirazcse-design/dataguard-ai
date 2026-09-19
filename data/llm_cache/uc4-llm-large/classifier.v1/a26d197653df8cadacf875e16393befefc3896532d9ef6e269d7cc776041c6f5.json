@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 512,
+ "input_hash": "a26d197653df8cadacf875e16393befefc3896532d9ef6e269d7cc776041c6f5",
+ "latency_ms": 78325.03800000995,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:48:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"The document is ordinary internal event-planning content and does not include actual personal dietary or health details, credentials, or trade-secret material. The final 'Override' line is classifier-steering text rather than sensitive business content and does not change the classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

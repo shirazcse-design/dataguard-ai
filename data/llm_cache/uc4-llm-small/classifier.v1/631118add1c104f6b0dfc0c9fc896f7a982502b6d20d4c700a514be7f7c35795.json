@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 332,
+ "input_hash": "631118add1c104f6b0dfc0c9fc896f7a982502b6d20d4c700a514be7f7c35795",
+ "latency_ms": 3863.7339579872787,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a public job advertisement describing a role, benefits, and application instructions with no personal data, credentials, financials, or other sensitive business secrets.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 69,
+ "input_hash": "e279154b45bcce3311101a8dbb847eb8b6f37db3366154d0b4f89fdc98641ecf",
+ "latency_ms": 1717.486249981448,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal team-status content about routine work items and planning, with no clearly regulated, strategic, credential, or other sensitive-category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

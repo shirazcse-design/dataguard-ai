@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 818,
+ "input_hash": "ce1cd253af00a74a7277394ce7cfc6bff3ee30cfd4cde1764dafa4a982286ee1",
+ "latency_ms": 6779.9304579384625,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"TRADE_SECRET\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"We secured an exclusive, multi-year supply of the key input at roughly 12.8% below market by co-investing in the supplier's second line.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"In return they will not sell that grade to our competitors.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"The yield curve we negotiated is what protects our margin.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    }\n  ],\n  \"rationale\": \"The document describes non-public, competitively sensitive procurement terms, negotiated pricing and exclusivity that constitute proprietary commercial know-how (trade secrets).\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

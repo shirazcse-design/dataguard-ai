@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1053,
+ "input_hash": "b49c086cd1972143daa2f13036cdb5cc821c6280a77227ecaf324d04f84ee463",
+ "latency_ms": 8293.358207913116,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5285,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:19:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"2025-10-27 09:14:02 DEBUG auth header Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtOTk3NSIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.s2NqkHWr6eLvd0eT41bJKZUsxrdimvog1N4zaZpnAvC\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The log contains a live-looking Authorization Bearer token (JWT), which is an authentication secret and thus Highly Confidential under the credentials/secrets category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

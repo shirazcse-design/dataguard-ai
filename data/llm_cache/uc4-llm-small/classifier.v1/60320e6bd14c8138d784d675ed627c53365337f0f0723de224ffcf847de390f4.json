@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1062,
+ "input_hash": "60320e6bd14c8138d784d675ed627c53365337f0f0723de224ffcf847de390f4",
+ "latency_ms": 8627.7388749877,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:28:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Target: Eastvale Software. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Project Willow - Due Diligence Checklist (STRICTLY CONFIDENTIAL)\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a due diligence checklist for a proposed acquisition (non-public M&A / corporate strategy material), which is highly sensitive and could cause severe competitive or financial harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

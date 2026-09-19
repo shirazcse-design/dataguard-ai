@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 471,
+ "input_hash": "b0153aa96f0b31133750792708408ba4058a936083c788c52fb0f7f482c68f28",
+ "latency_ms": 46712.23491698038,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:32:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"An investment firm has quietly built a holding in the company and is expected to push for a breakup of the cloud security software division.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We should be ready with a standalone-value analysis and a shortlist of alternatives, including a spin-off or sale.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public corporate strategy regarding a potential breakup, spin-off, or sale of a business division. Disclosure could cause severe competitive and market harm, so the M&A / Corporate Strategy category and Highly Confidential level apply.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

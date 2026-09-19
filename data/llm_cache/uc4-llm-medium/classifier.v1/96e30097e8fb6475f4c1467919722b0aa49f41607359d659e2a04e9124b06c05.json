@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 142,
+ "input_hash": "96e30097e8fb6475f4c1467919722b0aa49f41607359d659e2a04e9124b06c05",
+ "latency_ms": 2234.8471670411527,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Target: Kingfisher Capital.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public due diligence material for a proposed acquisition, which clearly falls under M&A / Corporate Strategy. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

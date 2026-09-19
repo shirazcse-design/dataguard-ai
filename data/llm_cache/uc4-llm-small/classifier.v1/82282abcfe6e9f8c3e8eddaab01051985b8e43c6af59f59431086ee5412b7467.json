@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 783,
+ "input_hash": "82282abcfe6e9f8c3e8eddaab01051985b8e43c6af59f59431086ee5412b7467",
+ "latency_ms": 6247.902709059417,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing: 275174554  Account: 62881200657\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Amount due: $51,432\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The invoice contains bank routing and account numbers and a specific payment amount, which are payment/bank-account data and non-public financial details requiring a Highly Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1317,
+ "input_hash": "c0059bd3baf30543f8717453ae5c83df089c65b9043ab46f657abaa003aa71d0",
+ "latency_ms": 9607.32025001198,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5196,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Error dropped by about 55.9% in all 9 test runs.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Next: repeat on the second prototype, then talk to Sabine Larsen in Legal about protecting it before we present anywhere.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"To our knowledge nobody has reported this approach.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"Unpublished experimental results and a novel calibration method are described; the team explicitly plans to protect the idea, indicating both intellectual-property and trade-secret value, which warrants Highly Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

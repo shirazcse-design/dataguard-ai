@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 665,
+ "input_hash": "2bc64c12165e63c2e2f796be716ab37aa29c13d9477d4684b2282177eaa2d8a0",
+ "latency_ms": 79450.36662498023,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5159,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:49:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The cure schedule uses a slow ramp followed by a brief spike, and holding humidity under 43.0% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"holding humidity under 43.0% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document describes specific process parameters and know-how that provide competitive advantage, which clearly fits Trade Secret. Trade Secret content carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

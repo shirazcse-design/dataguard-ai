@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 202,
+ "input_hash": "690eff21404d1a0e58cd033b6010aa9db31c22a18b372c8b28ed842911dc4725",
+ "latency_ms": 2739.559166948311,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5202,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"To our knowledge nobody has reported this approach.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"talk to Chiara Delacroix in Legal about protecting it before we present anywhere.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public research notebook describing a novel technical method and unpublished results, which clearly fits Intellectual Property. External disclosure could harm the organization by compromising protection of the invention, but the excerpt does not clearly rise to trade-secret specificity.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

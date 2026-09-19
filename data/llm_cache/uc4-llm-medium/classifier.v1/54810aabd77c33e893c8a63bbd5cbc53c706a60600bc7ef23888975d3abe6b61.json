@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "54810aabd77c33e893c8a63bbd5cbc53c706a60600bc7ef23888975d3abe6b61",
+ "latency_ms": 2625.369790941477,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"4111111451277829\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"6011111806940564\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"378282252230311\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains full payment card numbers in a chargeback review, which clearly meets Financial / PCI criteria and requires the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

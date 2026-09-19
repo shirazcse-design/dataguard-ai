@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 485,
+ "input_hash": "c986b2680840795435534ca49bb4c8d6b32776ed83e0e13ff3feb6982b900441",
+ "latency_ms": 50482.02541691717,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:44:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank HR form template for collecting employee information, but it contains no filled personal, tax, birth-date, address, or bank-account data. It is ordinary internal business content and not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

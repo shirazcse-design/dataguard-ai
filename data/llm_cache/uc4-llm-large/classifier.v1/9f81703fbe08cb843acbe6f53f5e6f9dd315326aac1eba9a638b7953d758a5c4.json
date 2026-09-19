@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1717,
+ "input_hash": "9f81703fbe08cb843acbe6f53f5e6f9dd315326aac1eba9a638b7953d758a5c4",
+ "latency_ms": 82812.66758299898,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:35:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Redwater Biosciences reduced downtime by 39.7% after adopting our battery pack.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is an unapproved draft customer case study containing customer-specific results and messaging. Because it is not yet approved for release, premature disclosure could plausibly harm the company or the customer relationship, so Confidential is the safer classification.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

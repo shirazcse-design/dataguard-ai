@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 830,
+ "input_hash": "c32c8e31d27d78d2a1454ce33d92f545952a04c89eb8e8336d2e4db73953abcc",
+ "latency_ms": 6486.339250113815,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5284,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"CREDENTIALS_SECRETS\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"2026-09-12 09:14:02 DEBUG auth header Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtMTMyMyIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.I1uT8f2yF1fyu6B8yOxG5L6kTwxBcRIan85LieJFvqh\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"CREDENTIALS_SECRETS\"\n    }\n  ],\n  \"rationale\": \"The log contains an unredacted Authorization: Bearer token (JWT), which is a live credential and therefore Highly Confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

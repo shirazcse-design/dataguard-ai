@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1143,
+ "input_hash": "455f72b58d15990f2914f30e4b551e5efc2b534feb7b27d4d8cab7b11f0c996f",
+ "latency_ms": 150236.84595804662,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT customer story - awaiting customer approval\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Marketing will publish once the customer signs off on the wording and the figures.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Quillon Holdings reduced downtime by 26.1% after adopting our edge gateway.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft customer marketing story pending customer approval, and it includes customer-specific performance claims. No listed sensitive data category clearly applies, but premature external disclosure could plausibly harm the organization or the customer relationship.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

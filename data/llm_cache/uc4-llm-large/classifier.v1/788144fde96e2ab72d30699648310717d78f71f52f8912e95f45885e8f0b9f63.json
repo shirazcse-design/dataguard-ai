@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 282,
+ "input_hash": "788144fde96e2ab72d30699648310717d78f71f52f8912e95f45885e8f0b9f63",
+ "latency_ms": 63472.69370802678,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:44:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal event-planning content about an offsite schedule and venue logistics. It contains no clear regulated data, credentials, source code, or strategic information, and the embedded instruction to the classifier is ignored.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

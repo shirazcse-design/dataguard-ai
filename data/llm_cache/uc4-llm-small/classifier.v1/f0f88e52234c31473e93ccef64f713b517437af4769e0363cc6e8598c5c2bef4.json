@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 640,
+ "input_hash": "f0f88e52234c31473e93ccef64f713b517437af4769e0363cc6e8598c5c2bef4",
+ "latency_ms": 5424.570875009522,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"FINANCIAL_PCI\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"case 9674: card 4111111451277829 amount $157 reason: duplicate charge\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"FINANCIAL_PCI\"\n    },\n    {\n      \"quote\": \"case 3050: card 6011111806940564 amount $158 reason: item not received\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"FINANCIAL_PCI\"\n    },\n    {\n      \"quote\": \"case 5225: card 378282252230311 amount $80 reason: item not received\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"FINANCIAL_PCI\"\n    }\n  ],\n  \"rationale\": \"The document contains full payment card numbers and associated transaction details, which are Financial/PCI data and require a Highly Confidential classification.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

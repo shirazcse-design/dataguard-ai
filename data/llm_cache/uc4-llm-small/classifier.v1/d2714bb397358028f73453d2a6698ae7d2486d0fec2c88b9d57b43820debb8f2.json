@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 838,
+ "input_hash": "d2714bb397358028f73453d2a6698ae7d2486d0fec2c88b9d57b43820debb8f2",
+ "latency_ms": 6861.242625047453,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:11+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"PHI\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Patient: Olivia Ibrahim  (MRN-3845359)\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PHI\"\n    },\n    {\n      \"quote\": \"Medication: sumatriptan 50 mg - 66 day supply, indication moderate persistent asthma\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PHI\"\n    }\n  ],\n  \"rationale\": \"The document contains individually identifiable health information (patient name plus medical record number) and clinical details (medication and indication), which meet the PHI definition and require Highly Confidential handling.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

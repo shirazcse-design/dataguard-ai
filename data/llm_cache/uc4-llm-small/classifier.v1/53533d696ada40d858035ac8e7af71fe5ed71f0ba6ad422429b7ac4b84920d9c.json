@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 857,
+ "input_hash": "53533d696ada40d858035ac8e7af71fe5ed71f0ba6ad422429b7ac4b84920d9c",
+ "latency_ms": 7242.310625035316,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5197,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"MA_CORP_STRATEGY\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"Project Trident - Due Diligence Checklist (STRICTLY CONFIDENTIAL)\",\n      \"supports_axis\": \"level\",\n      \"supports_value\": \"HIGHLY_CONFIDENTIAL\"\n    },\n    {\n      \"quote\": \"Target: Marlowe Payments. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"MA_CORP_STRATEGY\"\n    }\n  ],\n  \"rationale\": \"This is a non-public due diligence checklist for a proposed acquisition (Project Trident / Marlowe Payments), which is M&A / corporate strategy information and therefore Highly Confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

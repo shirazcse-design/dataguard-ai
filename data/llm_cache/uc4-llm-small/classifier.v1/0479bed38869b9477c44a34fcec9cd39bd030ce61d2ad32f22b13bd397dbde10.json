@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1016,
+ "input_hash": "0479bed38869b9477c44a34fcec9cd39bd030ce61d2ad32f22b13bd397dbde10",
+ "latency_ms": 7929.621040937491,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"TRADE_SECRET\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"We secured an exclusive, multi-year supply of the key input at roughly 16.5% below market by co-investing in the supplier's second line.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"In return they will not sell that grade to our competitors.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"The yield curve we negotiated is what protects our margin.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    }\n  ],\n  \"rationale\": \"Non-public procurement terms—exclusive multi-year supply, below-market pricing, and negotiated yield protections—are strategic, competitively sensitive business secrets and meet the Trade Secret definition.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

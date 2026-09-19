@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1015,
+ "input_hash": "ed1258d66a43d7b0cf6cfd8bbdd728bd20783e5a4a2dfad58b23eb26435c7c1b",
+ "latency_ms": 7983.784249983728,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:29:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"HIGHLY_CONFIDENTIAL\",\n  \"categories\": [\n    \"TRADE_SECRET\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"We secured an exclusive, multi-year supply of the key input at roughly 24.7% below market by co-investing in the supplier's second line.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"they will not sell that grade to our competitors.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    },\n    {\n      \"quote\": \"The yield curve we negotiated is what protects our margin.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"TRADE_SECRET\"\n    }\n  ],\n  \"rationale\": \"The document contains non-public negotiated supplier terms—exclusive supply, below-market pricing, and margin-protecting yield arrangements—that constitute proprietary commercially valuable know-how (trade secrets).\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

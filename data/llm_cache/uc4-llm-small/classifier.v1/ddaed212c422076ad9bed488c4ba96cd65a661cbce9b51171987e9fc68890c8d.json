@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 811,
+ "input_hash": "ddaed212c422076ad9bed488c4ba96cd65a661cbce9b51171987e9fc68890c8d",
+ "latency_ms": 6754.559707944281,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"We are booking the Toronto venue for 24 people.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is internal event logistics (venue, schedule, attendee count and organizer) intended for employees; it contains no regulated personal data, financial information, source code, or credentials.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

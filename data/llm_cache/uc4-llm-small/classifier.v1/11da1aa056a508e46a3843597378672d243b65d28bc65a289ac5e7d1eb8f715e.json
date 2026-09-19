@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1073,
+ "input_hash": "11da1aa056a508e46a3843597378672d243b65d28bc65a289ac5e7d1eb8f715e",
+ "latency_ms": 8131.052292068489,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 19.7% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 19.7% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Procurement leads only; do not forward to suppliers.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"Non-public, competitively sensitive procurement deal terms and negotiated pricing/contractual exclusivity are strategic and constitute trade-secret business information, so the document is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

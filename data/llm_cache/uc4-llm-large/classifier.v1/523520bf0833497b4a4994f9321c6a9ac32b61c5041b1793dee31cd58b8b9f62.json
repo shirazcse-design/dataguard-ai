@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 809,
+ "input_hash": "523520bf0833497b4a4994f9321c6a9ac32b61c5041b1793dee31cd58b8b9f62",
+ "latency_ms": 73215.32008296344,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5179,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:44:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Zane told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"These notes identify a named employee and describe private family and immigration circumstances, which clearly meet the PII definition. External disclosure would plausibly harm the individual, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

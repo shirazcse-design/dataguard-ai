@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 163,
+ "input_hash": "ad6be24f1a00d8819f11db61c29f7d07822d8ca5c0cb731d2869a7b867babc13",
+ "latency_ms": 22548.966916045174,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:41:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal team-status content with routine work items and no clearly regulated, strategic, credential, or other sensitive-category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

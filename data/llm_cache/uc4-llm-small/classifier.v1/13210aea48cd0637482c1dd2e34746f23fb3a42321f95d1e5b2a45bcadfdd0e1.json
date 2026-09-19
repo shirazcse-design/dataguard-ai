@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 666,
+ "input_hash": "13210aea48cd0637482c1dd2e34746f23fb3a42321f95d1e5b2a45bcadfdd0e1",
+ "latency_ms": 5488.209625007585,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:25:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Customer Success team sync - Monday\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"Routine internal team meeting notes with attendee names and ordinary action items, no regulated data, credentials, or strategic secrets.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

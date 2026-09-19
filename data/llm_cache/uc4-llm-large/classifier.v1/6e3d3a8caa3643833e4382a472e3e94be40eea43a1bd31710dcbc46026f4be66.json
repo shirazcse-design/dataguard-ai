@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1231,
+ "input_hash": "6e3d3a8caa3643833e4382a472e3e94be40eea43a1bd31710dcbc46026f4be66",
+ "latency_ms": 87392.5925840158,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5217,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is instructional quickstart documentation using placeholders and documented example keys rather than live credentials, so no sensitive category clearly applies. Because the excerpt does not clearly indicate public-release intent, INTERNAL is the conservative classification.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

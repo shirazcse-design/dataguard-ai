@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 195,
+ "input_hash": "809e1f716c5745db46d959d5d5bf6365ad8249c8a4ea37283fd44ced526a9f0b",
+ "latency_ms": 3046.251417021267,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"We propose a self-calibrating estimator for low-cost sensors and show that it reduces drift by 47.3% on a benchmark of 25 devices.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Draft manuscript - not yet submitted\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"We plan to submit to a peer-reviewed venue once co-authors have approved the text.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is an unpublished research draft describing a novel method and results, which clearly fits Intellectual Property. Because it is not yet submitted or publicly released, external disclosure could harm the organization but does not clearly rise to a highly confidential category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 411,
+ "input_hash": "e23a3e42c6cffdfb05f3c392aec7f2d3665c670912c78145299cbb82338dad11",
+ "latency_ms": 3661.764958058484,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"INTERNAL\",\n  \"categories\": [],\n  \"evidence\": [],\n  \"rationale\": \"Ordinary internal team meeting notes listing attendees and progress items; contains no regulated identifiers, credentials, financial data, or proprietary strategy.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

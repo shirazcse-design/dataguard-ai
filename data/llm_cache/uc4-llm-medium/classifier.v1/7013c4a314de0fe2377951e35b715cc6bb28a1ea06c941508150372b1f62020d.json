@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "7013c4a314de0fe2377951e35b715cc6bb28a1ea06c941508150372b1f62020d",
+ "latency_ms": 2955.213792040013,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 16.5% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public commercially valuable negotiating terms and pricing intelligence that derive value from secrecy, which fits Trade Secret. Disclosure could cause severe competitive harm by revealing exclusive supply and margin-protecting terms.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

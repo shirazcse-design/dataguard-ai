@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 363,
+ "input_hash": "f0f88e52234c31473e93ccef64f713b517437af4769e0363cc6e8598c5c2bef4",
+ "latency_ms": 78877.22616700921,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:45:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"card 4111111451277829\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"card 6011111806940564\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"card 378282252230311\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains full payment card numbers in a chargeback review, which clearly meets the Financial / PCI category. That category has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

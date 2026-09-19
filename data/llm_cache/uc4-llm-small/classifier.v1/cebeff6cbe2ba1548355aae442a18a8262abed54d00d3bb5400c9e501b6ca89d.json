@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 288,
+ "input_hash": "cebeff6cbe2ba1548355aae442a18a8262abed54d00d3bb5400c9e501b6ca89d",
+ "latency_ms": 2762.155291973613,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5223,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"PUBLIC\",\n  \"categories\": [],\n  \"evidence\": [],\n  \"rationale\": \"This is a publicly-facing careers FAQ with general information about offices, hiring timelines, visa sponsorship, and an application URL; it contains no sensitive or regulated data.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

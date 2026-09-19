@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 183,
+ "input_hash": "94bfd321a357d20c150f1bfe2c54a8a07ff6a3aa80dffd4389602effdaec5a1c",
+ "latency_ms": 3045.752750011161,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:22:11+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 24.6% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public negotiated supply and pricing intelligence that derives value from secrecy and would cause significant competitive harm if disclosed. That fits Trade Secret content, which sets the level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

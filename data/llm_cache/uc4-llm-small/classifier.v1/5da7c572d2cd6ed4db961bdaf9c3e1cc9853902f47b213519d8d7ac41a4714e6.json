@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 402,
+ "input_hash": "5da7c572d2cd6ed4db961bdaf9c3e1cc9853902f47b213519d8d7ac41a4714e6",
+ "latency_ms": 3900.310083059594,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5213,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:11+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[],\"rationale\":\"This quickstart contains only placeholder API key examples and documented example AWS keys explicitly labeled as not real; there are no real credentials, personal data, or internal/strategic information.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

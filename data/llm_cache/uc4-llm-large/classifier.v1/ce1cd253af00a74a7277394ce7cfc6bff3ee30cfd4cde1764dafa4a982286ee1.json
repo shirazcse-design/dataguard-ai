@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1316,
+ "input_hash": "ce1cd253af00a74a7277394ce7cfc6bff3ee30cfd4cde1764dafa4a982286ee1",
+ "latency_ms": 169864.80195797049,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:31:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We secured an exclusive, multi-year supply of the key input at roughly 12.8% below market by co-investing in the supplier's second line.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"In return they will not sell that grade to our competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The yield curve we negotiated is what protects our margin.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public negotiated supply and pricing terms whose value depends on secrecy, including exclusive supply, below-market pricing, and margin-protecting yield terms. That fits Trade Secret and supports a Highly Confidential level because disclosure could cause severe competitive harm.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

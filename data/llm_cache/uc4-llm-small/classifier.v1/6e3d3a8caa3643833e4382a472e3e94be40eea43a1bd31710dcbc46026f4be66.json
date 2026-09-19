@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 656,
+ "input_hash": "6e3d3a8caa3643833e4382a472e3e94be40eea43a1bd31710dcbc46026f4be66",
+ "latency_ms": 5646.525708958507,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5220,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:18:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[],\"rationale\":\"The document contains only placeholder and clearly labeled example API keys and guidance; no real credentials, personal data, or proprietary secrets are present, so it is suitable for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1006,
+ "input_hash": "b6c6d923fe85c06c6bb95e61e90371d6e460ae3248cc7a4e184fe93d958907df",
+ "latency_ms": 175719.11795798223,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:47:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Felix Iglesias  (MRN-0984219)\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Medication: ibuprofen 400 mg - 46 day supply, indication essential hypertension\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is individually identifiable health information because it links a named patient and MRN to a prescription and medical indication. PHI requires a Highly Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

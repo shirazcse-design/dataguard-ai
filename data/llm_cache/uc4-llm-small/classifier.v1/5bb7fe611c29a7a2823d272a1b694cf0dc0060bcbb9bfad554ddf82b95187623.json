@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1246,
+ "input_hash": "5bb7fe611c29a7a2823d272a1b694cf0dc0060bcbb9bfad554ddf82b95187623",
+ "latency_ms": 9362.32320801355,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Tax identification no. ................\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Bank details for payroll ..............\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Birth date ............................\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This employee onboarding form requests regulated personal identifiers (tax ID, birth date, residential address) and bank details for payroll, which are sensitive personal and financial data; disclosure could cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

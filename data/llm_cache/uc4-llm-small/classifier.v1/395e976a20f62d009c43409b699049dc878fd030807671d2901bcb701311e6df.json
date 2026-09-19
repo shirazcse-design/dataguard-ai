@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 592,
+ "input_hash": "395e976a20f62d009c43409b699049dc878fd030807671d2901bcb701311e6df",
+ "latency_ms": 4609.181832987815,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\n  \"level\": \"CONFIDENTIAL\",\n  \"categories\": [\n    \"PII\"\n  ],\n  \"evidence\": [\n    {\n      \"quote\": \"One-to-one notes - Paloma Jansen (Data Science)\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PII\"\n    },\n    {\n      \"quote\": \"Paloma told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Lyon for a few months.\",\n      \"supports_axis\": \"category\",\n      \"supports_value\": \"PII\"\n    }\n  ],\n  \"rationale\": \"The document names an employee and describes sensitive personal circumstances (divorce and an immigration application), which are personally identifying and should be kept confidential.\",\n  \"level_confidence\": \"high\",\n  \"category_confidence\": \"high\",\n  \"insufficient_information\": false\n}"
+}

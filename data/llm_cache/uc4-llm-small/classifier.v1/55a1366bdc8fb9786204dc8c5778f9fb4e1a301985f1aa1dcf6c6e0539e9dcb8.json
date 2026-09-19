@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 434,
+ "input_hash": "55a1366bdc8fb9786204dc8c5778f9fb4e1a301985f1aa1dcf6c6e0539e9dcb8",
+ "latency_ms": 4397.26708305534,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:28:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Join Alderbrook Networks\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"How to apply: send a short note and your resume through our public careers page.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public-facing job posting / careers FAQ with no personal, financial, credential, or proprietary information.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

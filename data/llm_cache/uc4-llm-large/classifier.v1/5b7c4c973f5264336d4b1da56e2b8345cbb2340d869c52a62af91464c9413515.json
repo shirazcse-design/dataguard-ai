@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 176,
+ "input_hash": "5b7c4c973f5264336d4b1da56e2b8345cbb2340d869c52a62af91464c9413515",
+ "latency_ms": 39276.45591599867,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5176,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:43:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank onboarding form template with empty fields, not completed personal records. It appears to be ordinary internal HR business content and does not clearly contain any sensitive data category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

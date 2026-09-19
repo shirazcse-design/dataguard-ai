@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 195,
+ "input_hash": "168e1c7bc1f86b3ab2140a58cc7dd228a6176a4559c09c578cb98614ff0f3662",
+ "latency_ms": 2384.365375037305,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5292,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtNTczNiIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.JHPiiXvtUR5wk2C5VfEFJpaB4prkGFH1UlT3ncwGPA3\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The log contains a live-looking bearer token in an authorization header, which is credentials/secrets material and warrants the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

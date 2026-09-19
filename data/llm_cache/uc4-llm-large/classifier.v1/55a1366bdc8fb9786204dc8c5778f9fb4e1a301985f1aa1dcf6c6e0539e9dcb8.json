@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 442,
+ "input_hash": "55a1366bdc8fb9786204dc8c5778f9fb4e1a301985f1aa1dcf6c6e0539e9dcb8",
+ "latency_ms": 44008.200583048165,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:45:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"through our public careers page.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a recruiting posting intended for external applicants, with explicit reference to a public careers page. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

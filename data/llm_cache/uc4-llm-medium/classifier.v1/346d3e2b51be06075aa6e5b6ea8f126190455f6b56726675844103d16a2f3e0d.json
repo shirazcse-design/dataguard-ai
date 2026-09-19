@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 169,
+ "input_hash": "346d3e2b51be06075aa6e5b6ea8f126190455f6b56726675844103d16a2f3e0d",
+ "latency_ms": 2555.4384170100093,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Dmitri Farrow (Operations)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Dmitri told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is non-public manager/HR-style information about a named employee's private family and immigration circumstances, which clearly meets the PII definition. Disclosure could harm the individual and the organization, but the content does not clearly include a higher-floor category such as PHI, credentials, or payment data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

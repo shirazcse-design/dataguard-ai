@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1446,
+ "input_hash": "c32c8e31d27d78d2a1454ce33d92f545952a04c89eb8e8336d2e4db73953abcc",
+ "latency_ms": 136827.85783300642,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5281,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:36:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtMTMyMyIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.I1uT8f2yF1fyu6B8yOxG5L6kTwxBcRIan85LieJFvqh\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The log contains a live-looking bearer token in an Authorization header, which is credential material. Credentials / Secrets requires HIGHLY_CONFIDENTIAL handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

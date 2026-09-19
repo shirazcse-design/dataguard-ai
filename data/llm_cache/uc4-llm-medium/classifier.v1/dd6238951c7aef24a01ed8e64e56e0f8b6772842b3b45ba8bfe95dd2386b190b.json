@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 179,
+ "input_hash": "dd6238951c7aef24a01ed8e64e56e0f8b6772842b3b45ba8bfe95dd2386b190b",
+ "latency_ms": 2865.6273330561817,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:21:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\",\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"- run: curl -H \\\"Authorization: Bearer dgtok_4ea44d38176bf1f4065d55316ca942b7\\\" https://deploy.corp.example/api/release\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"dgtok_4ea44d38176bf1f4065d55316ca942b7\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"This is non-public CI/CD configuration logic, and it contains a live-looking bearer token. The embedded secret raises the classification to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

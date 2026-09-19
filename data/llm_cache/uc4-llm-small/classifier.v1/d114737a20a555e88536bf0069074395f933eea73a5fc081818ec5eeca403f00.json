@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 855,
+ "input_hash": "d114737a20a555e88536bf0069074395f933eea73a5fc081818ec5eeca403f00",
+ "latency_ms": 7166.241083992645,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Routine internal event logistics (venue, times, attendee count) with a coordinator's name for contact; it contains no financial, health, credential, source code, trade-secret or other regulated personal data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

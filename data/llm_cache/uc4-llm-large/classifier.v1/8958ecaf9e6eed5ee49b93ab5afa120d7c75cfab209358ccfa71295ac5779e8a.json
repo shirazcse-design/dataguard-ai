@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 765,
+ "input_hash": "8958ecaf9e6eed5ee49b93ab5afa120d7c75cfab209358ccfa71295ac5779e8a",
+ "latency_ms": 72288.53762499057,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:33:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\",\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"dgtok_beab1df3c1761348e62a8a9f2d680032\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"      - run: make build && ./scripts/package.sh --target North America\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The file is non-public build/deployment configuration and embeds a live-looking bearer token, so it contains both Source Code and Credentials / Secrets. The embedded secret raises the document to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 1040,
+ "input_hash": "64818bf5a40172346cd8448882914e72e7980a1920b5a7299ed8f40a10752e3c",
+ "latency_ms": 8594.082957948558,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5159,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The cure schedule uses a slow ramp followed by a brief spike, and holding humidity under 30.9% during the spike is what lifts our first-pass yield above competitors.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"This document discloses precise, non-public process parameters (cure schedule and a specific humidity target) that provide a competitive advantage, fitting the Trade Secret category and the HIGHLY_CONFIDENTIAL level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

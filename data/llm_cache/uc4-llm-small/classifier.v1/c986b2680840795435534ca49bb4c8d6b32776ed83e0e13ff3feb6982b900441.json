@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 396,
+ "input_hash": "c986b2680840795435534ca49bb4c8d6b32776ed83e0e13ff3feb6982b900441",
+ "latency_ms": 4129.527542041615,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:27:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a blank internal new-hire data-sheet template requesting employee fields but contains no actual personal or regulated data; it's ordinary internal HR paperwork.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

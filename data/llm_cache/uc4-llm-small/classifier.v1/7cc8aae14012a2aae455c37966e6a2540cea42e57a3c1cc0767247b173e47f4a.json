@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 684,
+ "input_hash": "7cc8aae14012a2aae455c37966e6a2540cea42e57a3c1cc0767247b173e47f4a",
+ "latency_ms": 5695.35050005652,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:23:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"One-to-one notes - Oluwaseun Hargrove (Legal)\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Oluwaseun told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Leeds for a few months.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document names an employee and describes private personal circumstances (divorce, immigration application and work-location request), which are identifying personal information; this fits PII and warrants Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

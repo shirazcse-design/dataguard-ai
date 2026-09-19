@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 984,
+ "input_hash": "df8d6dfa11733ada14163bc24b5ff755b4cbc98e73fbcb95cca104957e7a7d2d",
+ "latency_ms": 7568.86687502265,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5292,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:24:57+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"2026-06-17 09:14:02 DEBUG auth header Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtNTczNiIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.JHPiiXvtUR5wk2C5VfEFJpaB4prkGFH1UlT3ncwGPA3\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The log contains a live-looking Authorization Bearer token (credential/secret); such authentication material is HIGHLY_CONFIDENTIAL.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

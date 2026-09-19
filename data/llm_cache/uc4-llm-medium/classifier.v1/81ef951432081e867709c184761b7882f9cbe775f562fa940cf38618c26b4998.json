@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 112,
+ "input_hash": "81ef951432081e867709c184761b7882f9cbe775f562fa940cf38618c26b4998",
+ "latency_ms": 1911.4974999101833,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:20:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing: 551692569  Account: 50192561070\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The invoice includes bank transfer details with a routing number and account number, which clearly meets the Financial / PCI category. That category has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

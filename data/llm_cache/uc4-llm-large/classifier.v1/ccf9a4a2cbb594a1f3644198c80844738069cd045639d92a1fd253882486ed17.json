@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 222,
+ "input_hash": "ccf9a4a2cbb594a1f3644198c80844738069cd045639d92a1fd253882486ed17",
+ "latency_ms": 31985.073082963936,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:37:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"Ordinary internal team meeting notes about routine work items and planning, with no sensitive data categories clearly present. The employee names listed in a business meeting context do not by themselves make the document PII under this policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

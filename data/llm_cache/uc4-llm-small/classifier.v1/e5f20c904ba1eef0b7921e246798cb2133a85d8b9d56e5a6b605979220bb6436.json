@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 398,
+ "input_hash": "e5f20c904ba1eef0b7921e246798cb2133a85d8b9d56e5a6b605979220bb6436",
+ "latency_ms": 3930.003749905154,
+ "model_id": "uc4-llm-small",
+ "prompt_tokens": 5233,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:26:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5-mini-2025-08-07",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a public-facing hiring FAQ with office locations, process timing, visa sponsorship and an application URL; it contains no personal, regulated, or proprietary information.\", \"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

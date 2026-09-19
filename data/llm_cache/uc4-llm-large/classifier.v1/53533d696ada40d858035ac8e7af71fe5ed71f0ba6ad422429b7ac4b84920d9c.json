@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 491,
+ "input_hash": "53533d696ada40d858035ac8e7af71fe5ed71f0ba6ad422429b7ac4b84920d9c",
+ "latency_ms": 43748.414875008166,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5194,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-19T20:43:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Target: Marlowe Payments. Workstreams for the proposed acquisition: financial, legal, IP, HR, tax, IT.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public due diligence checklist for a proposed acquisition target, which is M&A / Corporate Strategy content. That category carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}
