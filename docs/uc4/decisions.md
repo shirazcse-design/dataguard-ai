@@ -85,3 +85,19 @@ during build, open to review.
 
 Implementation notes: `validate-harness` now defaults to the development splits (it previously included
 test); the oracle interval check was corrected to expect FPR to collapse to 0 rather than 1.
+
+## Implementation decisions (Phase 3 - Rules Engine)
+
+| # | Decision | Why |
+|---|---|---|
+| D3.1 | The detector catalog was pre-registered (`rules-catalog.md`) and committed before any rule was written; every later change is classified and logged (`rules-changelog.md`). | The rules author also authored the dataset; pre-registration and a change log limit and expose overfitting. |
+| D3.2 | Protocol: errors inspected on train; dev at checkpoints; calibration untouched until the final report; the locked test split is not used. | Keeps a clean-ish holdout. The ruleset was frozen at 1.0.3 before the final report. |
+| D3.3 | Standalone abstention default is the config key `standalone_default_level: INTERNAL`; abstention is surfaced as `routing.abstained`, level confidence `none`, and an `abstained` field on records. Rules never output PUBLIC. | A16: no rule match does not mean Public. |
+| D3.4 | Labels raise, never lower; PUBLIC/INTERNAL labels are ignored as evidence. | Stale/spoofable labels must not downgrade content. |
+| D3.5 | No positive "public" detector (e.g. press-release or licence markers do not set the level to PUBLIC). | Spoofable; the pre-registered catalog excludes it. Open-source licences only suppress `SOURCE_CODE`. |
+| D3.6 | Strength is a tier; only `strong`+ assert a category or level (`emit_min_strength`, configurable). Weak evidence is kept, asserting nothing. | Rule strength is not a probability; weak hints belong to a later stage. |
+| D3.7 | Regexes and validators live in code; lexicons, thresholds and dummy values live in version-controlled config. Ruleset version is bumped on any change. | Definitions in configuration (A5) without embedding regex escaping in YAML. |
+| D3.8 | Evidence excerpts are masked/short; a test proves no raw matched value appears in evidence across all development documents. | No unnecessary exposure of sensitive values. |
+| D3.9 | Scan cap lowered to 100,000 characters after measuring a 732 ms adversarial case; content beyond it is not scanned. | Meet the PRD 500 ms pre-check target for hostile input; stated limitation. |
+| D3.10 | Harness additions: `abstained` and `decoy_for` on records, abstention rate, and a hard-negative block (decoy-hit rate). | Needed to report abstention, coverage and hard-negative failures for any approach. |
+| D3.11 | The Rules Engine was NOT evaluated on the locked test split. | The user approved train/dev development only; a single audited report-only test run can be requested once the ruleset is frozen. |

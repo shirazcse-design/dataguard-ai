@@ -104,6 +104,7 @@ def render_run_report(result: EvaluationResult) -> str:
                 "review required",
                 "review rate",
                 "auto-decided",
+                "abstained (rate)",
             ],
             [
                 [
@@ -113,6 +114,7 @@ def render_run_report(result: EvaluationResult) -> str:
                     cov["n_review_required"],
                     cov["review_rate"],
                     cov["n_auto_decided"],
+                    f"{cov['n_abstained']} ({_f(cov['abstention_rate'])})",
                 ]
             ],
         )
@@ -281,6 +283,23 @@ def render_run_report(result: EvaluationResult) -> str:
         add("The perfect-reviewer row is HYPOTHETICAL and is not a measured result.")
     add("")
 
+    hn = m["hard_negatives"]
+    add("## Hard negatives (T4)")
+    add("")
+    if hn["n_docs"]:
+        add(
+            f"{hn['n_docs']} hard-negative documents in {hn['n_families']} families. **Decoy-hit rate "
+            f"{_f(hn['decoy_hit_rate'])}** (a decoy hit = the prediction contains the category or level "
+            "the document merely resembles); any false-positive category "
+            f"{_f(hn['any_false_positive_category_rate'])}; predicted high-risk although not "
+            f"{_f(hn['high_risk_false_positive_rate'])}."
+        )
+        if hn["families_with_decoy_hits"]:
+            add("")
+            add(f"Families with decoy hits (documents): `{hn['families_with_decoy_hits']}`")
+    else:
+        add("No T4 documents in this run.")
+    add("")
     add("## Slices")
     add("")
     add(

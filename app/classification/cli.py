@@ -194,6 +194,10 @@ def _build_classifier(args: argparse.Namespace, bundle, docs):
     )
 
     policy = bundle.policy
+    if args.classifier == "rules":
+        from rules import build_rules_classifier
+
+        return build_rules_classifier(bundle, args.config_dir)
     if args.classifier == "oracle":
         return OracleClassifier.from_docs(docs, policy)
     if args.classifier == "majority":
@@ -262,7 +266,52 @@ def _cmd_eval_run(args: argparse.Namespace) -> int:
     sm = m["small_sample_labels"]
     for axis in ("levels", "categories"):
         for label, n in sm[axis].items():
-            print(f"  SMALL_SAMPLE: {axis[:-1]} {label} has only {n} gold positives")
+            noun = "level" if axis == "levels" else "category"
+            print(f"  SMALL_SAMPLE: {noun} {label} has only {n} gold positives")
+    return 0
+
+
+def _cmd_rules_analyze(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.rules_analysis import analyze, render
+    from rules import build_rules_classifier
+
+    bundle = load_config(args.config_dir)
+    splits = _resolve_splits(args.split)
+    if splits is None or "test" in splits:
+        print("rules analyze works on train, calibration and dev only", file=sys.stderr)
+        return 2
+    docs = _load_split_docs(args, splits)
+    clf = build_rules_classifier(bundle, args.config_dir)
+    text = render(analyze(clf, docs, bundle.policy), f"Rules error analysis ({', '.join(splits)})")
+    if args.out:
+        Path(args.out).write_text(text, encoding="utf-8")
+        print(f"wrote {args.out}")
+    else:
+        print(text)
+    return 0
+
+
+def _cmd_rules_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.rules_report import build_rules_report
+    from rules import build_rules_classifier
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    by_split = {s: [d for d in docs if d.split == s] for s in DEVELOPMENT_SPLITS}
+    clf = build_rules_classifier(bundle, args.config_dir)
+    text = build_rules_report(bundle, clf, by_split, load_manifest(args.data_dir), git_info())
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/rules-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
     return 0
 
 
@@ -352,7 +401,9 @@ def build_parser() -> argparse.ArgumentParser:
     ev = sub.add_parser("eval", help="evaluation harness commands")
     ev_sub = ev.add_subparsers(dest="eval_command", required=True)
     run = ev_sub.add_parser("run", help="evaluate a sanity classifier on dataset splits")
-    run.add_argument("--classifier", choices=["oracle", "majority", "random"], required=True)
+    run.add_argument(
+        "--classifier", choices=["oracle", "majority", "random", "rules"], required=True
+    )
     run.add_argument(
         "--split",
         default="dev",
@@ -372,6 +423,22 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--config-dir", default=None)
     run.add_argument("--data-dir", default=None)
     run.set_defaults(func=_cmd_eval_run)
+    rules = sub.add_parser("rules", help="Rules Engine commands")
+    rules_sub = rules.add_subparsers(dest="rules_command", required=True)
+    an = rules_sub.add_parser("analyze", help="per-family error analysis on development splits")
+    an.add_argument("--split", default="train")
+    an.add_argument("--out", default=None)
+    an.add_argument("--config-dir", default=None)
+    an.add_argument("--data-dir", default=None)
+    an.set_defaults(func=_cmd_rules_analyze)
+    rp = rules_sub.add_parser(
+        "report", help="write the Rules baseline results (development splits)"
+    )
+    rp.add_argument("--out", default=None)
+    rp.add_argument("--config-dir", default=None)
+    rp.add_argument("--data-dir", default=None)
+    rp.set_defaults(func=_cmd_rules_report)
+
     val = ev_sub.add_parser(
         "validate-harness", help="validate the harness with oracle/majority/random"
     )

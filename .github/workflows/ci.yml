@@ -73,9 +73,22 @@ jobs:
       # Exits non-zero if any of the harness self-checks fails.
       - run: dataguard-uc4 eval validate-harness --out-dir "$RUNNER_TEMP/harness-validation"
 
+  rules-baseline:
+    name: Rules Engine dev evaluation + baseline report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      # Development splits only: the locked test split is refused without --allow-locked-test.
+      - run: dataguard-uc4 eval run --classifier rules --split all --runs-dir "$RUNNER_TEMP/runs"
+      - run: dataguard-uc4 rules report --out "$RUNNER_TEMP/rules-baseline.md"
+
   # ---------------------------------------------------------------------------------------------
   # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):
-  #   Phase 3: rules eval + <=500 ms latency budget        (requires explicit approval)
   #   Phase 4: seeded ML retrain + eval
   #   Phase 5: full LLM + hybrid eval on release/dispatch, via OIDC (no long-lived secrets)
   #   Security: dependency scan, secret scanning (with fake-secret allowlist), CodeQL

@@ -26,6 +26,7 @@ class PredictionRecord(StrictModel):
     format: str
     generator: str
     ambiguity_flag: bool
+    decoy_for: list[str] = Field(default_factory=list)  # T4: what this hard negative resembles
 
     # ground truth (from the dataset + the configured high-risk definition)
     gold_level: str
@@ -40,6 +41,7 @@ class PredictionRecord(StrictModel):
     pred_categories: list[str] = Field(default_factory=list)
     pred_high_risk: bool = False  # ALWAYS re-derived by the harness from the configured definition
     review_required: bool = False
+    abstained: bool = False  # the approach reported no decisive level signal
     classifier_high_risk_mismatch: bool = False  # classifier's own high_risk disagreed with ours
 
     # cost / time

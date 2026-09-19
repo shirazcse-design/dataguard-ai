@@ -21,11 +21,11 @@ from app.classification.interfaces import Classifier
 from .bootstrap import bootstrap_intervals
 from .dataset.schema import DatasetDocument
 from .lock import LockedTestAuthorization, check_access
-from .metrics import compact, compute_metrics, round_floats
+from .metrics import compact, compute_metrics, hard_negative_metrics, round_floats
 from .records import PredictionRecord
 from .runner import run_classifier
 
-HARNESS_VERSION = "1.0.0"
+HARNESS_VERSION = "1.1.0"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -150,6 +150,7 @@ def build_metrics(records: list[PredictionRecord], bundle: ConfigBundle) -> dict
             "small_sample_labels": small,
         },
         "all_tiers": compute_metrics(records, levels, cats),
+        "hard_negatives": hard_negative_metrics(records),
         "slices": slices,
     }
 

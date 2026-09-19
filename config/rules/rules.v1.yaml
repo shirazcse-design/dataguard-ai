@@ -1,0 +1,88 @@
+# UC4 Rules Engine configuration (Approach A).  See docs/uc4/rules-catalog.md.
+#
+# Lexicons and thresholds live here (version-controlled); regexes and validators live in code
+# (rules/detectors/). Bump ruleset_version on ANY change here or to a detector.
+
+ruleset_version: 1.0.3
+taxonomy_version: 1.0.0
+
+# ---------------------------------------------------------------------------------------------
+# NO RULE MATCH DOES NOT MEAN THE DOCUMENT IS PUBLIC.
+# When rules find no level evidence they ABSTAIN. This default is applied ONLY by the standalone
+# Rules benchmark so it can be scored; the hybrid path will escalate to ML/LLM instead.
+# ---------------------------------------------------------------------------------------------
+standalone_default_level: INTERNAL
+
+# Inputs larger than this are truncated before scanning (bounds worst-case latency for hostile or
+# huge inputs against the PRD 500 ms pre-check target; a warning is recorded). Sensitive content
+# beyond the cap is NOT scanned - a stated limitation.
+max_content_chars: 100000
+
+# Minimum strength for a detection to ASSERT a category. Weaker evidence is retained but abstains.
+emit_min_strength:
+  default: strong
+  overrides: {}
+
+context:
+  window_chars: 60           # characters either side of a match searched for context terms
+  header_context_chars: 400  # start of the document scanned for document-level negative context
+  placeholder_terms: [example, sample, dummy, placeholder, fake, mock, "not a real", "e.g.", "for illustration", "lorem ipsum"]
+  test_terms: ["test data", "test card", "test cards", "test number", "test numbers", "test values", "test fixtures", "test fixture", sandbox, fixture, fixtures, "for testing", "qa data", synthetic]
+  documentation_terms: [documentation, tutorial, quickstart, "getting started", awareness, training, guide, policy, template, "how to", faq, overview]
+  filename_negative_tokens: [test, tests, sample, samples, example, examples, fixture, fixtures, mock, demo, dummy, template]
+  known_dummy:
+    ssn: ["123-45-6789", "078-05-1120", "000-00-0000", "111-11-1111", "222-22-2222", "333-33-3333", "999-99-9999", "123-12-1234"]
+    # Card numbers that payment processors publish for testing (never move funds).
+    pan: ["4111111111111111", "4242424242424242", "4000000000000002", "4012888888881881", "5555555555554444", "5105105105105100", "5500000000000004", "378282246310005", "371449635398431", "378734493671000", "6011111111111117", "6011000990139424", "3530111333300000", "3566002020360505", "30569309025904", "38520000023237"]
+    aws_access_key: ["AKIAIOSFODNN7EXAMPLE"]
+
+existing_labels:
+  # Embedded labels and banners can RAISE the level floor; they never lower it, and PUBLIC or
+  # INTERNAL labels are not evidence of low sensitivity.
+  banner_max_line_chars: 100   # a banner line is a short line among the first few lines
+  banner_lines: 3
+  # A banner is a short line that is MOSTLY the marking itself (`TRADE SECRET - RESTRICTED`), not a
+  # sentence that merely contains the words. Guards against injected or incidental text.
+  banner_min_marking_fraction: 0.25
+  levels:
+    HIGHLY_CONFIDENTIAL: ["strictly confidential", "highly confidential", "top secret", restricted, "deal team only"]
+    CONFIDENTIAL: [confidential, "proprietary and confidential"]
+
+lexicons:
+  pii_id_keywords: [ssn, "social security", "national id", "national identification", "tax id", taxpayer, itin, "ss#", "id number"]
+  passport_keywords: [passport]
+  dob_keywords: ["date of birth", dob, "birth date", birthdate]
+  pii_field_labels: ["home address", "residential address", "mailing address", "address on file", "home phone", "personal phone"]
+  card_keywords: [card, pan, visa, mastercard, amex, "credit card", "debit card", expiry, cvv, cvc]
+  routing_keywords: [routing, aba, rtn]
+  account_keywords: ["account number", "account no", acct, account]
+  icd_context_keywords: [diagnosis, dx, icd, assessment, dg1, "principal diagnosis"]
+  ssn_negative_keywords: [part, sku, order, tracking, invoice, ticket, serial, "item no", "part no", shipment, model]
+  clinical_terms: [diagnosis, patient, prescribed, prescription, medication, dosage, symptoms, "treatment plan", discharge, admission, biopsy, pathology, radiology, "lab results", clinician, physician, "chief complaint", prognosis, "medical history", allergies, "blood pressure", specimen, immunization, vaccine, "insurance claim"]
+  financial_results_terms: [revenue, "operating margin", guidance, earnings, "cash reserves", ebitda, "net debt", leverage, covenant, forecast, "annual recurring revenue", "net revenue retention", "gross margin", "operating income", "full-year"]
+  nonpublic_terms: ["not yet released", "not yet been announced", "before the announcement", "ahead of any public disclosure", "not for circulation", "do not discuss", "hold until", embargoed, "have not been told", "has not been announced", "non-public", "not public", "prior to release", "pre-announcement", "before we report", "not yet reported"]
+  published_terms: [published, "annual report", "investor relations", "press release", "already announced"]
+  mna_transaction_terms: [acquire, acquisition, merger, divest, divestiture, takeover, buyout, "stake in", "spin-off", "offer for", "sale of the", "make an offer", "purchase of", "bid for", "sell the"]
+  mna_secrecy_terms: [unannounced, "not been announced", "not yet announced", "not public", "nothing is public", "do not discuss", "do not mention", "deal team", quietly, "before the announcement", "not been discussed outside", "keep this within", "confidential talks", "cannot signal", "until then, no comment", "not to be shared"]
+  mna_markers: ["letter of intent", "term sheet", "due diligence", "exclusivity period", "definitive agreement", "heads of terms", "non-binding offer", "data room"]
+  mna_announced_terms: ["announced today", "today announced", "has announced", "have announced", "was announced", "press release", "for immediate release", "completed the acquisition", "case study", historical, "subject to regulatory approval", "shares rose"]
+  ip_markers: ["invention disclosure", "patent pending", "patent-pending", "patent application", "provisional patent", "draft claims", "not yet filed", "prior art", "attorney work product"]
+  ip_negative_terms: ["published application", "publication wo", granted, "issued patent", "patent office", "already published"]
+  ip_novelty_terms: [novel, "not been reported", "no one has", "not described in the literature", unpublished, "we have invented", nobody, "we believe is new"]
+  ts_markers: ["trade secret", "trade-secret"]
+  ts_negative_terms: ["trade secrets act", "trade secret law", "trade secret laws", misappropriation, "not a trade secret"]
+  ts_secrecy_terms: ["proprietary process", "know-how", "secret sauce", "shop secret", "do not disclose", formulation, "proprietary algorithm", "not published"]
+  # Short aliases that are only recognised when they are the WHOLE key name (so `pass =` matches but
+  # `compass =` does not).
+  secret_key_names_exact: [pass, pw]
+  secret_key_names: [password, passwd, pwd, secret, apikey, api_key, api-key, token, access_key, private_key, credential, credentials, passphrase]
+  placeholder_values: [your_, your-, changeme, change_me, xxxx, "****", redacted, todo, none, "null", secret_here, password_here, insert, replace, example, dummy, placeholder, sample, "<", "${", "%{", "{{"]
+  env_lookups: ["os.environ", "process.env", getenv, "env(", "os.getenv", "secrets.", "vault", "keyring"]
+
+code:
+  code_extensions: [py, js, ts, jsx, tsx, java, go, rb, rs, c, cc, cpp, h, hpp, cs, php, swift, kt, scala, sh, bash, ps1, sql, tf, pl, lua, dart, groovy]
+  code_filenames: [Dockerfile]
+  min_code_lines: 4
+  min_density: 0.3
+  oss_license_terms: ["mit license", "apache license", "apache-2.0", "bsd license", "gnu general public license", "spdx-license-identifier", "mozilla public license", "permission is hereby granted, free of charge"]
+  proprietary_terms: [proprietary, confidential, "internal use", "all rights reserved", "do not distribute"]

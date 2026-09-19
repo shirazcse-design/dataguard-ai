@@ -205,6 +205,8 @@ def coverage(records: Sequence[PredictionRecord]) -> dict[str, Any]:
         "n_with_prediction": sum(r.has_prediction for r in records),
         "n_failed": sum(r.failed for r in records),
         "n_deferred_to_review": sum(r.deferred for r in records),
+        "n_abstained": sum(r.abstained for r in records),
+        "abstention_rate": _div(sum(r.abstained for r in records), n),
         "n_review_required": sum(r.deferred or r.review_required for r in records),
         "review_rate": _div(sum(r.deferred or r.review_required for r in records), n),
         "n_auto_decided": sum(r.status in ("ok", "degraded") and r.has_prediction for r in records),
@@ -256,6 +258,55 @@ def compact(metrics: dict[str, Any]) -> dict[str, Any]:
         "docs_with_false_positive_category": metrics["categories"][
             "docs_with_false_positive_category"
         ],
+    }
+
+
+def hard_negative_metrics(records: Sequence[PredictionRecord]) -> dict[str, Any]:
+    """How often T4 hard negatives trigger the class they merely RESEMBLE.
+
+    * decoy_hit_rate: share of T4 documents where the prediction contains a category or the level
+      the document is a declared decoy for (the specific failure T4 is designed to expose).
+    * any_false_positive_category_rate: share with ANY predicted category not in the gold labels.
+    * high_risk_false_positive_rate: share of T4 documents predicted high-risk (none is high-risk
+      by gold, except source-code negatives whose gold categories are not in the high-risk list).
+    A missing prediction is not a false positive.
+    """
+    t4 = [r for r in records if r.tier == "T4"]
+    n = len(t4)
+
+    def decoy_hit(r: PredictionRecord) -> bool:
+        if not r.has_prediction:
+            return False
+        return bool(set(r.pred_categories) & set(r.decoy_for)) or r.pred_level in r.decoy_for
+
+    def any_fp(r: PredictionRecord) -> bool:
+        return r.has_prediction and bool(set(r.pred_categories) - set(r.gold_categories))
+
+    def hr_fp(r: PredictionRecord) -> bool:
+        return r.has_prediction and r.pred_high_risk and not r.gold_high_risk
+
+    by_family: dict[str, dict[str, int]] = {}
+    for r in t4:
+        f = by_family.setdefault(
+            r.family_id, {"n_docs": 0, "decoy_hits": 0, "false_positive_docs": 0}
+        )
+        f["n_docs"] += 1
+        f["decoy_hits"] += decoy_hit(r)
+        f["false_positive_docs"] += any_fp(r) or hr_fp(r) or decoy_hit(r)
+    return {
+        "n_docs": n,
+        "n_families": len(by_family),
+        "decoy_hit_rate": _div(sum(map(decoy_hit, t4)), n),
+        "any_false_positive_category_rate": _div(sum(map(any_fp, t4)), n),
+        "high_risk_false_positive_rate": _div(sum(map(hr_fp, t4)), n),
+        "families_with_decoy_hits": {
+            k: v["decoy_hits"] for k, v in sorted(by_family.items()) if v["decoy_hits"]
+        },
+        "families_with_any_false_positive": {
+            k: v["false_positive_docs"]
+            for k, v in sorted(by_family.items())
+            if v["false_positive_docs"]
+        },
     }
 
 
