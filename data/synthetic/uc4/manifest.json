@@ -3,7 +3,6 @@
     "unreviewed": 853
   },
   "config_file_hashes": {
-    "eval/eval.v1.yaml": "bccb9c2d81e8a21549f8e7d83080e988c86416765d1daf6b27a5e4143890197c",
     "taxonomy/high_risk.v1.yaml": "5ba1edd95b8acbac149a5c1abb072e4587b1a1cf5a645896e9587769fdc03c24",
     "taxonomy/taxonomy.v1.yaml": "4cd881ce5e62fed7c7b447b2e5313e415a22de864c98f552a085245b43e344bf"
   },

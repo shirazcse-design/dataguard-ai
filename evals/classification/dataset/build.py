@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from app.classification.config_loader import ConfigBundle
+from app.classification.config_loader import HIGH_RISK_FILE, TAXONOMY_FILE, ConfigBundle
 from app.classification.schemas.common import sha256_text
 
 from .generator import generate_dataset
@@ -95,7 +95,11 @@ def build_dataset(config: ConfigBundle, spec_dir: Path | str | None = None) -> B
         "seed": spec.dataset.seed,
         "taxonomy_version": policy.taxonomy_version,
         "high_risk_version": policy.high_risk_version,
-        "config_file_hashes": config.file_hashes,
+        # Only the configuration the dataset depends on. The evaluation config is deliberately
+        # excluded: changing evaluation settings must not invalidate the dataset.
+        "config_file_hashes": {
+            k: v for k, v in config.file_hashes.items() if k in (TAXONOMY_FILE, HIGH_RISK_FILE)
+        },
         "spec_hash": spec.spec_hash,
         "dataset_sha256": dataset_sha,
         "n_documents": len(docs),
