@@ -1,0 +1,11 @@
+# Evaluation targets from the PRD (13.8), as approved: the F1 target is defined as macro-F1 on EACH
+# axis (two separate gates, never combined), and high-risk recall is a separate INFORMATIONAL
+# reference that must never determine success alone (report precision, FPR and review rate beside it).
+# Passing a gate on the development split is NOT a release gate when dev was used to choose the
+# configuration.
+gates_version: 1.0.0
+gates:
+  level_macro_f1: 0.85
+  category_macro_f1: 0.85
+  high_risk_recall: 0.90
+tool_call_limit_s: 10.0          # informational: PRD tool-call limit (architecture section 19)

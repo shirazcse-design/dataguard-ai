@@ -49,18 +49,21 @@ tiers:
   small:
     alias: llm_small
     deployment_env: DATAGUARD_LLM_DEPLOYMENT_SMALL
+    replay_model_id: uc4-llm-small
     api: chat_completions
     send_temperature: false
     price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}
   mid:
     alias: llm_mid
     deployment_env: DATAGUARD_LLM_DEPLOYMENT_MID
+    replay_model_id: uc4-llm-medium
     api: chat_completions
     send_temperature: true
     price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}
   large:
     alias: llm_large
     deployment_env: DATAGUARD_LLM_DEPLOYMENT_LARGE
+    replay_model_id: uc4-llm-large
     api: responses
     send_temperature: false
     price: {input_per_1k_usd: null, output_per_1k_usd: null, retrieved_on: null}

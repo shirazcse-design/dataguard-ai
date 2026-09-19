@@ -412,11 +412,23 @@ def test_builder_reads_only_development_splits(parts, monkeypatch):
     assert seen and all(s and "test" not in s and auth is None for s, auth in seen)
 
 
-def test_construction_errors_are_clear(parts, monkeypatch):
+def test_replay_defaults_to_the_recorded_benchmark_identity_from_config(parts, monkeypatch):
+    monkeypatch.delenv("DATAGUARD_LLM_DEPLOYMENT_SMALL", raising=False)
+    clf = build_llm_classifier(parts.bundle, tier="small", mode="replay", data_dir=DEFAULT_DATA_DIR)
+    assert clf.client.model_id == parts.cfg.tiers["small"].replay_model_id == "uc4-llm-small"
+
+
+def test_construction_errors_are_clear(parts, monkeypatch, config_copy):
     common = dict(data_dir=DEFAULT_DATA_DIR)
     monkeypatch.delenv("DATAGUARD_LLM_DEPLOYMENT_SMALL", raising=False)
+    cfg_file = config_copy / "llm/llm.v1.yaml"
+    cfg_file.write_text(
+        "\n".join(x for x in cfg_file.read_text().splitlines() if "replay_model_id" not in x) + "\n"
+    )
     with pytest.raises(ValueError, match="needs --llm-model-id"):
-        build_llm_classifier(parts.bundle, tier="small", mode="replay", **common)
+        build_llm_classifier(
+            parts.bundle, tier="small", mode="replay", config_dir=config_copy, **common
+        )
     with pytest.raises(LLMError) as exc:
         build_llm_classifier(parts.bundle, tier="small", mode="foundry", **common)
     assert exc.value.kind == "not_configured" and "DATAGUARD_LLM_DEPLOYMENT_SMALL" in str(exc.value)
