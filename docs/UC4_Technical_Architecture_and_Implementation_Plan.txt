@@ -1,0 +1,528 @@
+# UC4 Technical Architecture & Implementation Plan
+DataGuard AI — Use Case 4: Sensitive Data Discovery & Classification
+
+Status: Draft, awaiting approval. No implementation has started.
+
+**Legend used throughout**
+- **[PRD §x]** is a requirement from the PRD.
+- **[DEC-n]** is one of the approved product decisions, numbered as in the approval message (1 taxonomy, 2 discovery scope, 3 high-risk, 4 persona, 5 RAG, 6 agent architecture, 7 MCP, 8 evaluation, 9 synthetic dataset, 10 confidence).
+- **[REC]** is an architectural recommendation. It is not approved and is open to change.
+
+---
+
+## 1. UC4 architecture
+
+The design is a **shared classification service** with a deterministic router. It is not an agent [DEC-6]. Every approach (Rules, ML, LLM, Hybrid) implements one common `Classifier` interface [REC]. The service and the offline evaluation harness therefore run the same code paths, and the benchmark measures the real thing.
+
+```
+ Caller: CLI / JSON API now  ·  MCP adapter later [DEC-7]
+        │  ClassificationRequest
+        ▼
+┌──────────────────────── ClassificationService ────────────────────────┐
+│ S0 Intake + input guardrails (size, encoding, injection scan)         │
+│ S1 Rules engine        (Approach A) → RulesResult                     │
+│ S2 ML classifier       (Approach B) → MLResult, calibrated            │
+│ S3 LLM classifier      (Approach C) → LLMResult, evidence-verified    │
+│    Router (Approach D): deterministic state machine + thresholds      │
+│ S4 Fusion + taxonomy-consistency enforcement                          │
+│ S5 Human-review decision + output guardrails + telemetry              │
+└───────────────────────────────────────────────────────────────────────┘
+   ▲ config/ (taxonomy, high-risk, floors, routing, pricing) — version-controlled [DEC-5]
+   ▲ Eval harness (offline): runs each approach standalone AND the hybrid on the same dataset [DEC-8]
+```
+
+Four structural rules:
+- **Route:** Rules → ML → LLM (small, then large at most once) → Human Review [DEC-6, PRD §6.2, §12.4].
+- **No RAG.** Definitions come from version-controlled config [DEC-5]. The LLM prompt is *generated from* the taxonomy config so there is a single source of truth [REC].
+- **Never default to Public on failure.** Any path that cannot decide routes to review [REC].
+- **Provider code sits behind interfaces** [PRD §22.10].
+
+---
+
+## 2. Component responsibilities
+
+| Component | Responsibility | Must not |
+|---|---|---|
+| **Intake/Guardrails** [PRD §12.1] | Validate schema, size, encoding, emptiness. Scan for injection patterns. Compute `content_hash`. | Alter content, except to normalize a copy |
+| **Rules Engine (A)** | Detect patterns, dictionaries, labels, and metadata signals. Emit evidence spans and strength tiers. | Claim "Public" from absence of signal |
+| **ML Classifier (B)** | Predict level and categories with calibrated probabilities and feature-attribution evidence. | Consume rule outputs as features (keeps A/B independent in the benchmark) |
+| **LLM Classifier (C)** | Semantic classification via schema-constrained output with verbatim evidence. | Self-certify its own confidence as a probability |
+| **Router (D)** | Deterministic stage sequencing, thresholds, budgets, and escalation. | Contain any model reasoning [PRD §11.1] |
+| **Fusion** | Merge stage outputs. Enforce level ≥ category floors. Derive `high_risk` from config. | Lower a rules-derived floor |
+| **Review Decider** | Emit `review_required` with reason codes and a provisional label. | Block; it only flags |
+| **Telemetry** | Emit structured events and spans, with no raw content [PRD §16.1]. | Log document text or unmasked secrets |
+| **Eval Harness** | Dataset loading, split integrity, metrics, calibration, cost, reports, and CI gates. | Contain placeholder or hand-typed numbers [DEC-8] |
+| **Config Loader** | Validate and version taxonomy, high-risk, floors, and routing. Fail fast on version mismatch. | Hard-code the high-risk definition [DEC-3] |
+
+---
+
+## 3. Input/output schemas [REC, conforming to PRD §4.12: "Document/text + metadata → label + confidence + evidence"]
+
+**ClassificationRequest**
+```yaml
+schema_version: "1.0"
+request_id: uuid
+document:
+  document_id: str|null            # synthetic-repo id
+  content: str                     # extracted text (see open item 5)
+  filename: str
+  extension: str
+  size_bytes: int
+  existing_labels: [{scheme: str, value: str}]   # e.g. embedded "CONFIDENTIAL" header
+  metadata: {str: str}             # path, author-role, source system, etc.
+options:
+  mode: hybrid | rules | ml | llm  # single-approach modes exist for benchmarking
+  max_llm_tier: none | small | large
+  budget: {max_cost_usd: float, max_latency_ms: int}
+  include_evidence: bool
+caller: {caller_id: str, purpose: str}           # populated by MCP later
+```
+
+**ClassificationResult**
+```yaml
+schema_version: "1.0"
+request_id, document_id, content_hash
+status: ok | degraded | review_required | rejected | error
+level:      {value: PUBLIC|INTERNAL|CONFIDENTIAL|HIGHLY_CONFIDENTIAL, confidence: Confidence, decided_by: rules|ml|llm|fusion}
+categories: [{id, confidence: Confidence, decided_by, evidence_ids: [..]}]   # zero or more
+high_risk:  {value: bool, reasons: [{axis, value}], config_version}          # derived, never predicted directly [DEC-3]
+review:     {required: bool, reason_codes: [..], provisional: bool, priority: int|null}
+evidence:   [Evidence]
+routing:    {stages_run: [..], stop_reason, escalations: int, short_circuited: bool}
+versions:   {taxonomy, ruleset, ml_model, prompt, llm_deployment, router_config, high_risk_config}
+telemetry:  {latency_ms: {per_stage..., total}, tokens: {...}, est_cost_usd}
+guardrail_events: [..]
+warnings: [..]
+```
+`high_risk` is derived from config after classification. That is how [DEC-3]'s "configurable, not hard-coded" is satisfied.
+
+---
+
+## 4. Taxonomy schema [DEC-1, DEC-5]
+
+Version-controlled in `config/taxonomy/taxonomy.v1.yaml`.
+
+```yaml
+taxonomy_version: 1.0.0
+levels:            # exactly one per document
+  - {id: PUBLIC, rank: 0, description: ..., }
+  - {id: INTERNAL, rank: 1}
+  - {id: CONFIDENTIAL, rank: 2}
+  - {id: HIGHLY_CONFIDENTIAL, rank: 3}
+categories:        # zero or more per document
+  - id: PII | PHI | FINANCIAL_PCI | SOURCE_CODE | CREDENTIALS_SECRETS |
+        INTELLECTUAL_PROPERTY | TRADE_SECRET | MA_CORP_STRATEGY
+    description: ...
+    positive_examples: [...]
+    counter_examples: [...]           # feeds hard-negative design and prompt
+    level_floor: <level id>           # see below
+constraints:
+  enforce_level_floors: true          # toggleable, benchmarked
+```
+
+**High-risk config** (`config/taxonomy/high_risk.v1.yaml`) [DEC-3]:
+```yaml
+high_risk_version: 1.0.0
+categories: [PII, PHI, FINANCIAL_PCI, CREDENTIALS_SECRETS, TRADE_SECRET]
+levels: [HIGHLY_CONFIDENTIAL]
+combine: any
+```
+
+**[REC] Level floors need approval.** The M&A example (Highly Confidential) implies a category → minimum-level mapping. These are *placeholder defaults*. The real owner is the Data Classification Standard, which is not in the repo yet.
+
+| Category | Proposed floor |
+|---|---|
+| PII | Confidential |
+| PHI | Highly Confidential |
+| Financial / PCI | Highly Confidential |
+| Credentials / Secrets | Highly Confidential |
+| Trade Secret | Highly Confidential |
+| M&A / Corporate Strategy | Highly Confidential |
+| Intellectual Property | Confidential |
+| Source Code | Confidential |
+
+**[REC] Overlap warning.** Trade Secret, Intellectual Property, and M&A overlap semantically. Without written labeling guidelines (`docs/uc4/labeling-guidelines.md`), the ground truth will be inconsistent and every approach will look worse than it is. These guidelines are a Phase 1 deliverable.
+
+---
+
+## 5. Evidence schema [REC; PRD §4.12, §8.4, §14.1]
+
+```yaml
+evidence_id: str
+source: rules | ml | llm | metadata
+supports: {axis: level|category, value: str}
+type: pattern_match | validator_passed | dictionary_hit | existing_label |
+      filename_signal | feature_attribution | llm_excerpt | llm_rationale
+locator: {char_start, char_end, line}|null
+excerpt: str|null          # truncated; ALWAYS masked for PCI/PII/secrets
+excerpt_hash: str
+detector: {id, version}|null
+strength: definitive | strong | weak | n/a
+weight: float|null         # ML signed contribution
+verified: bool             # LLM excerpts: confirmed to be a substring of the input
+provenance: observed | inferred   # maps to PRD §8.4: observed evidence vs model inference
+```
+`provenance` carries the PRD's grounding contract. Rules spans are `observed`, LLM excerpts that pass verification are `observed`, and LLM rationale and ML attribution are `inferred`.
+
+---
+
+## 6. Confidence contract [DEC-10]
+
+The core principle: **`confidence` is not a single comparable number.** Each value declares its kind, and only an *empirically validated mapping* turns it into a routing signal.
+
+```yaml
+Confidence:
+  kind: rule_strength | calibrated_probability | verbalized_bucket
+  raw: float|str
+  calibrated: bool
+  calibration_ref: str|null        # id of the calibration artifact used
+  est_reliability: float|null      # measured precision at this raw value on dev data; null if unmeasured
+```
+
+| Approach | Emits | What it means | What it does *not* mean |
+|---|---|---|---|
+| **Rules** | `rule_strength`: definitive / strong / weak. Definitive means a checksum or structural validator passed *and* context supports it. | Detector certainty, and how much a hit is worth | A probability. **No hit means abstain, not Public.** |
+| **ML** | `calibrated_probability` per axis. Sigmoid (Platt) or isotonic calibration fitted on a dedicated calibration split. Isotonic only if the split is large enough. Reported with ECE, Brier, and reliability curves. | A probability *in-distribution* | Trustworthy out-of-distribution. Calibration on synthetic data says little about real data, and the docs must state this. |
+| **LLM** | `verbalized_bucket` (low/medium/high). Optionally self-consistency agreement over n samples. Logprobs only if the deployment exposes them. | An ordinal hint | A probability |
+
+**How the router uses these:**
+1. Raw values are never compared across approaches.
+2. Each approach gets an `est_reliability` table built from **dev-split** results (for example, "LLM-small says *high*: 0.93 measured precision").
+3. Router thresholds are expressed against `est_reliability`, and the resulting cutoffs are tuned on dev [REC].
+4. The LLM's confidence gets no decision power until its reliability table exists and shows separation. If "high" is not measurably more accurate than "medium", the router ignores it and uses escalation or review instead.
+
+---
+
+## 7. Synthetic dataset design [DEC-2, DEC-9; PRD §13.1, Appendix B]
+
+**Scope:** a synthetic document repository plus classify-on-demand. No crawling [DEC-2].
+
+**Difficulty tiers** [DEC-9]. Each document carries a `tier` and a `generator` field.
+
+| Tier | Contents | Purpose |
+|---|---|---|
+| T1 Easy | Explicit patterns (card numbers, SSNs, keys, PHI terms) | Where rules should win on speed and cost |
+| T2 Semantic | No patterns; sensitivity lives in meaning (the `Acquisition_Targets_2027` case, trade-secret process descriptions, unannounced strategy) | Where rules should fail and ML/LLM should help |
+| T3 Ambiguous | Legitimately debatable level or category, with adjudicated gold | Threshold and review-rate behavior |
+| T4 Hard negatives | Look sensitive, aren't: a policy that *explains* SSNs, example or test data, an already-announced acquisition press release, code with a `password` variable but no secret, `Confidential_Lunch_Menu.docx` | Stops the benchmark favoring high-recall detectors |
+| T5 Adversarial | Prompt-injection text embedded in documents [PRD §12.4, §13.1] | Guardrail testing. **Reported separately** and excluded from headline F1 [REC]. |
+
+**Other dimensions.** Sample across level × category (including multi-category documents), document format (memo, email, CSV/table dump, JSON log, source file, config file, chat transcript), and length. Include **metadata-conflict cases**: an existing label of "Public" on a Highly Confidential document, and misleading filenames.
+
+**Splits** [REC]
+
+| Split | Docs (approx.) | Use |
+|---|---|---|
+| Train | ~400 | ML training, few-shot pool, rule development |
+| Calibration | ~100 | ML calibration only |
+| Dev | ~100 | Threshold tuning, prompt iteration, reliability tables |
+| **Test (locked)** | ~200 | Reporting only |
+
+The target is ~800 documents. This is a recommendation sized to the PRD's effort budget; adjust it as needed.
+
+- Require **≥ ~25 positives per category in test**. If a category can't reach that, report it with a small-sample flag.
+- **Group-split by template/scenario family**, and run near-duplicate detection across splits. Otherwise the templates leak.
+- Report **bootstrap confidence intervals**. On ~200 documents, an F1 gap of 0.03 is probably noise.
+
+**Generation and provenance** [REC]
+- Hybrid: template + fake-data generation for structured content, LLM-authored prose for semantic content, and hand-authored seeds for hard cases.
+- **Generator bias risk.** If an LLM writes the data and a same-family LLM classifies it, the benchmark can flatter Approach C through stylistic artifacts. Mitigations: several generators, at least ~30% human-authored or human-reviewed documents in test, and metrics sliced by `generator`.
+- A human review pass on every T2/T3/T4 gold label. Gold includes expected evidence spans [PRD Appendix B `expected_evidence`].
+
+**Safety of the data itself** [REC]
+- All values come from reserved or test ranges (published test card numbers, non-issued SSN ranges, obviously fake keys).
+- **Two practical traps.** First, rule validators that reject non-issued SSN ranges would ignore the synthetic data, so validator policy and data ranges must be designed together. Second, GitHub secret-scanning push protection may block commits containing realistic fake keys. Plan an allowlist or build those values at generation time.
+
+**Annotation record** (extends Appendix B): `doc_id, split, tier, generator, filename, content, existing_labels, gold_level, gold_categories, gold_evidence_spans, ambiguity_flag, acceptable_alternative_levels, annotation_notes, taxonomy_version`.
+
+---
+
+## 8. Rules architecture (Approach A) [PRD §4.5, FR-02]
+
+```
+Preprocess (normalize unicode, line index)
+ → Detector registry (versioned YAML/py; regex + validator + context window + negative context)
+ → Metadata analyzer (filename tokens, extension hints, existing-label mapping)
+ → Dictionary matchers (weak signals: PHI terms, M&A vocabulary)
+ → Strength scorer → RulesResult {categories, level_floor, evidence[], sufficiency}
+```
+- **Validators:** Luhn for card numbers, structural checks for SSN, IBAN checksum, and entropy plus vendor-prefix checks for secrets.
+- **Context handling:** "example", "test", and "sample" nearby downgrade strength. This is the T4 defense.
+- **No-signal semantics:** the level is `abstain`. For *benchmarking Approach A only*, a documented `rules_default_level` applies. The recommended convention is `INTERNAL`, since absence of signal ≠ Public. This affects A's level metrics, so it must be stated in every report.
+- **`sufficiency`:** a configurable predicate for "rules are enough to stop" [PRD §4.2, FR-02]. Default: at least one *definitive* detection. **Known trade-off:** stopping early can miss *additional* categories in the same document. This is measured, not assumed.
+- **Performance:** ≤ 500 ms pre-check [PRD §5.1]. Use linear-time regex (RE2-class) or bounded patterns to avoid ReDoS, and enforce a size cap in S0. A CI benchmark asserts the budget.
+- **Rule development discipline** [REC]: iterate on train and dev only. The test split stays locked.
+
+---
+
+## 9. Supervised ML architecture (Approach B) [PRD FR-03, DG-003; DEC-10]
+
+- **Two heads.** Level is multiclass (4 classes, ordinal; multinomial LR baseline, ordinal variant as a stretch). Categories are multilabel (8 one-vs-rest classifiers) with **per-category thresholds tuned on dev**. High-risk categories can favor recall, and that trade-off is recorded as a product decision [PRD §4.5].
+- **Features:** TF-IDF word + char n-grams over content, plus filename/extension tokens as a separate block. **No rule outputs** as features, so B stays independent. A stacked variant is a later hybrid experiment.
+- **Model:** linear models (LR / linear SVM) first, because they give per-feature attribution, which satisfies the explainability measure at no extra cost [PRD §4.5]. An embedding + LR variant (B2) is optional. It adds an API dependency and cost, so it is an experiment, not the baseline.
+- **Calibration:** fit on the calibration split, as described in section 6.
+- **Reproducibility:** fixed seeds and a training script deterministic from `(dataset_hash, config_hash)`. Training takes seconds at this size, so CI can retrain rather than commit binaries. Each model ships a **model card** (data hash, taxonomy version, dev metrics, calibration stats, known limits).
+- **Explainability output:** the top-N signed n-gram contributions become `feature_attribution` evidence.
+- **Version guard:** the model refuses to load if its `taxonomy_version` differs from the config.
+
+---
+
+## 10. LLM classifier architecture (Approach C) [PRD FR-03, §11]
+
+- **Provider interface** (`LLMClient.complete_structured(...)`) with three adapters [PRD §22.10]:
+  - Foundry
+  - Replay/cache, keyed by `(prompt_version, model_id, input_hash)`
+  - Mock, for unit tests
+- **Prompt assembly** [PRD §11 "structured schema + few-shot + deterministic thresholds"]:
+  - System prompt with role and taxonomy definitions *generated from config*.
+  - Few-shot examples drawn **only from the train split**, in a fixed, versioned set.
+  - The document goes in a delimited block with a random boundary token, labeled as untrusted data.
+  - Prompts live as versioned files under `prompts/`.
+- **Structured output:** `{level, categories[], evidence[{quote, supports}], rationale, confidence_bucket per axis, insufficient_information}`. It is validated against the JSON schema. Temperature is 0 where the deployment allows.
+- **Evidence verification** [REC]: every `quote` is checked as a substring of the input. Failures are flagged `verified: false`, and the confidence is capped. This is code-based anti-hallucination for evidence, and it feeds the explainability metric.
+- **Injection handling** [PRD §12.4]: the document is treated as data. If the input scan flagged injection, the LLM result may **raise but not lower** the level relative to rules and ML. Log a guardrail event either way.
+- **Model tiers:** `llm_small`, `llm_mid`, `llm_large` are config aliases resolved to Foundry deployments. The PRD requires ≥ 3 configurations benchmarked, with measured values only [PRD §6.3]. Which models are currently available in the Foundry project has not been verified. That is a dependency (open item 4).
+- **Pre-LLM redaction option** [REC, PRD §19 "context minimization"]: replace definitively rule-matched values (SSNs, keys) with typed tokens before sending. This keeps semantic context while minimizing exposure. It is a config flag, and its effect on accuracy is measured.
+- **Long documents:** a token cap with head truncation in v0.1. The result carries a `truncated` flag, and truncation plus low confidence is a review trigger.
+
+---
+
+## 11. Hybrid routing architecture (Approach D) [DEC-6]
+
+Deterministic harness logic [PRD §11.1]:
+
+```
+S0 guardrails ──fail──► rejected / review
+S1 Rules ── sufficiency met & short_circuit enabled ─────────────► S4 Fusion
+S2 ML ───── reliability ≥ τ_ml on all axes & no conflict ────────► S4
+S3a LLM-small ─ valid & reliability ≥ τ_llm & no conflict ───────► S4
+S3b LLM-large (escalation, max once) ─ same test ────────────────► S4
+otherwise / budget exhausted / failure ──────────────────────────► Human Review (with provisional label)
+S4 Fusion + floors + high-risk derivation → S5 result
+```
+
+**Fusion policy [REC, defaults to be benchmarked]:**
+- Rules-derived floors are never lowered.
+- For categories and level above the floor, the most authoritative stage that ran and passed its threshold wins.
+- Categories are a union of accepted categories, each with per-category provenance.
+- Enforce `level ≥ max(floor of predicted categories)`. This can over-elevate a T4 document, so it is toggleable and benchmarked.
+
+**Conflict definition** ("conflicting detectors", PRD §4.12) [REC]:
+- Two invoked approaches, each above threshold, disagree on `high_risk`.
+- Or they disagree on level by more than one rank.
+
+**Thresholds** [DEC-10, PRD §4.5]: symbolic in this design. Values are **derived from dev measurements in Phase 6**, and the chosen operating point is documented as a product/risk decision, not tuned silently.
+
+**Config:** `config/routing/routing.v1.yaml` holds thresholds, `short_circuit`, `always_run_ml`, LLM tier order, per-request budget, and max escalations.
+
+---
+
+## 12. Evaluation architecture [DEC-8, DEC-9; PRD FR-04, §13]
+
+**Modules:** dataset loader → split-integrity validator → runner → metrics → calibration → cost model → report generator → gate checker.
+
+**Runs.** Each approach (A, B, C-small/mid/large, D) runs **standalone on the full test set**. The hybrid is not scored only on the documents routed to it, so comparisons are like-for-like. Every run writes a **manifest**: git SHA, dataset hash, config hashes, model and prompt versions, seeds, and timestamp.
+
+**Metrics**
+
+| Axis | Metrics |
+|---|---|
+| Level (4-class, ordinal) | 4×4 confusion matrix, per-class and macro P/R/F1, **under-classification rate**, and severe under-classification (Highly Confidential → Public/Internal). Under-classification is the costly error in DLP, and macro-F1 hides it. |
+| Categories (multilabel) | Per-category P/R/F1 with per-label confusion (TP/FP/FN/TN), micro and macro F1 |
+| **High-risk (derived)** | Binary P/R/F1 computed from the *configured* definition [DEC-3]. **Recall is the gate** [PRD §13.8 ≥ 0.90]. |
+| Calibration | ECE, Brier, reliability curves, and the `est_reliability` tables |
+| Efficiency | Latency (P50/P95 per stage), tokens, estimated cost, stage-coverage %, review rate |
+| **Explainability** [PRD §4.5] | Code-based: evidence validity rate (LLM excerpts verified), and overlap of predicted evidence spans with gold spans. LLM-judge rationale scoring is optional and later. |
+
+Slices: per tier, per category, per format, and per generator. Bootstrap CIs on everything. Use scikit-learn for metric computation rather than hand-rolled code [REC].
+
+**Scoring deferrals for the hybrid** [REC]. Report all three views:
+- Coverage (% auto-decided) plus metrics on auto-decided documents.
+- Deferrals counted as errors (worst case).
+- Deferrals resolved by a perfect reviewer (best case, labeled hypothetical).
+
+**Harness self-validation** [REC]. Before any real classifier, run three trivial ones through the harness:
+- An **oracle** that returns gold and must score exactly 1.0.
+- A **majority-class** baseline.
+- A **random** baseline.
+
+This catches harness bugs before they can be mistaken for model behavior.
+
+**No fabricated metrics** [DEC-8]. Results tables in docs are generated from run artifacts and cite the run ID. Nothing is hand-typed.
+
+**Gates** [PRD §13.8]: F1 ≥ 0.85 and high-risk recall ≥ 0.90 are stored in config. **Open item 3:** the PRD's F1 target is a single number, so we must define which F1 gates. Recommendation: macro-F1 on *both* axes, with the high-risk recall gate separate.
+
+---
+
+## 13. Human-review logic [PRD §4.12, §12.4; DEC-6]
+
+**Triggers** (reason codes) [REC]:
+
+| Code | Condition |
+|---|---|
+| `LOW_CONFIDENCE` | Final stage below threshold (PRD "low confidence") |
+| `DETECTOR_CONFLICT` | Per section 11 (PRD "conflicting detectors") |
+| `LLM_UNAVAILABLE` | Timeout, 429, or malformed output after bounded retries |
+| `EVIDENCE_UNVERIFIED` | High-risk call whose LLM evidence failed verification |
+| `INJECTION_DOWNGRADE_ATTEMPT` | Injection flagged and the LLM tried to lower the level |
+| `TRUNCATED_LOW_CONF` | Truncated input with low confidence |
+| `EXTRACTION_FAILURE` / `BUDGET_EXHAUSTED` | Cannot decide safely |
+| `LEVEL_CATEGORY_INCONSISTENT` | Contradiction not resolvable by the floors |
+
+**Output:** `review.required`, reason codes, a best-effort **provisional** label (clearly marked), and a priority (provisional high-risk first). The service only flags and never blocks [PRD §4.12 "Autonomous recommendation"].
+
+**Review queue and feedback** [FR-15 is P1]. In v0.1, review items are a persisted JSONL queue, with reviewer decisions captured in a schema. Decisions feed a *candidate eval set*. They **never** auto-update models, rules, or prompts [PRD §18]. There is no review UI in v0.1.
+
+---
+
+## 14. Observability architecture [PRD FR-13, §16.1]
+
+- **Instrumentation:** OpenTelemetry-style spans per stage (S0–S5) under one `request_id` / `trace_id`. Locally the sink is JSONL. In the Foundry phase the exporter goes to Azure Monitor/App Insights or Foundry tracing.
+- **Fields** (mapped to the PRD layers):
+  - Request: case and request ID, pseudonymous caller.
+  - Model: model/prompt version, tokens, latency, cost estimate, status.
+  - Agent: not applicable here, since this is a service. Stage name, step, and stop reason take its place.
+  - Guardrail: type, trigger, action.
+  - Outcome: label, confidence kind, review flag, reason codes.
+  - Eval: evaluator version and per-slice scores.
+- **Privacy** [PRD §19]: never log raw content or unmasked evidence. Log `content_hash`, masked/truncated excerpts, and evidence locators.
+- **Derived metrics:** stage latency P50/P95, route distribution, review rate, cost per document, schema-validation failures, evidence-verification failure rate, fallback counts, and guardrail triggers. Dashboards are shared platform work (DG-018).
+
+---
+
+## 15. Future MCP interface [DEC-7: designed now, not implemented]
+
+`classify_document` [PRD §10: Read/compute, Medium risk], a thin adapter over the same service:
+- **Input:** the `ClassificationRequest` subset (document reference or content, options, `caller`).
+- **Output:** the `ClassificationResult`, unchanged. No forked schema.
+- **PRD §10.1 requirements:** schema validation on input and output, an allowlist, per-agent permissions, no arbitrary execution, and a full trace with caller, redacted args, result, latency, and status.
+- **[REC] Prefer `document_id` references over raw content.** Passing document text through an agent's context is itself exposure [PRD §19]. Allow `content` only for ad-hoc calls with a size limit.
+- **Freeze criteria before building it:** the result schema is versioned, the eval gates have passed, and the failure semantics are documented. Do not add MCP scaffolding in v0.1.
+
+---
+
+## 16. Repository / folder structure [REC]
+
+The PRD's tree (§20.2) has no `rules/` directory, even though the Rules Engine is a first-class component in §6.1. It also has no obvious home for the service, the LLM client, or config. This proposal keeps PRD directories and marks additions (＋).
+
+```
+dataguard-ai/
+├─ docs/
+│  ├─ DataGuard_AI_PRD.docx
+│  └─ uc4/ ＋ architecture.md, labeling-guidelines.md, confidence-contract.md, results/ (generated)
+├─ config/ ＋
+│  ├─ taxonomy/ (taxonomy.v1.yaml, high_risk.v1.yaml)
+│  ├─ routing/ (routing.v1.yaml)
+│  └─ eval/ (gates.yaml, pricing.yaml)      # pricing carries a "retrieved on" date; never hard-coded
+├─ prompts/ ＋ uc4/ (classifier.v1.md, fewshot.v1.json)
+├─ data/ ＋ synthetic/uc4/ (spec/, docs/, splits/, manifest.json)
+├─ rules/ ＋ (engine, detectors/, validators/, metadata/)
+├─ ml/classification/ (features, train, calibrate, infer, model_cards/)
+├─ app/
+│  ├─ classification/ ＋ (schemas, service, router, fusion, review, config_loader)
+│  └─ llm/ ＋ (client interface, foundry adapter, replay adapter, mock adapter)
+├─ guardrails/ (input.py, output.py — schema, evidence verification, injection scan)
+├─ evals/classification/ (loader, runner, metrics, calibration, cost, report, gates)
+├─ observability/ (tracing, events, redaction)
+├─ mcp/            # empty in v0.1 [DEC-7]; contract documented in docs/uc4 only
+├─ tests/ (unit/, integration/, failure_injection/)
+└─ .github/workflows/
+```
+**Assumption:** Python 3.11+. The PRD does not name a language, but its stack (scikit-learn, RAGAS, Isolation Forest) implies Python (open item 1).
+
+---
+
+## 17. Azure AI Foundry integration points [PRD §6, §20.1; product details unverified]
+
+Current Foundry capabilities and naming have not been verified, and PRD §22.10 warns they change. Confirm each item below against current docs when we reach it.
+
+| Integration point | Use | Phase |
+|---|---|---|
+| **Model deployments** | LLM tiers (small/mid/large) called through the provider interface | 5 |
+| **Authentication** | Entra ID / managed identity and Key Vault, no keys in the repo | 5 |
+| **Tracing / monitoring** | OTel exporter to Azure Monitor / Foundry tracing | 7 |
+| **Content-safety / injection detection** | Optional supplement to the local injection scan, and only if available | 5 |
+| **Foundry evaluation** | Optional later, for LLM-judge scoring of explanation quality. Code-based evals stay primary. | Later |
+| **Hosting** | Container-hosted service in the v1.0 deployment [PRD §3.5 v1.0] | Platform |
+| **Agent Service** | **Not used by UC4** [DEC-6]. Later agents call `classify_document` over MCP. | — |
+
+Unit and CI tests run **without Azure**, using mock and replay adapters. Azure is needed only for real LLM evaluation runs.
+
+---
+
+## 18. GitHub development and CI strategy [PRD §20.3; REC]
+
+**Workflow:** protected `main`, short-lived feature branches, PRs, and issues mapped to backlog IDs (DG-001/002/003, plus new IDs for the dataset, harness, router, and review). Commits are Conventional Commits.
+
+| CI job | Trigger | Content |
+|---|---|---|
+| Lint/type/unit | Every PR | ruff, type check, unit tests with mocks |
+| Schema/config validation | Every PR | Taxonomy, high-risk, routing, dataset schema; dataset split-integrity and near-duplicate checks |
+| Rules eval + latency budget | Every PR touching `rules/`, `config/`, `data/` | Deterministic and cheap; asserts ≤ 500 ms |
+| ML retrain + eval | PR touching `ml/`, `data/` | Seeded retrain, compare to committed baseline |
+| LLM smoke eval | PR, replay adapter only | No Azure calls |
+| **Full LLM + hybrid eval** | Manual dispatch, nightly, or release tag | Real endpoints via **OIDC federation** (no long-lived secrets); cost-capped; gates from `config/eval/gates.yaml` |
+| Security | Every PR | Dependency scan, secret scanning (with the fake-secret allowlist), CodeQL |
+| Release | Tag | Full eval, gate check, publish run manifest and results |
+
+**[REC] Gate cadence.** The PRD says classification F1 gates run "every model/prompt release" [§13.8]. Running real-LLM evals on every PR would be costly and noisy, so the real-LLM gate is tied to releases and prompt/model changes, with replay in between.
+
+---
+
+## 19. Failure-handling strategy [PRD FR-16, §12.4; REC]
+
+**Principle:** the classification path never raises to the caller. It always returns a valid `ClassificationResult` with a `status`, and it **never silently falls back to a lower sensitivity**.
+
+| Failure | Behavior |
+|---|---|
+| LLM timeout / 429 | Bounded retry with backoff and jitter, then next tier, then review (`LLM_UNAVAILABLE`). Default timeout aligns with the PRD's ≤10 s tool-call limit and is configurable. |
+| Malformed LLM JSON | One repair retry, then discard the LLM result and route on the remaining evidence |
+| Evidence fails verification | Mark `verified: false`, cap confidence, and review if the call is high-risk |
+| ML model missing or taxonomy-version mismatch | Fail fast at startup. At runtime, skip ML and log a warning (`degraded`). |
+| Config invalid | Refuse to start; never run with a partial taxonomy |
+| Empty, oversize, or undecodable input | `rejected` with a reason, or truncate with a flag |
+| Injection detected | Continue as data, log a guardrail event, and restrict LLM downgrading |
+| Budget or cost cap hit | Skip the LLM and route to review |
+| Rules engine error | Isolate per detector. One broken detector marks `degraded` and does not kill the run. |
+| Eval-run document fails | Counted as a failure in the report. Never dropped silently. |
+
+Failure-injection tests (`tests/failure_injection/`) cover each row.
+
+---
+
+## 20. Step-by-step implementation phases
+
+One ordering changed from the earlier proposal: the **harness now comes before Rules**. Otherwise rules would be tuned without measurement, or by peeking at the test set.
+
+| # | Phase | Deliverables | Exit criteria | Backlog |
+|---|---|---|---|---|
+| **0** | Foundations | Repo scaffolding, config schemas, Pydantic schemas, CI skeleton, config loader with version checks | CI green; config validation tests pass | new |
+| **1** | Dataset | Labeling guidelines, generation specs, generator, human review pass, splits, integrity checks | Split integrity passes; per-category test positives ≥ target; tiers and generator provenance present | DG-001 (extended) |
+| **2** | Eval harness | Loader, runner, metrics, calibration, cost, reports, gates. Validated with oracle, majority, and random baselines. | Oracle = 1.0; baselines behave as expected; reports reproducible from manifest | DG-014 (partial) |
+| **3** | Rules (A) | Detector registry, validators, metadata analyzer, sufficiency logic. Developed on train/dev only. | Meets the ≤ 500 ms budget. First real metrics with CIs. | DG-002 |
+| **4** | ML (B) | Two-head model, calibration, model card, feature attribution | Reliability table produced; per-slice results reported | DG-003 |
+| **5** | LLM (C) | Provider interface and adapters, prompts, evidence verification, injection guard, three tiers benchmarked | Schema-valid rate and evidence-verification rate reported; reliability table per tier | new |
+| **6** | Hybrid (D) | Router, fusion, review logic, thresholds derived from dev, ablations, one locked-test report | Gates evaluated honestly (pass or fail). Operating-point rationale documented. | new |
+| **7** | Observability + failure hardening | OTel spans, redaction, Foundry export, failure-injection suite | Every failure row in section 19 is tested | DG-018 (shared) |
+| **8** | Service surface + docs | Python API + CLI (JSON API optional), frozen result schema, documented MCP contract | Result schema versioned. **Stop for approval before MCP.** | DG-010 prep |
+
+Rough effort, an estimate only: Phases 1–2 are ~8–12 h, 3–4 ~8–10 h, 5–6 ~10–14 h, 7–8 ~6–8 h. This is comparable to the PRD's 15–20 h "Rules + ML experiments" line plus a share of the eval and observability lines. Phase 1 (data quality) is the largest risk to the budget.
+
+---
+
+## Open decisions requiring approval before implementation
+
+1. **Language/runtime:** Python 3.11+? (The PRD is silent.)
+2. **Level floors:** approve or edit the placeholder table in section 4.
+3. **Headline F1 definition and dataset size:** macro-F1 on both axes plus a separate high-risk recall gate. ~800 documents with a ~200 locked test set.
+4. **Azure access:** is a Foundry project available, and which model tiers can be deployed? Phase 5 depends on it.
+5. **Document formats in v0.1:** classify pre-extracted text only (recommended), or also parse `.xlsx`/`.docx`/`.pdf`? The M&A example is an `.xlsx`. Parsing adds an extraction stage and its own failure modes.
+6. **Rules default level** for the benchmark when no signal is found: `INTERNAL`?
+7. **v0.1 interface:** library + CLI only, or also a thin JSON API? (PRD FR-01 wants UI or JSON API at platform level.)
+8. **Repo layout:** OK with the additions to the PRD tree (`rules/`, `config/`, `data/`, `prompts/`, `app/classification/`, `app/llm/`)?
+
+## PRD alignment notes
+
+- The approved taxonomy [DEC-1] supersedes the PRD's flat example class list (§4.5) for UC4. It adds Credentials/Secrets, Intellectual Property, and M&A, and it separates levels from categories.
+- FR-01 (UI or JSON API ingestion) is satisfied only at the platform level, since UC4 v0.1 has no UI.
+- The PRD's ≤10 s tool-call timeout may be tight for large-tier LLM calls, so the timeout is configurable.
