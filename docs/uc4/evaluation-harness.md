@@ -12,6 +12,7 @@ itself measures correctly.
 
 ```bash
 dataguard-uc4 eval run --classifier oracle|majority|random --split dev        # default split: dev
+dataguard-uc4 eval run --classifier oracle --split test --allow-locked-test    # audited, report-only
 dataguard-uc4 eval run --classifier random --split dev,calibration --seed 7
 dataguard-uc4 eval validate-harness                                            # writes docs/uc4/results/
 ```
@@ -85,12 +86,43 @@ versions. `metrics_fingerprint` is the SHA-256 of all deterministic metrics (lat
 excluded, floats rounded to 12 places): the same dataset, config, classifier and seed reproduce it
 exactly. The dataset was also verified to regenerate byte-identically on Python 3.11 and 3.12.
 
-## Test-split discipline
+## The locked test split (hard protection)
 
-The `test` split is for reporting only. The CLI defaults to `dev`; evaluating `test` requires an
-explicit `--split` and prints a notice, and run manifests record whether the locked split was
-touched. This is a convention, not a hard lock: tuning on the test split is prevented by process
-and review, not by code.
+The `test` split is report-only: it must never be used to tune rules, thresholds, prompts or models.
+
+* **Development commands cannot see it.** `load_documents()` returns only `train`, `calibration`
+  and `dev` unless a `LockedTestAuthorization` is passed; `evaluate()` refuses any run containing
+  test documents without one; `eval run` and `eval validate-harness` only accept
+  `train`, `calibration`, `dev` (`--split all` means exactly those three).
+* **Reading it needs an explicit flag:** `dataguard-uc4 eval run --split test --allow-locked-test`.
+  The CLI prints a `LOCKED TEST SPLIT AUTHORISED` banner and warns if the working tree is dirty.
+* **Every authorised run is audited.** The run manifest gets a `locked_test_access` block
+  (git SHA and dirty flag, dataset sha256, config versions, classifier name/version/params,
+  timestamp, the authorisation), the report opens with a banner, and one line is appended to the
+  tracked, append-only `data/synthetic/uc4/locked_test_access.jsonl`. It is tracked on purpose:
+  every access shows up in `git diff`, which discourages repeated peeking.
+
+Limit, stated plainly: this stops *accidental* use through the project's own entry points. It cannot
+stop someone who reads `data/synthetic/uc4/docs/test.jsonl` directly; that remains a matter of
+process and review, and the access log and manifests make deliberate use visible.
+
+Dataset tooling (integrity checks, the review sheet) legitimately needs every split and authorises
+explicitly; it never produces evaluation results.
+
+## What every report states
+
+* **Label status:** "AI-generated synthetic dataset — pending human gold-label review". The gold
+  labels are not independently human-validated, and reports say so.
+* **Sample counts and `SMALL_SAMPLE`:** per-label `support` is in every table; any label with fewer
+  than 25 gold positives in the evaluated subset is flagged `SMALL_SAMPLE` (and printed by the CLI).
+  No synthetic examples are added merely to reach a count.
+* **Independent families:** every confidence-interval report states the number of independent
+  families (the resampling units) it rests on.
+* **High-risk is never a single number:** recall, precision, F1, false-positive rate and review rate
+  are reported together. The initial reference target `high_risk_recall >= 0.90` (in
+  `config/eval/eval.v1.yaml`) is **informational, not a pass/fail gate**; no minimum precision or FPR
+  threshold has been chosen. The operating point will be selected on the development set after
+  Rules and ML are evaluated, never on the locked test set.
 
 ## How the harness is validated
 

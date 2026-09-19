@@ -69,6 +69,19 @@ during build, open to review.
 | D2.9 | The dataset manifest records only the taxonomy and high-risk config hashes, not the eval config. | Found when editing eval settings invalidated the dataset manifest; the dataset does not depend on them. |
 | D2.10 | The validation suite includes a "lying classifier" check. | Mutation testing showed a harness that trusts a classifier's `high_risk` escaped the original checks. |
 | D2.11 | Run artifacts are git-ignored under `evals/classification/runs/`; only `docs/uc4/results/` is committed. | Runs contain per-document predictions and timestamps and are reproducible from the manifest. |
-| D2.12 | The CLI defaults to `dev`; `--split test` prints a notice. This is a convention, not a hard lock. | Lightweight guard; a hard lock is easy to add if wanted. |
+| D2.12 | ~~The CLI defaults to `dev`; `--split test` prints a notice (convention only).~~ **Superseded by A21.** | See below. |
 | D2.13 | `rules_default_level: INTERNAL` (A16) is still not a config key: there is no consumer until Phase 3. | Avoids dead configuration. |
 | D2.14 | Verified on Python 3.11.16 and 3.12.14; the dataset regenerates byte-identically on both. | CI covers 3.11 and 3.12 but could not be executed locally. |
+
+## Approved after the Phase 0-2 review (product owner)
+
+| # | Decision | Implementation |
+|---|---|---|
+| A20 | The dataset is "AI-generated synthetic dataset — pending human gold-label review" and must never be presented as independently human-validated. Human review is required before final benchmark results are trustworthy but does not block Phase 3. | `label_status` in `dataset_spec.yaml`, copied to the manifest, dataset report, run manifests and every report. |
+| A21 | Hard test-split protection: normal commands operate only on train/calibration/dev; the locked test split needs `--allow-locked-test`, prints a warning, and produces an audited manifest. | `evals/classification/lock.py`; enforced in `load_documents`, `evaluate`, the CLI; tracked access log. |
+| A22 | Keep 853 documents / 227 test; do not add examples to reach a count. Labels with < 25 positives report `SMALL_SAMPLE`; preserve per-label counts. | `SMALL_SAMPLE` flags and per-label `support` in every report. |
+| A23 | Keep high-risk recall >= 0.90 as the initial reference, but never alone: also report precision, FPR, F1 and review rate. No minimum precision yet; select the operating point on dev after Rules and ML. No threshold tuning on the locked test set. | Reports show all five; the 0.90 reference is informational only (`reference_targets`). |
+| A24 | Family-level bootstrap is the default; every CI report states the number of independent families. | Stated in the report header and in `n_units`. |
+
+Implementation notes: `validate-harness` now defaults to the development splits (it previously included
+test); the oracle interval check was corrected to expect FPR to collapse to 0 rather than 1.

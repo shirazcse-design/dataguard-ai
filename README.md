@@ -37,5 +37,5 @@ ruff check . && ruff format --check .
 dataguard-uc4 config validate
 ```
 
-All data in this repository is synthetic. No real personal, health, financial or credential data is
+All data in this repository is synthetic. **Dataset labels: AI-generated synthetic dataset — pending human gold-label review** (not independently human-validated). No real personal, health, financial or credential data is
 used anywhere.

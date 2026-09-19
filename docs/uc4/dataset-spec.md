@@ -102,8 +102,10 @@ deliberately reused in T4 part numbers so it is not a label cue on its own.
 
 ## Known limitations (read before trusting any number)
 
-1. **AI-authored, not human-reviewed.** Every family and gold label was written by an AI assistant
-   following the labeling guidelines. Every document carries `annotation_status=unreviewed`. Use
+1. **AI-authored, not human-reviewed.** The dataset's declared status is **"AI-generated synthetic
+   dataset — pending human gold-label review"**; gold labels must not be presented as independently
+   human-validated. Every family and gold label was written by an AI assistant following the labeling
+   guidelines. Every document carries `annotation_status=unreviewed`. Use
    `dataguard-uc4 dataset review-sheet` to produce a one-document-per-family CSV for a human to
    confirm or correct labels.
 2. **Template-generated.** Documents in a family are variations of one template. The effective
