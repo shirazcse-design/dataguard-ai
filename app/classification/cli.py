@@ -138,6 +138,112 @@ def _cmd_dataset_review_sheet(args: argparse.Namespace) -> int:
     return 0
 
 
+def _load_split_docs(args: argparse.Namespace, splits: list[str]):
+    from evals.classification.dataset.build import load_documents
+
+    return load_documents(args.data_dir, splits=splits)
+
+
+def _cmd_eval_run(args: argparse.Namespace) -> int:
+    from evals.classification.baselines import (
+        MajorityClassifier,
+        OracleClassifier,
+        RandomClassifier,
+    )
+    from evals.classification.dataset.build import load_manifest
+    from evals.classification.dataset.schema import SPLIT_NAMES
+    from evals.classification.evaluate import evaluate
+    from evals.classification.reporting import write_run
+
+    bundle = load_config(args.config_dir)
+    splits = list(SPLIT_NAMES) if args.split == "all" else args.split.split(",")
+    bad = [sp for sp in splits if sp not in SPLIT_NAMES]
+    if bad:
+        print(f"unknown split(s): {bad}; choose from {list(SPLIT_NAMES)} or 'all'", file=sys.stderr)
+        return 2
+    docs = _load_split_docs(args, splits)
+    policy = bundle.policy
+    if args.classifier == "oracle":
+        clf = OracleClassifier.from_docs(docs, policy)
+    elif args.classifier == "majority":
+        clf = MajorityClassifier.from_docs(_load_split_docs(args, ["train"]), policy)
+    else:
+        clf = RandomClassifier(args.seed, policy)
+    if "test" in splits:
+        print(
+            "note: evaluating the locked test split (report-only; never tune on it)",
+            file=sys.stderr,
+        )
+    cli_args = {k: v for k, v in vars(args).items() if k != "func"}
+    result = evaluate(clf, docs, bundle, load_manifest(args.data_dir), cli_args=cli_args)
+    out = write_run(result, args.runs_dir)
+    m = result.metrics["headline"]
+    stats = m["confidence_intervals"]["statistics"]
+    print(f"run_id: {result.run_id}")
+    print(f"artifacts: {out}")
+    for label, key in [
+        ("level macro-F1", "level_macro_f1"),
+        ("category macro-F1", "category_macro_f1"),
+        ("high-risk recall", "high_risk_recall"),
+    ]:
+        s = stats[key]
+        if s["point"] is None:
+            print(f"  {label:20s} n/a")
+        else:
+            print(f"  {label:20s} {s['point']:.3f}  [{s['ci_low']:.3f}, {s['ci_high']:.3f}]")
+    return 0
+
+
+def _cmd_eval_validate(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    import numpy
+    import sklearn
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents, load_manifest
+    from evals.classification.dataset.schema import SPLIT_NAMES
+    from evals.classification.evaluate import git_info
+    from evals.classification.validation import (
+        render_validation_report,
+        validate_harness,
+        validation_to_json,
+    )
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir)
+    by_split = {s: [d for d in docs if d.split == s] for s in SPLIT_NAMES}
+    manifest = load_manifest(args.data_dir)
+    result = validate_harness(by_split, bundle, manifest)
+    env = {
+        **git_info(),
+        "python": sys.version.split()[0],
+        "numpy": numpy.__version__,
+        "scikit_learn": sklearn.__version__,
+    }
+    out_dir = (
+        Path(args.out_dir)
+        if args.out_dir
+        else Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results"
+    )
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "harness-validation.md").write_text(
+        render_validation_report(result, manifest, env), encoding="utf-8"
+    )
+    (out_dir / "harness-validation.json").write_text(
+        json.dumps(validation_to_json(result), indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    passed = sum(c.passed for c in result.checks)
+    print(f"harness validation: {passed}/{len(result.checks)} checks passed -> {out_dir}")
+    for c in result.checks:
+        if not c.passed:
+            print(
+                f"  FAIL {c.suite} [{c.split}] {c.name}: "
+                f"expected {c.expected} observed {c.observed}",
+                file=sys.stderr,
+            )
+    return 0 if result.ok else 4
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="dataguard-uc4", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -170,6 +276,26 @@ def build_parser() -> argparse.ArgumentParser:
         if name in ("report", "review-sheet"):
             sp.add_argument("--out", default=None)
         sp.set_defaults(func=func)
+
+    ev = sub.add_parser("eval", help="evaluation harness commands")
+    ev_sub = ev.add_subparsers(dest="eval_command", required=True)
+    run = ev_sub.add_parser("run", help="evaluate a sanity classifier on dataset splits")
+    run.add_argument("--classifier", choices=["oracle", "majority", "random"], required=True)
+    run.add_argument(
+        "--split", default="dev", help="comma-separated splits or 'all' (default: dev)"
+    )
+    run.add_argument("--seed", type=int, default=20260918, help="seed for the random baseline")
+    run.add_argument("--runs-dir", default=None)
+    run.add_argument("--config-dir", default=None)
+    run.add_argument("--data-dir", default=None)
+    run.set_defaults(func=_cmd_eval_run)
+    val = ev_sub.add_parser(
+        "validate-harness", help="validate the harness with oracle/majority/random"
+    )
+    val.add_argument("--out-dir", default=None)
+    val.add_argument("--config-dir", default=None)
+    val.add_argument("--data-dir", default=None)
+    val.set_defaults(func=_cmd_eval_validate)
     return parser
 
 
