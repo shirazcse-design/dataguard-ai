@@ -177,9 +177,9 @@ families:
         ENV WORKERS=«@int:2-16»
         CMD ["python", "-m", "«codeword»_worker"]⟧
       - |
-        services:
+        ⟦SOURCE_CODE§services:
           «codeword»-api:
             image: registry.corp.example/«codeword»/api:«@int:1-9».«@int:0-20»
             ports: ["«@int:8000-8999»:8080"]
           «codeword»-cache:
-            image: registry.corp.example/base/redis:7
+            image: registry.corp.example/base/redis:7⟧

@@ -162,7 +162,7 @@ families:
         Cardholder data extract («month» «@year»)
         1) «person» - PAN ⟦FINANCIAL_PCI§«@card»⟧ exp «@expiry» - «@usd:20-900»
         2) «person#2» - PAN ⟦FINANCIAL_PCI§«@card#2»⟧ exp «@expiry#2» - «@usd:20-900»
-        Billing contact: «person#3», «@int:10-999» «street», «city», «person#3.email»
+        Billing contact: «person#3», ⟦PII§«@int:10-999» «street», «city»⟧, «person#3.email»
   - family_id: fin_wire_instructions_iban
     description: Email with wire transfer instructions including IBAN.
     tier: T1
