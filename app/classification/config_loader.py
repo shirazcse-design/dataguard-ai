@@ -92,6 +92,9 @@ def _read_yaml(path: Path) -> tuple[dict[str, Any], str]:
     return data, hashlib.sha256(raw).hexdigest()
 
 
+read_yaml = _read_yaml  # public alias: strict YAML (duplicate keys rejected) + sha256 of the bytes
+
+
 def _validate(model_cls, data: dict[str, Any], path: Path):
     try:
         return model_cls.model_validate(data)
