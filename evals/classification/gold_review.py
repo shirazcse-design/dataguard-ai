@@ -12,6 +12,7 @@ labels IN MEMORY ONLY and are labelled hypothetical.
 
 from __future__ import annotations
 
+import contextlib
 import csv
 import hashlib
 import io
@@ -100,10 +101,10 @@ def _fmt(p: dict[str, Any]) -> str:
     cats = ";".join(p["categories"]) or "-"
     tag = " [abstained: default level, not a finding]" if p.get("abstained") else ""
     raw = p.get("conf")
-    try:  # a model probability: two decimals, so the sheet does not depend on library float noise
+    # a model probability: two decimals, so the sheet does not depend on library float noise
+    # (a rule strength or a verbalized bucket is not a number and is printed as is)
+    with contextlib.suppress(TypeError, ValueError):
         raw = f"{float(raw):.2f}"
-    except (TypeError, ValueError):
-        pass  # a rule strength or a verbalized bucket
     conf = f" conf={raw}" if raw not in (None, "None") else ""
     return f"{p['level']} | {cats}{conf}{tag}"
 
