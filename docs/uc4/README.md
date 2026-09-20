@@ -20,6 +20,9 @@
 | [`results/ml-cv.json`](results/ml-cv.json) | Grouped cross-validation used for model selection |
 | [`llm-plan.md`](llm-plan.md) | Pre-registered LLM plan (written before any LLM code) |
 | [`llm-engine.md`](llm-engine.md) | LLM classifier architecture, rules, what was and was not measured |
+| [`observability-plan.md`](observability-plan.md) | Pre-registered Phase 7 plan (written before any Phase 7 code) |
+| [`observability-engine.md`](observability-engine.md) | Spans, redaction, privacy audit, hardening, failure matrix, what is unverified |
+| [`results/observability-baseline.md`](results/observability-baseline.md) | Generated: derived metrics, privacy audit, failure matrix from an actual suite run |
 | [`hybrid-plan.md`](hybrid-plan.md) | Pre-registered Hybrid routing plan (written before any router code) |
 | [`hybrid-engine.md`](hybrid-engine.md) | Hybrid architecture, findings, recommendation, what was not done |
 | [`results/hybrid-baseline.md`](results/hybrid-baseline.md) | Generated Hybrid results: all variants, gates, fault injection (dev, replayed) |

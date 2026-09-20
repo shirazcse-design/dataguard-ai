@@ -22,8 +22,9 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | 3 | Rules Engine (deterministic baseline) | done; merged (development splits only) |
 | 4 | Supervised ML classifier | done; merged (development splits only) |
 | 5 | LLM classifier | done; merged (benchmarked on dev against three Foundry deployments, recorded and replayable) |
-| 6 | Hybrid routing (router, fusion, review, variants, gates) | done (development split only, replayed); awaiting review |
-| 7+ | Observability, service surface | **not started; requires explicit approval** |
+| 6 | Hybrid routing (router, fusion, review, variants, gates) | done; merged (development split only, replayed) |
+| 7 | Observability and failure hardening (spans, redaction, privacy gate, failure-injection suite) | done (development split only); awaiting review |
+| 8 | Service surface (Python API + CLI, frozen result schema, documented MCP contract) | **not started; requires explicit approval** |
 
 Out of scope for this stage: RAG, MCP, autonomous agents, UI, repository crawling, document
 parsing, self-learning, production deployment.
