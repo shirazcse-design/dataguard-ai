@@ -19,11 +19,22 @@ def _cmd_config_validate(args: argparse.Namespace) -> int:
     try:
         from pathlib import Path
 
+        from app.classification.routing_config import load_gates, load_routing_config
         from app.llm.config import load_llm_config
         from guardrails.injection import load_injection_config
+        from guardrails.input import load_input_guard_config
+        from ml.classification import load_ml_config
+        from observability import load_observability_config
+        from rules.config import load_rules_config
 
         llm_cfg, llm_sha = load_llm_config(policy, args.config_dir)
         guard_cfg, guard_sha = load_injection_config(args.config_dir)
+        routing_cfg, routing_sha = load_routing_config(policy, args.config_dir)
+        gates_cfg, _ = load_gates(args.config_dir)
+        input_cfg, _ = load_input_guard_config(args.config_dir)
+        obs_cfg, _ = load_observability_config(args.config_dir)
+        ml_cfg, _ = load_ml_config(policy, args.config_dir)
+        rules_cfg, _ = load_rules_config(policy, args.config_dir)
         root = Path(__file__).resolve().parents[2]
         for rel in (llm_cfg.prompt.file, llm_cfg.prompt.fewshot_file):
             if not (root / rel).exists():
@@ -39,9 +50,16 @@ def _cmd_config_validate(args: argparse.Namespace) -> int:
             "llm": llm_cfg.llm_version,
             "prompt": llm_cfg.prompt.version,
             "injection_guardrail": guard_cfg.guardrail_version,
+            "input_guardrail": input_cfg.guardrail_version,
+            "routing": routing_cfg.routing_version,
+            "gates": gates_cfg.gates_version,
+            "observability": obs_cfg.observability_version,
+            "ml": ml_cfg.ml_version,
+            "ruleset": rules_cfg.ruleset_version,
         },
         "llm_config_sha256": llm_sha,
         "guardrail_config_sha256": guard_sha,
+        "routing_config_sha256": routing_sha,
         "levels": policy.level_ids,
         "categories": policy.category_ids,
         "file_hashes": bundle.file_hashes,
@@ -273,6 +291,20 @@ def _cmd_eval_run(args: argparse.Namespace) -> int:
         return 2
     docs = _load_split_docs(args, splits, authorization)
     clf = _build_classifier(args, bundle, docs)
+    if args.trace_out:
+        from pathlib import Path
+
+        from observability import (
+            JsonlSink,
+            TracedClassifier,
+            build_tracer,
+            load_observability_config,
+        )
+
+        obs_cfg, _ = load_observability_config(args.config_dir)
+        Path(args.trace_out).unlink(missing_ok=True)  # a fresh trace file per run
+        tracer, salt = build_tracer(obs_cfg, [JsonlSink(args.trace_out)])
+        clf = TracedClassifier(clf, tracer, salt)
     cli_args = {k: v for k, v in vars(args).items() if k != "func"}
     result = evaluate(
         clf,
@@ -525,6 +557,100 @@ def _cmd_hybrid_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_obs_summarize(args: argparse.Namespace) -> int:
+    from observability import read_jsonl, summarize
+
+    spans = read_jsonl(args.spans)
+    text = json.dumps(summarize(spans), indent=2, sort_keys=True)
+    if args.out:
+        from pathlib import Path
+
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
+def _cmd_obs_audit(args: argparse.Namespace) -> int:
+    """Privacy gate: exit 1 if any span output contains document text or a sensitive value."""
+    from pathlib import Path
+
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from observability import audit_spans
+
+    splits = list(DEVELOPMENT_SPLITS) if args.split == "all" else args.split.split(",")
+    if "test" in splits:
+        print("the locked test split is not audited by this command", file=sys.stderr)
+        return 2
+    docs = _load_split_docs(args, splits)
+    res = audit_spans(Path(args.spans).read_text(encoding="utf-8"), docs)
+    print(
+        f"documents {res.documents}; content windows {res.windows_checked}; evidence spans "
+        f"{res.evidence_spans_checked}; filenames {res.filenames_checked}; "
+        f"patterns {res.pattern_checks}"
+    )
+    if res.clean:
+        print("PRIVACY AUDIT PASSED: no document text or sensitive value in the spans")
+        return 0
+    print(f"PRIVACY AUDIT FAILED: {len(res.leaks)} leak(s): {res.leaks[:10]}", file=sys.stderr)
+    return 1
+
+
+def _cmd_obs_report(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.obs_report import build_obs_report
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    dev = [d for d in docs if d.split == "dev"]
+    text = build_obs_report(bundle, dev, git_info())
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/observability-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
+def _cmd_obs_overhead(args: argparse.Namespace) -> int:
+    """Measure (not assume) what tracing costs per request. Numbers vary run to run."""
+    import time
+
+    from app.classification.hybrid import build_hybrid_classifier
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from observability import MemorySink, TracedClassifier, build_tracer, load_observability_config
+    from rules import build_rules_classifier
+
+    bundle = load_config(args.config_dir)
+    dev = [d for d in _load_split_docs(args, list(DEVELOPMENT_SPLITS)) if d.split == "dev"]
+    reqs = [d.to_request() for d in dev]
+    cfg, _ = load_observability_config(args.config_dir)
+    for label, clf in (
+        ("rules only", build_rules_classifier(bundle, args.config_dir)),
+        ("hybrid default (replayed LLM)", build_hybrid_classifier(bundle, variant="default")),
+    ):
+        tracer, salt = build_tracer(cfg, [MemorySink()])
+        traced = TracedClassifier(clf, tracer, salt)
+        best = {}
+        for name, target in (("off", clf), ("on", traced)):
+            times = []
+            for _ in range(args.repeats):
+                t0 = time.perf_counter()
+                for r in reqs:
+                    target.classify(r)
+                times.append((time.perf_counter() - t0) / len(reqs) * 1e6)
+            best[name] = min(times)
+        print(
+            f"{label}: {best['off']:.0f} us/request without tracing, {best['on']:.0f} us with; "
+            f"overhead {best['on'] - best['off']:.0f} us/request (best of {args.repeats}, "
+            f"{len(reqs)} documents)"
+        )
+    return 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -642,6 +768,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="named variant from config/routing/routing.v1.yaml (default: the configured default)",
     )
+    run.add_argument(
+        "--trace-out",
+        default=None,
+        help="write one span per stage as JSONL (deny-by-default redaction; no document text)",
+    )
     run.add_argument("--llm-tier", choices=["small", "mid", "large"], default="small")
     run.add_argument(
         "--llm-mode",
@@ -707,6 +838,27 @@ def build_parser() -> argparse.ArgumentParser:
     lrp.add_argument("--config-dir", default=None)
     lrp.add_argument("--data-dir", default=None)
     lrp.set_defaults(func=_cmd_llm_report)
+    obs = sub.add_parser("obs", help="observability commands")
+    obs_sub = obs.add_subparsers(dest="obs_command", required=True)
+    osum = obs_sub.add_parser("summarize", help="derived metrics from a span JSONL file")
+    osum.add_argument("--spans", required=True)
+    osum.add_argument("--out", default=None)
+    osum.set_defaults(func=_cmd_obs_summarize)
+    orp = obs_sub.add_parser("report", help="write the observability + failure-matrix results")
+    orp.add_argument("--out", default=None)
+    orp.add_argument("--config-dir", default=None)
+    orp.add_argument("--data-dir", default=None)
+    orp.set_defaults(func=_cmd_obs_report)
+    oov = obs_sub.add_parser("overhead", help="measure the per-request cost of tracing")
+    oov.add_argument("--repeats", type=int, default=5)
+    oov.add_argument("--config-dir", default=None)
+    oov.add_argument("--data-dir", default=None)
+    oov.set_defaults(func=_cmd_obs_overhead)
+    oaud = obs_sub.add_parser("audit", help="fail if a span file leaks document text")
+    oaud.add_argument("--spans", required=True)
+    oaud.add_argument("--split", default="dev", help="development splits to audit against")
+    oaud.add_argument("--data-dir", default=None)
+    oaud.set_defaults(func=_cmd_obs_audit)
     hyb = sub.add_parser("hybrid", help="hybrid routing commands (Approach D)")
     hyb_sub = hyb.add_subparsers(dest="hybrid_command", required=True)
     hrp = hyb_sub.add_parser("report", help="write the hybrid results (development split, replay)")
