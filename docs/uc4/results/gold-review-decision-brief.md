@@ -84,7 +84,7 @@ B(i) would make the hybrid "miss" PII on 5 documents. Same tuning-on-dev caution
 
 ## D. New question raised by the metadata finding
 
-Should the blind review be repeated (or extended) **with** the `source_system` field shown? Today's package shows filename and text only, matching what the classifiers receive, so it answers "is this label defensible from the content?". A second pass with metadata would answer "is it defensible from the whole document record the gold author used?". Both are cheap; the second is a small generator flag, not built yet because you asked for content only. Separately, whether classifiers should ever receive `source_system` is a model-configuration question (`include_metadata`), which I have not touched.
+Should the blind review also be run **with** the `source_system` field shown? The content-only package shows filename and text only, matching what the classifiers receive, so it answers "is this label defensible from the content?". The **metadata variant** (built; see [`../blind-review.md`](../blind-review.md)) shows the same 33 documents in a different order with the document record's source metadata added, and answers "is it defensible from the whole document record the gold author used?". Comparing the two answers shows how much of any human/gold disagreement is the missing metadata. Whether classifiers should ever receive `source_system` is a separate model-configuration question (`include_metadata`), which I have not touched.
 
 ## What I recommend (recommendations, not decisions)
 

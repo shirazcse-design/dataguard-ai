@@ -153,7 +153,7 @@ def test_a_leaking_package_is_refused(bundle, monkeypatch):
     import evals.classification.blind_review as br
 
     leaking = [dict.fromkeys(SHEET_COLUMNS, "hn_public_api_docs_placeholder_keys")]
-    monkeypatch.setattr(br, "sheet_rows", lambda items: leaking)
+    monkeypatch.setattr(br, "sheet_rows", lambda items, variant=None: leaking)
     with pytest.raises(ValueError, match="leaks answer information"):
         build_package(bundle, {}, DATA)
 

@@ -23,14 +23,7 @@ from typing import Any
 
 from app.classification.config_loader import ConfigBundle
 
-from .blind_review import (
-    KEY_FILE,
-    MANIFEST_FILE,
-    NO_CATEGORY,
-    PRIOR_ARTIFACTS,
-    SHEET_FILE,
-    check_completed,
-)
+from .blind_review import CONTENT, NO_CATEGORY, PRIOR_ARTIFACTS, Variant, check_completed
 from .dataset.build import DEFAULT_DATA_DIR
 
 ADJUDICATION_SHEET = "review/adjudication_sheet.csv"
@@ -85,21 +78,21 @@ def _rows(text: str) -> list[dict[str, str]]:
     return list(csv.DictReader(io.StringIO(text)))
 
 
-def load_package(data_dir: Path | str) -> dict[str, Any]:
+def load_package(data_dir: Path | str, variant: Variant = CONTENT) -> dict[str, Any]:
     """Load the key, the reviewer sheet and the executed predictions, verified against the manifest."""
     base = Path(data_dir)
-    manifest = json.loads((base / MANIFEST_FILE).read_text(encoding="utf-8"))
+    manifest = json.loads((base / variant.manifest_file).read_text(encoding="utf-8"))
     problems = []
-    if _sha(base / KEY_FILE) != manifest["key_sha256"]:
+    if _sha(base / variant.key_file) != manifest["key_sha256"]:
         problems.append("the blind key differs from the one the package was built with")
-    if _sha(base / SHEET_FILE) != manifest["reviewer_files_sha256"][SHEET_FILE]:
+    if _sha(base / variant.sheet_file) != manifest["reviewer_files_sha256"][variant.sheet_file]:
         problems.append("the blind reviewer sheet differs from the one the package was built with")
     for rel in PRIOR_ARTIFACTS:
         if _sha(base / rel) != manifest["adjudication_artifacts_sha256"][rel]:
             problems.append(f"{rel} changed since the package was built")
     if problems:
         raise PackageError("package integrity check failed:\n  " + "\n  ".join(problems))
-    key = _rows((base / KEY_FILE).read_text(encoding="utf-8"))
+    key = _rows((base / variant.key_file).read_text(encoding="utf-8"))
     adjudication = {
         r["sample_id"]: r for r in _rows((base / ADJUDICATION_SHEET).read_text(encoding="utf-8"))
     }
@@ -107,10 +100,11 @@ def load_package(data_dir: Path | str) -> dict[str, Any]:
     if missing:
         raise PackageError(f"no executed predictions for {missing}")
     return {
+        "variant": variant,
         "manifest": manifest,
         "key": key,
         "adjudication": adjudication,
-        "sheet_text": (base / SHEET_FILE).read_text(encoding="utf-8"),
+        "sheet_text": (base / variant.sheet_file).read_text(encoding="utf-8"),
     }
 
 
@@ -120,7 +114,7 @@ def _split(value: str) -> list[str]:
 
 def read_reviewer(completed: str, package: dict[str, Any], bundle: ConfigBundle) -> dict[str, Any]:
     """A validated returned sheet as {'reviewer_id', 'date', 'items': {sample_id: normalized answers}}."""
-    errs = check_completed(completed, package["sheet_text"], bundle)
+    errs = check_completed(completed, package["sheet_text"], bundle, package["variant"])
     if errs:
         raise PackageError("the returned sheet is not well-formed:\n  " + "\n  ".join(errs))
     rows = _rows(completed)
@@ -166,6 +160,7 @@ def compare(package: dict[str, Any], reviewer: dict[str, Any]) -> list[dict[str,
         human: Label | None = None if h["level"] is None else (h["level"], h["cats"])
         row: dict[str, Any] = {
             "reviewer_id": reviewer["reviewer_id"],
+            "variant": package["variant"].name,
             "review_order": int(k["review_order"]),
             "sample_id": sid,
             "role": k["role"],
@@ -251,7 +246,7 @@ def _dist(items: list[str]) -> str:
 
 
 def csv_rows(all_rows: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, str]]]:
-    cols = ["reviewer_id", "review_order", "sample_id", "role", "family_id", "split", "gold_level",
+    cols = ["reviewer_id", "variant", "review_order", "sample_id", "role", "family_id", "split", "gold_level",
             "gold_categories", "gold_acceptable_alternative_levels", "human_level", "human_categories",
             "human_confidence", "human_taxonomy_ambiguity", "human_alternative_levels",
             "human_insufficient_information", "human_rationale", "level_human_eq_gold",
@@ -265,7 +260,7 @@ def csv_rows(all_rows: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, 
     out = []
     for r in all_rows:
         d = {
-            "reviewer_id": r["reviewer_id"], "review_order": str(r["review_order"]),
+            "reviewer_id": r["reviewer_id"], "variant": r["variant"], "review_order": str(r["review_order"]),
             "sample_id": r["sample_id"], "role": r["role"], "family_id": r["family_id"], "split": r["split"],
             "gold_level": r["gold"][0], "gold_categories": ";".join(r["gold"][1]),
             "gold_acceptable_alternative_levels": ";".join(r["gold_alts"]),
@@ -431,11 +426,17 @@ def render_report(
     reviewers: list[dict[str, Any]],
     per_reviewer: list[list[dict[str, Any]]],
     input_hashes: dict[str, str],
+    extra_sections: list[list[str]] | None = None,
 ) -> str:
     m = package["manifest"]
+    meta_variant = package["variant"].shows_metadata
     L: list[str] = []
     add = L.append
-    add("# Blind review: gold vs human vs model predictions")
+    add(
+        "# Blind review (source metadata shown): gold vs human vs model predictions"
+        if meta_variant
+        else "# Blind review: gold vs human vs model predictions"
+    )
     add("")
     add(
         f"> **{DATASET_BANNER}.** Read-only comparison. No label, taxonomy, schema v1.0, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score."
@@ -449,6 +450,10 @@ def render_report(
     add(
         f"* Package: {m['n_items']} items ({m['n_disputed']} disputed, {m['n_controls']} controls), seed `{m['seed']}`, dataset sha256 `{m['dataset_sha256'][:16]}…`, taxonomy {m['taxonomy_version']}; integrity verified against the manifest."
     )
+    if meta_variant:
+        add(
+            "* **Variant: the reviewer was shown the document record's source metadata** (for example `source_system`) in addition to filename and text. The LLM and ML classifiers never receive metadata (`include_metadata: false`), so a human/model difference here can reflect that information gap rather than a reading difference."
+        )
     add(
         "* Every table is **SMALL_SAMPLE** (fewer than 25 per cell), and the disputed set is 4 independent decisions, not 21: counts are shown, not rates with intervals."
     )
@@ -485,14 +490,114 @@ def render_report(
                         )
                     )
                     add("")
+    for sec in extra_sections or []:
+        L += sec
     return "\n".join(L).rstrip() + "\n"
 
 
+def paired_section(
+    content_rows: list[dict[str, Any]],
+    meta_rows: list[dict[str, Any]],
+    content_id: str,
+    meta_id: str,
+) -> list[str]:
+    """What changed between a content-only review and a metadata-shown review of the same documents."""
+    L: list[str] = []
+    add = L.append
+    same = content_id == meta_id
+    c_by = {r["sample_id"]: r for r in content_rows}
+    pairs = [(c_by[m["sample_id"]], m) for m in meta_rows if m["sample_id"] in c_by]
+    both = [(c, m) for c, m in pairs if c["human"] and m["human"]]
+    add(
+        f"## Effect of showing metadata: `{content_id}` (content only) vs `{meta_id}` (metadata shown)"
+    )
+    add("")
+    add(
+        f"{'The same reviewer' if same else 'Different reviewers'}; {len(both)} of {len(pairs)} documents were labelled in both variants{_flag(len(both))}. "
+        + (
+            "A second pass by the same reviewer is anchored on the first (they may remember it), so read a change as evidence, not as a controlled effect."
+            if same
+            else "The difference mixes the effect of metadata with the difference between two people."
+        )
+    )
+    add("")
+    disputed = sorted({c["family_id"] for c, _ in both if c["role"] == "disputed"})
+    trs = []
+    for f in disputed:
+        fr = [(c, m) for c, m in both if c["family_id"] == f]
+        trs.append(
+            [
+                f"`{f}`",
+                len(fr),
+                _lab(fr[0][0]["gold"]),
+                _dist([_lab(c["human"]) for c, _ in fr]),
+                _dist([_lab(m["human"]) for _, m in fr]),
+                _frac(sum(c["human"][0] != m["human"][0] for c, m in fr), len(fr)),
+                _frac(sum(c["human"][1] != m["human"][1] for c, m in fr), len(fr)),
+                _frac(sum(bool(c["level_human_eq_gold"]) for c, _ in fr), len(fr)),
+                _frac(sum(bool(m["level_human_eq_gold"]) for _, m in fr), len(fr)),
+            ]
+        )
+    add(
+        _table(
+            [
+                "family",
+                "n",
+                "gold",
+                "content only",
+                "metadata shown",
+                "level changed",
+                "cats changed",
+                "level = gold (content only)",
+                "level = gold (metadata shown)",
+            ],
+            trs,
+        )
+    )
+    add("")
+    ctl = [(c, m) for c, m in both if c["role"] == "control"]
+    add(
+        f"Controls{_flag(len(ctl))}: level changed {_frac(sum(c['human'][0] != m['human'][0] for c, m in ctl), len(ctl))}, category set changed {_frac(sum(c['human'][1] != m['human'][1] for c, m in ctl), len(ctl))}."
+    )
+    changed = [(c, m) for c, m in both if c["human"] != m["human"]]
+    add("")
+    if changed:
+        add(
+            _table(
+                ["sample", "role", "family", "gold", "content only", "metadata shown"],
+                [
+                    [
+                        c["sample_id"],
+                        c["role"],
+                        f"`{c['family_id']}`",
+                        _lab(c["gold"]),
+                        _lab(c["human"]),
+                        _lab(m["human"]),
+                    ]
+                    for c, m in changed
+                ],
+            )
+        )
+    else:
+        add("No document's label changed when the metadata was shown.")
+    add("")
+    return L
+
+
 def run(
-    completed_paths: list[Path], bundle: ConfigBundle, data_dir: Path | str = DEFAULT_DATA_DIR
+    completed_paths: list[Path],
+    bundle: ConfigBundle,
+    data_dir: Path | str = DEFAULT_DATA_DIR,
+    variant: Variant = CONTENT,
+    content_sheets: list[Path] | None = None,
 ) -> tuple[str, str]:
-    """Return (report markdown, per-sample csv). Raises PackageError if anything cannot be trusted."""
-    package = load_package(data_dir)
+    """Return (report markdown, per-sample csv). Raises PackageError if anything cannot be trusted.
+
+    `content_sheets` (only with the metadata variant) adds the paired "effect of showing metadata" section.
+    """
+    if content_sheets and not variant.shows_metadata:
+        raise PackageError("content-only sheets can be paired only with the metadata variant")
+    package = load_package(data_dir, variant)
     reviewers, per_reviewer, hashes = [], [], {}
     for p in completed_paths:
         text = Path(p).read_text(encoding="utf-8")
@@ -502,7 +607,24 @@ def run(
         reviewers.append(rv)
         per_reviewer.append(compare(package, rv))
         hashes[Path(p).name] = hashlib.sha256(text.encode()).hexdigest()
-    hashes[KEY_FILE] = package["manifest"]["key_sha256"]
-    hashes[SHEET_FILE] = package["manifest"]["reviewer_files_sha256"][SHEET_FILE]
+    hashes[variant.key_file] = package["manifest"]["key_sha256"]
+    hashes[variant.sheet_file] = package["manifest"]["reviewer_files_sha256"][variant.sheet_file]
+    extra: list[list[str]] = []
+    if content_sheets:
+        cpkg = load_package(data_dir, CONTENT)
+        seen_ids: set[str] = set()
+        for p in content_sheets:
+            text = Path(p).read_text(encoding="utf-8")
+            crv = read_reviewer(text, cpkg, bundle)
+            if crv["reviewer_id"] in seen_ids:
+                raise PackageError(
+                    f"reviewer_id {crv['reviewer_id']!r} appears in more than one content-only sheet"
+                )
+            seen_ids.add(crv["reviewer_id"])
+            crows = compare(cpkg, crv)
+            hashes[f"(content-only) {Path(p).name}"] = hashlib.sha256(text.encode()).hexdigest()
+            hashes[CONTENT.key_file] = cpkg["manifest"]["key_sha256"]
+            for rv, rows in zip(reviewers, per_reviewer, strict=True):
+                extra.append(paired_section(crows, rows, crv["reviewer_id"], rv["reviewer_id"]))
     cols, rows = csv_rows([r for rs in per_reviewer for r in rs])
-    return render_report(package, reviewers, per_reviewer, hashes), to_csv(cols, rows)
+    return render_report(package, reviewers, per_reviewer, hashes, extra), to_csv(cols, rows)
