@@ -74,6 +74,8 @@ class TierConfig(StrictModel):
     deployment_env: str
     price: Price
     api: Literal["chat_completions", "responses"] = "chat_completions"
+    # Cache identity of the recorded benchmark for this tier (a deployment NAME, not a secret).
+    replay_model_id: str | None = None
     # False when the deployment rejects a temperature parameter (some reasoning models do).
     send_temperature: bool = True
 

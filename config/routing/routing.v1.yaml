@@ -1,0 +1,62 @@
+# UC4 hybrid routing configuration (Approach D). Version-controlled; hash recorded in every run.
+#
+# `base` is the `default` variant. Every named variant below is a set of overrides applied to `base`
+# and is FIXED by the pre-registered plan (docs/uc4/hybrid-plan.md). Thresholds here are a
+# recommendation: no minimum precision has been approved, and dev was used for both selection and
+# evaluation, so nothing here is a validated operating point.
+routing_version: 1.0.0
+taxonomy_version: 1.0.0
+default_variant: default
+
+base:
+  rules:
+    enabled: true
+    short_circuit: false          # Rules sufficiency does not skip the LLM unless enabled
+    min_level_strength: strong    # sufficiency: decisive level with at least this rule strength
+  ml:
+    enabled: false
+    short_circuit: true           # an accepted ML decision may skip the LLM
+    tau: 0.7                      # calibrated reliability needed on ALL axes
+  llm:
+    tier_order: [mid, large]      # each tier tried at most once, in order
+    min_confidence: medium        # verbalized bucket floor (low | medium | high); NOT a probability
+    accept_abstention: false      # insufficient_information escalates
+  budget:
+    max_llm_calls: 3              # per document; no prices exist, so cost is counted in calls
+  conflict:
+    level_rank_gap: 2             # disagree by MORE than one rank (gap >= 2), or on high-risk
+  fusion:
+    rules_floor: true             # a sufficient Rules level is never lowered
+    category_floors: true         # raise the level to the highest floor of the fused categories
+  injection:
+    restrict_downgrade: true      # a flagged document's level may be raised, not lowered, by the LLM
+
+variants:
+  llm_mid_only:                   # pure pass-through of the mid tier (sanity check vs standalone)
+    rules: {enabled: false}
+    llm: {tier_order: [mid], min_confidence: low, accept_abstention: true}
+    fusion: {rules_floor: false, category_floors: false}
+    injection: {restrict_downgrade: false}
+  default: {}
+  rules_short_circuit:
+    rules: {short_circuit: true}
+  no_rules_floor:
+    fusion: {rules_floor: false}
+  no_category_floors:
+    fusion: {category_floors: false}
+  small_first:
+    llm: {tier_order: [small, mid, large]}
+  small_mid:
+    llm: {tier_order: [small, mid]}
+  large_only:
+    llm: {tier_order: [large]}
+  strict_confidence:
+    llm: {min_confidence: high}
+  no_injection_restriction:
+    injection: {restrict_downgrade: false}
+  ml_stage_50:
+    ml: {enabled: true, tau: 0.5}
+  ml_stage_70:
+    ml: {enabled: true, tau: 0.7}
+  ml_stage_90:
+    ml: {enabled: true, tau: 0.9}

@@ -56,6 +56,16 @@ class PredictionRecord(StrictModel):
     evidence_verified: int = 0  # of those, found in the text that was sent
     guardrail_types: list[str] = Field(default_factory=list)
 
+    # routing accounting (hybrid; empty for single-stage approaches)
+    stop_reason: str | None = None
+    stages_run: list[str] = Field(default_factory=list)
+    escalations: int = 0
+    short_circuited: bool = False
+    review_reasons: list[str] = Field(default_factory=list)
+    routing_flags: list[str] = Field(default_factory=list)  # fusion:* / conflict:* / budget:* trace
+
+    stage_latency_ms: dict[str, float] = Field(default_factory=dict)  # per-stage, as reported
+
     # cost / time
     latency_ms: float  # wall-clock around classify(), measured by the harness
     reported_latency_ms: float | None = None  # what the classifier says it spent

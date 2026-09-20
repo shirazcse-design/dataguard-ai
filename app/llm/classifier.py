@@ -385,7 +385,11 @@ def build_llm_classifier(
         if mode == "foundry":
             client = live()
         elif mode in ("replay", "record"):
-            mid = model_id or os.environ.get(cfg.tiers[tier].deployment_env, "")
+            mid = (
+                model_id
+                or os.environ.get(cfg.tiers[tier].deployment_env, "")
+                or (cfg.tiers[tier].replay_model_id if mode == "replay" else "")
+            )
             if not mid:
                 raise ValueError(
                     f"{mode} mode needs --llm-model-id (or {cfg.tiers[tier].deployment_env})"
