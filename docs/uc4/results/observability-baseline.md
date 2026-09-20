@@ -9,7 +9,7 @@
 * pre-registered plan: `docs/uc4/observability-plan.md` (committed before any Phase 7 code)
 * observability config `1.0.0` sha256 `166398d516cf13e6...`; 53 allow-listed attribute keys (deny by default)
 * traced run: hybrid `default` over 107 dev documents -> 107 traces, 749 spans
-* git `76cb57364189` on `uc4/blind-review-metadata-variant` (dirty: True)
+* git `3470e6d31810` on `uc4/blind-review-metadata-variant` (dirty: False)
 
 ## Derived metrics (from spans)
 
