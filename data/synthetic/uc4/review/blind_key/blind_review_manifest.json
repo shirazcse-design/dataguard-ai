@@ -1,0 +1,40 @@
+{
+  "adjudication_artifacts_sha256": {
+    "review/adjudication_decisions.yaml": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+    "review/adjudication_sheet.csv": "8b3131663a9023d457ab562c3f723dc40fd94e91d359e4a07d9f1995b277c6cd",
+    "review/adjudication_sheet.meta.json": "1c5b1ec682fb9c33a703ab7045ef2dc87dd07d7f3d2d7e6bc53dde5b4fa91693"
+  },
+  "controls_per_level": 3,
+  "dataset_banner": "AI-generated synthetic dataset \u2014 pending human gold-label review",
+  "dataset_sha256": "bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa",
+  "decisions_file": "review/adjudication_decisions.yaml",
+  "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+  "disputed_families": [
+    "amb_customer_case_study_draft",
+    "hn_business_case_study",
+    "hn_public_api_docs_placeholder_keys",
+    "phi_prescription_record"
+  ],
+  "git_branch": "uc4/blind-review-package",
+  "git_commit": "a688b194495772ce6441157cff223e9c3fa852e9",
+  "git_dirty": true,
+  "key_sha256": "d73b22083db2718078dd2ece3e28f26743751c3449e925cb09236d7fcc6a65ad",
+  "labels_changed": false,
+  "leak_check": "passed",
+  "locked_test_split_read": false,
+  "n_controls": 12,
+  "n_disputed": 21,
+  "n_items": 33,
+  "purpose": "blind human review of the disputed gold labels; reviewer must not open this directory",
+  "reviewer_files_sha256": {
+    "review/blind/blind_review_packet.md": "c4cfd8951eb3470760e3f924d273aa4c04a129fa22ad4b5a041ed82b640fd496",
+    "review/blind/blind_review_sheet.csv": "c3a6f6851b2cf1908e342007fa4d00f687471c6a781c7964f00586924e930d9e"
+  },
+  "seed": "uc4-blind-review-v1",
+  "splits_loaded": [
+    "train",
+    "calibration",
+    "dev"
+  ],
+  "taxonomy_version": "1.0.0"
+}

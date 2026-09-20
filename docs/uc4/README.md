@@ -22,6 +22,8 @@
 | [`llm-engine.md`](llm-engine.md) | LLM classifier architecture, rules, what was and was not measured |
 | [`results/gold-review.md`](results/gold-review.md) | Gold-label review preparation: adjudication summary, proposed changes (none applied), impact analysis |
 | [`../../data/synthetic/uc4/review/adjudication_sheet.csv`](../../data/synthetic/uc4/review/adjudication_sheet.csv) | The auditable adjudication sheet (127 rows; human columns blank) |
+| [`results/gold-review-decision-brief.md`](results/gold-review-decision-brief.md) | Decision brief for the proposed label/taxonomy changes (A/B/C), with a correction about `source_system` metadata; nothing applied |
+| [`blind-review.md`](blind-review.md) | Blind human-review package: what the reviewer sees, the key kept apart, checks; nothing applied |
 | [`service-plan.md`](service-plan.md) | Pre-registered Phase 8 plan (written before any Phase 8 code) |
 | [`service-api.md`](service-api.md) | Python API, CLI, exit codes |
 | [`result-schema.md`](result-schema.md) | Frozen result schema v1.0: fields, status semantics, invariants, failure semantics |

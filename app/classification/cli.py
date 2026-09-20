@@ -925,6 +925,48 @@ def _cmd_review_build(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_review_blind_package(args: argparse.Namespace) -> int:
+    """Write the blind human-review package (reviewer files, key, manifest); no label is touched."""
+    from pathlib import Path
+
+    from evals.classification.blind_review import MANIFEST_FILE, build_package
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR
+    from evals.classification.evaluate import git_info
+
+    bundle = load_config(args.config_dir)
+    data_dir = args.data_dir or str(DEFAULT_DATA_DIR)
+    files, manifest = build_package(bundle, git_info(), data_dir)
+    files[MANIFEST_FILE] = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    for rel, text in files.items():
+        path = Path(data_dir) / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        print(f"wrote {path}")
+    n, nd, nc = manifest["n_items"], manifest["n_disputed"], manifest["n_controls"]
+    print(f"{n} items ({nd} disputed + {nc} controls)")
+    return 0
+
+
+def _cmd_review_blind_check(args: argparse.Namespace) -> int:
+    """Check that a returned blind-review sheet is well-formed (it does not judge the labels)."""
+    from pathlib import Path
+
+    from evals.classification.blind_review import SHEET_FILE, check_completed
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR
+
+    bundle = load_config(args.config_dir)
+    data_dir = Path(args.data_dir or DEFAULT_DATA_DIR)
+    errs = check_completed(
+        Path(args.sheet).read_text(encoding="utf-8"),
+        (data_dir / SHEET_FILE).read_text(encoding="utf-8"),
+        bundle,
+    )
+    for e in errs:
+        print(f"ERROR {e}")
+    print("well-formed" if not errs else f"{len(errs)} problem(s)")
+    return 1 if errs else 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -1141,6 +1183,17 @@ def build_parser() -> argparse.ArgumentParser:
     rvb.add_argument("--config-dir", default=None)
     rvb.add_argument("--data-dir", default=None)
     rvb.set_defaults(func=_cmd_review_build)
+    rvp = rv_sub.add_parser("blind-package", help="write the blind human-review package")
+    rvp.add_argument("--config-dir", default=None)
+    rvp.add_argument("--data-dir", default=None)
+    rvp.set_defaults(func=_cmd_review_blind_package)
+    rvc = rv_sub.add_parser(
+        "blind-check", help="check a returned blind-review sheet is well-formed"
+    )
+    rvc.add_argument("--sheet", required=True)
+    rvc.add_argument("--config-dir", default=None)
+    rvc.add_argument("--data-dir", default=None)
+    rvc.set_defaults(func=_cmd_review_blind_check)
     cl = sub.add_parser("classify", help="classify a document and print the result JSON")
     src = cl.add_argument_group("input (exactly one)")
     src.add_argument("--file", default=None, help="a UTF-8 text file, or - for stdin")
