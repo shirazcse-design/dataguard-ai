@@ -94,7 +94,7 @@ class RulesClassifier:
                 decided_by="rules",
             )
 
-        warnings: list[str] = []
+        warnings: list[str] = [f"detector_error:{e}" for e in result.detector_errors]
         if abstained:
             warnings.append(f"level_abstained:standalone_default={self._default_level}")
         if result.weak_only_categories:
@@ -113,7 +113,8 @@ class RulesClassifier:
             request_id=request.request_id,
             document_id=doc.document_id,
             content_hash=doc.content_hash(),
-            status="ok",
+            # a broken detector means the evidence may be incomplete: degraded, never silently ok
+            status="degraded" if result.detector_errors else "ok",
             level=level,
             categories=categories,
             high_risk=self._policy.derive_high_risk(level.value, [c.id for c in categories]),

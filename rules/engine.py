@@ -99,8 +99,13 @@ class RulesEngine:
         scan = ScanContext(doc, self.cfg, self.matcher)
         detections: list[Detection] = []
         suppressions: list[Suppression] = []
+        errors: list[str] = []
         for det in self.detectors:
-            out = det.detect(scan)
+            try:
+                out = det.detect(scan)
+            except Exception as exc:  # noqa: BLE001 - one broken detector must not kill the request
+                errors.append(f"{det.id}:{type(exc).__name__}")
+                continue
             detections.extend(out.detections)
             suppressions.extend(out.suppressions)
 
@@ -158,4 +163,5 @@ class RulesEngine:
             truncated=doc.truncated,
             weak_only_categories=weak_only,
             elapsed_ms=(time.perf_counter() - started) * 1000,
+            detector_errors=errors,
         )

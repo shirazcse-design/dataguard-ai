@@ -15,10 +15,10 @@ The Foundry adapter was exercised with real calls against the project's deployme
 ## Provenance and protocol
 
 * pre-registered plan: `docs/uc4/llm-plan.md` (committed before any LLM code)
-* prompt `classifier.v1` sha256 `44404a014cc703c8...`; llm config sha256 `8bc1281a5ccb22cc...`
+* prompt `classifier.v1` sha256 `44404a014cc703c8...`; llm config sha256 `e0a96e7ec8f761fc...`
 * 13 few-shot examples, all from `train`; temperature None; max output tokens 4000
 * injection guardrail `1.0.1` sha256 `556e1d3df18fa137...`
-* git `92a0b80bd2e1` on `uc4/phase-5-llm` (dirty: False)
+* git `af515c55c5ca` on `uc4/phase-7-observability` (dirty: False)
 * embedded labels and metadata are NOT shown to the model; the filename is
 
 ## Prompt audit (no model involved)

@@ -166,3 +166,20 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D6.11 | Fault-injection scenarios (tiers unavailable) are part of the report, because real recorded outputs never trigger escalation, conflict or review on dev. | Safety paths must be shown to work. |
 | D6.12 | Harness 1.4.0: records carry routing accounting (stop reason, stages run, escalations, review reasons, routing flags, per-stage latency). | Needed to report stage coverage and cost for any approach. |
 | D6.13 | `replay_model_id` per LLM tier in `llm.v1.yaml` names the recorded benchmark (a deployment name, not a secret) so replay needs no flag. | CI and the hybrid replay without configuration. |
+
+## Implementation decisions (Phase 7 - observability and failure hardening)
+
+| # | Decision | Why |
+|---|---|---|
+| D7.1 | `observability-plan.md` was committed before any Phase 7 code and lists the gaps found by reading the code (G1-G5). | Pre-registration; the hardening was driven by an explicit gap list, not by what happened to pass. |
+| D7.2 | Tracing is a no-op unless a trace is active; a test proves results are identical with tracing on and off. | Observability must not change behaviour. |
+| D7.3 | Export is **deny by default**: only allow-listed `dg.*` keys leave the process; keys whose final segment names text (`content`, `quote`, `excerpt`, `rationale`, `prompt`, `filename`, ...) are refused at config load; identifier keys are shape-validated, not masked; other values are masked and truncated; exception messages are never recorded, only class names. | PRD 19: never log raw content or unmasked evidence. |
+| D7.4 | Privacy is verified by an audit (`obs audit`, a CI gate) that scans every key and string value of a full dev run for 6-word windows of every document, every gold evidence span, filenames and sensitive-value patterns, and has a negative control proving it can fail. | Absence of leakage must be checkable. |
+| D7.5 | Spans use an OpenTelemetry-compatible data model with JSONL and in-memory sinks and an optional SDK bridge (extra `otel`, tested with the in-memory exporter). **Azure Monitor/Foundry export is unverified** (no connection string); the glue is lazy, optional and labelled so. | Foundry tracing needs an Application Insights resource that does not exist here. |
+| D7.6 | Closing G1: the Rules engine isolates each detector; a failure marks the result `degraded`; a degraded Rules result is never sufficient for the hybrid (no short-circuit, no floor). | Incomplete evidence must not decide. |
+| D7.7 | Closing G2: an input guard (`config/guardrails/input.v1.yaml`) rejects empty, undecodable and oversize text, flags truncation above a soft limit, and `classify_safely` turns malformed payloads and classifier crashes into `rejected`/`error` results without ever raising or leaking text. | Architecture section 19. |
+| D7.8 | Closing G3: the hybrid honours `options.mode`, `max_llm_tier` and `budget` (latency; cost only when a price exists; a cap of 0 means no spend). A cost cap with no price cannot be enforced and says so. | The options existed in the schema but were ignored. |
+| D7.9 | Closing G4: a decided hybrid result is `degraded` when a configured stage errored or was unavailable. | The failure must be visible, not silent. |
+| D7.10 | The failure-injection suite (`tests/failure_injection/`) has a test for every row of architecture section 19, run through the real classifiers, the real Foundry adapter and a local fake provider server; a meta-test fails if a row has no test and mirrors the architecture table. `obs report` builds the matrix from an actual run. | Exit criterion of Phase 7. |
+| D7.11 | Bugs found by tests while building Phase 7 and fixed: the redactor first mangled the identifiers it must preserve and masked snake_case codes; guardrail events were emitted twice; the allow-list check first rejected safe keys such as `dg.content_hash`. | Recorded so the design history is honest. |
+| D7.12 | Dashboards (DG-018), the service surface (Phase 8), Azure Monitor verification and any locked-test evaluation were not done. | Out of scope or blocked. |

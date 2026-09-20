@@ -27,7 +27,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - name: Install
-        run: python -m pip install -e ".[dev]"
+        run: python -m pip install -e ".[dev,otel]"
       - name: Lint
         run: |
           ruff check .
@@ -132,8 +132,26 @@ jobs:
       - run: dataguard-uc4 eval run --classifier hybrid --hybrid-variant default --split dev --runs-dir "$RUNNER_TEMP/runs"
       - run: dataguard-uc4 hybrid report --out "$RUNNER_TEMP/hybrid-baseline.md"
 
+  observability:
+    name: Observability + failure-injection suite + privacy gate (no Azure)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev,otel]"
+      # Every row of the architecture section 19 failure matrix, end to end (local fake provider).
+      - run: python -m pytest tests/failure_injection -q -p no:cacheprovider
+      # Traced dev run (replayed LLM responses), then the privacy gate: exits 1 on any leaked text.
+      - run: dataguard-uc4 eval run --classifier hybrid --split dev --trace-out "$RUNNER_TEMP/spans.jsonl" --runs-dir "$RUNNER_TEMP/runs"
+      - run: dataguard-uc4 obs audit --spans "$RUNNER_TEMP/spans.jsonl" --split dev
+      - run: dataguard-uc4 obs summarize --spans "$RUNNER_TEMP/spans.jsonl"
+      - run: dataguard-uc4 obs report --out "$RUNNER_TEMP/observability-baseline.md"
+
   # ---------------------------------------------------------------------------------------------
   # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):
-  #   Phase 5: full LLM + hybrid eval on release/dispatch, via OIDC (no long-lived secrets)
+  #   Real-LLM re-recording on release/dispatch, via OIDC (no long-lived secrets)
   #   Security: dependency scan, secret scanning (with fake-secret allowlist), CodeQL
   # ---------------------------------------------------------------------------------------------

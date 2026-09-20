@@ -1,0 +1,70 @@
+# Observability configuration (architecture section 14; PRD 16.1, 19).
+#
+# PRIVACY IS DENY-BY-DEFAULT: a span or event attribute is exported only if its key is listed in
+# `allowed_attributes`. Never list a key that can carry document text. Values are additionally
+# truncated and masked by the redactor as defence in depth. Exception MESSAGES are never recorded,
+# only the exception class name.
+observability_version: 1.0.0
+service_name: dataguard-uc4
+max_value_chars: 120
+pseudonym_salt_env: DATAGUARD_OBS_SALT     # unset: a per-process random salt (pseudonyms are then not stable)
+allowed_attributes:
+  # request
+  - dg.request_id
+  - dg.document_id
+  - dg.caller
+  - dg.content_hash
+  - dg.content_bytes
+  - dg.extension
+  - dg.classifier
+  - dg.classifier_version
+  - dg.variant
+  # stage / routing
+  - dg.stage
+  - dg.reason
+  - dg.stop_reason
+  - dg.escalations
+  - dg.short_circuited
+  - dg.stages_run
+  - dg.notes_count
+  - dg.latency_ms
+  - dg.tokens_in
+  - dg.tokens_out
+  - dg.est_cost_usd
+  - dg.failed_stages
+  # model
+  - dg.llm.tier
+  - dg.llm.model_id
+  - dg.llm.served_model
+  - dg.llm.prompt_version
+  - dg.llm.attempts
+  - dg.llm.repair_attempts
+  - dg.llm.cached
+  - dg.llm.status
+  - dg.llm.error_kind
+  - dg.llm.schema_invalid
+  - dg.llm.invalid_reason
+  - dg.llm.evidence_total
+  - dg.llm.evidence_verified
+  - dg.llm.truncated
+  - dg.llm.retry_kind
+  # guardrail
+  - dg.guardrail.type
+  - dg.guardrail.trigger
+  - dg.guardrail.action
+  - dg.input.reason
+  - dg.injection.flagged
+  # outcome
+  - dg.outcome.status
+  - dg.outcome.level
+  - dg.outcome.level_decided_by
+  - dg.outcome.level_confidence_kind
+  - dg.outcome.n_categories
+  - dg.outcome.categories
+  - dg.outcome.high_risk
+  - dg.outcome.review_required
+  - dg.outcome.review_reasons
+  - dg.outcome.provisional
+  - dg.outcome.warnings_count
+  # errors (class name only)
+  - dg.error.type
