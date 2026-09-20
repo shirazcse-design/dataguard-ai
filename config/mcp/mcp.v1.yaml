@@ -1,0 +1,20 @@
+# MCP adapter configuration for `classify_document` (docs/uc4/mcp-contract.md).
+#
+# The adapter is a thin, read/compute wrapper over ClassificationService. It is DENY-BY-DEFAULT:
+# a caller that is not listed under `callers` is refused before any classification happens.
+#
+# The caller identity is bound by whoever starts the server (env DATAGUARD_MCP_CALLER_ID). Over the
+# stdio transport that identity is ASSERTED by the launcher, not authenticated; real authentication
+# needs a networked transport and is out of scope for v0.1.
+#
+# Per-caller policy caps what an agent may ask for; a request can only lower these, never raise them.
+mcp_version: 1.0.0
+tool_name: classify_document
+max_content_bytes: 100000          # raw `content` is for ad-hoc calls only (contract: far below the 5 MB service limit)
+default_include_evidence: false    # evidence excerpts are model-derived text from an untrusted document
+callers:
+  example-agent:                   # development placeholder; replace with the real agent identities
+    max_llm_tier: mid              # large takes ~78 s, above the PRD's 10 s tool-call limit
+    max_cost_usd: 0.05
+    max_latency_ms: 10000
+    allow_evidence: true

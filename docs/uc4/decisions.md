@@ -198,3 +198,22 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D8.8 | Tools accept only `content`, filename/extension, options and (adapter-supplied) caller in the documented MCP contract; `existing_labels` and `metadata` are not accepted; model-generated text in results is documented as untrusted. | Spoofable inputs; tool-output prompt-injection risk. |
 | D8.9 | Bugs found by tests while building Phase 8 and fixed: a hostile over-long `request_id` made building the rejected result itself raise; an unknown `--variant` escaped as a traceback; the example generator's first filename (`example.txt`) triggered Rules' negative context. | Recorded so the history is honest. |
 | D8.10 | No JSON/HTTP API, `document_id` resolution, authentication or rate limiting. | Optional in the plan / out of scope for a library + CLI first. |
+
+## Approved after the Phase 8 review (product owner)
+
+| # | Decision | Implementation |
+|---|---|---|
+| A25 | Build the MCP adapter for `classify_document` (2026-09-20). This lifts the "stop for approval before MCP" gate only; it does not lift the other two unblock conditions (audited confirmation on data that did not choose the configuration; human gold-label review), which remain open and are reported as NOT satisfied. | `mcp_adapter/`, `config/mcp/mcp.v1.yaml`, `docs/uc4/mcp-contract.md` |
+
+## Implementation decisions (MCP adapter)
+
+| # | Decision | Why |
+|---|---|---|
+| D9.1 | The package is `mcp_adapter/`, not `mcp/` as the plan sketched. | A top-level `mcp` package would shadow the MCP SDK (`import mcp`). |
+| D9.2 | The adapter core does not import the SDK; only `server.py` does, behind the optional `mcp` extra. | The policy stays testable without the SDK, and the SDK (currently 2.x, a breaking rewrite of 1.x) is a replaceable transport. |
+| D9.3 | Deny by default: an empty or missing allowlist entry means no access; startup refuses an unlisted identity. | PRD 10.1 allowlist and per-agent permissions. |
+| D9.4 | Spoofable or unresolvable inputs (`metadata`, `existing_labels`, `caller`, `schema_version`, `document_id`) are rejected rather than silently dropped. | A field must never be silently ignored (same principle as D8.6). |
+| D9.5 | Evidence is off by default and only available to callers whose policy allows it. | Excerpts and rationales are model text from an untrusted document. |
+| D9.6 | The shipped `example-agent` policy caps the LLM tier at `mid`. | `large` takes ~78 s against the PRD's 10 s tool-call limit. |
+| D9.7 | The tool runs the synchronous service in a worker thread. | Live LLM calls take seconds; the protocol loop must not block. |
+| D9.8 | The server is verified end to end in-process and once over a real stdio subprocess; no network transport, authentication, rate limiting or `document_id` store. | Out of scope for v0.1 (D8.10). |

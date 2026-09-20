@@ -244,10 +244,12 @@ def build_service_report(bundle: ConfigBundle, dev: list, git: dict[str, Any], t
         ["The result schema is versioned", "MET", f"`schema_version` {info['schema_version']}; frozen schemas and changelog under `docs/uc4/schema/`; drift check passes" if not any(r["breaking"] or r["additive"] for r in schema_report.values()) else "**drift detected**"],
         ["Failure semantics are documented", "MET", f"`docs/uc4/result-schema.md`; the Phase 7 failure matrix has {len(ROWS)} rows, each tested"],
         ["The eval gates have passed", "MET" if gates_pass else "**NOT MET**", "; ".join([f"level macro-F1 {gate(st['level_macro_f1'], g.level_macro_f1)}", f"category macro-F1 {gate(st['category_macro_f1'], g.category_macro_f1)}", f"high-risk recall {gate(st['high_risk_recall'], g.high_risk_recall)}"]) + f". Dev chose the variant; the locked test split has been read {test_runs} times"],
-        ["Approval to build MCP", "NOT GIVEN", "the plan says to stop for approval before MCP"],
+        ["Approval to build MCP", "GIVEN", "the product owner approved building the adapter on 2026-09-20; the other two conditions to unblock it (an audited confirmation on data that did not choose the configuration, and human review of the gold labels) are NOT satisfied"],
     ]))  # fmt: skip
     add("")
-    add("The MCP contract is documented (`docs/uc4/mcp-contract.md`) and **not implemented**.")
+    add(
+        "The MCP adapter is implemented (`mcp_adapter/`, `dataguard-uc4-mcp`; contract in `docs/uc4/mcp-contract.md`) **ahead of the unmet freeze criteria above**: development and evaluation use only, not a release."
+    )
     add("")
     add("## Caveats")
     add("")

@@ -59,11 +59,11 @@ def test_the_freeze_criteria_are_computed_and_the_gates_criterion_is_reported_ho
     crit = report[report.index("## MCP freeze criteria") :]
     assert "| The result schema is versioned | MET |" in crit
     assert "| The eval gates have passed |" in crit and "point / lower bound" in crit
-    assert "| Approval to build MCP | NOT GIVEN |" in crit
+    assert "| Approval to build MCP | GIVEN |" in crit and "NOT satisfied" in crit
     # the gates row must agree with the numbers it prints: any FAIL in the evidence means NOT MET
     row = next(x for x in crit.splitlines() if x.startswith("| The eval gates have passed"))
     assert ("**NOT MET**" in row) == ("FAIL" in row.split("|")[3])
-    assert "not implemented" in crit
+    assert "ahead of the unmet freeze criteria" in crit
 
 
 # ---- documentation integrity -------------------------------------------------------------------
@@ -78,10 +78,13 @@ def test_relative_links_in_the_uc4_docs_resolve(doc):
         assert (doc.parent / target).resolve().exists(), f"{doc.name} links to missing {target}"
 
 
-def test_the_mcp_contract_says_it_is_not_implemented_and_blocked():
+def test_the_mcp_contract_says_it_is_built_ahead_of_unmet_freeze_criteria():
     text = (DOCS / "mcp-contract.md").read_text()
-    assert "Not implemented, and blocked" in text and "NOT MET" in text and "Not given" in text
-    assert not (ROOT / "mcp").exists() or not any((ROOT / "mcp").iterdir())  # no scaffolding exists
+    assert "Implemented ahead of the freeze criteria" in text and "NOT MET" in text
+    assert "Approval to build MCP | Given" in text
+    assert (ROOT / "mcp_adapter" / "adapter.py").exists()
+    # a top-level `mcp` package would shadow the MCP SDK on import
+    assert not (ROOT / "mcp").exists()
 
 
 def test_the_service_docs_document_every_exit_code():

@@ -28,11 +28,18 @@ otel = [
     "opentelemetry-sdk>=1.24",
 ]
 
+# The MCP server for `classify_document` (docs/uc4/mcp-contract.md). The adapter core does not
+# import the SDK; only `mcp_adapter/server.py` does.
+mcp = [
+    "mcp>=2.0",
+]
+
 [project.scripts]
 dataguard-uc4 = "app.classification.cli:main"
+dataguard-uc4-mcp = "mcp_adapter.server:main"
 
 [tool.setuptools.packages.find]
-include = ["app*", "rules*", "ml*", "evals*", "guardrails*", "observability*"]
+include = ["app*", "rules*", "ml*", "evals*", "guardrails*", "observability*", "mcp_adapter*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

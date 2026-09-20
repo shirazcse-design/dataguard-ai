@@ -27,7 +27,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - name: Install
-        run: python -m pip install -e ".[dev,otel]"
+        run: python -m pip install -e ".[dev,otel,mcp]"
       - name: Lint
         run: |
           ruff check .
@@ -141,7 +141,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: python -m pip install -e ".[dev,otel]"
+      - run: python -m pip install -e ".[dev,otel,mcp]"
       # Every row of the architecture section 19 failure matrix, end to end (local fake provider).
       - run: python -m pytest tests/failure_injection -q -p no:cacheprovider
       # Traced dev run (replayed LLM responses), then the privacy gate: exits 1 on any leaked text.
@@ -159,12 +159,14 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: python -m pip install -e ".[dev]"
+      - run: python -m pip install -e ".[dev,mcp]"
       # Fails on ANY difference between the models and the frozen v1 schemas.
       - run: dataguard-uc4 schema check
       - run: dataguard-uc4 service info --check --llm-mode off
       - run: dataguard-uc4 classify --text "Employee record. National ID 905-37-6209." --llm-mode off --pretty
       - run: dataguard-uc4 service report --out "$RUNNER_TEMP/service-baseline.md"
+      # The MCP adapter and its stdio server (SDK from the optional `mcp` extra).
+      - run: pytest tests/unit/test_mcp_adapter.py tests/unit/test_mcp_server.py
 
   # ---------------------------------------------------------------------------------------------
   # Added in later phases (see docs/uc4 and the approved architecture plan, section 18):

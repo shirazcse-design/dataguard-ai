@@ -28,7 +28,7 @@
 | [`service-api.md`](service-api.md) | Python API, CLI, exit codes |
 | [`result-schema.md`](result-schema.md) | Frozen result schema v1.0: fields, status semantics, invariants, failure semantics |
 | [`schema/`](schema/CHANGELOG.md) | Frozen JSON Schemas, golden examples, compatibility policy |
-| [`mcp-contract.md`](mcp-contract.md) | MCP contract for `classify_document` (documentation only; blocked) |
+| [`mcp-contract.md`](mcp-contract.md) | MCP contract for `classify_document` and how the adapter (`mcp_adapter/`) implements it; built ahead of two unmet freeze criteria |
 | [`results/service-baseline.md`](results/service-baseline.md) | Generated: schema digests, examples, exit codes, MCP freeze criteria |
 | [`observability-plan.md`](observability-plan.md) | Pre-registered Phase 7 plan (written before any Phase 7 code) |
 | [`observability-engine.md`](observability-engine.md) | Spans, redaction, privacy audit, hardening, failure matrix, what is unverified |
