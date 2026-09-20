@@ -129,6 +129,6 @@ For the frozen `default` hybrid the level macro-F1 is 0.870 [0.631, 1.000] over 
 
 ## Provenance
 
-* dataset sha256 `bc86537c2cc23e5f...` (unchanged); decisions file sha256 `b3f22ebf5c3045cc...`; git `8620c1eac75b` on `uc4/gold-review-prep` (dirty: True)
+* dataset sha256 `bc86537c2cc23e5f...` (unchanged); decisions file sha256 `b3f22ebf5c3045cc...`; git `1e08abe12433` on `uc4/gold-review-prep` (dirty: False)
 * splits loaded: train, calibration, dev. **The locked test split was not read.**
 * regenerate with `dataguard-uc4 review build`
