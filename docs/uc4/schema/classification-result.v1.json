@@ -1,0 +1,831 @@
+{
+  "$defs": {
+    "CategoryPrediction": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "decided_by": {
+          "enum": [
+            "rules",
+            "ml",
+            "llm",
+            "fusion",
+            "baseline"
+          ],
+          "title": "Decided By",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "confidence",
+        "decided_by"
+      ],
+      "title": "CategoryPrediction",
+      "type": "object"
+    },
+    "Confidence": {
+      "additionalProperties": false,
+      "properties": {
+        "calibrated": {
+          "default": false,
+          "title": "Calibrated",
+          "type": "boolean"
+        },
+        "calibration_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calibration Ref"
+        },
+        "est_reliability": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Est Reliability"
+        },
+        "kind": {
+          "enum": [
+            "rule_strength",
+            "calibrated_probability",
+            "uncalibrated_score",
+            "verbalized_bucket",
+            "none"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "Confidence",
+      "type": "object"
+    },
+    "DetectorRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "DetectorRef",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "detector": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DetectorRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "excerpt": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excerpt"
+        },
+        "excerpt_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excerpt Hash"
+        },
+        "locator": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Locator"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "provenance": {
+          "enum": [
+            "observed",
+            "inferred"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "rules",
+            "ml",
+            "llm",
+            "metadata"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "strength": {
+          "default": "n/a",
+          "enum": [
+            "definitive",
+            "strong",
+            "weak",
+            "n/a"
+          ],
+          "title": "Strength",
+          "type": "string"
+        },
+        "supports": {
+          "$ref": "#/$defs/Supports"
+        },
+        "type": {
+          "enum": [
+            "pattern_match",
+            "validator_passed",
+            "dictionary_hit",
+            "existing_label",
+            "filename_signal",
+            "feature_attribution",
+            "llm_excerpt",
+            "llm_rationale"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "verified": {
+          "default": false,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Weight"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "source",
+        "supports",
+        "type",
+        "provenance"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "GuardrailEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "trigger": {
+          "title": "Trigger",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "trigger",
+        "action"
+      ],
+      "title": "GuardrailEvent",
+      "type": "object"
+    },
+    "HighRisk": {
+      "additionalProperties": false,
+      "properties": {
+        "config_version": {
+          "title": "Config Version",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "$ref": "#/$defs/HighRiskReason"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "value": {
+          "title": "Value",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "config_version"
+      ],
+      "title": "HighRisk",
+      "type": "object"
+    },
+    "HighRiskReason": {
+      "additionalProperties": false,
+      "properties": {
+        "axis": {
+          "enum": [
+            "level",
+            "category"
+          ],
+          "title": "Axis",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "axis",
+        "value"
+      ],
+      "title": "HighRiskReason",
+      "type": "object"
+    },
+    "LevelPrediction": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "decided_by": {
+          "enum": [
+            "rules",
+            "ml",
+            "llm",
+            "fusion",
+            "baseline"
+          ],
+          "title": "Decided By",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "confidence",
+        "decided_by"
+      ],
+      "title": "LevelPrediction",
+      "type": "object"
+    },
+    "Locator": {
+      "additionalProperties": false,
+      "properties": {
+        "char_end": {
+          "minimum": 0,
+          "title": "Char End",
+          "type": "integer"
+        },
+        "char_start": {
+          "minimum": 0,
+          "title": "Char Start",
+          "type": "integer"
+        },
+        "line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line"
+        }
+      },
+      "required": [
+        "char_start",
+        "char_end"
+      ],
+      "title": "Locator",
+      "type": "object"
+    },
+    "ReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "priority": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priority"
+        },
+        "provisional": {
+          "default": false,
+          "title": "Provisional",
+          "type": "boolean"
+        },
+        "reason_codes": {
+          "items": {
+            "enum": [
+              "LOW_CONFIDENCE",
+              "DETECTOR_CONFLICT",
+              "LLM_UNAVAILABLE",
+              "EVIDENCE_UNVERIFIED",
+              "INJECTION_DOWNGRADE_ATTEMPT",
+              "TRUNCATED_LOW_CONF",
+              "EXTRACTION_FAILURE",
+              "BUDGET_EXHAUSTED",
+              "LEVEL_CATEGORY_INCONSISTENT"
+            ],
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "title": "ReviewDecision",
+      "type": "object"
+    },
+    "Routing": {
+      "additionalProperties": false,
+      "properties": {
+        "abstained": {
+          "default": false,
+          "title": "Abstained",
+          "type": "boolean"
+        },
+        "escalations": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Escalations",
+          "type": "integer"
+        },
+        "short_circuited": {
+          "default": false,
+          "title": "Short Circuited",
+          "type": "boolean"
+        },
+        "stages_run": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Stages Run",
+          "type": "array"
+        },
+        "stop_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop Reason"
+        }
+      },
+      "title": "Routing",
+      "type": "object"
+    },
+    "Scores": {
+      "additionalProperties": false,
+      "description": "Per-label probabilities/scores behind the decision (for calibration and threshold analysis).\n\n`calibrated` states whether they are calibrated probabilities; `calibration_ref` names the\nartifact that calibrated them. Uncalibrated scores must say so.",
+      "properties": {
+        "calibrated": {
+          "default": false,
+          "title": "Calibrated",
+          "type": "boolean"
+        },
+        "calibration_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calibration Ref"
+        },
+        "categories": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Categories"
+        },
+        "level": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Level"
+        }
+      },
+      "title": "Scores",
+      "type": "object"
+    },
+    "Supports": {
+      "additionalProperties": false,
+      "properties": {
+        "axis": {
+          "enum": [
+            "level",
+            "category"
+          ],
+          "title": "Axis",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "axis",
+        "value"
+      ],
+      "title": "Supports",
+      "type": "object"
+    },
+    "Telemetry": {
+      "additionalProperties": false,
+      "properties": {
+        "est_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Est Cost Usd"
+        },
+        "latency_ms": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Latency Ms",
+          "type": "object"
+        },
+        "tokens": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Tokens",
+          "type": "object"
+        }
+      },
+      "title": "Telemetry",
+      "type": "object"
+    },
+    "Versions": {
+      "additionalProperties": false,
+      "properties": {
+        "classifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Classifier"
+        },
+        "high_risk_config": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "High Risk Config"
+        },
+        "llm_deployment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Llm Deployment"
+        },
+        "ml_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ml Model"
+        },
+        "prompt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt"
+        },
+        "router_config": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Router Config"
+        },
+        "ruleset": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ruleset"
+        },
+        "taxonomy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Taxonomy"
+        }
+      },
+      "title": "Versions",
+      "type": "object"
+    }
+  },
+  "$id": "https://dataguard.example/uc4/schema/classification-result.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "categories": {
+      "items": {
+        "$ref": "#/$defs/CategoryPrediction"
+      },
+      "title": "Categories",
+      "type": "array"
+    },
+    "content_hash": {
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "document_id": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Document Id"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "guardrail_events": {
+      "items": {
+        "$ref": "#/$defs/GuardrailEvent"
+      },
+      "title": "Guardrail Events",
+      "type": "array"
+    },
+    "high_risk": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HighRisk"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "level": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LevelPrediction"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "request_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewDecision"
+    },
+    "routing": {
+      "$ref": "#/$defs/Routing"
+    },
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scores": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Scores"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "degraded",
+        "review_required",
+        "rejected",
+        "error"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "telemetry": {
+      "$ref": "#/$defs/Telemetry"
+    },
+    "versions": {
+      "$ref": "#/$defs/Versions"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "request_id",
+    "content_hash",
+    "status"
+  ],
+  "title": "ClassificationResult",
+  "type": "object",
+  "x-schema-version": "1.0"
+}

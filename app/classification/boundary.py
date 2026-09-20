@@ -21,9 +21,12 @@ from .schemas.common import sha256_text
 NO_HASH = "0" * 64  # sentinel: there is no valid content to hash
 
 
-def _bare(
+def bare_result(
     request_id: str, digest: str, status: str, code: str, event: GuardrailEvent | None
 ) -> ClassificationResult:
+    # A hostile request id must not break the rejection: echo it only if the schema accepts it.
+    if not (isinstance(request_id, str) and 1 <= len(request_id) <= 200):
+        request_id = "unknown"
     return ClassificationResult(
         request_id=request_id,
         content_hash=digest,
@@ -51,12 +54,12 @@ def classify_safely(
             fields = sorted({".".join(str(p) for p in e["loc"]) for e in exc.errors()})[:5]
             rid = payload.get("request_id") if isinstance(payload, dict) else None
             code = "invalid_request:" + ",".join(fields)
-            return _bare(
+            return bare_result(
                 rid if isinstance(rid, str) and rid else "unknown", NO_HASH, "rejected", code,
                 GuardrailEvent(type="input_rejected", trigger="invalid_request", action="rejected"),
             )  # fmt: skip
         except Exception:  # noqa: BLE001 - a hostile payload must not escape as an exception
-            return _bare(
+            return bare_result(
                 "unknown", NO_HASH, "rejected", "invalid_request",
                 GuardrailEvent(type="input_rejected", trigger="invalid_request", action="rejected"),
             )  # fmt: skip
@@ -67,7 +70,7 @@ def classify_safely(
             digest = request.document.content_hash()
         except UnicodeEncodeError:
             digest = NO_HASH
-        return _bare(
+        return bare_result(
             request.request_id,
             digest,
             "rejected",
@@ -78,7 +81,7 @@ def classify_safely(
     try:
         result = classifier.classify(request)
     except Exception as exc:  # noqa: BLE001 - the path never raises
-        return _bare(
+        return bare_result(
             request.request_id, request.document.content_hash(), "error",
             f"stage_error:classifier:{type(exc).__name__}",
             GuardrailEvent(
@@ -88,7 +91,7 @@ def classify_safely(
     if result.request_id != request.request_id or result.content_hash != sha256_text(
         request.document.content
     ):
-        return _bare(
+        return bare_result(
             request.request_id, request.document.content_hash(), "error",
             "stage_error:classifier:contract_violation", None,
         )  # fmt: skip

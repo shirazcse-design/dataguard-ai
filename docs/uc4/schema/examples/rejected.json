@@ -1,0 +1,63 @@
+{
+  "description": "Whitespace-only text: rejected with a reason; no level, no text in the result.",
+  "request": {
+    "schema_version": "1.0",
+    "request_id": "example-rejected",
+    "document": {
+      "content": "   \n",
+      "filename": "employee_record.txt",
+      "extension": "txt"
+    }
+  },
+  "result": {
+    "schema_version": "1.0",
+    "request_id": "example-rejected",
+    "document_id": null,
+    "content_hash": "2106c36011520fe73876d45bfb9ef8bf7b2e9f4362096a320376d8ee9b27ef12",
+    "status": "rejected",
+    "level": null,
+    "categories": [],
+    "high_risk": null,
+    "review": {
+      "required": false,
+      "reason_codes": [],
+      "provisional": false,
+      "priority": null
+    },
+    "evidence": [],
+    "routing": {
+      "stages_run": [],
+      "stop_reason": "input_rejected:empty_content",
+      "escalations": 0,
+      "short_circuited": false,
+      "abstained": false
+    },
+    "versions": {
+      "taxonomy": null,
+      "high_risk_config": null,
+      "ruleset": null,
+      "ml_model": null,
+      "prompt": null,
+      "llm_deployment": null,
+      "router_config": null,
+      "classifier": null
+    },
+    "telemetry": {
+      "latency_ms": {},
+      "tokens": {},
+      "est_cost_usd": null
+    },
+    "scores": null,
+    "guardrail_events": [
+      {
+        "type": "input_rejected",
+        "trigger": "empty_content",
+        "action": "rejected",
+        "detail": null
+      }
+    ],
+    "warnings": [
+      "input_rejected:empty_content"
+    ]
+  }
+}

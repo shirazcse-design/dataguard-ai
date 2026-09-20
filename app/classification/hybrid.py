@@ -517,6 +517,7 @@ def build_hybrid_classifier(
     llm_mode: str = "replay",
     cache_dir: Path | str | None = None,
     components: dict[str, Any] | None = None,
+    no_llm: bool = False,
 ) -> HybridClassifier:
     """Build the hybrid for `variant` (default: the configured default variant).
 
@@ -529,6 +530,11 @@ def build_hybrid_classifier(
     policy = bundle.policy
     routing, sha = load_routing_config(policy, config_dir)
     name = variant or routing.default_variant
+    if no_llm:  # a runtime variant: the chosen one with every LLM tier removed
+        base_over = dict(routing.variants[name])
+        base_over["llm"] = {**base_over.get("llm", {}), "tier_order": []}
+        name = f"{name}+no_llm"
+        routing.variants[name] = base_over
     cfg = routing.variant(name)
     comp = dict(components or {})
     if cfg.rules.enabled and "rules" not in comp:
