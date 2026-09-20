@@ -9,7 +9,7 @@
 * pre-registered plan: `docs/uc4/observability-plan.md` (committed before any Phase 7 code)
 * observability config `1.0.0` sha256 `166398d516cf13e6...`; 53 allow-listed attribute keys (deny by default)
 * traced run: hybrid `default` over 107 dev documents -> 107 traces, 749 spans
-* git `b44e99768449` on `uc4/phase-7-observability` (dirty: False)
+* git `66078e84d898` on `uc4/phase-8-service` (dirty: False)
 
 ## Derived metrics (from spans)
 
@@ -63,7 +63,7 @@ The audit reads every key and string value of the exported spans (numbers such a
 | F03 | Evidence fails verification: verified=false, confidence capped, review if the call is high-risk | 4 | 4 | 0 | PASS |
 | F04 | ML model missing or taxonomy-version mismatch: fail fast at startup; at runtime skip ML (degraded) | 8 | 8 | 0 | PASS |
 | F05 | Config invalid: refuse to start, never run with a partial taxonomy | 60 | 60 | 0 | PASS |
-| F06 | Empty, oversize or undecodable input: rejected with a reason, or truncated with a flag | 27 | 27 | 0 | PASS |
+| F06 | Empty, oversize or undecodable input: rejected with a reason, or truncated with a flag | 34 | 34 | 0 | PASS |
 | F07 | Injection detected: continue as data, log a guardrail event, restrict LLM downgrading | 8 | 8 | 0 | PASS |
 | F08 | Budget or cost cap hit: skip the LLM and route to review | 10 | 10 | 0 | PASS |
 | F09 | Rules engine error: isolate per detector; one broken detector marks the result degraded | 5 | 5 | 0 | PASS |
@@ -72,7 +72,7 @@ The audit reads every key and string value of the exported spans (numbers such a
 | X02 | Telemetry privacy: no document text or sensitive value in any exported span, including error paths | 4 | 4 | 0 | PASS |
 | X03 | Tracing is inert: results are identical with tracing on and off; a broken sink never breaks a request | 8 | 8 | 0 | PASS |
 
-159 tests passed, 0 failed (pytest exit code 0). Every row has at least one end-to-end test through the real classifiers, a local fake provider server, or injected faults.
+166 tests passed, 0 failed (pytest exit code 0). Every row has at least one end-to-end test through the real classifiers, a local fake provider server, or injected faults.
 
 ## Caveats
 

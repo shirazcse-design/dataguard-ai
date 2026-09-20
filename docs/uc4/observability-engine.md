@@ -10,7 +10,7 @@
 Every stage of the classification path now emits OpenTelemetry-compatible spans under one trace per
 request, through a deny-by-default redactor, and a privacy audit proves that no document text or
 sensitive value reaches them (a CI gate). The failure-injection suite covers every row of the
-architecture's failure table end to end (159 tests, 0 failures) and, more importantly, exposed and
+architecture's failure table end to end (166 tests, 0 failures) and, more importantly, exposed and
 closed real hardening gaps (below). **Export to Azure Monitor / Foundry tracing is not verified**: no
 Application Insights connection string exists here. Dashboards and the service surface are not built.
 
@@ -69,7 +69,7 @@ spans ─► summarize (derived metrics)  │  obs audit (privacy gate)
 | F03 | Evidence fails verification: verified=false, confidence capped, review if the call is high-risk | 4 | 4 | 0 | PASS |
 | F04 | ML model missing or taxonomy-version mismatch: fail fast at startup; at runtime skip ML (degraded) | 8 | 8 | 0 | PASS |
 | F05 | Config invalid: refuse to start, never run with a partial taxonomy | 60 | 60 | 0 | PASS |
-| F06 | Empty, oversize or undecodable input: rejected with a reason, or truncated with a flag | 27 | 27 | 0 | PASS |
+| F06 | Empty, oversize or undecodable input: rejected with a reason, or truncated with a flag | 34 | 34 | 0 | PASS |
 | F07 | Injection detected: continue as data, log a guardrail event, restrict LLM downgrading | 8 | 8 | 0 | PASS |
 | F08 | Budget or cost cap hit: skip the LLM and route to review | 10 | 10 | 0 | PASS |
 | F09 | Rules engine error: isolate per detector; one broken detector marks the result degraded | 5 | 5 | 0 | PASS |
