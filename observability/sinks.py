@@ -1,0 +1,94 @@
+"""Span sinks: JSONL (local default), in-memory (tests), optional OpenTelemetry SDK bridge.
+
+The bridge and the Azure Monitor glue are OPTIONAL and lazily imported. The bridge is tested
+with the SDK's in-memory exporter. The Azure Monitor glue has NOT been verified against a real
+Application Insights resource (no connection string exists in this environment).
+"""
+
+from __future__ import annotations
+
+import threading
+from pathlib import Path
+from typing import Any
+
+from .types import Span
+
+
+class MemorySink:
+    def __init__(self) -> None:
+        self.spans: list[Span] = []
+        self._lock = threading.Lock()
+
+    def write(self, spans: list[Span]) -> None:
+        with self._lock:
+            self.spans.extend(spans)
+
+
+class JsonlSink:
+    """Appends one JSON object per span; a lock keeps concurrent traces from interleaving."""
+
+    def __init__(self, path: Path | str) -> None:
+        self.path = Path(path)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self._lock = threading.Lock()
+
+    def write(self, spans: list[Span]) -> None:
+        blob = "".join(s.model_dump_json() + "\n" for s in spans)
+        with self._lock, self.path.open("a", encoding="utf-8") as fh:
+            fh.write(blob)
+
+
+def read_jsonl(path: Path | str) -> list[Span]:
+    out: list[Span] = []
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            out.append(Span.model_validate_json(line))
+    return out
+
+
+class OtelSink:
+    """Re-emits our spans through an OpenTelemetry TracerProvider (SDK ids are assigned by the SDK;
+    our ids are kept as `dg.trace_id` / `dg.span_id` attributes). Requires the `otel` extra."""
+
+    def __init__(self, tracer_provider: Any, service_name: str = "dataguard-uc4") -> None:
+        try:
+            from opentelemetry import trace  # noqa: F401
+        except ImportError as exc:  # pragma: no cover - depends on the optional extra
+            raise RuntimeError("OtelSink needs the 'otel' extra (opentelemetry-sdk)") from exc
+        self._tracer = tracer_provider.get_tracer(service_name)
+
+    def write(self, spans: list[Span]) -> None:
+        from opentelemetry import trace
+        from opentelemetry.trace import Status, StatusCode
+
+        made: dict[str, Any] = {}
+        for s in sorted(spans, key=lambda x: (x.start_ns, x.parent_span_id is not None)):
+            parent = made.get(s.parent_span_id) if s.parent_span_id else None
+            ctx = trace.set_span_in_context(parent) if parent is not None else None
+            attrs = {**s.attributes, "dg.trace_id": s.trace_id, "dg.span_id": s.span_id}
+            otel = self._tracer.start_span(
+                s.name, context=ctx, start_time=s.start_ns, attributes=attrs
+            )
+            for ev in s.events:
+                otel.add_event(ev.name, ev.attributes, timestamp=ev.ts_ns)
+            if s.status == "error":
+                otel.set_status(Status(StatusCode.ERROR))
+            made[s.span_id] = otel
+        for s in sorted(spans, key=lambda x: -x.end_ns):  # children end before parents
+            made[s.span_id].end(end_time=s.end_ns)
+
+
+def azure_monitor_sink(connection_string: str) -> OtelSink:
+    """UNVERIFIED glue: configure Azure Monitor and return a bridge to its tracer provider.
+
+    Written from general knowledge of `azure-monitor-opentelemetry`; needs that package and a real
+    Application Insights connection string, neither of which is available here. Never call this in
+    tests; the caller must supply the connection string from a secret store.
+    """
+    from azure.monitor.opentelemetry import (
+        configure_azure_monitor,  # type: ignore[import-not-found]
+    )
+    from opentelemetry import trace
+
+    configure_azure_monitor(connection_string=connection_string)
+    return OtelSink(trace.get_tracer_provider())

@@ -517,7 +517,8 @@ def test_a_broken_rules_stage_does_not_stop_the_llm(bundle):
     r = build(
         bundle, rules=Stub("rules", lambda req: ValueError("x")), llms={"mid": mid, "large": mid}
     ).classify(request())
-    assert r.status == "ok" and "stage_error:rules:ValueError" in r.warnings
+    assert r.status == "degraded" and "stage_error:rules:ValueError" in r.warnings
+    assert "degraded:rules" in r.warnings and r.level.value == "CONFIDENTIAL"
 
 
 def test_telemetry_sums_the_stages_and_evidence_can_be_switched_off(bundle):

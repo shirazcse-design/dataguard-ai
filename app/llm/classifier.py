@@ -42,6 +42,7 @@ from guardrails.output import (
     parse_llm_output,
     verify_quote,
 )
+from observability.trace import current_span, span
 
 from .config import LLMConfig
 from .prompting import BuiltPrompt, PromptBuilder
@@ -173,32 +174,58 @@ class LLMClassifier:
         out: LLMOutput | None = None
         failure: str | None = None
         suffix = ""
-        for _ in range(self.cfg.generation.schema_repair_retries + 1):
-            try:
-                resp, _ = call_with_retry(
-                    lambda s=suffix: self.client.complete_structured(self._request(prompt, s)),
-                    self.cfg.retry,
-                    sleep=self._sleep,
-                    rng=self._rng,
+        for repair in range(self.cfg.generation.schema_repair_retries + 1):
+            with span(
+                "llm.call",
+                dg__stage="llm",
+                dg__llm__tier=self.tier,
+                dg__llm__model_id=self.client.model_id,
+                dg__llm__prompt_version=self.builder.version,
+                dg__llm__repair_attempts=repair,
+            ) as sp:
+                try:
+                    resp, attempts = call_with_retry(
+                        lambda s=suffix: self.client.complete_structured(self._request(prompt, s)),
+                        self.cfg.retry,
+                        sleep=self._sleep,
+                        rng=self._rng,
+                        on_retry=lambda err, n: sp.event(
+                            "retry", dg__llm__retry_kind=err.kind, dg__llm__attempts=n
+                        ),
+                    )
+                except LLMError as err:
+                    failure = f"llm_error:{err.kind}"
+                    sp.set(dg__llm__status="error", dg__llm__error_kind=err.kind,
+                           dg__llm__attempts=getattr(err, "attempts", 1))  # fmt: skip
+                    sp.fail("LLMError")
+                    break
+                llm_ms += resp.latency_ms
+                if resp.served_model:
+                    self.served_models[resp.served_model] += 1
+                self._add_tokens(tokens, resp)
+                sp.set(
+                    dg__llm__attempts=attempts,
+                    dg__llm__cached=resp.cached,
+                    dg__llm__status="ok",
+                    dg__llm__served_model=resp.served_model or "",
+                    dg__latency_ms=float(resp.latency_ms),
+                    dg__tokens_in=int(resp.prompt_tokens or 0),
+                    dg__tokens_out=int(resp.completion_tokens or 0),
                 )
-            except LLMError as err:
-                failure = f"llm_error:{err.kind}"
-                break
-            llm_ms += resp.latency_ms
-            if resp.served_model:
-                self.served_models[resp.served_model] += 1
-            self._add_tokens(tokens, resp)
-            try:
-                out = parse_llm_output(
-                    resp.text,
-                    self.policy.level_ids,
-                    self.policy.category_ids,
-                    max_quotes=self.cfg.evidence.max_quotes,
-                )
-                break
-            except OutputValidationError as bad:
-                failure = f"llm_output_invalid:{bad.reason}"
-                suffix = REPAIR_NOTE.format(reason=bad.reason)
+                try:
+                    out = parse_llm_output(
+                        resp.text,
+                        self.policy.level_ids,
+                        self.policy.category_ids,
+                        max_quotes=self.cfg.evidence.max_quotes,
+                    )
+                    sp.set(dg__llm__schema_invalid=False)
+                    break
+                except OutputValidationError as bad:
+                    failure = f"llm_output_invalid:{bad.reason}"
+                    suffix = REPAIR_NOTE.format(reason=bad.reason)
+                    sp.set(dg__llm__schema_invalid=True, dg__llm__invalid_reason=bad.reason)
+        current_span().set(dg__llm__truncated=prompt.truncated)
         telemetry = Telemetry(
             latency_ms={"llm": llm_ms, "total": llm_ms + (time.perf_counter() - started) * 1000},
             tokens=tokens,
@@ -276,6 +303,9 @@ class LLMClassifier:
 
         level_b, cat_b = out.level_confidence, out.category_confidence
         n_quotes = len(out.evidence) if request.options.include_evidence else 0
+        current_span().set(
+            dg__llm__evidence_total=n_quotes, dg__llm__evidence_verified=n_quotes - n_unverified
+        )
         if n_quotes and n_unverified:
             cap = "low" if n_unverified == n_quotes else "medium"
             level_b, cat_b = cap_bucket(level_b, cap), cap_bucket(cat_b, cap)

@@ -1,0 +1,10 @@
+# Input guard (PRD 12.1 "input schema validation"; architecture section 19: empty, oversize or
+# undecodable input becomes `rejected` with a reason, or is truncated with a flag).
+guardrail_version: 1.0.0
+min_non_space_chars: 1
+# Above soft_max_bytes the stages truncate (each stage flags it); above hard_max_bytes the document
+# is rejected outright, so a huge payload cannot cost unbounded time or memory.
+soft_max_bytes: 200000
+hard_max_bytes: 5000000
+# A text that is mostly U+FFFD replacement characters failed extraction/decoding upstream.
+max_replacement_char_ratio: 0.3

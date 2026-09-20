@@ -16,6 +16,9 @@ from pathlib import Path
 from typing import Any
 
 from guardrails.injection import InjectionScanner
+from guardrails.input import InputGuardConfig, InputVerdict, check_document
+from observability.instrument import outcome_attrs
+from observability.trace import current_span, span
 
 from .config_loader import ConfigBundle
 from .fusion import StageResult, fuse
@@ -48,6 +51,7 @@ class HybridClassifier:
         ml: Classifier | None = None,
         llms: dict[str, Classifier] | None = None,
         scanner: InjectionScanner | None = None,
+        input_guard: InputGuardConfig | None = None,
     ) -> None:
         self.policy = policy
         self.variant = variant
@@ -56,6 +60,7 @@ class HybridClassifier:
         self._sha = routing_sha256
         self._rules, self._ml, self._llms = rules, ml, dict(llms or {})
         self._scanner = scanner
+        self._input_cfg = input_guard
         missing = [
             n
             for n, need, have in (
@@ -98,23 +103,39 @@ class HybridClassifier:
     def _call(
         self, label: str, clf: Classifier, request: ClassificationRequest, notes: list[str]
     ) -> ClassificationResult | None:
-        try:
-            res = clf.classify(request)
-        except Exception as exc:  # noqa: BLE001 - a broken stage must not kill the request
-            notes.append(f"stage_error:{label}:{type(exc).__name__}")
-            return None
-        if (
-            res.request_id != request.request_id
-            or res.content_hash != request.document.content_hash()
-        ):
-            notes.append(f"stage_error:{label}:contract_violation")
-            return None
-        return res
+        with span(_stage_span(label), dg__stage=label) as sp:
+            try:
+                res = clf.classify(request)
+            except Exception as exc:  # noqa: BLE001 - a broken stage must not kill the request
+                notes.append(f"stage_error:{label}:{type(exc).__name__}")
+                sp.fail(type(exc).__name__)
+                return None
+            if (
+                res.request_id != request.request_id
+                or res.content_hash != request.document.content_hash()
+            ):
+                notes.append(f"stage_error:{label}:contract_violation")
+                sp.fail("contract_violation")
+                return None
+            sp.set(
+                dg__outcome__status=res.status,
+                dg__latency_ms=float(res.telemetry.latency_ms.get("total", 0.0)),
+                dg__tokens_in=int(res.telemetry.tokens.get("prompt", 0)),
+                dg__tokens_out=int(res.telemetry.tokens.get("completion", 0)),
+            )
+            if res.telemetry.est_cost_usd is not None:
+                sp.set(dg__est_cost_usd=float(res.telemetry.est_cost_usd))
+            return res
 
     def classify(self, request: ClassificationRequest) -> ClassificationResult:
         started = time.perf_counter()
-        cfg, pol = self.cfg, self.policy
+        cfg, pol = self._effective(request.options), self.policy
         doc = request.document
+        opts = request.options
+        verdict = check_document(doc, self._input_cfg) if self._input_cfg else None
+        if verdict is not None and not verdict.ok:
+            return self._rejected(request, verdict)
+        failed: list[str] = []  # configured stages that errored or were unavailable
         notes: list[str] = []  # compact trace of every routing decision
         events: list[GuardrailEvent] = []
         stages_run: list[str] = []
@@ -135,11 +156,16 @@ class HybridClassifier:
                 costs.append(res.telemetry.est_cost_usd)
 
         flagged = False
-        if self._scanner is not None:
-            ev = self._scanner.event(self._scanner.scan(doc.content))
-            if ev is not None:
-                events.append(ev)
-                flagged = True
+        with span("S0.guardrails", dg__stage="guardrails") as s0:
+            if verdict is not None and verdict.event() is not None:
+                events.append(verdict.event())  # type: ignore[arg-type]
+                s0.set(dg__input__reason="truncate")
+            if self._scanner is not None:
+                ev = self._scanner.event(self._scanner.scan(doc.content))
+                if ev is not None:
+                    events.append(ev)
+                    flagged = True
+            s0.set(dg__injection__flagged=flagged)
 
         # ---- S1 Rules ----------------------------------------------------------------------
         rules_ok = False
@@ -147,8 +173,11 @@ class HybridClassifier:
         if cfg.rules.enabled and self._rules is not None:
             rules_res = self._call("rules", self._rules, request, notes)
             note_stage("rules", rules_res)
+            if rules_res is None or rules_res.status == "degraded":
+                failed.append("rules")
             acc = rules_sufficient(rules_res, cfg.rules)
             notes.append(f"stage:rules:{acc.reason}")
+            current_span().event("route", dg__stage="rules", dg__reason=acc.reason)
             if acc.accepted and rules_res is not None:
                 rules_ok = True
                 sr = StageResult("rules", "rules", rules_res)
@@ -158,15 +187,18 @@ class HybridClassifier:
                     return self._assemble(
                         request, accepted, seen, [], rules_ok, None, stages_run, latency, tokens,
                         costs, notes, events, escalations=0, stop="rules_short_circuit",
-                        short_circuited=True, started=started,
+                        short_circuited=True, started=started, failed=failed,
                     )  # fmt: skip
 
         # ---- S2 ML (optional) --------------------------------------------------------------
         if cfg.ml.enabled and self._ml is not None:
             ml_res = self._call("ml", self._ml, request, notes)
             note_stage("ml", ml_res)
+            if ml_res is None:
+                failed.append("ml")
             acc = ml_accepted(ml_res, cfg.ml)
             notes.append(f"stage:ml:{acc.reason}")
+            current_span().event("route", dg__stage="ml", dg__reason=acc.reason)
             if acc.accepted and ml_res is not None:
                 if (
                     rules_ok
@@ -182,7 +214,7 @@ class HybridClassifier:
                         return self._assemble(
                             request, accepted, seen, [], rules_ok, None, stages_run, latency,
                             tokens, costs, notes, events, escalations=0, stop="ml_short_circuit",
-                            short_circuited=True, started=started,
+                            short_circuited=True, started=started, failed=failed,
                         )  # fmt: skip
 
         # ---- S3 LLM tiers ------------------------------------------------------------------
@@ -192,7 +224,9 @@ class HybridClassifier:
         escalations = calls = 0
         llm_results: list[tuple[str, ClassificationResult]] = []
         for tier in cfg.llm.tier_order:
-            if calls >= cfg.budget.max_llm_calls:
+            if calls >= cfg.budget.max_llm_calls or self._request_budget_hit(
+                opts.budget, latency, costs, notes
+            ):
                 budget_out = True
                 notes.append(f"budget_exhausted_before:llm:{tier}")
                 break
@@ -202,6 +236,7 @@ class HybridClassifier:
             note_stage(label, res)
             if res is None or res.level is None:
                 notes.append(f"stage:{label}:llm_no_level")
+                failed.append(label)
                 notes.extend(w for w in (res.warnings if res else []) if w.startswith("llm_"))
                 escalations += 1
                 continue
@@ -209,6 +244,7 @@ class HybridClassifier:
             seen.append(StageResult("llm", label, res))
             acc: Acceptance = llm_accepted(res, cfg.llm)
             notes.append(f"stage:{label}:{acc.reason}")
+            current_span().event("route", dg__stage=label, dg__reason=acc.reason)
             if not acc.accepted:
                 if acc.reason.startswith("llm_review:"):
                     review_codes += [c for c in acc.reason.split(":", 1)[1].split(",") if c]
@@ -217,6 +253,7 @@ class HybridClassifier:
             if any(has_conflict(res, r.result, pol, cfg.conflict.level_rank_gap) for r in refs):
                 conflicted = True
                 notes.append(f"conflict:{label}~{'+'.join(r.label for r in refs)}")
+                current_span().event("route", dg__stage=label, dg__reason="conflict")
                 escalations += 1
                 continue
             accepted_llm = StageResult("llm", label, res)
@@ -267,8 +304,85 @@ class HybridClassifier:
         return self._assemble(
             request, accepted, seen, review_codes, rules_ok, raise_to, stages_run, latency, tokens,
             costs, notes, events, escalations=escalations, stop=stop, short_circuited=False,
-            started=started,
+            started=started, failed=failed,
         )  # fmt: skip
+
+    # -- request options -----------------------------------------------------------------------
+    def _effective(self, opts) -> VariantConfig:
+        """The variant restricted by the request's options (mode, max LLM tier)."""
+        cfg = self.cfg
+        order = ["small", "mid", "large"]
+        tiers = list(cfg.llm.tier_order)
+        if opts.max_llm_tier == "none":
+            tiers = []
+        else:
+            cap = order.index(opts.max_llm_tier)
+            tiers = [t for t in tiers if order.index(t) <= cap]
+        rules_on, ml_on = cfg.rules.enabled, cfg.ml.enabled
+        if opts.mode == "rules":
+            ml_on, tiers = False, []
+        elif opts.mode == "ml":
+            rules_on, tiers = False, []
+        elif opts.mode == "llm":
+            rules_on = ml_on = False
+        if (
+            tiers == cfg.llm.tier_order
+            and rules_on == cfg.rules.enabled
+            and ml_on == cfg.ml.enabled
+        ):
+            return cfg
+        return cfg.model_copy(
+            update={
+                "rules": cfg.rules.model_copy(update={"enabled": rules_on}),
+                "ml": cfg.ml.model_copy(update={"enabled": ml_on}),
+                "llm": cfg.llm.model_copy(update={"tier_order": tiers}),
+            }
+        )
+
+    @staticmethod
+    def _request_budget_hit(budget, latency: dict[str, float], costs: list[float], notes) -> bool:
+        """Per-request latency/cost caps, checked before each LLM call. A cost cap can only be
+        enforced when a price exists (costs are estimated from configured prices; none is invented),
+        except a cap of 0, which means no spend at all."""
+        if budget.max_latency_ms is not None and sum(latency.values()) >= budget.max_latency_ms:
+            return True
+        cap = budget.max_cost_usd
+        if cap is not None:
+            if cap == 0 or (costs and sum(costs) >= cap):
+                return True
+            if not costs and "cost_cap_unenforceable:no_price" not in notes:
+                notes.append("cost_cap_unenforceable:no_price")
+        return False
+
+    def _rejected(
+        self, request: ClassificationRequest, verdict: InputVerdict
+    ) -> ClassificationResult:
+        doc = request.document
+        try:
+            digest = doc.content_hash()
+        except UnicodeEncodeError:  # undecodable text cannot even be hashed
+            digest = "0" * 64
+        event = verdict.event()
+        result = ClassificationResult(
+            request_id=request.request_id,
+            document_id=doc.document_id,
+            content_hash=digest,
+            status="rejected",
+            versions=Versions(
+                taxonomy=self.policy.taxonomy_version,
+                high_risk_config=self.policy.high_risk_version,
+                router_config=f"{self.version}:{self.variant}@{self._sha[:8]}",
+                classifier=f"{self.name}@{self.version}",
+            ),
+            routing=Routing(stop_reason=f"input_rejected:{verdict.reason}"),
+            guardrail_events=[event] if event else [],
+            warnings=[f"input_rejected:{verdict.reason}"],
+        )
+        with span(
+            "S0.guardrails", dg__stage="guardrails", dg__input__reason=verdict.reason or ""
+        ) as s0:
+            s0.set(**outcome_attrs(result))
+        return result
 
     # -- result construction -------------------------------------------------------------------
     def _assemble(
@@ -290,12 +404,15 @@ class HybridClassifier:
         stop: str,
         short_circuited: bool,
         started: float,
+        failed: list[str],
     ) -> ClassificationResult:
         pol = self.policy
         doc = request.document
         decided = not review_codes
         basis = accepted if decided else _dedupe(seen + accepted)
-        fused = fuse(pol, self.cfg.fusion, basis, rules_is_floor=rules_ok, raise_to=raise_to)
+        with span("S4.fusion", dg__stage="fusion") as s4:
+            fused = fuse(pol, self.cfg.fusion, basis, rules_is_floor=rules_ok, raise_to=raise_to)
+            s4.set(dg__notes_count=len(fused.notes) if fused else 0)
         include_ev = request.options.include_evidence
         if fused is not None:
             level = fused.level
@@ -312,7 +429,12 @@ class HybridClassifier:
             provisional=fused is not None,
             provisional_high_risk=bool(high_risk and high_risk.value),
         )
-        status = "ok" if decided and fused is not None else "review_required"
+        status = "review_required"
+        if decided and fused is not None:
+            # decided, but a configured stage errored or was unavailable: say so
+            status = "degraded" if failed else "ok"
+            if failed:
+                notes.append("degraded:" + ",".join(dict.fromkeys(failed)))
         if status == "review_required" and not review.required:
             review = build_review(
                 ["LLM_UNAVAILABLE"], provisional=False, provisional_high_risk=False
@@ -337,7 +459,7 @@ class HybridClassifier:
             for w in s.result.warnings
             if w in ("truncated", "input_truncated")
         ]
-        return ClassificationResult(
+        result = ClassificationResult(
             request_id=request.request_id,
             document_id=doc.document_id,
             content_hash=doc.content_hash(),
@@ -363,6 +485,20 @@ class HybridClassifier:
             guardrail_events=events,
             warnings=[*notes, *stage_warnings],
         )
+        with span("S5.result", dg__stage="result") as s5:
+            attrs = outcome_attrs(result)
+            for k in ("dg.latency_ms", "dg.tokens_in", "dg.tokens_out"):
+                attrs.pop(k)  # request totals belong on the root span, not on a stage span
+            s5.set(**attrs, dg__failed_stages=list(dict.fromkeys(failed)))
+        return result
+
+
+def _stage_span(label: str) -> str:
+    if label == "rules":
+        return "S1.rules"
+    if label == "ml":
+        return "S2.ml"
+    return "S3." + label.replace(":", ".")
 
 
 def _dedupe(stages: list[StageResult]) -> list[StageResult]:
@@ -416,13 +552,18 @@ def build_hybrid_classifier(
                 config_dir=config_dir,
                 cache_dir=cache_dir,
             )
+    input_guard = comp.get("input_guard")
+    if input_guard is None:
+        from guardrails.input import load_input_guard_config
+
+        input_guard = load_input_guard_config(config_dir)[0]
     scanner = comp.get("scanner")
     if scanner is None:
         gcfg, _ = load_injection_config(config_dir)
         scanner = InjectionScanner(gcfg)
     return HybridClassifier(
         policy, routing, name, routing_sha256=sha, rules=comp.get("rules"), ml=comp.get("ml"),
-        llms=llms, scanner=scanner,
+        llms=llms, scanner=scanner, input_guard=input_guard,
     )  # fmt: skip
 
 

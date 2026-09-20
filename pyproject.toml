@@ -20,6 +20,12 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.5",
 ]
+# Optional export bridge to the OpenTelemetry SDK (tested with its in-memory exporter). Azure Monitor
+# export additionally needs azure-monitor-opentelemetry and is NOT verified here.
+otel = [
+    "opentelemetry-api>=1.24",
+    "opentelemetry-sdk>=1.24",
+]
 
 [project.scripts]
 dataguard-uc4 = "app.classification.cli:main"
@@ -49,3 +55,5 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/classification/ml_report.py" = ["E501"]
 "evals/classification/llm_report.py" = ["E501"]
 "evals/classification/hybrid_report.py" = ["E501"]
+"evals/classification/obs_report.py" = ["E501"]
+"evals/classification/failure_matrix.py" = ["E501"]

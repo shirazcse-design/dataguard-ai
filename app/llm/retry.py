@@ -19,6 +19,7 @@ def call_with_retry(
     *,
     sleep: Callable[[float], None] = time.sleep,
     rng: random.Random | None = None,
+    on_retry: Callable[[LLMError, int], None] | None = None,
 ) -> tuple[T, int]:
     """Return (result, attempts). Raises the last LLMError when attempts are exhausted or the
     error is not retryable (auth, bad request, content filter, replay miss are never retried)."""
@@ -36,4 +37,6 @@ def call_with_retry(
             if err.retry_after_s is not None:
                 delay = min(cfg.max_delay_s, max(delay, err.retry_after_s))
             delay *= 1 - cfg.jitter + cfg.jitter * rng.random()
+            if on_retry is not None:
+                on_retry(err, attempt)
             sleep(delay)

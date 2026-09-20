@@ -25,6 +25,8 @@ def rules_sufficient(result: ClassificationResult | None, cfg: RulesStage) -> Ac
     """
     if result is None or result.level is None:
         return Acceptance(False, "rules_unavailable")
+    if result.status == "degraded":
+        return Acceptance(False, "rules_degraded")  # a broken detector: evidence may be incomplete
     if result.routing.abstained:
         return Acceptance(False, "rules_abstained")
     conf = result.level.confidence

@@ -71,3 +71,5 @@ class RulesResult:
     truncated: bool
     weak_only_categories: list[str]  # categories with weak evidence that did not reach emission
     elapsed_ms: float
+    # detectors that raised ("<detector_id>:<ExceptionClass>"); never the message, it may hold text
+    detector_errors: list[str] = field(default_factory=list)
