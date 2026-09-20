@@ -12,7 +12,7 @@ request, through a deny-by-default redactor, and a privacy audit proves that no 
 sensitive value reaches them (a CI gate). The failure-injection suite covers every row of the
 architecture's failure table end to end (166 tests, 0 failures) and, more importantly, exposed and
 closed real hardening gaps (below). **Export to Azure Monitor / Foundry tracing is not verified**: no
-Application Insights connection string exists here. Dashboards and the service surface are not built.
+Application Insights connection string exists here. A static offline dashboard was added later (`dataguard-uc4 obs dashboard --spans S --out D.html`); a shared live dashboard (DG-018) is not built.
 
 ## Architecture
 
@@ -108,7 +108,7 @@ numbers vary by machine and are not part of the generated (reproducible) report.
 | Item | State |
 |---|---|
 | Azure Monitor / Foundry tracing export | **Unverified**: no Application Insights connection string; the glue (`azure_monitor_sink`) is optional, lazy and never called in tests |
-| Dashboards (DG-018) | Shared platform work; only the derived metrics they would show are computed |
+| Dashboards (DG-018) | A static, script-free HTML page over the derived metrics is built (`observability/dashboard.py`, tested for escaping and no document text). A shared live dashboard remains platform work |
 | Service surface, frozen result schema, MCP contract | Phase 8 |
 | Real-service failure behaviour (rates, latency under load) | Unmeasured; the suite uses a local fake |
 | Locked-test evaluation | Not authorised; never used |

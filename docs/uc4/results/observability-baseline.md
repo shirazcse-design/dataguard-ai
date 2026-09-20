@@ -9,7 +9,7 @@
 * pre-registered plan: `docs/uc4/observability-plan.md` (committed before any Phase 7 code)
 * observability config `1.0.0` sha256 `166398d516cf13e6...`; 53 allow-listed attribute keys (deny by default)
 * traced run: hybrid `default` over 107 dev documents -> 107 traces, 749 spans
-* git `66078e84d898` on `uc4/phase-8-service` (dirty: False)
+* git `76cb57364189` on `uc4/blind-review-metadata-variant` (dirty: True)
 
 ## Derived metrics (from spans)
 
@@ -79,5 +79,5 @@ The audit reads every key and string value of the exported spans (numbers such a
 * Spans are not verified against Azure Monitor or Foundry tracing (no connection string).
 * The fake provider server verifies the adapter's failure handling, not the real service's; real failure rates and latencies are unmeasured.
 * The privacy audit proves the absence of the tested strings and patterns, not the absence of every conceivable leak; the allow-list and redactor are the primary control.
-* Dashboards (DG-018) and the service surface (Phase 8) are not built.
+* An offline static dashboard exists (`dataguard-uc4 obs dashboard`); a shared, live dashboard (DG-018) is not built.
 * Synthetic, AI-authored labels not yet human reviewed; nothing transfers to real data without validation.

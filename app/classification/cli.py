@@ -574,6 +574,19 @@ def _cmd_obs_summarize(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_obs_dashboard(args: argparse.Namespace) -> int:
+    """A static HTML dashboard over the derived metrics of a span file (no text, no script)."""
+    from pathlib import Path
+
+    from observability import read_jsonl, render_dashboard, summarize
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(render_dashboard(summarize(read_jsonl(args.spans))), encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_obs_audit(args: argparse.Namespace) -> int:
     """Privacy gate: exit 1 if any span output contains document text or a sensitive value."""
     from pathlib import Path
@@ -1191,6 +1204,10 @@ def build_parser() -> argparse.ArgumentParser:
     osum.add_argument("--spans", required=True)
     osum.add_argument("--out", default=None)
     osum.set_defaults(func=_cmd_obs_summarize)
+    odash = obs_sub.add_parser("dashboard", help="static HTML dashboard from a span JSONL file")
+    odash.add_argument("--spans", required=True)
+    odash.add_argument("--out", required=True)
+    odash.set_defaults(func=_cmd_obs_dashboard)
     orp = obs_sub.add_parser("report", help="write the observability + failure-matrix results")
     orp.add_argument("--out", default=None)
     orp.add_argument("--config-dir", default=None)

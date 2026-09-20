@@ -217,3 +217,4 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D9.6 | The shipped `example-agent` policy caps the LLM tier at `mid`. | `large` takes ~78 s against the PRD's 10 s tool-call limit. |
 | D9.7 | The tool runs the synchronous service in a worker thread. | Live LLM calls take seconds; the protocol loop must not block. |
 | D9.8 | The server is verified end to end in-process and once over a real stdio subprocess; no network transport, authentication, rate limiting or `document_id` store. | Out of scope for v0.1 (D8.10). |
+| D9.9 | The dashboard is a static, script-free HTML file generated from `summarize(spans)`, not a service. | It needs no infrastructure, cannot leak text (spans carry none), and every value is escaped. A live shared dashboard (DG-018) remains platform work. |

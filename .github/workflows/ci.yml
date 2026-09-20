@@ -148,6 +148,7 @@ jobs:
       - run: dataguard-uc4 eval run --classifier hybrid --split dev --trace-out "$RUNNER_TEMP/spans.jsonl" --runs-dir "$RUNNER_TEMP/runs"
       - run: dataguard-uc4 obs audit --spans "$RUNNER_TEMP/spans.jsonl" --split dev
       - run: dataguard-uc4 obs summarize --spans "$RUNNER_TEMP/spans.jsonl"
+      - run: dataguard-uc4 obs dashboard --spans "$RUNNER_TEMP/spans.jsonl" --out "$RUNNER_TEMP/dashboard.html"
       - run: dataguard-uc4 obs report --out "$RUNNER_TEMP/observability-baseline.md"
 
   service:
