@@ -967,6 +967,31 @@ def _cmd_review_blind_check(args: argparse.Namespace) -> int:
     return 1 if errs else 0
 
 
+def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
+    """Compare returned blind sheet(s) with the gold and the executed predictions (read-only)."""
+    from pathlib import Path
+
+    from evals.classification.blind_compare import PackageError, run
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR
+
+    bundle = load_config(args.config_dir)
+    data_dir = Path(args.data_dir or DEFAULT_DATA_DIR)
+    out_dir = Path(args.out_dir) if args.out_dir else data_dir / "review/blind_results"
+    try:
+        report, per_sample = run([Path(p) for p in args.sheet], bundle, data_dir)
+    except PackageError as e:
+        print(f"ERROR {e}")
+        return 1
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "blind_review_comparison.md").write_text(report, encoding="utf-8")
+    (out_dir / "blind_review_comparison.csv").write_text(per_sample, encoding="utf-8")
+    print(
+        f"wrote {out_dir / 'blind_review_comparison.md'} and "
+        f"{out_dir / 'blind_review_comparison.csv'}"
+    )
+    return 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -1194,6 +1219,16 @@ def build_parser() -> argparse.ArgumentParser:
     rvc.add_argument("--config-dir", default=None)
     rvc.add_argument("--data-dir", default=None)
     rvc.set_defaults(func=_cmd_review_blind_check)
+    rvm = rv_sub.add_parser(
+        "blind-compare", help="compare returned blind sheet(s) with gold and model predictions"
+    )
+    rvm.add_argument(
+        "--sheet", action="append", required=True, help="a completed sheet; repeat per reviewer"
+    )
+    rvm.add_argument("--out-dir", default=None)
+    rvm.add_argument("--config-dir", default=None)
+    rvm.add_argument("--data-dir", default=None)
+    rvm.set_defaults(func=_cmd_review_blind_compare)
     cl = sub.add_parser("classify", help="classify a document and print the result JSON")
     src = cl.add_argument_group("input (exactly one)")
     src.add_argument("--file", default=None, help="a UTF-8 text file, or - for stdin")

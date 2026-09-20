@@ -26,6 +26,21 @@ The packet shows only filename and text (what the LLM and ML classifiers receive
 * **Leak audit:** the generator refuses to write a package whose reviewer-facing text contains a family id, an annotation note or a label/prediction column name (`leak_check`), and a test pins this.
 * **Check a returned sheet:** `dataguard-uc4 review blind-check --sheet completed.csv` validates allowed values, required fields, unedited inputs and completeness. It does not judge whether a label is right.
 
+## Comparing the returned results
+
+```
+dataguard-uc4 review blind-check   --sheet completed.csv
+dataguard-uc4 review blind-compare --sheet completed.csv [--sheet second_reviewer.csv] [--out-dir DIR]
+```
+
+Writes `blind_review_comparison.md` and `blind_review_comparison.csv` (default `data/synthetic/uc4/review/blind_results/`; nothing else is written). Three-way: **synthetic gold vs blind human label vs each approach's prediction**.
+
+* **Inputs are files only.** The returned sheet(s), the blind key, and the predictions *already executed* for the adjudication sheet. Nothing is re-run, no model is called, the dataset is not loaded, and the locked test split is not touched. The package is verified against its manifest first (key, reviewer sheet and adjudication artifacts must be the ones it was built from) and every sheet must pass `blind-check`; otherwise nothing is compared.
+* **Per document (CSV):** gold, human label with confidence/ambiguity/insufficient flags, `level_human_eq_gold`, `cats_human_eq_gold`, a lenient level match (the human's level is in the gold's alternatives, or the gold's level is in the human's), and each approach's prediction with its pattern.
+* **Patterns per document and approach**, on the level and the category set separately: `all agree`, `gold=human≠pred` (the human confirms the gold, the model is wrong), `human=pred≠gold` (the human sides with the model: evidence the gold may be wrong), `gold=pred≠human` (the human is the outlier), `all differ`. A Rules abstention or a document without a recorded LLM run is excluded, never treated as a label.
+* **Report sections:** controls (reviewer calibration), disputed families (agreement, within-family consistency, ambiguity and insufficient-information flags), the two pattern tables, and the facts bearing on decisions A / B / C. With two or more sheets, inter-reviewer agreement and Cohen's kappa on level.
+* **What it does not do:** no combined headline score, no bootstrap or re-scoring under human labels (that would be tuning on dev), and no label change. Counts only, with `SMALL_SAMPLE` on every table: the disputed set is four independent decisions.
+
 ## Regenerate
 
 ```
@@ -44,4 +59,4 @@ The committed package is tested to equal its generator's output, and the manifes
 
 ## Not done (waiting for your decision)
 
-No labels applied, no comparison run, no re-evaluation, no locked-test evaluation.
+No labels applied, no comparison run on real reviewer output (none exists yet), no re-evaluation, no locked-test evaluation.
