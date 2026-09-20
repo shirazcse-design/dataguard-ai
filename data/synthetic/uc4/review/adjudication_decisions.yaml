@@ -1,0 +1,244 @@
+# Preliminary adjudications for the UC4 gold-label review (Phase "review prep").
+#
+# WHO: an AI-assisted reviewer (Claude). This is NOT human validation. The reviewer is the same model
+# family that authored the dataset, and saw the models' predictions, so it is biased twice over; every
+# entry below is a PROPOSAL for a human to accept, reject or modify. Nothing here changes any label,
+# taxonomy, schema, threshold, prompt or configuration.
+#
+# SCOPE: development splits only (train, calibration, dev). The locked test split was not read.
+#
+# disagreement_type (one of four):
+#   gold_label_error                   the synthetic gold label appears wrong under the project's own rules
+#   taxonomy_ambiguity                 the taxonomy/guidelines do not settle the case; reasonable readings differ
+#   genuine_model_error                gold is right; the model is wrong
+#   insufficient_information           the sample cannot settle it; a human decision on policy or intent is needed
+#
+# applies_to: "all" = every document of the family; "disagreeing" = only documents where some approach
+# (other than the ML model alone) disagrees with the gold label.
+version: 1
+reviewer: "AI-assisted preliminary review (not human-validated)"
+families:
+
+  hn_public_api_docs_placeholder_keys:
+    priority: P1
+    applies_to: all
+    disagreement_type: gold_label_error
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: true
+    proposed_gold_level: INTERNAL
+    proposed_gold_categories: []
+    proposed_ambiguity_flag: true
+    proposed_acceptable_alternative_levels: [PUBLIC]
+    human_decision_required: true
+    reviewer_rationale: >-
+      The text is customer-facing developer documentation (a quickstart with placeholder and
+      vendor-documented example keys), so no CREDENTIALS_SECRETS category applies and the categories
+      are correctly empty. The open question is the LEVEL. Labeling guideline section 2 allows PUBLIC
+      only if the document is "explicitly intended for, or already in, public release". Nothing in the
+      text says it was released or is to be released (there is no publication date, no "published" or
+      "public" marker, no PUBLIC label, no licence); "the vendor's own documentation" describes where
+      other keys appear, not this file's status. Every other PUBLIC-gold family in the development
+      splits carries an explicit public marker in its text (a publication date, "(published)",
+      "announced publicly", "our public careers page", an MIT licence header, a PUBLIC label); this
+      one has none. The same guideline's tie-break says that when adjacent levels are both defensible
+      the gold is the HIGHER level, flagged ambiguous with the lower level recorded as an acceptable
+      alternative. The gold (PUBLIC, ambiguity_flag false, no alternative) therefore departs from the
+      project's own rule. The models agree it is uncertain: `small` answers PUBLIC on 4 of 5 identical
+      templates and INTERNAL on the fifth, and `mid`, `large` and the hybrid answer INTERNAL on all 5
+      (large reports medium confidence, saying PUBLIC intent is not explicit).
+    recommended_action: >-
+      HUMAN DECISION REQUIRED. Option A (recommended, follows guideline section 2): change the gold to
+      INTERNAL with ambiguity_flag true and PUBLIC as an acceptable alternative. Option B: keep PUBLIC
+      and add an operational test to the taxonomy stating that customer-facing product/developer
+      documentation counts as PUBLIC without an explicit release marker (this would also make the
+      models' INTERNAL answers "errors" by policy). Do not change either until a human decides.
+
+  phi_prescription_record:
+    priority: P2
+    applies_to: disagreeing
+    disagreement_type: taxonomy_ambiguity
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: false
+    proposed_gold_level: HIGHLY_CONFIDENTIAL
+    proposed_gold_categories: [PHI]
+    proposed_ambiguity_flag: null
+    proposed_acceptable_alternative_levels: null
+    alternative_gold_if_taxonomy_clarified: "HIGHLY_CONFIDENTIAL / PHI + PII (if a medical record number counts as another direct identifier)"
+    human_decision_required: true
+    reviewer_rationale: >-
+      The taxonomy says: "If a name is the only identifier, label PHI only; add PII when other direct
+      identifiers also appear." The record has a patient name AND a medical record number (MRN). The
+      gold annotation treats the name as the only direct identifier. The PII definition lists
+      "government IDs, personal contact details, dates of birth, or private personal circumstances", and
+      an MRN is none of those, so the gold follows the letter of the taxonomy. But an MRN is a
+      direct patient identifier in ordinary usage, and the taxonomy never says where it falls, so a
+      careful reviewer could add PII. The level is Highly Confidential either way, so only category
+      scoring is affected. `small` and `large` add PII on 2 of the 5 documents each; `mid`, Rules, and
+      the hybrid do not. The neighbouring family phi_workplace_injury_report is labeled PHI + PII
+      because it also contains a personal phone number (contact details), which is consistent.
+    recommended_action: >-
+      Keep the gold unchanged for now. HUMAN DECISION on the taxonomy: state whether an MRN (and similar
+      record or employee ids) counts as a "direct identifier" for the PHI/PII rule. If yes, the gold
+      for this family becomes PHI + PII; if no, add MRN to the PII "does not apply" list and the
+      models that add PII are simply wrong.
+
+  cred_ci_pipeline_token:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: false
+    label_change_proposed: false
+    proposed_gold_level: HIGHLY_CONFIDENTIAL
+    proposed_gold_categories: [CREDENTIALS_SECRETS, SOURCE_CODE]
+    human_decision_required: false
+    reviewer_rationale: >-
+      A CI pipeline file with an embedded live-looking bearer token. The taxonomy defines SOURCE_CODE
+      as "non-public source code, queries, and build or configuration logic owned by the
+      organization", so build/deploy configuration is Source Code, and the token is
+      CREDENTIALS_SECRETS. The gold is correct. The Rules stage detects the token but has no
+      detector for pipeline YAML as code, so it misses SOURCE_CODE (level still correct). The ML model
+      under-classifies four of the five to Confidential and misses the credential.
+    recommended_action: No label change. Rules recall gap for build/config files (already known).
+
+  ip_research_notebook_novel_method:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: false
+    proposed_gold_level: CONFIDENTIAL
+    proposed_gold_categories: [INTELLECTUAL_PROPERTY]
+    human_decision_required: false
+    reviewer_rationale: >-
+      The taxonomy's own positive example for INTELLECTUAL_PROPERTY is "Unpublished research notebook
+      describing a novel method", so the gold (Confidential, IP) is correct. `small` over-classifies
+      all six documents to Highly Confidential and adds TRADE_SECRET, reasoning that the method is
+      "actionable proprietary know-how". The taxonomy does note the IP/Trade Secret overlap ("if the
+      content is a secret proprietary process, prefer Trade Secret; they may co-occur"), which is why
+      the ambiguity flag is set, but the text describes WHAT was found (an invention), not HOW a
+      secret process is run, so Trade Secret is not clearly met. `mid` and `large` agree with gold.
+    recommended_action: No label change. Optionally note the IP/Trade Secret boundary in the guidelines.
+
+  hn_blank_hr_form_template:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: false
+    label_change_proposed: false
+    proposed_gold_level: INTERNAL
+    proposed_gold_categories: []
+    human_decision_required: false
+    reviewer_rationale: >-
+      A blank onboarding form with empty field labels and no values. The PII counter-examples list "A
+      blank onboarding form template with empty fields", so the gold (Internal, no categories) is
+      correct. `small` answered Highly Confidential with FINANCIAL_PCI and PII on one of the five
+      identical templates and correctly on the other four, which is sampling noise rather than a
+      systematic reading.
+    recommended_action: No label change.
+
+  ts_supplier_yield_terms:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: false
+    proposed_gold_level: HIGHLY_CONFIDENTIAL
+    proposed_gold_categories: [TRADE_SECRET]
+    human_decision_required: false
+    reviewer_rationale: >-
+      Negotiated supply terms and a yield curve that "protects our margin", marked for procurement
+      leads only. Compiled pricing/negotiation intelligence is Trade Secret per the taxonomy. `small`
+      added MA_CORP_STRATEGY on one document (a co-investment with a supplier) but the guidelines
+      separate strategy (what the company intends to do: buy, sell, restructure) from know-how, so the
+      gold stands. The TS/M&A overlap is documented, hence the flag.
+    recommended_action: No label change.
+
+  amb_customer_case_study_draft:
+    priority: P3
+    applies_to: all
+    disagreement_type: taxonomy_ambiguity
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: false
+    proposed_gold_level: CONFIDENTIAL
+    proposed_gold_categories: []
+    proposed_ambiguity_flag: true
+    proposed_acceptable_alternative_levels: [PUBLIC, INTERNAL]
+    human_decision_required: true
+    reviewer_rationale: >-
+      No approach disagrees with the gold (Confidential), but agreement is weak evidence here: the LLM
+      prompt encodes the same "choose the higher level" tie-break that produced the gold. A customer
+      story that is intended for publication but awaits customer approval can reasonably be Public
+      (imminent release), Internal (ordinary marketing draft) or Confidential (unapproved customer
+      figures). The recorded acceptable alternatives list only PUBLIC, although the tie-break is
+      described for ADJACENT levels and PUBLIC to Confidential skips Internal.
+    recommended_action: >-
+      Keep the gold. Optional metadata-only change (does not affect scoring): add INTERNAL to the
+      acceptable alternative levels. HUMAN DECISION whether the tie-break applies across a two-rank gap.
+
+  hn_confidential_word_menu:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: false
+    label_change_proposed: false
+    proposed_gold_level: INTERNAL
+    proposed_gold_categories: []
+    human_decision_required: false
+    reviewer_rationale: >-
+      A cafeteria menu with a "STRICTLY CONFIDENTIAL" banner and filename. The labeling guidelines say
+      labels describe the content, not what a document says about itself, so the gold (Internal) is
+      correct. The Rules stage takes the banner at face value (a known, documented false positive on
+      this decoy family); the ML model answers Internal.
+    recommended_action: No label change. Known Rules false positive.
+
+  phi_immunization_registry:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: false
+    label_change_proposed: false
+    proposed_gold_level: HIGHLY_CONFIDENTIAL
+    proposed_gold_categories: [PHI, PII]
+    human_decision_required: false
+    reviewer_rationale: >-
+      A vaccination log linking named patients and dates of birth to vaccines given: individually
+      identifiable health information (PHI) plus personal identifiers (DOB, PII). The gold is correct.
+      Rules detect only the date of birth (PII, Confidential) and miss the health context, so they
+      under-classify by one rank. ML predicts PHI only.
+    recommended_action: No label change. Rules recall gap for health context without clinical vocabulary.
+
+  phi_discharge_summary:
+    priority: P3
+    applies_to: disagreeing
+    disagreement_type: genuine_model_error
+    taxonomy_ambiguity_flag: false
+    label_change_proposed: false
+    proposed_gold_level: HIGHLY_CONFIDENTIAL
+    proposed_gold_categories: [PHI, PII]
+    human_decision_required: false
+    reviewer_rationale: >-
+      A discharge summary with name, phone, date of birth, a diagnosis and medications: PHI plus PII
+      (contact details, DOB). The gold is correct. Rules detect only the PII and under-classify the
+      level by one rank (Confidential); ML predicts PHI only.
+    recommended_action: No label change. Rules recall gap (health context).
+
+  hn_business_case_study:
+    priority: P2
+    applies_to: all
+    disagreement_type: insufficient_information
+    taxonomy_ambiguity_flag: true
+    label_change_proposed: false
+    proposed_gold_level: PUBLIC
+    proposed_gold_categories: []
+    human_decision_required: true
+    reviewer_rationale: >-
+      Watch item, not a disagreement between the non-ML approaches (no LLM responses were recorded for
+      the calibration split). It has the same property as the named dev family: gold PUBLIC without an
+      explicit release marker in the text. The gold note says it is "a historical, public case study of
+      a completed deal, used for teaching", which is plausible (a 2007 deal analysed with discussion
+      questions), but that fact lives in the annotation, not in the document. Rules abstain and ML
+      over-classifies it to Highly Confidential.
+    recommended_action: >-
+      HUMAN DECISION, jointly with hn_public_api_docs_placeholder_keys: decide whether "historical or
+      teaching material about completed public events" and "customer-facing documentation" count as
+      PUBLIC without an explicit release marker. No change proposed until that policy is set.

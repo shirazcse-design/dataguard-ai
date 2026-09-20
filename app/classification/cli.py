@@ -898,6 +898,33 @@ def _cmd_schema_examples(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_review_build(args: argparse.Namespace) -> int:
+    """Build the adjudication sheet and impact report (read-only: nothing else is changed)."""
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR
+    from evals.classification.evaluate import git_info
+    from evals.classification.gold_review import META_FILE, SHEET_FILE, build_review, rows_to_csv
+
+    bundle = load_config(args.config_dir)
+    data_dir = args.data_dir or str(DEFAULT_DATA_DIR)
+    rows, report, meta = build_review(bundle, git_info(), data_dir)
+    sheet = Path(args.sheet) if args.sheet else Path(data_dir) / SHEET_FILE
+    meta_path = Path(data_dir) / META_FILE
+    out = (
+        Path(args.out)
+        if args.out
+        else Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/gold-review.md"
+    )
+    for p in (sheet, meta_path, out):
+        p.parent.mkdir(parents=True, exist_ok=True)
+    sheet.write_text(rows_to_csv(rows), encoding="utf-8")
+    meta_path.write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    out.write_text(report, encoding="utf-8")
+    print(f"wrote {sheet} ({len(rows)} rows), {meta_path}, {out}")
+    return 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -1106,6 +1133,14 @@ def build_parser() -> argparse.ArgumentParser:
     oaud.add_argument("--split", default="dev", help="development splits to audit against")
     oaud.add_argument("--data-dir", default=None)
     oaud.set_defaults(func=_cmd_obs_audit)
+    rv = sub.add_parser("review", help="gold-label review preparation (read-only)")
+    rv_sub = rv.add_subparsers(dest="review_command", required=True)
+    rvb = rv_sub.add_parser("build", help="build the adjudication sheet and impact report")
+    rvb.add_argument("--sheet", default=None)
+    rvb.add_argument("--out", default=None)
+    rvb.add_argument("--config-dir", default=None)
+    rvb.add_argument("--data-dir", default=None)
+    rvb.set_defaults(func=_cmd_review_build)
     cl = sub.add_parser("classify", help="classify a document and print the result JSON")
     src = cl.add_argument_group("input (exactly one)")
     src.add_argument("--file", default=None, help="a UTF-8 text file, or - for stdin")
