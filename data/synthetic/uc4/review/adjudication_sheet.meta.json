@@ -1,0 +1,15 @@
+{
+  "dataset_sha256": "bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa",
+  "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+  "git_branch": "uc4/gold-review-prep",
+  "git_commit": "8a54c1e440f1469bb9f6ae851f3cee884cf09be5",
+  "git_dirty": false,
+  "labels_changed": false,
+  "locked_test_split_read": false,
+  "rows": 127,
+  "splits_loaded": [
+    "train",
+    "calibration",
+    "dev"
+  ]
+}
