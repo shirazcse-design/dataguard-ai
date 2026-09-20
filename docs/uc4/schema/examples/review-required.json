@@ -1,0 +1,71 @@
+{
+  "description": "The LLM stage is unavailable and Rules cannot decide: review, no label.",
+  "request": {
+    "schema_version": "1.0",
+    "request_id": "example-review-required",
+    "document": {
+      "content": "Notes from the supplier call: pricing tiers for the next contract round are attached.",
+      "filename": "employee_record.txt",
+      "extension": "txt"
+    },
+    "options": {
+      "mode": "llm"
+    }
+  },
+  "result": {
+    "schema_version": "1.0",
+    "request_id": "example-review-required",
+    "document_id": null,
+    "content_hash": "64be670164cc683e3311cecb27a4c8c936aab6c52d27be63851def7d87c0881c",
+    "status": "review_required",
+    "level": null,
+    "categories": [],
+    "high_risk": null,
+    "review": {
+      "required": true,
+      "reason_codes": [
+        "LLM_UNAVAILABLE"
+      ],
+      "provisional": false,
+      "priority": 2
+    },
+    "evidence": [],
+    "routing": {
+      "stages_run": [
+        "llm:mid",
+        "llm:large"
+      ],
+      "stop_reason": "no_stage_accepted",
+      "escalations": 2,
+      "short_circuited": false,
+      "abstained": false
+    },
+    "versions": {
+      "taxonomy": "1.0.0",
+      "high_risk_config": "1.0.0",
+      "ruleset": null,
+      "ml_model": null,
+      "prompt": null,
+      "llm_deployment": null,
+      "router_config": "1.0.0:default@95768d41",
+      "classifier": "hybrid@1.0.0"
+    },
+    "telemetry": {
+      "latency_ms": {
+        "llm:mid": 1.0,
+        "llm:large": 1.0,
+        "total": 1.0
+      },
+      "tokens": {},
+      "est_cost_usd": null
+    },
+    "scores": null,
+    "guardrail_events": [],
+    "warnings": [
+      "stage:llm:mid:llm_no_level",
+      "llm_error:replay_miss",
+      "stage:llm:large:llm_no_level",
+      "llm_error:replay_miss"
+    ]
+  }
+}

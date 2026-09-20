@@ -1,0 +1,110 @@
+"""The generated service report, and the documentation it depends on."""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+import pytest
+
+from app.classification.cli import main
+
+ROOT = Path(__file__).resolve().parents[2]
+DOCS = ROOT / "docs" / "uc4"
+
+
+@pytest.fixture(scope="module")
+def report(tmp_path_factory):
+    out = tmp_path_factory.mktemp("svc") / "service.md"
+    assert main(["service", "report", "--out", str(out)]) == 0
+    return out.read_text()
+
+
+def test_report_states_provenance_and_that_the_locked_split_was_not_read(report):
+    assert (
+        "pending human gold-label review" in report
+        and "The locked test split was not read" in report
+    )
+    assert "recommendations" in report and "service-plan.md" in report
+
+
+def test_report_has_every_section(report):
+    for h in (
+        "## Frozen schema",
+        "## Golden examples",
+        "## CLI exit codes",
+        "## Version block",
+        "## MCP freeze criteria",
+        "## Caveats",
+    ):
+        assert h in report, h
+
+
+def test_every_exit_code_scenario_passes_and_covers_all_four_codes(report):
+    section = report[report.index("## CLI exit codes") : report.index("## Version block")]
+    assert "**FAIL**" not in section and section.count("| PASS |") == 9
+    for code in ("| 0 |", "| 2 |", "| 3 |", "| 4 |"):
+        assert code in section
+
+
+def test_every_example_validates_both_ways_and_no_schema_drift(report):
+    section = report[report.index("## Golden examples") : report.index("## CLI exit codes")]
+    assert "**NO**" not in section and section.count("| yes | yes | yes |") == 6
+    assert (
+        "**" not in report[report.index("## Frozen schema") : report.index("## Golden examples")]
+    )  # no drift
+
+
+def test_the_freeze_criteria_are_computed_and_the_gates_criterion_is_reported_honestly(report):
+    crit = report[report.index("## MCP freeze criteria") :]
+    assert "| The result schema is versioned | MET |" in crit
+    assert "| The eval gates have passed |" in crit and "point / lower bound" in crit
+    assert "| Approval to build MCP | NOT GIVEN |" in crit
+    # the gates row must agree with the numbers it prints: any FAIL in the evidence means NOT MET
+    row = next(x for x in crit.splitlines() if x.startswith("| The eval gates have passed"))
+    assert ("**NOT MET**" in row) == ("FAIL" in row.split("|")[3])
+    assert "not implemented" in crit
+
+
+# ---- documentation integrity -------------------------------------------------------------------
+LINK = re.compile(r"\[[^\]]*\]\(([^)#\s]+)(?:#[^)]*)?\)")
+
+
+@pytest.mark.parametrize("doc", sorted(DOCS.glob("*.md")), ids=lambda p: p.name)
+def test_relative_links_in_the_uc4_docs_resolve(doc):
+    for target in LINK.findall(doc.read_text()):
+        if target.startswith(("http://", "https://", "mailto:")):
+            continue
+        assert (doc.parent / target).resolve().exists(), f"{doc.name} links to missing {target}"
+
+
+def test_the_mcp_contract_says_it_is_not_implemented_and_blocked():
+    text = (DOCS / "mcp-contract.md").read_text()
+    assert "Not implemented, and blocked" in text and "NOT MET" in text and "Not given" in text
+    assert not (ROOT / "mcp").exists() or not any((ROOT / "mcp").iterdir())  # no scaffolding exists
+
+
+def test_the_service_docs_document_every_exit_code():
+    text = (DOCS / "service-api.md").read_text()
+    for code in ("| 0 |", "| 3 |", "| 4 |", "| 2 |"):
+        assert code in text
+    assert "a review is a flag, not a block" in text.lower()
+
+
+def test_the_result_schema_doc_covers_every_status_and_field():
+    text = (DOCS / "result-schema.md").read_text()
+    for status in ("`ok`", "`degraded`", "`review_required`", "`rejected`", "`error`"):
+        assert status in text
+    for field in (
+        "`level`",
+        "`categories`",
+        "`high_risk`",
+        "`review`",
+        "`evidence`",
+        "`routing`",
+        "`versions`",
+        "`telemetry`",
+        "`guardrail_events`",
+        "`warnings`",
+    ):
+        assert field in text

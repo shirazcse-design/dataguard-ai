@@ -201,6 +201,14 @@ def test_row_F06_a_rejected_validation_names_only_the_offending_fields(parts, pr
     assert r2.warnings == ["invalid_request:document.content"]
 
 
+@pytest.mark.parametrize("rid", ["x" * 201, "x" * 100_000, "", None, 12345, ["a"], {"a": 1}])
+def test_row_F06_a_hostile_request_id_can_never_break_the_rejection_itself(parts, provider, rid):
+    """Found by a test: an over-long id made building the rejected result raise."""
+    body = payload("hello there", request_id=rid)
+    r = classify_safely(stack(parts, provider), body, guard=parts.input_guard)
+    assert r.status == "rejected" and r.request_id == "unknown" and r.level is None
+
+
 def test_row_F06_a_valid_request_passes_straight_through(parts, provider):
     r = classify_safely(
         stack(parts, provider),

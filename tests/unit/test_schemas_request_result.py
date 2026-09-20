@@ -175,3 +175,13 @@ def test_classifier_protocol_is_runtime_checkable():
 def test_confidence_type_is_reused_in_results():
     res = _ok_result()
     assert isinstance(res.level.confidence, Confidence)
+
+
+def test_size_bytes_is_recomputed_so_a_caller_cannot_lie():
+    from app.classification.schemas import Document
+
+    d = Document(content="héllo", filename="a.txt", extension="txt", size_bytes=1)
+    assert d.size_bytes == len("héllo".encode())
+    lone = Document(content="x\ud800", filename="a.txt", extension="txt", size_bytes=7)
+    assert lone.size_bytes == 7  # undecodable: the caller's figure is kept, the guard rejects it
+    assert Document(content="x\ud800", filename="a.txt", extension="txt").size_bytes == 0

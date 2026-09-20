@@ -20,6 +20,12 @@
 | [`results/ml-cv.json`](results/ml-cv.json) | Grouped cross-validation used for model selection |
 | [`llm-plan.md`](llm-plan.md) | Pre-registered LLM plan (written before any LLM code) |
 | [`llm-engine.md`](llm-engine.md) | LLM classifier architecture, rules, what was and was not measured |
+| [`service-plan.md`](service-plan.md) | Pre-registered Phase 8 plan (written before any Phase 8 code) |
+| [`service-api.md`](service-api.md) | Python API, CLI, exit codes |
+| [`result-schema.md`](result-schema.md) | Frozen result schema v1.0: fields, status semantics, invariants, failure semantics |
+| [`schema/`](schema/CHANGELOG.md) | Frozen JSON Schemas, golden examples, compatibility policy |
+| [`mcp-contract.md`](mcp-contract.md) | MCP contract for `classify_document` (documentation only; blocked) |
+| [`results/service-baseline.md`](results/service-baseline.md) | Generated: schema digests, examples, exit codes, MCP freeze criteria |
 | [`observability-plan.md`](observability-plan.md) | Pre-registered Phase 7 plan (written before any Phase 7 code) |
 | [`observability-engine.md`](observability-engine.md) | Spans, redaction, privacy audit, hardening, failure matrix, what is unverified |
 | [`results/observability-baseline.md`](results/observability-baseline.md) | Generated: derived metrics, privacy audit, failure matrix from an actual suite run |

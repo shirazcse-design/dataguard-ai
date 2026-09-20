@@ -1,0 +1,152 @@
+{
+  "description": "Rules-only request on a record with a national ID: status ok, high-risk.",
+  "request": {
+    "schema_version": "1.0",
+    "request_id": "example-ok-rules",
+    "document": {
+      "content": "Employee record\nNational ID: 905-37-6209\nDate of birth: 01/27/1960\nReports to Tariq Alvarez in Marketing.\n",
+      "filename": "employee_record.txt",
+      "extension": "txt"
+    },
+    "options": {
+      "mode": "rules"
+    }
+  },
+  "result": {
+    "schema_version": "1.0",
+    "request_id": "example-ok-rules",
+    "document_id": null,
+    "content_hash": "213145b05cef46e5b5413ddc470def876520aeb9acd10d6e34373d2374bbeaec",
+    "status": "ok",
+    "level": {
+      "value": "HIGHLY_CONFIDENTIAL",
+      "confidence": {
+        "kind": "rule_strength",
+        "raw": "strong",
+        "calibrated": false,
+        "calibration_ref": null,
+        "est_reliability": null
+      },
+      "decided_by": "rules"
+    },
+    "categories": [
+      {
+        "id": "PII",
+        "confidence": {
+          "kind": "rule_strength",
+          "raw": "strong",
+          "calibrated": false,
+          "calibration_ref": null,
+          "est_reliability": null
+        },
+        "decided_by": "rules",
+        "evidence_ids": [
+          "rules.e1",
+          "rules.e2"
+        ]
+      }
+    ],
+    "high_risk": {
+      "value": true,
+      "reasons": [
+        {
+          "axis": "level",
+          "value": "HIGHLY_CONFIDENTIAL"
+        },
+        {
+          "axis": "category",
+          "value": "PII"
+        }
+      ],
+      "config_version": "1.0.0"
+    },
+    "review": {
+      "required": false,
+      "reason_codes": [],
+      "provisional": false,
+      "priority": null
+    },
+    "evidence": [
+      {
+        "evidence_id": "rules.e1",
+        "source": "rules",
+        "supports": {
+          "axis": "category",
+          "value": "PII"
+        },
+        "type": "validator_passed",
+        "locator": {
+          "char_start": 29,
+          "char_end": 40,
+          "line": 2
+        },
+        "excerpt": "SSN:***-**-**09",
+        "excerpt_hash": "156df9925573688f742fe5254e079e89daed5d419ea48c15a2548c66ded75adf",
+        "detector": {
+          "id": "pii.ssn_like",
+          "version": "1.0.0"
+        },
+        "strength": "strong",
+        "weight": null,
+        "verified": false,
+        "provenance": "observed"
+      },
+      {
+        "evidence_id": "rules.e2",
+        "source": "rules",
+        "supports": {
+          "axis": "category",
+          "value": "PII"
+        },
+        "type": "pattern_match",
+        "locator": {
+          "char_start": 56,
+          "char_end": 66,
+          "line": 3
+        },
+        "excerpt": "[DOB:********(len=10)]",
+        "excerpt_hash": "1dfd8257069229f1c8032a37c7d17803e93fa338e21370c0f300824f238feb99",
+        "detector": {
+          "id": "pii.dob_field",
+          "version": "1.0.0"
+        },
+        "strength": "strong",
+        "weight": null,
+        "verified": false,
+        "provenance": "observed"
+      }
+    ],
+    "routing": {
+      "stages_run": [
+        "rules"
+      ],
+      "stop_reason": "no_llm_configured",
+      "escalations": 0,
+      "short_circuited": false,
+      "abstained": false
+    },
+    "versions": {
+      "taxonomy": "1.0.0",
+      "high_risk_config": "1.0.0",
+      "ruleset": "1.0.3",
+      "ml_model": null,
+      "prompt": null,
+      "llm_deployment": null,
+      "router_config": "1.0.0:default+no_llm@95768d41",
+      "classifier": "hybrid@1.0.0"
+    },
+    "telemetry": {
+      "latency_ms": {
+        "rules": 1.0,
+        "total": 1.0
+      },
+      "tokens": {},
+      "est_cost_usd": null
+    },
+    "scores": null,
+    "guardrail_events": [],
+    "warnings": [
+      "stage:rules:rules_sufficient"
+    ]
+  }
+}

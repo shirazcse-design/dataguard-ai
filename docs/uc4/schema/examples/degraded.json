@@ -1,0 +1,167 @@
+{
+  "description": "A configured stage (a Rules detector) failed but another stage decided: degraded.",
+  "request": {
+    "schema_version": "1.0",
+    "request_id": "example-degraded",
+    "document": {
+      "content": "Sourcing notes (internal)\n\nWe secured an exclusive, multi-year supply of the key input at roughly 12.8% below market by co-investing in the supplier's second line. In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.\nProcurement leads only; do not forward to suppliers.\n",
+      "filename": "Sourcing_Advantage_Notes.docx",
+      "extension": "docx"
+    }
+  },
+  "result": {
+    "schema_version": "1.0",
+    "request_id": "example-degraded",
+    "document_id": null,
+    "content_hash": "f67a24875ab63ee4c02033a3ed1a8a6f4d2e41776e9ac5471e2601008f4dab95",
+    "status": "degraded",
+    "level": {
+      "value": "HIGHLY_CONFIDENTIAL",
+      "confidence": {
+        "kind": "verbalized_bucket",
+        "raw": "high",
+        "calibrated": false,
+        "calibration_ref": null,
+        "est_reliability": null
+      },
+      "decided_by": "llm"
+    },
+    "categories": [
+      {
+        "id": "TRADE_SECRET",
+        "confidence": {
+          "kind": "verbalized_bucket",
+          "raw": "high",
+          "calibrated": false,
+          "calibration_ref": null,
+          "est_reliability": null
+        },
+        "decided_by": "llm",
+        "evidence_ids": [
+          "llm:mid.e1",
+          "llm:mid.e2"
+        ]
+      }
+    ],
+    "high_risk": {
+      "value": true,
+      "reasons": [
+        {
+          "axis": "level",
+          "value": "HIGHLY_CONFIDENTIAL"
+        },
+        {
+          "axis": "category",
+          "value": "TRADE_SECRET"
+        }
+      ],
+      "config_version": "1.0.0"
+    },
+    "review": {
+      "required": false,
+      "reason_codes": [],
+      "provisional": false,
+      "priority": null
+    },
+    "evidence": [
+      {
+        "evidence_id": "llm:mid.e1",
+        "source": "llm",
+        "supports": {
+          "axis": "category",
+          "value": "TRADE_SECRET"
+        },
+        "type": "llm_excerpt",
+        "locator": {
+          "char_start": 27,
+          "char_end": 163,
+          "line": null
+        },
+        "excerpt": "We secured an exclusive, multi-year supply of the key input at roughly ##.#% below market by co-investing in the suppli\u2026",
+        "excerpt_hash": "3271fe256094a8ac371f890cf3ba132dc6612c8e0e07181db10dbce3e13186ae",
+        "detector": null,
+        "strength": "n/a",
+        "weight": null,
+        "verified": true,
+        "provenance": "observed"
+      },
+      {
+        "evidence_id": "llm:mid.e2",
+        "source": "llm",
+        "supports": {
+          "axis": "category",
+          "value": "TRADE_SECRET"
+        },
+        "type": "llm_excerpt",
+        "locator": {
+          "char_start": 164,
+          "char_end": 282,
+          "line": null
+        },
+        "excerpt": "In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.",
+        "excerpt_hash": "ce45d7d8ed0761159b94d3522e3562f72b81c9d5671022e6487def864960cfc3",
+        "detector": null,
+        "strength": "n/a",
+        "weight": null,
+        "verified": true,
+        "provenance": "observed"
+      },
+      {
+        "evidence_id": "llm:mid.e3",
+        "source": "llm",
+        "supports": {
+          "axis": "level",
+          "value": "HIGHLY_CONFIDENTIAL"
+        },
+        "type": "llm_rationale",
+        "locator": null,
+        "excerpt": "The document contains non-public supplier and pricing intelligence that derives value from secrecy and would cause significant competitive harm if disclosed. That clearly fits Trade Secret content, which sets the level to Highly Confidential.",
+        "excerpt_hash": null,
+        "detector": null,
+        "strength": "n/a",
+        "weight": null,
+        "verified": false,
+        "provenance": "inferred"
+      }
+    ],
+    "routing": {
+      "stages_run": [
+        "rules",
+        "llm:mid"
+      ],
+      "stop_reason": "llm:mid_accepted",
+      "escalations": 0,
+      "short_circuited": false,
+      "abstained": false
+    },
+    "versions": {
+      "taxonomy": "1.0.0",
+      "high_risk_config": "1.0.0",
+      "ruleset": null,
+      "ml_model": null,
+      "prompt": "classifier.v1@44404a01",
+      "llm_deployment": "uc4-llm-medium",
+      "router_config": "1.0.0:default@95768d41",
+      "classifier": "hybrid@1.0.0"
+    },
+    "telemetry": {
+      "latency_ms": {
+        "rules": 1.0,
+        "llm:mid": 1.0,
+        "total": 1.0
+      },
+      "tokens": {
+        "prompt": 5185,
+        "completion": 169
+      },
+      "est_cost_usd": null
+    },
+    "scores": null,
+    "guardrail_events": [],
+    "warnings": [
+      "stage:rules:rules_degraded",
+      "stage:llm:mid:llm_accepted",
+      "degraded:rules"
+    ]
+  }
+}

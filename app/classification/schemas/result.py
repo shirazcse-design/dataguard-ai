@@ -129,8 +129,8 @@ class GuardrailEvent(StrictModel):
 
 class ClassificationResult(StrictModel):
     schema_version: str = SCHEMA_VERSION
-    request_id: str
-    document_id: str | None = None
+    request_id: str = Field(min_length=1, max_length=200)
+    document_id: str | None = Field(default=None, max_length=200)
     content_hash: str
     status: Status
     level: LevelPrediction | None = None

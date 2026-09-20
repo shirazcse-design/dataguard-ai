@@ -35,6 +35,9 @@ def _cmd_config_validate(args: argparse.Namespace) -> int:
         obs_cfg, _ = load_observability_config(args.config_dir)
         ml_cfg, _ = load_ml_config(policy, args.config_dir)
         rules_cfg, _ = load_rules_config(policy, args.config_dir)
+        from .service import load_service_config
+
+        service_cfg, _ = load_service_config(bundle, args.config_dir)
         root = Path(__file__).resolve().parents[2]
         for rel in (llm_cfg.prompt.file, llm_cfg.prompt.fewshot_file):
             if not (root / rel).exists():
@@ -56,6 +59,7 @@ def _cmd_config_validate(args: argparse.Namespace) -> int:
             "observability": obs_cfg.observability_version,
             "ml": ml_cfg.ml_version,
             "ruleset": rules_cfg.ruleset_version,
+            "service": service_cfg.service_version,
         },
         "llm_config_sha256": llm_sha,
         "guardrail_config_sha256": guard_sha,
@@ -651,6 +655,249 @@ def _cmd_obs_overhead(args: argparse.Namespace) -> int:
     return 0
 
 
+EXIT_FOR_STATUS = {"ok": 0, "degraded": 0, "review_required": 0, "rejected": 3, "error": 4}
+
+
+def _make_service(args: argparse.Namespace):
+    """Build the service or print a short reason and return None (exit code 2)."""
+    from app.llm import LLMError
+
+    from .service import ClassificationService
+
+    try:
+        return ClassificationService(
+            config_dir=args.config_dir,
+            data_dir=args.data_dir,
+            variant=args.variant,
+            llm_mode=args.llm_mode,
+            cache_dir=args.llm_cache_dir,
+            trace_path=args.trace_out,
+        )
+    except (ConfigError, LLMError, ValueError, OSError) as exc:
+        print(f"SERVICE START FAILED: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return None
+
+
+def _add_service_args(p: argparse.ArgumentParser) -> None:
+    p.add_argument("--config-dir", default=None)
+    p.add_argument("--data-dir", default=None)
+    p.add_argument(
+        "--variant", default=None, help="routing variant (default: the service config's)"
+    )
+    p.add_argument(
+        "--llm-mode",
+        choices=["foundry", "replay", "record", "off"],
+        default=None,
+        help="foundry = live calls, replay = recorded responses only, off = no LLM stage",
+    )
+    p.add_argument("--llm-cache-dir", default=None)
+    p.add_argument("--trace-out", default=None, help="write redacted spans (no text) as JSONL")
+
+
+def _read_capped(path: str, limit: int) -> bytes:
+    """Read at most limit+1 bytes so an enormous file can never exhaust memory."""
+    if path == "-":
+        return sys.stdin.buffer.read(limit + 1)
+    with open(path, "rb") as fh:
+        return fh.read(limit + 1)
+
+
+def _emit(result, pretty: bool) -> None:
+    print(json.dumps(result.model_dump(mode="json"), indent=2 if pretty else None, sort_keys=False))
+
+
+def _request_options(args: argparse.Namespace) -> dict:
+    opts: dict = {}
+    if args.mode:
+        opts["mode"] = args.mode
+    if args.max_llm_tier:
+        opts["max_llm_tier"] = args.max_llm_tier
+    budget = {}
+    if args.max_latency_ms is not None:
+        budget["max_latency_ms"] = args.max_latency_ms
+    if args.max_cost_usd is not None:
+        budget["max_cost_usd"] = args.max_cost_usd
+    if budget:
+        opts["budget"] = budget
+    if args.no_evidence:
+        opts["include_evidence"] = False
+    return opts
+
+
+def _cmd_classify(args: argparse.Namespace) -> int:
+    """Classify one document (or many) and print the ClassificationResult JSON.
+
+    Exit codes: 0 valid result (ok, degraded or review_required: a review is a flag, not a block),
+    3 rejected, 4 error, 2 usage or startup failure.
+    """
+    import os
+
+    chosen = [x for x in (args.file, args.text, args.json_request, args.jsonl) if x is not None]
+    if len(chosen) != 1:
+        print("give exactly one of --file, --text, --json, --jsonl", file=sys.stderr)
+        return 2
+    svc = _make_service(args)
+    if svc is None:
+        return 2
+    limit = svc.max_document_bytes
+    rid = args.request_id or "cli-1"
+    worst = 0
+
+    def finish(result) -> None:
+        nonlocal worst
+        worst = max(worst, EXIT_FOR_STATUS.get(result.status, 4))
+        _emit(result, args.pretty and not args.jsonl)
+
+    try:
+        if args.jsonl is not None:
+            raw = _read_capped(args.jsonl, limit * min(svc.config.max_batch_size, 8))
+            lines = [x for x in raw.decode("utf-8", errors="replace").splitlines() if x.strip()]
+            if len(lines) > svc.config.max_batch_size:
+                print(
+                    f"more than max_batch_size ({svc.config.max_batch_size}) lines", file=sys.stderr
+                )
+                return 2
+            for n, line in enumerate(lines, 1):
+                try:
+                    obj = json.loads(line)
+                except ValueError:
+                    finish(svc.reject(f"line-{n}", "invalid_json"))
+                    continue
+                finish(svc.classify(obj))
+            return worst
+        if args.json_request is not None:
+            data = _read_capped(args.json_request, limit * 2)
+            try:
+                obj = json.loads(data.decode("utf-8"))
+            except (ValueError, UnicodeDecodeError):
+                finish(svc.reject(rid, "invalid_json"))
+                return worst
+            finish(svc.classify(obj))
+            return worst
+        opts = _request_options(args)
+        common = {"request_id": rid, **opts}
+        if args.caller_id or args.purpose:
+            common["caller"] = {
+                "caller_id": args.caller_id or "cli",
+                "purpose": args.purpose or "classification",
+            }
+        if args.text is not None:
+            payload = {
+                "request_id": rid,
+                "document": {
+                    "content": args.text,
+                    "filename": args.filename or "text.txt",
+                    "extension": "txt",
+                },
+                **({"options": opts} if opts else {}),
+                **({"caller": common["caller"]} if "caller" in common else {}),
+            }
+            finish(svc.classify(payload))
+            return worst
+        data = _read_capped(args.file, limit)
+        if len(data) > limit:
+            finish(svc.reject(rid, "oversize"))
+            return worst
+        try:
+            text = data.decode("utf-8")
+        except UnicodeDecodeError:
+            finish(svc.reject(rid, "undecodable_text"))
+            return worst
+        name = args.filename or ("stdin.txt" if args.file == "-" else os.path.basename(args.file))
+        payload = {
+            "request_id": rid,
+            "document": {
+                "content": text,
+                "filename": name,
+                "extension": name.rsplit(".", 1)[-1] if "." in name else "txt",
+            },
+            **({"options": opts} if opts else {}),
+            **({"caller": common["caller"]} if "caller" in common else {}),
+        }
+        finish(svc.classify(payload))
+        return worst
+    except OSError as exc:
+        print(f"cannot read input: {type(exc).__name__}", file=sys.stderr)
+        return 2
+
+
+def _cmd_service_info(args: argparse.Namespace) -> int:
+    svc = _make_service(args)
+    if svc is None:
+        return 2
+    out = svc.info()
+    if args.check:
+        out["self_check"] = svc.self_check()
+    print(json.dumps(out, indent=2))
+    return 0 if not args.check or out["self_check"]["ok"] else 1
+
+
+def _cmd_service_report(args: argparse.Namespace) -> int:
+    import tempfile
+    from pathlib import Path
+
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
+    from evals.classification.evaluate import git_info
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.service_report import build_service_report
+
+    bundle = load_config(args.config_dir)
+    docs = load_documents(args.data_dir, splits=list(DEVELOPMENT_SPLITS))
+    dev = [d for d in docs if d.split == "dev"]
+    with tempfile.TemporaryDirectory() as tmp:
+        text = build_service_report(bundle, dev, git_info(), Path(tmp))
+    default_out = Path(DEFAULT_DATA_DIR).parents[2] / "docs/uc4/results/service-baseline.md"
+    out = Path(args.out) if args.out else default_out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
+def _cmd_schema_export(args: argparse.Namespace) -> int:
+    from .schema_freeze import SCHEMA_DIR, digest, export_schema, write_frozen
+
+    paths = write_frozen(args.out_dir or SCHEMA_DIR)
+    for path in paths:
+        name = path.name.rsplit(".v", 1)[0]
+        print(f"wrote {path} (structural digest {digest(export_schema(name))[:16]})")
+    return 0
+
+
+def _cmd_schema_check(args: argparse.Namespace) -> int:
+    """Exit 1 if the models drifted from the frozen schemas in any way."""
+    from .schema_freeze import SCHEMA_DIR, check_frozen
+
+    report = check_frozen(args.dir or SCHEMA_DIR)
+    bad = False
+    for name, r in report.items():
+        if r["missing"]:
+            print(f"{name}: FROZEN SCHEMA MISSING")
+            bad = True
+            continue
+        state = "unchanged" if not (r["breaking"] or r["additive"]) else "CHANGED"
+        print(f"{name}: {state} (frozen v{r['frozen_version']}, digest {r['frozen_digest'][:16]})")
+        for line in r["breaking"]:
+            print(f"  BREAKING (needs a major version): {line}")
+        for line in r["additive"]:
+            print(f"  additive (needs a minor version + changelog + `schema export`): {line}")
+        bad = bad or bool(r["breaking"] or r["additive"])
+    return 1 if bad else 0
+
+
+def _cmd_schema_examples(args: argparse.Namespace) -> int:
+    from pathlib import Path
+
+    from evals.classification.schema_examples import write_examples
+
+    from .schema_freeze import SCHEMA_DIR
+
+    out = Path(args.out_dir) if args.out_dir else SCHEMA_DIR / "examples"
+    for p in write_examples(out, config_dir=args.config_dir, data_dir=args.data_dir):
+        print(f"wrote {p}")
+    return 0
+
+
 def _cmd_llm_fewshot(args: argparse.Namespace) -> int:
     """Regenerate the few-shot id file from the pre-registered rule (train only)."""
     from pathlib import Path
@@ -859,6 +1106,54 @@ def build_parser() -> argparse.ArgumentParser:
     oaud.add_argument("--split", default="dev", help="development splits to audit against")
     oaud.add_argument("--data-dir", default=None)
     oaud.set_defaults(func=_cmd_obs_audit)
+    cl = sub.add_parser("classify", help="classify a document and print the result JSON")
+    src = cl.add_argument_group("input (exactly one)")
+    src.add_argument("--file", default=None, help="a UTF-8 text file, or - for stdin")
+    src.add_argument("--text", default=None)
+    src.add_argument(
+        "--json", dest="json_request", default=None, help="a ClassificationRequest JSON file or -"
+    )
+    src.add_argument(
+        "--jsonl", default=None, help="one request per line (file or -); one result per line"
+    )
+    cl.add_argument("--filename", default=None)
+    cl.add_argument("--request-id", default=None)
+    cl.add_argument("--caller-id", default=None)
+    cl.add_argument("--purpose", default=None)
+    cl.add_argument("--mode", choices=["hybrid", "rules", "ml", "llm"], default=None)
+    cl.add_argument("--max-llm-tier", choices=["none", "small", "mid", "large"], default=None)
+    cl.add_argument("--max-latency-ms", type=int, default=None)
+    cl.add_argument("--max-cost-usd", type=float, default=None)
+    cl.add_argument("--no-evidence", action="store_true")
+    cl.add_argument("--pretty", action="store_true")
+    _add_service_args(cl)
+    cl.set_defaults(func=_cmd_classify)
+    svc = sub.add_parser("service", help="service commands")
+    svc_sub = svc.add_subparsers(dest="service_command", required=True)
+    srep = svc_sub.add_parser(
+        "report", help="write the service-surface results (development split)"
+    )
+    srep.add_argument("--out", default=None)
+    srep.add_argument("--config-dir", default=None)
+    srep.add_argument("--data-dir", default=None)
+    srep.set_defaults(func=_cmd_service_report)
+    sinfo = svc_sub.add_parser("info", help="versions of everything that decides a result")
+    sinfo.add_argument("--check", action="store_true", help="also run a rules-only self-check")
+    _add_service_args(sinfo)
+    sinfo.set_defaults(func=_cmd_service_info)
+    sch = sub.add_parser("schema", help="frozen request/result schemas")
+    sch_sub = sch.add_subparsers(dest="schema_command", required=True)
+    sexp = sch_sub.add_parser("export", help="write the frozen JSON Schemas (a deliberate act)")
+    sexp.add_argument("--out-dir", default=None)
+    sexp.set_defaults(func=_cmd_schema_export)
+    schk = sch_sub.add_parser("check", help="fail if the models drifted from the frozen schemas")
+    schk.add_argument("--dir", default=None)
+    schk.set_defaults(func=_cmd_schema_check)
+    sex = sch_sub.add_parser("examples", help="regenerate the golden examples")
+    sex.add_argument("--out-dir", default=None)
+    sex.add_argument("--config-dir", default=None)
+    sex.add_argument("--data-dir", default=None)
+    sex.set_defaults(func=_cmd_schema_examples)
     hyb = sub.add_parser("hybrid", help="hybrid routing commands (Approach D)")
     hyb_sub = hyb.add_subparsers(dest="hybrid_command", required=True)
     hrp = hyb_sub.add_parser("report", help="write the hybrid results (development split, replay)")

@@ -1,0 +1,12 @@
+# Service configuration for the classification service (Python API and CLI).
+#
+# `llm_mode`: foundry = live calls (needs the DATAGUARD_FOUNDRY_* and DATAGUARD_LLM_DEPLOYMENT_*
+# environment variables; missing ones fail at STARTUP, not at request time), replay = recorded
+# responses only (no network), record = live calls stored for replay, off = no LLM stage at all.
+service_version: 1.0.0
+taxonomy_version: 1.0.0
+default_variant: default         # a variant of config/routing/routing.v1.yaml
+llm_mode: foundry
+max_batch_size: 100              # documents per classify_many / JSON-lines call
+trace:
+  enabled: false                 # JSONL spans (deny-by-default redaction); the path is a runtime choice

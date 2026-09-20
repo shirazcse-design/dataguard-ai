@@ -1,0 +1,63 @@
+{
+  "description": "An unexpected failure in a classifier: an error result, never a low sensitivity.",
+  "request": {
+    "schema_version": "1.0",
+    "request_id": "example-error",
+    "document": {
+      "content": "Employee record\nNational ID: 905-37-6209\nDate of birth: 01/27/1960\nReports to Tariq Alvarez in Marketing.\n",
+      "filename": "employee_record.txt",
+      "extension": "txt"
+    }
+  },
+  "result": {
+    "schema_version": "1.0",
+    "request_id": "example-error",
+    "document_id": null,
+    "content_hash": "213145b05cef46e5b5413ddc470def876520aeb9acd10d6e34373d2374bbeaec",
+    "status": "error",
+    "level": null,
+    "categories": [],
+    "high_risk": null,
+    "review": {
+      "required": false,
+      "reason_codes": [],
+      "provisional": false,
+      "priority": null
+    },
+    "evidence": [],
+    "routing": {
+      "stages_run": [],
+      "stop_reason": "stage_error:classifier:RuntimeError",
+      "escalations": 0,
+      "short_circuited": false,
+      "abstained": false
+    },
+    "versions": {
+      "taxonomy": null,
+      "high_risk_config": null,
+      "ruleset": null,
+      "ml_model": null,
+      "prompt": null,
+      "llm_deployment": null,
+      "router_config": null,
+      "classifier": null
+    },
+    "telemetry": {
+      "latency_ms": {},
+      "tokens": {},
+      "est_cost_usd": null
+    },
+    "scores": null,
+    "guardrail_events": [
+      {
+        "type": "classifier_error",
+        "trigger": "RuntimeError",
+        "action": "error result",
+        "detail": null
+      }
+    ],
+    "warnings": [
+      "stage_error:classifier:RuntimeError"
+    ]
+  }
+}

@@ -19,6 +19,7 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "ruff>=0.5",
+    "jsonschema>=4.20",  # validates examples against the FROZEN JSON Schemas, as a consumer would
 ]
 # Optional export bridge to the OpenTelemetry SDK (tested with its in-memory exporter). Azure Monitor
 # export additionally needs azure-monitor-opentelemetry and is NOT verified here.
@@ -57,3 +58,5 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/classification/hybrid_report.py" = ["E501"]
 "evals/classification/obs_report.py" = ["E501"]
 "evals/classification/failure_matrix.py" = ["E501"]
+"evals/classification/schema_examples.py" = ["E501"]
+"evals/classification/service_report.py" = ["E501"]
