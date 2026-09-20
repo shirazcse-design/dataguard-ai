@@ -99,7 +99,12 @@ def _fmt(p: dict[str, Any]) -> str:
         return f"NO LABEL ({p['status']})"
     cats = ";".join(p["categories"]) or "-"
     tag = " [abstained: default level, not a finding]" if p.get("abstained") else ""
-    conf = f" conf={p['conf']}" if p.get("conf") not in (None, "None") else ""
+    raw = p.get("conf")
+    try:  # a model probability: two decimals, so the sheet does not depend on library float noise
+        raw = f"{float(raw):.2f}"
+    except (TypeError, ValueError):
+        pass  # a rule strength or a verbalized bucket
+    conf = f" conf={raw}" if raw not in (None, "None") else ""
     return f"{p['level']} | {cats}{conf}{tag}"
 
 
