@@ -279,3 +279,62 @@ def test_schema_export_and_examples_write_files(tmp_path, capsys):
     assert main(["schema", "examples", "--out-dir", str(tmp_path / "ex")]) == 0
     assert len(list((tmp_path / "ex").glob("*.json"))) == 6
     capsys.readouterr()
+
+
+def test_exit_codes_for_review_and_error_results_are_asserted_explicitly(capsys):
+    from unittest import mock
+
+    from app.classification.hybrid import HybridClassifier
+
+    rc, out, _ = run(
+        capsys, "--text", "Notes from the supplier call about pricing.", "--max-llm-tier", "none"
+    )
+    assert parsed(out)[0].status == "review_required" and rc == 0  # a review is a flag, not a block
+    with mock.patch.object(
+        HybridClassifier, "classify", side_effect=RuntimeError("SECRET-DOC-TEXT")
+    ):
+        rc, out, err = run(capsys, "--text", RECORD)
+    r = parsed(out)[0]
+    assert (
+        rc == 4 and r.status == "error" and r.level is None and "SECRET-DOC-TEXT" not in out + err
+    )
+
+
+def test_an_oversize_file_is_rejected_before_it_is_hashed_or_decoded(tmp_path, capsys):
+    huge = tmp_path / "huge.txt"
+    huge.write_bytes(b"a" * 5_000_100)
+    rc, out, _ = run(capsys, "--file", str(huge))
+    assert rc == 3 and parsed(out)[0].content_hash == "0" * 64  # never read into a request
+
+
+def test_input_is_read_with_a_cap_of_the_limit_plus_one_byte(tmp_path, monkeypatch):
+    from app.classification.cli import _read_capped
+
+    f = tmp_path / "big.bin"
+    f.write_bytes(b"x" * 1000)
+    assert len(_read_capped(str(f), 10)) == 11
+    monkeypatch.setattr(sys, "stdin", type("S", (), {"buffer": io.BytesIO(b"y" * 1000)})())
+    assert len(_read_capped("-", 10)) == 11
+
+
+def test_mode_and_tier_options_change_which_stages_run_when_an_llm_stage_exists(tmp_path, capsys):
+    from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
+
+    docs = sorted(load_documents(DEFAULT_DATA_DIR, splits=["dev"]), key=lambda d: d.doc_id)
+    doc = next(d for d in docs if d.tier == "T2")
+    f = (
+        tmp_path / doc.filename
+    )  # the recorded LLM responses are keyed by input including the filename
+    f.write_text(doc.content)
+    base = ["classify", "--llm-mode", "replay", "--file", str(f)]
+
+    def stages(*extra):
+        rc = main([*base, *extra])
+        return rc, ClassificationResult.model_validate_json(
+            capsys.readouterr().out.strip()
+        ).routing.stages_run
+
+    assert stages() == (0, ["rules", "llm:mid"])
+    assert stages("--mode", "rules")[1] == ["rules"]
+    assert stages("--mode", "llm")[1] == ["llm:mid"]
+    assert stages("--max-llm-tier", "none")[1] == ["rules"]

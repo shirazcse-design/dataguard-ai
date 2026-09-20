@@ -212,3 +212,18 @@ def test_the_schema_directory_only_contains_the_expected_files():
         "classification-request.v1.json", "classification-result.v1.json", "CHANGELOG.md"
     }  # fmt: skip
     assert isinstance(SCHEMA_DIR, Path)
+
+
+def test_a_changed_reference_or_additional_properties_policy_is_breaking():
+    frozen = base_sig()
+    schema = export_schema("classification-result")
+    refs = [k for k, v in schema["properties"].items() if "$ref" in v]
+    assert refs
+    other = next(
+        n for n in schema["$defs"] if n != schema["properties"][refs[0]]["$ref"].rsplit("/", 1)[-1]
+    )
+    schema["properties"][refs[0]]["$ref"] = f"#/$defs/{other}"
+    assert diff_signatures(frozen, signature(schema))[0]  # the field now points at another model
+    schema2 = export_schema("classification-result")
+    schema2["additionalProperties"] = True
+    assert any("additionalProperties" in b for b in diff_signatures(frozen, signature(schema2))[0])
