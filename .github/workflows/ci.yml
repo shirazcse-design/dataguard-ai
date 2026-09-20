@@ -151,7 +151,7 @@ jobs:
       - run: dataguard-uc4 obs report --out "$RUNNER_TEMP/observability-baseline.md"
 
   service:
-    name: Service surface: frozen schema, examples, CLI (no Azure)
+    name: Service surface - frozen schema, examples, CLI (no Azure)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
