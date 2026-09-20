@@ -289,3 +289,30 @@ def test_the_load_bearing_numbers_hold(bundle):
         or "0.870 [0.631, 1.000]" in report
     )
     assert "All 5 of the hybrid's level errors" in report
+
+
+def test_the_counterfactual_scenarios_contain_exactly_the_proposed_changes(decisions):
+    s = scenario_changes(decisions)
+    assert set(s["S1 apply the proposed label change"]) == {"hn_public_api_docs_placeholder_keys"}
+    assert set(s["S2 = S1 + MRN counts as an identifier"]) == {
+        "hn_public_api_docs_placeholder_keys",
+        "phi_prescription_record",
+    }
+    assert s["S1 apply the proposed label change"]["hn_public_api_docs_placeholder_keys"] == {
+        "gold_level": "INTERNAL",
+        "gold_categories": [],
+    }
+
+
+def test_an_adjudicated_family_that_does_not_exist_is_an_error(bundle, docs, built, decisions):
+    preds, _ = built
+    bogus = decisions.model_copy(
+        update={
+            "families": {
+                **decisions.families,
+                "no_such_family": decisions.families["cred_ci_pipeline_token"],
+            }
+        }
+    )
+    with pytest.raises(ValueError, match="not found in the development splits"):
+        build_rows(bundle, docs, preds, bogus)
