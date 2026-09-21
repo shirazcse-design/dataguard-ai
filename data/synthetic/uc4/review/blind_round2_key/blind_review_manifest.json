@@ -8,9 +8,9 @@
   "extra_docs": {
     "amb_aggregate_health_stats": 3
   },
-  "git_branch": "uc4/blind-review-metadata-variant",
-  "git_commit": "a9c9bfa7e0c58adbd25eb0b8190e2d6a27881280",
-  "git_dirty": true,
+  "git_branch": "uc4/human-review-round2",
+  "git_commit": "e8a1e5c02a2a6a7eac005581d8e3eb7c74152c7e",
+  "git_dirty": false,
   "key_sha256": "f3208ddfc1b5e51d7c30192ab963cf2a2c7adbaa4655c2d36d0ec851990b74c0",
   "labels_changed": false,
   "leak_check": "passed",
