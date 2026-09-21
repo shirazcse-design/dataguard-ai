@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 76,
+ "input_hash": "92de44948895a376a0962e61a52720dbe11e2b857fd6229b7be17b43af08bafd",
+ "latency_ms": 1575.9998330613598,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5163,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary employee-facing training/process information about handling sensitive topics, but it does not itself contain non-public deal details, regulated data, credentials, or other clearly sensitive category content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

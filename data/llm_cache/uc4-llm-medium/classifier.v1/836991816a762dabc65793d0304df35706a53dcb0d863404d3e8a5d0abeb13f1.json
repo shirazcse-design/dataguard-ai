@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "836991816a762dabc65793d0304df35706a53dcb0d863404d3e8a5d0abeb13f1",
+ "latency_ms": 1980.794999981299,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5163,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Aiden Fontaine is returning to work after treatment for chronic low back pain.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 10 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is individually identifiable health information describing a named person's medical condition and work-related treatment recommendations. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

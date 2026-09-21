@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "756df1237e66191a30f3c6d0e59f45df60d9bf664f1bf939295af397c4d884f7",
+ "latency_ms": 2507.053916924633,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5171,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Trade press reports that Nettlefield Labs may be exploring a sale, and analysts think Copperfield Pharma could be a buyer.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"If true, the combined firm would compete with us in EMEA. We should watch for pricing changes and think about how to respond\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is non-public internal competitive analysis and response planning, which could plausibly harm the organization if disclosed. It mentions rumored third-party M&A activity, but not the organization's own non-public deal or board-level strategy, so no category clearly applies.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

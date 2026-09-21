@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 132,
+ "input_hash": "328283d7230e028c9daa09ec7446719ff0bf4b45c64db1eb94e3a7536f29e48b",
+ "latency_ms": 1841.2249579560012,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5193,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Case study: the Emberlight Capital-Larkspur Foods merger\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"In 2010, Emberlight Capital acquired Larkspur Foods in one of the largest deals in the precision components industry.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a historical case study describing a past acquisition, not non-public deal activity or internal strategy. The content appears educational and suitable for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

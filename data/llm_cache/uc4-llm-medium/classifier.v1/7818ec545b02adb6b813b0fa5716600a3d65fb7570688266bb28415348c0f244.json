@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 190,
+ "input_hash": "7818ec545b02adb6b813b0fa5716600a3d65fb7570688266bb28415348c0f244",
+ "latency_ms": 2323.4590409556404,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5195,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Anneliese Yamada   DOB: 05/08/1993   MRN-6461586\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Assessment: M06.9 - rheumatoid arthritis\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Plan: continue metformin 500 mg; recheck labs in 3 weeks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical visit note containing diagnosis and treatment information linked to a named patient, along with date of birth and medical record number. PHI is present and drives the classification to Highly Confidential; additional direct identifiers also make PII applicable.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

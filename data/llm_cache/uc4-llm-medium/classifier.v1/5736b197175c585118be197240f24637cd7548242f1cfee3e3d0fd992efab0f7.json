@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 244,
+ "input_hash": "5736b197175c585118be197240f24637cd7548242f1cfee3e3d0fd992efab0f7",
+ "latency_ms": 2803.8012919714674,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5198,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We have invented a way to grow the film at room temperature using a pulsed feed, which nobody has shown before.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The exact pulse timing and the ratio of the two feed gases are what make it work, and we intend to keep those settings out of the patent application and run them as a shop secret.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"The exact pulse timing and the ratio of the two feed gases are what make it work, and we intend to keep those settings out of the patent application and run them as a shop secret.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document describes a non-public invention and also specific process know-how intended to be kept secret, so both Intellectual Property and Trade Secret clearly apply. Trade Secret carries a Highly Confidential floor, making the overall level Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

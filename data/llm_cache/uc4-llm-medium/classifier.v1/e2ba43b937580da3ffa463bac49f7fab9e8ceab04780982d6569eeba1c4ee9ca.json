@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 177,
+ "input_hash": "e2ba43b937580da3ffa463bac49f7fab9e8ceab04780982d6569eeba1c4ee9ca",
+ "latency_ms": 2269.615624914877,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"payee,routing,account,amount\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Greywater Energy,755722141,5320386254,$31,643\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Kingfisher Health,209578582,03989190020,$24,307\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank routing and account numbers in a payments file, which clearly meets Financial / PCI criteria. Exposure could cause severe financial harm, so the level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

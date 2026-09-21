@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 697,
+ "input_hash": "203d5a0cce57fabe40eccbcc6d9e5fee5bd0ebf3897902d9b441e220648c0150",
+ "latency_ms": 141313.57608397957,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We have invented a way to grow the film at room temperature using a pulsed feed, which nobody has shown before.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The exact pulse timing and the ratio of the two feed gases are what make it work, and we intend to keep those settings out of the patent application and run them as a shop secret.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invented process and also identifies secret process parameters intended to be kept confidential as a shop secret. Because Trade Secret clearly applies, the appropriate level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

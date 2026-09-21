@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 175,
+ "input_hash": "f8cba010c380be2ef6feeeb907beb806327340a1c200d7c0d764a7d1b4f08ba3",
+ "latency_ms": 2372.9129580315202,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Marlowe Health pays about 24.7% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Silverpine Logistics is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Vantage Labs has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public customer pricing and negotiation intelligence that derives value from secrecy, making Trade Secret clearly applicable. External disclosure could cause competitive harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

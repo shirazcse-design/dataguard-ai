@@ -198,3 +198,37 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D8.8 | Tools accept only `content`, filename/extension, options and (adapter-supplied) caller in the documented MCP contract; `existing_labels` and `metadata` are not accepted; model-generated text in results is documented as untrusted. | Spoofable inputs; tool-output prompt-injection risk. |
 | D8.9 | Bugs found by tests while building Phase 8 and fixed: a hostile over-long `request_id` made building the rejected result itself raise; an unknown `--variant` escaped as a traceback; the example generator's first filename (`example.txt`) triggered Rules' negative context. | Recorded so the history is honest. |
 | D8.10 | No JSON/HTTP API, `document_id` resolution, authentication or rate limiting. | Optional in the plan / out of scope for a library + CLI first. |
+
+## Approved after the Phase 8 review (product owner)
+
+| # | Decision | Implementation |
+|---|---|---|
+| A25 | Build the MCP adapter for `classify_document` (2026-09-20). This lifts the "stop for approval before MCP" gate only; it does not lift the other two unblock conditions (audited confirmation on data that did not choose the configuration; human gold-label review), which remain open and are reported as NOT satisfied. | `mcp_adapter/`, `config/mcp/mcp.v1.yaml`, `docs/uc4/mcp-contract.md` |
+
+## Implementation decisions (MCP adapter)
+
+| # | Decision | Why |
+|---|---|---|
+| D9.1 | The package is `mcp_adapter/`, not `mcp/` as the plan sketched. | A top-level `mcp` package would shadow the MCP SDK (`import mcp`). |
+| D9.2 | The adapter core does not import the SDK; only `server.py` does, behind the optional `mcp` extra. | The policy stays testable without the SDK, and the SDK (currently 2.x, a breaking rewrite of 1.x) is a replaceable transport. |
+| D9.3 | Deny by default: an empty or missing allowlist entry means no access; startup refuses an unlisted identity. | PRD 10.1 allowlist and per-agent permissions. |
+| D9.4 | Spoofable or unresolvable inputs (`metadata`, `existing_labels`, `caller`, `schema_version`, `document_id`) are rejected rather than silently dropped. | A field must never be silently ignored (same principle as D8.6). |
+| D9.5 | Evidence is off by default and only available to callers whose policy allows it. | Excerpts and rationales are model text from an untrusted document. |
+| D9.6 | The shipped `example-agent` policy caps the LLM tier at `mid`. | `large` takes ~78 s against the PRD's 10 s tool-call limit. |
+| D9.7 | The tool runs the synchronous service in a worker thread. | Live LLM calls take seconds; the protocol loop must not block. |
+| D9.8 | The server is verified end to end in-process and once over a real stdio subprocess; no network transport, authentication, rate limiting or `document_id` store. | Out of scope for v0.1 (D8.10). |
+| D9.9 | The dashboard is a static, script-free HTML file generated from `summarize(spans)`, not a service. | It needs no infrastructure, cannot leak text (spans carry none), and every value is escaped. A live shared dashboard (DG-018) remains platform work. |
+
+## Gold-label decisions A / B / C (product owner, 2026-09-20)
+
+Evidence: the blind-review sheet the product owner designated as the human review. **That sheet is identical to an earlier AI-completed sheet on all 33 documents (level, categories, confidence, flags and rationale text), so it adds no evidence independent of the AI review** (recorded verbatim in `review/blind_results/blind_review_comparison.md`). The dataset therefore stays "AI-generated synthetic dataset — pending human gold-label review" (A20); these decisions do not change that status.
+
+| # | Decision | Implementation |
+|---|---|---|
+| A26 | **Decision A:** keep `PUBLIC` for `hn_public_api_docs_placeholder_keys` (and the same rule for `hn_business_case_study`); no label change. Clarify that published customer-facing documentation is Public. | Guidelines section 8; **no label, taxonomy or prompt change.** The hybrid's 5 headline level errors remain, and its level macro-F1 lower bound stays 0.631. |
+| A27 | **Decision B:** an MRN does not count as another direct identifier; `phi_prescription_record` stays `[PHI]`. | Guidelines section 8; no label change. |
+| A28 | **Decision C:** add `INTERNAL` to the acceptable alternative levels of `amb_customer_case_study_draft`: `[PUBLIC, INTERNAL]`. | `t3_ambiguous.yaml`; dataset regenerated (`dataset_sha256` `bc86537c2cc23e5f…` -> `9442e354c3dd51dd…`, only the 6 dev documents' alternatives and the manifest changed); blind key and manifest regenerated (reviewer-facing files byte-identical). **No effect on strict scoring.** |
+
+Not done: no taxonomy config edit (it would invalidate the recorded LLM cache); the AI-review comparison under `blind_results_ai/` was computed against the previous dataset hash and is kept as the historical record.
+| D9.10 | The out-of-sample check ran the frozen `default` hybrid on the calibration split, recorded live; no label, config, threshold or prompt was changed in response to its result. | Changing anything now would be tuning on a split just inspected. The `amb_aggregate_health_stats` label question (gold HIGHLY_CONFIDENTIAL, taxonomy lists de-identified aggregate stats as a PHI counter-example) is left for a human review. |
+| D9.11 | The locked test split was evaluated once (2026-09-21, `--allow-locked-test`, run `hybrid-test-20260921T071856Z-789a620e`) with the frozen `default` hybrid, report-only. No label, config, threshold, prompt or model was changed in response. The split is now consumed: any further evaluation on it is no longer an unbiased confirmation. | Requested by the product owner. The result and its caveats are in `results/hybrid-locked-test.md`; the MCP freeze criterion for the audited confirmation is met, the eval-gates criterion is not (level lower bound 0.758), and the human-review criterion is not satisfied. |

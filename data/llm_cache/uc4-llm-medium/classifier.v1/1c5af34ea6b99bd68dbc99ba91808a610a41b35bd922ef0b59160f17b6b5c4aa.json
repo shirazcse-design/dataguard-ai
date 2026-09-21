@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 84,
+ "input_hash": "1c5af34ea6b99bd68dbc99ba91808a610a41b35bd922ef0b59160f17b6b5c4aa",
+ "latency_ms": 1643.8517089700326,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5193,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a historical case-study summary about a past merger and discussion questions, with no indication of non-public deal information or other sensitive data categories. It appears to be ordinary business or training content rather than public-release material.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

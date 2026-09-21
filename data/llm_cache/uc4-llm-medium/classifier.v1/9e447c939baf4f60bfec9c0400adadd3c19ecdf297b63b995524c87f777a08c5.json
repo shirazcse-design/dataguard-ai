@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 185,
+ "input_hash": "9e447c939baf4f60bfec9c0400adadd3c19ecdf297b63b995524c87f777a08c5",
+ "latency_ms": 2666.715750005096,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5190,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Inventive concept: combine a low-cost sensor with a learned correction model so the warehouse robot can self-calibrate in the field.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Prior art search found no reference that teaches on-device correction without a reference standard.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"add three dependent claims.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document contains non-public invention and patent-drafting content, indicating unpublished intellectual property. Disclosure could harm the organization's patent position, but it does not clearly include trade-secret process details or other highly confidential regulated data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

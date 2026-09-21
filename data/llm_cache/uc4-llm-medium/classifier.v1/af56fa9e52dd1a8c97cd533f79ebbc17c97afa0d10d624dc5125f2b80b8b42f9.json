@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 142,
+ "input_hash": "af56fa9e52dd1a8c97cd533f79ebbc17c97afa0d10d624dc5125f2b80b8b42f9",
+ "latency_ms": 1796.6034580022097,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5204,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"PID|1||MRN-8925883||Galvez^Ulrich\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"DG1|1||I48.91 - atrial fibrillation\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This HL7 ADT message contains individually identifiable health information, including a patient identifier/name and a diagnosis. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

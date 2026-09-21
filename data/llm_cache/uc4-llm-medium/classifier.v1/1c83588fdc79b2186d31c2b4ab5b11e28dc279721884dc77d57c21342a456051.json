@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 231,
+ "input_hash": "1c83588fdc79b2186d31c2b4ab5b11e28dc279721884dc77d57c21342a456051",
+ "latency_ms": 3136.911250068806,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5205,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"DRAFT - NOT YET FILED - ATTORNEY WORK PRODUCT\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"1. A system comprising: a sensor configured to sample a signal at a variable rate; a processor configured to estimate a drift value and to adjust the sample rate in response to the drift value; and a memory storing calibration parameters.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"2. The system of claim 1, wherein the processor is further configured to reduce the sample rate when the drift value is below a threshold.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"This is a non-public draft patent-claim style description of an invention, which clearly fits Intellectual Property. External disclosure could harm the organization, but the content does not clearly show trade-secret process details, credentials, or regulated personal data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

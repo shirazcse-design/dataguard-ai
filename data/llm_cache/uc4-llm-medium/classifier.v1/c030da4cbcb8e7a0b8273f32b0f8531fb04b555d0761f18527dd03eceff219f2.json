@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 128,
+ "input_hash": "c030da4cbcb8e7a0b8273f32b0f8531fb04b555d0761f18527dd03eceff219f2",
+ "latency_ms": 1874.9439580133185,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:57+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing number: 911488740\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Account number: 6847431083\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank account and routing numbers in a business checking statement, which clearly meets the Financial / PCI category and requires the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 165,
+ "input_hash": "b980d09dd22cc3dee4cb532178ab353c53b2ba3adf6f88ef125625a450a9e574",
+ "latency_ms": 2518.5707919299603,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"We propose to withdraw from ANZ by the end of 2027 and redeploy the budget to expand direct sales in DACH.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"This will not be announced until partner discussions are complete. Field teams have not been told.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document describes a non-public regional restructuring and partnership-related strategic plan. Disclosure could cause severe competitive and organizational harm, so M&A / Corporate Strategy applies at the Highly Confidential level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

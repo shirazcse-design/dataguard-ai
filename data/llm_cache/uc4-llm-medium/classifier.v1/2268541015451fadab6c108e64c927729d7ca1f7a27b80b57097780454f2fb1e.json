@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "2268541015451fadab6c108e64c927729d7ca1f7a27b80b57097780454f2fb1e",
+ "latency_ms": 2537.946084048599,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5164,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Quartz*Quartz56\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"API_TOKEN=dgtok_a173f2791ae022d417183727a43a61a3\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication secrets, including a password and API token. Disclosure could enable unauthorized access, so the highest sensitivity level applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

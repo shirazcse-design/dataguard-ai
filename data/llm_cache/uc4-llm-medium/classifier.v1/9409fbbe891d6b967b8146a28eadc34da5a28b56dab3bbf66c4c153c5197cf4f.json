@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 172,
+ "input_hash": "9409fbbe891d6b967b8146a28eadc34da5a28b56dab3bbf66c4c153c5197cf4f",
+ "latency_ms": 2103.2518330030143,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"| billing console | svc-billing | Willow!Ember51 |\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"| reporting db | svc-report | Quartz$Falcon92 |\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"| vendor portal | Priya | Falcon#Harbor61 |\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking account passwords for internal systems and a vendor portal, which are credentials/secrets and require the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 196,
+ "input_hash": "87dfccecfaaa16d64ffc90088d4acfca28c484d972479a233212c0b7242419ac",
+ "latency_ms": 2448.3680829871446,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5216,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"company,sector,indicative_value,fit,priority\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Driftwood Energy,industrial sensors,$1.6B,removes a competitor from key accounts,1\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Notes: approach Driftwood Energy first, before their next funding round. Do not contact any target directly.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public shortlist of acquisition or investment targets with valuation ranges, strategic rationale, and approach guidance, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

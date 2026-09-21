@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 137,
+ "input_hash": "dd4c2eaf1e606ed1e3fac96d9e831591dd733c3913b76e4d77d5b807e9d48136",
+ "latency_ms": 2097.2246669698507,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT - not yet announced\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Proposed hybrid working policy. Employees would be expected in the office 2 days a week, with core hours between 10:00 and 15:00.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is ordinary internal business policy content that is not yet publicly announced, but it contains no regulated data, credentials, or other clearly sensitive category content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

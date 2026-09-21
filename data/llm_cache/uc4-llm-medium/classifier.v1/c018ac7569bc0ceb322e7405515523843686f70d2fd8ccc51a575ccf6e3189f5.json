@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 215,
+ "input_hash": "c018ac7569bc0ceb322e7405515523843686f70d2fd8ccc51a575ccf6e3189f5",
+ "latency_ms": 2432.4861660134047,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5191,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\",\"PII\"],\"evidence\":[{\"quote\":\"3782-827629-70356\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"6011 1175 1685 3898\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Elena Iwasaki,3782-827629-70356,09/28,302 Hillcrest Avenue, Singapore\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Ulrich Eriksen,6011 1175 1685 3898,11/31,262 Harbor Street, Lyon\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and named individuals with home shipping addresses. Payment-card data requires Highly Confidential treatment, and PII also clearly applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

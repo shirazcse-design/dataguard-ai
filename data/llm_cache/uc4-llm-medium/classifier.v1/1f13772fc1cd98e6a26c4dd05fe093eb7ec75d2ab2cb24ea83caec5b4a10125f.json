@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 76,
+ "input_hash": "1f13772fc1cd98e6a26c4dd05fe093eb7ec75d2ab2cb24ea83caec5b4a10125f",
+ "latency_ms": 1650.7657499751076,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5165,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal support-status digest with routine operational notes and no clearly regulated, strategic, credential, or personal-sensitive data categories. It is not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

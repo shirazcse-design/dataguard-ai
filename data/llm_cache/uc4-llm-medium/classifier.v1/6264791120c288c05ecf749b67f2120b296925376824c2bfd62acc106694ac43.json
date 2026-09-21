@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 221,
+ "input_hash": "6264791120c288c05ecf749b67f2120b296925376824c2bfd62acc106694ac43",
+ "latency_ms": 2602.845749934204,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5212,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:22:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The team has developed a new way to bond precision components components without heat, using a two-layer adhesive that self-aligns under light pressure.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"We will file a patent on the general method in August.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The layer thicknesses and the surface treatment before bonding stay out of the filing, because they are what make the bond hold and would be easy for a competitor to copy.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention and planned patent filing, and it also identifies secret process details that derive value from secrecy and would be useful to competitors. Trade Secret has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

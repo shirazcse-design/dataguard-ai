@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 129,
+ "input_hash": "2421da4ae25eebf2dbb14e5420879115a2e8023f103542ea0857e1bfceecaa38",
+ "latency_ms": 1762.4149590265006,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5211,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"PRESS RELEASE - Published July 2026\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"today announced a multi-year partnership\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Both companies will share a joint roadmap on their public websites.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a published press release announcing a partnership, indicating intent for public release. It contains no clearly applicable sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

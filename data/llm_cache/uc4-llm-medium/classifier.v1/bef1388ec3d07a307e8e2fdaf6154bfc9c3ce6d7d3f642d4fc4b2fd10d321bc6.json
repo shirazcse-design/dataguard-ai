@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 224,
+ "input_hash": "bef1388ec3d07a307e8e2fdaf6154bfc9c3ce6d7d3f642d4fc4b2fd10d321bc6",
+ "latency_ms": 2610.5137079721317,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5205,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Option A: buy Fairhaven Software (battery materials). Rationale: it secures a scarce supply relationship. Rough price $2.0B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Option B: buy Umberton Software (logistics software). Rationale: it gives us a foothold in a new region. Rough price $6.6B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Recommendation: open confidential talks with option A this quarter and keep option B as the fallback if pricing moves.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public acquisition target shortlist with rationale, valuation ranges, and recommended next steps, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

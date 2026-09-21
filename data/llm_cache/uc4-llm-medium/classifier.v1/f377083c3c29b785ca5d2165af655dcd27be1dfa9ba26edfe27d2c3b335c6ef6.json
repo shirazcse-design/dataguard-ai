@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 160,
+ "input_hash": "f377083c3c29b785ca5d2165af655dcd27be1dfa9ba26edfe27d2c3b335c6ef6",
+ "latency_ms": 2520.043332944624,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5157,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"db_admin_password  = \\\"Copper*Lantern28\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"monitoring_api_key = \\\"dgsk_live_YU73eYGfc3iTvfSHymM0XPXU\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication secrets, including a password and an API key. That category has a Highly Confidential floor due to the severe risk of unauthorized access if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

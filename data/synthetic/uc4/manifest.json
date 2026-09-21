@@ -7,7 +7,7 @@
     "taxonomy/taxonomy.v1.yaml": "4cd881ce5e62fed7c7b447b2e5313e415a22de864c98f552a085245b43e344bf"
   },
   "dataset_id": "dataguard-uc4-synthetic",
-  "dataset_sha256": "bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa",
+  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
   "dataset_version": "1.0.0",
   "families": [
     {
@@ -1105,7 +1105,7 @@
     "dev": {
       "n_docs": 107,
       "path": "docs/dev.jsonl",
-      "sha256": "4c66cd66efee97fd58919dda30e9fd7c422367a082c99e61adc9e1f5a29afdb7"
+      "sha256": "1d60efa3b505a9cdc7d9a7d18412cd889238c48afd688e3a402a951e8e6a30ab"
     },
     "test": {
       "n_docs": 227,
@@ -1253,7 +1253,7 @@
   "label_status": "AI-generated synthetic dataset — pending human gold-label review",
   "n_documents": 853,
   "seed": 20260918,
-  "spec_hash": "85e57f22fdee069b249fcbc0b166ad91489ab9121684f599beb5f08b9cd1ccbd",
+  "spec_hash": "ba069cc4d5f9f159ce78b09ddba25b89173aca9a406605165196aa970b6e28f6",
   "stats": {
     "adversarial_types": {
       "prompt_injection_downgrade": 20,

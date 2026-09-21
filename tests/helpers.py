@@ -44,3 +44,15 @@ def mkrec(
     )  # fmt: skip
     base.update(kw)
     return PredictionRecord(**base)
+
+
+def only_explicit_locked_runs(data_dir) -> None:
+    """The locked-test access log may hold entries, but only from explicitly authorised runs
+    (`--allow-locked-test`): the review tooling has no path that writes one."""
+    import json
+    from pathlib import Path
+
+    for line in Path(data_dir, "locked_test_access.jsonl").read_text().splitlines():
+        entry = json.loads(line)
+        assert entry["authorization"]["mechanism"] == "--allow-locked-test"
+        assert entry["run_id"].startswith(("hybrid-test-", "rules-test-", "ml-test-", "llm-test-"))

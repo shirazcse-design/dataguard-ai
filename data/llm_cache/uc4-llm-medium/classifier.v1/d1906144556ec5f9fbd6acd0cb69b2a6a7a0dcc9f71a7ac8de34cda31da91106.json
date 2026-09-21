@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 120,
+ "input_hash": "d1906144556ec5f9fbd6acd0cb69b2a6a7a0dcc9f71a7ac8de34cda31da91106",
+ "latency_ms": 1973.2504580169916,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5188,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"On the support page of our public website.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Use the chat on our website or call during business hours.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a customer-facing help/FAQ document describing product support and warranty information, with explicit indications it is available on the public website. It contains no clearly sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

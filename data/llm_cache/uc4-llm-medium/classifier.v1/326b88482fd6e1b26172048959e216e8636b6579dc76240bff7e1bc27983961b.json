@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 148,
+ "input_hash": "326b88482fd6e1b26172048959e216e8636b6579dc76240bff7e1bc27983961b",
+ "latency_ms": 2146.5966250980273,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"This module contains new illustrations, a set of case exercises and a scoring rubric created for the Peregrine curriculum.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"are scheduled for release with the Q2 course update.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document describes unpublished creative course materials created by the organization, which is non-public intellectual property. It is not yet approved for public release, so external disclosure could harm the organization.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

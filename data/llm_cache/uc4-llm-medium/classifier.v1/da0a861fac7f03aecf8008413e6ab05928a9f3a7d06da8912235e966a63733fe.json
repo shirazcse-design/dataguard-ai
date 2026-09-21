@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 204,
+ "input_hash": "da0a861fac7f03aecf8008413e6ab05928a9f3a7d06da8912235e966a63733fe",
+ "latency_ms": 2461.3939999835566,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\",\"PII\"],\"evidence\":[{\"quote\":\"3528002426691047\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"4111110458906539\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Oluwaseun Castellano,3528002426691047,02/31,821 Ridgeway Drive, Nashville\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Theo Jovanovic,4111110458906539,07/31,203 Windmill Lane, Denver\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and named individuals with home shipping addresses. Payment-card data requires Highly Confidential handling, and PII also clearly applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

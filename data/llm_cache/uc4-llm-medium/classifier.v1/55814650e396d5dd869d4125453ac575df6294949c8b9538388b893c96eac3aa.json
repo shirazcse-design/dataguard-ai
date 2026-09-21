@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 126,
+ "input_hash": "55814650e396d5dd869d4125453ac575df6294949c8b9538388b893c96eac3aa",
+ "latency_ms": 2072.81195896212,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5222,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Yewtree Payments Customer Summit - Auckland - Public Agenda\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Registration is free at www.yewtreepayments.example/summit. Sessions will be recorded and posted publicly.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is an event agenda explicitly intended for public distribution, with registration open and sessions to be posted publicly. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

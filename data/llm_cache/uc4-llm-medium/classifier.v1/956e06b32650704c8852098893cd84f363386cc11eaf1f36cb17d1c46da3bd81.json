@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 173,
+ "input_hash": "956e06b32650704c8852098893cd84f363386cc11eaf1f36cb17d1c46da3bd81",
+ "latency_ms": 2377.2771660005674,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Our new approach to precision components separates the mixture with a membrane whose pores are shaped by the process itself, a concept not seen in published work.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The membrane casting conditions we settled on after 23 experiments are our know-how, and will be run as a trade secret rather than disclosed.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention and also identifies secret process know-how that derives value from secrecy. Because Trade Secret applies, the sensitivity level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

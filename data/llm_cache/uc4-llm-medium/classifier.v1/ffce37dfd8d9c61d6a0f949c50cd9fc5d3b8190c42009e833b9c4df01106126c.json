@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "ffce37dfd8d9c61d6a0f949c50cd9fc5d3b8190c42009e833b9c4df01106126c",
+ "latency_ms": 1969.306500046514,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5159,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Thank you for referring Tamsin Iwasaki.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"the patient has poorly controlled major depressive disorder and reports worsening symptoms.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"I have started a change in medication\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical narrative containing a named patient, diagnosis, symptoms, and treatment information, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

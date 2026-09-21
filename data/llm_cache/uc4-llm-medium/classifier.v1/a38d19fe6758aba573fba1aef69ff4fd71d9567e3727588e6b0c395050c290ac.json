@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 147,
+ "input_hash": "a38d19fe6758aba573fba1aef69ff4fd71d9567e3727588e6b0c395050c290ac",
+ "latency_ms": 2144.4872920401394,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5147,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Thank you for referring Noor Brennan.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"the patient has poorly controlled gastroesophageal reflux disease and reports worsening symptoms.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"I have started a change in medication\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical narrative naming a patient and describing diagnosis, symptoms, and treatment, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

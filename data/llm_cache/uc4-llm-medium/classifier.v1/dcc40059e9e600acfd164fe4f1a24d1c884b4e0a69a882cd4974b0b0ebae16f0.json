@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 194,
+ "input_hash": "dcc40059e9e600acfd164fe4f1a24d1c884b4e0a69a882cd4974b0b0ebae16f0",
+ "latency_ms": 2462.4504579696804,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Annual recurring revenue grew 54.3% year on year to about $569.4M, and net revenue retention improved.\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Gross margin reached 75.9%, ahead of what we have told the market so far.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"Hold until the results are approved by the board.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public company financial performance information, including unreleased metrics and results pending board approval. Disclosure could cause severe financial and legal harm, so the Financial / PCI category applies at the Highly Confidential level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

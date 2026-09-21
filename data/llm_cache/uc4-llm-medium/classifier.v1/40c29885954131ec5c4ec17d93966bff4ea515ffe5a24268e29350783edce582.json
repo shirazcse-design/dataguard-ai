@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 200,
+ "input_hash": "40c29885954131ec5c4ec17d93966bff4ea515ffe5a24268e29350783edce582",
+ "latency_ms": 2754.3975000735372,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"account,annual_volume,negotiated_margin,contract_end\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Vantage Mobility,$84.3M,19.7%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Yewtree Therapeutics,$22.7M,30.4%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Marlowe Capital,$55.2M,31.0%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains a non-public compiled customer list with negotiated margins and contract timing, which is competitively sensitive trade-secret information. Disclosure could cause severe competitive harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

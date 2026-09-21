@@ -73,7 +73,7 @@ Pre-registered expectations that were **not** met: ML did not beat Rules on M&A 
 Synthetic, template-generated, AI-authored labels not yet human reviewed; 76 training families and 18
 dev families, so intervals are wide; Rules were developed while looking at dev and ML was not, so the
 comparison flatters Rules; calibration was fitted on ~100 documents; nothing here transfers to real
-data. The locked test split has never been evaluated.
+data. The locked test split was evaluated once on 2026-09-21, for the frozen hybrid only; the ML classifier was not evaluated on it on its own.
 
 ## Reproduce
 

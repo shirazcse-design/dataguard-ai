@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 167,
+ "input_hash": "839c21430e08c09573e6d3be0ee44a2eb3e577ce11103a8906533ee1f499f51c",
+ "latency_ms": 2145.5050830263644,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5193,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:22:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"namespace Corp.Northstar\\n{\\n    public class InvoiceCalculator\\n    {\\n        private readonly ITaxTable _taxes;\\n        public InvoiceCalculator(ITaxTable taxes) { _taxes = taxes; }\\n\\n        public decimal Total(decimal net, string region)\\n        {\\n            return net + net * _taxes.RateFor(region);\\n        }\\n    }\\n}\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary source code for an internal service component. Non-public source code is Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

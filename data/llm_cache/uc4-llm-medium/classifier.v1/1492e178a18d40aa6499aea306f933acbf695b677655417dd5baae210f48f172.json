@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 146,
+ "input_hash": "1492e178a18d40aa6499aea306f933acbf695b677655417dd5baae210f48f172",
+ "latency_ms": 1861.728125018999,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5171,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Leila Yilmaz is returning to work after treatment for hypothyroidism.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 7 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable occupational health record describing a named person's medical condition, treatment context, and work restrictions. Individually identifiable health information is PHI, which carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

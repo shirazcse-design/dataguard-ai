@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 203,
+ "input_hash": "05b93e615f559f2187fa020ef597c097b795b76c2457d44c3edaf83ac1bc23b9",
+ "latency_ms": 2223.565125023015,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"payee,routing,account,amount\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Zephyra Robotics,790231435,872747543004,$14,799\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Tidewater Semiconductors,716019084,5151289767,$8,285\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Lakemont Retail,306904347,4957070120,$6,136\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank routing and account numbers for payments, which clearly meets Financial / PCI and carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 142,
+ "input_hash": "ca00dde735f0479c6573c2a57ee5c64355b3b8bee6e8c2d387a4d356ef31296b",
+ "latency_ms": 2607.6206249417737,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5176,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Transaction: acquisition of Crestmoor Mobility by Highmoor Pharma. Consideration: $1.3B in cash and stock. Closing conditions: regulatory approval in Iberia, completion of due diligence, key-employee retention.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public deal documentation describing an acquisition and transaction terms, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

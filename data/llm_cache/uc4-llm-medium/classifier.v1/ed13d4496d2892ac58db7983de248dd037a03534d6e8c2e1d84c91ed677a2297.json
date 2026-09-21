@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 158,
+ "input_hash": "ed13d4496d2892ac58db7983de248dd037a03534d6e8c2e1d84c91ed677a2297",
+ "latency_ms": 1971.9198750099167,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5214,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Customer: Tamsin Okafor, 339 Bayside Drive, Dublin, phone (285) 555-0129\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Customer: Nikhil Moreau, 654 Cedar Lane, Lyon, phone (516) 555-0167\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains named individuals' home addresses and phone numbers in customer support tickets, which is personal identifying information. This is non-public personal data and fits Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

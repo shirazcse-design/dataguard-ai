@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 190,
+ "input_hash": "6ef0a003d7ea0f2761aea10f22b87eb295eadcfdf6e6ea286512bd946ee2274f",
+ "latency_ms": 2602.9898750130087,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5190,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Inventive concept: combine a low-cost sensor with a learned correction model so the payment gateway can self-calibrate in the field.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Prior art search found no reference that teaches on-device correction without a reference standard.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"add three dependent claims.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document contains non-public patent working notes describing an inventive concept and draft claim development, which clearly fits Intellectual Property. Disclosure could harm the organization's patent position, but it does not clearly include trade-secret process details or other highly regulated data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

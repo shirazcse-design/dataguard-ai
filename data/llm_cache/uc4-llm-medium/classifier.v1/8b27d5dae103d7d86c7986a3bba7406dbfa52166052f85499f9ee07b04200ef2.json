@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 107,
+ "input_hash": "8b27d5dae103d7d86c7986a3bba7406dbfa52166052f85499f9ee07b04200ef2",
+ "latency_ms": 1814.2801249632612,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5220,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Public Agenda\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Registration is free at www.goldcrestcapital.example/summit. Sessions will be recorded and posted publicly.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is an event agenda clearly intended for public release, and it contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

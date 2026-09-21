@@ -574,6 +574,19 @@ def _cmd_obs_summarize(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_obs_dashboard(args: argparse.Namespace) -> int:
+    """A static HTML dashboard over the derived metrics of a span file (no text, no script)."""
+    from pathlib import Path
+
+    from observability import read_jsonl, render_dashboard, summarize
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(render_dashboard(summarize(read_jsonl(args.spans))), encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
+
+
 def _cmd_obs_audit(args: argparse.Namespace) -> int:
     """Privacy gate: exit 1 if any span output contains document text or a sensitive value."""
     from pathlib import Path
@@ -929,14 +942,15 @@ def _cmd_review_blind_package(args: argparse.Namespace) -> int:
     """Write the blind human-review package (reviewer files, key, manifest); no label is touched."""
     from pathlib import Path
 
-    from evals.classification.blind_review import MANIFEST_FILE, build_package
+    from evals.classification.blind_review import VARIANTS, build_package
     from evals.classification.dataset.build import DEFAULT_DATA_DIR
     from evals.classification.evaluate import git_info
 
     bundle = load_config(args.config_dir)
     data_dir = args.data_dir or str(DEFAULT_DATA_DIR)
-    files, manifest = build_package(bundle, git_info(), data_dir)
-    files[MANIFEST_FILE] = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    variant = VARIANTS[args.variant]
+    files, manifest = build_package(bundle, git_info(), data_dir, variant)
+    files[variant.manifest_file] = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
     for rel, text in files.items():
         path = Path(data_dir) / rel
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -951,15 +965,17 @@ def _cmd_review_blind_check(args: argparse.Namespace) -> int:
     """Check that a returned blind-review sheet is well-formed (it does not judge the labels)."""
     from pathlib import Path
 
-    from evals.classification.blind_review import SHEET_FILE, check_completed
+    from evals.classification.blind_review import VARIANTS, check_completed
     from evals.classification.dataset.build import DEFAULT_DATA_DIR
 
     bundle = load_config(args.config_dir)
     data_dir = Path(args.data_dir or DEFAULT_DATA_DIR)
+    variant = VARIANTS[args.variant]
     errs = check_completed(
         Path(args.sheet).read_text(encoding="utf-8"),
-        (data_dir / SHEET_FILE).read_text(encoding="utf-8"),
+        (data_dir / variant.sheet_file).read_text(encoding="utf-8"),
         bundle,
+        variant,
     )
     for e in errs:
         print(f"ERROR {e}")
@@ -972,13 +988,26 @@ def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
     from pathlib import Path
 
     from evals.classification.blind_compare import PackageError, run
+    from evals.classification.blind_review import VARIANTS
     from evals.classification.dataset.build import DEFAULT_DATA_DIR
 
     bundle = load_config(args.config_dir)
     data_dir = Path(args.data_dir or DEFAULT_DATA_DIR)
-    out_dir = Path(args.out_dir) if args.out_dir else data_dir / "review/blind_results"
+    variant = VARIANTS[args.variant]
+    # an AI review never writes into the human-review results directory
+    default_dir = variant.default_results_dir + ("_ai" if args.reviewer_kind == "ai" else "")
+    out_dir = Path(args.out_dir) if args.out_dir else data_dir / default_dir
+    paired = [Path(p) for p in args.content_sheet] if args.content_sheet else None
     try:
-        report, per_sample = run([Path(p) for p in args.sheet], bundle, data_dir)
+        report, per_sample = run(
+            [Path(p) for p in args.sheet],
+            bundle,
+            data_dir,
+            variant,
+            paired,
+            args.reviewer_kind,
+            args.note,
+        )
     except PackageError as e:
         print(f"ERROR {e}")
         return 1
@@ -1185,6 +1214,10 @@ def build_parser() -> argparse.ArgumentParser:
     osum.add_argument("--spans", required=True)
     osum.add_argument("--out", default=None)
     osum.set_defaults(func=_cmd_obs_summarize)
+    odash = obs_sub.add_parser("dashboard", help="static HTML dashboard from a span JSONL file")
+    odash.add_argument("--spans", required=True)
+    odash.add_argument("--out", required=True)
+    odash.set_defaults(func=_cmd_obs_dashboard)
     orp = obs_sub.add_parser("report", help="write the observability + failure-matrix results")
     orp.add_argument("--out", default=None)
     orp.add_argument("--config-dir", default=None)
@@ -1210,12 +1243,18 @@ def build_parser() -> argparse.ArgumentParser:
     rvb.set_defaults(func=_cmd_review_build)
     rvp = rv_sub.add_parser("blind-package", help="write the blind human-review package")
     rvp.add_argument("--config-dir", default=None)
+    rvp.add_argument(
+        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+    )
     rvp.add_argument("--data-dir", default=None)
     rvp.set_defaults(func=_cmd_review_blind_package)
     rvc = rv_sub.add_parser(
         "blind-check", help="check a returned blind-review sheet is well-formed"
     )
     rvc.add_argument("--sheet", required=True)
+    rvc.add_argument(
+        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+    )
     rvc.add_argument("--config-dir", default=None)
     rvc.add_argument("--data-dir", default=None)
     rvc.set_defaults(func=_cmd_review_blind_check)
@@ -1226,6 +1265,27 @@ def build_parser() -> argparse.ArgumentParser:
         "--sheet", action="append", required=True, help="a completed sheet; repeat per reviewer"
     )
     rvm.add_argument("--out-dir", default=None)
+    rvm.add_argument(
+        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+    )
+    rvm.add_argument(
+        "--content-sheet",
+        action="append",
+        default=None,
+        help="with --variant metadata: a completed content-only sheet (pairs the two reviews)",
+    )
+    rvm.add_argument(
+        "--reviewer-kind",
+        choices=["human", "ai"],
+        default="human",
+        help="ai: label the report and CSV as an AI review (not human validation); "
+        "writes to <results dir>_ai",
+    )
+    rvm.add_argument(
+        "--note",
+        default=None,
+        help="a provenance note printed verbatim at the top of the report (facts about the sheet)",
+    )
     rvm.add_argument("--config-dir", default=None)
     rvm.add_argument("--data-dir", default=None)
     rvm.set_defaults(func=_cmd_review_blind_compare)

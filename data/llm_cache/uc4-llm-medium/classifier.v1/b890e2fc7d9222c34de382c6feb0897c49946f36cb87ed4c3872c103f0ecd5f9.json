@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 148,
+ "input_hash": "b890e2fc7d9222c34de382c6feb0897c49946f36cb87ed4c3872c103f0ecd5f9",
+ "latency_ms": 2127.6684999465942,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5198,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Case study: the Pinecrest Biosciences-Larkspur Energy merger\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"In 2014, Pinecrest Biosciences acquired Larkspur Energy in one of the largest deals in the industrial sensors industry.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is a historical case-study summary about a past merger, not non-public deal activity or board-level strategy. It appears to be ordinary business or training content with no clearly applicable sensitive data category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

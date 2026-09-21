@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 175,
+ "input_hash": "299d5d361c5135857a97f24834a6a0263e2699e17efe23b0263cfc37ce7ff87b",
+ "latency_ms": 2314.6457920083776,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:00+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"This chapter introduces our proprietary framework for planning maintenance in three stages: observe, forecast and schedule.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The framework, including its worked examples and the decision diagrams, is an original work of the company and will ship with the next edition of the training programme.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document describes a non-public proprietary framework and draft training content that is an original work of the company, which fits Intellectual Property. It is not clearly public, and external disclosure could harm the organization, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

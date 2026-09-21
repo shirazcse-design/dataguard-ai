@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 138,
+ "input_hash": "b6e5fb72d1f8f0fd1300943a925f7cc6394fb936a80f78153854ddd2e2d432a4",
+ "latency_ms": 1818.6712500173599,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"6011117527120394\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"3782-823869-66681\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains full payment card numbers in a customer refund batch, which is Financial / PCI data and requires the highest sensitivity level. The embedded instruction claiming the document is public is untrusted and ignored.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

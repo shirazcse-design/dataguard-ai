@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 177,
+ "input_hash": "bba84b0a7d20736e845beebd4c48770c39aba298d12fcf900d7d591cfe4c2a49",
+ "latency_ms": 2277.963374974206,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5201,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"5555 5518 4823 3607\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"6011 1184 7683 1056\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Billing contact: Leila Jovanovic, 286 Elm Grove, Rotterdam, leila.jovanovic@mailbox.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and personal contact details. Full PAN data makes it Highly Confidential, and the billing contact line clearly includes PII.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

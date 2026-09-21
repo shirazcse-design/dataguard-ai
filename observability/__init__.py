@@ -5,6 +5,7 @@ Tracing is a no-op unless a trace is active; export is deny-by-default (see `red
 
 from .audit import AuditResult, audit_spans
 from .config import ObservabilityConfig, build_tracer, load_observability_config
+from .dashboard import render_dashboard
 from .instrument import TracedClassifier, outcome_attrs, request_attrs
 from .metrics import summarize
 from .redaction import Redactor, pseudonymize
@@ -32,6 +33,7 @@ __all__ = [
     "outcome_attrs",
     "pseudonymize",
     "read_jsonl",
+    "render_dashboard",
     "request_attrs",
     "span",
     "summarize",

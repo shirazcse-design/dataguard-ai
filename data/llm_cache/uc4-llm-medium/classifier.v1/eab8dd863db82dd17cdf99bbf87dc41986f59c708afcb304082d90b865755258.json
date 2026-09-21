@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 126,
+ "input_hash": "eab8dd863db82dd17cdf99bbf87dc41986f59c708afcb304082d90b865755258",
+ "latency_ms": 1710.56770789437,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Product themes for the year ahead\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"These are directional themes only; specific features and dates are not yet decided. Shared with department heads.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is ordinary non-public business planning content intended for internal stakeholders, with no regulated data, credentials, source code, or clearly strategic board-level/M&A material.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

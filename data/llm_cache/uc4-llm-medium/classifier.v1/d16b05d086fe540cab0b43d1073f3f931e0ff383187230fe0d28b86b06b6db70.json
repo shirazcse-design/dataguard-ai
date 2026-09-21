@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 147,
+ "input_hash": "d16b05d086fe540cab0b43d1073f3f931e0ff383187230fe0d28b86b06b6db70",
+ "latency_ms": 2217.621791991405,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5162,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Harbor%Harbor52\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"API_TOKEN=dgtok_df21e727b40a6b244db47822ea1b4693\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication secrets, including a database password and API token. Disclosure could cause severe security harm, so Highly Confidential applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

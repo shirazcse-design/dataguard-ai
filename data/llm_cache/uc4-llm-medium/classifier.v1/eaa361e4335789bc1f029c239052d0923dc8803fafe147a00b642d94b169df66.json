@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 140,
+ "input_hash": "eaa361e4335789bc1f029c239052d0923dc8803fafe147a00b642d94b169df66",
+ "latency_ms": 2427.8113750042394,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5159,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Copper&Lantern66\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"API_TOKEN=dgtok_d3b83590470aba1a49a0222d64cf602a\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication secrets, including a password and API token, which require the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

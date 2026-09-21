@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "c133db84668426ef91d16f3e81ab4e9365ce3e4ab56fa66b5a8a85a4dcdf7e67",
+ "latency_ms": 1807.5612499378622,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5153,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"db_admin_password  = \\\"Lantern%Willow55\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"monitoring_api_key = \\\"dgsk_live_922UZgGFnq1Ug4qGePm9OlrP\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication material, including a password and API key. Credentials / Secrets require Highly Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

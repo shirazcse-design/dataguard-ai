@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 140,
+ "input_hash": "1590804919dcc3bf9feef0697583a8b7393c44d657e84d576fdf01ad63a69529",
+ "latency_ms": 2073.109416058287,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5285,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:22:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"FOR IMMEDIATE RELEASE\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Whitcombe Semiconductors today announced that its new edge gateway is generally available to customers in APAC.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Pricing and availability are published at www.whitcombesemiconductors.example.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a press release clearly intended for public distribution, announcing product availability and directing readers to public website information.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

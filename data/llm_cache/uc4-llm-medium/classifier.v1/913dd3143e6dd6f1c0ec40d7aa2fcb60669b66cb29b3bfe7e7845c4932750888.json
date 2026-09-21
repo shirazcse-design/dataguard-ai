@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 149,
+ "input_hash": "913dd3143e6dd6f1c0ec40d7aa2fcb60669b66cb29b3bfe7e7845c4932750888",
+ "latency_ms": 2181.0985000338405,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT - not yet announced\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Proposed hybrid working policy.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Feedback from department heads is requested before the announcement.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is ordinary internal business policy content that is not yet publicly announced, but it does not contain regulated data, credentials, source code, or strategically critical information. External disclosure could cause limited harm, so Internal is the best fit.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

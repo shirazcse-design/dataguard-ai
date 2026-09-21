@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 86,
+ "input_hash": "5145bd3a27db449e4cc17446f5a0049ac8021d8aa87af85cf3a2f5c4b0bf7151",
+ "latency_ms": 2145.613208063878,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5196,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is a historical business case study about a past acquisition and integration, with no indication of non-public deal activity or other sensitive data categories. It is ordinary business/educational content rather than regulated, strategic, or credential material.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

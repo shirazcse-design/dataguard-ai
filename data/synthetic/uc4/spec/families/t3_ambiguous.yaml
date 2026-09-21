@@ -219,7 +219,7 @@ families:
     format: draft
     gold_level: CONFIDENTIAL
     ambiguity: true
-    acceptable_alternative_levels: [PUBLIC]
+    acceptable_alternative_levels: [PUBLIC, INTERNAL]
     n_docs: 6
     filenames: ["Case_Study_Draft_«company#2.short».docx", "Customer_Story_«@year».docx"]
     metadata: {source_system: "SharePoint", author_department: "Marketing"}

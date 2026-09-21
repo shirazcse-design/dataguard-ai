@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 154,
+ "input_hash": "2dc5c2841e11631059c488e4d08f7a0a7eb7696b0b05b97b2c9e65d33696b8d9",
+ "latency_ms": 2180.8282090350986,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5194,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Base: 56.8% solvent A, 18.5% stabilizer B, 11.2% additive C. Cure at 87 C for 21 minutes with a two-step ramp. The additive C ratio is the critical parameter; deviations above 1.2% reduce yield sharply.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public formulation details and process parameters that derive value from secrecy, which clearly fits Trade Secret. That category carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

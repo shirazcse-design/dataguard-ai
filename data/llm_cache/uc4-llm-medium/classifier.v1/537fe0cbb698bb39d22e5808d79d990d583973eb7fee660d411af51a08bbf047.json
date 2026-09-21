@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 138,
+ "input_hash": "537fe0cbb698bb39d22e5808d79d990d583973eb7fee660d411af51a08bbf047",
+ "latency_ms": 1922.2584170056507,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5218,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"PRESS RELEASE - Published July 2027\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Tidewater Pharma and Yarrowdale Pharma today announced a multi-year partnership\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Both companies will share a joint roadmap on their public websites.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a published press release announcing a partnership, indicating intent for public release. It contains no clearly applicable sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

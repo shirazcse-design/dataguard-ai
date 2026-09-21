@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 176,
+ "input_hash": "9b9d17339571cedaac0c151edb1d532af33ae35a78d8b6c9a26701b8489e6dcf",
+ "latency_ms": 2302.079166052863,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Yusuf Hoffmann, DOB 1978-12-01\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Dx: K21.9 - reflux disease. Rx: gabapentin 300 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Patient reports worsening symptoms since last visit.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable medical progress note containing a named individual’s date of birth plus diagnosis, medication, and symptoms. PHI is present, and the date of birth also makes PII clearly applicable, requiring the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

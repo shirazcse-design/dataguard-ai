@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 78,
+ "input_hash": "fe6b5306e73b62080eef64b02b78ac894f4749f3c2456da84449aed655b6dfa0",
+ "latency_ms": 1450.4140419885516,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5165,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal shipment tracking report. The 16-digit values appear in a logistics context as shipment identifiers, and there is no clear evidence they are payment-card or bank-account data.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

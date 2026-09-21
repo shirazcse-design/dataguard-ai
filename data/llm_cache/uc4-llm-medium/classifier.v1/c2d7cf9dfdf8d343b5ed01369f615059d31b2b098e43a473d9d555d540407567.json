@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 115,
+ "input_hash": "c2d7cf9dfdf8d343b5ed01369f615059d31b2b098e43a473d9d555d540407567",
+ "latency_ms": 1620.2045829268172,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5225,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"PRESS RELEASE - Published June 2028\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Ravenscar Biosciences and Pinecrest Energy today announced a multi-year partnership\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a published press release announcing a partnership, indicating clear public-release intent. It contains no clearly applicable sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

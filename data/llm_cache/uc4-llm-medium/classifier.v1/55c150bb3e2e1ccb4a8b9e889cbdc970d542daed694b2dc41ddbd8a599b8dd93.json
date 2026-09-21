@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 141,
+ "input_hash": "55c150bb3e2e1ccb4a8b9e889cbdc970d542daed694b2dc41ddbd8a599b8dd93",
+ "latency_ms": 1918.7983749434352,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Benedikt Novak is returning to work after treatment for generalized anxiety disorder.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 5 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information about a named employee, including a diagnosis/treatment context and work restrictions. Health information has a Highly Confidential floor under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

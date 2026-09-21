@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 83,
+ "input_hash": "7dd359078786cd1621b59a0c852f601a585e48654c3523c6f3f75367df91b03b",
+ "latency_ms": 1838.4146669413894,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary business receipt/export showing order IDs, dates, masked card numbers, and amounts. The card data is masked to last four digits only, so Financial / PCI does not clearly apply under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

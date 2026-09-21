@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 186,
+ "input_hash": "b5b107f5ba69987a7e058491cb5be5f190e026cfaedd3ede605f975a78166019",
+ "latency_ms": 2042.789209051989,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5235,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Management seeks the Board's approval to make an offer for Pemberton Energy.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"we expect to fund the purchase of roughly $6.6B with a mix of cash and new debt.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"The deal has not been discussed outside the executive team and our advisers.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public board memo about a proposed acquisition and financing plan, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and market harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

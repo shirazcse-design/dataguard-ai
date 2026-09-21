@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 146,
+ "input_hash": "7b234031997f70cae8ed45031c1b1eedc18f07d27dd10aa90518ce3d323fb907",
+ "latency_ms": 1937.4073749640957,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The committee reviewed a proposal to invest $85.1M for a 17.8% stake in Pemberton Software, a satellite imaging start-up, with an option to acquire the rest within 2 years.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"These are non-public investment committee notes describing a proposed strategic investment and potential acquisition terms. Disclosure could cause severe competitive and transactional harm, so M&A / Corporate Strategy applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

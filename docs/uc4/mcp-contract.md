@@ -1,9 +1,11 @@
 # MCP contract for `classify_document` (documentation only)
 
-> **Not implemented, and blocked.** The architecture plan says to stop for approval before MCP and to
-> add no MCP scaffolding in v0.1. This document only fixes what the tool WOULD be, so it can be
-> reviewed now. The freeze criteria below are computed in
-> [`results/service-baseline.md`](results/service-baseline.md); one of them is **not met**.
+> **Implemented ahead of the freeze criteria.** The product owner approved building the adapter on
+> 2026-09-20. It lives in `mcp_adapter/` (core: `adapter.py`, SDK-independent; `server.py`: stdio
+> server, optional `mcp` extra) and is started with `dataguard-uc4-mcp`. Two of the three conditions
+> the plan set for unblocking it are **not satisfied** (see the freeze criteria below), so treat it as
+> a development and evaluation surface, not a release. Criteria are computed in
+> [`results/service-baseline.md`](results/service-baseline.md).
 >
 > Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.**
 
@@ -72,12 +74,38 @@ Computed from a real run in `results/service-baseline.md` (see that file for the
 |---|---|
 | The result schema is versioned | Met (v1.0 frozen, drift check in CI) |
 | Failure semantics are documented | Met (`result-schema.md`; the Phase 7 failure matrix) |
-| **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration, and the locked test split has never been evaluated |
-| Approval to build MCP | **Not given** |
+| **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration. The single locked-test evaluation (2026-09-21) confirms the pattern: level macro-F1 0.884, lower bound 0.758, so the gate still fails on the lower bound |
+| Approval to build MCP | Given (2026-09-20) |
 
-**Therefore: MCP implementation is blocked.** To unblock it: (1) an audited, report-only confirmation
-of the frozen configuration on data that did not choose it (the locked test split, or a
-newly recorded split), (2) human review of the gold labels, and (3) explicit approval.
+**Therefore: the adapter exists but is not release-ready.** Of the two remaining conditions, (1) the
+audited, report-only confirmation on data that did not choose the configuration is **done**
+(2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)); it did not pass the
+level-F1 lower bound (0.758 against 0.85). (2) Human review of the gold labels is **still not satisfied**:
+the sheet designated as the human review is identical to an AI sheet.
+
+## As implemented
+
+* **Deny by default.** `config/mcp/mcp.v1.yaml` lists the allowed callers; the launcher refuses to
+  start for an identity that is not listed, and every call re-checks. Over stdio the identity is set
+  by whoever launches the server (`DATAGUARD_MCP_CALLER_ID`): **asserted, not authenticated.**
+* **Per-caller policy** caps `max_llm_tier`, cost and latency and gates evidence. A request may lower
+  the caps, never raise them. The shipped policy caps at `mid` because `large` (~78 s) exceeds the
+  PRD's 10 s tool-call limit.
+* **Input subset only**: `request_id`, `document.{content, filename, extension}`, `options.{mode,
+  max_llm_tier, max_cost_usd, max_latency_ms, include_evidence}`. `metadata`, `existing_labels`,
+  `caller`, `schema_version` and `document_id` are **rejected, not ignored** (`document_id`
+  resolution does not exist). The caller is the connection identity, and the purpose is fixed at
+  `mcp:classify_document`.
+* **Evidence is off by default** (`default_include_evidence: false`), because excerpts are model
+  text from an untrusted document.
+* **Size limit** 100 KB of UTF-8 (`max_content_bytes`), counted in bytes; over it is a `rejected`
+  result.
+* **Output** is the `ClassificationResult` unchanged; the tool advertises the frozen result schema
+  as its output schema. Invalid input is a `rejected` result with field paths only (sanitised,
+  truncated), never the offending value.
+* **Protocol errors** are only: an unknown tool, and an identity that is not allowlisted (JSON-RPC
+  code -32001).
+* **Tracing** reuses the Phase 7 spans: caller pseudonymised, content hash and size only.
 
 ## Out of scope for this contract
 

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 199,
+ "input_hash": "ac2c26a679e163d148fc2758e32ee9dbef1a47fc916b7db9b229c93ac84e6bd8",
+ "latency_ms": 2329.5427080010995,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"payee,routing,account,amount\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Emberlight Pharma,067544431,552875060344,$20,258\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Amberley Software,361266062,03649498399,$523\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Jadewater Systems,585610591,2511879364,$15,017\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document lists bank routing and account numbers for payments, which is Financial / PCI data and carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

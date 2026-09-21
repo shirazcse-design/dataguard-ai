@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "0dd2f0c2b7f72204012aab220eb7291441a78daa3c734ccd7a79a47b7753b2a5",
+ "latency_ms": 2532.118499977514,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The new sensor module replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"it is a departure from anything in our current or competing products.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This describes a non-public product concept and novel design approach, which clearly fits Intellectual Property. External disclosure could harm the organization competitively, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

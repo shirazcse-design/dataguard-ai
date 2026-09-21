@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 148,
+ "input_hash": "20cd7370bbe4c853612cdc6649bc310814628f40c2535edd20027b7d10c715a7",
+ "latency_ms": 2450.1129999989644,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The team believes an acquisition at a modest premium is achievable if we move before they open a sale process.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Advisers recommend an approach in the next 5 weeks.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is non-public acquisition planning and timing for a potential target, which fits M&A / Corporate Strategy and could cause severe competitive harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

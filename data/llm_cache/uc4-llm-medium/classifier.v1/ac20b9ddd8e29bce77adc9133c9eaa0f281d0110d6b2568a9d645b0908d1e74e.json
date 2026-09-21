@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 215,
+ "input_hash": "ac20b9ddd8e29bce77adc9133c9eaa0f281d0110d6b2568a9d645b0908d1e74e",
+ "latency_ms": 2651.723457966,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5229,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"To: Board of Directors\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"Management seeks the Board's approval to make an offer for Goldcrest Pharma.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"we expect to fund the purchase of roughly $4.0B with a mix of cash and new debt.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"The deal has not been discussed outside the executive team and our advisers.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public board-level acquisition planning, including a proposed offer and financing details, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm, so the document is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

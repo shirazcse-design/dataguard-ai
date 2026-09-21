@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 141,
+ "input_hash": "6cbaafb93479e56a579082047ee0a07f2e35e5f50863b2c6fff156c407ec70e2",
+ "latency_ms": 2044.0242500044405,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5206,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"PID|1||MRN-6327868||Farrow^Marcus\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"DG1|1||F41.1 - generalized anxiety disorder\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This HL7 ADT message contains individually identifiable health information: a patient identifier and name linked to a diagnosis. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 164,
+ "input_hash": "a8b0a3264f5b462a7b2f4146487141fad5e61d9aef664ec098a3481842a26046",
+ "latency_ms": 1944.8832089547068,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"account,annual_volume,negotiated_margin,contract_end\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Pemberton Logistics,$66.7M,25.8%,2026\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Crestmoor Payments,$19.2M,14.6%,2026\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains a non-public compiled customer list with negotiated margins and contract timing, which fits Trade Secret and carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

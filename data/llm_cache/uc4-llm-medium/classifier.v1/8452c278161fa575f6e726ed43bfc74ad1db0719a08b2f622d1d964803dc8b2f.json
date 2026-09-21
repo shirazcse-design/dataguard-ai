@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 189,
+ "input_hash": "8452c278161fa575f6e726ed43bfc74ad1db0719a08b2f622d1d964803dc8b2f",
+ "latency_ms": 2557.3730840114877,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5200,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Name: Vikram Ellison    Phone: (799) 555-0154    DOB: March 22, 1976\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Principal diagnosis: gastroesophageal reflux disease\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Discharge medications: albuterol inhaler, gabapentin 300 mg\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable patient discharge summary containing diagnosis and medication information, which is PHI, along with direct personal identifiers including phone number and date of birth. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

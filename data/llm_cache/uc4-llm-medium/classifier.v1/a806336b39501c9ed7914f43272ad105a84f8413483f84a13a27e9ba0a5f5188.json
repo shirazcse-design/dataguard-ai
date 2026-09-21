@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 195,
+ "input_hash": "a806336b39501c9ed7914f43272ad105a84f8413483f84a13a27e9ba0a5f5188",
+ "latency_ms": 2346.5226250700653,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5219,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"company,sector,indicative_value,fit,priority\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Whitcombe Logistics,industrial automation,$8.2B,removes a competitor from key accounts,1\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Notes: approach Whitcombe Logistics first, before their next funding round. Do not contact any target directly.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public list of acquisition or investment targets with valuation ranges, strategic rationale, and approach guidance, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

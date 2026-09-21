@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 189,
+ "input_hash": "85b7fa9ddaa65231d576b8a6e1e81718da0e5ded68bd134bff0ea188764536ae",
+ "latency_ms": 2606.3962500775233,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5206,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Name: Willa Fairchild    Phone: (495) 555-0120    DOB: June 9, 1961\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Principal diagnosis: essential hypertension\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Discharge medications: ibuprofen 400 mg, omeprazole 20 mg\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable hospital discharge summary containing a named person's contact and birth-date details plus diagnosis and treatment information. PHI is present, which sets the level to Highly Confidential; PII also clearly applies due to the phone number and DOB.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

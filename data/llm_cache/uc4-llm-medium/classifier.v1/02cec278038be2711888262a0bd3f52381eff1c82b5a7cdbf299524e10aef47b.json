@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 140,
+ "input_hash": "02cec278038be2711888262a0bd3f52381eff1c82b5a7cdbf299524e10aef47b",
+ "latency_ms": 2140.176209039055,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5196,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Case study: the Nettlefield Capital-Whitcombe Foods merger\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"In 2007, Nettlefield Capital acquired Whitcombe Foods in one of the largest deals in the diagnostic devices industry.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a historical case study about a past merger and contains no indication of non-public deal activity or other sensitive data categories. Historical or public business-school-style case study content fits Public.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

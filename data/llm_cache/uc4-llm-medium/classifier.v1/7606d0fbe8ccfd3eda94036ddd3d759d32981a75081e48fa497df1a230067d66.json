@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 148,
+ "input_hash": "7606d0fbe8ccfd3eda94036ddd3d759d32981a75081e48fa497df1a230067d66",
+ "latency_ms": 2203.2964170211926,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5176,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Transaction: acquisition of Orchardline Cloud by Eastvale Capital. Consideration: $1.8B in cash and stock. Closing conditions: regulatory approval in ANZ, completion of due diligence, key-employee retention.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public acquisition terms and deal details, which clearly fit M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm, so the level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 170,
+ "input_hash": "608c06f07961f5ea4d8f9fcd901df896d00b1a1764c62f663191d65a12ca13c2",
+ "latency_ms": 2067.1639159554616,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"if customer.tier == \\\"enterprise\\\" and volume > threshold:\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"price = base * (1 - enterprise_discount(volume))\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"Suggest extracting the discount lookup into its own function so we can test the boundaries.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document contains non-public code and code-review commentary about pricing-rule implementation, which clearly fits Source Code. External disclosure could harm the organization, but there is no clear evidence of live secrets or other Highly Confidential data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

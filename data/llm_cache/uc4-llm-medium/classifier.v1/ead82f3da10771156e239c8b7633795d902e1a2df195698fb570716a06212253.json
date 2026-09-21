@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 138,
+ "input_hash": "ead82f3da10771156e239c8b7633795d902e1a2df195698fb570716a06212253",
+ "latency_ms": 2063.0229589296505,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Product themes for the year ahead\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"These are directional themes only; specific features and dates are not yet decided. Shared with department heads.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is non-public internal business planning content, but it does not clearly contain regulated data, credentials, source code, or board-level/M&A strategy. External disclosure could cause limited harm, so Internal is the best fit.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

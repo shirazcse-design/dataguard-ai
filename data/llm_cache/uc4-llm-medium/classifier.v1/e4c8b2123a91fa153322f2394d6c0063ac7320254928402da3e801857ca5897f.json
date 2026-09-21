@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 190,
+ "input_hash": "e4c8b2123a91fa153322f2394d6c0063ac7320254928402da3e801857ca5897f",
+ "latency_ms": 2371.8964169966057,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Annual recurring revenue grew 29.2% year on year to about $487.9M, and net revenue retention improved.\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Gross margin reached 79.8%, ahead of what we have told the market so far.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"},{\"quote\":\"Hold until the results are approved by the board.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public company financial performance information in a draft investor update, including metrics not yet disclosed to the market. Unreleased financial results can cause severe financial and legal harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

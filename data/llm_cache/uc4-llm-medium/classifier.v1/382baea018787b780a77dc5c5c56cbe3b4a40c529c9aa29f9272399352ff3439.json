@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 167,
+ "input_hash": "382baea018787b780a77dc5c5c56cbe3b4a40c529c9aa29f9272399352ff3439",
+ "latency_ms": 2248.901291983202,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Farid Ostrowski has been managing generalized anxiety disorder for several years but has struggled to keep to the treatment plan since starting shift work.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"At the last review the patient described missing doses and feeling low, and we agreed to adjust the regimen and involve a counsellor.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical narrative describing a named person's diagnosis, treatment adherence, and care plan, which is PHI. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

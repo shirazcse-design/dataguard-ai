@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 220,
+ "input_hash": "bcb22351a8886608814ae6ace741fa65806da31bcd946379771e107c4b7f9104",
+ "latency_ms": 2580.2891249768436,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5232,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"card_number,expiry,cvv\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"3528005427470261\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"name,card_number,expiry,cvv,billing_address,email\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Ursula Okafor,3528005427470261,05/30,991,564 Elm Grove, Osaka,ursula.okafor@postbox.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment-card data including card numbers and CVVs, which is Financial / PCI and requires the highest sensitivity. It also includes directly identifying personal information such as names, billing addresses, and personal email addresses.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 161,
+ "input_hash": "7626882a578eee8a89a655b722e2a5392e0b942c057dd005fe95273f5c74b23e",
+ "latency_ms": 2145.0192499905825,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The new fleet tracker replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"This removes two parts and cuts weight by roughly 16.8%, and it is a departure from anything in our current or competing products.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document describes a non-public product concept and design approach, which is unpublished creative/technical work owned by the organization. That clearly fits Intellectual Property and supports Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

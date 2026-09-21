@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "60e1001d75cddfa64dde63bb5f5ff8d51fdf7c15b620eb541d527f3a9b387854",
+ "latency_ms": 2494.3569999886677,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Blackfern Logistics pays about 24.7% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Upland Biosciences is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Copperfield Retail has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public compiled customer and pricing intelligence, including negotiated discounting, renewal risk, and competitive account posture. Disclosure could cause significant competitive harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

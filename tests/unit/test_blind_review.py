@@ -36,7 +36,7 @@ from evals.classification.blind_review import (
 )
 from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
 from evals.classification.gold_review import REVIEW_SPLITS
-from tests.helpers import mkdoc
+from tests.helpers import mkdoc, only_explicit_locked_runs
 
 DATA = str(DEFAULT_DATA_DIR)
 
@@ -66,7 +66,7 @@ def test_the_package_is_built_from_development_splits_only(docs, package):
     assert {d.split for d in docs} <= set(REVIEW_SPLITS)
     assert package[1]["splits_loaded"] == ["train", "calibration", "dev"]
     assert package[1]["locked_test_split_read"] is False
-    assert Path(DATA, "locked_test_access.jsonl").stat().st_size == 0
+    only_explicit_locked_runs(DATA)
 
 
 # ---- which samples ---------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ def test_a_leaking_package_is_refused(bundle, monkeypatch):
     import evals.classification.blind_review as br
 
     leaking = [dict.fromkeys(SHEET_COLUMNS, "hn_public_api_docs_placeholder_keys")]
-    monkeypatch.setattr(br, "sheet_rows", lambda items: leaking)
+    monkeypatch.setattr(br, "sheet_rows", lambda items, variant=None: leaking)
     with pytest.raises(ValueError, match="leaks answer information"):
         build_package(bundle, {}, DATA)
 

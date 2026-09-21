@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 164,
+ "input_hash": "02d835d8e2b43a078caeeba8b2921618bddc1f8027c8057ddeef771ef9522d80",
+ "latency_ms": 1982.1408750722185,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"account,annual_volume,negotiated_margin,contract_end\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Pemberton Analytics,$79.4M,9.3%,2028\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Highmoor Materials,$85.1M,22.1%,2028\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"This is a non-public compiled customer list with negotiated margins and contract timing, which fits Trade Secret and could cause severe competitive harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

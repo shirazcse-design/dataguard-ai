@@ -162,7 +162,7 @@ def test_a_disagreeing_human_is_counted_on_the_right_family(package, bundle):
 
 
 def test_lenient_match_uses_the_gold_alternatives_too(package, bundle):
-    # the draft-customer-story gold is CONFIDENTIAL with alternative PUBLIC
+    # the draft-customer-story gold is CONFIDENTIAL with alternatives PUBLIC and INTERNAL (decision A28)
     fam = "amb_customer_case_study_draft"
     rows = compare(
         package,
@@ -174,6 +174,15 @@ def test_lenient_match_uses_the_gold_alternatives_too(package, bundle):
         package,
         read_reviewer(
             _sheet(package, by_family={fam: {"human_level": "INTERNAL"}}), package, bundle
+        ),
+    )
+    assert all(r["lenient_level_match"] for r in rows if r["family_id"] == fam)  # A28
+    rows = compare(
+        package,
+        read_reviewer(
+            _sheet(package, by_family={fam: {"human_level": "HIGHLY_CONFIDENTIAL"}}),
+            package,
+            bundle,
         ),
     )
     assert all(not r["lenient_level_match"] for r in rows if r["family_id"] == fam)
@@ -324,7 +333,7 @@ def test_the_comparison_never_touches_the_dataset_or_the_locked_test_split(
     s = tmp_path / "s.csv"
     s.write_text(_sheet(package))
     run([s], bundle, DATA)
-    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before == b""
+    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before
 
 
 def test_the_cli_writes_only_to_the_output_directory(package, tmp_path, capsys):
@@ -444,3 +453,53 @@ def test_every_markdown_table_row_has_the_same_number_of_cells_as_its_header(
             assert line.count("|") == width, line
         else:
             width = None
+
+
+# ---- AI-reviewer labelling -------------------------------------------------------------------------------------
+def test_an_ai_review_is_labelled_in_the_report_and_the_csv(package, bundle, tmp_path):
+    s = tmp_path / "ai.csv"
+    s.write_text(_sheet(package, reviewer="some-model"), encoding="utf-8")
+    report, per_sample = run([s], bundle, DATA, reviewer_kind="ai")
+    assert "AI REVIEW: NOT HUMAN VALIDATION" in report and report.startswith("# AI review")
+    assert "decision A20" in report and "must not be used to apply label" in report
+    assert "The human applied" not in report and "One human is one opinion" not in report
+    assert "One AI model is one opinion" in report
+    rows = list(csv.DictReader(io.StringIO(per_sample)))
+    assert {r["reviewer_kind"] for r in rows} == {"ai"}
+
+
+def test_the_default_human_output_is_unchanged_and_carries_no_ai_label(package, bundle, tmp_path):
+    s = tmp_path / "h.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    report, per_sample = run([s], bundle, DATA)
+    assert "AI REVIEW" not in report and report.startswith("# Blind review: gold vs human")
+    assert "reviewer_kind" not in per_sample.splitlines()[0]
+
+
+def test_an_unknown_reviewer_kind_is_refused(package, bundle, tmp_path):
+    s = tmp_path / "x.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    with pytest.raises(PackageError):
+        run([s], bundle, DATA, reviewer_kind="robot")
+
+
+def test_the_ai_cli_writes_to_a_separate_default_directory(package, tmp_path, capsys):
+    data = tmp_path / "data"
+    shutil.copytree(DATA, data)
+    s = tmp_path / "ai.csv"
+    s.write_text(_sheet(package, reviewer="some-model"), encoding="utf-8")
+    assert main(["review", "blind-compare", "--sheet", str(s), "--data-dir", str(data),
+                 "--reviewer-kind", "ai"]) == 0  # fmt: skip
+    assert (data / "review/blind_results_ai/blind_review_comparison.md").exists()
+    human = {p.name: p.read_bytes() for p in (data / "review/blind_results").glob("*")}
+    assert human == {p.name: p.read_bytes() for p in (DATA / "review/blind_results").glob("*")}
+
+
+def test_a_provenance_note_is_printed_verbatim_and_absent_by_default(package, bundle, tmp_path):
+    s = tmp_path / "h.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    plain, _ = run([s], bundle, DATA)
+    noted, _ = run([s], bundle, DATA, note="Sheet identical to another sheet on all 33 rows.")
+    assert "Provenance note" not in plain
+    assert "Provenance note (recorded verbatim" in noted
+    assert "Sheet identical to another sheet on all 33 rows." in noted

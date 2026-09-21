@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 155,
+ "input_hash": "f7e1b7aa364b241083879af8c771d8edad8ea39c1bcc6eedcfc1e38d6eb47336",
+ "latency_ms": 2314.446624950506,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5160,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Xavier Jansen, DOB 1975-05-08\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Dx: F41.1 - generalized anxiety disorder. Rx: amlodipine 5 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable medical progress note containing a named individual’s date of birth and clinical diagnosis/treatment information. PHI is present, and the additional direct identifier supports PII as well, making the document Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 156,
+ "input_hash": "ab225db6ed36df1e331937c6697b3ee633340068fec895c54c615eab66ee88b1",
+ "latency_ms": 2043.4524579904974,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5191,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"preliminary review of Upland Holdings. The team believes an acquisition at a modest premium is achievable if we move before they open a sale process.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Advisers recommend an approach in the next 4 weeks.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public acquisition planning and timing for directors, which is M&A / Corporate Strategy content and could cause severe competitive and financial harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

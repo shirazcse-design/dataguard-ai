@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 165,
+ "input_hash": "080731435e436a551f2a0de3666929add6dd7640c08a3b24021537f305c23352",
+ "latency_ms": 2135.7167499372736,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"payee,routing,account,amount\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Stonebridge Retail,331251777,27126063048,$17,956\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Ironwood Retail,154185509,469502188696,$35,251\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank routing and account numbers for payments, which clearly meets Financial / PCI and requires the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

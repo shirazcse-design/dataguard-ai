@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "c4f9dceb00295d0a8f0fe54fc7e5f26d01d61e534f9848dcb4afe4e2d0896ae4",
+ "latency_ms": 2048.0662080226466,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5162,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Quartz!Harbor59\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"API_TOKEN=dgtok_d7c4d87b93328af29f3e5b50c9271c13\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document is a .env-style configuration file containing live-looking authentication secrets, which require the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

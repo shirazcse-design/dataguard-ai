@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "0a7f980365db5ca06ce7a5ae8da9537abb61f1bf1f072721b864727814ae6392",
+ "latency_ms": 2352.3241250077263,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5214,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Customer: Gustavo Oduya, 445 Copper Street, Denver, phone (822) 555-0119\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Customer: Callum Castellano, 95 Orchard Way, Tampere, phone (541) 555-0172\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains personal contact details for named individuals, including home addresses and phone numbers. That clearly meets the PII definition and supports a Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

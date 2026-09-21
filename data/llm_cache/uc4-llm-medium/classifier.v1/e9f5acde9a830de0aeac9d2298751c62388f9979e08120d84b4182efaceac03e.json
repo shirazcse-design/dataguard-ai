@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 147,
+ "input_hash": "e9f5acde9a830de0aeac9d2298751c62388f9979e08120d84b4182efaceac03e",
+ "latency_ms": 2059.1864170273766,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient Dmitri Mbeki attended Meadow Pediatrics on 2025-03-22.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Diagnosis: K21.9 - reflux disease; started on gabapentin 300 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information: a named patient, visit context, diagnosis, and prescribed medication. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -28,7 +28,7 @@
 | [`service-api.md`](service-api.md) | Python API, CLI, exit codes |
 | [`result-schema.md`](result-schema.md) | Frozen result schema v1.0: fields, status semantics, invariants, failure semantics |
 | [`schema/`](schema/CHANGELOG.md) | Frozen JSON Schemas, golden examples, compatibility policy |
-| [`mcp-contract.md`](mcp-contract.md) | MCP contract for `classify_document` (documentation only; blocked) |
+| [`mcp-contract.md`](mcp-contract.md) | MCP contract for `classify_document` and how the adapter (`mcp_adapter/`) implements it; built ahead of two unmet freeze criteria |
 | [`results/service-baseline.md`](results/service-baseline.md) | Generated: schema digests, examples, exit codes, MCP freeze criteria |
 | [`observability-plan.md`](observability-plan.md) | Pre-registered Phase 7 plan (written before any Phase 7 code) |
 | [`observability-engine.md`](observability-engine.md) | Spans, redaction, privacy audit, hardening, failure matrix, what is unverified |
@@ -36,6 +36,7 @@
 | [`hybrid-plan.md`](hybrid-plan.md) | Pre-registered Hybrid routing plan (written before any router code) |
 | [`hybrid-engine.md`](hybrid-engine.md) | Hybrid architecture, findings, recommendation, what was not done |
 | [`results/hybrid-baseline.md`](results/hybrid-baseline.md) | Generated Hybrid results: all variants, gates, fault injection (dev, replayed) |
+| [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md) | The single audited locked-test evaluation of the frozen hybrid (report-only): level F1 0.884 [0.758, 0.980], category 0.997, high-risk recall 1.000 |
+| [`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md) | Out-of-sample check of the frozen hybrid on the calibration split (live, recorded); high-risk recall 0.891, all misses in one ambiguous family |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
 
-Later phases add: the evaluation-harness guide and generated results under `results/`.

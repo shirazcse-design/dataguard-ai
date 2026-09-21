@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 81,
+ "input_hash": "750cc6ae509d387d88b5fb52b53b10d43ff1d8c740fee213a5ff8f0485548d72",
+ "latency_ms": 1606.2002499820665,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5171,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary receipt log with only masked payment-card digits shown; masked values are not Financial / PCI under the policy. It is not clearly intended for public release, so Internal is the best fit.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

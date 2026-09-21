@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 149,
+ "input_hash": "141a06612e9322e31fce350db54cac94c32ec697a66f88edd14d8ba19e93eb04",
+ "latency_ms": 2038.8398339273408,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient Liam Abernathy attended Harborview Health Center on 2026-06-11.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Diagnosis: F41.1 - generalized anxiety disorder; started on gabapentin 300 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical summary containing a named patient, care encounter details, diagnosis, and prescribed medication. Individually identifiable health information is PHI, which requires the Highly Confidential level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

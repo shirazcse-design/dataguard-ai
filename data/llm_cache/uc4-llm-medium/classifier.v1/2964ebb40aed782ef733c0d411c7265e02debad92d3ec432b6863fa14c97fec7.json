@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 103,
+ "input_hash": "2964ebb40aed782ef733c0d411c7265e02debad92d3ec432b6863fa14c97fec7",
+ "latency_ms": 1553.4047089749947,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5266,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Published November 10, 2027\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Thanks for reading. Comments and questions are welcome.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This appears to be a published blog post intended for public release, with no sensitive data categories present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 149,
+ "input_hash": "a0e617af66543f74f6241b24f06cd67a087a6ec804275f48e62701d4e43b5b61",
+ "latency_ms": 2145.484083914198,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Of 825 enrolled patients, 6 in the under-30 group had a hospital admission and 6 in the over-80 group discontinued treatment.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"Data are aggregated and contain no names or identifiers.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is aggregated programme-outcomes information about patients without individual identifiers, so no PHI or other listed sensitive category clearly applies. It appears to be ordinary non-public business reporting rather than material approved for public release.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

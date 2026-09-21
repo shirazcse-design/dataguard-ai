@@ -220,7 +220,7 @@ def build_obs_report(
         "Spans are not verified against Azure Monitor or Foundry tracing (no connection string).",
         "The fake provider server verifies the adapter's failure handling, not the real service's; real failure rates and latencies are unmeasured.",
         "The privacy audit proves the absence of the tested strings and patterns, not the absence of every conceivable leak; the allow-list and redactor are the primary control.",
-        "Dashboards (DG-018) and the service surface (Phase 8) are not built.",
+        "An offline static dashboard exists (`dataguard-uc4 obs dashboard`); a shared, live dashboard (DG-018) is not built.",
         "Synthetic, AI-authored labels not yet human reviewed; nothing transfers to real data without validation.",
     ):
         add(f"* {c}")

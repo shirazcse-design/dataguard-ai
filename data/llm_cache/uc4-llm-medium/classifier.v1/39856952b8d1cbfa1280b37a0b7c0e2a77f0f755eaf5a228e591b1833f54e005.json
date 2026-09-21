@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 85,
+ "input_hash": "39856952b8d1cbfa1280b37a0b7c0e2a77f0f755eaf5a228e591b1833f54e005",
+ "latency_ms": 1941.7066669557244,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5166,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal support summary with routine customer or user issues and no clearly regulated, credential, strategic, or other sensitive-category data. The named first names and business context alone do not clearly meet any listed data category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

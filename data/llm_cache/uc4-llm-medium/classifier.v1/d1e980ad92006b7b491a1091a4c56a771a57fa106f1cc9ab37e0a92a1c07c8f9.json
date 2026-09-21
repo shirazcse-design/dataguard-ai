@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 140,
+ "input_hash": "d1e980ad92006b7b491a1091a4c56a771a57fa106f1cc9ab37e0a92a1c07c8f9",
+ "latency_ms": 2001.3954580063,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5165,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Kofi Sandoval is returning to work after treatment for hypothyroidism.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 4 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable occupational health note describing a named person's medical condition and treatment-related work restrictions, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

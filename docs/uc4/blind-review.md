@@ -41,10 +41,42 @@ Writes `blind_review_comparison.md` and `blind_review_comparison.csv` (default `
 * **Report sections:** controls (reviewer calibration), disputed families (agreement, within-family consistency, ambiguity and insufficient-information flags), the two pattern tables, and the facts bearing on decisions A / B / C. With two or more sheets, inter-reviewer agreement and Cohen's kappa on level.
 * **What it does not do:** no combined headline score, no bootstrap or re-scoring under human labels (that would be tuning on dev), and no label change. Counts only, with `SMALL_SAMPLE` on every table: the disputed set is four independent decisions.
 
+## The metadata-shown variant
+
+`data/synthetic/uc4/review/blind_metadata/` (reviewer) and `blind_metadata_key/` (key + manifest; not for the reviewer). It is a **separate package with the same 33 documents in a different order** (same set, different order seed), so a reviewer cannot rely on memory of positions and the two reviews can be compared sample by sample.
+
+* **What is added:** one column/line, `source_metadata`, the document record's metadata map as `key=value; key=value` (for example `source_system=Public developer portal`; `author_department`, `source_path` where present). Extension is redundant with the filename; embedded labels are not shown because none of the 33 documents carries one.
+* **What is not shown:** identical to the content-only package (no gold, predictions, proposals, adjudication). The same leak audit runs; a test pins that the content-only files still contain no `source_system`.
+* **Framing:** the packet says metadata is evidence about where a document came from, never truth, and asks the reviewer to say how much weight it deserved.
+* **Metadata correlates with the gold** (for example `Pharmacy system`, `Corporate website`, `Public developer portal`). That is the point of the variant, and it means this review is easier and less independent of the gold author's evidence than the content-only one. The classifiers never see it.
+* **Who should review it:** ideally reviewers who have **not** seen the content-only package. If the same person does both, do the content-only pass first; their second pass is anchored on the first, and the report says so.
+
+```
+dataguard-uc4 review blind-package --variant metadata
+dataguard-uc4 review blind-check   --variant metadata --sheet completed_metadata.csv
+dataguard-uc4 review blind-compare --variant metadata --sheet completed_metadata.csv \
+    [--content-sheet completed_content.csv]
+```
+
+Results default to `review/blind_results_metadata/`. With `--content-sheet` the report adds **"Effect of showing metadata"**: per disputed family, the human's labels in each variant, how many level/category labels changed, agreement with the gold in each variant, controls, and every changed document. It labels whether the two sheets are from the same reviewer (anchored) or different reviewers (person and metadata effects mixed). A content-only sheet is rejected by the metadata commands, and vice versa. The comparison reads only the returned sheets, the keys and the already-executed predictions; it never loads the dataset or the locked test split.
+
+## When the reviewer is an AI model
+
+```
+dataguard-uc4 review blind-compare --sheet completed.csv --reviewer-kind ai
+```
+
+Labels the report ("AI REVIEW: NOT HUMAN VALIDATION") and adds a `reviewer_kind` column to the CSV, and
+writes to `review/blind_results_ai/` so it never mixes with a human review's results. An AI sheet is a
+second opinion only: it does not satisfy the human review requirement (A20), and it must not be used
+to apply label changes A / B / C or to clear the MCP freeze criteria. The first such run is committed
+under `data/synthetic/uc4/review/blind_results_ai/` (reviewer id in the sheet: `ChatGPT-GPT-5.6-Sol`).
+
 ## Regenerate
 
 ```
-dataguard-uc4 review blind-package
+dataguard-uc4 review blind-package                      # content-only
+dataguard-uc4 review blind-package --variant metadata     # metadata shown
 ```
 
 The committed package is tested to equal its generator's output, and the manifest records the sha256 of the (unchanged) adjudication artifacts, so a stale package or a changed adjudication sheet fails CI.

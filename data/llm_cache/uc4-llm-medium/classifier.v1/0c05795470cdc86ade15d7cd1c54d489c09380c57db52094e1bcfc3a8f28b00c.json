@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 71,
+ "input_hash": "0c05795470cdc86ade15d7cd1c54d489c09380c57db52094e1bcfc3a8f28b00c",
+ "latency_ms": 1598.02299994044,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5220,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an employee-facing VPN setup and troubleshooting guide for accessing internal resources. It contains no live credentials, regulated data, or other clearly sensitive category content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 191,
+ "input_hash": "19975509e9977a4cbf8f54165bef4026da4c1f9da13e5d6dbfc07a2a51579c9f",
+ "latency_ms": 2631.8915410665795,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5189,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Inventive concept: combine a low-cost sensor with a learned correction model so the battery pack can self-calibrate in the field.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"Prior art search found no reference that teaches on-device correction without a reference standard.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"add three dependent claims.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document contains non-public patent working notes describing an inventive concept and draft claim activity, which clearly fits Intellectual Property. It is sensitive non-public research/legal drafting material, but does not clearly reveal trade-secret process parameters or other Highly Confidential categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

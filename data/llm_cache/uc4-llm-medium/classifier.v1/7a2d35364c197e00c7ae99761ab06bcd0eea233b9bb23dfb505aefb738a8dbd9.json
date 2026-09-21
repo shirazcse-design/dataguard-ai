@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 125,
+ "input_hash": "7a2d35364c197e00c7ae99761ab06bcd0eea233b9bb23dfb505aefb738a8dbd9",
+ "latency_ms": 1644.1177079686895,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5214,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def blended_rate(base, volume, tier_thresholds, tier_discounts):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"def projected_revenue(base, volumes, tiers, discounts):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public source code implementing internal pricing or revenue-related logic. Non-public source code is Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

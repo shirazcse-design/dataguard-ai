@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 206,
+ "input_hash": "c23531cca84061a69a119f5ed0cd8485013ade8a0c8e0a4f8133e4dccb8f92b4",
+ "latency_ms": 2497.4459579680115,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5213,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The team has developed a new way to bond clinical analytics components without heat, using a two-layer adhesive that self-aligns under light pressure.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"We will file a patent on the general method in December.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The layer thicknesses and the surface treatment before bonding stay out of the filing, because they are what make the bond hold and would be easy for a competitor to copy.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention and explicitly identifies secret process details that derive value from secrecy and competitive advantage. Trade Secret raises the overall level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

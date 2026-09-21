@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 202,
+ "input_hash": "ad001077e67703eb204daab038744de4ee4578dfdbba5170786c200f585e7362",
+ "latency_ms": 2366.7772919870913,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5242,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"5555-5504-1705-2687\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"3782-820872-91520\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Nikhil Iwasaki,5555-5504-1705-2687,09/29,774,766 Foundry Street, Pittsburgh,nikhil.iwasaki@freemail.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and CVVs, which are Financial / PCI data and require the highest sensitivity. It also includes named individuals with personal email and billing address details, which are PII.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

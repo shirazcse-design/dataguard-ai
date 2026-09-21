@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 148,
+ "input_hash": "c42b6eabb346ede524e8b148aa2d41605cd854f519dca4e34756755d0a290bd5",
+ "latency_ms": 2003.1689170282334,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"Meadow#Cinder64\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"Harbor#Lantern75\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"Quartz*Falcon82\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking account passwords for service and portal logins, which are credentials/secrets and require the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

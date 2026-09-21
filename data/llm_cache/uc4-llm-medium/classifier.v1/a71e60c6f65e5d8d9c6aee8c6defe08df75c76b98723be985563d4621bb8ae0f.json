@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "a71e60c6f65e5d8d9c6aee8c6defe08df75c76b98723be985563d4621bb8ae0f",
+ "latency_ms": 1752.1758750081062,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Theo Ashworth has been managing moderate persistent asthma for several years but has struggled to keep to the treatment plan since starting shift work.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"At the last review the patient described missing doses and feeling low, and we agreed to adjust the regimen and involve a counsellor.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical narrative describing a named person's condition, treatment adherence, and care plan, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

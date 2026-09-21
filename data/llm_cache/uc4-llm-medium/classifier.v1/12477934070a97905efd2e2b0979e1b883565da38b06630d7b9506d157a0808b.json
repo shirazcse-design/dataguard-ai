@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "12477934070a97905efd2e2b0979e1b883565da38b06630d7b9506d157a0808b",
+ "latency_ms": 2044.2462919745594,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5168,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Santiago Larsen is returning to work after treatment for stage 3 chronic kidney disease.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 9 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is individually identifiable health information describing a named person's medical condition and treatment-related work restrictions. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

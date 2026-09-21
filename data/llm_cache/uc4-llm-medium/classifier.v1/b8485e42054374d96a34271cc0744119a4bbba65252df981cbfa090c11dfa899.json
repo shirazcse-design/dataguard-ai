@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 176,
+ "input_hash": "b8485e42054374d96a34271cc0744119a4bbba65252df981cbfa090c11dfa899",
+ "latency_ms": 2318.7691249186173,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Bruno Zhang, DOB 1994-12-01\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Dx: M54.5 - low back pain. Rx: atorvastatin 20 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Patient reports worsening symptoms since last visit.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable medical progress note containing a named individual, date of birth, diagnosis, medication, and symptom information. PHI is present, and the DOB also makes PII clearly applicable, so the level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

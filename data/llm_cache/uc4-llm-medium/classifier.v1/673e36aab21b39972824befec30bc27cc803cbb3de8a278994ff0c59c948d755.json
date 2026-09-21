@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "673e36aab21b39972824befec30bc27cc803cbb3de8a278994ff0c59c948d755",
+ "latency_ms": 2726.684540975839,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:37:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Reps may discount up to 11.6% without approval. Between 22.9% and the hard floor, approval from the regional head is required, and we never go below the floor even for strategic logos.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"If a competitor quotes lower, lead with support quality and multi-year terms rather than price.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is non-public pricing guidance and negotiation strategy, including discount thresholds and a pricing floor, whose value derives from secrecy. External disclosure could materially weaken the organization's negotiating position.\",\"level_confidence\":\"high\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

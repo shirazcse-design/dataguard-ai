@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 66,
+ "input_hash": "0ada369b45bbbcdfd91e2a72a6bcef2c47016b764d108a791224a780615b7472",
+ "latency_ms": 1555.551000055857,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5235,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an employee-facing IT setup guide for accessing internal systems. It contains ordinary business instructions and no clearly applicable sensitive data category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

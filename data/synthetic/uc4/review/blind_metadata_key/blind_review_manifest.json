@@ -1,0 +1,43 @@
+{
+  "adjudication_artifacts_sha256": {
+    "review/adjudication_decisions.yaml": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+    "review/adjudication_sheet.csv": "d5d51c68dd04a4e82ea9b2885d801c0409f3b25ba51c8094a9a729431e17f880",
+    "review/adjudication_sheet.meta.json": "d0614953e4feddfe8e4a5daba7162969f0dca95d41dbdf8e3232db6ce4ff26f7"
+  },
+  "controls_per_level": 3,
+  "dataset_banner": "AI-generated synthetic dataset \u2014 pending human gold-label review",
+  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "decisions_file": "review/adjudication_decisions.yaml",
+  "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+  "disputed_families": [
+    "amb_customer_case_study_draft",
+    "hn_business_case_study",
+    "hn_public_api_docs_placeholder_keys",
+    "phi_prescription_record"
+  ],
+  "git_branch": "uc4/blind-review-metadata-variant",
+  "git_commit": "b7e94ac130fa929df90fd1599023256c163eba57",
+  "git_dirty": true,
+  "key_sha256": "030722ba64178c1ac55037da2f8f20fac7c89b1a05101460bd95ec855b6f26a4",
+  "labels_changed": false,
+  "leak_check": "passed",
+  "locked_test_split_read": false,
+  "n_controls": 12,
+  "n_disputed": 21,
+  "n_items": 33,
+  "order_seed": "uc4-blind-review-v1-metadata-order",
+  "purpose": "blind human review WITH source metadata shown; same items as the content-only package, different order; reviewer must not open this directory",
+  "reviewer_files_sha256": {
+    "review/blind_metadata/blind_review_metadata_packet.md": "de8478bd6983e069b0bc8e31d36af401592fdc88ceca88d8dcc8a6fd75d58b37",
+    "review/blind_metadata/blind_review_metadata_sheet.csv": "c8d702010b730e9a32a4f2f5a9fe23a1c95e0b74df97da2e684a79dbea295cda"
+  },
+  "seed": "uc4-blind-review-v1",
+  "shows_metadata": true,
+  "splits_loaded": [
+    "train",
+    "calibration",
+    "dev"
+  ],
+  "taxonomy_version": "1.0.0",
+  "variant": "metadata"
+}

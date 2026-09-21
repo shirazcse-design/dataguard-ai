@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "2e68a274e7d1f650597b9e4d0f49a346e14fde6e9f8fa48c4a7fcb730b407212",
+ "latency_ms": 2264.864791999571,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"our original method for onboarding field engineers: a four-week apprenticeship with paired shifts, a competency map and a graded practical exam\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The map, exam questions and coaching scripts were written by our own trainers and have not been shared outside the company.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft describing an original internally created training method and related materials, which fits Intellectual Property. External disclosure could harm the organization, but the content does not clearly rise to trade secret or other highly confidential categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

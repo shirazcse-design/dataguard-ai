@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 186,
+ "input_hash": "6dbc95e6a3809218fea5233c0b0b32dc58973225c4475ce381996f79b42cfd24",
+ "latency_ms": 3579.3823749991134,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5203,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Greta Kowalski   DOB: 12/08/1990   MRN-8299862\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Assessment: N18.3 - chronic kidney disease stage 3\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Plan: continue amlodipine 5 mg; recheck labs in 12 weeks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical visit note containing diagnosis and treatment information, along with direct personal identifiers including date of birth. PHI applies, and PII also applies because identifiers beyond a name are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}
