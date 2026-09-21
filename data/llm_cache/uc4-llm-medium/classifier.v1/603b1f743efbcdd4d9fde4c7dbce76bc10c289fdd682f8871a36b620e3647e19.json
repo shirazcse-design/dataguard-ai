@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 146,
+ "input_hash": "603b1f743efbcdd4d9fde4c7dbce76bc10c289fdd682f8871a36b620e3647e19",
+ "latency_ms": 2247.725166962482,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5169,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient Nadia Underwood attended Summit Cardiology on 2025-11-18.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Diagnosis: M06.9 - rheumatoid arthritis; started on atorvastatin 20 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information: a named patient, provider visit, diagnosis, and prescribed medication. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

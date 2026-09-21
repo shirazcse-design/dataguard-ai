@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 161,
+ "input_hash": "984ac76ef06ed0f52ee1a8f47a05cc815713b1d2dd372e3fd21542cb0160df69",
+ "latency_ms": 3685.554917086847,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5219,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Customer: Olivia Abernathy, 457 Cedar Lane, Seattle, phone (276) 555-0115\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Customer: Emeka Novak, 157 Lakeview Boulevard, Munich, phone (243) 555-0197\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains named individuals' home addresses and phone numbers in customer support tickets, which clearly qualifies as PII. External disclosure could harm individuals and the organization, but no higher-floor regulated data is clearly present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

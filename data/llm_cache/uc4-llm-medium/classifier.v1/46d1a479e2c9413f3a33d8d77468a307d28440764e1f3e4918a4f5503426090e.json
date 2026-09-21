@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 155,
+ "input_hash": "46d1a479e2c9413f3a33d8d77468a307d28440764e1f3e4918a4f5503426090e",
+ "latency_ms": 2165.813500061631,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"if customer.tier == \\\"enterprise\\\" and volume > threshold:\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"price = base * (1 - enterprise_discount(volume))\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"Also the enterprise branch never applies the regional adjustment.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document contains non-public code and code-review commentary about pricing-rule logic, which clearly fits Source Code. External disclosure could expose internal implementation details, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

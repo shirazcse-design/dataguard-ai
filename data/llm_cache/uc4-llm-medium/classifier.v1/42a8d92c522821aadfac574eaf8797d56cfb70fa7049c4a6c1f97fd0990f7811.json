@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "42a8d92c522821aadfac574eaf8797d56cfb70fa7049c4a6c1f97fd0990f7811",
+ "latency_ms": 2099.7250829823315,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5163,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"REDIS_URL=redis://:Meadow!Willow29@billing-24.corp.example:6379\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"SERVICE_TOKEN=dgtok_61fcc72bbdc66a948a54542ffb661f1e\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication material: an embedded Redis password in a connection string and a service token. Credentials / Secrets has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

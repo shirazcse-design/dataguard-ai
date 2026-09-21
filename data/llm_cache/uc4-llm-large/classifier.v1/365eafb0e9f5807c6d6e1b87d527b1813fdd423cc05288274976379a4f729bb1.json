@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 616,
+ "input_hash": "365eafb0e9f5807c6d6e1b87d527b1813fdd423cc05288274976379a4f729bb1",
+ "latency_ms": 242363.88158297632,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:34:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Our new approach to precision components separates the mixture with a membrane whose pores are shaped by the process itself, a concept not seen in published work.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The membrane casting conditions we settled on after 23 experiments are our know-how, and will be run as a trade secret rather than disclosed.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"This is a non-public invention note describing a novel method and planned patent disclosure, so Intellectual Property clearly applies. It also explicitly identifies undisclosed process conditions as valuable know-how to be kept secret, making it Trade Secret and therefore Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

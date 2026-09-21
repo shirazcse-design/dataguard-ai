@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 153,
+ "input_hash": "54a0e8f3f43aa28304fa7786ecdf68412637000dccb7f9b6bdfef139397b269d",
+ "latency_ms": 2120.3099170234054,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"We propose to withdraw from DACH by the end of 2026 and redeploy the budget to expand direct sales in ANZ.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"This will not be announced until partner discussions are complete.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document describes a non-public regional strategic shift and partner-related discussions whose disclosure could cause significant competitive and business harm. This clearly fits non-public corporate strategy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

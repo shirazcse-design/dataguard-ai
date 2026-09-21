@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 190,
+ "input_hash": "3bf0afc5e430faad63c6e31726a5971f61d179965ae94648be1cc84ea4f3068d",
+ "latency_ms": 2438.700374914333,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5179,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Deepwell Retail,024076104,857849563956,$36,036\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Stonebridge Analytics,044875990,80973221037,$1,616\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Alderbrook Mobility,550681034,10483817660,$19,092\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank routing and account numbers in an ACH payment batch, which clearly meets the Financial / PCI category. That category has a Highly Confidential floor due to the risk of financial harm from disclosure.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

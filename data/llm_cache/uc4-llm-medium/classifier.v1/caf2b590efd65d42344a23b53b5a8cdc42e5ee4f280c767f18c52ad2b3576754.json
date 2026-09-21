@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "caf2b590efd65d42344a23b53b5a8cdc42e5ee4f280c767f18c52ad2b3576754",
+ "latency_ms": 2383.949042065069,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:23+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The new warehouse robot replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"it is a departure from anything in our current or competing products.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document describes a non-public product concept and novel design approach, which clearly fits Intellectual Property. External disclosure could harm the organization's competitive position, but it does not clearly include trade-secret parameters or other highly regulated content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

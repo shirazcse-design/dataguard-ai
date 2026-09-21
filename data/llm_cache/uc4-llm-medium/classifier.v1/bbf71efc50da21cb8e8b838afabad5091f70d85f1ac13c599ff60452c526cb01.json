@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "bbf71efc50da21cb8e8b838afabad5091f70d85f1ac13c599ff60452c526cb01",
+ "latency_ms": 2139.06324992422,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The committee reviewed a proposal to invest $34.2M for a 7.2% stake in Bellhaven Devices, a packaged foods start-up, with an option to acquire the rest within 2 years.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public investment and potential acquisition discussion reviewed by an investment committee, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

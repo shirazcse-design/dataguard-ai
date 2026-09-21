@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 72,
+ "input_hash": "bb6df6cb40da7e7c468ede02160c1fa42db9ea08f72edc22471b5de395555e3d",
+ "latency_ms": 1533.9715000009164,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary employee-facing office guidance about setting up and using a network printer, with no sensitive data categories present. It is not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

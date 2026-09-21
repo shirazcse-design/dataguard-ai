@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 205,
+ "input_hash": "2963a4129c6c8e1917b0a436082f7312ce09e6d5009f54546f83c92b53649655",
+ "latency_ms": 2354.9259999999776,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5190,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"We have come up with a scheduler that learns each job's runtime from its first few seconds and reassigns work on the fly, which we believe is new. We intend to protect the concept by patent.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The features we use for the runtime prediction and the reassignment thresholds, tuned on 24 months of production traces, are not going in the application and will remain confidential know-how.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention intended for patent protection and also discloses secret implementation know-how that derives value from remaining confidential. Trade Secret has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

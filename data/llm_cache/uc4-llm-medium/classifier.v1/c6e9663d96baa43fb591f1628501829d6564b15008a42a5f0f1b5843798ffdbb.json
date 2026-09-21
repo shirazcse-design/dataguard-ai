@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 196,
+ "input_hash": "c6e9663d96baa43fb591f1628501829d6564b15008a42a5f0f1b5843798ffdbb",
+ "latency_ms": 2298.93233301118,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5193,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Ember%Willow57\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"PAYMENTS_API_KEY=dgsk_live_LrMuLCSL2RuV1YrE4LGIaJ8F\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"SESSION_SECRET=0c92dca7f592abd905d3fa173e3b4860\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document is an environment configuration file containing live-looking authentication secrets, including a password, API key, and session secret. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

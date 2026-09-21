@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 151,
+ "input_hash": "a5e0c4353d8ddc2bebae40095ef9b153852203df084ed2b9f1e3c6835a95d015",
+ "latency_ms": 2077.171790995635,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient Bruno Espinoza attended Northgate Medical Group on 2027-01-07.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Diagnosis: I48.91 - atrial fibrillation; started on lisinopril 10 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information: a named patient, visit context, diagnosis, and prescribed medication. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

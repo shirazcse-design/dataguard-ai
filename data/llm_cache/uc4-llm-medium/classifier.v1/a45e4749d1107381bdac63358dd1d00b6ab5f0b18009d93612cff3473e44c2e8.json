@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 73,
+ "input_hash": "a45e4749d1107381bdac63358dd1d00b6ab5f0b18009d93612cff3473e44c2e8",
+ "latency_ms": 1511.786959017627,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"The document is an ordinary business receipt-style export showing only masked payment card digits and amounts. It does not contain full payment-card data or another clearly applicable sensitive category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

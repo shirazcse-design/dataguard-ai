@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "909b1f196c16cc317d308a96c117553f69b1b0363a91739e606f55b5e4d3b00a",
+ "latency_ms": 2216.268499963917,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5163,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Patient Liam Yamada attended Riverside Family Clinic on 2027-01-01.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Diagnosis: I10 - essential hypertension; started on amlodipine 5 mg.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information: a named patient, clinic visit, diagnosis, and prescribed medication. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

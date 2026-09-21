@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 70,
+ "input_hash": "fc1b1b2216877657a6f3b21a691d94e82f4b21dd0bb44ce7889c22283699fa49",
+ "latency_ms": 1636.9972079992294,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary employee-facing operational guidance about setting up an office printer, with no sensitive data categories present and no indication it is intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

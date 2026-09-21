@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "5bfb430bba8297342da478da701435fa70b4b0994f3fd2bd0cec277964135068",
+ "latency_ms": 2059.829083038494,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Tax ID: 923-24-6005\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Primary account: 495919741373 at routing 295396383\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains a named individual's government identifier and bank account/routing information in a loan application, which are regulated personal and financial data. Disclosure could cause severe personal and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

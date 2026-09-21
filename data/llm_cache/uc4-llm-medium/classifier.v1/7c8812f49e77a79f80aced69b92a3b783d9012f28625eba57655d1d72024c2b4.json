@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 121,
+ "input_hash": "7c8812f49e77a79f80aced69b92a3b783d9012f28625eba57655d1d72024c2b4",
+ "latency_ms": 1940.1672499952838,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5233,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Public Agenda\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Registration is free at www.ashgrovesoftware.example/summit. Sessions will be recorded and posted publicly.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is an event agenda clearly intended for public release, with explicit public registration and notice that sessions will be posted publicly. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

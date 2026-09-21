@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 168,
+ "input_hash": "828446674a45cda45b495eb7535c761d2be97ab3a258bc07c59b58c53a5dca22",
+ "latency_ms": 1938.1045000627637,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"REDIS_URL=redis://:Falcon#Willow40@etl-16.corp.example:6379\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"SERVICE_TOKEN=dgtok_92c02e71fc5ab22e0953555a3518c6ee\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document is a production environment file containing live-looking authentication material, including an embedded Redis password and a service token. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

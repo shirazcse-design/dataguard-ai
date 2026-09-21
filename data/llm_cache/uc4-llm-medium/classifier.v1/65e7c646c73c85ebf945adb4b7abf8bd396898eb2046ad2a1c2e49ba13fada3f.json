@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 83,
+ "input_hash": "65e7c646c73c85ebf945adb4b7abf8bd396898eb2046ad2a1c2e49ba13fada3f",
+ "latency_ms": 1612.1626660460606,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5167,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary receipt log showing only masked card numbers (last four digits), order IDs, dates, and amounts. Under the policy, masked payment-card values alone do not clearly meet the Financial / PCI category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

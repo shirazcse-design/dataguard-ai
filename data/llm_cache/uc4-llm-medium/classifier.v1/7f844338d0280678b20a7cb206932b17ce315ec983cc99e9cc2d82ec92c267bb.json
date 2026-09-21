@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 186,
+ "input_hash": "7f844338d0280678b20a7cb206932b17ce315ec983cc99e9cc2d82ec92c267bb",
+ "latency_ms": 2172.544833039865,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5226,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Management seeks the Board's approval to make an offer for Jadewater Payments.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"we expect to fund the purchase of roughly $3.9B with a mix of cash and new debt.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"The deal has not been discussed outside the executive team and our advisers.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public board-level memo about a proposed acquisition and financing, which clearly fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

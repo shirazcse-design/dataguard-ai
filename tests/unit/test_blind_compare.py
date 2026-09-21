@@ -333,7 +333,7 @@ def test_the_comparison_never_touches_the_dataset_or_the_locked_test_split(
     s = tmp_path / "s.csv"
     s.write_text(_sheet(package))
     run([s], bundle, DATA)
-    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before == b""
+    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before
 
 
 def test_the_cli_writes_only_to_the_output_directory(package, tmp_path, capsys):

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 183,
+ "input_hash": "db12d5721b565c2e53b12946c5daeb21ba30a827cbd989284a1ea64c0907c9da",
+ "latency_ms": 2557.1252919035032,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5194,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Patient: Paloma Espinoza   DOB: 06/23/1962   MRN-8790441\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Assessment: F32.1 - major depressive disorder\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Plan: continue metformin 500 mg; recheck labs in 10 weeks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinic visit note containing a patient's date of birth and medical record number along with diagnosis and treatment information. PHI is clearly present, and the additional direct identifiers also make PII applicable.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

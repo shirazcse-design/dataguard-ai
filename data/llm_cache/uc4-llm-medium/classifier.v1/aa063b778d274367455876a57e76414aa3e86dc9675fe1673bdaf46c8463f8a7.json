@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 199,
+ "input_hash": "aa063b778d274367455876a57e76414aa3e86dc9675fe1673bdaf46c8463f8a7",
+ "latency_ms": 2655.6572500849143,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Cinder#Willow22\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"PAYMENTS_API_KEY=dgsk_live_hTaBFBKy4JcIlykjeMDtnAiD\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"SESSION_SECRET=1ea006d54fce9625e8e2da4ed5560189\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document is an environment configuration file containing live-looking secrets, including a database password, API key, and session secret. Credentials / Secrets has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

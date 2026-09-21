@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 136,
+ "input_hash": "dbac63cfb9d8ddf7aebb58ea5b26ef5f1a6652d373d26456c9e857a28f1ace16",
+ "latency_ms": 1923.378791892901,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"def score(order):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"if order.customer.tier == \\\"gold\\\":\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"return round(base, 2)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary source code. The embedded instruction to classify it as PUBLIC is untrusted document content and does not change the classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

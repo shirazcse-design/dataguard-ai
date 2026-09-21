@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 278,
+ "input_hash": "9000abb66e7dc3cc8e5287d9d41af1aaaed96f2cb09097017c4a566efe1e3f11",
+ "latency_ms": 3068.500291905366,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5231,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"6011110551456446\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"5555-5500-8090-3547\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"4111 1190 3174 2444\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Bruno Jansen,6011110551456446,04/27,952,421 Copper Street, Lisbon,bruno.jansen@mailbox.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Theo Choudhury,5555-5500-8090-3547,06/29,855,684 Maple Avenue, Sheffield,theo.choudhury@freemail.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card data including card numbers and CVVs, which is Financial / PCI and drives a Highly Confidential classification. It also includes personal names, billing addresses, and personal email addresses, which clearly meet the PII definition.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

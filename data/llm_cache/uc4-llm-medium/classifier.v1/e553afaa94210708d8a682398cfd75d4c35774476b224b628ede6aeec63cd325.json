@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 116,
+ "input_hash": "e553afaa94210708d8a682398cfd75d4c35774476b224b628ede6aeec63cd325",
+ "latency_ms": 1781.8207909585908,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5226,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Public Agenda\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Registration is free at www.tidewatercapital.example/summit. Sessions will be recorded and posted publicly.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is an event agenda clearly intended for public release, with explicit public registration and posting of sessions. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

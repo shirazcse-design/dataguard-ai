@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 168,
+ "input_hash": "23106bb8b7cbfe81bd8b207241227826345720837b07fe5a5548744b4c5468f1",
+ "latency_ms": 2144.094916060567,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:13+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The committee reviewed a proposal to invest $279.2M for a 6.1% stake in Larkspur Retail, a industrial sensors start-up, with an option to acquire the rest within 3 years.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Decision deferred to the next meeting.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"These are non-public investment committee notes about a proposed strategic investment and potential acquisition, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

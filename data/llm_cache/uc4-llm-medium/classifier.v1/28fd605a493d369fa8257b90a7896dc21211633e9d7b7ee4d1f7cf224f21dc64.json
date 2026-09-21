@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 187,
+ "input_hash": "28fd605a493d369fa8257b90a7896dc21211633e9d7b7ee4d1f7cf224f21dc64",
+ "latency_ms": 2429.771250113845,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Umberton Aerospace pays about 15.6% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Mistral Holdings is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Silverpine Semiconductors has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public compiled customer and pricing intelligence, including negotiated discounting, renewal risk, and competitive posture. Disclosure could cause significant competitive harm, so Highly Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

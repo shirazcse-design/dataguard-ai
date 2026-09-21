@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 219,
+ "input_hash": "dadd5f2b05344a74467fef8135f5edb77cf619ddd7aad728ad2e56972beebc06",
+ "latency_ms": 2469.532540999353,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5191,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\",\"PII\"],\"evidence\":[{\"quote\":\"3782 827388 92023\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"6011 1128 3732 9017\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Owen Brennan,3782 827388 92023,10/29,565 Copper Street, Bristol\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Yara Ellison,6011 1128 3732 9017,06/31,120 Windmill Lane, Munich\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and associated named individuals with home shipping addresses. Payment-card data requires Highly Confidential handling, and the names plus addresses also clearly qualify as PII.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

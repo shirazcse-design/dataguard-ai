@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 169,
+ "input_hash": "561933fade9d2fa44ddfa05323860ca0b2feffbbeba6239f515cdd04e2c5c4b3",
+ "latency_ms": 2023.014000034891,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Reps may discount up to 15.3% without approval. Between 29.8% and the hard floor, approval from the regional head is required, and we never go below the floor even for strategic logos.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"If a competitor quotes lower, lead with support quality and multi-year terms rather than price.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"The document contains non-public pricing guidance and discount-floor logic that could harm the organization competitively if disclosed. This is compiled pricing intelligence consistent with Trade Secret content.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

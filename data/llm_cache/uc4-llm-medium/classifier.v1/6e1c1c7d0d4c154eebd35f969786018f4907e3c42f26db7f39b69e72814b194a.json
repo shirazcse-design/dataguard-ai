@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 158,
+ "input_hash": "6e1c1c7d0d4c154eebd35f969786018f4907e3c42f26db7f39b69e72814b194a",
+ "latency_ms": 1895.3936249017715,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The team believes an acquisition at a modest premium is achievable if we move before they open a sale process.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Advisers recommend an approach in the next 6 weeks.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public board/director pre-read discussing a potential acquisition target, timing, and deal considerations. Such unannounced M&A strategy could cause severe competitive and financial harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

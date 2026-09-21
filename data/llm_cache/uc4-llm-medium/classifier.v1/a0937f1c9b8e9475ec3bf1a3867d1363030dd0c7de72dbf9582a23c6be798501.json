@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 79,
+ "input_hash": "a0937f1c9b8e9475ec3bf1a3867d1363030dd0c7de72dbf9582a23c6be798501",
+ "latency_ms": 1532.297333003953,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:08+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an internal draft policy about hybrid work expectations and stipend changes. It is non-public business information, but it does not contain regulated data, credentials, source code, or strategically critical content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

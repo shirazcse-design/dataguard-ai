@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 188,
+ "input_hash": "61d06474b3012b640e190a12c572e7874239e23dc2840d05b690f05407c7d1e1",
+ "latency_ms": 2148.9853330422193,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:38:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Pinecrest Payments pays about 26.7% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Ravenscar Payments is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Zephyra Capital has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public compiled customer and pricing intelligence, including negotiated discounts, renewal risk, and competitive account posture. That fits Trade Secret under the policy, making the appropriate level Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

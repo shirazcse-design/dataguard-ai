@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "9f2b1b3f908f1f75ae347e3b64b5ba1c1ed06b4cf58c616fb11d98f1ade93bfa",
+ "latency_ms": 1898.174166912213,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5155,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:13+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Thank you for referring Paloma Calloway.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"the patient has poorly controlled moderate persistent asthma and reports new side effects. I have started a change in medication\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable clinical narrative linking a named individual to diagnosis and treatment information, which is PHI. PHI has a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

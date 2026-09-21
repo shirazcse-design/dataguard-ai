@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 178,
+ "input_hash": "c6b38db7487974d862873150dfd27a4dfcc09ac1d88be7e8700fd5f85bbcfad4",
+ "latency_ms": 2203.5995420301333,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5204,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"5555-5507-4665-8808\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"5555 5513 2200 7451\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Billing contact: Jasmine Nakamura, 651 Lakeview Boulevard, Calgary, jasmine.nakamura@postbox.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and personal contact details. Full PAN data makes it Highly Confidential, and the billing contact information clearly meets the PII definition.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

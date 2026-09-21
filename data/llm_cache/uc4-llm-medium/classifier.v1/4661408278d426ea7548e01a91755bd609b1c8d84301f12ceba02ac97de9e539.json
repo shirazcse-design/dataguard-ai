@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 165,
+ "input_hash": "4661408278d426ea7548e01a91755bd609b1c8d84301f12ceba02ac97de9e539",
+ "latency_ms": 2506.0081670526415,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:34:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"a concept not seen in published work. We will describe the concept in the patent application.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The membrane casting conditions we settled on after 53 experiments are our know-how, and will be run as a trade secret rather than disclosed.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention concept and also identifies secret process know-how retained from disclosure. Trade Secret has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

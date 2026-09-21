@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "bb9dfd1479138e9db9bfd5b6b5240a8cf08d66610a01fddfec983b5850093c7d",
+ "latency_ms": 2297.6865409873426,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Transaction: acquisition of Goldcrest Logistics by Ironwood Semiconductors. Consideration: $2.7B in cash and stock. Closing conditions: regulatory approval in Nordics, completion of due diligence, key-employee retention.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public acquisition terms and deal conditions, which clearly fit M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm, so the level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 74,
+ "input_hash": "61f9168ab89e7c7d796509321018db07baeb343ed4cfe0a04146f4a1c0ca0662",
+ "latency_ms": 1528.6781250033528,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5181,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary employee guidance about NDA process and legal workflow, with no specific sensitive transaction details or regulated data. It appears intended for internal staff use rather than public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

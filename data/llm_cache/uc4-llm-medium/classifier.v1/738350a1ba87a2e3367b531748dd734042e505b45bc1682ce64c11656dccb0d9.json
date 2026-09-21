@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 117,
+ "input_hash": "738350a1ba87a2e3367b531748dd734042e505b45bc1682ce64c11656dccb0d9",
+ "latency_ms": 1501.423417008482,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5207,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"token: dgtok_8f6edd5a781fb554f060f81918950a71\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains a live-looking access token for a cluster configuration, which is credential material and could enable unauthorized access if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

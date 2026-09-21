@@ -34,6 +34,7 @@ from evals.classification.blind_review import (
 )
 from evals.classification.dataset.build import DEFAULT_DATA_DIR, load_documents
 from evals.classification.gold_review import REVIEW_SPLITS
+from tests.helpers import only_explicit_locked_runs
 
 DATA = Path(DEFAULT_DATA_DIR)
 API = "hn_public_api_docs_placeholder_keys"
@@ -168,7 +169,7 @@ def test_the_committed_variant_package_is_in_sync_and_pinned(bundle):
         committed["dataset_sha256"]
         == json.loads((DATA / "manifest.json").read_text())["dataset_sha256"]
     )
-    assert Path(DATA, "locked_test_access.jsonl").stat().st_size == 0
+    only_explicit_locked_runs(DATA)
 
 
 def test_both_keys_carry_the_same_gold_for_the_same_samples(mpkg, cpkg):
@@ -319,6 +320,6 @@ def test_the_metadata_comparison_never_touches_the_locked_test_split(mpkg, bundl
     s = tmp_path / "m.csv"
     s.write_text(_sheet(mpkg))
     run([s], bundle, DATA, METADATA)
-    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before == b""
+    assert Path(DATA, "locked_test_access.jsonl").read_bytes() == before
     rows = compare(mpkg, read_reviewer(s.read_text(), mpkg, bundle))
     assert len(rows) == 33

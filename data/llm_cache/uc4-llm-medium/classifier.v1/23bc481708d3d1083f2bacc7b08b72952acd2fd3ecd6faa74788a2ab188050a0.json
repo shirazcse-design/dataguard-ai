@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "23bc481708d3d1083f2bacc7b08b72952acd2fd3ecd6faa74788a2ab188050a0",
+ "latency_ms": 1924.9882500153035,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The committee reviewed a proposal to invest $193.3M for a 12.4% stake in Marlowe Labs, a clinical analytics start-up, with an option to acquire the rest within 2 years.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public investment and potential acquisition deliberations by an investment committee, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

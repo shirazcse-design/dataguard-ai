@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 73,
+ "input_hash": "87868597fdead94c2c541349ac826998162ad00ec29246bca0fb5dfd8161c5b2",
+ "latency_ms": 1378.0914159724489,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5165,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal shipment tracking report with route and scheduling information. The long numbers appear in a logistics context and are not clearly payment-card or other regulated data.\",\"level_confidence\":\"medium\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

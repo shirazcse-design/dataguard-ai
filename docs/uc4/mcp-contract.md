@@ -74,12 +74,14 @@ Computed from a real run in `results/service-baseline.md` (see that file for the
 |---|---|
 | The result schema is versioned | Met (v1.0 frozen, drift check in CI) |
 | Failure semantics are documented | Met (`result-schema.md`; the Phase 7 failure matrix) |
-| **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration, and the locked test split has never been evaluated |
+| **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration. The single locked-test evaluation (2026-09-21) confirms the pattern: level macro-F1 0.884, lower bound 0.758, so the gate still fails on the lower bound |
 | Approval to build MCP | Given (2026-09-20) |
 
-**Therefore: the adapter exists but is not release-ready.** Still to do before it could be: (1) an
-audited, report-only confirmation of the frozen configuration on data that did not choose it (the
-locked test split, or a newly recorded split) and (2) human review of the gold labels.
+**Therefore: the adapter exists but is not release-ready.** Of the two remaining conditions, (1) the
+audited, report-only confirmation on data that did not choose the configuration is **done**
+(2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)); it did not pass the
+level-F1 lower bound (0.758 against 0.85). (2) Human review of the gold labels is **still not satisfied**:
+the sheet designated as the human review is identical to an AI sheet.
 
 ## As implemented
 

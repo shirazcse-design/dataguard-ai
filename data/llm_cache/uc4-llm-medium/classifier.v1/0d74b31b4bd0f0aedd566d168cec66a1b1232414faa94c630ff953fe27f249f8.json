@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "0d74b31b4bd0f0aedd566d168cec66a1b1232414faa94c630ff953fe27f249f8",
+ "latency_ms": 1934.4904170138761,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:22:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"DRAFT - not yet announced\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Proposed hybrid working policy.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"Feedback from department heads is requested before the announcement.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft internal policy pending announcement, so external disclosure could plausibly harm the organization or create confusion. It contains no clearly regulated data or other category-specific sensitive content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

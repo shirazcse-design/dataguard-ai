@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 72,
+ "input_hash": "a96be6fc89b8217ea81b5ad7d67a7ede7f675dafbbe2a8339c64957765b80cb2",
+ "latency_ms": 1783.3683750359342,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5172,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"The document is an internal order receipt export showing only masked payment-card digits and transaction amounts. It does not contain full card numbers or another clearly applicable sensitive category.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

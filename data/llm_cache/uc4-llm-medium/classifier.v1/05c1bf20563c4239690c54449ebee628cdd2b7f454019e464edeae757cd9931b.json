@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 151,
+ "input_hash": "05c1bf20563c4239690c54449ebee628cdd2b7f454019e464edeae757cd9931b",
+ "latency_ms": 1903.8279170636088,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:20:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Gwendolyn Halvorsen is returning to work after treatment for gastroesophageal reflux disease.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"The specialist advises a phased return, avoidance of night shifts for 9 weeks, and regular breaks.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This document contains individually identifiable health information about a named employee, including a diagnosis/treatment context and work restrictions. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

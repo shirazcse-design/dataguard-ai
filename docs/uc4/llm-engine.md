@@ -156,7 +156,7 @@ documents per deployment), 4,000 output-token cap, records committed under `data
 * One sample per document; two tiers have no temperature.
 * Rules were developed against dev; the LLM prompt was not tuned on dev, but the prompt does encode
   the labeling guidelines.
-* The locked test split has never been evaluated.
+* The locked test split was evaluated once on 2026-09-21, for the frozen hybrid only ([`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)); the LLM tiers were not evaluated on it on their own.
 
 ## What was NOT done, and why
 

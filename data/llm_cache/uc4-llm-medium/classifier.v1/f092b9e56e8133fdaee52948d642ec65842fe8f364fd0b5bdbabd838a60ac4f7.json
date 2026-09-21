@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 139,
+ "input_hash": "f092b9e56e8133fdaee52948d642ec65842fe8f364fd0b5bdbabd838a60ac4f7",
+ "latency_ms": 1989.9686250137165,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5219,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"import math\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"def blended_rate(base, volume, tier_thresholds, tier_discounts):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"def projected_revenue(base, volumes, tiers, discounts):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public Python source code implementing internal business logic. No live credentials or other regulated data are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

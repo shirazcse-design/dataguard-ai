@@ -36,6 +36,7 @@
 | [`hybrid-plan.md`](hybrid-plan.md) | Pre-registered Hybrid routing plan (written before any router code) |
 | [`hybrid-engine.md`](hybrid-engine.md) | Hybrid architecture, findings, recommendation, what was not done |
 | [`results/hybrid-baseline.md`](results/hybrid-baseline.md) | Generated Hybrid results: all variants, gates, fault injection (dev, replayed) |
+| [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md) | The single audited locked-test evaluation of the frozen hybrid (report-only): level F1 0.884 [0.758, 0.980], category 0.997, high-risk recall 1.000 |
 | [`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md) | Out-of-sample check of the frozen hybrid on the calibration split (live, recorded); high-risk recall 0.891, all misses in one ambiguous family |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
 

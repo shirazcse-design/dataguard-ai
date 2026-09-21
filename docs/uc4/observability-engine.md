@@ -111,7 +111,7 @@ numbers vary by machine and are not part of the generated (reproducible) report.
 | Dashboards (DG-018) | A static, script-free HTML page over the derived metrics is built (`observability/dashboard.py`, tested for escaping and no document text). A shared live dashboard remains platform work |
 | Service surface, frozen result schema, MCP contract | Phase 8 |
 | Real-service failure behaviour (rates, latency under load) | Unmeasured; the suite uses a local fake |
-| Locked-test evaluation | Not authorised; never used |
+| Locked-test evaluation | Done once for the frozen hybrid on 2026-09-21 ([`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)) |
 
 ## Use
 

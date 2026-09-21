@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 182,
+ "input_hash": "32812e3e9aa877591fff571fd000f9e784dce4970355b505301c9542217a328b",
+ "latency_ms": 2294.04200008139,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5166,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\",\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"Our new compression scheme predicts each block from a learned dictionary that is updated as data streams in, something the literature has not described.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The dictionary update rule and the pruning schedule we use in production are tuned over 17 months of data and are not part of any filing; they stay internal.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public novel method and also discloses internal production know-how that derives value from secrecy. Trade Secret applies and sets the level to Highly Confidential; Intellectual Property also clearly applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

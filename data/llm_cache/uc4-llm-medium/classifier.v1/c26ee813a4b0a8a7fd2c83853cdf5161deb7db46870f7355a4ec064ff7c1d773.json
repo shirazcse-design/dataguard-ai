@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 175,
+ "input_hash": "c26ee813a4b0a8a7fd2c83853cdf5161deb7db46870f7355a4ec064ff7c1d773",
+ "latency_ms": 1972.7386670419946,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5184,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Mistral Software pays about 18.2% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Highmoor Aerospace is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Flintlock Networks has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public customer pricing and negotiation intelligence that derives value from secrecy. External disclosure could cause competitive harm, making it Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

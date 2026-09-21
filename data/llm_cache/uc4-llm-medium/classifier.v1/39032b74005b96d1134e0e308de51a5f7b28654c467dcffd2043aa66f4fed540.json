@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 77,
+ "input_hash": "39032b74005b96d1134e0e308de51a5f7b28654c467dcffd2043aa66f4fed540",
+ "latency_ms": 2454.306458006613,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal market-monitoring commentary about publicly reported rumors and possible competitive implications. It contains no clearly regulated data, credentials, source code, or confirmed non-public strategic transaction information.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

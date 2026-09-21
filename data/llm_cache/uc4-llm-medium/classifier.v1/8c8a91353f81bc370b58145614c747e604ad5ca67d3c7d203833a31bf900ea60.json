@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 66,
+ "input_hash": "8c8a91353f81bc370b58145614c747e604ad5ca67d3c7d203833a31bf900ea60",
+ "latency_ms": 1633.249375037849,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5161,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal support digest with routine operational notes and no clearly regulated, strategic, credential, or personal sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

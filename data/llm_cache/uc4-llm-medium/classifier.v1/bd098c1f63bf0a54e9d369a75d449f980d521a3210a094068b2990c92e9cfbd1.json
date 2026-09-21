@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 74,
+ "input_hash": "bd098c1f63bf0a54e9d369a75d449f980d521a3210a094068b2990c92e9cfbd1",
+ "latency_ms": 1588.9079590560868,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5156,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:34:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal business expense summary with no regulated data, credentials, strategic transactions, or other clearly sensitive category content. It is not clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 165,
+ "input_hash": "04016a825e2da49151ff2c150c862c75f9527902800b21294c579c22af34cb7a",
+ "latency_ms": 2151.7794580431655,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5212,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"dgtok_0df71041a85e4209b8ae6082f35fcc3e\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"token: dgtok_0df71041a85e4209b8ae6082f35fcc3e\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document contains a live-looking access token in a cluster configuration file, which is Credentials / Secrets data. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

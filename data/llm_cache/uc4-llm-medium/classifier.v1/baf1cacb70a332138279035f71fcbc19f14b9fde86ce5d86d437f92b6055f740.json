@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "baf1cacb70a332138279035f71fcbc19f14b9fde86ce5d86d437f92b6055f740",
+ "latency_ms": 2094.4402079330757,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"public class InvoiceCalculator\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"public decimal Total(decimal net, string region)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"return net + net * _taxes.RateFor(region);\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary source code. Non-public source code is classified as Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

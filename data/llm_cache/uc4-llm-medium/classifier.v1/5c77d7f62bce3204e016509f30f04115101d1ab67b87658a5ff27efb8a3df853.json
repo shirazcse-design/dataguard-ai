@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 162,
+ "input_hash": "5c77d7f62bce3204e016509f30f04115101d1ab67b87658a5ff27efb8a3df853",
+ "latency_ms": 2297.9445840464905,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5207,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"dgtok_d9dc9732b2bd4ccd35f9dc28d81649dc\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"token: dgtok_d9dc9732b2bd4ccd35f9dc28d81649dc\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document contains a live-looking access token for a deploy bot, which is Credentials / Secrets data. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

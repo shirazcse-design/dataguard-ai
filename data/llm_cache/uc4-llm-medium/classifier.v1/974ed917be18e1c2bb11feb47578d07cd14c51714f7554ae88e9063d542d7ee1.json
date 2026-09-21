@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 158,
+ "input_hash": "974ed917be18e1c2bb11feb47578d07cd14c51714f7554ae88e9063d542d7ee1",
+ "latency_ms": 2248.6540839308873,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The new sensor module replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"it is a departure from anything in our current or competing products.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document describes a non-public product design concept and potential novel technical approach, which fits Intellectual Property. External disclosure could harm the organization competitively, but it does not clearly include trade-secret parameters or other highly regulated content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

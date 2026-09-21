@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 109,
+ "input_hash": "8a56fd3d248f02d83ddedc456116fd64dbab5bcd9cb8f7de65584cd5ea15d310",
+ "latency_ms": 1425.1920419046655,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5190,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"public class InvoiceCalculator\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"public decimal Total(decimal net, string region)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public source code for an internal software component. Non-public source code is Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

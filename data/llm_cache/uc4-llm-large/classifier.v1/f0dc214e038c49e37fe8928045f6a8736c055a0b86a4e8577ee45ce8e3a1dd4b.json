@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 418,
+ "input_hash": "f0dc214e038c49e37fe8928045f6a8736c055a0b86a4e8577ee45ce8e3a1dd4b",
+ "latency_ms": 203787.13820804842,
+ "model_id": "uc4-llm-large",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:37:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "uc4-llm-large",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\",\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Our new approach to logistics software separates the mixture with a membrane whose pores are shaped by the process itself, a concept not seen in published work. We will describe the concept in the patent application.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"The membrane casting conditions we settled on after 53 experiments are our know-how, and will be run as a trade secret rather than disclosed.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes a non-public invention intended for a patent application and separately identifies secret process know-how. Trade Secret content sets the level to Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

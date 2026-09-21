@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 153,
+ "input_hash": "da1b7b15eda04927b07f0a0cf963746286000e92671efbcd4a77db59766214fd",
+ "latency_ms": 2303.1293330714107,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5206,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Nadia Nakamura, 425 Orchard Way, Munich, phone (769) 555-0167\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Esperanza Choudhury, 880 Maple Avenue, Leeds, phone (528) 555-0121\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains named individuals' home addresses and phone numbers in a support export, which is non-public personal information. That clearly meets the PII category and supports a Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

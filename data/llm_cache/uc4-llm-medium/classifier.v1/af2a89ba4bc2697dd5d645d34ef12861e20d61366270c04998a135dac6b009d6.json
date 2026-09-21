@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 175,
+ "input_hash": "af2a89ba4bc2697dd5d645d34ef12861e20d61366270c04998a135dac6b009d6",
+ "latency_ms": 2043.3550419984385,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Applicant: Quentin Wojcik    Tax ID: 996-11-3600\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Primary account: 19949317964 at routing 961676528\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Requested amount: $23,965\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document contains a named individual's government identifier and bank account/routing information in a loan application, which are regulated personal and financial data. Disclosure could cause severe personal and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

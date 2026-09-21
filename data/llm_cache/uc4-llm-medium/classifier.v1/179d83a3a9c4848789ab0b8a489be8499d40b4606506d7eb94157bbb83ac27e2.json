@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 120,
+ "input_hash": "179d83a3a9c4848789ab0b8a489be8499d40b4606506d7eb94157bbb83ac27e2",
+ "latency_ms": 2039.6030000410974,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5222,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Kingfisher Systems Customer Summit - Minneapolis - Public Agenda\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Registration is free at www.kingfishersystems.example/summit. Sessions will be recorded and posted publicly.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a public event agenda with explicit indications of public availability and posting. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

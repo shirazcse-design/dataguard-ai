@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "874078b330ae55409cc9810360b7483846fa461153db14cc03c2615dc678037a",
+ "latency_ms": 2041.9827499426901,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Transaction: acquisition of Westerly Biosciences by Silverpine Devices. Consideration: $3.9B in cash and stock. Closing conditions: regulatory approval in LATAM, completion of due diligence, key-employee retention.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public acquisition terms and deal details, which clearly fit M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm, so the level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

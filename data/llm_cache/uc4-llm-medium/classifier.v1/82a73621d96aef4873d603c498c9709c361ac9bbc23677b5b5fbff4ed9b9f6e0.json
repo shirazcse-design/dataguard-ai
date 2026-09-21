@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 129,
+ "input_hash": "82a73621d96aef4873d603c498c9709c361ac9bbc23677b5b5fbff4ed9b9f6e0",
+ "latency_ms": 1776.722582988441,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5170,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"The dictionary update rule and the pruning schedule we use in production are tuned over 30 months of data and are not part of any filing; they stay internal.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document describes non-public proprietary algorithm logic and production tuning that derives value from secrecy, which fits Trade Secret. Disclosure could cause severe competitive harm, so Highly Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

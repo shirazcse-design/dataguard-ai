@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 183,
+ "input_hash": "5395898dc430f3eceb4340b69743cd397fbda5332569feb3a91af9ce0ac7e762",
+ "latency_ms": 2176.9787090597674,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5208,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"3782 821790 71897\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"4111 1184 8567 2339\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Amara Quintero, 458 Windmill Lane, Austin, amara.quintero@freemail.example\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains full payment card numbers and expiration dates, which are Financial / PCI data and require the highest sensitivity. It also includes personal contact details for a named individual, so PII clearly applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

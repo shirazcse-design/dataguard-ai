@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 92,
+ "input_hash": "17a743d34811221425b57cdb98809018cd2886ea69de3d48e0e3f74845a8a408",
+ "latency_ms": 1593.8293340150267,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5193,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"On the support page of our public website.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is customer-facing help-center content about product support, manuals, warranty, and contacting support, with an explicit indication that materials are on the public website.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

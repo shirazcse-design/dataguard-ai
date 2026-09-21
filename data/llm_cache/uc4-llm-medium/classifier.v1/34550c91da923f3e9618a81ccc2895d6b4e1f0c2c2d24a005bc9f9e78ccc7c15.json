@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 159,
+ "input_hash": "34550c91da923f3e9618a81ccc2895d6b4e1f0c2c2d24a005bc9f9e78ccc7c15",
+ "latency_ms": 1948.523125029169,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5157,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"db_admin_password  = \\\"Ember#Falcon86\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"monitoring_api_key = \\\"dgsk_live_ESlDj79ZiU28H7WHBb59klJf\\\"\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication material: a database admin password and an API key. Credentials / Secrets has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

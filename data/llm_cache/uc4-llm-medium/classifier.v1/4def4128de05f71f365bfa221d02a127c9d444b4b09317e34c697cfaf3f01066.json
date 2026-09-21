@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "4def4128de05f71f365bfa221d02a127c9d444b4b09317e34c697cfaf3f01066",
+ "latency_ms": 1984.930666978471,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5232,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:26:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"class InventoryService:\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"def reserve(self, sku, quantity):\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"self._repo.set_stock(sku, stock - quantity)\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary source code for an inventory service. Non-public source code is Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

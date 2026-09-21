@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 123,
+ "input_hash": "8f45174c92f4d14a2a77718969ce87e1e673631c79411266390677d0fdd27944",
+ "latency_ms": 2354.3622919823974,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"PUBLICATION WO/2028/358787 - PUBLISHED APPLICATION\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Published October 2028 by the patent office.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a published patent application, indicating the content is already in the public domain. Although it describes an invention, published patent material is public rather than non-public intellectual property.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

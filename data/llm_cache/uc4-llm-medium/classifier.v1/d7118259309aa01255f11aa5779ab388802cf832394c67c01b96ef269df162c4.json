@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 77,
+ "input_hash": "d7118259309aa01255f11aa5779ab388802cf832394c67c01b96ef269df162c4",
+ "latency_ms": 1326.5232919948176,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5194,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:28:06+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is general employee training guidance about how to handle confidential deal information, not actual non-public deal details or other regulated data. It appears to be ordinary internal business content intended for staff.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

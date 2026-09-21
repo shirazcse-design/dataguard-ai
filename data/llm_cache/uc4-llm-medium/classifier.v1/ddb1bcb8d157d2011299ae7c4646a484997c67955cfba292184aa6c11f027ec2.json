@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 124,
+ "input_hash": "ddb1bcb8d157d2011299ae7c4646a484997c67955cfba292184aa6c11f027ec2",
+ "latency_ms": 1838.145666057244,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5192,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"On the support page of our public website.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"All devices include a 2-year limited warranty; see the terms online.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is customer-facing help-center content describing product support, manuals, warranty, and contact options, with indications it is available on the public website. It contains no sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

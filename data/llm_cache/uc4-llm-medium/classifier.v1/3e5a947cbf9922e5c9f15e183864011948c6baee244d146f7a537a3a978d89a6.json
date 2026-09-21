@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 143,
+ "input_hash": "3e5a947cbf9922e5c9f15e183864011948c6baee244d146f7a537a3a978d89a6",
+ "latency_ms": 2367.958415998146,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Trade press reports that Cinderpoint Analytics may be exploring a sale, and analysts think Tidewater Health could be a buyer.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"},{\"quote\":\"nothing has been confirmed by either company.\",\"supports_axis\":\"level\",\"supports_value\":\"INTERNAL\"}],\"rationale\":\"This is ordinary internal market-monitoring commentary based on trade press and analyst speculation, not clear non-public deal information or another sensitive category. It is not explicitly intended for public release, so Internal is the conservative fit.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

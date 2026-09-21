@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 190,
+ "input_hash": "efe7d52fb1a8b5ea998d6877df1320f3caa725746181fdc53075e86ea20abc22",
+ "latency_ms": 2939.420917071402,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5191,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"Harrowgate Mobility pays about 30.3% less than list because of a volume commitment, and their renewal is the one to watch.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Yarrowdale Software is price-insensitive but expects a dedicated engineer.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Whitcombe Labs has a competing offer and will walk if we do not match.\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains non-public customer pricing and negotiation intelligence, including discounting, renewal risk, and competitive posture. That compiled commercial intelligence derives value from secrecy and fits Trade Secret, making the level Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

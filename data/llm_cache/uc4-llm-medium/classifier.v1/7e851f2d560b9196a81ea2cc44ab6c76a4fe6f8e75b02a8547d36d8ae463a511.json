@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "7e851f2d560b9196a81ea2cc44ab6c76a4fe6f8e75b02a8547d36d8ae463a511",
+ "latency_ms": 2002.0694580161944,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"The committee reviewed a proposal to invest $161.4M for a 14.7% stake in Upland Energy, a cloud security software start-up, with an option to acquire the rest within 2 years.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"The document contains non-public investment and potential acquisition deliberations by an investment committee, which fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

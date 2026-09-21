@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 168,
+ "input_hash": "6e72fff6dd4401c698abd179e0f7ac421cecaec2f7909ad9b5d12aae597d7d3a",
+ "latency_ms": 2360.0923750782385,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"Gwendolyn Lefebvre has been managing migraine without aura for several years but has struggled to keep to the treatment plan since starting shift work.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"At the last review the patient described missing doses and feeling low, and we agreed to adjust the regimen and involve a counsellor.\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"The document contains individually identifiable health information, including a named patient, diagnosis, treatment adherence, and care plan details. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

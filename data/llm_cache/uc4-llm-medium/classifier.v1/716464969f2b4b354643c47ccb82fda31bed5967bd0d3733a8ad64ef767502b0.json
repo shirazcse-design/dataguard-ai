@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 134,
+ "input_hash": "716464969f2b4b354643c47ccb82fda31bed5967bd0d3733a8ad64ef767502b0",
+ "latency_ms": 1864.6573330042884,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[],\"evidence\":[{\"quote\":\"Product themes for the year ahead\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"},{\"quote\":\"These are directional themes only; specific features and dates are not yet decided. Shared with department heads.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is non-public product planning and strategic business direction shared internally with department heads, so external disclosure could plausibly harm the organization. It does not clearly meet any listed sensitive data category.\",\"level_confidence\":\"medium\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

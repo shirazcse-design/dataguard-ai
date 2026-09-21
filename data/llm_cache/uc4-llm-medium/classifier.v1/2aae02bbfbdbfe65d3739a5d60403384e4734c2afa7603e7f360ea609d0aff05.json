@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 163,
+ "input_hash": "2aae02bbfbdbfe65d3739a5d60403384e4734c2afa7603e7f360ea609d0aff05",
+ "latency_ms": 2160.895749926567,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5211,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"dgtok_e0ea8d6a1e007699011ba9e065083933\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"token: dgtok_e0ea8d6a1e007699011ba9e065083933\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document contains a live-looking authentication token in a kubeconfig, which is Credentials / Secrets data. Exposure could enable unauthorized access, so the highest sensitivity level applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

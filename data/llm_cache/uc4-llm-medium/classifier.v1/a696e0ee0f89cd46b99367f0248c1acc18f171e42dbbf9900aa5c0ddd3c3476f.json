@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 155,
+ "input_hash": "a696e0ee0f89cd46b99367f0248c1acc18f171e42dbbf9900aa5c0ddd3c3476f",
+ "latency_ms": 2086.3801250234246,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5209,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:25:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Customer: Ivan Lefebvre, 187 Orchard Way, Gothenburg, phone (309) 555-0197\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Customer: Willa Novak, 49 Harbor Street, Osaka, phone (400) 555-0190\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"The document contains non-public personal contact details for named individuals, including home addresses and phone numbers. No clearly identifiable health information, payment data, or other higher-floor categories are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

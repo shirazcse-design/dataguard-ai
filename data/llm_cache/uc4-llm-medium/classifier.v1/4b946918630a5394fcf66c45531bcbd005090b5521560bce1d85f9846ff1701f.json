@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 126,
+ "input_hash": "4b946918630a5394fcf66c45531bcbd005090b5521560bce1d85f9846ff1701f",
+ "latency_ms": 2116.2301669828594,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5208,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:30:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"token: dgtok_3967bca3d8e44e5516be90a69840f4b1\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains a live-looking authentication token in a configuration file, which is Credentials / Secrets data. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

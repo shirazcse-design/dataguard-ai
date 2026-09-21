@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 124,
+ "input_hash": "93ae789643beccded12d89d46371b7b747ec996fde4334a967f8a330aa632f30",
+ "latency_ms": 1996.1278749397025,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5187,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:27:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"PUBLICATION WO/2028/601367 - PUBLISHED APPLICATION\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Published April 2028 by the patent office.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a published patent application and therefore clearly intended for public release. Although it describes an invention, the content is already public and does not meet the non-public IP category definition.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

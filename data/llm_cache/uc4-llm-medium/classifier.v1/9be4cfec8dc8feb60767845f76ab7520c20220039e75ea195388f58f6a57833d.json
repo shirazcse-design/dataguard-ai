@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 159,
+ "input_hash": "9be4cfec8dc8feb60767845f76ab7520c20220039e75ea195388f58f6a57833d",
+ "latency_ms": 1980.7992089772597,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5176,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The new fleet tracker replaces the rigid housing with a flexible lattice that absorbs shock and doubles as the antenna.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"},{\"quote\":\"it is a departure from anything in our current or competing products.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"The document describes a non-public product design concept and potential invention details, which clearly fit Intellectual Property. External disclosure could harm the organization's competitive position, but it does not contain regulated data, credentials, or other Highly Confidential content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

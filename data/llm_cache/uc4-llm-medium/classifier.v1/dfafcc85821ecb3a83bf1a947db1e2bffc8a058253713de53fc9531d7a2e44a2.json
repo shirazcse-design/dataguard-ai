@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "dfafcc85821ecb3a83bf1a947db1e2bffc8a058253713de53fc9531d7a2e44a2",
+ "latency_ms": 1970.7964999834076,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5276,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:26+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"FOR IMMEDIATE RELEASE\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Cinderpoint Energy today announced that its new payment gateway is generally available to customers in Nordics.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Pricing and availability are published at www.cinderpointenergy.example.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This is a press-release style announcement explicitly intended for public release, with published pricing and media contact details. It contains no clearly applicable sensitive data categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

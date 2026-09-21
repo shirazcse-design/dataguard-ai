@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 71,
+ "input_hash": "305850e20fcb52c172fff77b4a8584264b31c164be0683c9532573b7f17ef330",
+ "latency_ms": 1654.7614170704037,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5160,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:29:41+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal business information summarizing departmental expenses and budget status, with no regulated data, credentials, strategic deal content, or other clearly sensitive categories.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

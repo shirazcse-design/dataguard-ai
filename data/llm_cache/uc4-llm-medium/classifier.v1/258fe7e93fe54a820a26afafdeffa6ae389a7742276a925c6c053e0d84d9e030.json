@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 163,
+ "input_hash": "258fe7e93fe54a820a26afafdeffa6ae389a7742276a925c6c053e0d84d9e030",
+ "latency_ms": 2475.577958044596,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:22:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"We propose to withdraw from EMEA by the end of 2027 and redeploy the budget to expand direct sales in LATAM.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"This will not be announced until partner discussions are complete. Field teams have not been told.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document describes a non-public regional restructuring and strategic market withdrawal/expansion plan, which is corporate strategy information. Disclosure could cause severe competitive and business harm before announcement.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

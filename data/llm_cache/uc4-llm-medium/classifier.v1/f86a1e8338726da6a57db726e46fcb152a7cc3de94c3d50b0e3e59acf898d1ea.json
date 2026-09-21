@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 174,
+ "input_hash": "f86a1e8338726da6a57db726e46fcb152a7cc3de94c3d50b0e3e59acf898d1ea",
+ "latency_ms": 2221.0509170545265,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:19:58+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Transaction: acquisition of Flintlock Materials by Pemberton Foods. Consideration: $3.9B in cash and stock. Closing conditions: regulatory approval in APAC, completion of due diligence, key-employee retention.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Target closing: Q1 2028.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public draft term sheet describing an acquisition, valuation, and deal conditions, which clearly fits M&A / Corporate Strategy. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}
