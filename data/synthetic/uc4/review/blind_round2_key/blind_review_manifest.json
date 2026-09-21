@@ -1,17 +1,17 @@
 {
   "controls_per_level": 3,
   "dataset_banner": "AI-generated synthetic dataset \u2014 pending human gold-label review",
-  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "dataset_sha256": "284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e",
   "decisions_file": "review/adjudication_decisions.yaml",
   "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
   "docs_per_family": 1,
   "extra_docs": {
     "amb_aggregate_health_stats": 3
   },
-  "git_branch": "uc4/human-review-round2",
-  "git_commit": "e8a1e5c02a2a6a7eac005581d8e3eb7c74152c7e",
-  "git_dirty": false,
-  "key_sha256": "f3208ddfc1b5e51d7c30192ab963cf2a2c7adbaa4655c2d36d0ec851990b74c0",
+  "git_branch": "uc4/round2-review-results",
+  "git_commit": "2c0026a611dc97f9e5376b1a8a54ed402319bb13",
+  "git_dirty": true,
+  "key_sha256": "e01944c46adfb422151aff1cb24ab231adaa0e08ee1edbbb492371de43604a21",
   "labels_changed": false,
   "leak_check": "passed",
   "locked_test_split_read": false,

@@ -195,7 +195,7 @@ def test_validate_harness_defaults_to_development_splits(tmp_path):
     assert main(["eval", "validate-harness", "--out-dir", str(tmp_path)]) == 0
     md = (tmp_path / "harness-validation.md").read_text()
     assert "splits validated: train, calibration, dev" in md and "| test |" not in md
-    assert "pending human gold-label review" in md
+    assert "second independent review pending" in md
     data = json.loads((tmp_path / "harness-validation.json").read_text())
     assert {r["split"] for r in data["runs"]} == {"train", "calibration", "dev"}
 

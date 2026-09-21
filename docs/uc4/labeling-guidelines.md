@@ -141,3 +141,14 @@ invalidate the recorded LLM responses. Sections 1-3 (which a blind reviewer is s
 * **Two-rank ties.** For a draft that is intended for publication but not yet approved, the gold is
   the higher plausible level (`CONFIDENTIAL`) and both `PUBLIC` and the level between them
   (`INTERNAL`) are acceptable alternatives. This extends the section 2 tie-break across a two-rank gap.
+* **De-identified aggregate health statistics with small cells** (decision A30, 2026-09-21): no named or
+  directly identifiable individual means PHI is not met (the taxonomy lists de-identified aggregate patient
+  statistics as a PHI counter-example), but small cell counts (single digits) can allow re-identification,
+  so the level is `CONFIDENTIAL`, with `HIGHLY_CONFIDENTIAL` and `INTERNAL` as acceptable alternatives.
+* **Historical teaching case studies of completed deals** are `PUBLIC` in the gold but genuinely
+  ambiguous (independent readers split between `PUBLIC` and `INTERNAL`), so `INTERNAL` is an acceptable
+  alternative (decision A32).
+* **The gold tie-break stays fail-safe** (the higher of two defensible levels); a **lenient view**, in which a
+  predicted level inside the acceptable alternatives counts as correct, is reported beside the strict
+  score (decision A31). The strict score is what the gates use.
+

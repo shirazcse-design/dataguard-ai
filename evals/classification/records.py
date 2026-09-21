@@ -32,6 +32,9 @@ class PredictionRecord(StrictModel):
     gold_level: str
     gold_categories: list[str]
     gold_high_risk: bool
+    # Other levels a reader could defensibly assign (ambiguous documents): used ONLY by the lenient
+    # level view; every headline metric stays strict against `gold_level`.
+    gold_alternative_levels: list[str] = Field(default_factory=list)
 
     # what the classifier returned
     status: RecordStatus

@@ -4,10 +4,10 @@
 
 **Result: PASS** - 311 of 311 checks passed.
 
-* dataset: `dataguard-uc4-synthetic` v1.0.0, sha256 `9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab`
-* git commit: `3d628de8dc004384dc5c095779584d49374343b5` (dirty: False)
+* dataset: `dataguard-uc4-synthetic` v1.0.0, sha256 `284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e`
+* git commit: `2c0026a611dc97f9e5376b1a8a54ed402319bb13` (dirty: True)
 * python 3.12.14, numpy 2.5.3, scikit-learn 1.9.1
-* dataset labels: AI-generated synthetic dataset — pending human gold-label review
+* dataset labels: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending
 * splits validated: train, calibration, dev (the locked test split is excluded unless explicitly authorised)
 * random-baseline seed: 20260918; tolerance for chance-rate checks: 4.5 binomial standard deviations
 
@@ -26,15 +26,15 @@ Headline = tiers T1-T4. These are sanity classifiers, not approaches to be compa
 
 | baseline | split | headline docs | level macro-F1 | category macro-F1 | high-risk recall | high-risk precision | run id |
 |---|---|---|---|---|---|---|---|
-| oracle | train | 391 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-train-20260921T014848Z-b2b813ac` |
-| majority | train | 391 | 0.1664 | 0.0000 | 1.0000 | 0.5396 | `majority-train-20260921T014848Z-a2b2fe3b` |
-| random | train | 391 | 0.2685 | 0.1602 | 0.9905 | 0.5443 | `random-train-20260921T014849Z-033d8c42` |
-| oracle | calibration | 98 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-calibration-20260921T014849Z-74eb3274` |
-| majority | calibration | 98 | 0.1667 | 0.0000 | 1.0000 | 0.5612 | `majority-calibration-20260921T014849Z-145100e5` |
-| random | calibration | 98 | 0.2078 | 0.1601 | 1.0000 | 0.5612 | `random-calibration-20260921T014849Z-07f3305b` |
-| oracle | dev | 97 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-dev-20260921T014849Z-f4f4473a` |
-| majority | dev | 97 | 0.1632 | 0.0000 | 1.0000 | 0.5464 | `majority-dev-20260921T014849Z-8a3f1a32` |
-| random | dev | 97 | 0.2283 | 0.1635 | 0.9623 | 0.5426 | `random-dev-20260921T014849Z-2fe0da22` |
+| oracle | train | 391 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-train-20260921T212421Z-6b3a8680` |
+| majority | train | 391 | 0.1664 | 0.0000 | 1.0000 | 0.5396 | `majority-train-20260921T212421Z-4f9decb4` |
+| random | train | 391 | 0.2685 | 0.1602 | 0.9905 | 0.5443 | `random-train-20260921T212421Z-f90f34c9` |
+| oracle | calibration | 98 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-calibration-20260921T212422Z-99837a7e` |
+| majority | calibration | 98 | 0.1525 | 0.0000 | 1.0000 | 0.5000 | `majority-calibration-20260921T212422Z-75f0fc86` |
+| random | calibration | 98 | 0.2053 | 0.1601 | 1.0000 | 0.5000 | `random-calibration-20260921T212422Z-6fdb187d` |
+| oracle | dev | 97 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | `oracle-dev-20260921T212423Z-d8c9a42c` |
+| majority | dev | 97 | 0.1632 | 0.0000 | 1.0000 | 0.5464 | `majority-dev-20260921T212423Z-7551946c` |
+| random | dev | 97 | 0.2283 | 0.1635 | 0.9623 | 0.5426 | `random-dev-20260921T212423Z-eeaea15d` |
 
 ## Checks by suite and split
 

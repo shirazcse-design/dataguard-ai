@@ -1,15 +1,15 @@
 review_order,sample_id,role,family_id,split,tier,gold_level,gold_categories,gold_ambiguity_flag,gold_acceptable_alternative_levels
 1,uc4-9d42fc85c9,review,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
 2,uc4-9a94d05821,control,fin_invoice_bank_details,dev,T1,HIGHLY_CONFIDENTIAL,FINANCIAL_PCI,FALSE,
-3,uc4-fb41e91266,review,amb_aggregate_health_stats,calibration,T3,HIGHLY_CONFIDENTIAL,,TRUE,CONFIDENTIAL
+3,uc4-fb41e91266,review,amb_aggregate_health_stats,calibration,T3,CONFIDENTIAL,,TRUE,HIGHLY_CONFIDENTIAL;INTERNAL
 4,uc4-cfac4adf77,control,hn_blank_hr_form_template,dev,T4,INTERNAL,,FALSE,
 5,uc4-dd34b9e9fe,control,fin_merchant_settlement,dev,T1,HIGHLY_CONFIDENTIAL,FINANCIAL_PCI,FALSE,
 6,uc4-791425f3af,control,ip_research_notebook_novel_method,dev,T2,CONFIDENTIAL,INTELLECTUAL_PROPERTY,FALSE,
 7,uc4-8a7180ec97,review,amb_internal_tooling_source,calibration,T3,CONFIDENTIAL,SOURCE_CODE,TRUE,INTERNAL
 8,uc4-4fb7c238e1,control,cred_jwt_in_log,dev,T1,HIGHLY_CONFIDENTIAL,CREDENTIALS_SECRETS,FALSE,
 9,uc4-8d31d6cc41,review,amb_vendor_contract_summary,train,T3,CONFIDENTIAL,,TRUE,INTERNAL
-10,uc4-205126d683,review,amb_aggregate_health_stats,calibration,T3,HIGHLY_CONFIDENTIAL,,TRUE,CONFIDENTIAL
-11,uc4-14696d668c,review,amb_aggregate_health_stats,calibration,T3,HIGHLY_CONFIDENTIAL,,TRUE,CONFIDENTIAL
+10,uc4-205126d683,review,amb_aggregate_health_stats,calibration,T3,CONFIDENTIAL,,TRUE,HIGHLY_CONFIDENTIAL;INTERNAL
+11,uc4-14696d668c,review,amb_aggregate_health_stats,calibration,T3,CONFIDENTIAL,,TRUE,HIGHLY_CONFIDENTIAL;INTERNAL
 12,uc4-19c5bd1307,review,phi_prescription_record,dev,T1,HIGHLY_CONFIDENTIAL,PHI,FALSE,
 13,uc4-c8334a8e38,control,pub_careers_faq,dev,T1,PUBLIC,,FALSE,
 14,uc4-6454537dc7,control,int_team_meeting_notes,dev,T1,INTERNAL,,FALSE,
@@ -19,7 +19,7 @@ review_order,sample_id,role,family_id,split,tier,gold_level,gold_categories,gold
 18,uc4-97a4c07fb4,control,hn_blank_hr_form_template,dev,T4,INTERNAL,,FALSE,
 19,uc4-de0bb4eb1c,review,amb_incident_postmortem_internal,train,T3,CONFIDENTIAL,,TRUE,INTERNAL
 20,uc4-2154faf7ae,control,pub_careers_faq,dev,T1,PUBLIC,,FALSE,
-21,uc4-fac2c886c3,review,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
+21,uc4-fac2c886c3,review,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
 22,uc4-f01402e5c4,review,amb_customer_case_study_draft,dev,T3,CONFIDENTIAL,,TRUE,PUBLIC;INTERNAL
 23,uc4-da9e1d43b1,review,amb_employee_directory,train,T3,CONFIDENTIAL,,TRUE,INTERNAL
 24,uc4-31b9634466,review,amb_hashed_password_dump,train,T3,HIGHLY_CONFIDENTIAL,,TRUE,CONFIDENTIAL

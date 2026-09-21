@@ -102,8 +102,9 @@ def check_document(
             errs.append(f"{tag} T3 documents must set ambiguity_flag")
         if not doc.annotation_notes:
             errs.append(f"{tag} T3 documents need annotation_notes explaining the ambiguity")
-    elif doc.ambiguity_flag:
-        errs.append(f"{tag} ambiguity_flag is only valid for tier T3")
+    elif doc.ambiguity_flag and doc.tier != "T4":
+        # T4 hard negatives may be flagged when independent readers split (decision A32)
+        errs.append(f"{tag} ambiguity_flag is only valid for tiers T3 and T4")
     if doc.acceptable_alternative_levels and not doc.ambiguity_flag:
         errs.append(f"{tag} alternative levels require ambiguity_flag")
 

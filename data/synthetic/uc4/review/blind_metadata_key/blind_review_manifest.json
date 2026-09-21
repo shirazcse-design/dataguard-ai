@@ -1,12 +1,12 @@
 {
   "adjudication_artifacts_sha256": {
     "review/adjudication_decisions.yaml": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
-    "review/adjudication_sheet.csv": "d5d51c68dd04a4e82ea9b2885d801c0409f3b25ba51c8094a9a729431e17f880",
-    "review/adjudication_sheet.meta.json": "d0614953e4feddfe8e4a5daba7162969f0dca95d41dbdf8e3232db6ce4ff26f7"
+    "review/adjudication_sheet.csv": "846a20958a87f359d90891fc3e3402d87a850a32603dbabdc3e5f1710817c3cf",
+    "review/adjudication_sheet.meta.json": "fc14a498567c2ac4702853cc8941eb5ed170c75a860fbcac8c4ae853b56008d0"
   },
   "controls_per_level": 3,
   "dataset_banner": "AI-generated synthetic dataset \u2014 pending human gold-label review",
-  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "dataset_sha256": "284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e",
   "decisions_file": "review/adjudication_decisions.yaml",
   "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
   "disputed_families": [
@@ -15,10 +15,10 @@
     "hn_public_api_docs_placeholder_keys",
     "phi_prescription_record"
   ],
-  "git_branch": "uc4/blind-review-metadata-variant",
-  "git_commit": "b7e94ac130fa929df90fd1599023256c163eba57",
+  "git_branch": "uc4/round2-review-results",
+  "git_commit": "2c0026a611dc97f9e5376b1a8a54ed402319bb13",
   "git_dirty": true,
-  "key_sha256": "030722ba64178c1ac55037da2f8f20fac7c89b1a05101460bd95ec855b6f26a4",
+  "key_sha256": "51a964eed46ac0cc86bf0b9fb889872ff601ff7ce3b48c2d489654cfb1205c5d",
   "labels_changed": false,
   "leak_check": "passed",
   "locked_test_split_read": false,

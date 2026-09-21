@@ -111,7 +111,7 @@ explicitly; it never produces evaluation results.
 
 ## What every report states
 
-* **Label status:** "AI-generated synthetic dataset — pending human gold-label review". The gold
+* **Label status:** "AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending". The gold
   labels are not independently human-validated, and reports say so.
 * **Sample counts and `SMALL_SAMPLE`:** per-label `support` is in every table; any label with fewer
   than 25 gold positives in the evaluated subset is flagged `SMALL_SAMPLE` (and printed by the CLI).

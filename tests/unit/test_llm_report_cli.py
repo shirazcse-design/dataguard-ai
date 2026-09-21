@@ -95,7 +95,7 @@ def test_report_with_no_models_says_nothing_was_run_and_shows_no_model_numbers(e
     assert "## Tier `" not in text and "macro-F1" not in text
     assert (
         "never been run against a real endpoint here" in text
-        and "pending human gold-label review" in text
+        and "second independent review pending" in text
     )
     assert "The locked test split was not read" in text
     assert "eval run --classifier llm" in text

@@ -4,11 +4,11 @@
 
 ## Provenance and protocol
 
-* **dataset labels: AI-generated synthetic dataset — pending human gold-label review** (not independently human-validated)
+* **dataset labels: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending** (not independently human-validated)
 * ruleset `1.0.3`, standalone default level `INTERNAL`
 * rules config sha256 `9d5a973c465395d3...`
-* dataset sha256 `9442e354c3dd51dd...`
-* git `3d628de8dc00` on `uc4/blind-review-metadata-variant` (dirty: True)
+* dataset sha256 `284abad1247b53a3...`
+* git `2c0026a611dc` on `uc4/round2-review-results` (dirty: True)
 * development protocol: errors inspected on **train**; **dev** evaluated at checkpoints; **calibration** untouched until this report; every post-first-run change is in `docs/uc4/rules-changelog.md`. The rules were written by the same assistant that authored the dataset, and the train figures were used to tune three details, so **train and pooled numbers are development-contaminated**.
 * the purpose is an honest deterministic baseline, not to beat ML or an LLM.
 
@@ -18,10 +18,10 @@
 
 | split | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR | abstained | latency p50 / p95 ms |
 |---|---|---|---|---|---|---|---|---|---|
-| train | 391 / 71 | 0.398 [0.310, 0.485] | 0.736 [0.605, 0.825] | 0.963 | 0.621 [0.475, 0.770] | 0.755 | 0.028 | 227/416 (0.546) | 0.26 / 0.36 |
-| calibration | 98 / 18 | 0.454 [0.284, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.655 [0.333, 1.000] | 0.791 | 0.000 | 46/103 (0.447) | 0.27 / 0.69 |
+| train | 391 / 71 | 0.398 [0.310, 0.485] | 0.736 [0.605, 0.825] | 0.963 | 0.621 [0.475, 0.770] | 0.755 | 0.028 | 227/416 (0.546) | 0.26 / 0.35 |
+| calibration | 98 / 18 | 0.451 [0.293, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.735 [0.400, 1.000] | 0.847 | 0.000 | 46/103 (0.447) | 0.25 / 0.41 |
 | dev | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 | 69/107 (0.645) | 0.26 / 0.37 |
-| pooled development | 586 / 107 | 0.403 [0.332, 0.473] | 0.733 [0.626, 0.812] | 0.976 | 0.627 [0.506, 0.756] | 0.763 | 0.019 | 342/626 (0.546) | 0.25 / 0.35 |
+| pooled development | 586 / 107 | 0.403 [0.332, 0.471] | 0.733 [0.626, 0.812] | 0.976 | 0.639 [0.519, 0.770] | 0.772 | 0.018 | 342/626 (0.546) | 0.25 / 0.36 |
 
 Intervals are family-level percentile bootstrap intervals (95%); the pooled row rests on **107 independent families**, the per-split rows on far fewer (see the families column). HR = high-risk. Read recall together with precision and FPR; no operating point has been chosen.
 
@@ -30,13 +30,13 @@ Intervals are family-level percentile bootstrap intervals (95%); the pooled row 
 | split | SMALL_SAMPLE labels (headline subset) | per-label gold positives |
 |---|---|---|
 | train | none | min 28, max 195 |
-| calibration | PUBLIC (n=10), INTERNAL (n=11), PII (n=11), PHI (n=10), FINANCIAL_PCI (n=11), SOURCE_CODE (n=11), CREDENTIALS_SECRETS (n=5), INTELLECTUAL_PROPERTY (n=11), TRADE_SECRET (n=10), MA_CORP_STRATEGY (n=7) | min 5, max 49 |
+| calibration | PUBLIC (n=10), INTERNAL (n=11), PII (n=11), PHI (n=10), FINANCIAL_PCI (n=11), SOURCE_CODE (n=11), CREDENTIALS_SECRETS (n=5), INTELLECTUAL_PROPERTY (n=11), TRADE_SECRET (n=10), MA_CORP_STRATEGY (n=7) | min 5, max 43 |
 | dev | PUBLIC (n=10), INTERNAL (n=11), PII (n=11), PHI (n=10), FINANCIAL_PCI (n=10), SOURCE_CODE (n=10), CREDENTIALS_SECRETS (n=10), INTELLECTUAL_PROPERTY (n=12), TRADE_SECRET (n=6), MA_CORP_STRATEGY (n=11) | min 6, max 47 |
-| pooled development | none | min 47, max 291 |
+| pooled development | none | min 47, max 285 |
 
 Per-label counts for the pooled set are in the `support` columns below. No examples were added to reach a count.
 
-Initial high-risk recall reference 0.90 (informational, not a gate): pooled observed 0.627, i.e. **below the reference**.
+Initial high-risk recall reference 0.90 (informational, not a gate): pooled observed 0.639, i.e. **below the reference**.
 
 ## Pooled development set: detail
 
@@ -50,17 +50,17 @@ Confusion matrix (rows = gold, columns = predicted; abstentions appear as the de
 |---|---|---|---|---|---|
 | PUBLIC | 0 | 52 | 0 | 0 | 0 |
 | INTERNAL | 0 | 64 | 0 | 5 | 0 |
-| CONFIDENTIAL | 0 | 110 | 64 | 0 | 0 |
-| HIGHLY_CONFIDENTIAL | 0 | 96 | 10 | 185 | 0 |
+| CONFIDENTIAL | 0 | 116 | 64 | 0 | 0 |
+| HIGHLY_CONFIDENTIAL | 0 | 90 | 10 | 185 | 0 |
 
 | level | precision | recall | F1 | support | predicted | warning |
 |---|---|---|---|---|---|---|
 | PUBLIC | n/a | 0.000 | 0.000 | 52 | 0 |  |
 | INTERNAL | 0.199 | 0.928 | 0.327 | 69 | 322 |  |
-| CONFIDENTIAL | 0.865 | 0.368 | 0.516 | 174 | 74 |  |
-| HIGHLY_CONFIDENTIAL | 0.974 | 0.636 | 0.769 | 291 | 190 |  |
+| CONFIDENTIAL | 0.865 | 0.356 | 0.504 | 180 | 74 |  |
+| HIGHLY_CONFIDENTIAL | 0.974 | 0.649 | 0.779 | 285 | 190 |  |
 
-macro P/R/F1 0.509 / 0.483 / 0.403 (interval 0.403 [0.332, 0.473]); micro F1 0.534; accuracy 0.534. **Under-classification rate 0.369** (severe 0.164); over-classification 0.097.
+macro P/R/F1 0.509 / 0.483 / 0.403 (interval 0.403 [0.332, 0.471]); micro F1 0.534; accuracy 0.534. **Under-classification rate 0.369** (severe 0.154); over-classification 0.097.
 
 ### Data categories (per-category performance)
 
@@ -81,9 +81,9 @@ macro P/R/F1 1.000 / 0.616 / 0.733 (interval 0.733 [0.626, 0.812]); micro P/R/F1
 
 | TP | FP | FN | TN | precision | recall | F1 | FPR | prevalence |
 |---|---|---|---|---|---|---|---|---|
-| 200 | 5 | 119 | 262 | 0.976 | 0.627 | 0.763 | 0.019 | 0.544 |
+| 200 | 5 | 113 | 268 | 0.976 | 0.639 | 0.772 | 0.018 | 0.534 |
 
-precision 0.976 [0.920, 1.000]; recall 0.627 [0.506, 0.756]; F1 0.763 [0.661, 0.854]; FPR 0.019 [0.000, 0.062].
+precision 0.976 [0.920, 1.000]; recall 0.639 [0.519, 0.770]; F1 0.772 [0.673, 0.864]; FPR 0.018 [0.000, 0.062].
 
 ## Abstention and rules coverage (all tiers, pooled)
 
@@ -103,10 +103,10 @@ precision 0.976 [0.920, 1.000]; recall 0.627 [0.506, 0.756]; F1 0.763 [0.661, 0.
 
 | measure | n | mean ms | p50 ms | p95 ms | max ms |
 |---|---|---|---|---|---|
-| harness wall clock per document | 626 | 0.260 | 0.253 | 0.353 | 0.633 |
-| engine-internal (classifier-reported) | 626 | 0.249 | 0.243 | 0.341 | 0.419 |
+| harness wall clock per document | 626 | 0.261 | 0.254 | 0.359 | 0.564 |
+| engine-internal (classifier-reported) | 626 | 0.250 | 0.243 | 0.347 | 0.552 |
 
-Measured p95 0.353 ms and max 0.633 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
+Measured p95 0.359 ms and max 0.564 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
 
 ## Performance by difficulty tier (all tiers, pooled)
 
@@ -114,7 +114,7 @@ Measured p95 0.353 ms and max 0.633 ms across 626 documents: **within** the 500 
 |---|---|---|---|---|---|---|---|---|
 | T1 | 287 | 55 | 0.617 | 0.950 | 0.944 | 1.000 | 0.000 |  |
 | T2 | 163 | 27 | 0.226 | 0.192 | 0.248 | 1.000 | 0.000 |  |
-| T3 | 66 | 11 | 0.111 | 0.500 | 0.000 | n/a | 0.000 |  |
+| T3 | 66 | 11 | 0.100 | 0.500 | 0.000 | n/a | 0.000 |  |
 | T4 | 70 | 14 | 0.544 | 1.000 | n/a | 0.000 | 0.071 |  |
 | T5 | 40 | 8 | 0.519 | 0.600 | 0.800 | 1.000 | 0.000 |  |
 
@@ -188,7 +188,6 @@ _none_
 - `ts_manufacturing_process` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): high-risk missed in 6/6 (pred {'INTERNAL': 6})
 - `ts_recipe_formulation_notes` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): high-risk missed in 6/6 (pred {'INTERNAL': 6})
 - `ts_supplier_yield_terms` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): high-risk missed in 6/6 (pred {'INTERNAL': 6})
-- `amb_aggregate_health_stats` (T3, 6 docs, gold HIGHLY_CONFIDENTIAL []): high-risk missed in 6/6 (pred {'INTERNAL': 6})
 - `amb_board_minutes_routine` (T3, 6 docs, gold HIGHLY_CONFIDENTIAL []): high-risk missed in 6/6 (pred {'INTERNAL': 6})
 - `amb_hashed_password_dump` (T3, 6 docs, gold HIGHLY_CONFIDENTIAL []): high-risk missed in 6/6 (pred {'INTERNAL': 6})
 - `adv_exfil_trade_secret` (T5, 5 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): high-risk missed in 5/5 (pred {'INTERNAL': 5})
@@ -231,7 +230,7 @@ _none_
 - `ts_manufacturing_process` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): predicted {'INTERNAL': 6}
 - `ts_recipe_formulation_notes` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): predicted {'INTERNAL': 6}
 - `ts_supplier_yield_terms` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['TRADE_SECRET']): predicted {'INTERNAL': 6}
-- `amb_aggregate_health_stats` (T3, 6 docs, gold HIGHLY_CONFIDENTIAL []): predicted {'INTERNAL': 6}
+- `amb_aggregate_health_stats` (T3, 6 docs, gold CONFIDENTIAL []): predicted {'INTERNAL': 6}
 - `amb_board_minutes_routine` (T3, 6 docs, gold HIGHLY_CONFIDENTIAL []): predicted {'INTERNAL': 6}
 - `amb_conference_talk_draft` (T3, 6 docs, gold CONFIDENTIAL ['INTELLECTUAL_PROPERTY']): predicted {'INTERNAL': 6}
 - `amb_customer_case_study_draft` (T3, 6 docs, gold CONFIDENTIAL []): predicted {'INTERNAL': 6}

@@ -43,6 +43,10 @@ from .schemas.common import SCHEMA_VERSION, SEMVER_RE, StrictModel
 SERVICE_FILE = "service/service.v1.yaml"
 _VERSION_RE = re.compile(r"^(\d{1,3})\.(\d{1,3})$")
 LlmMode = Literal["foundry", "replay", "record", "off"]
+DATASET_LABEL = (
+    "AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); "
+    "second independent review pending"
+)
 
 
 class TraceCfg(StrictModel):
@@ -244,7 +248,7 @@ class ClassificationService:
             "levels": self.bundle.policy.level_ids,
             "categories": self.bundle.policy.category_ids,
             "requests_served": self._served,
-            "labels_are": "AI-generated synthetic dataset — pending human gold-label review",
+            "labels_are": DATASET_LABEL,
         }
 
     def self_check(self) -> dict[str, Any]:

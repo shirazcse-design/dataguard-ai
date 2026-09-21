@@ -155,7 +155,7 @@ def report(tmp_path_factory):
 
 def test_report_states_provenance_and_that_dev_was_used_for_selection(report):
     assert (
-        "pending human gold-label review" in report
+        "second independent review pending" in report
         and "The locked test split was not read" in report
     )
     assert "Dev was used both to choose the recommended variant and to evaluate it" in report
@@ -201,8 +201,8 @@ def test_report_fault_injection_shows_failsafe_behaviour(report):
     assert "never produces a low default" in sec
 
 
-def test_report_warns_that_locked_test_was_not_run(report):
-    assert "has not been authorised or run" in report
+def test_report_points_to_the_single_locked_test_run(report):
+    assert "hybrid-locked-test.md" in report and "now consumed" in report
 
 
 def test_the_whole_report_is_reproducible_run_to_run(tmp_path):

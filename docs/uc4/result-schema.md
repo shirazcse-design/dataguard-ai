@@ -1,6 +1,6 @@
 # Classification result schema v1.0 (frozen)
 
-> Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.** A result is a
+> Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** A result is a
 > **recommendation**. The service flags and never blocks, quarantines or remediates.
 
 The frozen JSON Schemas are `docs/uc4/schema/classification-request.v1.json` and

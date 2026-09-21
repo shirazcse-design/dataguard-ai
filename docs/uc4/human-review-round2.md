@@ -1,6 +1,6 @@
 # Round 2 human review: coordinator's guide
 
-> **AI-generated synthetic dataset — pending human gold-label review.** This guide is for whoever runs the review. It is **not** for the reviewers: they receive only `data/synthetic/uc4/review/blind_round2/`. Nothing in the package changes a label; a label changes only through a recorded decision after adjudication.
+> **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** This guide is for whoever runs the review. It is **not** for the reviewers: they receive only `data/synthetic/uc4/review/blind_round2/`. Nothing in the package changes a label; a label changes only through a recorded decision after adjudication.
 
 ## Why a Round 2
 
@@ -63,9 +63,15 @@ dataguard-uc4 review blind-compare --variant round2 --sheet returned/round2.a.cs
 3. `amb_aggregate_health_stats` needs an explicit small-cell rule. The candidates are HIGHLY_CONFIDENTIAL (current gold), CONFIDENTIAL (the gold's alternative) and INTERNAL (the frozen hybrid's answer). Statistical offices often suppress cell counts below 11; that is a convention to weigh, not a rule of this project.
 4. A change is made in the family spec, the dataset is regenerated, and the tests are run. **A relabel after seeing model errors on a split is tuning on that split**; say so in the decision and re-score under both label sets rather than replacing the old numbers.
 
-## When the dataset label may change
+## The dataset label
 
-"Pending human gold-label review" changes only after at least two independent humans have reviewed the labels and their disagreements are adjudicated and recorded. Until then every report keeps the banner. A suggested bar (a decision for the product owner, not a project rule): at least two reviewers, Cohen's kappa of at least 0.8 on level for the non-ambiguous documents, and every disagreement with the gold either changed or explained in `decisions.md`.
+After the first reviewer's sheet the product owner accepted one reviewer as sufficient for recording the
+review (decision A29), so the label reads **"reviewed by one human (provenance per coordinator); second
+independent review pending"**. It drops "second independent review pending" only after a second
+independent human has reviewed the labels and every disagreement is adjudicated and recorded. A suggested
+bar for that second review (a decision for the product owner, not a project rule): Cohen's kappa of at
+least 0.8 on level for the non-ambiguous documents, and every disagreement with the gold either changed or
+explained in `decisions.md`.
 
 ## Regenerating the package
 

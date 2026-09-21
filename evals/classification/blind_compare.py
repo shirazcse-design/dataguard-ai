@@ -30,7 +30,7 @@ ADJUDICATION_SHEET = "review/adjudication_sheet.csv"
 APPROACHES = ["rules", "ml", "llm_small", "llm_mid", "llm_large", "hybrid"]
 SMALL_SAMPLE_MIN = 25
 PATTERNS = ["all agree", "gold=human≠pred", "human=pred≠gold", "gold=pred≠human", "all differ"]
-DATASET_BANNER = "AI-generated synthetic dataset — pending human gold-label review"
+DATASET_BANNER = "AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending"
 REVIEWER_KINDS = ("human", "ai")
 AI_REVIEW_BANNER = (
     "**AI REVIEW: NOT HUMAN VALIDATION.** The blind sheet was completed by an AI model, not a person. "

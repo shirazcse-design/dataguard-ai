@@ -9,10 +9,10 @@ review_order,sample_id,role,family_id,split,tier,gold_level,gold_categories,gold
 8,uc4-fcfbdb789f,control,amb_research_paper_draft,dev,T3,CONFIDENTIAL,INTELLECTUAL_PROPERTY,TRUE,INTERNAL
 9,uc4-f01402e5c4,disputed,amb_customer_case_study_draft,dev,T3,CONFIDENTIAL,,TRUE,PUBLIC;INTERNAL
 10,uc4-3a62ad2249,control,ip_research_notebook_novel_method,dev,T2,CONFIDENTIAL,INTELLECTUAL_PROPERTY,FALSE,
-11,uc4-e9ab29f565,disputed,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
-12,uc4-089c6dc891,disputed,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
+11,uc4-e9ab29f565,disputed,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
+12,uc4-089c6dc891,disputed,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
 13,uc4-b16d04f2c2,control,int_team_meeting_notes,dev,T1,INTERNAL,,FALSE,
-14,uc4-fac2c886c3,disputed,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
+14,uc4-fac2c886c3,disputed,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
 15,uc4-00ac341854,disputed,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
 16,uc4-2154faf7ae,control,pub_careers_faq,dev,T1,PUBLIC,,FALSE,
 17,uc4-4b84f54ee7,disputed,phi_prescription_record,dev,T1,HIGHLY_CONFIDENTIAL,PHI,FALSE,
@@ -22,7 +22,7 @@ review_order,sample_id,role,family_id,split,tier,gold_level,gold_categories,gold
 21,uc4-de62c38c69,disputed,phi_prescription_record,dev,T1,HIGHLY_CONFIDENTIAL,PHI,FALSE,
 22,uc4-c2223643cf,disputed,phi_prescription_record,dev,T1,HIGHLY_CONFIDENTIAL,PHI,FALSE,
 23,uc4-59fba52cb2,control,pub_careers_faq,dev,T1,PUBLIC,,FALSE,
-24,uc4-a278fd5603,disputed,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
+24,uc4-a278fd5603,disputed,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
 25,uc4-9d42fc85c9,disputed,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
 26,uc4-10e1c66f39,disputed,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
 27,uc4-35ffba48e4,disputed,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
@@ -30,5 +30,5 @@ review_order,sample_id,role,family_id,split,tier,gold_level,gold_categories,gold
 29,uc4-02400f99b0,disputed,hn_public_api_docs_placeholder_keys,dev,T4,PUBLIC,,FALSE,
 30,uc4-f79ebb3064,disputed,amb_customer_case_study_draft,dev,T3,CONFIDENTIAL,,TRUE,PUBLIC;INTERNAL
 31,uc4-c885ab8c28,disputed,phi_prescription_record,dev,T1,HIGHLY_CONFIDENTIAL,PHI,FALSE,
-32,uc4-210e112c7e,disputed,hn_business_case_study,calibration,T4,PUBLIC,,FALSE,
+32,uc4-210e112c7e,disputed,hn_business_case_study,calibration,T4,PUBLIC,,TRUE,INTERNAL
 33,uc4-4c7bd732c6,disputed,amb_customer_case_study_draft,dev,T3,CONFIDENTIAL,,TRUE,PUBLIC;INTERNAL

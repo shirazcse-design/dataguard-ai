@@ -325,6 +325,25 @@ def render_run_report(result: EvaluationResult) -> str:
     )  # fmt: skip
     add("")
 
+    lenient = head.get("lenient_level_view")
+    if lenient and lenient["n_relaxed"]:
+        add("### Lenient level view (within the gold's acceptable alternatives)")
+        add("")
+        add(
+            f"{lenient['note']} {lenient['n_relaxed']} of {lenient['n_headline']} headline documents change from "
+            "incorrect to correct under it."
+        )
+        add("")
+        add(
+            _table(
+                ["view", "level accuracy", "level macro-F1 [95% CI]"],
+                [
+                    ["strict (headline)", hm["level"]["accuracy"], _ci(stats["level_macro_f1"])],
+                    ["lenient", lenient["level_accuracy"], _ci(lenient["level_macro_f1_interval"])],
+                ],
+            )
+        )
+        add("")
     dv = head["deferral_views"]
     add("### Deferrals to human review")
     add("")

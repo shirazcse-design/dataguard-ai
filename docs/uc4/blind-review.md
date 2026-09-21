@@ -1,6 +1,6 @@
 # Blind human-review package (gold-label validation)
 
-> **AI-generated synthetic dataset — pending human gold-label review.** Read-only preparation: nothing here changes a label, the taxonomy, schema v1.0, a prompt, a threshold, model selection or the frozen hybrid configuration. The locked test split is not read, scored or used; `data/synthetic/uc4/locked_test_access.jsonl` is 0 bytes.
+> **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** Read-only preparation: nothing here changes a label, the taxonomy, schema v1.0, a prompt, a threshold, model selection or the frozen hybrid configuration. The locked test split is not read, scored or used; `data/synthetic/uc4/locked_test_access.jsonl` is 0 bytes.
 
 ## Purpose
 

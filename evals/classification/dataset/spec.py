@@ -50,6 +50,10 @@ class FamilySpec(StrictModel):
     adversarial_type: str | None = None
     notes: str = ""
     group_id: str | None = None  # families sharing a group_id are always placed in one split
+    # The level the split search balances on, when it must differ from `gold_level`. Set it to the
+    # level a family had when the splits were fixed, so relabelling it cannot move ANY family across
+    # splits (the assignment is a global seeded search; the locked test split must stay put).
+    split_gold_level: str | None = None
 
     @field_validator("family_id")
     @classmethod

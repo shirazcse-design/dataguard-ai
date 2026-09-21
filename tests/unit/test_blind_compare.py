@@ -275,7 +275,7 @@ def test_the_report_states_its_limits_and_has_no_headline_score(package, bundle,
         )
     )
     report, per_sample = run([s], bundle, DATA)
-    assert "pending human gold-label review" in report
+    assert "second independent review pending" in report
     assert "locked test split was not read" in report
     assert "SMALL_SAMPLE" in report and "4 independent decisions" in report
     assert (
