@@ -22,12 +22,28 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | 3 | Rules Engine (deterministic baseline) | done; merged (development splits only) |
 | 4 | Supervised ML classifier | done; merged (development splits only) |
 | 5 | LLM classifier | done; merged (benchmarked on dev against three Foundry deployments, recorded and replayable) |
-| 6 | Hybrid routing (router, fusion, review, variants, gates) | done; merged (development split only, replayed) |
+| 6 | Hybrid routing (router, fusion, review, variants, gates) | done; evaluated on dev (replayed), calibration (live, out-of-sample) and, once, the locked test split |
 | 7 | Observability and failure hardening (spans, redaction, privacy gate, failure-injection suite) | done; merged (development split only) |
-| 8 | Service surface: Python API + CLI, frozen result schema v1.0, documented MCP contract | done (MCP **documented, not implemented, blocked**); awaiting review |
+| 8 | Service surface: Python API + CLI, frozen result schema v1.0, MCP contract | done |
+| 9 | MCP adapter (`mcp_adapter/`, `dataguard-uc4-mcp`) and an offline observability dashboard | done; the adapter is **not release-ready** (see below) |
 
-Out of scope for this stage: RAG, MCP, autonomous agents, UI, repository crawling, document
-parsing, self-learning, production deployment.
+### Where UC4 stands (2026-09-21)
+
+The v0.1 scope is implemented and tested. It is **not validated**:
+
+* **Locked-test result (one audited, report-only run):** level macro-F1 0.884 [0.758, 0.980], category
+  macro-F1 0.997, high-risk recall 1.000 (111 of 111). The level gate passes on the point estimate and
+  **fails on the lower confidence bound** (0.758 against 0.85). See
+  [`docs/uc4/results/hybrid-locked-test.md`](docs/uc4/results/hybrid-locked-test.md). The split is now consumed.
+* **Gold labels are not independently human-reviewed.** The sheet designated as the human review is
+  identical to an earlier AI-completed sheet, so the dataset stays "pending human gold-label review".
+* **The MCP adapter is a development surface.** Freeze criteria: audited confirmation done; eval gates
+  not met; human review not satisfied.
+* **Not done:** Azure Monitor export (needs an Application Insights connection string), a shared live
+  dashboard, and the optional prompt-injection second opinion.
+
+Out of scope for this stage: RAG, autonomous agents, UI, repository crawling, document parsing,
+self-learning, production deployment.
 
 ## Development
 
@@ -35,7 +51,7 @@ Python 3.11+ is required.
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+pip install -e ".[dev,mcp]"   # "mcp" is only needed for the MCP server
 
 pytest                       # unit tests
 ruff check . && ruff format --check .

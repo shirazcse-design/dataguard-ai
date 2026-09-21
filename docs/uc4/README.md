@@ -40,4 +40,3 @@
 | [`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md) | Out-of-sample check of the frozen hybrid on the calibration split (live, recorded); high-risk recall 0.891, all misses in one ambiguous family |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
 
-Later phases add: the evaluation-harness guide and generated results under `results/`.
