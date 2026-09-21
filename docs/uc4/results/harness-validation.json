@@ -3107,7 +3107,7 @@
     {
       "expected": ">= 2.9 ms",
       "name": "latency: p50 reflects the injected 3 ms",
-      "observed": 4.569,
+      "observed": 4.57,
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3115,7 +3115,7 @@
     {
       "expected": ">=",
       "name": "latency: p95 >= p50",
-      "observed": 4.62,
+      "observed": 4.658,
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3213,7 +3213,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 391,
-      "run_id": "oracle-train-20260921T014829Z-b2b813ac",
+      "run_id": "oracle-train-20260921T014848Z-b2b813ac",
       "split": "train"
     },
     {
@@ -3224,7 +3224,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16638225255972697,
       "n_headline_docs": 391,
-      "run_id": "majority-train-20260921T014829Z-a2b2fe3b",
+      "run_id": "majority-train-20260921T014848Z-a2b2fe3b",
       "split": "train"
     },
     {
@@ -3235,7 +3235,7 @@
       "high_risk_recall": 0.990521327014218,
       "level_macro_f1": 0.2684601469562624,
       "n_headline_docs": 391,
-      "run_id": "random-train-20260921T014829Z-033d8c42",
+      "run_id": "random-train-20260921T014849Z-033d8c42",
       "split": "train"
     },
     {
@@ -3246,7 +3246,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 98,
-      "run_id": "oracle-calibration-20260921T014829Z-74eb3274",
+      "run_id": "oracle-calibration-20260921T014849Z-74eb3274",
       "split": "calibration"
     },
     {
@@ -3257,7 +3257,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16666666666666666,
       "n_headline_docs": 98,
-      "run_id": "majority-calibration-20260921T014829Z-145100e5",
+      "run_id": "majority-calibration-20260921T014849Z-145100e5",
       "split": "calibration"
     },
     {
@@ -3268,7 +3268,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.2078494447098161,
       "n_headline_docs": 98,
-      "run_id": "random-calibration-20260921T014829Z-07f3305b",
+      "run_id": "random-calibration-20260921T014849Z-07f3305b",
       "split": "calibration"
     },
     {
@@ -3279,7 +3279,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 97,
-      "run_id": "oracle-dev-20260921T014830Z-f4f4473a",
+      "run_id": "oracle-dev-20260921T014849Z-f4f4473a",
       "split": "dev"
     },
     {
@@ -3290,7 +3290,7 @@
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16319444444444445,
       "n_headline_docs": 97,
-      "run_id": "majority-dev-20260921T014830Z-8a3f1a32",
+      "run_id": "majority-dev-20260921T014849Z-8a3f1a32",
       "split": "dev"
     },
     {
@@ -3301,7 +3301,7 @@
       "high_risk_recall": 0.9622641509433962,
       "level_macro_f1": 0.2283140283140283,
       "n_headline_docs": 97,
-      "run_id": "random-dev-20260921T014830Z-2fe0da22",
+      "run_id": "random-dev-20260921T014849Z-2fe0da22",
       "split": "dev"
     }
   ]

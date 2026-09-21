@@ -8,7 +8,7 @@
 * ruleset `1.0.3`, standalone default level `INTERNAL`
 * rules config sha256 `9d5a973c465395d3...`
 * dataset sha256 `9442e354c3dd51dd...`
-* git `b7e94ac130fa` on `uc4/blind-review-metadata-variant` (dirty: True)
+* git `3d628de8dc00` on `uc4/blind-review-metadata-variant` (dirty: True)
 * development protocol: errors inspected on **train**; **dev** evaluated at checkpoints; **calibration** untouched until this report; every post-first-run change is in `docs/uc4/rules-changelog.md`. The rules were written by the same assistant that authored the dataset, and the train figures were used to tune three details, so **train and pooled numbers are development-contaminated**.
 * the purpose is an honest deterministic baseline, not to beat ML or an LLM.
 
@@ -19,9 +19,9 @@
 | split | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR | abstained | latency p50 / p95 ms |
 |---|---|---|---|---|---|---|---|---|---|
 | train | 391 / 71 | 0.398 [0.310, 0.485] | 0.736 [0.605, 0.825] | 0.963 | 0.621 [0.475, 0.770] | 0.755 | 0.028 | 227/416 (0.546) | 0.26 / 0.36 |
-| calibration | 98 / 18 | 0.454 [0.284, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.655 [0.333, 1.000] | 0.791 | 0.000 | 46/103 (0.447) | 0.25 / 0.42 |
-| dev | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 | 69/107 (0.645) | 0.25 / 0.37 |
-| pooled development | 586 / 107 | 0.403 [0.332, 0.473] | 0.733 [0.626, 0.812] | 0.976 | 0.627 [0.506, 0.756] | 0.763 | 0.019 | 342/626 (0.546) | 0.26 / 0.36 |
+| calibration | 98 / 18 | 0.454 [0.284, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.655 [0.333, 1.000] | 0.791 | 0.000 | 46/103 (0.447) | 0.27 / 0.69 |
+| dev | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 | 69/107 (0.645) | 0.26 / 0.37 |
+| pooled development | 586 / 107 | 0.403 [0.332, 0.473] | 0.733 [0.626, 0.812] | 0.976 | 0.627 [0.506, 0.756] | 0.763 | 0.019 | 342/626 (0.546) | 0.25 / 0.35 |
 
 Intervals are family-level percentile bootstrap intervals (95%); the pooled row rests on **107 independent families**, the per-split rows on far fewer (see the families column). HR = high-risk. Read recall together with precision and FPR; no operating point has been chosen.
 
@@ -103,10 +103,10 @@ precision 0.976 [0.920, 1.000]; recall 0.627 [0.506, 0.756]; F1 0.763 [0.661, 0.
 
 | measure | n | mean ms | p50 ms | p95 ms | max ms |
 |---|---|---|---|---|---|
-| harness wall clock per document | 626 | 0.262 | 0.257 | 0.356 | 0.626 |
-| engine-internal (classifier-reported) | 626 | 0.251 | 0.246 | 0.343 | 0.426 |
+| harness wall clock per document | 626 | 0.260 | 0.253 | 0.353 | 0.633 |
+| engine-internal (classifier-reported) | 626 | 0.249 | 0.243 | 0.341 | 0.419 |
 
-Measured p95 0.356 ms and max 0.626 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
+Measured p95 0.353 ms and max 0.633 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
 
 ## Performance by difficulty tier (all tiers, pooled)
 
@@ -135,7 +135,7 @@ Families with decoy hits: `{'hn_confidential_word_menu': 5}`
 - `cred_ci_pipeline_token` (T1, 5 docs, gold HIGHLY_CONFIDENTIAL ['CREDENTIALS_SECRETS', 'SOURCE_CODE']): missed {'SOURCE_CODE': 5}
 - `phi_discharge_summary` (T1, 5 docs, gold HIGHLY_CONFIDENTIAL ['PHI', 'PII']): missed {'PHI': 5} weak-evidence: {'PHI:phi.clinical_density': 5}
 - `phi_immunization_registry` (T1, 5 docs, gold HIGHLY_CONFIDENTIAL ['PHI', 'PII']): missed {'PHI': 5}
-- `phi_workplace_injury_report` (T1, 5 docs, gold HIGHLY_CONFIDENTIAL ['PHI', 'PII']): missed {'PHI': 5, 'PII': 5}
+- `phi_workplace_injury_report` (T1, 5 docs, gold HIGHLY_CONFIDENTIAL ['PHI', 'PII']): missed {'PII': 5, 'PHI': 5}
 - `pii_donor_list` (T1, 5 docs, gold CONFIDENTIAL ['PII']): missed {'PII': 5} weak-evidence: {'PII:pii.bulk_contact': 5}
 - `sc_docker_compose` (T1, 5 docs, gold CONFIDENTIAL ['SOURCE_CODE']): missed {'SOURCE_CODE': 3} weak-evidence: {'SOURCE_CODE:code.structure': 1}
 - `fin_board_forecast_notes` (T2, 6 docs, gold HIGHLY_CONFIDENTIAL ['FINANCIAL_PCI']): missed {'FINANCIAL_PCI': 6} weak-evidence: {'FINANCIAL_PCI:fin.nonpublic_financials': 6}
