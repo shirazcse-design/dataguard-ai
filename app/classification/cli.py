@@ -994,10 +994,14 @@ def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
     bundle = load_config(args.config_dir)
     data_dir = Path(args.data_dir or DEFAULT_DATA_DIR)
     variant = VARIANTS[args.variant]
-    out_dir = Path(args.out_dir) if args.out_dir else data_dir / variant.default_results_dir
+    # an AI review never writes into the human-review results directory
+    default_dir = variant.default_results_dir + ("_ai" if args.reviewer_kind == "ai" else "")
+    out_dir = Path(args.out_dir) if args.out_dir else data_dir / default_dir
     paired = [Path(p) for p in args.content_sheet] if args.content_sheet else None
     try:
-        report, per_sample = run([Path(p) for p in args.sheet], bundle, data_dir, variant, paired)
+        report, per_sample = run(
+            [Path(p) for p in args.sheet], bundle, data_dir, variant, paired, args.reviewer_kind
+        )
     except PackageError as e:
         print(f"ERROR {e}")
         return 1
@@ -1263,6 +1267,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         default=None,
         help="with --variant metadata: a completed content-only sheet (pairs the two reviews)",
+    )
+    rvm.add_argument(
+        "--reviewer-kind",
+        choices=["human", "ai"],
+        default="human",
+        help="ai: label the report and CSV as an AI review (not human validation); "
+        "writes to <results dir>_ai",
     )
     rvm.add_argument("--config-dir", default=None)
     rvm.add_argument("--data-dir", default=None)

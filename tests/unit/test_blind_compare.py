@@ -444,3 +444,42 @@ def test_every_markdown_table_row_has_the_same_number_of_cells_as_its_header(
             assert line.count("|") == width, line
         else:
             width = None
+
+
+# ---- AI-reviewer labelling -------------------------------------------------------------------------------------
+def test_an_ai_review_is_labelled_in_the_report_and_the_csv(package, bundle, tmp_path):
+    s = tmp_path / "ai.csv"
+    s.write_text(_sheet(package, reviewer="some-model"), encoding="utf-8")
+    report, per_sample = run([s], bundle, DATA, reviewer_kind="ai")
+    assert "AI REVIEW: NOT HUMAN VALIDATION" in report and report.startswith("# AI review")
+    assert "decision A20" in report and "must not be used to apply label" in report
+    assert "The human applied" not in report and "One human is one opinion" not in report
+    assert "One AI model is one opinion" in report
+    rows = list(csv.DictReader(io.StringIO(per_sample)))
+    assert {r["reviewer_kind"] for r in rows} == {"ai"}
+
+
+def test_the_default_human_output_is_unchanged_and_carries_no_ai_label(package, bundle, tmp_path):
+    s = tmp_path / "h.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    report, per_sample = run([s], bundle, DATA)
+    assert "AI REVIEW" not in report and report.startswith("# Blind review: gold vs human")
+    assert "reviewer_kind" not in per_sample.splitlines()[0]
+
+
+def test_an_unknown_reviewer_kind_is_refused(package, bundle, tmp_path):
+    s = tmp_path / "x.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    with pytest.raises(PackageError):
+        run([s], bundle, DATA, reviewer_kind="robot")
+
+
+def test_the_ai_cli_writes_to_a_separate_default_directory(package, tmp_path, capsys):
+    data = tmp_path / "data"
+    shutil.copytree(DATA, data)
+    s = tmp_path / "ai.csv"
+    s.write_text(_sheet(package, reviewer="some-model"), encoding="utf-8")
+    assert main(["review", "blind-compare", "--sheet", str(s), "--data-dir", str(data),
+                 "--reviewer-kind", "ai"]) == 0  # fmt: skip
+    assert (data / "review/blind_results_ai/blind_review_comparison.md").exists()
+    assert not (data / "review/blind_results").exists()

@@ -60,6 +60,18 @@ dataguard-uc4 review blind-compare --variant metadata --sheet completed_metadata
 
 Results default to `review/blind_results_metadata/`. With `--content-sheet` the report adds **"Effect of showing metadata"**: per disputed family, the human's labels in each variant, how many level/category labels changed, agreement with the gold in each variant, controls, and every changed document. It labels whether the two sheets are from the same reviewer (anchored) or different reviewers (person and metadata effects mixed). A content-only sheet is rejected by the metadata commands, and vice versa. The comparison reads only the returned sheets, the keys and the already-executed predictions; it never loads the dataset or the locked test split.
 
+## When the reviewer is an AI model
+
+```
+dataguard-uc4 review blind-compare --sheet completed.csv --reviewer-kind ai
+```
+
+Labels the report ("AI REVIEW: NOT HUMAN VALIDATION") and adds a `reviewer_kind` column to the CSV, and
+writes to `review/blind_results_ai/` so it never mixes with a human review's results. An AI sheet is a
+second opinion only: it does not satisfy the human review requirement (A20), and it must not be used
+to apply label changes A / B / C or to clear the MCP freeze criteria. The first such run is committed
+under `data/synthetic/uc4/review/blind_results_ai/` (reviewer id in the sheet: `ChatGPT-GPT-5.6-Sol`).
+
 ## Regenerate
 
 ```

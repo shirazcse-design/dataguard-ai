@@ -31,6 +31,14 @@ APPROACHES = ["rules", "ml", "llm_small", "llm_mid", "llm_large", "hybrid"]
 SMALL_SAMPLE_MIN = 25
 PATTERNS = ["all agree", "gold=human≠pred", "human=pred≠gold", "gold=pred≠human", "all differ"]
 DATASET_BANNER = "AI-generated synthetic dataset — pending human gold-label review"
+REVIEWER_KINDS = ("human", "ai")
+AI_REVIEW_BANNER = (
+    "**AI REVIEW: NOT HUMAN VALIDATION.** The blind sheet was completed by an AI model, not a person. "
+    "Every 'human' column and word below means 'the blind reviewer', here an AI model (see `reviewer_id`). "
+    "This is a second, independent AI opinion on the same taxonomy. It does NOT satisfy the human gold-label "
+    "review requirement (decision A20), and it must not be used to apply label or taxonomy changes A / B / C "
+    "or to clear the MCP freeze criteria"
+)
 Label = tuple[str, tuple[str, ...]]  # (level, sorted categories)
 
 
@@ -245,7 +253,9 @@ def _dist(items: list[str]) -> str:
     return ", ".join(f"{k} ×{v}" for k, v in Counter(items).most_common()) or "-"
 
 
-def csv_rows(all_rows: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, str]]]:
+def csv_rows(
+    all_rows: list[dict[str, Any]], reviewer_kind: str = "human"
+) -> tuple[list[str], list[dict[str, str]]]:
     cols = ["reviewer_id", "variant", "review_order", "sample_id", "role", "family_id", "split", "gold_level",
             "gold_categories", "gold_acceptable_alternative_levels", "human_level", "human_categories",
             "human_confidence", "human_taxonomy_ambiguity", "human_alternative_levels",
@@ -253,6 +263,10 @@ def csv_rows(all_rows: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, 
             "cats_human_eq_gold", "lenient_level_match"]  # fmt: skip
     for a in APPROACHES:
         cols += [f"pred_{a}", f"level_pattern_{a}", f"cats_pattern_{a}"]
+    if reviewer_kind != "human":
+        cols.insert(
+            1, "reviewer_kind"
+        )  # only non-default kinds add the column: human output is unchanged
 
     def tf(v: bool | None) -> str:
         return "" if v is None else str(v).upper()
@@ -277,6 +291,8 @@ def csv_rows(all_rows: list[dict[str, Any]]) -> tuple[list[str], list[dict[str, 
             d[f"pred_{a}"] = _lab(p["label"]) if p["status"] == "label" else p["status"]
             d[f"level_pattern_{a}"] = p.get("level_pattern", "")
             d[f"cats_pattern_{a}"] = p.get("cats_pattern", "")
+        if reviewer_kind != "human":
+            d["reviewer_kind"] = reviewer_kind
         out.append(d)
     return cols, out
 
@@ -427,17 +443,27 @@ def render_report(
     per_reviewer: list[list[dict[str, Any]]],
     input_hashes: dict[str, str],
     extra_sections: list[list[str]] | None = None,
+    reviewer_kind: str = "human",
 ) -> str:
     m = package["manifest"]
     meta_variant = package["variant"].shows_metadata
     L: list[str] = []
     add = L.append
+    ai = reviewer_kind == "ai"
+    kind_title = "AI review" if ai else "Blind review"
     add(
-        "# Blind review (source metadata shown): gold vs human vs model predictions"
+        f"# {kind_title} (source metadata shown): gold vs blind reviewer vs model predictions"
+        if meta_variant and ai
+        else f"# {kind_title}: gold vs blind reviewer vs model predictions"
+        if ai
+        else "# Blind review (source metadata shown): gold vs human vs model predictions"
         if meta_variant
         else "# Blind review: gold vs human vs model predictions"
     )
     add("")
+    if ai:
+        add(f"> {AI_REVIEW_BANNER}.")
+        add("")
     add(
         f"> **{DATASET_BANNER}.** Read-only comparison. No label, taxonomy, schema v1.0, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score."
     )
@@ -457,12 +483,20 @@ def render_report(
     add(
         "* Every table is **SMALL_SAMPLE** (fewer than 25 per cell), and the disputed set is 4 independent decisions, not 21: counts are shown, not rates with intervals."
     )
-    add(
-        "* The human applied the same taxonomy and guidelines that produced the gold: agreement shows consistent application of the rules, not that the rules are right. A human decision is required before any label or taxonomy change."
-    )
-    add(
-        "* One human is one opinion; a single reviewer cannot separate a dataset problem from a reviewer idiosyncrasy."
-    )
+    if ai:
+        add(
+            "* The reviewer is an AI model that applied the same taxonomy and guidelines that produced the gold: agreement shows consistent application of the rules, not that the rules are right, and a model can share a reading with the classifiers that a person would not. A human decision is required before any label or taxonomy change."
+        )
+        add(
+            "* One AI model is one opinion, and it was not run under controlled conditions (prompt, model version and any tool use are not recorded here); it cannot separate a dataset problem from that model's idiosyncrasy."
+        )
+    else:
+        add(
+            "* The human applied the same taxonomy and guidelines that produced the gold: agreement shows consistent application of the rules, not that the rules are right. A human decision is required before any label or taxonomy change."
+        )
+        add(
+            "* One human is one opinion; a single reviewer cannot separate a dataset problem from a reviewer idiosyncrasy."
+        )
     add("")
     add("Input files (sha256):")
     add("")
@@ -590,11 +624,14 @@ def run(
     data_dir: Path | str = DEFAULT_DATA_DIR,
     variant: Variant = CONTENT,
     content_sheets: list[Path] | None = None,
+    reviewer_kind: str = "human",
 ) -> tuple[str, str]:
     """Return (report markdown, per-sample csv). Raises PackageError if anything cannot be trusted.
 
     `content_sheets` (only with the metadata variant) adds the paired "effect of showing metadata" section.
     """
+    if reviewer_kind not in REVIEWER_KINDS:
+        raise PackageError(f"reviewer_kind must be one of {REVIEWER_KINDS}, got {reviewer_kind!r}")
     if content_sheets and not variant.shows_metadata:
         raise PackageError("content-only sheets can be paired only with the metadata variant")
     package = load_package(data_dir, variant)
@@ -626,5 +663,6 @@ def run(
             hashes[CONTENT.key_file] = cpkg["manifest"]["key_sha256"]
             for rv, rows in zip(reviewers, per_reviewer, strict=True):
                 extra.append(paired_section(crows, rows, crv["reviewer_id"], rv["reviewer_id"]))
-    cols, rows = csv_rows([r for rs in per_reviewer for r in rs])
-    return render_report(package, reviewers, per_reviewer, hashes, extra), to_csv(cols, rows)
+    cols, rows = csv_rows([r for rs in per_reviewer for r in rs], reviewer_kind)
+    report = render_report(package, reviewers, per_reviewer, hashes, extra, reviewer_kind)
+    return report, to_csv(cols, rows)
