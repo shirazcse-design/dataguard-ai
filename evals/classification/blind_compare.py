@@ -95,18 +95,21 @@ def load_package(data_dir: Path | str, variant: Variant = CONTENT) -> dict[str, 
         problems.append("the blind key differs from the one the package was built with")
     if _sha(base / variant.sheet_file) != manifest["reviewer_files_sha256"][variant.sheet_file]:
         problems.append("the blind reviewer sheet differs from the one the package was built with")
-    for rel in PRIOR_ARTIFACTS:
+    for rel in PRIOR_ARTIFACTS if "adjudication_artifacts_sha256" in manifest else []:
         if _sha(base / rel) != manifest["adjudication_artifacts_sha256"][rel]:
             problems.append(f"{rel} changed since the package was built")
     if problems:
         raise PackageError("package integrity check failed:\n  " + "\n  ".join(problems))
     key = _rows((base / variant.key_file).read_text(encoding="utf-8"))
-    adjudication = {
-        r["sample_id"]: r for r in _rows((base / ADJUDICATION_SHEET).read_text(encoding="utf-8"))
-    }
-    missing = [k["sample_id"] for k in key if k["sample_id"] not in adjudication]
-    if missing:
-        raise PackageError(f"no executed predictions for {missing}")
+    adjudication: dict[str, dict[str, str]] = {}
+    if variant.kind != "round2":  # Round 2 carries no executed model predictions
+        adjudication = {
+            r["sample_id"]: r
+            for r in _rows((base / ADJUDICATION_SHEET).read_text(encoding="utf-8"))
+        }
+        missing = [k["sample_id"] for k in key if k["sample_id"] not in adjudication]
+        if missing:
+            raise PackageError(f"no executed predictions for {missing}")
     return {
         "variant": variant,
         "manifest": manifest,
@@ -190,7 +193,7 @@ def compare(package: dict[str, Any], reviewer: dict[str, Any]) -> list[dict[str,
             "preds": {},
         }
         for a in APPROACHES:
-            status, label = parse_pred(package["adjudication"][sid][f"pred_{a}"])
+            status, label = parse_pred(package["adjudication"].get(sid, {}).get(f"pred_{a}", ""))
             entry: dict[str, Any] = {"status": status, "label": label}
             if label is not None and human is not None:
                 entry["level_pattern"] = triple_pattern(gold[0], human[0], label[0])

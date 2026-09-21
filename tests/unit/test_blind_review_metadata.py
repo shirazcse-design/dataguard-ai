@@ -74,10 +74,12 @@ def _sheet(pkg, reviewer="rev-1", by_family=None, override=None):
 
 # ---- what the variant is -------------------------------------------------------------------------------------
 def test_the_variants_are_registered_and_kept_apart():
-    assert set(VARIANTS) == {"content", "metadata"}
+    assert set(VARIANTS) == {"content", "metadata", "round2"}
     assert CONTENT.shows_metadata is False and METADATA.shows_metadata is True
     for f in ("sheet_file", "packet_file", "key_file", "manifest_file"):
-        assert getattr(CONTENT, f) != getattr(METADATA, f)
+        paths = {getattr(v, f) for v in VARIANTS.values()}
+        assert len(paths) == len(VARIANTS), f  # no two variants share a file
+    assert VARIANTS["round2"].shows_metadata is False and VARIANTS["round2"].kind == "round2"
     assert Path(METADATA.blind_dir) not in Path(METADATA.key_dir).parents
     assert CONTENT.default_results_dir != METADATA.default_results_dir
     assert (

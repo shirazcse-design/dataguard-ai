@@ -1,0 +1,52 @@
+{
+  "controls_per_level": 3,
+  "dataset_banner": "AI-generated synthetic dataset \u2014 pending human gold-label review",
+  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "decisions_file": "review/adjudication_decisions.yaml",
+  "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
+  "docs_per_family": 1,
+  "extra_docs": {
+    "amb_aggregate_health_stats": 3
+  },
+  "git_branch": "uc4/blind-review-metadata-variant",
+  "git_commit": "a9c9bfa7e0c58adbd25eb0b8190e2d6a27881280",
+  "git_dirty": true,
+  "key_sha256": "f3208ddfc1b5e51d7c30192ab963cf2a2c7adbaa4655c2d36d0ec851990b74c0",
+  "labels_changed": false,
+  "leak_check": "passed",
+  "locked_test_split_read": false,
+  "n_controls": 12,
+  "n_items": 28,
+  "n_review": 16,
+  "order_seed": "uc4-blind-review-v1-round2-order",
+  "purpose": "round 2 blind human review of the ambiguous and disputed families (development splits only); reviewer must not open this directory",
+  "review_families": [
+    "amb_aggregate_health_stats",
+    "amb_board_minutes_routine",
+    "amb_conference_talk_draft",
+    "amb_customer_case_study_draft",
+    "amb_employee_directory",
+    "amb_hashed_password_dump",
+    "amb_incident_postmortem_internal",
+    "amb_internal_tooling_source",
+    "amb_research_paper_draft",
+    "amb_salary_bands",
+    "amb_vendor_contract_summary",
+    "hn_business_case_study",
+    "hn_public_api_docs_placeholder_keys",
+    "phi_prescription_record"
+  ],
+  "reviewer_files_sha256": {
+    "review/blind_round2/blind_review_round2_packet.md": "88335d7fc622ea0e2c7f50c6fc9154abcdfcb8f8d1d042feda1caf3ecfc1becd",
+    "review/blind_round2/blind_review_round2_sheet.csv": "d9f0ef04506dd98b03dfae9ba9427c53dff429a65957c4e96f4cc18c77c7a7a9"
+  },
+  "round": 2,
+  "seed": "uc4-blind-review-v1-round2",
+  "splits_loaded": [
+    "train",
+    "calibration",
+    "dev"
+  ],
+  "taxonomy_version": "1.0.0",
+  "variant": "round2"
+}

@@ -62,6 +62,7 @@ class Variant:
     shows_metadata: bool
     sheet_name: str
     packet_name: str
+    kind: str = "disputed"  # "disputed": the four disputed families + controls; "round2": see select_round2_items
 
     @property
     def sheet_file(self) -> str:
@@ -101,7 +102,17 @@ METADATA = Variant(
     ("sample_id", "filename", "source_metadata", "content"), "uc4-blind-review-v1-metadata-order", True,
     "blind_review_metadata_sheet.csv", "blind_review_metadata_packet.md",
 )  # fmt: skip
-VARIANTS = {v.name: v for v in (CONTENT, METADATA)}
+ROUND2_SEED = "uc4-blind-review-v1-round2"
+ROUND2 = Variant(
+    "round2", "review/blind_round2", "review/blind_round2_key", tuple(INPUT_COLUMNS),
+    "uc4-blind-review-v1-round2-order", False,
+    "blind_review_round2_sheet.csv", "blind_review_round2_packet.md", kind="round2",
+)  # fmt: skip
+# One document per family, except a family under specific scrutiny: its documents differ in the numbers
+# that a small-cell rule would depend on (cell counts of 3-9), so several are shown.
+ROUND2_DOCS_PER_FAMILY = 1
+ROUND2_EXTRA_DOCS = {"amb_aggregate_health_stats": 3}
+VARIANTS = {v.name: v for v in (CONTENT, METADATA, ROUND2)}
 KEY_COLUMNS = [
     "review_order", "sample_id", "role", "family_id", "split", "tier", "gold_level", "gold_categories",
     "gold_ambiguity_flag", "gold_acceptable_alternative_levels",
@@ -155,6 +166,45 @@ def select_items(
             if len(chosen) < controls_per_level and d not in chosen:
                 chosen.append(d)
         items += [{"doc": d, "role": "control"} for d in chosen]
+    items.sort(key=lambda it: _order_key(it["doc"].doc_id, order_seed or seed))
+    for i, it in enumerate(items, 1):
+        it["order"] = i
+    return items
+
+
+def round2_families(docs: list[DatasetDocument], disputed: list[str]) -> list[str]:
+    """Round 2 reviews every family in the development splits that carries an ambiguity flag, plus the
+    Round 1 disputed families (which have had no independent human review)."""
+    assert all(d.split in REVIEW_SPLITS for d in docs), "the locked test split must never be loaded"
+    return sorted({d.family_id for d in docs if d.ambiguity_flag} | set(disputed))
+
+
+def select_round2_items(
+    docs: list[DatasetDocument],
+    families: list[str],
+    seed: str = ROUND2_SEED,
+    controls_per_level: int = CONTROLS_PER_LEVEL,
+    order_seed: str | None = None,
+) -> list[dict[str, Any]]:
+    """`ROUND2_DOCS_PER_FAMILY` documents per family (more for `ROUND2_EXTRA_DOCS`), chosen by a seeded hash,
+    plus the same kind of undisputed controls as Round 1 (dev split, no T5, stratified by gold level).
+    Only the development splits are loaded; the locked test split is never read."""
+    assert all(d.split in REVIEW_SPLITS for d in docs), "the locked test split must never be loaded"
+    by_family: dict[str, list[DatasetDocument]] = {}
+    for d in docs:
+        if d.family_id in set(families):
+            by_family.setdefault(d.family_id, []).append(d)
+    items: list[dict[str, Any]] = []
+    for fam in sorted(by_family):
+        n = ROUND2_EXTRA_DOCS.get(fam, ROUND2_DOCS_PER_FAMILY)
+        chosen = sorted(by_family[fam], key=lambda d: _order_key(d.doc_id, seed))[:n]
+        items += [{"doc": d, "role": "review"} for d in chosen]
+    controls = [
+        it
+        for it in select_items(docs, families, seed, controls_per_level, order_seed)
+        if it["role"] == "control"
+    ]
+    items += controls
     items.sort(key=lambda it: _order_key(it["doc"].doc_id, order_seed or seed))
     for i, it in enumerate(items, 1):
         it["order"] = i
@@ -415,7 +465,12 @@ def build_package(
     """Return (files, manifest). `files` maps a data-dir-relative path to its text."""
     docs = load_documents(data_dir, splits=REVIEW_SPLITS)
     disputed = disputed_families(data_dir)
-    items = select_items(docs, disputed, order_seed=variant.order_seed)
+    if variant.kind == "round2":
+        families = round2_families(docs, disputed)
+        items = select_round2_items(docs, families, order_seed=variant.order_seed)
+    else:
+        families = disputed
+        items = select_items(docs, disputed, order_seed=variant.order_seed)
     sheet = to_csv(sheet_rows(items, variant), variant.sheet_columns)
     packet = packet_markdown(bundle, items, variant)
     problems = leak_check({variant.sheet_file: sheet, variant.packet_file: packet}, docs, bundle)
@@ -457,6 +512,24 @@ def build_package(
         "git_branch": git.get("branch"),
         "git_dirty": git.get("dirty"),
     }
+    if variant.kind == "round2":
+        manifest["variant"] = variant.name
+        manifest["round"] = 2
+        manifest["seed"] = ROUND2_SEED
+        manifest["order_seed"] = variant.order_seed
+        manifest["purpose"] = (
+            "round 2 blind human review of the ambiguous and disputed families (development splits only); "
+            "reviewer must not open this directory"
+        )
+        manifest["review_families"] = families
+        manifest["docs_per_family"] = ROUND2_DOCS_PER_FAMILY
+        manifest["extra_docs"] = ROUND2_EXTRA_DOCS
+        del manifest["n_disputed"]
+        manifest["n_review"] = roles["review"]
+        del manifest["disputed_families"]
+        # Round 2 is compared with the gold and between reviewers only, so it does not depend on the
+        # Round 1 adjudication artifacts.
+        del manifest["adjudication_artifacts_sha256"]
     if variant.shows_metadata:
         manifest["variant"] = variant.name
         manifest["shows_metadata"] = True

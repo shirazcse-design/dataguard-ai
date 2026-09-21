@@ -70,5 +70,6 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/classification/gold_review.py" = ["E501"]
 "evals/classification/blind_review.py" = ["E501"]
 "evals/classification/blind_compare.py" = ["E501"]
+"evals/classification/blind_compare_round2.py" = ["E501"]
 # Inline CSS and HTML templates.
 "observability/dashboard.py" = ["E501"]

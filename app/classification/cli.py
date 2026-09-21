@@ -956,8 +956,10 @@ def _cmd_review_blind_package(args: argparse.Namespace) -> int:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
         print(f"wrote {path}")
-    n, nd, nc = manifest["n_items"], manifest["n_disputed"], manifest["n_controls"]
-    print(f"{n} items ({nd} disputed + {nc} controls)")
+    n, nc = manifest["n_items"], manifest["n_controls"]
+    nd = manifest.get("n_disputed", manifest.get("n_review"))
+    kind = "review" if "n_review" in manifest else "disputed"
+    print(f"{n} items ({nd} {kind} + {nc} controls)")
     return 0
 
 
@@ -988,6 +990,7 @@ def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
     from pathlib import Path
 
     from evals.classification.blind_compare import PackageError, run
+    from evals.classification.blind_compare_round2 import run_round2
     from evals.classification.blind_review import VARIANTS
     from evals.classification.dataset.build import DEFAULT_DATA_DIR
 
@@ -999,15 +1002,20 @@ def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
     out_dir = Path(args.out_dir) if args.out_dir else data_dir / default_dir
     paired = [Path(p) for p in args.content_sheet] if args.content_sheet else None
     try:
-        report, per_sample = run(
-            [Path(p) for p in args.sheet],
-            bundle,
-            data_dir,
-            variant,
-            paired,
-            args.reviewer_kind,
-            args.note,
-        )
+        if variant.kind == "round2":
+            report, per_sample = run_round2(
+                [Path(p) for p in args.sheet], bundle, data_dir, args.reviewer_kind, args.note
+            )
+        else:
+            report, per_sample = run(
+                [Path(p) for p in args.sheet],
+                bundle,
+                data_dir,
+                variant,
+                paired,
+                args.reviewer_kind,
+                args.note,
+            )
     except PackageError as e:
         print(f"ERROR {e}")
         return 1
@@ -1244,7 +1252,10 @@ def build_parser() -> argparse.ArgumentParser:
     rvp = rv_sub.add_parser("blind-package", help="write the blind human-review package")
     rvp.add_argument("--config-dir", default=None)
     rvp.add_argument(
-        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+        "--variant",
+        choices=["content", "metadata", "round2"],
+        default="content",
+        help="which blind package",
     )
     rvp.add_argument("--data-dir", default=None)
     rvp.set_defaults(func=_cmd_review_blind_package)
@@ -1253,7 +1264,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     rvc.add_argument("--sheet", required=True)
     rvc.add_argument(
-        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+        "--variant",
+        choices=["content", "metadata", "round2"],
+        default="content",
+        help="which blind package",
     )
     rvc.add_argument("--config-dir", default=None)
     rvc.add_argument("--data-dir", default=None)
@@ -1266,7 +1280,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     rvm.add_argument("--out-dir", default=None)
     rvm.add_argument(
-        "--variant", choices=["content", "metadata"], default="content", help="which blind package"
+        "--variant",
+        choices=["content", "metadata", "round2"],
+        default="content",
+        help="which blind package",
     )
     rvm.add_argument(
         "--content-sheet",
