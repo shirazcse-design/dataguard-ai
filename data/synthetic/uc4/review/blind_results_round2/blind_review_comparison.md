@@ -1,6 +1,6 @@
 # Round 2 blind review: gold vs blind reviewer(s)
 
-> **Provenance note (recorded verbatim at the operator's request):** Reviewer id 'Rahul' (file received as blind_review_round2_sheet_Rahul_approved.csv, 2026-09-21). Checks by the analyst: the sheet is well-formed; no rationale is a duplicate of any earlier sheet (highest similarity 0.86, none >= 0.9; the Round 1 duplicates were 1.00). Whether the reviewer worked independently and without AI help is the coordinator's statement and cannot be verified from the file.
+> **Provenance note (recorded verbatim at the operator's request):** Reviewer id 'Rahul'; the sheet is data/synthetic/uc4/review/returned/blind_review_round2_sheet.csv, uploaded by the coordinator on 2026-09-21 (received as blind_review_round2_sheet_Rahul_approved.csv). Checks by the analyst: the sheet is well-formed; no rationale is a duplicate of any earlier sheet (highest similarity 0.86, none >= 0.9; the Round 1 duplicates were 1.00). Whether the reviewer worked independently and without AI help is the coordinator's statement and cannot be verified from the file.
 
 > **AI-generated synthetic dataset — pending human gold-label review.** Read-only comparison. No label, taxonomy, schema, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score.
 
@@ -13,9 +13,9 @@
 
 Input files (sha256):
 
+* `blind_review_round2_sheet.csv`: `7f78bde2dfcaa4248a29cec4745406550e4b646c5a189e40d05e894078b60f64`
 * `review/blind_round2/blind_review_round2_sheet.csv`: `d9f0ef04506dd98b03dfae9ba9427c53dff429a65957c4e96f4cc18c77c7a7a9`
 * `review/blind_round2_key/blind_review_key.csv`: `f3208ddfc1b5e51d7c30192ab963cf2a2c7adbaa4655c2d36d0ec851990b74c0`
-* `round2.rahul.csv`: `7f78bde2dfcaa4248a29cec4745406550e4b646c5a189e40d05e894078b60f64`
 
 ## Reviewer `Rahul` (last review date 2026-09-21)
 
