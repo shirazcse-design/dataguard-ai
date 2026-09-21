@@ -1,0 +1,200 @@
+sample_id,filename,content,human_level,human_categories,human_confidence,human_rationale,human_taxonomy_ambiguity,human_alternative_levels,human_insufficient_information,reviewer_id,review_date
+uc4-9d42fc85c9,authentication.md,"# Quickstart
+
+Create an API key in your dashboard, then export it:
+
+    export API_KEY=YOUR_API_KEY_HERE
+
+Example request:
+
+    curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.pembertoncapital.example/v1/status
+
+For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
+",PUBLIC,NONE,high,"Public-style quickstart; all credential strings are placeholders or documented examples, not live secrets.",no,,no,Rahul,2026-09-21
+uc4-9a94d05821,Vendor_Invoice_Tidewater.pdf,"INVOICE INV-2027-4294
+From: Tidewater Energy
+To: Oakhurst Semiconductors
+Date: 2025-02-04
+Services: consulting, 48 hours
+Amount due: $11,667
+
+Remit payment by bank transfer:
+Routing: 551692569  Account: 50192561070
+",HIGHLY_CONFIDENTIAL,FINANCIAL_PCI,high,"The invoice contains full routing and bank account numbers, which meet Financial / PCI and its Highly Confidential floor.",no,,no,Rahul,2026-09-21
+uc4-fb41e91266,Programme_Outcomes_Q3.docx,"Harborview Health Center programme outcomes - Q3
+
+Of 874 enrolled patients, 5 in the under-30 group had a hospital admission and 4 in the over-80 group discontinued treatment. In the Valencia site the smallest subgroup (n=4) showed the largest improvement.
+
+Data are aggregated and contain no names or identifiers.
+",INTERNAL,NONE,medium,"The health outcomes are aggregated and explicitly contain no identifiers, so PHI does not apply; no public-release intent is stated.",no,,no,Rahul,2026-09-21
+uc4-cfac4adf77,New_Hire_Form_2027.pdf,"Mistral Payments - Employee Data Sheet (blank template, revision 2)
+Legal name ............................
+Tax identification no. ................
+Birth date ............................
+Residential address ...................
+Bank details for payroll ..............
+Please fill in every line and hand the form to Marisol Alvarez in HR. Do not email completed forms.
+",INTERNAL,NONE,high,This is a blank employee form. Empty fields are specifically excluded from PII and contain no actual financial data.,no,,no,Rahul,2026-09-21
+uc4-dd34b9e9fe,Merchant_Settlement_11.txt,"Chargeback review - April 2028
+case 3303: card 6011114419516482 amount $643 reason: fraud
+case 6341: card 3528-0058-3206-1150 amount $554 reason: duplicate charge
+case 5423: card 4111-1132-5849-7766 amount $632 reason: item not received
+",HIGHLY_CONFIDENTIAL,FINANCIAL_PCI,high,"Complete payment-card numbers appear in the chargeback record, clearly meeting Financial / PCI.",no,,no,Rahul,2026-09-21
+uc4-791425f3af,Lab_Notebook_11.docx,"Research notebook - week 35
+
+Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference. Error dropped by about 66.6% in all 10 test runs. To our knowledge nobody has reported this approach.
+Next: repeat on the second prototype, then talk to Willa Nakamura in Legal about protecting it before we present anywhere.
+",CONFIDENTIAL,INTELLECTUAL_PROPERTY,high,"The notebook describes a novel unpublished method and results and mentions protecting the work before presentation, meeting Intellectual Property.",no,,no,Rahul,2026-09-21
+uc4-8a7180ec97,cleanup_tool.py,"# helper for the weekly ops report
+import csv
+HOST = ""db-12.corp.example""
+
+def load_rows(path):
+    with open(path) as f:
+        return list(csv.DictReader(f))
+
+def summarise(rows):
+    return {""count"": len(rows), ""hosts"": sorted({r[""host""] for r in rows})}
+",CONFIDENTIAL,SOURCE_CODE,medium,"The file contains operational Python logic and an internal host, which reasonably fits non-public Source Code.",yes,INTERNAL,no,Rahul,2026-09-21
+uc4-4fb7c238e1,app_trace_46.txt,"2026-01-12 09:14:02 INFO  request GET /v1/accounts status=200 user=svc-billing
+2026-09-12 09:14:02 DEBUG auth header Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdmMtMTMyMyIsImRnIjoic3ludGhldGljIiwiZXhwIjoxOTAwMDAwMDAwfQ.I1uT8f2yF1fyu6B8yOxG5L6kTwxBcRIan85LieJFvqh
+2027-11-24 09:14:03 INFO  request POST /v1/transfers status=202 user=svc-billing
+",HIGHLY_CONFIDENTIAL,CREDENTIALS_SECRETS,high,"The trace exposes a complete live-looking bearer token, which meets Credentials / Secrets.",no,,no,Rahul,2026-09-21
+uc4-8d31d6cc41,Vendor_Terms_2028.docx,"Contract summary - Emberlight Cloud
+
+Term: 5 years from June 2028. Annual fee: $3.8M. Payment: net 50 days. Termination for convenience with 71 days' notice. Liability capped at annual fees. Auto-renews unless notice is given 68 days before expiry.
+",CONFIDENTIAL,NONE,high,"The contract contains non-public multi-million-dollar commercial terms whose disclosure could harm the organization, but no named category clearly applies.",no,,no,Rahul,2026-09-21
+uc4-205126d683,Programme_Outcomes_Q4.docx,"Meadow Pediatrics programme outcomes - Q4
+
+Of 825 enrolled patients, 6 in the under-30 group had a hospital admission and 6 in the over-80 group discontinued treatment. In the Ottawa site the smallest subgroup (n=3) showed the largest improvement.
+
+Data are aggregated and contain no names or identifiers.
+",INTERNAL,NONE,medium,"The document explicitly describes aggregated, non-identifiable health outcomes, so PHI does not apply and Internal is the default.",no,,no,Rahul,2026-09-21
+uc4-14696d668c,Cohort_Summary_2028.pdf,"Riverside Family Clinic programme outcomes - Q1
+
+Of 722 enrolled patients, 3 in the under-30 group had a hospital admission and 7 in the over-80 group discontinued treatment. In the Kraków site the smallest subgroup (n=3) showed the largest improvement.
+
+Data are aggregated and contain no names or identifiers.
+",INTERNAL,NONE,medium,"The clinic statistics are aggregated and explicitly de-identified; without public-release intent, Internal is appropriate.",no,,no,Rahul,2026-09-21
+uc4-19c5bd1307,Pharmacy_Log_November.csv,"PRESCRIPTION RECORD
+Patient: Theo Bianchi  (MRN-9952462)
+Filled: 2026-12-26
+Medication: sertraline 50 mg - 18 day supply, indication generalized anxiety disorder
+Pharmacist: Anneliese Oduya
+",HIGHLY_CONFIDENTIAL,PHI,high,"A named patient and MRN are linked to medication and diagnosis, clearly meeting PHI.",no,,no,Rahul,2026-09-21
+uc4-c8334a8e38,Hiring_FAQ_2026.md,"Careers at Yewtree Retail - Frequently Asked Questions
+
+Q: Where are your offices?
+A: We have offices in Austin, Kraków and Calgary, and many roles can be done remotely.
+
+Q: How long does the hiring process take?
+A: Most candidates hear from us within 4 business days of applying, and the full process typically takes 2 weeks.
+
+Q: Do you sponsor work visas?
+A: Yes, for many engineering and research roles. Ask your recruiter for details.
+
+Apply at www.yewtreeretail.example/careers. We are an equal opportunity employer.
+",PUBLIC,NONE,high,"The careers FAQ targets external applicants and points to a public careers page, establishing public-release intent.",no,,no,Rahul,2026-09-21
+uc4-6454537dc7,Weekly_Notes_Facilities.docx,"Facilities team sync - Thursday
+
+Present: Yusuf Mbeki, Rohan Choudhury, Yusuf Montgomery
+
+Progress
+- Finished the quarterly report template
+- Updated the onboarding checklist
+- Fixed the broken link on the internal wiki
+
+Blockers
+- Waiting on a review of the vendor evaluation checklist
+
+Next week: plan the team offsite in Porto, schedule the process retrospective.
+",INTERNAL,NONE,high,Routine Facilities meeting notes contain ordinary internal operational information and no defined sensitive category.,no,,no,Rahul,2026-09-21
+uc4-66c7774ba3,1on1_Notes_Oluwaseun.docx,"One-to-one notes - Oluwaseun Hargrove (Legal)
+
+Oluwaseun told me in confidence that they are going through a divorce and are also waiting on the outcome of an immigration application, which is why they have asked to work from Leeds for a few months.
+I said I would keep this between us and HR. Agreed a lighter workload until December.
+",CONFIDENTIAL,PII,high,"Private divorce and immigration circumstances are tied to a named employee, directly meeting the PII definition.",no,,no,Rahul,2026-09-21
+uc4-633f3b10fe,db_client.py,"// Internal - Inkwell Aerospace
+const apiKey = process.env.PAYMENTS_API_KEY;
+if (!apiKey) {
+  throw new Error(""PAYMENTS_API_KEY is not set"");
+}
+const client = new PaymentsClient({ apiKey });
+",CONFIDENTIAL,SOURCE_CODE,high,"The file is explicitly internal code. It reads a key from an environment variable rather than containing the secret, so only Source Code applies.",no,,no,Rahul,2026-09-21
+uc4-ecb3c33352,Careers_FAQ.html,"Join Alderbrook Networks
+
+We are hiring a Architect in Data Science to work with a small team on fleet tracker products. You will collaborate with customers, ship features and help shape our roadmap.
+
+What we offer: flexible working, learning budget, and a friendly team in Lyon.
+How to apply: send a short note and your resume through our public careers page.
+",PUBLIC,NONE,high,This recruiting advertisement directs applicants to a public careers page and is clearly intended for public distribution.,no,,no,Rahul,2026-09-21
+uc4-97a4c07fb4,New_Hire_Form_2026.pdf,"Umberton Foods - Employee Data Sheet (blank template, revision 5)
+Legal name ............................
+Tax identification no. ................
+Birth date ............................
+Residential address ...................
+Bank details for payroll ..............
+Please fill in every line and hand the form to Leila Haddad in HR. Do not email completed forms.
+",INTERNAL,NONE,high,The employee data sheet is a blank template; empty personal and bank fields do not constitute actual PII or financial data.,no,,no,Rahul,2026-09-21
+uc4-de0bb4eb1c,Postmortem_177.docx,"Postmortem - partial outage on Wednesday
+
+Summary: the primary database host auth-01.corp.example ran out of disk after a batch job wrote unexpected temporary files. Failover to db-02.corp.example took 34 minutes because the replica lagged.
+Impact: about 9.0% of requests failed for 85 minutes.
+Actions: add disk alerts, cap batch temp usage, rehearse failover quarterly.
+",CONFIDENTIAL,NONE,medium,"The postmortem reveals internal hosts, outage impact and operational weaknesses, making external disclosure plausibly harmful, though no named category clearly applies.",yes,INTERNAL,no,Rahul,2026-09-21
+uc4-2154faf7ae,Join_Foxglove.txt,"Join Foxglove Devices
+
+We are hiring a Engineer in Legal to work with a small team on fleet tracker products. You will collaborate with customers, ship features and help shape our roadmap.
+
+What we offer: flexible working, learning budget, and a friendly team in Valencia.
+How to apply: send a short note and your resume through our public careers page.
+",PUBLIC,NONE,high,"The hiring notice explicitly directs applicants to a public careers page, indicating public-release intent.",no,,no,Rahul,2026-09-21
+uc4-fac2c886c3,Case_Study_Merger_Horizon.pdf,"Case study: the Emberlight Cloud-Elmsworth Mobility merger
+
+In 2016, Emberlight Cloud acquired Elmsworth Mobility in one of the largest deals in the precision components industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
+
+Discussion questions: Was the price justified? What would you have done differently in integration?
+",INTERNAL,NONE,medium,"This is a historical completed-merger case rather than non-public future strategy. Public status is not explicit, so Internal is the default.",yes,PUBLIC,no,Rahul,2026-09-21
+uc4-f01402e5c4,Customer_Story_2028.docx,"DRAFT customer story - awaiting customer approval
+
+Quillon Holdings reduced downtime by 26.1% after adopting our edge gateway. ""We expected a long rollout, but the team was live in weeks,"" said Gwendolyn Halvorsen, Senior Analyst at Quillon Holdings.
+Marketing will publish once the customer signs off on the wording and the figures.
+",CONFIDENTIAL,NONE,medium,The customer story is awaiting customer approval and is therefore not yet approved for public release; the non-public customer results make Confidential defensible.,yes,INTERNAL,no,Rahul,2026-09-21
+uc4-da9e1d43b1,Employee_Directory_2027.xlsx,"name,title,department,work_email,office
+Sabine Pellegrino,Senior Analyst,Sales,sabine.pellegrino@bellhavenhealth.example,Denver
+Hassan Sokolov,Specialist,Data Science,hassan.sokolov@bellhavenhealth.example,Denver
+Marcus Ramanathan,Architect,Operations,marcus.ramanathan@bellhavenhealth.example,Bristol
+Pavel Jovanovic,Staff Engineer,Human Resources,pavel.jovanovic@bellhavenhealth.example,Bristol
+",INTERNAL,NONE,high,"Only business names, titles, departments, work emails and offices are listed; business contact details alone are explicitly excluded from PII.",no,,no,Rahul,2026-09-21
+uc4-31b9634466,legacy_accounts_72.csv,"username,password_hash
+Bruno_80,$2b$12$ozFhYBahu2ZBxTamq3fOsGlAbFlbTgGMKN8B0Tye4Skau0Gt3CcQV
+Keiko_68,$2b$12$ndDP6MpFdZkFnNCMAe9jM4K9iYxMspYf9xbjIAgBaGra3rkwTA5S4
+Jasmine_77,$2b$12$aDUWrsO7eoSLhMwLJ7zwKxK4aRipBkJIH5Zwd4kKvuzPpcvF7G3xn
+",CONFIDENTIAL,NONE,medium,"Usernames and password hashes are sensitive security information, but hashes are not clearly live passwords, keys or tokens under the Credentials / Secrets definition.",yes,HIGHLY_CONFIDENTIAL,no,Rahul,2026-09-21
+uc4-27c61a57f0,Talk_Draft_Seattle.docx,"Talk outline for the Seattle conference
+
+We will present our approach to on-device calibration, including the feedback structure and the accuracy gains we measured across 21 units.
+Legal has cleared a general description; the detailed algorithm is not to be shown. Slides due December.
+",CONFIDENTIAL,INTELLECTUAL_PROPERTY,medium,"The draft talk discusses a non-public technical approach and measured results before presentation, fitting unpublished technical Intellectual Property.",yes,INTERNAL,no,Rahul,2026-09-21
+uc4-bea9a6819d,Manuscript_Ironclad.docx,"Draft manuscript - not yet submitted
+
+Abstract. We propose a self-calibrating estimator for low-cost sensors and show that it reduces drift by 41.7% on a benchmark of 37 devices. The method requires no reference standard and runs on commodity hardware.
+We plan to submit to a peer-reviewed venue once co-authors have approved the text.
+",CONFIDENTIAL,INTELLECTUAL_PROPERTY,high,"The unsubmitted manuscript describes a novel method and unpublished research results, directly matching Intellectual Property.",no,,no,Rahul,2026-09-21
+uc4-5317e7d5e6,Board_Minutes_July.docx,"Minutes of the board meeting
+
+Present: all directors and Rosalind Castellano, secretary.
+1. Minutes of the previous meeting approved.
+2. The CEO reported on progress against the annual plan and the competitive landscape in Nordics.
+3. The committee chairs gave their updates. The audit committee noted no material issues.
+4. Directors discussed long-term priorities and agreed to revisit strategy at the next meeting.
+5. Any other business: none.
+",CONFIDENTIAL,NONE,medium,"These non-public board minutes discuss competitive landscape and priorities, but the excerpt lacks a concrete strategic plan; Confidential is defensible.",yes,HIGHLY_CONFIDENTIAL,no,Rahul,2026-09-21
+uc4-4aaea9fc3f,Compensation_Bands_2026.xlsx,"Compensation bands - 2026
+
+Level 3: $69,680 to $80,014
+Level 4: $97,798 to $113,262
+Level 5: $101,335 to $153,766
+
+Managers may share the band for their own team's roles when hiring.
+",CONFIDENTIAL,NONE,medium,"Internal compensation bands are restricted sensitive business information, although they do not clearly meet a named data category.",yes,INTERNAL,no,Rahul,2026-09-21
