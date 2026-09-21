@@ -29,6 +29,8 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 
 ### Where UC4 stands (2026-09-21)
 
+See the [completion report](docs/uc4/completion-report.md).
+
 The v0.1 scope is implemented and tested. It is **not validated**:
 
 * **Locked-test result (one audited, report-only run):** level macro-F1 0.884 [0.758, 0.980], category

@@ -24,6 +24,8 @@
 | [`../../data/synthetic/uc4/review/adjudication_sheet.csv`](../../data/synthetic/uc4/review/adjudication_sheet.csv) | The auditable adjudication sheet (127 rows; human columns blank) |
 | [`results/gold-review-decision-brief.md`](results/gold-review-decision-brief.md) | Decision brief for the proposed label/taxonomy changes (A/B/C), with a correction about `source_system` metadata; nothing applied |
 | [`blind-review.md`](blind-review.md) | Blind human-review package: what the reviewer sees, the key kept apart, checks; nothing applied |
+| [`completion-report.md`](completion-report.md) | **Start here for status:** what is complete, the evidence, and what is still open (and who can close it) |
+| [`human-review-round2.md`](human-review-round2.md) | Coordinator's guide for the Round 2 independent human review (ambiguous + disputed families, incl. `amb_aggregate_health_stats`): who, what to hand over, how to compare, how to adjudicate |
 | [`service-plan.md`](service-plan.md) | Pre-registered Phase 8 plan (written before any Phase 8 code) |
 | [`service-api.md`](service-api.md) | Python API, CLI, exit codes |
 | [`result-schema.md`](result-schema.md) | Frozen result schema v1.0: fields, status semantics, invariants, failure semantics |

@@ -72,6 +72,13 @@ second opinion only: it does not satisfy the human review requirement (A20), and
 to apply label changes A / B / C or to clear the MCP freeze criteria. The first such run is committed
 under `data/synthetic/uc4/review/blind_results_ai/` (reviewer id in the sheet: `ChatGPT-GPT-5.6-Sol`).
 
+## Round 2
+
+A wider package (`review/blind_round2/`, variant `round2`) covers every ambiguity-flagged family in the
+development splits plus the Round 1 disputed families, including `amb_aggregate_health_stats`. It is
+compared with the gold and between reviewers only (no model columns). See
+[`human-review-round2.md`](human-review-round2.md).
+
 ## Regenerate
 
 ```
