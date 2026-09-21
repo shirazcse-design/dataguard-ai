@@ -56,7 +56,7 @@ def baseline_report(tmp_path_factory):
 
 def test_baseline_report_states_its_provenance_and_the_core_principle(baseline_report):
     t = baseline_report
-    assert "pending human gold-label review" in t and "not independently human-validated" in t
+    assert "second independent review pending" in t and "not independently human-validated" in t
     assert "The locked test split was not read" in t
     assert "No rule match does not mean Public" in t and "Rules never output `PUBLIC`" in t
     assert "development-contaminated" in t and "rules-changelog.md" in t

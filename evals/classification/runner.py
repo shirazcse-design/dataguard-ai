@@ -32,6 +32,7 @@ def _base_fields(doc: DatasetDocument, policy: TaxonomyPolicy) -> dict:
         "ambiguity_flag": doc.ambiguity_flag,
         "decoy_for": sorted(doc.decoy_for),
         "gold_level": doc.gold_level,
+        "gold_alternative_levels": sorted(doc.acceptable_alternative_levels),
         "gold_categories": sorted(doc.gold_categories),
         "gold_high_risk": policy.derive_high_risk(doc.gold_level, doc.gold_categories).value,
     }

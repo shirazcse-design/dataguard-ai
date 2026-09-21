@@ -320,11 +320,13 @@ families:
     tier: T4
     format: report
     gold_level: PUBLIC
+    ambiguity: true
+    acceptable_alternative_levels: [INTERNAL]
     decoy_for: [MA_CORP_STRATEGY]
     n_docs: 5
     filenames: ["Case_Study_Merger_«codeword».pdf", "Teaching_Case_«company#2.short».pdf"]
     metadata: {source_system: "Public teaching materials"}
-    notes: A historical, public case study of a completed deal, used for teaching.
+    notes: A historical, public case study of a completed deal, used for teaching. Independent readers split between PUBLIC and INTERNAL (Round 1 and Round 2 reviews); gold stays PUBLIC, flagged ambiguous with INTERNAL as an acceptable alternative (decision A32).
     bodies:
       - |
         Case study: the «company»-«company#2» merger

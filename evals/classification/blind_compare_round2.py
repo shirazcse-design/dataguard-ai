@@ -173,11 +173,17 @@ def _focus_block(per_reviewer: list[list[dict[str, Any]]]) -> list[str]:
         f"## Focus: `{FOCUS_FAMILY}` (de-identified aggregate patient statistics with small cell counts)"
     )
     add("")
-    add(
-        "Gold is HIGHLY_CONFIDENTIAL with no category (alternative CONFIDENTIAL); the frozen hybrid predicted INTERNAL. "
-        "The reviewers' own words, verbatim, so the policy owner can decide a small-cell rule:"
+    focus = next(
+        (r for rows in per_reviewer for r in _family_rows(rows).get(FOCUS_FAMILY, [])), None
     )
-    add("")
+    if focus is not None:
+        alts = ";".join(focus["gold_alts"]) or "none"
+        add(
+            f"Gold (as of this run's key): {_lab(focus['gold'])}, acceptable alternatives {alts}. "
+            "The frozen hybrid predicted INTERNAL for this family in the calibration check. "
+            "The reviewers' own words, verbatim, so the policy owner can decide a small-cell rule:"
+        )
+        add("")
     for rows in per_reviewer:
         rs = _family_rows(rows).get(FOCUS_FAMILY, [])
         if not rs:

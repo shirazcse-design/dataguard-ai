@@ -46,13 +46,14 @@ families:
     description: Aggregated, de-identified patient statistics with small cell counts.
     tier: T3
     format: report
-    gold_level: HIGHLY_CONFIDENTIAL
+    gold_level: CONFIDENTIAL
+    split_gold_level: HIGHLY_CONFIDENTIAL   # the level when the splits were fixed; keeps every split unchanged (decision A30)
     ambiguity: true
-    acceptable_alternative_levels: [CONFIDENTIAL]
+    acceptable_alternative_levels: [HIGHLY_CONFIDENTIAL, INTERNAL]
     n_docs: 6
     filenames: ["Programme_Outcomes_«quarter».docx", "Cohort_Summary_«@year».pdf"]
     metadata: {source_system: "Analytics share", author_department: "Data Science"}
-    notes: No individual is named, so PHI is not clearly met, but small cell counts could allow re-identification. Level tie-break to Highly Confidential; PHI omitted.
+    notes: No individual is named, so PHI is not clearly met (the taxonomy lists de-identified aggregate statistics as a PHI counter-example), but small cell counts could allow re-identification. Level CONFIDENTIAL after the Round 2 review (decision A30); HIGHLY_CONFIDENTIAL and INTERNAL are acceptable alternatives; PHI omitted.
     bodies:
       - |
         «clinic» programme outcomes - «quarter»

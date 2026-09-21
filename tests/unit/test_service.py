@@ -219,7 +219,7 @@ def test_info_reports_every_version_that_decides_a_result(off):
         and len(info["routing"]["sha256"]) == 64
     )
     assert "PUBLIC" in info["levels"] and "TRADE_SECRET" in info["categories"]
-    assert "pending human gold-label review" in info["labels_are"]
+    assert "second independent review pending" in info["labels_are"]
     json.dumps(info)
 
 

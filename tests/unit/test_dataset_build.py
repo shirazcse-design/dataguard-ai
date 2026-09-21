@@ -278,7 +278,7 @@ def test_report_numbers_come_from_the_manifest(manifest, bundle):
     assert f"**{manifest['n_documents']}**" in text and manifest["dataset_sha256"] in text
     for split in SPLIT_NAMES:
         assert f"| {split} | {manifest['stats']['by_split'][split]['n_docs']} |" in text
-    assert "pending human gold-label review" in text
+    assert "second independent review pending" in text
     assert "NOT independently human-validated" in text
 
 
@@ -341,7 +341,7 @@ def test_cli_generate_refuses_to_write_when_integrity_fails(tmp_path, capsys):
     assert "INTEGRITY ERRORS" in capsys.readouterr().err
 
 
-LABEL_STATUS = "AI-generated synthetic dataset — pending human gold-label review"
+LABEL_STATUS = "AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending"
 
 
 def test_dataset_is_marked_pending_human_review_everywhere(docs, manifest):

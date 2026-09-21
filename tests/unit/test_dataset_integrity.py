@@ -142,7 +142,7 @@ def test_t3_ambiguity_rules(policy):
         acceptable_alternative_levels=["PUBLIC"],
     )
     assert errs(ok, policy) == []
-    assert has(errs(mk(ambiguity_flag=True), policy), "only valid for tier T3")
+    assert has(errs(mk(ambiguity_flag=True), policy), "only valid for tiers T3 and T4")
     assert has(
         errs(
             mk(
@@ -283,3 +283,17 @@ def test_shared_vocabulary_spans_are_exempt_from_the_leak_check_but_identifiers_
     )
     # ... but the very same text is leakage when it is NOT known shared vocabulary.
     assert has(check_dataset(docs, spec, policy, INJECTION).errors, "more than one split")
+
+
+def test_a_t4_hard_negative_may_carry_an_ambiguity_flag_but_other_tiers_still_may_not(policy):
+    ok = mk(
+        tier="T4",
+        decoy_for=["MA_CORP_STRATEGY"],
+        ambiguity_flag=True,
+        acceptable_alternative_levels=["INTERNAL"],
+    )
+    assert not has(errs(ok, policy), "ambiguity_flag is only valid")
+    for tier in ("T1", "T2", "T5"):
+        assert has(
+            errs(mk(tier=tier, ambiguity_flag=True), policy), "only valid for tiers T3 and T4"
+        )

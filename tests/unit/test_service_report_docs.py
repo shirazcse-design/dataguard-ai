@@ -22,7 +22,7 @@ def report(tmp_path_factory):
 
 def test_report_states_provenance_and_that_the_locked_split_was_not_read(report):
     assert (
-        "pending human gold-label review" in report
+        "second independent review pending" in report
         and "The locked test split was not read" in report
     )
     assert "recommendations" in report and "service-plan.md" in report
@@ -59,7 +59,7 @@ def test_the_freeze_criteria_are_computed_and_the_gates_criterion_is_reported_ho
     crit = report[report.index("## MCP freeze criteria") :]
     assert "| The result schema is versioned | MET |" in crit
     assert "| The eval gates have passed |" in crit and "point / lower bound" in crit
-    assert "| Approval to build MCP | GIVEN |" in crit and "NOT satisfied" in crit
+    assert "| Approval to build MCP | GIVEN |" in crit and "decision A29" in crit
     # the gates row must agree with the numbers it prints: any FAIL in the evidence means NOT MET
     row = next(x for x in crit.splitlines() if x.startswith("| The eval gates have passed"))
     assert ("**NOT MET**" in row) == ("FAIL" in row.split("|")[3])

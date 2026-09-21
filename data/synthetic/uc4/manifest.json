@@ -7,7 +7,7 @@
     "taxonomy/taxonomy.v1.yaml": "4cd881ce5e62fed7c7b447b2e5313e415a22de864c98f552a085245b43e344bf"
   },
   "dataset_id": "dataguard-uc4-synthetic",
-  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "dataset_sha256": "284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e",
   "dataset_version": "1.0.0",
   "families": [
     {
@@ -1100,7 +1100,7 @@
     "calibration": {
       "n_docs": 103,
       "path": "docs/calibration.jsonl",
-      "sha256": "48ed286c4b919a67867ef2bbd23755ee35bcd383864695bb97928e71653a7f24"
+      "sha256": "fe1a808711e92871d1df9403b9bc8f61b3a85e21164691914cbe428ea15e8591"
     },
     "dev": {
       "n_docs": 107,
@@ -1250,10 +1250,10 @@
     },
     "warnings": []
   },
-  "label_status": "AI-generated synthetic dataset — pending human gold-label review",
+  "label_status": "AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending",
   "n_documents": 853,
   "seed": 20260918,
-  "spec_hash": "ba069cc4d5f9f159ce78b09ddba25b89173aca9a406605165196aa970b6e28f6",
+  "spec_hash": "be1012288bc57135da6615c36f026b5bd4486cb86ac8d67b7e505267f081910f",
   "stats": {
     "adversarial_types": {
       "prompt_injection_downgrade": 20,
@@ -1265,7 +1265,7 @@
     },
     "by_split": {
       "calibration": {
-        "ambiguous_docs": 12,
+        "ambiguous_docs": 17,
         "categories": {
           "CREDENTIALS_SECRETS": 10,
           "FINANCIAL_PCI": 11,
@@ -1284,10 +1284,10 @@
         },
         "docs_with_multiple_categories": 5,
         "docs_with_no_category": 27,
-        "high_risk_docs": 60,
+        "high_risk_docs": 54,
         "levels": {
-          "CONFIDENTIAL": 28,
-          "HIGHLY_CONFIDENTIAL": 54,
+          "CONFIDENTIAL": 34,
+          "HIGHLY_CONFIDENTIAL": 48,
           "INTERNAL": 11,
           "PUBLIC": 10
         },
@@ -1460,7 +1460,7 @@
       "template-v1": 853
     },
     "overall": {
-      "ambiguous_docs": 90,
+      "ambiguous_docs": 95,
       "categories": {
         "CREDENTIALS_SECRETS": 75,
         "FINANCIAL_PCI": 83,
@@ -1479,10 +1479,10 @@
       },
       "docs_with_multiple_categories": 70,
       "docs_with_no_category": 263,
-      "high_risk_docs": 465,
+      "high_risk_docs": 459,
       "levels": {
-        "CONFIDENTIAL": 242,
-        "HIGHLY_CONFIDENTIAL": 432,
+        "CONFIDENTIAL": 248,
+        "HIGHLY_CONFIDENTIAL": 426,
         "INTERNAL": 105,
         "PUBLIC": 74
       },

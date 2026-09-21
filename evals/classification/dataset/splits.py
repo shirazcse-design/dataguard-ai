@@ -30,7 +30,7 @@ def _features(fam: FamilySpec) -> dict[str, int]:
     feats = {
         "size": fam.n_docs,
         f"tier:{fam.tier}": fam.n_docs,
-        f"level:{fam.gold_level}": fam.n_docs,
+        f"level:{fam.split_gold_level or fam.gold_level}": fam.n_docs,
     }
     for cat in fam.gold_categories:
         feats[f"cat:{cat}"] = fam.n_docs

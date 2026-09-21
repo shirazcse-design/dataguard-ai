@@ -26,7 +26,7 @@ from .metrics import compact, compute_metrics, hard_negative_metrics, round_floa
 from .records import PredictionRecord
 from .runner import run_classifier
 
-HARNESS_VERSION = "1.4.0"
+HARNESS_VERSION = "1.5.0"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -52,6 +52,19 @@ def _perfect_reviewer(records: list[PredictionRecord]) -> list[PredictionRecord]
             }
         )
         if r.deferred
+        else r
+        for r in records
+    ]
+
+
+def _lenient_level(records: list[PredictionRecord]) -> list[PredictionRecord]:
+    """A predicted level that differs from gold but is one of the document's acceptable alternatives
+    is treated as correct. Levels only: categories and high-risk are never relaxed."""
+    return [
+        r.model_copy(update={"pred_level": r.gold_level})
+        if r.has_prediction
+        and r.pred_level != r.gold_level
+        and r.pred_level in r.gold_alternative_levels
         else r
         for r in records
     ]
@@ -112,6 +125,30 @@ def build_metrics(records: list[PredictionRecord], bundle: ConfigBundle) -> dict
         unit=cfg.bootstrap.unit,
     )
 
+    lenient = _lenient_level(headline)
+    lenient_view = {
+        "note": (
+            "A predicted level equal to one of the document's acceptable alternative levels counts "
+            "as correct. Levels only; categories and high-risk stay strict. Reported beside, never "
+            "instead of, the strict headline."
+        ),
+        "n_relaxed": sum(
+            a.pred_level != b.pred_level for a, b in zip(headline, lenient, strict=True)
+        ),
+        "n_headline": len(headline),
+        "level_accuracy": compute_metrics(lenient, levels, cats)["level"]["accuracy"],
+        "level_macro_f1": compute_metrics(lenient, levels, cats)["level"]["macro"]["f1"],
+        "level_macro_f1_interval": bootstrap_intervals(
+            lenient,
+            levels,
+            cats,
+            n_resamples=cfg.bootstrap.n_resamples,
+            confidence_level=cfg.bootstrap.confidence_level,
+            seed=cfg.bootstrap.seed,
+            unit=cfg.bootstrap.unit,
+        )["statistics"]["level_macro_f1"],
+    }
+
     slices: dict[str, dict[str, Any]] = {}
     for field in cfg.slice_fields:
         groups: dict[str, list[PredictionRecord]] = {}
@@ -150,6 +187,7 @@ def build_metrics(records: list[PredictionRecord], bundle: ConfigBundle) -> dict
             "metrics": primary,
             "confidence_intervals": intervals,
             "deferral_views": deferral_views,
+            "lenient_level_view": lenient_view,
             "small_sample_labels": small,
         },
         "all_tiers": compute_metrics(records, levels, cats),

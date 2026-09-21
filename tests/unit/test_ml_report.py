@@ -16,7 +16,7 @@ def report(tmp_path_factory):
 
 def test_report_states_provenance_protocol_and_the_lock(report):
     assert (
-        "pending human gold-label review" in report
+        "second independent review pending" in report
         and "not independently human-validated" in report
     )
     assert "The locked test split was not read" in report and "ml-plan.md" in report
