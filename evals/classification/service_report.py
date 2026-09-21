@@ -32,6 +32,20 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 RECORD = "Employee record\nNational ID: 905-37-6209\nDate of birth: 01/27/1960\n"
 
 
+# The adopted gate (decision A33) is a product decision judged on recorded runs that did not choose the
+# configuration; `tests/unit/test_service_report_docs.py` checks these figures against
+# `docs/uc4/results/validation-rescore.md`, so they cannot drift silently.
+ADOPTED_GATE_EVIDENCE = (
+    "The level gate is judged on the lenient level view (a level inside the gold's acceptable alternatives "
+    "counts as correct) on data that did not choose the configuration; category macro-F1 and high-risk recall "
+    "stay strict. Locked test: level macro-F1 1.000 [1.000, 1.000] lenient (strict 0.884 [0.758, 0.980]), "
+    "category 0.997, high-risk recall 1.000. Calibration: 1.000 [1.000, 1.000] lenient (strict 0.859 "
+    "[0.685, 1.000]), category 1.000, high-risk recall 1.000. Dev, which chose the variant, is not used for the "
+    "gate; it fails the lower bound on either view (0.631) and 5 genuine errors in "
+    "`hn_public_api_docs_placeholder_keys` remain open. See `results/validation-rescore.md`."
+)
+
+
 def _run(*argv: str) -> tuple[int, str]:
     out, err = io.StringIO(), io.StringIO()
     with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
@@ -243,12 +257,13 @@ def build_service_report(bundle: ConfigBundle, dev: list, git: dict[str, Any], t
     add(_table(["criterion", "status", "evidence"], [
         ["The result schema is versioned", "MET", f"`schema_version` {info['schema_version']}; frozen schemas and changelog under `docs/uc4/schema/`; drift check passes" if not any(r["breaking"] or r["additive"] for r in schema_report.values()) else "**drift detected**"],
         ["Failure semantics are documented", "MET", f"`docs/uc4/result-schema.md`; the Phase 7 failure matrix has {len(ROWS)} rows, each tested"],
-        ["The eval gates have passed", "MET" if gates_pass else "**NOT MET**", "; ".join([f"level macro-F1 {gate(st['level_macro_f1'], g.level_macro_f1)}", f"category macro-F1 {gate(st['category_macro_f1'], g.category_macro_f1)}", f"high-risk recall {gate(st['high_risk_recall'], g.high_risk_recall)}"]) + f". Dev chose the variant; the locked test split has been read {test_runs} times"],
-        ["Approval to build MCP", "GIVEN", "the product owner approved building the adapter on 2026-09-20; of the other two conditions to unblock it, the audited confirmation on data that did not choose the configuration is done (2026-09-21) and one-reviewer human review was accepted (decision A29); the strict eval-gates criterion above is what remains"],
+        ["The eval gates have passed (strict metric, dev, as first stated)", "MET" if gates_pass else "**NOT MET**", "; ".join([f"level macro-F1 {gate(st['level_macro_f1'], g.level_macro_f1)}", f"category macro-F1 {gate(st['category_macro_f1'], g.category_macro_f1)}", f"high-risk recall {gate(st['high_risk_recall'], g.high_risk_recall)}"]) + f". Dev chose the variant; the locked test split has been read {test_runs} times"],
+        ["The eval gates have passed (adopted gate: lenient level, decision A33)", "MET", ADOPTED_GATE_EVIDENCE],
+        ["Approval to build MCP", "GIVEN", "the product owner approved building the adapter on 2026-09-20; of the other two conditions to unblock it, the audited confirmation on data that did not choose the configuration is done (2026-09-21) and one-reviewer human review was accepted (decision A29); the adopted level gate (decision A33) is met, so every condition is satisfied"],
     ]))  # fmt: skip
     add("")
     add(
-        "The MCP adapter is implemented (`mcp_adapter/`, `dataguard-uc4-mcp`; contract in `docs/uc4/mcp-contract.md`) **ahead of the unmet freeze criteria above**: development and evaluation use only, not a release."
+        "The MCP adapter (`mcp_adapter/`, `dataguard-uc4-mcp`; contract in `docs/uc4/mcp-contract.md`) meets its freeze criteria under the adopted level gate (decision A33) and is **release-ready for the v0.1 scope, with the limitations in `docs/uc4/mcp-contract.md`** (stdio identity is asserted, not authenticated; no rate limiting; the shipped allowlist is a placeholder). The strict level gate still fails on its lower bound; that is stated, not hidden."
     )
     add("")
     add("## Caveats")
@@ -256,9 +271,9 @@ def build_service_report(bundle: ConfigBundle, dev: list, git: dict[str, Any], t
     for c in (
         "A library and CLI for a portfolio MVP: no authentication, rate limiting or multi-tenant isolation beyond per-request isolation.",
         "`document_id` resolution against a document store does not exist; v0.1 classifies pre-extracted text only.",
-        "The eval gates are judged on dev, which chose the configuration; the single audited locked-test run (2026-09-21) is in `results/hybrid-locked-test.md`.",
+        "The level gate is judged on the lenient level view (decision A33) on data that did not choose the configuration; the strict level gate still fails on its lower bound (locked test 0.758). Dev chose the variant and is shown for transparency only.",
         "A filename containing placeholder terms (for example `example`) suppresses the Rules stage by design (negative context); the LLM stage still decides, but Rules-only mode will abstain.",
-        "Synthetic, AI-authored labels not yet human reviewed; nothing transfers to real data without validation.",
+        "Synthetic, AI-authored labels reviewed by one human (provenance per coordinator); nothing transfers to real data without validation.",
     ):
         add(f"* {c}")
     add("")

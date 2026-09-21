@@ -1,11 +1,11 @@
 # MCP contract for `classify_document` (documentation only)
 
-> **Implemented ahead of the freeze criteria.** The product owner approved building the adapter on
-> 2026-09-20. It lives in `mcp_adapter/` (core: `adapter.py`, SDK-independent; `server.py`: stdio
-> server, optional `mcp` extra) and is started with `dataguard-uc4-mcp`. Two of the three conditions
-> the plan set for unblocking it are **not satisfied** (see the freeze criteria below), so treat it as
-> a development and evaluation surface, not a release. Criteria are computed in
-> [`results/service-baseline.md`](results/service-baseline.md).
+> **Implemented and release-ready for the v0.1 scope** (decision A33, 2026-09-21). The product owner
+> approved building the adapter on 2026-09-20. It lives in `mcp_adapter/` (core: `adapter.py`,
+> SDK-independent; `server.py`: stdio server, optional `mcp` extra) and is started with
+> `dataguard-uc4-mcp`. Every freeze criterion is met under the adopted level gate (see below).
+> **Release-ready does not mean production-hardened:** read "What release-ready means" before using it.
+> Criteria are computed in [`results/service-baseline.md`](results/service-baseline.md).
 >
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 
@@ -74,17 +74,36 @@ Computed from a real run in `results/service-baseline.md` (see that file for the
 |---|---|
 | The result schema is versioned | Met (v1.0 frozen, drift check in CI) |
 | Failure semantics are documented | Met (`result-schema.md`; the Phase 7 failure matrix) |
-| **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration. The single locked-test evaluation (2026-09-21) confirms the pattern: level macro-F1 0.884, lower bound 0.758, so the gate still fails on the lower bound |
+| **The eval gates have passed** | **Met under the adopted gate (decision A33):** the level gate is judged on the lenient level view on data that did not choose the configuration. Locked test: level macro-F1 1.000 [1.000, 1.000] lenient (strict 0.884 [0.758, 0.980]), category 0.997, high-risk recall 1.000. Calibration: 1.000 lenient (strict 0.859 [0.685, 1.000]). The **strict** level gate still fails on its lower bound (0.758 against 0.85), and dev, which chose the variant, fails on either view (0.631); both are stated, not hidden |
+| Audited confirmation on data that did not choose the configuration | Met (2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)) |
+| Human review of the gold labels | Accepted by the product owner with **one** reviewer (decision A29; provenance per the coordinator) |
 | Approval to build MCP | Given (2026-09-20) |
 
-**Therefore: the adapter exists but is not release-ready.** Of the two conditions that remained after
-the build approval: (1) the audited, report-only confirmation on data that did not choose the
-configuration is **done** (2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md));
-(2) human review of the gold labels was **accepted by the product owner with one reviewer** (decision A29;
-provenance per the coordinator). What is still unmet is the **eval-gates criterion on the strict metric**:
-the level macro-F1 lower bound is 0.758 on the locked test (0.85 required). A lenient view reaches 1.000
-([`results/validation-rescore.md`](results/validation-rescore.md)), but whether the gate may be judged on it is
-a product decision that has not been made.
+**Therefore: the freeze criteria are met and the adapter is release-ready for the v0.1 scope.** The one
+criterion that had been open, the eval gates, is met because the product owner adopted the lenient level
+view as the gate (A33). That is a product decision, not a measurement: the strict metric the plan first
+stated still fails on its lower bound. See [`results/validation-rescore.md`](results/validation-rescore.md).
+
+## What release-ready means (and does not)
+
+It means the adapter may be used for the v0.1 scope: a read/compute `classify_document` tool over
+pre-extracted synthetic-style text, with results treated as **recommendations**. It does **not** mean:
+
+* **Authenticated.** Over stdio the caller identity is set by whoever launches the server
+  (`DATAGUARD_MCP_CALLER_ID`): asserted, not verified. A networked transport needs real authentication,
+  which is out of scope.
+* **Ready to deploy as shipped.** The allowlist in `config/mcp/mcp.v1.yaml` lists a placeholder
+  (`example-agent`); replace it with the real agent identities and per-agent policies first.
+* **Rate limited or multi-tenant.** Neither exists.
+* **Fast on every call.** The shipped policy caps the LLM tier at `mid` (about 2 to 3 s at P95) because a
+  call that escalates to `large` took 85 to 245 s, far over the PRD's 10 s limit.
+* **Validated on real data.** The data is synthetic and AI-labelled, reviewed by one person; nothing
+  transfers to real data without validation.
+* **Free of known model errors.** On dev, 5 documents of `hn_public_api_docs_placeholder_keys` (public API
+  documentation with placeholder keys) are classified INTERNAL against a PUBLIC gold; that is the
+  conservative direction, but it is not fixed.
+* **Trusting model text.** `evidence[].excerpt` and rationales derive from an untrusted document and must
+  be treated as data, never as instructions.
 
 ## As implemented
 

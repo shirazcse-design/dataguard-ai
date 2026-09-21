@@ -254,3 +254,9 @@ Evidence: the Round 2 sheet from one reviewer (`Rahul`; independence per the coo
 | D9.15 | Relabelling calibration families moved the ML baseline and the `ml_stage_*` hybrid variants; the recommended `default` variant (no ML) is unchanged. Affected reports and prose were regenerated and updated. | The ML model is calibrated on the calibration split. |
 | D9.16 | The locked test split was replayed once more (`--allow-locked-test`, access-log entry 2) to compute the lenient view. Strict numbers are identical. | Post-hoc, audited, report-only; the split remains consumed. |
 
+## Approved after the validation re-score (product owner, 2026-09-21)
+
+| # | Decision | Implementation |
+|---|---|---|
+| A33 | **The level gate is judged on the lenient level view** (a level inside the gold's acceptable alternatives counts as correct; category macro-F1 and high-risk recall stay strict) on data that did not choose the configuration (locked test and calibration). Consequence: the MCP eval-gates freeze criterion is **met**, every freeze criterion is met, and the MCP adapter is **release-ready for the v0.1 scope**. | `service_report.py` freeze table (adopted-gate row, figures checked against `results/validation-rescore.md`); `mcp-contract.md`. The strict level gate still fails on its lower bound (locked test 0.758); dev, which chose the variant, still fails on either view (0.631) and its 5 genuine errors in `hn_public_api_docs_placeholder_keys` are **not** accepted or fixed by this decision. |
+

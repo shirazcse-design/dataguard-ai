@@ -37,7 +37,7 @@ Headline tiers T1-T4; intervals are family-level bootstraps. **Strict** = the he
 | category macro-F1 >= 0.85 | PASS / PASS on all three | (not relaxed) |
 | high-risk recall >= 0.90 (informational) | PASS / PASS on all three | (not relaxed) |
 
-**The gate verdict is unchanged: the approved gates are defined on the strict metric, and the strict level lower bound fails on every split.** The lenient view shows where the shortfall lives (tie-break disagreements inside the gold's acceptable alternatives) but it does not pass the gate. Whether to gate on the lenient view is a product decision that has not been made.
+**The gate verdict is unchanged: the approved gates are defined on the strict metric, and the strict level lower bound fails on every split.** The lenient view shows where the shortfall lives (tie-break disagreements inside the gold's acceptable alternatives) but it does not pass the gate. The product owner subsequently **adopted the lenient level view as the gate** (decision A33, 2026-09-21); that is a decision, not a measurement, and the strict result stays as reported here.
 
 ## Collateral changes to report
 

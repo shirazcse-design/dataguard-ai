@@ -58,12 +58,24 @@ def test_every_example_validates_both_ways_and_no_schema_drift(report):
 def test_the_freeze_criteria_are_computed_and_the_gates_criterion_is_reported_honestly(report):
     crit = report[report.index("## MCP freeze criteria") :]
     assert "| The result schema is versioned | MET |" in crit
-    assert "| The eval gates have passed |" in crit and "point / lower bound" in crit
+    assert "| The eval gates have passed (strict metric, dev, as first stated) |" in crit
+    assert "point / lower bound" in crit
     assert "| Approval to build MCP | GIVEN |" in crit and "decision A29" in crit
-    # the gates row must agree with the numbers it prints: any FAIL in the evidence means NOT MET
-    row = next(x for x in crit.splitlines() if x.startswith("| The eval gates have passed"))
+    # the computed strict/dev row must agree with the numbers it prints: any FAIL means NOT MET
+    row = next(
+        x for x in crit.splitlines() if x.startswith("| The eval gates have passed (strict metric")
+    )
     assert ("**NOT MET**" in row) == ("FAIL" in row.split("|")[3])
-    assert "ahead of the unmet freeze criteria" in crit
+
+
+def test_the_adopted_gate_row_is_stated_as_a_decision_and_its_figures_match_the_rescore_doc(report):
+    crit = report[report.index("## MCP freeze criteria") :]
+    row = next(x for x in crit.splitlines() if "adopted gate: lenient level, decision A33" in x)
+    assert "| MET |" in row and "not used for the gate" in row  # dev is disclosed, not hidden
+    doc = (DOCS / "results" / "validation-rescore.md").read_text()
+    for figure in ("0.884 [0.758, 0.980]", "0.859 [0.685, 1.000]", "1.000 [1.000, 1.000]", "0.997"):
+        assert figure in row and figure in doc, figure
+    assert "release-ready for the v0.1 scope" in crit and "strict level gate still fails" in crit
 
 
 # ---- documentation integrity -------------------------------------------------------------------
@@ -78,9 +90,13 @@ def test_relative_links_in_the_uc4_docs_resolve(doc):
         assert (doc.parent / target).resolve().exists(), f"{doc.name} links to missing {target}"
 
 
-def test_the_mcp_contract_says_it_is_built_ahead_of_unmet_freeze_criteria():
+def test_the_mcp_contract_states_release_readiness_as_a_decision_with_its_limits():
     text = (DOCS / "mcp-contract.md").read_text()
-    assert "Implemented ahead of the freeze criteria" in text and "NOT MET" in text
+    assert "release-ready for the v0.1 scope" in text and "decision A33" in text
+    assert "Release-ready does not mean production-hardened" in text
+    for limit in ("asserted, not verified", "placeholder", "Rate limited", "10 s limit"):
+        assert limit in text, limit
+    assert "strict** level gate still fails" in text  # the unmet strict result stays visible
     assert "Approval to build MCP | Given" in text
     assert (ROOT / "mcp_adapter" / "adapter.py").exists()
     # a top-level `mcp` package would shadow the MCP SDK on import
