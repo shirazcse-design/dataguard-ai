@@ -218,3 +218,15 @@ test); the oracle interval check was corrected to expect FPR to collapse to 0 ra
 | D9.7 | The tool runs the synchronous service in a worker thread. | Live LLM calls take seconds; the protocol loop must not block. |
 | D9.8 | The server is verified end to end in-process and once over a real stdio subprocess; no network transport, authentication, rate limiting or `document_id` store. | Out of scope for v0.1 (D8.10). |
 | D9.9 | The dashboard is a static, script-free HTML file generated from `summarize(spans)`, not a service. | It needs no infrastructure, cannot leak text (spans carry none), and every value is escaped. A live shared dashboard (DG-018) remains platform work. |
+
+## Gold-label decisions A / B / C (product owner, 2026-09-20)
+
+Evidence: the blind-review sheet the product owner designated as the human review. **That sheet is identical to an earlier AI-completed sheet on all 33 documents (level, categories, confidence, flags and rationale text), so it adds no evidence independent of the AI review** (recorded verbatim in `review/blind_results/blind_review_comparison.md`). The dataset therefore stays "AI-generated synthetic dataset — pending human gold-label review" (A20); these decisions do not change that status.
+
+| # | Decision | Implementation |
+|---|---|---|
+| A26 | **Decision A:** keep `PUBLIC` for `hn_public_api_docs_placeholder_keys` (and the same rule for `hn_business_case_study`); no label change. Clarify that published customer-facing documentation is Public. | Guidelines section 8; **no label, taxonomy or prompt change.** The hybrid's 5 headline level errors remain, and its level macro-F1 lower bound stays 0.631. |
+| A27 | **Decision B:** an MRN does not count as another direct identifier; `phi_prescription_record` stays `[PHI]`. | Guidelines section 8; no label change. |
+| A28 | **Decision C:** add `INTERNAL` to the acceptable alternative levels of `amb_customer_case_study_draft`: `[PUBLIC, INTERNAL]`. | `t3_ambiguous.yaml`; dataset regenerated (`dataset_sha256` `bc86537c2cc23e5f…` -> `9442e354c3dd51dd…`, only the 6 dev documents' alternatives and the manifest changed); blind key and manifest regenerated (reviewer-facing files byte-identical). **No effect on strict scoring.** |
+
+Not done: no taxonomy config edit (it would invalidate the recorded LLM cache); the AI-review comparison under `blind_results_ai/` was computed against the previous dataset hash and is kept as the historical record.

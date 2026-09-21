@@ -162,7 +162,7 @@ def test_a_disagreeing_human_is_counted_on_the_right_family(package, bundle):
 
 
 def test_lenient_match_uses_the_gold_alternatives_too(package, bundle):
-    # the draft-customer-story gold is CONFIDENTIAL with alternative PUBLIC
+    # the draft-customer-story gold is CONFIDENTIAL with alternatives PUBLIC and INTERNAL (decision A28)
     fam = "amb_customer_case_study_draft"
     rows = compare(
         package,
@@ -174,6 +174,15 @@ def test_lenient_match_uses_the_gold_alternatives_too(package, bundle):
         package,
         read_reviewer(
             _sheet(package, by_family={fam: {"human_level": "INTERNAL"}}), package, bundle
+        ),
+    )
+    assert all(r["lenient_level_match"] for r in rows if r["family_id"] == fam)  # A28
+    rows = compare(
+        package,
+        read_reviewer(
+            _sheet(package, by_family={fam: {"human_level": "HIGHLY_CONFIDENTIAL"}}),
+            package,
+            bundle,
         ),
     )
     assert all(not r["lenient_level_match"] for r in rows if r["family_id"] == fam)

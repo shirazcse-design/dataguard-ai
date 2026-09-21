@@ -7,8 +7,8 @@
 * **dataset labels: AI-generated synthetic dataset — pending human gold-label review** (not independently human-validated)
 * ruleset `1.0.3`, standalone default level `INTERNAL`
 * rules config sha256 `9d5a973c465395d3...`
-* dataset sha256 `bc86537c2cc23e5f...`
-* git `df0eedd15ffe` on `uc4/phase-3-rules` (dirty: False)
+* dataset sha256 `9442e354c3dd51dd...`
+* git `b7e94ac130fa` on `uc4/blind-review-metadata-variant` (dirty: True)
 * development protocol: errors inspected on **train**; **dev** evaluated at checkpoints; **calibration** untouched until this report; every post-first-run change is in `docs/uc4/rules-changelog.md`. The rules were written by the same assistant that authored the dataset, and the train figures were used to tune three details, so **train and pooled numbers are development-contaminated**.
 * the purpose is an honest deterministic baseline, not to beat ML or an LLM.
 
@@ -18,10 +18,10 @@
 
 | split | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR | abstained | latency p50 / p95 ms |
 |---|---|---|---|---|---|---|---|---|---|
-| train | 391 / 71 | 0.398 [0.310, 0.485] | 0.736 [0.605, 0.825] | 0.963 | 0.621 [0.475, 0.770] | 0.755 | 0.028 | 227/416 (0.546) | 0.25 / 0.35 |
-| calibration | 98 / 18 | 0.454 [0.284, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.655 [0.333, 1.000] | 0.791 | 0.000 | 46/103 (0.447) | 0.24 / 0.39 |
-| dev | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 | 69/107 (0.645) | 0.25 / 0.36 |
-| pooled development | 586 / 107 | 0.403 [0.332, 0.473] | 0.733 [0.626, 0.812] | 0.976 | 0.627 [0.506, 0.756] | 0.763 | 0.019 | 342/626 (0.546) | 0.25 / 0.35 |
+| train | 391 / 71 | 0.398 [0.310, 0.485] | 0.736 [0.605, 0.825] | 0.963 | 0.621 [0.475, 0.770] | 0.755 | 0.028 | 227/416 (0.546) | 0.26 / 0.36 |
+| calibration | 98 / 18 | 0.454 [0.284, 0.737] | 0.740 [0.504, 0.958] | 1.000 | 0.655 [0.333, 1.000] | 0.791 | 0.000 | 46/103 (0.447) | 0.25 / 0.42 |
+| dev | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 | 69/107 (0.645) | 0.25 / 0.37 |
+| pooled development | 586 / 107 | 0.403 [0.332, 0.473] | 0.733 [0.626, 0.812] | 0.976 | 0.627 [0.506, 0.756] | 0.763 | 0.019 | 342/626 (0.546) | 0.26 / 0.36 |
 
 Intervals are family-level percentile bootstrap intervals (95%); the pooled row rests on **107 independent families**, the per-split rows on far fewer (see the families column). HR = high-risk. Read recall together with precision and FPR; no operating point has been chosen.
 
@@ -103,10 +103,10 @@ precision 0.976 [0.920, 1.000]; recall 0.627 [0.506, 0.756]; F1 0.763 [0.661, 0.
 
 | measure | n | mean ms | p50 ms | p95 ms | max ms |
 |---|---|---|---|---|---|
-| harness wall clock per document | 626 | 0.252 | 0.246 | 0.347 | 0.561 |
-| engine-internal (classifier-reported) | 626 | 0.242 | 0.236 | 0.334 | 0.452 |
+| harness wall clock per document | 626 | 0.262 | 0.257 | 0.356 | 0.626 |
+| engine-internal (classifier-reported) | 626 | 0.251 | 0.246 | 0.343 | 0.426 |
 
-Measured p95 0.347 ms and max 0.561 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
+Measured p95 0.356 ms and max 0.626 ms across 626 documents: **within** the 500 ms budget. Documents here are at most a few KB; adversarial 200 KB inputs are covered by unit tests (worst measured 213 ms after the scan cap).
 
 ## Performance by difficulty tier (all tiers, pooled)
 

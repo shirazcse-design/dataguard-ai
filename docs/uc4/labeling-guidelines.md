@@ -124,3 +124,20 @@ acquisition. They are produced by the generator at render time and checked to eq
 * **Template-generated.** Documents within a family share structure; splitting is done by family so
   test families are unseen, but the corpus is still far less varied than real enterprise data.
 * **Synthetic-to-real gap.** Metrics on this dataset say nothing certain about real data.
+
+## 8. Clarifications after the blind review (2026-09-20)
+
+Recorded as decisions A26-A28 in [`decisions.md`](decisions.md). These are guideline clarifications,
+**not** taxonomy configuration: the taxonomy text is part of the LLM prompt, and changing it would
+invalidate the recorded LLM responses. Sections 1-3 (which a blind reviewer is shown) are unchanged.
+
+* **Customer-facing product and developer documentation is Public** without an explicit marker in
+  the text: it is "already in public release" under section 2 item 3 when the document is published
+  material (for example a quickstart on a public developer portal). Placeholder keys and
+  vendor-documented example keys in such a document do not make it `CREDENTIALS_SECRETS`.
+* **A medical record number does not, by itself, count as "another direct identifier"** for the PHI
+  rule. A name plus an MRN is PHI only; add PII only when a section 3 identifier appears (contact
+  details, date of birth, government id).
+* **Two-rank ties.** For a draft that is intended for publication but not yet approved, the gold is
+  the higher plausible level (`CONFIDENTIAL`) and both `PUBLIC` and the level between them
+  (`INTERNAL`) are acceptable alternatives. This extends the section 2 tie-break across a two-rank gap.

@@ -8,7 +8,7 @@
 * dataset: `dataguard-uc4-synthetic` v1.0.0
 * generator: `template-v1` v1.0.0, seed `20260918`
 * taxonomy: v1.0.0; high-risk config: v1.0.0
-* dataset sha256: `bc86537c2cc23e5f1e94fe54c66a3f5c9860389f6c341b8384a0b80d608d7dfa`
+* dataset sha256: `9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab`
 * documents: **853** in **155** scenario families
 * **label status: AI-generated synthetic dataset — pending human gold-label review**
 * per-document annotation status: {'unreviewed': 853}

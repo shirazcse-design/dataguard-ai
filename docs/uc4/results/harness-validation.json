@@ -1013,9 +1013,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "expected": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
       "name": "same seed reproduces identical predictions",
-      "observed": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "observed": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
       "passed": true,
       "split": "train",
       "suite": "random"
@@ -2025,9 +2025,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "expected": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
       "name": "same seed reproduces identical predictions",
-      "observed": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "observed": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
       "passed": true,
       "split": "calibration",
       "suite": "random"
@@ -3045,9 +3045,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "expected": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
       "name": "same seed reproduces identical predictions",
-      "observed": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "observed": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
       "passed": true,
       "split": "dev",
       "suite": "random"
@@ -3107,7 +3107,7 @@
     {
       "expected": ">= 2.9 ms",
       "name": "latency: p50 reflects the injected 3 ms",
-      "observed": 3.819,
+      "observed": 4.569,
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3115,23 +3115,23 @@
     {
       "expected": ">=",
       "name": "latency: p95 >= p50",
-      "observed": 3.851,
+      "observed": 4.62,
       "passed": true,
       "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "expected": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
       "name": "latency does not change the metrics fingerprint",
-      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "observed": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
       "passed": true,
       "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "expected": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
       "name": "identical runs give identical fingerprints",
-      "observed": "85070abac441c8adffcb89672b0b72735f75143bee49533074dfefb6762320c6",
+      "observed": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3208,100 +3208,100 @@
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "783d3f7a929de9bd92dd81e817b4f2cdc50a17cbe234504db2c69211950c9172",
+      "fingerprint": "b2b813ac5756cea397f74ced11266a7ccceea2c6042fc1c4c6e07a948efb6183",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 391,
-      "run_id": "oracle-train-20260919T071104Z-783d3f7a",
+      "run_id": "oracle-train-20260921T014829Z-b2b813ac",
       "split": "train"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "bd78ea2dbafddce7cbe89310c0d6d39d926290a62c6a67e45f8d28c1e856761d",
+      "fingerprint": "a2b2fe3b45d79f89f08d9d6e6af181e4398fe8b3d8c9f056c3c9830d647ed7b3",
       "high_risk_precision": 0.5396419437340153,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16638225255972697,
       "n_headline_docs": 391,
-      "run_id": "majority-train-20260919T071104Z-bd78ea2d",
+      "run_id": "majority-train-20260921T014829Z-a2b2fe3b",
       "split": "train"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16020679046371936,
-      "fingerprint": "f1176d27ef605ca32bd798605d2aae95c570b931b3dc7a5a3b0678f2f2e4294c",
+      "fingerprint": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
       "high_risk_precision": 0.5442708333333334,
       "high_risk_recall": 0.990521327014218,
       "level_macro_f1": 0.2684601469562624,
       "n_headline_docs": 391,
-      "run_id": "random-train-20260919T071104Z-f1176d27",
+      "run_id": "random-train-20260921T014829Z-033d8c42",
       "split": "train"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "024f24cbec3ae1f49ff3f1ac3d90db51616a1c57cff53e0e0dc77ee936e3fb9a",
+      "fingerprint": "74eb32743f43215ce538ec6182e60c1c3286abfd0a5d19e506528c3eb611cb3f",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 98,
-      "run_id": "oracle-calibration-20260919T071105Z-024f24cb",
+      "run_id": "oracle-calibration-20260921T014829Z-74eb3274",
       "split": "calibration"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "512442a2a8e6087d98ffb5b71a4900fd184ea7f788ca9c4b02ff587c03d74b90",
+      "fingerprint": "145100e5c971ce26e9ad3f39959570169d481aee0e4500e54f5c1d36e786a17c",
       "high_risk_precision": 0.5612244897959183,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16666666666666666,
       "n_headline_docs": 98,
-      "run_id": "majority-calibration-20260919T071105Z-512442a2",
+      "run_id": "majority-calibration-20260921T014829Z-145100e5",
       "split": "calibration"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16009765837489026,
-      "fingerprint": "fb60fbe449cb853e3fc716a96caa0fe6fcc3df18f385fcd5bff3d2acbf682b1c",
+      "fingerprint": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
       "high_risk_precision": 0.5612244897959183,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.2078494447098161,
       "n_headline_docs": 98,
-      "run_id": "random-calibration-20260919T071105Z-fb60fbe4",
+      "run_id": "random-calibration-20260921T014829Z-07f3305b",
       "split": "calibration"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "887bc3ace8367833dee959a59d59d97a87d75f2380573fb4062d8b27268b6e68",
+      "fingerprint": "f4f4473ab03556a3d1a36d423dc73895b7f0c69c9a85dfe79362e562d507f95f",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 97,
-      "run_id": "oracle-dev-20260919T071105Z-887bc3ac",
+      "run_id": "oracle-dev-20260921T014830Z-f4f4473a",
       "split": "dev"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "b63d38bb3f217a6e58d39bb8cb9ebab467c52d23da1f8d673e3466d83568dd13",
+      "fingerprint": "8a3f1a32074a931f42d0f6dfc2444e401c6265805ea1e648a210dfaaab5913c7",
       "high_risk_precision": 0.5463917525773195,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16319444444444445,
       "n_headline_docs": 97,
-      "run_id": "majority-dev-20260919T071105Z-b63d38bb",
+      "run_id": "majority-dev-20260921T014830Z-8a3f1a32",
       "split": "dev"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.1635446515973488,
-      "fingerprint": "7fb20973e721bdad9c0e45a18680fb945c0d15ad9dbecf8cc2db6a900410c2da",
+      "fingerprint": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
       "high_risk_precision": 0.5425531914893617,
       "high_risk_recall": 0.9622641509433962,
       "level_macro_f1": 0.2283140283140283,
       "n_headline_docs": 97,
-      "run_id": "random-dev-20260919T071105Z-7fb20973",
+      "run_id": "random-dev-20260921T014830Z-2fe0da22",
       "split": "dev"
     }
   ]
