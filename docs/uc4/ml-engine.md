@@ -1,6 +1,6 @@
 # UC4 supervised ML classifier (Approach B)
 
-> Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.** Every number
+> Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** Every number
 > below comes from an executed run of `dataguard-uc4 ml report`; see
 > [`results/ml-baseline.md`](results/ml-baseline.md). The protocol was pre-registered in
 > [`ml-plan.md`](ml-plan.md) before any model was trained.
@@ -51,17 +51,19 @@ content + filename ──► TF-IDF word (1-2) ┐
 1. **It memorises templates.** Fitted on train it scores 1.0; random K-fold on train scores 0.98 /
    1.00 (level / category macro-F1); grouped K-fold scores 0.31 / 0.14. Documents in a family share a
    template, so only the grouped figure is honest, and only 76 families are available.
-2. **Held-out dev is weak and over-flags.** Level macro-F1 0.232, category macro-F1 0.433. It
-   predicts Highly Confidential for 89 of 97 headline documents, so high-risk recall (0.925) is
-   accompanied by a false-positive rate of 0.909 and precision of 0.551. **That recall must not be
-   read as success** (approved decision A23).
+2. **Held-out dev is weak and over-flags.** Level macro-F1 0.215, category macro-F1 0.433. It
+   predicts Highly Confidential for 84 of 97 headline documents, so high-risk recall (0.830) comes
+   with a false-positive rate of 0.909 and precision of 0.524. **That recall must not be read as
+   success** (approved decision A23). *These figures were 0.232 / 0.925 / 0.551 before 2026-09-21:
+   the model is calibrated on the calibration split, and relabelling two calibration families
+   (decisions A30 and A32) moved them, although no dev label changed.*
 3. **Complementary to Rules, not better.** ML wins on Intellectual Property (0.92 vs 0.00) and Source
    Code (0.95 vs 0.67) and catches documents where Rules abstain; Rules win on Credentials (1.0 vs
    0.11), Financial/PCI and M&A (0.84 vs 0). Neither finds Trade Secret or PII on dev.
 4. **Calibration is decent where measurable, but it cannot fix a biased ranker.** Category ECE 0.009,
    level ECE 0.058, fitted on ~100 documents.
 5. **The filename block did not help.** The content-only variant is slightly better on every dev
-   metric (level 0.259 vs 0.232, category 0.457 vs 0.433, high-risk FPR 0.795 vs 0.909), all well
+   metric (level 0.251 vs 0.215, category 0.457 vs 0.433, high-risk FPR 0.682 vs 0.909), all well
    within the intervals. The pre-registered suspicion that filenames inflate results was therefore
    not confirmed; if anything the filename block adds noise here.
 6. **Latency** is a few milliseconds per document after training.

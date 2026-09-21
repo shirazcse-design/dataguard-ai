@@ -7,7 +7,7 @@
 > a development and evaluation surface, not a release. Criteria are computed in
 > [`results/service-baseline.md`](results/service-baseline.md).
 >
-> Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.**
+> Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 
 ## Tool
 
@@ -77,11 +77,14 @@ Computed from a real run in `results/service-baseline.md` (see that file for the
 | **The eval gates have passed** | **NOT MET.** Point estimates pass on dev, but the lower family-bootstrap bound of level macro-F1 fails (0.631 against 0.85), dev chose the configuration. The single locked-test evaluation (2026-09-21) confirms the pattern: level macro-F1 0.884, lower bound 0.758, so the gate still fails on the lower bound |
 | Approval to build MCP | Given (2026-09-20) |
 
-**Therefore: the adapter exists but is not release-ready.** Of the two remaining conditions, (1) the
-audited, report-only confirmation on data that did not choose the configuration is **done**
-(2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md)); it did not pass the
-level-F1 lower bound (0.758 against 0.85). (2) Human review of the gold labels is **still not satisfied**:
-the sheet designated as the human review is identical to an AI sheet.
+**Therefore: the adapter exists but is not release-ready.** Of the two conditions that remained after
+the build approval: (1) the audited, report-only confirmation on data that did not choose the
+configuration is **done** (2026-09-21, [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md));
+(2) human review of the gold labels was **accepted by the product owner with one reviewer** (decision A29;
+provenance per the coordinator). What is still unmet is the **eval-gates criterion on the strict metric**:
+the level macro-F1 lower bound is 0.758 on the locked test (0.85 required). A lenient view reaches 1.000
+([`results/validation-rescore.md`](results/validation-rescore.md)), but whether the gate may be judged on it is
+a product decision that has not been made.
 
 ## As implemented
 

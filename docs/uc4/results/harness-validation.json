@@ -1013,9 +1013,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
+      "expected": "f90f34c9d2534dd7d4824399f405878acf631910ccb0a84c9b9bb1857e44658f",
       "name": "same seed reproduces identical predictions",
-      "observed": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
+      "observed": "f90f34c9d2534dd7d4824399f405878acf631910ccb0a84c9b9bb1857e44658f",
       "passed": true,
       "split": "train",
       "suite": "random"
@@ -1079,7 +1079,7 @@
         [
           0,
           0,
-          28,
+          34,
           0,
           0
         ],
@@ -1087,7 +1087,7 @@
           0,
           0,
           0,
-          49,
+          43,
           0
         ]
       ],
@@ -1110,7 +1110,7 @@
         [
           0,
           0,
-          28,
+          34,
           0,
           0
         ],
@@ -1118,7 +1118,7 @@
           0,
           0,
           0,
-          49,
+          43,
           0
         ]
       ],
@@ -1261,25 +1261,25 @@
       "suite": "majority/headline"
     },
     {
-      "expected": 0.5,
+      "expected": 0.4387755102040816,
       "name": "level accuracy",
-      "observed": 0.5,
+      "observed": 0.4387755102040816,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
     },
     {
-      "expected": 0.16666666666666666,
+      "expected": 0.1524822695035461,
       "name": "level macro F1",
-      "observed": 0.16666666666666666,
+      "observed": 0.1524822695035461,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
     },
     {
-      "expected": 0.125,
+      "expected": 0.1096938775510204,
       "name": "level macro precision",
-      "observed": 0.125,
+      "observed": 0.1096938775510204,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
@@ -1293,9 +1293,9 @@
       "suite": "majority/headline"
     },
     {
-      "expected": 0.5,
+      "expected": 0.4387755102040816,
       "name": "level micro F1",
-      "observed": 0.5,
+      "observed": 0.4387755102040816,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
@@ -1303,14 +1303,14 @@
     {
       "expected": {
         "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
+        "HIGHLY_CONFIDENTIAL": 0.6099290780141844,
         "INTERNAL": 0.0,
         "PUBLIC": 0.0
       },
       "name": "level per-class F1",
       "observed": {
         "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6666666666666666,
+        "HIGHLY_CONFIDENTIAL": 0.6099290780141844,
         "INTERNAL": 0.0,
         "PUBLIC": 0.0
       },
@@ -1335,9 +1335,9 @@
       "suite": "majority/headline"
     },
     {
-      "expected": 0.5,
+      "expected": 0.5612244897959183,
       "name": "over-classification rate",
-      "observed": 0.5,
+      "observed": 0.5612244897959183,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
@@ -1394,15 +1394,15 @@
     },
     {
       "expected": [
-        55,
-        43,
+        49,
+        49,
         0,
         0
       ],
       "name": "high-risk confusion counts",
       "observed": [
-        55,
-        43,
+        49,
+        49,
         0,
         0
       ],
@@ -1419,9 +1419,9 @@
       "suite": "majority/headline"
     },
     {
-      "expected": 0.5612244897959183,
+      "expected": 0.5,
       "name": "high-risk precision",
-      "observed": 0.5612244897959183,
+      "observed": 0.5,
       "passed": true,
       "split": "calibration",
       "suite": "majority/headline"
@@ -1493,7 +1493,7 @@
         [
           0,
           0,
-          28,
+          34,
           0,
           0
         ],
@@ -1501,7 +1501,7 @@
           0,
           0,
           0,
-          54,
+          48,
           0
         ]
       ],
@@ -1524,7 +1524,7 @@
         [
           0,
           0,
-          28,
+          34,
           0,
           0
         ],
@@ -1532,7 +1532,7 @@
           0,
           0,
           0,
-          54,
+          48,
           0
         ]
       ],
@@ -1667,25 +1667,25 @@
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.5242718446601942,
+      "expected": 0.46601941747572817,
       "name": "level accuracy",
-      "observed": 0.5242718446601942,
+      "observed": 0.46601941747572817,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.17197452229299362,
+      "expected": 0.15894039735099338,
       "name": "level macro F1",
-      "observed": 0.17197452229299362,
+      "observed": 0.15894039735099338,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.13106796116504854,
+      "expected": 0.11650485436893204,
       "name": "level macro precision",
-      "observed": 0.13106796116504854,
+      "observed": 0.11650485436893204,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
@@ -1699,9 +1699,9 @@
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.5242718446601942,
+      "expected": 0.46601941747572817,
       "name": "level micro F1",
-      "observed": 0.5242718446601942,
+      "observed": 0.46601941747572817,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
@@ -1709,14 +1709,14 @@
     {
       "expected": {
         "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6878980891719745,
+        "HIGHLY_CONFIDENTIAL": 0.6357615894039735,
         "INTERNAL": 0.0,
         "PUBLIC": 0.0
       },
       "name": "level per-class F1",
       "observed": {
         "CONFIDENTIAL": 0.0,
-        "HIGHLY_CONFIDENTIAL": 0.6878980891719745,
+        "HIGHLY_CONFIDENTIAL": 0.6357615894039735,
         "INTERNAL": 0.0,
         "PUBLIC": 0.0
       },
@@ -1741,9 +1741,9 @@
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.47572815533980584,
+      "expected": 0.5339805825242718,
       "name": "over-classification rate",
-      "observed": 0.47572815533980584,
+      "observed": 0.5339805825242718,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
@@ -1800,15 +1800,15 @@
     },
     {
       "expected": [
-        60,
-        43,
+        54,
+        49,
         0,
         0
       ],
       "name": "high-risk confusion counts",
       "observed": [
-        60,
-        43,
+        54,
+        49,
         0,
         0
       ],
@@ -1825,9 +1825,9 @@
       "suite": "majority/all_tiers"
     },
     {
-      "expected": 0.5825242718446602,
+      "expected": 0.5242718446601942,
       "name": "high-risk precision",
-      "observed": 0.5825242718446602,
+      "observed": 0.5242718446601942,
       "passed": true,
       "split": "calibration",
       "suite": "majority/all_tiers"
@@ -1843,7 +1843,7 @@
     {
       "expected": "0.2500 +/- 4.5*0.0427",
       "name": "level accuracy ~ 1/levels",
-      "observed": 0.27184466019417475,
+      "observed": 0.2621359223300971,
       "passed": true,
       "split": "calibration",
       "suite": "random/all_tiers"
@@ -1865,17 +1865,17 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "0.2500 +/- 4.5*0.0818",
+      "expected": "0.2500 +/- 4.5*0.0743",
       "name": "level recall[CONFIDENTIAL] ~ 1/levels",
-      "observed": 0.25,
+      "observed": 0.2647058823529412,
       "passed": true,
       "split": "calibration",
       "suite": "random/all_tiers"
     },
     {
-      "expected": "0.2500 +/- 4.5*0.0589",
+      "expected": "0.2500 +/- 4.5*0.0625",
       "name": "level recall[HIGHLY_CONFIDENTIAL] ~ 1/levels",
-      "observed": 0.3333333333333333,
+      "observed": 0.3125,
       "passed": true,
       "split": "calibration",
       "suite": "random/all_tiers"
@@ -2001,7 +2001,7 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "0.9766 +/- 4.5*0.0195",
+      "expected": "0.9766 +/- 4.5*0.0206",
       "name": "high-risk recall ~ P(pred high-risk)",
       "observed": 1.0,
       "passed": true,
@@ -2009,7 +2009,7 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "0.9766 +/- 4.5*0.0231",
+      "expected": "0.9766 +/- 4.5*0.0216",
       "name": "high-risk FPR ~ P(pred high-risk)",
       "observed": 1.0,
       "passed": true,
@@ -2017,17 +2017,17 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "0.5825 +/- 4.5*0.0486",
+      "expected": "0.5243 +/- 4.5*0.0492",
       "name": "high-risk precision ~ prevalence",
-      "observed": 0.5825242718446602,
+      "observed": 0.5242718446601942,
       "passed": true,
       "split": "calibration",
       "suite": "random/all_tiers"
     },
     {
-      "expected": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
+      "expected": "6fdb187da956c6e94340a65cec7b61c9eccba1c3121a2076b527068c84e28d01",
       "name": "same seed reproduces identical predictions",
-      "observed": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
+      "observed": "6fdb187da956c6e94340a65cec7b61c9eccba1c3121a2076b527068c84e28d01",
       "passed": true,
       "split": "calibration",
       "suite": "random"
@@ -3045,9 +3045,9 @@
       "suite": "random/all_tiers"
     },
     {
-      "expected": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
+      "expected": "eeaea15df47d03eb7a1c4e1dc36b57e97c92c1442a37bec1f756e3136ef7669b",
       "name": "same seed reproduces identical predictions",
-      "observed": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
+      "observed": "eeaea15df47d03eb7a1c4e1dc36b57e97c92c1442a37bec1f756e3136ef7669b",
       "passed": true,
       "split": "dev",
       "suite": "random"
@@ -3107,7 +3107,7 @@
     {
       "expected": ">= 2.9 ms",
       "name": "latency: p50 reflects the injected 3 ms",
-      "observed": 4.57,
+      "observed": 4.566,
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3115,23 +3115,23 @@
     {
       "expected": ">=",
       "name": "latency: p95 >= p50",
-      "observed": 4.658,
+      "observed": 4.592,
       "passed": true,
       "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
+      "expected": "354b399b1442125c1324037f0aa0972cb2f45c068daf16f421d988d4ff930d22",
       "name": "latency does not change the metrics fingerprint",
-      "observed": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
+      "observed": "354b399b1442125c1324037f0aa0972cb2f45c068daf16f421d988d4ff930d22",
       "passed": true,
       "split": "all",
       "suite": "robustness"
     },
     {
-      "expected": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
+      "expected": "354b399b1442125c1324037f0aa0972cb2f45c068daf16f421d988d4ff930d22",
       "name": "identical runs give identical fingerprints",
-      "observed": "80a46bffa5d53cae5016e751ce48ca55fe30ea0060ff18fae15eb6ba3b9afb64",
+      "observed": "354b399b1442125c1324037f0aa0972cb2f45c068daf16f421d988d4ff930d22",
       "passed": true,
       "split": "all",
       "suite": "robustness"
@@ -3208,100 +3208,100 @@
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "b2b813ac5756cea397f74ced11266a7ccceea2c6042fc1c4c6e07a948efb6183",
+      "fingerprint": "6b3a868083e28de0f4f4c0ceedf46dd54e3dc0b4418dfa5ac1f3103c32eb27c5",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 391,
-      "run_id": "oracle-train-20260921T014848Z-b2b813ac",
+      "run_id": "oracle-train-20260921T212421Z-6b3a8680",
       "split": "train"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "a2b2fe3b45d79f89f08d9d6e6af181e4398fe8b3d8c9f056c3c9830d647ed7b3",
+      "fingerprint": "4f9decb4270ce19d5c2733698405aceafa6e44e5670c5eac61b05ab73fbb5efb",
       "high_risk_precision": 0.5396419437340153,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16638225255972697,
       "n_headline_docs": 391,
-      "run_id": "majority-train-20260921T014848Z-a2b2fe3b",
+      "run_id": "majority-train-20260921T212421Z-4f9decb4",
       "split": "train"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16020679046371936,
-      "fingerprint": "033d8c42e8a28f4a47204bff887f080564f5895442099bf13ee89853ed3d0e6c",
+      "fingerprint": "f90f34c9d2534dd7d4824399f405878acf631910ccb0a84c9b9bb1857e44658f",
       "high_risk_precision": 0.5442708333333334,
       "high_risk_recall": 0.990521327014218,
       "level_macro_f1": 0.2684601469562624,
       "n_headline_docs": 391,
-      "run_id": "random-train-20260921T014849Z-033d8c42",
+      "run_id": "random-train-20260921T212421Z-f90f34c9",
       "split": "train"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "74eb32743f43215ce538ec6182e60c1c3286abfd0a5d19e506528c3eb611cb3f",
+      "fingerprint": "99837a7e7b44663e642b51faf863a4bd2829178e1aa245c3cabf6b64ecb16e11",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 98,
-      "run_id": "oracle-calibration-20260921T014849Z-74eb3274",
+      "run_id": "oracle-calibration-20260921T212422Z-99837a7e",
       "split": "calibration"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "145100e5c971ce26e9ad3f39959570169d481aee0e4500e54f5c1d36e786a17c",
-      "high_risk_precision": 0.5612244897959183,
+      "fingerprint": "75f0fc864644dd9fb228fa5afa1402bb3ec8e962ab48eac821b935905460054b",
+      "high_risk_precision": 0.5,
       "high_risk_recall": 1.0,
-      "level_macro_f1": 0.16666666666666666,
+      "level_macro_f1": 0.1524822695035461,
       "n_headline_docs": 98,
-      "run_id": "majority-calibration-20260921T014849Z-145100e5",
+      "run_id": "majority-calibration-20260921T212422Z-75f0fc86",
       "split": "calibration"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.16009765837489026,
-      "fingerprint": "07f3305b452e934d5aa7342957f68915c58a751a868f313720f10cba539d2a04",
-      "high_risk_precision": 0.5612244897959183,
+      "fingerprint": "6fdb187da956c6e94340a65cec7b61c9eccba1c3121a2076b527068c84e28d01",
+      "high_risk_precision": 0.5,
       "high_risk_recall": 1.0,
-      "level_macro_f1": 0.2078494447098161,
+      "level_macro_f1": 0.2053379672625958,
       "n_headline_docs": 98,
-      "run_id": "random-calibration-20260921T014849Z-07f3305b",
+      "run_id": "random-calibration-20260921T212422Z-6fdb187d",
       "split": "calibration"
     },
     {
       "baseline": "oracle",
       "category_macro_f1": 1.0,
-      "fingerprint": "f4f4473ab03556a3d1a36d423dc73895b7f0c69c9a85dfe79362e562d507f95f",
+      "fingerprint": "d8c9a42c934b4474fb3895fe05d5053576c84f17c7c6489215804d38778788d8",
       "high_risk_precision": 1.0,
       "high_risk_recall": 1.0,
       "level_macro_f1": 1.0,
       "n_headline_docs": 97,
-      "run_id": "oracle-dev-20260921T014849Z-f4f4473a",
+      "run_id": "oracle-dev-20260921T212423Z-d8c9a42c",
       "split": "dev"
     },
     {
       "baseline": "majority",
       "category_macro_f1": 0.0,
-      "fingerprint": "8a3f1a32074a931f42d0f6dfc2444e401c6265805ea1e648a210dfaaab5913c7",
+      "fingerprint": "7551946c998b0f71de467648a150c45548446e7f0249acdfda09c0299da43415",
       "high_risk_precision": 0.5463917525773195,
       "high_risk_recall": 1.0,
       "level_macro_f1": 0.16319444444444445,
       "n_headline_docs": 97,
-      "run_id": "majority-dev-20260921T014849Z-8a3f1a32",
+      "run_id": "majority-dev-20260921T212423Z-7551946c",
       "split": "dev"
     },
     {
       "baseline": "random",
       "category_macro_f1": 0.1635446515973488,
-      "fingerprint": "2fe0da22bd839139b3edc835675722716d5e9fb6c04964e1d365b666eb878736",
+      "fingerprint": "eeaea15df47d03eb7a1c4e1dc36b57e97c92c1442a37bec1f756e3136ef7669b",
       "high_risk_precision": 0.5425531914893617,
       "high_risk_recall": 0.9622641509433962,
       "level_macro_f1": 0.2283140283140283,
       "n_headline_docs": 97,
-      "run_id": "random-dev-20260921T014849Z-2fe0da22",
+      "run_id": "random-dev-20260921T212423Z-eeaea15d",
       "split": "dev"
     }
   ]

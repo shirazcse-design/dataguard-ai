@@ -233,3 +233,24 @@ Not done: no taxonomy config edit (it would invalidate the recorded LLM cache); 
 | D9.10 | The out-of-sample check ran the frozen `default` hybrid on the calibration split, recorded live; no label, config, threshold or prompt was changed in response to its result. | Changing anything now would be tuning on a split just inspected. The `amb_aggregate_health_stats` label question (gold HIGHLY_CONFIDENTIAL, taxonomy lists de-identified aggregate stats as a PHI counter-example) is left for a human review. |
 | D9.11 | The locked test split was evaluated once (2026-09-21, `--allow-locked-test`, run `hybrid-test-20260921T071856Z-789a620e`) with the frozen `default` hybrid, report-only. No label, config, threshold, prompt or model was changed in response. The split is now consumed: any further evaluation on it is no longer an unbiased confirmation. | Requested by the product owner. The result and its caveats are in `results/hybrid-locked-test.md`; the MCP freeze criterion for the audited confirmation is met, the eval-gates criterion is not (level lower bound 0.758), and the human-review criterion is not satisfied. |
 | D9.12 | Build a Round 2 blind package (`--variant round2`): every ambiguity-flagged family in the development splits plus the Round 1 disputed families (14 families, 16 documents) and 12 controls, compared with the gold and between reviewers only. The four ambiguous locked-test families are excluded by design. | No independent human has reviewed any gold label yet (the Round 1 sheet duplicated an AI sheet), and the calibration high-risk misses are one family that was never in a blind package. See `human-review-round2.md`. |
+
+## Approved after the Round 2 review (product owner, 2026-09-21)
+
+Evidence: the Round 2 sheet from one reviewer (`Rahul`; independence per the coordinator's statement, not verifiable from the file). See `review/blind_results_round2/`.
+
+| # | Decision | Implementation |
+|---|---|---|
+| A29 | One reviewer is enough to record the review and re-word the dataset label: **"AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending"**. It is not called validated. | `dataset_spec.yaml` `label_status` and the current-state report banners. The reviewer-facing blind packets keep the wording they were issued with. |
+| A30 | `amb_aggregate_health_stats`: gold **CONFIDENTIAL**, alternatives `[HIGHLY_CONFIDENTIAL, INTERNAL]`, no category. | `t3_ambiguous.yaml`; guidelines section 8. The six documents are no longer high-risk. |
+| A31 | Tie-break policy: **keep the gold as it is** (fail-safe: the higher level on a tie) and report a **lenient level view** beside the strict headline. No relabelling. | Harness 1.5.0 (`lenient_level_view`); `results/validation-rescore.md`. |
+| A32 | `hn_business_case_study`: gold stays PUBLIC, flagged ambiguous, `INTERNAL` an acceptable alternative. | `t4_hard_negatives.yaml`; the integrity rule now allows `ambiguity_flag` on tier T4 as well as T3. |
+
+## Implementation decisions (validation re-score)
+
+| # | Decision | Why |
+|---|---|---|
+| D9.13 | A family may pin its split-balancing level (`split_gold_level`), and a test pins the locked split's family set. | The split search is a global seeded search balanced on gold levels: the first regeneration after A30 silently moved families between splits, including the locked test split. Reverted before use. |
+| D9.14 | The lenient view relaxes **levels only** (categories and high-risk stay strict), is reported beside and never instead of the strict headline, and does not change any gate verdict. | Safety metrics must not be softened; the approved gates are defined on the strict metric. |
+| D9.15 | Relabelling calibration families moved the ML baseline and the `ml_stage_*` hybrid variants; the recommended `default` variant (no ML) is unchanged. Affected reports and prose were regenerated and updated. | The ML model is calibrated on the calibration split. |
+| D9.16 | The locked test split was replayed once more (`--allow-locked-test`, access-log entry 2) to compute the lenient view. Strict numbers are identical. | Post-hoc, audited, report-only; the split remains consumed. |
+

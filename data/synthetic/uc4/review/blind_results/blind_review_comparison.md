@@ -2,21 +2,21 @@
 
 > **Provenance note (recorded verbatim at the operator's request):** The product owner designated this sheet (reviewer_id 'Shiraz Ahmed', file modified 2026-09-20 18:24) as the human review. Fact recorded by the analyst: on all 33 documents its level, categories, confidence, ambiguity flag, alternative levels, insufficient-information flag and rationale text are identical to an earlier AI-completed sheet (reviewer_id 'ChatGPT-GPT-5.6-Sol'; see blind_results_ai/). It therefore adds no evidence independent of that AI review, and this report must not be cited as independent human validation.
 
-> **AI-generated synthetic dataset — pending human gold-label review.** Read-only comparison. No label, taxonomy, schema v1.0, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score.
+> **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** Read-only comparison. No label, taxonomy, schema v1.0, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score.
 
 ## What this is and is not
 
 * Inputs: the returned blind sheet(s), the blind key, and the predictions already executed for the adjudication sheet (nothing was re-run).
-* Package: 33 items (21 disputed, 12 controls), seed `uc4-blind-review-v1`, dataset sha256 `9442e354c3dd51dd…`, taxonomy 1.0.0; integrity verified against the manifest.
+* Package: 33 items (21 disputed, 12 controls), seed `uc4-blind-review-v1`, dataset sha256 `284abad1247b53a3…`, taxonomy 1.0.0; integrity verified against the manifest.
 * Every table is **SMALL_SAMPLE** (fewer than 25 per cell), and the disputed set is 4 independent decisions, not 21: counts are shown, not rates with intervals.
 * The human applied the same taxonomy and guidelines that produced the gold: agreement shows consistent application of the rules, not that the rules are right. A human decision is required before any label or taxonomy change.
 * One human is one opinion; a single reviewer cannot separate a dataset problem from a reviewer idiosyncrasy.
 
 Input files (sha256):
 
-* `blind_review_sheet.csv`: `679a54e7161cf7b9266c9e3da00ae90a6681ddbee57d92f27c5b9808321d3e56`
+* `blind_review_sheet.completed.shiraz-ahmed.csv`: `679a54e7161cf7b9266c9e3da00ae90a6681ddbee57d92f27c5b9808321d3e56`
 * `review/blind/blind_review_sheet.csv`: `c3a6f6851b2cf1908e342007fa4d00f687471c6a781c7964f00586924e930d9e`
-* `review/blind_key/blind_review_key.csv`: `154da1c1081420913e0b0e5bce31dfedc4bd20978762b47bd2dacb159c264e61`
+* `review/blind_key/blind_review_key.csv`: `eaf47b5953a2032bdba2a924fcd99b7a073aaba21beedf4bcab4415b9a2e519a`
 
 ## Reviewer `Shiraz Ahmed` (last review date 2026-09-20)
 
@@ -106,7 +106,7 @@ How to read the patterns: `gold=human≠pred` = the human confirms the gold and 
 
 **A (follow-on). same rule, calibration family** (`hn_business_case_study`, 5 documents, one independent decision)
 
-* synthetic gold: PUBLIC (no categories); gold alternatives: none
+* synthetic gold: PUBLIC (no categories); gold alternatives: INTERNAL
 * human labels: INTERNAL (no categories) ×3, PUBLIC (no categories) ×2
 * human ambiguity flagged: 5 of 5; alternative levels named: PUBLIC ×3, INTERNAL ×2; insufficient information: 0 of 5
 * rationale(s): “The document is framed as a historical teaching case about a completed 2010 merger, which matches the taxonomy's historical/public case-study counterexample for M&A.” / “The filename and content frame this as a historical teaching case about a completed 2006 merger, matching the historical/public case-study counterexample for M&A.” / “This is a historical case study about a completed 2007 merger, so M&A / Corporate Strategy does not apply. The text does not explicitly establish public-release status, so Internal is the default.” …

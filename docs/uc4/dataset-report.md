@@ -8,9 +8,9 @@
 * dataset: `dataguard-uc4-synthetic` v1.0.0
 * generator: `template-v1` v1.0.0, seed `20260918`
 * taxonomy: v1.0.0; high-risk config: v1.0.0
-* dataset sha256: `9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab`
+* dataset sha256: `284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e`
 * documents: **853** in **155** scenario families
-* **label status: AI-generated synthetic dataset — pending human gold-label review**
+* **label status: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending**
 * per-document annotation status: {'unreviewed': 853}
 * the gold labels are NOT independently human-validated
 
@@ -19,7 +19,7 @@
 | split | documents | families | high-risk docs | ambiguous docs | docs with no category |
 |---|---|---|---|---|---|
 | train | 416 | 76 | 226 | 42 | 132 |
-| calibration | 103 | 19 | 60 | 12 | 27 |
+| calibration | 103 | 19 | 54 | 17 | 27 |
 | dev | 107 | 20 | 58 | 12 | 32 |
 | test | 227 | 40 | 121 | 24 | 72 |
 
@@ -39,7 +39,7 @@ Splitting is by scenario family: every document of a family is in exactly one sp
 | split | PUBLIC | INTERNAL | CONFIDENTIAL | HIGHLY_CONFIDENTIAL |
 |---|---|---|---|---|
 | train | 32 | 52 | 122 | 210 |
-| calibration | 10 | 11 | 28 | 54 |
+| calibration | 10 | 11 | 34 | 48 |
 | dev | 10 | 16 | 29 | 52 |
 | test | 22 | 26 | 63 | 116 |
 

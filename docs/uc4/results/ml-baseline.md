@@ -4,24 +4,24 @@
 
 ## Provenance and protocol
 
-* **dataset labels: AI-generated synthetic dataset — pending human gold-label review** (not independently human-validated)
+* **dataset labels: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending** (not independently human-validated)
 * pre-registered plan: `docs/uc4/ml-plan.md` (committed before any model was trained)
 * model `ml-1.0.0-9c98cbca-a37bca16`; config sha256 `9c98cbcab088d3be...`; seed 20260918; level C 0.3, category C 1.0
 * fitted on **train** (416 docs, 76 families); calibrated on **calibration** (103 docs); **evaluated on dev** (107 docs)
 * C selected by grouped (by family) 5-fold CV on train only; dev evaluated once for the selected configuration; no tuning followed
-* git `f49660bd5e82` on `uc4/phase-4-ml` (dirty: False)
+* git `2c0026a611dc` on `uc4/round2-review-results` (dirty: True)
 * features: word + character TF-IDF over content + a filename block. No rule outputs, no embedded labels.
 
 ## Headline: held-out dev split (tiers T1-T4)
 
 | classifier | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR |
 |---|---|---|---|---|---|---|---|
-| ML (this model) | 97 / 18 | 0.232 [0.134, 0.392] | 0.433 [0.257, 0.628] | 0.551 | 0.925 [0.745, 1.000] | 0.690 | 0.909 |
+| ML (this model) | 97 / 18 | 0.215 [0.117, 0.382] | 0.433 [0.257, 0.628] | 0.524 | 0.830 [0.571, 1.000] | 0.642 | 0.909 |
 | Rules 1.0.3 (frozen) | 97 / 18 | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.767 | 0.000 |
 
 Intervals are family-level bootstrap intervals resting on **18 independent families**; they are wide. Rules were developed while looking at dev (see the Rules changelog), ML was not, so the comparison flatters Rules. HR = high-risk. No operating point has been chosen; read recall with precision and FPR.
 
-Initial high-risk recall reference 0.90 (informational, not a gate): ML observed 0.925, **at or above** the reference.
+Initial high-risk recall reference 0.90 (informational, not a gate): ML observed 0.830, **below** the reference.
 
 ## Why the numbers look this way: template memorisation
 
@@ -55,16 +55,16 @@ Confusion matrix (rows = gold, columns = predicted; `NO_PREDICTION` counts missi
 | PUBLIC | 1 | 1 | 0 | 8 | 0 |
 | INTERNAL | 0 | 0 | 0 | 11 | 0 |
 | CONFIDENTIAL | 0 | 0 | 2 | 27 | 0 |
-| HIGHLY_CONFIDENTIAL | 0 | 0 | 4 | 43 | 0 |
+| HIGHLY_CONFIDENTIAL | 0 | 0 | 9 | 38 | 0 |
 
 | level | precision | recall | F1 | support | predicted | warning |
 |---|---|---|---|---|---|---|
 | PUBLIC | 1.000 | 0.100 | 0.182 | 10 | 1 | SMALL_SAMPLE |
 | INTERNAL | 0.000 | 0.000 | 0.000 | 11 | 1 | SMALL_SAMPLE |
-| CONFIDENTIAL | 0.333 | 0.069 | 0.114 | 29 | 6 |  |
-| HIGHLY_CONFIDENTIAL | 0.483 | 0.915 | 0.632 | 47 | 89 |  |
+| CONFIDENTIAL | 0.182 | 0.069 | 0.100 | 29 | 11 |  |
+| HIGHLY_CONFIDENTIAL | 0.452 | 0.809 | 0.580 | 47 | 84 |  |
 
-macro F1 0.232 [0.134, 0.392]; accuracy 0.474; under-classification 0.041 (severe 0.000); over-classification 0.485.
+macro F1 0.215 [0.117, 0.382]; accuracy 0.423; under-classification 0.093 (severe 0.000); over-classification 0.485.
 
 ### Data categories
 
@@ -85,22 +85,22 @@ macro F1 0.433 [0.257, 0.628]; micro P/R/F1 0.773 / 0.425 / 0.548. Support count
 
 | TP | FP | FN | TN | precision | recall | F1 | FPR |
 |---|---|---|---|---|---|---|---|
-| 49 | 40 | 4 | 4 | 0.551 | 0.925 | 0.690 | 0.909 |
+| 44 | 40 | 9 | 4 | 0.524 | 0.830 | 0.642 | 0.909 |
 
-precision 0.551 [0.318, 0.776]; recall 0.925 [0.745, 1.000]; F1 0.690 [0.457, 0.854]; FPR 0.909 [0.789, 1.000].
+precision 0.524 [0.280, 0.753]; recall 0.830 [0.571, 1.000]; F1 0.642 [0.393, 0.817]; FPR 0.909 [0.789, 1.000].
 
 ## Calibration (held-out dev)
 
 Platt scaling was fitted on the calibration split; the classifier claims calibration: **True**. Reliability is measured on dev with 5 bins; with so few documents per bin these figures are indicative only. Calibration on the calibration split cannot fix a model that fails to generalise across families.
 
-**Level (top-label confidence):** ECE 0.058, multiclass Brier 0.614, n=97.
+**Level (top-label confidence):** ECE 0.082, multiclass Brier 0.612, n=97.
 
 | confidence bin | n | mean confidence | accuracy |
 |---|---|---|---|
 | [0.00, 0.20) | 0 | n/a | n/a |
-| [0.20, 0.40) | 5 | 0.372 | 0.400 |
-| [0.40, 0.60) | 73 | 0.513 | 0.438 |
-| [0.60, 0.80) | 19 | 0.630 | 0.632 |
+| [0.20, 0.40) | 10 | 0.355 | 0.500 |
+| [0.40, 0.60) | 87 | 0.489 | 0.414 |
+| [0.60, 0.80) | 0 | n/a | n/a |
 | [0.80, 1.00] | 0 | n/a | n/a |
 
 **Categories (all document-category pairs):** ECE 0.009, Brier 0.057, n=776.
@@ -129,7 +129,7 @@ Platt scaling was fitted on the calibration split; the classifier claims calibra
 | tier | docs | ML level F1 | Rules level F1 | ML category F1 | Rules category F1 | ML HR recall | Rules HR recall | ML HR FPR | Rules HR FPR |
 |---|---|---|---|---|---|---|---|---|---|
 | T1 | 46 | 0.387 | 0.490 | 0.427 | 0.611 | 0.886 | 0.857 | 0.818 | 0.000 |
-| T2 | 24 | 0.496 | 0.200 | 0.250 | 0.167 | 1.000 | 0.167 | 0.667 | 0.000 |
+| T2 | 24 | 0.347 | 0.200 | 0.250 | 0.167 | 0.722 | 0.167 | 0.667 | 0.000 |
 | T3 | 12 | 0.000 | 0.000 | 1.000 | 0.000 | n/a | n/a | 1.000 | 0.000 |
 | T4 | 15 | 0.000 | 0.556 | 1.000 | 1.000 | n/a | n/a | 1.000 | 0.000 |
 | T5 | 10 | 0.333 | 0.333 | 0.750 | 0.000 | 1.000 | 0.000 | 1.000 | 0.000 |
@@ -138,39 +138,39 @@ Platt scaling was fitted on the calibration split; the classifier claims calibra
 
 | gold high-risk documents | caught by both | ML only | Rules only | neither |
 |---|---|---|---|---|
-| 58 | 29 | 25 | 4 | 0 |
+| 58 | 29 | 20 | 4 | 5 |
 
-**Read with care:** ML predicted high-risk for 99 of 107 dev documents (0.925), so many of its 'ML only' catches would occur for almost any document. Its high-risk recall is inflated by over-flagging; read it with the false-positive rate.
+**Read with care:** ML predicted high-risk for 94 of 107 dev documents (0.879), so many of its 'ML only' catches would occur for almost any document. Its high-risk recall is inflated by over-flagging; read it with the false-positive rate.
 
 | dev subset | documents | ML level accuracy | ML high-risk recall |
 |---|---|---|---|
 | Rules decisive | 38 | 0.763 | 0.879 (of 33 positives) |
-| Rules abstained | 69 | 0.319 | 1.000 (of 25 positives) |
+| Rules abstained | 69 | 0.246 | 0.800 (of 25 positives) |
 
 ## Threshold sweep on dev (no operating point chosen)
 
 Global category threshold applied to the calibrated probabilities; the level stays as decided. This exposes the trade-off for a later, deliberate choice on development data.
 
-High-risk barely moves with the threshold because it is **level-driven**: ML predicts Highly Confidential for 99 of 107 dev documents (all tiers), and that alone makes them high-risk.
+High-risk barely moves with the threshold because it is **level-driven**: ML predicts Highly Confidential for 94 of 107 dev documents (all tiers), and that alone makes them high-risk.
 
 | threshold | category macro-F1 | cat micro precision | cat micro recall | HR precision | HR recall | HR F1 | HR FPR |
 |---|---|---|---|---|---|---|---|
 | 0.100 | 0.506 | 0.337 | 0.812 | 0.570 | 1.000 | 0.726 | 0.909 |
 | 0.200 | 0.523 | 0.547 | 0.588 | 0.551 | 0.925 | 0.690 | 0.909 |
 | 0.300 | 0.556 | 0.737 | 0.525 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.400 | 0.479 | 0.771 | 0.463 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.500 | 0.433 | 0.773 | 0.425 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.600 | 0.401 | 0.769 | 0.375 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.700 | 0.366 | 0.806 | 0.312 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.800 | 0.277 | 0.783 | 0.225 | 0.551 | 0.925 | 0.690 | 0.909 |
-| 0.900 | 0.144 | 1.000 | 0.100 | 0.551 | 0.925 | 0.690 | 0.909 |
+| 0.400 | 0.479 | 0.771 | 0.463 | 0.524 | 0.830 | 0.642 | 0.909 |
+| 0.500 | 0.433 | 0.773 | 0.425 | 0.524 | 0.830 | 0.642 | 0.909 |
+| 0.600 | 0.401 | 0.769 | 0.375 | 0.524 | 0.830 | 0.642 | 0.909 |
+| 0.700 | 0.366 | 0.806 | 0.312 | 0.524 | 0.830 | 0.642 | 0.909 |
+| 0.800 | 0.277 | 0.783 | 0.225 | 0.524 | 0.830 | 0.642 | 0.909 |
+| 0.900 | 0.144 | 1.000 | 0.100 | 0.524 | 0.830 | 0.642 | 0.909 |
 
 ## Ablation: no filename block (dev)
 
 | variant | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR |
 |---|---|---|---|---|---|---|---|
-| with filename block | 97 / 18 | 0.232 [0.134, 0.392] | 0.433 [0.257, 0.628] | 0.551 | 0.925 [0.745, 1.000] | 0.690 | 0.909 |
-| content only | 97 / 18 | 0.259 [0.135, 0.478] | 0.457 [0.270, 0.645] | 0.583 | 0.925 [0.745, 1.000] | 0.715 | 0.795 |
+| with filename block | 97 / 18 | 0.215 [0.117, 0.382] | 0.433 [0.257, 0.628] | 0.524 | 0.830 [0.571, 1.000] | 0.642 | 0.909 |
+| content only | 97 / 18 | 0.251 [0.136, 0.464] | 0.457 [0.270, 0.645] | 0.615 | 0.906 [0.681, 1.000] | 0.733 | 0.682 |
 
 ## In-sample and calibration-split numbers (NOT held-out)
 
@@ -179,12 +179,12 @@ Shown to make the memorisation visible. **These are optimistic by construction.*
 | split | docs / families | level macro-F1 | category macro-F1 | HR precision | HR recall | HR F1 | HR FPR |
 |---|---|---|---|---|---|---|---|
 | train (fitted on: in-sample) | 391 / 71 | 1.000 [1.000, 1.000] | 0.875 [0.875, 0.875] | 1.000 | 0.924 [0.830, 1.000] | 0.961 | 0.000 |
-| calibration (used to fit calibrators) | 98 / 18 | 0.366 [0.169, 0.515] | 0.473 [0.330, 0.669] | 0.598 | 1.000 [1.000, 1.000] | 0.748 | 0.860 |
-| dev (held-out) | 97 / 18 | 0.232 [0.134, 0.392] | 0.433 [0.257, 0.628] | 0.551 | 0.925 [0.745, 1.000] | 0.690 | 0.909 |
+| calibration (used to fit calibrators) | 98 / 18 | 0.376 [0.165, 0.518] | 0.473 [0.330, 0.669] | 0.553 | 0.959 [0.857, 1.000] | 0.701 | 0.776 |
+| dev (held-out) | 97 / 18 | 0.215 [0.117, 0.382] | 0.433 [0.257, 0.628] | 0.524 | 0.830 [0.571, 1.000] | 0.642 | 0.909 |
 
 ## Latency (dev, measured)
 
-P50 2.45 ms, P95 3.99 ms, max 5.04 ms over 107 documents (training takes a few seconds and is not part of classification latency).
+P50 2.47 ms, P95 4.03 ms, max 5.19 ms over 107 documents (training takes a few seconds and is not part of classification latency).
 
 ## Hard negatives (dev, T4)
 
@@ -212,6 +212,6 @@ P50 2.45 ms, P95 3.99 ms, max 5.04 ms over 107 documents (training takes a few s
 
 ## Caveats
 
-* Dataset labels: AI-generated synthetic dataset — pending human gold-label review. Synthetic, template-generated, small (dev has 18 families).
+* Dataset labels: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending. Synthetic, template-generated, small (dev has 18 families).
 * The comparison with Rules is not like-for-like: Rules were developed against dev; ML was not.
 * Calibration was fitted on only ~100 documents (7-11 positives for some categories).

@@ -1,8 +1,8 @@
 {
-  "dataset_sha256": "9442e354c3dd51dd6e11f77e22b6c4241e85a9bee14fc9d9bfe535fa98e5f4ab",
+  "dataset_sha256": "284abad1247b53a35aa3ecfa015baf78b54215b30a0855ade378979cc1a52a5e",
   "decisions_sha256": "b3f22ebf5c3045cc5302b2d8a22d7ad4c30335696840b0253f6a7f77cf46f7ba",
-  "git_branch": "uc4/blind-review-metadata-variant",
-  "git_commit": "b7e94ac130fa929df90fd1599023256c163eba57",
+  "git_branch": "uc4/round2-review-results",
+  "git_commit": "2c0026a611dc97f9e5376b1a8a54ed402319bb13",
   "git_dirty": true,
   "labels_changed": false,
   "locked_test_split_read": false,

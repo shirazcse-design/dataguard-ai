@@ -1,6 +1,6 @@
 # UC4 Hybrid routing (Approach D)
 
-> Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.**
+> Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Plan (pre-registered before any code): [`hybrid-plan.md`](hybrid-plan.md). Generated results:
 > [`results/hybrid-baseline.md`](results/hybrid-baseline.md). Every number here comes from that file.
 
@@ -52,7 +52,7 @@ derived from configuration; the hybrid never abstains silently; only development
 | hybrid `default` **(recommended)** | 0.870 [0.631, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 | 0.000 | 1.00 | 5329 | 2.4 | 3.0 | 0 |
 | hybrid `rules_short_circuit` | 0.870 [0.631, 1.000] | 0.958 [0.833, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 | 0.000 | 0.64 | 3428 | 1.9 | 3.0 | 0 |
 | hybrid `small_first` | 0.918 [0.787, 1.000] | 0.932 [0.881, 1.000] | 0.883 | 1.000 [1.000, 1.000] | 0.159 | 0.000 | 1.00 | 5985 | 6.4 | 9.4 | 2 |
-| hybrid `ml_stage_50` | 0.651 [0.271, 0.855] | 0.771 [0.585, 0.950] | 0.688 | 1.000 [1.000, 1.000] | 0.545 | 0.000 | 0.35 | 1845 | 0.0 | 3.0 | 0 |
+| hybrid `ml_stage_50` | 0.773 [0.481, 1.000] | 0.897 [0.820, 0.985] | 0.930 | 1.000 [1.000, 1.000] | 0.091 | 0.000 | 0.66 | 3540 | 2.1 | 3.0 | 0 |
 | hybrid `ml_stage_70` | 0.870 [0.631, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 | 0.000 | 1.00 | 5329 | 2.4 | 3.0 | 0 |
 
 Gates on the recommended variant (PRD MVP targets, judged on the point estimate / the lower

@@ -86,19 +86,19 @@ Held-out dev, T1-T4 headline, family-level bootstrap intervals over the independ
 | scenario | approach | level macro-F1 | category macro-F1 | HR precision | HR recall | HR FPR |
 |---|---|---|---|---|---|---|
 | S0 current gold | rules | 0.358 [0.222, 0.592] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.000 |
-| S0 current gold | ml | 0.232 [0.134, 0.392] | 0.433 [0.257, 0.628] | 0.551 | 0.925 [0.745, 1.000] | 0.909 |
+| S0 current gold | ml | 0.215 [0.117, 0.382] | 0.433 [0.257, 0.628] | 0.524 | 0.830 [0.571, 1.000] | 0.909 |
 | S0 current gold | llm_small | 0.918 [0.787, 1.000] | 0.932 [0.881, 1.000] | 0.883 | 1.000 [1.000, 1.000] | 0.159 |
 | S0 current gold | llm_mid | 0.870 [0.631, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S0 current gold | llm_large | 0.870 [0.631, 1.000] | 0.990 [0.958, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S0 current gold | hybrid | 0.870 [0.631, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S1 apply the proposed label change | rules | 0.386 [0.247, 0.682] | 0.522 [0.333, 0.757] | 1.000 | 0.623 [0.333, 0.917] | 0.000 |
-| S1 apply the proposed label change | ml | 0.270 [0.170, 0.379] | 0.433 [0.257, 0.628] | 0.551 | 0.925 [0.745, 1.000] | 0.909 |
+| S1 apply the proposed label change | ml | 0.253 [0.153, 0.361] | 0.433 [0.257, 0.628] | 0.524 | 0.830 [0.571, 1.000] | 0.909 |
 | S1 apply the proposed label change | llm_small | 0.836 [0.644, 1.000] | 0.932 [0.881, 1.000] | 0.883 | 1.000 [1.000, 1.000] | 0.159 |
 | S1 apply the proposed label change | llm_mid | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S1 apply the proposed label change | llm_large | 1.000 [1.000, 1.000] | 0.990 [0.958, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S1 apply the proposed label change | hybrid | 1.000 [1.000, 1.000] | 1.000 [1.000, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S2 = S1 + MRN counts as an identifier | rules | 0.386 [0.247, 0.682] | 0.522 [0.333, 0.700] | 1.000 | 0.623 [0.333, 0.917] | 0.000 |
-| S2 = S1 + MRN counts as an identifier | ml | 0.270 [0.170, 0.379] | 0.433 [0.257, 0.595] | 0.551 | 0.925 [0.745, 1.000] | 0.909 |
+| S2 = S1 + MRN counts as an identifier | ml | 0.253 [0.153, 0.361] | 0.433 [0.257, 0.595] | 0.524 | 0.830 [0.571, 1.000] | 0.909 |
 | S2 = S1 + MRN counts as an identifier | llm_small | 0.836 [0.644, 1.000] | 0.930 [0.875, 1.000] | 0.883 | 1.000 [1.000, 1.000] | 0.159 |
 | S2 = S1 + MRN counts as an identifier | llm_mid | 1.000 [1.000, 1.000] | 0.977 [0.857, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
 | S2 = S1 + MRN counts as an identifier | llm_large | 1.000 [1.000, 1.000] | 0.987 [0.939, 1.000] | 1.000 | 1.000 [1.000, 1.000] | 0.000 |
@@ -129,6 +129,6 @@ For the frozen `default` hybrid the level macro-F1 is 0.870 [0.631, 1.000] over 
 
 ## Provenance
 
-* dataset sha256 `9442e354c3dd51dd...` (unchanged); decisions file sha256 `b3f22ebf5c3045cc...`; git `b7e94ac130fa` on `uc4/blind-review-metadata-variant` (dirty: True)
+* dataset sha256 `284abad1247b53a3...` (unchanged); decisions file sha256 `b3f22ebf5c3045cc...`; git `2c0026a611dc` on `uc4/round2-review-results` (dirty: True)
 * splits loaded: train, calibration, dev. **The locked test split was not read.**
 * regenerate with `dataguard-uc4 review build`
