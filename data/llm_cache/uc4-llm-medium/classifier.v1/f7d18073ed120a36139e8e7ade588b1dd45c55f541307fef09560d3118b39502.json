@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "f7d18073ed120a36139e8e7ade588b1dd45c55f541307fef09560d3118b39502",
+ "latency_ms": 2380.6008329847828,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Wanjiru is leaving to care for a parent with a serious illness and to move back to Lyon where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"They asked that the reason not be given to the wider team.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a named employee exit note containing private personal circumstances and relocation details, which meets the policy for PII and is not intended for broad internal or public distribution. External disclosure could harm the individual’s privacy and the organization.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

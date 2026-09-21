@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 67,
+ "input_hash": "98f581441572bae1867faf863a331f12ac8902abd639147fa8f34a6bd70f9655",
+ "latency_ms": 1570.996166090481,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5222,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"These are ordinary internal meeting notes for employees with routine office updates and no clearly regulated, strategic, credential, or other sensitive-category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "6bf355afafc3b535c3d0efee7866a16868791a492305d23e102a44fd5b6e175e",
+ "latency_ms": 1942.6953330403194,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5162,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"DB_PASSWORD=Lantern!Falcon46\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"API_TOKEN=dgtok_91f7fb20c379091eb81df91814f3876c\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains live-looking authentication secrets in an environment file, which meets the Credentials / Secrets category and requires the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

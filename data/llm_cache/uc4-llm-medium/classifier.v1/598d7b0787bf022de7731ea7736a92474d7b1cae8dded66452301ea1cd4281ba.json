@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 71,
+ "input_hash": "598d7b0787bf022de7731ea7736a92474d7b1cae8dded66452301ea1cd4281ba",
+ "latency_ms": 1456.428833073005,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5186,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal business communication about a town hall summary and routine action items, with no clearly regulated, strategic, credential, or other sensitive-category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -126,7 +126,7 @@ gave no discriminating signal for them.
 | Item | State |
 |---|---|
 | Locked-test evaluation of the frozen variant | Not authorised; the capability exists (`eval run --classifier hybrid --split test --allow-locked-test`) and was not run |
-| Out-of-sample check on calibration | Needs LLM responses recorded for the calibration split (credentials, about 300 calls); not done |
+| Out-of-sample check on calibration | **Done 2026-09-21** ([`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md)): level macro-F1 0.867 [0.717, 1.000], category 1.000, **high-risk recall 0.891** (49 of 55; all 6 misses in one ambiguous family, `amb_aggregate_health_stats`). 103 `mid` responses recorded; large never called |
 | Hybrid on train/calibration | No recorded LLM responses there; those documents route to review (`replay_miss`) |
 | Injection second opinion | Not implemented |
 | Observability export, service surface, MCP | Phases 7-8 |

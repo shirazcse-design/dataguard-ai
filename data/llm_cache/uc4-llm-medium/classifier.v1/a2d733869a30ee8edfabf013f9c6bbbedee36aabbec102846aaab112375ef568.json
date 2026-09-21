@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 164,
+ "input_hash": "a2d733869a30ee8edfabf013f9c6bbbedee36aabbec102846aaab112375ef568",
+ "latency_ms": 2126.0344160255045,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"import csv\\nHOST = \\\"auth-15.corp.example\\\"\\n\\ndef load_rows(path):\\n    with open(path) as f:\\n        return list(csv.DictReader(f))\\n\\ndef summarise(rows):\\n    return {\\\"count\\\": len(rows), \\\"hosts\\\": sorted({r[\\\"host\\\"] for r in rows})}\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"This is non-public Python code used for an internal reporting helper, which clearly meets the Source Code category. No live credentials or other regulated data are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

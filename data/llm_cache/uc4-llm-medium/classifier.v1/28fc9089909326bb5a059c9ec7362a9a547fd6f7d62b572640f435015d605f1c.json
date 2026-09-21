@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 127,
+ "input_hash": "28fc9089909326bb5a059c9ec7362a9a547fd6f7d62b572640f435015d605f1c",
+ "latency_ms": 1930.0364999799058,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5164,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing number: 243640434\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Account number: 24744601672\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank account and routing numbers in a business checking statement, which clearly meets Financial / PCI criteria and carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

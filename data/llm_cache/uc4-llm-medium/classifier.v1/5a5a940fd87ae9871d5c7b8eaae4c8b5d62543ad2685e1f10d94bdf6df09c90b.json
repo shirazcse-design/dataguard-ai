@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 205,
+ "input_hash": "5a5a940fd87ae9871d5c7b8eaae4c8b5d62543ad2685e1f10d94bdf6df09c90b",
+ "latency_ms": 2237.5687080202624,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5183,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"account,annual_volume,negotiated_margin,contract_end\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Eastvale Foods,$31.1M,10.0%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Pinecrest Capital,$45.6M,13.1%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Yarrowdale Logistics,$80.7M,13.4%,2027\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains a compiled customer/account list with negotiated margins and contract timing, which is non-public pricing intelligence that derives value from secrecy. That fits Trade Secret and drives a Highly Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

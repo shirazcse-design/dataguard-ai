@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 128,
+ "input_hash": "d903554d8dafbe5c356703769c1afd90be3e70b5192ed6a441789b7d7e4b79f7",
+ "latency_ms": 2658.873250009492,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5182,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"INTELLECTUAL_PROPERTY\"],\"evidence\":[{\"quote\":\"The map, exam questions and coaching scripts were written by our own trainers and have not been shared outside the company.\",\"supports_axis\":\"category\",\"supports_value\":\"INTELLECTUAL_PROPERTY\"}],\"rationale\":\"This is non-public internally created training material describing original content owned by the organization. Its external disclosure could harm the organization, but it does not clearly contain regulated data, credentials, or trade-secret-level detail.\",\"level_confidence\":\"high\",\"category_confidence\":\"medium\",\"insufficient_information\":false}"
+}

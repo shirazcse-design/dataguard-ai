@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 87,
+ "input_hash": "eeec096007b4872da9ceee74ea1d3d0dded980e3e098c2b7c66cbf0a78e3f7fb",
+ "latency_ms": 1719.152292003855,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is aggregated programme-outcomes information with no individual identifiers, diagnoses, treatments linked to a person, or other clearly regulated data categories. It appears to be ordinary internal business/operational reporting rather than content clearly intended for public release.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

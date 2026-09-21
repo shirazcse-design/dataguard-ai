@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 222,
+ "input_hash": "220f283fa45d286cfa05c659ba45a2ec9ab83aacce38c47502ef5564e86be027",
+ "latency_ms": 2455.2043329458684,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5197,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Option A: buy Dunmore Therapeutics (clinical analytics). Rationale: it secures a scarce supply relationship. Rough price $6.2B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Option B: buy Oakhurst Mobility (industrial automation). Rationale: it adds recurring revenue at a healthy margin. Rough price $4.4B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Recommendation: open confidential talks with option A this quarter and keep option B as the fallback if pricing moves.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public acquisition shortlist with valuation ranges and a recommendation on which target to approach, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

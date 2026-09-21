@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 85,
+ "input_hash": "8ae03f6801689e66ba74faead9a9fdbe6f9b17283cc525817a36a1129b7ab6f4",
+ "latency_ms": 1627.2317079128698,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5177,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal inventory listing of parts, quantities, and locations with no clear regulated, strategic, credential, or other sensitive-category content. It is not clearly intended for public release, so Internal is the conservative choice.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

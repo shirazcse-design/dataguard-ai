@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 168,
+ "input_hash": "46c03a3c338e8f6e022576a9f570eaeb2e72a3894a39f499e2ff6cd638b93b1f",
+ "latency_ms": 2464.6274159895256,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5185,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:43+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"TRADE_SECRET\"],\"evidence\":[{\"quote\":\"account,annual_volume,negotiated_margin,contract_end\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Jadewater Devices,$68.6M,28.6%,2028\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"},{\"quote\":\"Flintlock Therapeutics,$50.6M,25.7%,2028\",\"supports_axis\":\"category\",\"supports_value\":\"TRADE_SECRET\"}],\"rationale\":\"The document contains a non-public compiled customer list with negotiated margins and contract timing, which fits Trade Secret and could cause severe competitive harm if disclosed.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

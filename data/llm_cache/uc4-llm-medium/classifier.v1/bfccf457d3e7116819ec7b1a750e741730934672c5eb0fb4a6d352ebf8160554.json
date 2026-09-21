@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 74,
+ "input_hash": "bfccf457d3e7116819ec7b1a750e741730934672c5eb0fb4a6d352ebf8160554",
+ "latency_ms": 1566.657166928053,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is an ordinary internal inventory listing with part numbers, descriptions, quantities, and locations. It contains no clearly regulated, strategic, credential, or other sensitive-category data.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

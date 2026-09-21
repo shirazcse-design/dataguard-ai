@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 114,
+ "input_hash": "f9c44d4939515f72c081e91d7d51f9fbf4fff51c893ad243c5145cec1fa3dc43",
+ "latency_ms": 2011.148291057907,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:32+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Leila is leaving to care for a parent with a serious illness and to move back to Dublin where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is a non-public employee note about a named person's private family and personal circumstances. Disclosure could harm the individual’s privacy, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

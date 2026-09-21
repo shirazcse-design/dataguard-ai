@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 144,
+ "input_hash": "3865a102fc230a3e5ced4e753fbf1608ce5617256a15774a659000e859979248",
+ "latency_ms": 2255.379000096582,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5208,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"PID|1||MRN-9413450||Galvez^Tariq\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"DG1|1||K21.9 - reflux disease\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an HL7-style patient record containing an identifiable patient reference and a diagnosis, which is individually identifiable health information. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

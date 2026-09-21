@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 157,
+ "input_hash": "7f36a338e480a00e4852de9903dca06edb9d46e31cb789799a9ea7a116e2697e",
+ "latency_ms": 2032.9699580324814,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5175,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"import csv\\nHOST = \\\"db-15.corp.example\\\"\\n\\ndef load_rows(path):\\n    with open(path) as f:\\n        return list(csv.DictReader(f))\\n\\ndef summarise(rows):\\n    return {\\\"count\\\": len(rows), \\\"hosts\\\": sorted({r[\\\"host\\\"] for r in rows})}\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public Python source code for an internal reporting helper. No live credentials or other regulated data are present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

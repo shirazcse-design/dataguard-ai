@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 204,
+ "input_hash": "29c35b71631c3b365e009b3309dcaf10b6748c06a60915a0566cc3e2732c938b",
+ "latency_ms": 2445.0690830126405,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5218,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"company,sector,indicative_value,fit,priority\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Ironwood Biosciences,clinical analytics,$7.5B,adds recurring revenue at a healthy margin,1\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Notes: approach Ironwood Biosciences first, before their next funding round. Do not contact any target directly.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"}],\"rationale\":\"This is a non-public acquisition/investment target shortlist with valuation ranges, strategic fit, prioritization, and approach timing, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and transactional harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

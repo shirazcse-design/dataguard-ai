@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 185,
+ "input_hash": "a22604ae0a65ed5fd12906a3925a8c0e957d570b9d2d22679ed9b0c1c1470ab3",
+ "latency_ms": 2553.385708015412,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:19+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Exit interview - Fiona Lindqvist, Coordinator\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Fiona is leaving to care for a parent with a serious illness and to move back to Munich where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"They asked that the reason not be given to the wider team.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a named employee record containing private personal circumstances and relocation details, which meets the policy for PII and is not appropriate for broad internal or external disclosure. It does not contain the employee's own health data, so PHI does not clearly apply.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

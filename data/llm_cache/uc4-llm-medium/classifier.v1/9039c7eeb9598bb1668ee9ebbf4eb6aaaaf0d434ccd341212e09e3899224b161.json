@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 164,
+ "input_hash": "9039c7eeb9598bb1668ee9ebbf4eb6aaaaf0d434ccd341212e09e3899224b161",
+ "latency_ms": 1904.8407919472083,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5195,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:22+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"public class ShipmentPlanner {\\n    private final RouteRepository routes;\\n\\n    public ShipmentPlanner(RouteRepository routes) {\\n        this.routes = routes;\\n    }\\n\\n    public int estimateDays(String origin, String destination, double weightKg) {\\n        int base = routes.baseDays(origin, destination);\\n        return weightKg > 500 ? base + 2 : base;\\n    }\\n}\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary Java source code. Non-public source code is Confidential under the policy.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

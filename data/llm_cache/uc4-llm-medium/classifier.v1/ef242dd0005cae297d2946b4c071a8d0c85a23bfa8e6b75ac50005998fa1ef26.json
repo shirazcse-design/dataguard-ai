@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 141,
+ "input_hash": "ef242dd0005cae297d2946b4c071a8d0c85a23bfa8e6b75ac50005998fa1ef26",
+ "latency_ms": 1855.713790981099,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5213,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"PID|1||MRN-8344569||Brennan^Paloma\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"DG1|1||E11.9 - type 2 diabetes mellitus\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an HL7 admission message containing an identifiable patient record with a medical record number, patient name, and diagnosis. Individually identifiable health information requires Highly Confidential handling.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 115,
+ "input_hash": "c2d64066706862c2cb3d74305b46d7858f7a675457e4db181dc97dfd8dfea4d0",
+ "latency_ms": 2017.5673339981586,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5178,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Paloma is leaving to care for a parent with a serious illness and to move back to Calgary where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is a non-public employee exit note containing named personal circumstances about an identifiable individual. External disclosure could harm the individual’s privacy, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 185,
+ "input_hash": "04a2a20c0d63fef91adf02c910e8005cae3062c424a5e1b35d120584af25df57",
+ "latency_ms": 2271.3102919515222,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5208,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Name: Katarina Espinoza    Phone: (276) 555-0116    DOB: March 19, 1988\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Principal diagnosis: generalized anxiety disorder\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Discharge medications: gabapentin 300 mg, metformin 500 mg\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable patient discharge summary containing health information and direct personal identifiers. PHI is present, which sets the level to Highly Confidential; PII also clearly applies due to the phone number and date of birth.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

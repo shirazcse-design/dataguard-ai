@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 107,
+ "input_hash": "f1c659055457293137f64738049d8ed1f453f5d75777b94e2ccc78537fd72efa",
+ "latency_ms": 1833.4035829175264,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5263,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"PUBLIC\",\"categories\":[],\"evidence\":[{\"quote\":\"Published September 15, 2026\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"},{\"quote\":\"Thanks for reading. Comments and questions are welcome.\",\"supports_axis\":\"level\",\"supports_value\":\"PUBLIC\"}],\"rationale\":\"This appears to be a published engineering blog post intended for public release, with general advice and no sensitive data categories present.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

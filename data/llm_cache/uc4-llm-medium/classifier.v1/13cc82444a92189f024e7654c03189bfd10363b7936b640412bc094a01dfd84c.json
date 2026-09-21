@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 183,
+ "input_hash": "13cc82444a92189f024e7654c03189bfd10363b7936b640412bc094a01dfd84c",
+ "latency_ms": 2453.3715000143275,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5210,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Name: Tamsin Bianchi    Phone: (936) 555-0176    DOB: September 10, 1989\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Principal diagnosis: stage 3 chronic kidney disease\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Discharge medications: lisinopril 10 mg, atorvastatin 20 mg\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable patient discharge summary containing diagnosis and medication information, which is PHI. It also includes direct personal identifiers beyond a name, so PII clearly applies as well.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

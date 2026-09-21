@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 216,
+ "input_hash": "1946cb4b904b577751d9f469ee3993cdc27d7d64b29b077a44e85bf7c0e05227",
+ "latency_ms": 2685.6465839082375,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5207,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Option A: buy Glenmoor Software (industrial automation). Rationale: it adds recurring revenue at a healthy margin. Rough price $3.7B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Option B: buy Orchardline Health (diagnostic devices). Rationale: it brings a team we have failed to hire organically. Rough price $1.4B.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Recommendation: open confidential talks with option A this quarter and keep option B as the fallback if pricing moves.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public acquisition-target evaluation and negotiation planning, which is M&A / Corporate Strategy content. Disclosure could cause severe competitive and financial harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

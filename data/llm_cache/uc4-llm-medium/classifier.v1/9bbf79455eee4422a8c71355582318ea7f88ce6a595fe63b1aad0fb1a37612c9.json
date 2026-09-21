@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "9bbf79455eee4422a8c71355582318ea7f88ce6a595fe63b1aad0fb1a37612c9",
+ "latency_ms": 1879.7589159803465,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5207,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PHI\"],\"evidence\":[{\"quote\":\"PID|1||MRN-8502150||Verhoeven^Vikram\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"DG1|1||M06.9 - rheumatoid arthritis\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an HL7-style patient record containing an identifiable patient reference and a diagnosis, which is individually identifiable health information. PHI has a Highly Confidential floor, so the overall level is Highly Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

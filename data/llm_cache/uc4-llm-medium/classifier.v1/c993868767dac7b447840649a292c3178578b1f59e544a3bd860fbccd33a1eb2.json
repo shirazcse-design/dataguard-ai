@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 163,
+ "input_hash": "c993868767dac7b447840649a292c3178578b1f59e544a3bd860fbccd33a1eb2",
+ "latency_ms": 2463.4814580203965,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"CREDENTIALS_SECRETS\"],\"evidence\":[{\"quote\":\"postgres://Quicksilver_app:Willow*Quartz34@search-03.corp.example:5432/orders\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"},{\"quote\":\"postgres://Quicksilver_ro:Cinder!Cinder19@api-20.corp.example:5432/orders\",\"supports_axis\":\"category\",\"supports_value\":\"CREDENTIALS_SECRETS\"}],\"rationale\":\"The document contains database connection strings with embedded usernames and passwords, which are live-looking credentials/secrets. Disclosure could enable unauthorized access and cause severe harm.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

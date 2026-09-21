@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 153,
+ "input_hash": "969fb2b74fc623061b46edd3d1da7e1fcb29c42cda7ed96f311cfc46bff14c2c",
+ "latency_ms": 2281.43829095643,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Exit interview - Liam Jansen, Director\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Liam is leaving to care for a parent with a serious illness and to move back to Singapore where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"}],\"rationale\":\"This is a named employee record containing private personal circumstances and relocation/family details, which meets the PII definition and is not intended for broad internal or public release. External disclosure could harm the individual’s privacy, so Confidential is appropriate.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

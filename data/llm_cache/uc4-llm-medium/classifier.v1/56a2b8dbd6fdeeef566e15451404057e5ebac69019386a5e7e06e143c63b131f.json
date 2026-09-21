@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 160,
+ "input_hash": "56a2b8dbd6fdeeef566e15451404057e5ebac69019386a5e7e06e143c63b131f",
+ "latency_ms": 2389.745708089322,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5173,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:02:02+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"PII\"],\"evidence\":[{\"quote\":\"Marcus is leaving to care for a parent with a serious illness and to move back to Denver where their partner has found work.\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"They asked that the reason not be given to the wider team.\",\"supports_axis\":\"level\",\"supports_value\":\"CONFIDENTIAL\"}],\"rationale\":\"This is a non-public employee exit note containing a named individual's private personal circumstances, which meets the PII definition and would plausibly harm privacy if disclosed externally. It is sensitive personnel information but does not clearly contain regulated health information about the named person.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

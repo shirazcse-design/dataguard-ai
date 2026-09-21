@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 183,
+ "input_hash": "cbd31cfb9e0b273916b821ff80e16248266b15109c395b26a9c1493b6aa4007e",
+ "latency_ms": 2657.7979170251638,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5208,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"PII\",\"PHI\"],\"evidence\":[{\"quote\":\"Name: Rohan Montgomery    Phone: (450) 555-0110    DOB: December 3, 1981\",\"supports_axis\":\"category\",\"supports_value\":\"PII\"},{\"quote\":\"Principal diagnosis: chronic low back pain\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"},{\"quote\":\"Discharge medications: omeprazole 20 mg, atorvastatin 20 mg\",\"supports_axis\":\"category\",\"supports_value\":\"PHI\"}],\"rationale\":\"This is an identifiable patient's discharge summary containing diagnosis and medications, along with personal identifiers including phone number and date of birth. PHI is present, and the additional direct identifiers also make PII applicable.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 114,
+ "input_hash": "df4ce3a7c7f47df0bdea236c7362b33ddaeddce48dccaeb57ccdb0c53377cd48",
+ "latency_ms": 1840.207583969459,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5201,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"CONFIDENTIAL\",\"categories\":[\"SOURCE_CODE\"],\"evidence\":[{\"quote\":\"public class ShipmentPlanner {\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"},{\"quote\":\"public int estimateDays(String origin, String destination, double weightKg) {\",\"supports_axis\":\"category\",\"supports_value\":\"SOURCE_CODE\"}],\"rationale\":\"The document contains non-public proprietary source code. Source Code clearly applies, which sets the level to Confidential.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

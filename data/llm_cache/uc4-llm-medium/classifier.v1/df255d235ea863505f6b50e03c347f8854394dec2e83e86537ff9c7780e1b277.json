@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 123,
+ "input_hash": "df255d235ea863505f6b50e03c347f8854394dec2e83e86537ff9c7780e1b277",
+ "latency_ms": 1838.658249936998,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5169,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing number: 351894318\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Account number: 563058773215\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"}],\"rationale\":\"The document contains bank account and routing numbers, which clearly meet the Financial / PCI category and require a Highly Confidential classification.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

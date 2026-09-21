@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 159,
+ "input_hash": "cb294b1716d5f72fcf06a3a104a359ee26159b59ea9c5f91aa60bf4104be16f5",
+ "latency_ms": 2285.017666989006,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5166,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:04:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Routing number: 928845208\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Account number: 6471091955\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Opening balance: $170,769\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"The document contains bank account and routing numbers in a business checking statement, which clearly meets Financial / PCI criteria. Exposure could cause severe financial harm, so the highest sensitivity level applies.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

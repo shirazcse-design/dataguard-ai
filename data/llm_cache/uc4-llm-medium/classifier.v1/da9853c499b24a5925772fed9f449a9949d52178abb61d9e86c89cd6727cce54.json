@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 69,
+ "input_hash": "da9853c499b24a5925772fed9f449a9949d52178abb61d9e86c89cd6727cce54",
+ "latency_ms": 1562.6631670165807,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5180,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:01:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"INTERNAL\",\"categories\":[],\"evidence\":[],\"rationale\":\"This is ordinary internal business communication about routine company topics and action items, with no clearly regulated, strategic, credential, or other sensitive-category content.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

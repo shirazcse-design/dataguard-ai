@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 185,
+ "input_hash": "31a79cc06ee6c12d3237479f6128436052e94848dddca5ac338783831df4406f",
+ "latency_ms": 2256.2872499693185,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5174,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-09-21T07:03:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"FINANCIAL_PCI\"],\"evidence\":[{\"quote\":\"Annual recurring revenue grew 50.1% year on year to about $267.9M, and net revenue retention improved.\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Gross margin reached 58.3%, ahead of what we have told the market so far.\",\"supports_axis\":\"category\",\"supports_value\":\"FINANCIAL_PCI\"},{\"quote\":\"Hold until the results are approved by the board.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is non-public company financial performance information, including unreleased revenue and margin figures, which fits Financial / PCI under the policy and carries a Highly Confidential floor.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}
