@@ -6,22 +6,22 @@ jobs:
     steps:
       - run: make build && ./scripts/package.sh --target North America
       - run: curl -H ""Authorization: Bearer dgtok_8b562c4a9d1a2bb819945bacb6988c90"" https://deploy.corp.example/api/release
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,SOURCE_CODE;CREDENTIALS_SECRETS,high,Internal CI configuration contains a live-looking bearer token. The token meets Credentials / Secrets and the CI logic is non-public Source Code.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-fb63604243,Supplier_Terms_Summary.docx,"Sourcing notes (internal)
 
 We secured an exclusive, multi-year supply of the key input at roughly 24.7% below market by co-investing in the supplier's second line. In return they will not sell that grade to our competitors. The yield curve we negotiated is what protects our margin.
 Procurement leads only; do not forward to suppliers.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,high,"Non-public supplier terms, discount, exclusivity and margin-protection details are sensitive commercial information. No defined category is clearly met.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-1807887255,Case_Study_Draft_Jadewater.docx,"DRAFT customer story - awaiting customer approval
 
 Jadewater Pharma reduced downtime by 34.4% after adopting our water-quality probe. ""We expected a long rollout, but the team was live in weeks,"" said Noor Larsen, Analyst at Jadewater Pharma.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,"The customer story is explicitly a draft awaiting customer approval, so it is not yet approved for public release and contains non-public commercial detail.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-dd34b9e9fe,Merchant_Settlement_11.txt,"Chargeback review - April 2028
 case 3303: card 6011114419516482 amount $643 reason: fraud
 case 6341: card 3528-0058-3206-1150 amount $554 reason: duplicate charge
 case 5423: card 4111-1132-5849-7766 amount $632 reason: item not received
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,FINANCIAL_PCI,high,The settlement record contains full payment-card numbers. Full card data is Financial / PCI and carries a Highly Confidential floor.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-acc01a7faa,Weekly_Notes_Customer Success.docx,"Customer Success team sync - Monday
 
 Present: Ulrich Yamada, Pavel Fairchild, Elena Tremblay
@@ -35,7 +35,7 @@ Blockers
 - Waiting on a review of the vendor evaluation checklist
 
 Next week: plan the team offsite in Singapore, schedule the process retrospective.
-",,,,,,,,,
+",INTERNAL,NONE,high,Routine internal team notes contain ordinary operational information and no sensitive category or public-release intent.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-9e0dbf644f,payments_gateway.py,"# Copyright 2028 Blackfern Semiconductors. Internal.
 import os
 
@@ -44,7 +44,7 @@ def get_connection():
     user = os.environ[""DB_USER""]
     password = os.environ[""DB_PASSWORD""]  # injected by the secret manager at runtime
     return connect(host=host, user=user, password=password)
-",,,,,,,,,
+",CONFIDENTIAL,SOURCE_CODE,high,"Organization-owned internal Python code is non-public Source Code. It only reads a password from an environment variable, so Credentials / Secrets does not apply.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-95ec10ed1c,New_Hire_Form_2026.pdf,"NEW HIRE ONBOARDING FORM (TEMPLATE)
 Full name: ______________________
 Social Security Number: ______________________
@@ -52,34 +52,34 @@ Date of birth: ______________________
 Home address: ______________________
 Emergency contact: ______________________
 Complete this form and return it to Katarina Castellano in Human Resources on your first day (2027-01-18).
-",,,,,,,,,
+",INTERNAL,NONE,high,"This is a blank onboarding template with empty SSN, DOB and address fields. The taxonomy explicitly excludes blank forms from PII.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-fcfbdb789f,Manuscript_Fjord.docx,"Draft manuscript - not yet submitted
 
 Abstract. We propose a self-calibrating estimator for low-cost sensors and show that it reduces drift by 21.8% on a benchmark of 9 devices. The method requires no reference standard and runs on commodity hardware.
 We plan to submit to a peer-reviewed venue once co-authors have approved the text.
-",,,,,,,,,
+",CONFIDENTIAL,INTELLECTUAL_PROPERTY,high,The unpublished manuscript describes a novel research method and results and is not yet submitted. That clearly meets unpublished research / Intellectual Property.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-f01402e5c4,Customer_Story_2028.docx,"DRAFT customer story - awaiting customer approval
 
 Quillon Holdings reduced downtime by 26.1% after adopting our edge gateway. ""We expected a long rollout, but the team was live in weeks,"" said Gwendolyn Halvorsen, Senior Analyst at Quillon Holdings.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,The customer story is a draft awaiting approval and therefore is not yet approved for public release. No defined sensitive-data category clearly applies.,yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-3a62ad2249,Lab_Notebook_5.docx,"Research notebook - week 12
 
 Today's experiment confirmed the idea we sketched last month: if the sensor's own noise is fed back as a calibration input, the device corrects itself without an external reference. Error dropped by about 66.7% in all 30 test runs. To our knowledge nobody has reported this approach.
 Next: repeat on the second prototype, then talk to Amara Alvarez in Legal about protecting it before we present anywhere.
-",,,,,,,,,
+",CONFIDENTIAL,INTELLECTUAL_PROPERTY,high,"The research notebook records a novel, unpublished method and experimental results and discusses protecting it before disclosure. This meets Intellectual Property.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-e9ab29f565,Teaching_Case_Larkspur.pdf,"Case study: the Emberlight Capital-Larkspur Foods merger
 
 In 2010, Emberlight Capital acquired Larkspur Foods in one of the largest deals in the precision components industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
 
 Discussion questions: Was the price justified? What would you have done differently in integration?
-",,,,,,,,,
+",PUBLIC,NONE,medium,"The document is framed as a historical teaching case about a completed 2010 merger, which matches the taxonomy's historical/public case-study counterexample for M&A.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-089c6dc891,Case_Study_Merger_Lighthouse.pdf,"Case study: the Nettlefield Capital-Whitcombe Foods merger
 
 In 2007, Nettlefield Capital acquired Whitcombe Foods in one of the largest deals in the diagnostic devices industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
 
 Discussion questions: Was the price justified? What would you have done differently in integration?
-",,,,,,,,,
+",INTERNAL,NONE,medium,"This is a historical case study about a completed 2007 merger, so M&A / Corporate Strategy does not apply. The text does not explicitly establish public-release status, so Internal is the default.",yes,PUBLIC,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-b16d04f2c2,Weekly_Notes_Operations.docx,"Operations team sync - Tuesday
 
 Present: Leila Underwood, Vikram Yamada, Uma Eriksen
@@ -93,13 +93,13 @@ Blockers
 - Waiting on a review of the vendor evaluation checklist
 
 Next week: plan the team offsite in Lisbon, schedule the process retrospective.
-",,,,,,,,,
+",INTERNAL,NONE,high,"Routine internal Operations team notes contain no regulated, strategic, credential or other defined sensitive category.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-fac2c886c3,Case_Study_Merger_Horizon.pdf,"Case study: the Emberlight Cloud-Elmsworth Mobility merger
 
 In 2016, Emberlight Cloud acquired Elmsworth Mobility in one of the largest deals in the precision components industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
 
 Discussion questions: Was the price justified? What would you have done differently in integration?
-",,,,,,,,,
+",INTERNAL,NONE,medium,"This is a historical case study about a completed 2016 merger, so M&A / Corporate Strategy does not apply. Public-release intent is not explicit, making Internal the default.",yes,PUBLIC,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-00ac341854,README_sdk.md,"# Quickstart
 
 Create an API key in your dashboard, then export it:
@@ -111,25 +111,25 @@ Example request:
     curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.nettlefieldrobotics.example/v1/status
 
 For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The quickstart uses placeholders and explicitly documented example AWS keys, which the taxonomy excludes from Credentials / Secrets. Its documentation format and example language indicate public documentation.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-2154faf7ae,Join_Foxglove.txt,"Join Foxglove Devices
 
 We are hiring a Engineer in Legal to work with a small team on fleet tracker products. You will collaborate with customers, ship features and help shape our roadmap.
 
 What we offer: flexible working, learning budget, and a friendly team in Valencia.
 How to apply: send a short note and your resume through our public careers page.
-",,,,,,,,,
+",PUBLIC,NONE,high,"This is a recruiting advertisement that explicitly directs applicants to a public careers page, establishing public-release intent.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-4b84f54ee7,Rx_Record_25439.txt,"PRESCRIPTION RECORD
 Patient: Keiko Ashworth  (MRN-7473774)
 Filled: 2027-12-01
 Medication: metformin 500 mg - 62 day supply, indication stage 3 chronic kidney disease
 Pharmacist: Nikhil Pellegrino
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,PHI,high,The prescription record links an identifiable patient/MRN to medication and diagnosis. This is individually identifiable health information and therefore PHI.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-2472fae2da,Customer_Story_2028.docx,"DRAFT customer story - awaiting customer approval
 
 Dunmore Systems reduced downtime by 34.3% after adopting our scheduling app. ""We expected a long rollout, but the team was live in weeks,"" said Liam Gallagher, Architect at Dunmore Systems.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,"The customer story is a draft awaiting customer approval, so it is not yet approved for public release. No defined category clearly applies.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-c8334a8e38,Hiring_FAQ_2026.md,"Careers at Yewtree Retail - Frequently Asked Questions
 
 Q: Where are your offices?
@@ -142,25 +142,25 @@ Q: Do you sponsor work visas?
 A: Yes, for many engineering and research roles. Ask your recruiter for details.
 
 Apply at www.yewtreeretail.example/careers. We are an equal opportunity employer.
-",,,,,,,,,
+",PUBLIC,NONE,high,The careers FAQ explicitly directs readers to a public careers site and is clearly intended for external applicants.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-19c5bd1307,Pharmacy_Log_November.csv,"PRESCRIPTION RECORD
 Patient: Theo Bianchi  (MRN-9952462)
 Filled: 2026-12-26
 Medication: sertraline 50 mg - 18 day supply, indication generalized anxiety disorder
 Pharmacist: Anneliese Oduya
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,PHI,high,The pharmacy record links a named patient/MRN to medication and diagnosis. This meets PHI and carries a Highly Confidential floor.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-de62c38c69,Pharmacy_Log_February.csv,"PRESCRIPTION RECORD
 Patient: Felix Iglesias  (MRN-0984219)
 Filled: 2025-09-07
 Medication: ibuprofen 400 mg - 46 day supply, indication essential hypertension
 Pharmacist: Joaquin Delacroix
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,PHI,high,The pharmacy record links a named patient/MRN to medication and diagnosis. This meets PHI and carries a Highly Confidential floor.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-c2223643cf,Pharmacy_Log_December.csv,"PRESCRIPTION RECORD
 Patient: Theo Hoffmann  (MRN-1711661)
 Filled: 2027-03-19
 Medication: amlodipine 5 mg - 20 day supply, indication rheumatoid arthritis
 Pharmacist: Paloma Brennan
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,PHI,high,The pharmacy record links a named patient/MRN to medication and diagnosis. This meets PHI and carries a Highly Confidential floor.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-59fba52cb2,Careers_FAQ.html,"Careers at Pinecrest Labs - Frequently Asked Questions
 
 Q: Where are your offices?
@@ -173,13 +173,13 @@ Q: Do you sponsor work visas?
 A: Yes, for many engineering and research roles. Ask your recruiter for details.
 
 Apply at www.pinecrestlabs.example/careers. We are an equal opportunity employer.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The careers FAQ is directed to job applicants and explicitly points to a public careers page, establishing public-release intent.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-a278fd5603,Teaching_Case_Westerly.pdf,"Case study: the Pinecrest Industries-Westerly Holdings merger
 
 In 2006, Pinecrest Industries acquired Westerly Holdings in one of the largest deals in the precision components industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
 
 Discussion questions: Was the price justified? What would you have done differently in integration?
-",,,,,,,,,
+",PUBLIC,NONE,medium,"The filename and content frame this as a historical teaching case about a completed 2006 merger, matching the historical/public case-study counterexample for M&A.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-9d42fc85c9,authentication.md,"# Quickstart
 
 Create an API key in your dashboard, then export it:
@@ -191,7 +191,7 @@ Example request:
     curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.pembertoncapital.example/v1/status
 
 For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The authentication quickstart contains placeholders and explicitly documented example keys, which are excluded from Credentials / Secrets. It reads as public product documentation.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-10e1c66f39,README_sdk.md,"# Quickstart
 
 Create an API key in your dashboard, then export it:
@@ -203,7 +203,7 @@ Example request:
     curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.ashgrovesemiconductors.example/v1/status
 
 For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The SDK quickstart uses placeholders and documented example keys rather than live credentials, and is presented as public-facing documentation.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-35ffba48e4,authentication.md,"# Quickstart
 
 Create an API key in your dashboard, then export it:
@@ -215,12 +215,12 @@ Example request:
     curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.thornfieldcapital.example/v1/status
 
 For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The authentication quickstart contains only placeholders and documented example keys, which the taxonomy excludes from Credentials / Secrets, and is public-style documentation.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-521a321e60,Customer_Story_2027.docx,"DRAFT customer story - awaiting customer approval
 
 Silverpine Devices reduced downtime by 28.5% after adopting our billing portal. ""We expected a long rollout, but the team was live in weeks,"" said Joaquin Oduya, Lead at Silverpine Devices.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,The customer story is a draft awaiting customer approval and is not yet approved for public release. No defined category clearly applies.,yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-02400f99b0,api_quickstart.md,"# Quickstart
 
 Create an API key in your dashboard, then export it:
@@ -232,26 +232,26 @@ Example request:
     curl -H ""Authorization: Bearer YOUR_API_KEY_HERE"" https://api.valemontpayments.example/v1/status
 
 For AWS integration you will see keys like AKIAIOSFODNN7EXAMPLE and wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY in the vendor's own documentation; these are documented examples, not real credentials.
-",,,,,,,,,
+",PUBLIC,NONE,high,"The API quickstart uses placeholders and documented example credentials, not live secrets, and is presented as public product documentation.",no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-f79ebb3064,Customer_Story_2026.docx,"DRAFT customer story - awaiting customer approval
 
 Bellhaven Software reduced downtime by 22.6% after adopting our insulin pump controller. ""We expected a long rollout, but the team was live in weeks,"" said Liam Grigoryan, Manager at Bellhaven Software.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,"The customer story is explicitly awaiting customer approval, so it is not yet approved for public release despite being intended for later publication.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-c885ab8c28,Pharmacy_Log_April.csv,"PRESCRIPTION RECORD
 Patient: Olivia Ibrahim  (MRN-3845359)
 Filled: 2025-10-15
 Medication: sumatriptan 50 mg - 66 day supply, indication moderate persistent asthma
 Pharmacist: Rosalind Halvorsen
-",,,,,,,,,
+",HIGHLY_CONFIDENTIAL,PHI,high,The pharmacy record links a named patient/MRN to medication and diagnosis. This is PHI and therefore Highly Confidential.,no,,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-210e112c7e,Case_Study_Merger_Lantern.pdf,"Case study: the Pinecrest Biosciences-Larkspur Energy merger
 
 In 2014, Pinecrest Biosciences acquired Larkspur Energy in one of the largest deals in the industrial sensors industry. The case examines how the acquirer financed the purchase, how integration unfolded, and why the combined firm struggled with culture clashes in its first years.
 
 Discussion questions: Was the price justified? What would you have done differently in integration?
-",,,,,,,,,
+",INTERNAL,NONE,medium,"This is a historical case study about a completed 2014 merger, so M&A / Corporate Strategy does not apply. The text does not explicitly establish public-release intent.",yes,PUBLIC,no,ChatGPT-GPT-5.6-Sol,2026-09-20
 uc4-4c7bd732c6,Case_Study_Draft_Redwater.docx,"DRAFT customer story - awaiting customer approval
 
 Redwater Biosciences reduced downtime by 39.7% after adopting our battery pack. ""We expected a long rollout, but the team was live in weeks,"" said Priya Espinoza, Senior Analyst at Redwater Biosciences.
 Marketing will publish once the customer signs off on the wording and the figures.
-",,,,,,,,,
+",CONFIDENTIAL,NONE,medium,"The customer story is a draft awaiting customer approval, so it is not yet approved for public release. No defined category clearly applies.",yes,INTERNAL,no,ChatGPT-GPT-5.6-Sol,2026-09-20
