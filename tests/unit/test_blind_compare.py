@@ -482,7 +482,8 @@ def test_the_ai_cli_writes_to_a_separate_default_directory(package, tmp_path, ca
     assert main(["review", "blind-compare", "--sheet", str(s), "--data-dir", str(data),
                  "--reviewer-kind", "ai"]) == 0  # fmt: skip
     assert (data / "review/blind_results_ai/blind_review_comparison.md").exists()
-    assert not (data / "review/blind_results").exists()
+    human = {p.name: p.read_bytes() for p in (data / "review/blind_results").glob("*")}
+    assert human == {p.name: p.read_bytes() for p in (DATA / "review/blind_results").glob("*")}
 
 
 def test_a_provenance_note_is_printed_verbatim_and_absent_by_default(package, bundle, tmp_path):
