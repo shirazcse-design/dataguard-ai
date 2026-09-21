@@ -228,7 +228,12 @@ def test_the_cli_writes_only_to_the_round2_results_directory(package, tmp_path):
     data = tmp_path / "data"
     shutil.copytree(DATA, data)
     s = _write(tmp_path, "s.csv", _sheet(package, "rev-a"))
-    tracked = {p: p.read_bytes() for p in (data / "review").rglob("*") if p.is_file()}
+    tracked = {
+        p: p.read_bytes()
+        for p in (data / "review").rglob("*")
+        if p.is_file()
+        and "blind_results_round2" not in p.parts[-2]  # the outputs this command writes
+    }
     assert (
         main(
             [
