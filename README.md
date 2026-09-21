@@ -25,7 +25,7 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | 6 | Hybrid routing (router, fusion, review, variants, gates) | done; evaluated on dev (replayed), calibration (live, out-of-sample) and, once, the locked test split |
 | 7 | Observability and failure hardening (spans, redaction, privacy gate, failure-injection suite) | done; merged (development split only) |
 | 8 | Service surface: Python API + CLI, frozen result schema v1.0, MCP contract | done |
-| 9 | MCP adapter (`mcp_adapter/`, `dataguard-uc4-mcp`) and an offline observability dashboard | done; the adapter is **not release-ready** (see below) |
+| 9 | MCP adapter (`mcp_adapter/`, `dataguard-uc4-mcp`) and an offline observability dashboard | done; the adapter is **release-ready for the v0.1 scope** (decision A33; not production-hardened, see below) |
 
 ### Where UC4 stands (2026-09-21)
 
@@ -36,11 +36,13 @@ evaluated on every split. It is **not independently validated**:
   reads "reviewed by one human; second independent review pending".
 * **Locked-test result (one audited run):** level macro-F1 0.884 [0.758, 0.980], category macro-F1 0.997,
   high-risk recall 1.000 (111 of 111). The level gate **passes on the point estimate and fails on the
-  lower confidence bound** (0.758 against 0.85). A lenient view (a level inside the gold's acceptable
-  alternatives counts as correct) is 1.000 on calibration and test, but the approved gates are strict.
+  lower confidence bound** (0.758 against 0.85). The adopted gate (A33) is a lenient view (a level inside
+  the gold's acceptable alternatives counts as correct), which is 1.000 on calibration and test.
   See [`docs/uc4/results/validation-rescore.md`](docs/uc4/results/validation-rescore.md). The split is consumed.
-* **The MCP adapter is a development surface.** Freeze criteria: audited confirmation done; human review
-  accepted (one reviewer); eval gates not met on the strict metric.
+* **The MCP adapter is release-ready for the v0.1 scope** (decision A33): every freeze criterion is met,
+  the level gate being judged on the lenient view, a product decision. That is **not** production-hardened:
+  stdio identity is asserted not authenticated, the shipped allowlist is a placeholder, there is no rate
+  limiting, and the LLM tier is capped at `mid`. See [`docs/uc4/mcp-contract.md`](docs/uc4/mcp-contract.md).
 * **Not done:** Azure Monitor export (needs an Application Insights connection string), a shared live
   dashboard, and the optional prompt-injection second opinion.
 
