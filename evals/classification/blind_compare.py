@@ -444,6 +444,7 @@ def render_report(
     input_hashes: dict[str, str],
     extra_sections: list[list[str]] | None = None,
     reviewer_kind: str = "human",
+    note: str | None = None,
 ) -> str:
     m = package["manifest"]
     meta_variant = package["variant"].shows_metadata
@@ -463,6 +464,11 @@ def render_report(
     add("")
     if ai:
         add(f"> {AI_REVIEW_BANNER}.")
+        add("")
+    if note:
+        add(
+            f"> **Provenance note (recorded verbatim at the operator's request):** {' '.join(note.split())}"
+        )
         add("")
     add(
         f"> **{DATASET_BANNER}.** Read-only comparison. No label, taxonomy, schema v1.0, threshold, prompt, model configuration or the frozen hybrid configuration was changed, and the **locked test split was not read, scored or used**. There is no combined headline score."
@@ -625,6 +631,7 @@ def run(
     variant: Variant = CONTENT,
     content_sheets: list[Path] | None = None,
     reviewer_kind: str = "human",
+    note: str | None = None,
 ) -> tuple[str, str]:
     """Return (report markdown, per-sample csv). Raises PackageError if anything cannot be trusted.
 
@@ -664,5 +671,5 @@ def run(
             for rv, rows in zip(reviewers, per_reviewer, strict=True):
                 extra.append(paired_section(crows, rows, crv["reviewer_id"], rv["reviewer_id"]))
     cols, rows = csv_rows([r for rs in per_reviewer for r in rs], reviewer_kind)
-    report = render_report(package, reviewers, per_reviewer, hashes, extra, reviewer_kind)
+    report = render_report(package, reviewers, per_reviewer, hashes, extra, reviewer_kind, note)
     return report, to_csv(cols, rows)

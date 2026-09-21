@@ -1000,7 +1000,13 @@ def _cmd_review_blind_compare(args: argparse.Namespace) -> int:
     paired = [Path(p) for p in args.content_sheet] if args.content_sheet else None
     try:
         report, per_sample = run(
-            [Path(p) for p in args.sheet], bundle, data_dir, variant, paired, args.reviewer_kind
+            [Path(p) for p in args.sheet],
+            bundle,
+            data_dir,
+            variant,
+            paired,
+            args.reviewer_kind,
+            args.note,
         )
     except PackageError as e:
         print(f"ERROR {e}")
@@ -1274,6 +1280,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="human",
         help="ai: label the report and CSV as an AI review (not human validation); "
         "writes to <results dir>_ai",
+    )
+    rvm.add_argument(
+        "--note",
+        default=None,
+        help="a provenance note printed verbatim at the top of the report (facts about the sheet)",
     )
     rvm.add_argument("--config-dir", default=None)
     rvm.add_argument("--data-dir", default=None)

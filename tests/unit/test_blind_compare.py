@@ -483,3 +483,13 @@ def test_the_ai_cli_writes_to_a_separate_default_directory(package, tmp_path, ca
                  "--reviewer-kind", "ai"]) == 0  # fmt: skip
     assert (data / "review/blind_results_ai/blind_review_comparison.md").exists()
     assert not (data / "review/blind_results").exists()
+
+
+def test_a_provenance_note_is_printed_verbatim_and_absent_by_default(package, bundle, tmp_path):
+    s = tmp_path / "h.csv"
+    s.write_text(_sheet(package), encoding="utf-8")
+    plain, _ = run([s], bundle, DATA)
+    noted, _ = run([s], bundle, DATA, note="Sheet identical to another sheet on all 33 rows.")
+    assert "Provenance note" not in plain
+    assert "Provenance note (recorded verbatim" in noted
+    assert "Sheet identical to another sheet on all 33 rows." in noted
