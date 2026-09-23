@@ -261,6 +261,15 @@ Evidence: the Round 2 sheet from one reviewer (`Rahul`; independence per the coo
 | A33 | **The level gate is judged on the lenient level view** (a level inside the gold's acceptable alternatives counts as correct; category macro-F1 and high-risk recall stay strict) on data that did not choose the configuration (locked test and calibration). Consequence: the MCP eval-gates freeze criterion is **met**, every freeze criterion is met, and the MCP adapter is **release-ready for the v0.1 scope**. | `service_report.py` freeze table (adopted-gate row, figures checked against `results/validation-rescore.md`); `mcp-contract.md`. The strict level gate still fails on its lower bound (locked test 0.758); dev, which chose the variant, still fails on either view (0.631) and its 5 genuine errors in `hn_public_api_docs_placeholder_keys` are **not** accepted or fixed by this decision. |
 
 
+## Implementation decisions (Azure Monitor export)
+
+| # | Decision | Why |
+|---|---|---|
+| D9.17 | The Azure Monitor bridge (`azure_monitor_sink`, `flush_azure_monitor`) reuses the existing `Sink` protocol (`.write(spans)`); `ClassificationService` gained an `extra_sinks` parameter rather than a special case. | The tracer already accepts a list of sinks; no new abstraction was needed. |
+| D9.18 | `dataguard-uc4 obs azure-check` sends one self-check trace with a fresh `request_id` (not the fixed `"self-check"` id `ClassificationService.self_check()` uses), so a specific run is unambiguous to search for in the portal. | Two runs on the same day would otherwise share one request id. |
+| D9.19 | The connection string's env var NAME lives in config (`observability.azure_monitor.connection_string_env`), never the value; the CLI command never prints, logs, or writes it. | Same convention as the Foundry API key (`llm.v1.yaml` `api_key_env`). |
+| D9.20 | Verification is reported precisely as "SDK-confirmed, portal-confirmation pending": two live runs completed with no error and a completed `force_flush`, but nobody has checked Transaction search to confirm the traces actually arrived (an operator-side browser-automation issue blocked that check, unrelated to the code). | `force_flush()` returning `True` means the batch processor's local queue drained before the timeout; it does not, by itself, prove the remote endpoint accepted the data (OTel's batch exporter can swallow a delivery failure in its background thread). Overstating this as fully verified would repeat the mistake caught once already this project (a premature "verified" docstring, corrected before commit). |
+
 ## Approved: Azure AI Foundry for Evaluations, Guardrails, Observability; Responsible AI (product owner, 2026-09-22)
 
 | # | Decision | Implementation |

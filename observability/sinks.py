@@ -1,8 +1,11 @@
 """Span sinks: JSONL (local default), in-memory (tests), optional OpenTelemetry SDK bridge.
 
-The bridge and the Azure Monitor glue are OPTIONAL and lazily imported. The bridge is tested
-with the SDK's in-memory exporter. The Azure Monitor glue has NOT been verified against a real
-Application Insights resource (no connection string exists in this environment).
+The bridge and the Azure Monitor glue are OPTIONAL and lazily imported. The bridge is tested with
+the SDK's in-memory exporter. The Azure Monitor glue ran successfully against a real Application
+Insights resource (`dataguard-uc4-appinsights`, 2026-09-22, via `dataguard-uc4 obs azure-check`):
+the SDK reported no error and `force_flush` completed without timing out on two separate runs.
+Portal-side confirmation (Transaction search) has not been completed; see
+`docs/uc4/observability-engine.md` for the exact status.
 """
 
 from __future__ import annotations
@@ -79,11 +82,10 @@ class OtelSink:
 
 
 def azure_monitor_sink(connection_string: str) -> OtelSink:
-    """UNVERIFIED glue: configure Azure Monitor and return a bridge to its tracer provider.
-
-    Written from general knowledge of `azure-monitor-opentelemetry`; needs that package and a real
-    Application Insights connection string, neither of which is available here. Never call this in
-    tests; the caller must supply the connection string from a secret store.
+    """Configure Azure Monitor and return a bridge to its tracer provider. Requires the
+    `azure-monitor` extra (`pip install 'dataguard-ai[azure-monitor]'`); raises `ImportError` if it
+    is not installed. The caller must supply the connection string from the environment or a secret
+    store, never a literal in code, a config file or a log line.
     """
     from azure.monitor.opentelemetry import (
         configure_azure_monitor,  # type: ignore[import-not-found]
@@ -92,3 +94,13 @@ def azure_monitor_sink(connection_string: str) -> OtelSink:
 
     configure_azure_monitor(connection_string=connection_string)
     return OtelSink(trace.get_tracer_provider())
+
+
+def flush_azure_monitor(timeout_millis: int = 30_000) -> bool:
+    """Force the Azure Monitor exporter to send now rather than on its periodic timer. Returns
+    whether the flush completed within the timeout. Only meaningful after `azure_monitor_sink`."""
+    from opentelemetry import trace
+
+    provider = trace.get_tracer_provider()
+    force_flush = getattr(provider, "force_flush", None)
+    return bool(force_flush(timeout_millis)) if force_flush else True

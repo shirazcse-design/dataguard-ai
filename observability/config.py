@@ -16,12 +16,20 @@ from .trace import RandomIds, SeededIds, Sink, Tracer
 OBS_FILE = "observability/observability.v1.yaml"
 
 
+class AzureMonitorCfg(StrictModel):
+    """The connection string is never stored here: only the environment variable NAME that holds it
+    (same convention as the Foundry API key). Absent from the file entirely if never configured."""
+
+    connection_string_env: str = "DATAGUARD_AZURE_MONITOR_CONNECTION_STRING"
+
+
 class ObservabilityConfig(StrictModel):
     observability_version: str
     service_name: str
     max_value_chars: int = Field(ge=20, le=500)
     pseudonym_salt_env: str
     allowed_attributes: list[str] = Field(min_length=1)
+    azure_monitor: AzureMonitorCfg = Field(default_factory=AzureMonitorCfg)
 
     @field_validator("observability_version")
     @classmethod

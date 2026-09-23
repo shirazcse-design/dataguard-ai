@@ -128,6 +128,7 @@ class ClassificationService:
         cache_dir: Path | str | None = None,
         trace_path: Path | str | None = None,
         salt: bytes | None = None,
+        extra_sinks: list[Any] | None = None,
     ) -> None:
         self.bundle = bundle or load_config(config_dir)
         self.config, self._config_sha = load_service_config(self.bundle, config_dir)
@@ -156,7 +157,8 @@ class ClassificationService:
             if trace_path is None:
                 raise ConfigError("trace.enabled is true but no trace path was given")
             obs_cfg, _ = load_observability_config(config_dir)
-            self._tracer, salt_env = build_tracer(obs_cfg, [JsonlSink(trace_path)])
+            sinks = [JsonlSink(trace_path), *(extra_sinks or [])]
+            self._tracer, salt_env = build_tracer(obs_cfg, sinks)
             self._salt = salt if salt is not None else salt_env
         self._lock = threading.Lock()
         self._served = 0

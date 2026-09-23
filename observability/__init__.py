@@ -9,7 +9,14 @@ from .dashboard import render_dashboard
 from .instrument import TracedClassifier, outcome_attrs, request_attrs
 from .metrics import summarize
 from .redaction import Redactor, pseudonymize
-from .sinks import JsonlSink, MemorySink, OtelSink, read_jsonl
+from .sinks import (
+    JsonlSink,
+    MemorySink,
+    OtelSink,
+    azure_monitor_sink,
+    flush_azure_monitor,
+    read_jsonl,
+)
 from .trace import RandomIds, SeededIds, Tracer, current_span, span, tracing_active
 from .types import Span, SpanEvent
 
@@ -27,8 +34,10 @@ __all__ = [
     "TracedClassifier",
     "Tracer",
     "audit_spans",
+    "azure_monitor_sink",
     "build_tracer",
     "current_span",
+    "flush_azure_monitor",
     "load_observability_config",
     "outcome_attrs",
     "pseudonymize",
