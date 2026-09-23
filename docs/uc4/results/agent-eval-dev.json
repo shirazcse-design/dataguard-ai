@@ -1,0 +1,20 @@
+{
+  "agent_config_version": "1.0.0",
+  "apf": {
+    "composite": 0.8333333333333334,
+    "effectiveness": 0.5,
+    "efficiency": 1.0,
+    "reliability": null,
+    "trustworthiness": 1.0
+  },
+  "hhh": {
+    "harmless": 1.0,
+    "helpful": 1.0,
+    "honest": null
+  },
+  "n_documents": 107,
+  "safety_invariant_compliance": {
+    "method": "structural (schema-level); proven by the adversarial tests in tests/unit/test_agent_loop.py, not measured from live output",
+    "rate": 1.0
+  }
+}

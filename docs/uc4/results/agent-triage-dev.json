@@ -1,0 +1,2413 @@
+{
+  "agent_config_version": "1.0.0",
+  "documents": [
+    {
+      "categories": [],
+      "doc_id": "uc4-00ac341854",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-1",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-02400f99b0",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-3",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-02558b2653",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-5",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-03937fd0c4",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-7",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-0f8bb74c53",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-9",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-10e1c66f39",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-11",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS"
+      ],
+      "doc_id": "uc4-135033cf6a",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-13",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-140a242892",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-15",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-17eb558505",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-17",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-1807887255",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-19",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI"
+      ],
+      "doc_id": "uc4-19c5bd1307",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-21",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-1b97dfb0c8",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-23",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-1bc925570d",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-25",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-1c81f3c64a",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-27",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-1d9d723729",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-29",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-1e639f5eab",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-31",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-209d07ca5a",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-33",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-2154faf7ae",
+      "high_risk": false,
+      "level": "PUBLIC",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-35",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-2472fae2da",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-37",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-288d0c258b",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-39",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-2930f435d7",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-41",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-2d695b6f89",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-43",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-2ff12b7a49",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-45",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI",
+        "PII"
+      ],
+      "doc_id": "uc4-3095e0ae30",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-47",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS",
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-312ecaca55",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-49",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-35ffba48e4",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-51",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-3a5b7f51af",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-53",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-3a62ad2249",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-55",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-4b4b541179",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-57",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI"
+      ],
+      "doc_id": "uc4-4b84f54ee7",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-59",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-4c7bd732c6",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-61",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI",
+        "PII"
+      ],
+      "doc_id": "uc4-4cd159c13e",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-63",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-4f1f0327ab",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-65",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS"
+      ],
+      "doc_id": "uc4-4fb7c238e1",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-67",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-521a321e60",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-69",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-53b989fc54",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-71",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS",
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-577680a82a",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-73",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-58c1f78801",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-75",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-59fba52cb2",
+      "high_risk": false,
+      "level": "PUBLIC",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-77",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-5a7110deea",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-79",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-60caa3c6ff",
+      "high_risk": false,
+      "level": "PUBLIC",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-81",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-633f3b10fe",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-83",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-6454537dc7",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-85",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-66c7774ba3",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-87",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-6a85097b22",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-89",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI",
+        "PII"
+      ],
+      "doc_id": "uc4-7759eef801",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-91",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-78057a08a9",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-93",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-791425f3af",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-95",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-7b2b922f1a",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-97",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-7b78f7a817",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-99",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-7c5bac491d",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-101",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-821bb02c8d",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-103",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-86a8154a97",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-105",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-88687009ca",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-107",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-89cc28ef38",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-109",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-95ec10ed1c",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-111",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-97a4c07fb4",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-113",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-9a94d05821",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-115",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-9bb6f9bba3",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-117",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS"
+      ],
+      "doc_id": "uc4-9cb362d509",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-119",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-9d42fc85c9",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-121",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-9e0dbf644f",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-123",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-9ed0217a4e",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-125",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-a06c584035",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-127",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-a46a9b6524",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-129",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-a8647f52f9",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-131",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-ab6edf36e0",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-133",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-acc01a7faa",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-135",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-b16d04f2c2",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-137",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI",
+        "PII"
+      ],
+      "doc_id": "uc4-b19d96eb75",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-139",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-b3be4faced",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-141",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-b4fe4d5cb3",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-143",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-bbe609c8bc",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-145",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-bd359a7c38",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-147",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-bea9a6819d",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-149",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS",
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-bfadb3a0f0",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-151",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI"
+      ],
+      "doc_id": "uc4-c2223643cf",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-153",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-c400fdca79",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-155",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS",
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-c584e970c8",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-157",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-c8334a8e38",
+      "high_risk": false,
+      "level": "PUBLIC",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-159",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-c853e9ed1a",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-161",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI"
+      ],
+      "doc_id": "uc4-c885ab8c28",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-163",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-cab96119dc",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-165",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-cfac4adf77",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-167",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-d01081ba76",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-169",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PII"
+      ],
+      "doc_id": "uc4-d44d3f8388",
+      "high_risk": true,
+      "level": "CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-171",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-d5796b1fc5",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-173",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-d627081708",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-175",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS",
+        "SOURCE_CODE"
+      ],
+      "doc_id": "uc4-d95ff13bde",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-177",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "FINANCIAL_PCI"
+      ],
+      "doc_id": "uc4-dd34b9e9fe",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-179",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI"
+      ],
+      "doc_id": "uc4-de62c38c69",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-181",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-e103cb606b",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-183",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-e174bd5bbf",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-185",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-eb31774882",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-187",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-ec594a3b79",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-189",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-ecb3c33352",
+      "high_risk": false,
+      "level": "PUBLIC",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-191",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-f01402e5c4",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-193",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS"
+      ],
+      "doc_id": "uc4-f0f1e3c140",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-195",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "PHI",
+        "PII"
+      ],
+      "doc_id": "uc4-f6ecd62605",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-197",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-f6ef83564f",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-199",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-f79ebb3064",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-201",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-fb63604243",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-203",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "MA_CORP_STRATEGY"
+      ],
+      "doc_id": "uc4-fbbb9028da",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-205",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "doc_id": "uc4-fcb2686291",
+      "high_risk": false,
+      "level": "INTERNAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-207",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "INTELLECTUAL_PROPERTY"
+      ],
+      "doc_id": "uc4-fcfbdb789f",
+      "high_risk": false,
+      "level": "CONFIDENTIAL",
+      "priority": "low",
+      "rationale": "classify_document returned status=ok, high_risk=False",
+      "request_id": "req-209",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "CREDENTIALS_SECRETS"
+      ],
+      "doc_id": "uc4-ff811569d1",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-211",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "TRADE_SECRET"
+      ],
+      "doc_id": "uc4-ff8713878a",
+      "high_risk": true,
+      "level": "HIGHLY_CONFIDENTIAL",
+      "priority": "high",
+      "rationale": "classify_document returned status=ok, high_risk=True",
+      "request_id": "req-213",
+      "review_reason": null,
+      "review_requested": false,
+      "status": "ok",
+      "stopped_reason": "completed",
+      "tool_calls": [
+        {
+          "error_kind": null,
+          "ok": true,
+          "step": 1,
+          "tool": "classify_document"
+        }
+      ]
+    }
+  ],
+  "n_documents": 107
+}

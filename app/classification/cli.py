@@ -1298,6 +1298,93 @@ def _cmd_guardrails_second_opinion(args: argparse.Namespace) -> int:
     return 0
 
 
+def _build_agent_batch(args: argparse.Namespace):
+    """Shared setup for `agent triage`/`agent eval`: real classify_document, a chosen planner."""
+    from app.agent.batch import run_batch
+    from app.agent.config import load_agent_config
+    from app.agent.mock import MockAgentClient
+    from app.agent.offline_policy import offline_policy
+    from app.agent.tools import ToolRegistry
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+
+    splits = list(DEVELOPMENT_SPLITS) if args.split == "all" else args.split.split(",")
+    if "test" in splits:
+        print("the locked test split is not used for the agent", file=sys.stderr)
+        return None, None, None
+
+    cfg, _ = load_agent_config(args.config_dir)
+    svc = _make_service(args)
+    if svc is None:
+        return None, None, None
+    registry = ToolRegistry(svc, svc.bundle)
+    if args.agent_mode == "mock":
+        client = MockAgentClient(offline_policy)
+    else:
+        from app.agent.foundry_agent import build_agent_client
+        from app.agent.tools import tool_schemas
+        from app.llm.config import load_llm_config
+
+        llm_cfg, _ = load_llm_config(svc.bundle.policy, args.config_dir)
+        deployment_env = f"DATAGUARD_LLM_DEPLOYMENT_{cfg.planner_tier.upper()}"
+        import os
+
+        deployment = os.environ.get(deployment_env)
+        if not deployment:
+            print(f"{deployment_env} is not set; needed for --agent-mode foundry", file=sys.stderr)
+            return None, None, None
+        client = build_agent_client(llm_cfg.foundry, cfg.planner_tier, deployment, tool_schemas())
+
+    docs = _load_split_docs(args, splits)
+    if args.limit is not None:
+        docs = docs[: args.limit]
+    return run_batch(docs, client, registry, cfg), docs, cfg
+
+
+def _cmd_agent_triage(args: argparse.Namespace) -> int:
+    """Run the Batch Triage Agent over a document batch and print/write its BatchTriageReport.
+
+    See docs/uc4/agent-plan.md. `--agent-mode mock` (default) needs no Foundry credentials - it
+    uses a deterministic, inspectable planner (`app/agent/offline_policy.py`), not a live model.
+    `--agent-mode foundry` makes real, uncached calls per the plan (agent tool-calling conversations
+    are not record/replay cached, unlike the classifier's own LLM stage).
+    """
+    from pathlib import Path
+
+    report, _docs, _cfg = _build_agent_batch(args)
+    if report is None:
+        return 2
+    text = json.dumps(report.model_dump(mode="json"), indent=2, sort_keys=True)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
+def _cmd_agent_eval(args: argparse.Namespace) -> int:
+    """Run the Batch Triage Agent and compute its own evals: task completion, tool-call accuracy,
+    safety-invariant compliance (structural; see docs/uc4/agent-plan.md), scoped HHH and APF."""
+    from pathlib import Path
+
+    from evals.classification.agent_eval import agent_apf, agent_hhh, safety_invariant_compliance
+
+    report, docs, cfg = _build_agent_batch(args)
+    if report is None:
+        return 2
+    doc_ids = [d.doc_id for d in docs]
+    result = {
+        "n_documents": report.n_documents,
+        "agent_config_version": report.agent_config_version,
+        "safety_invariant_compliance": safety_invariant_compliance(),
+        "hhh": agent_hhh(report, doc_ids),
+        "apf": agent_apf(report, doc_ids, step_budget=cfg.max_steps_per_document),
+    }
+    text = json.dumps(result, indent=2, sort_keys=True)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="dataguard-uc4", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -1649,6 +1736,38 @@ def build_parser() -> argparse.ArgumentParser:
     hp.add_argument("--config-dir", default=None)
     hp.add_argument("--data-dir", default=None)
     hp.set_defaults(func=_cmd_eval_hhh_apf)
+
+    agent = sub.add_parser(
+        "agent", help="Batch Triage Agent (docs/uc4/agent-plan.md) - classify_document as a tool"
+    )
+    agent_sub = agent.add_subparsers(dest="agent_command", required=True)
+
+    agent_commands = [
+        (
+            "triage",
+            "run the agent over a batch and print/write its BatchTriageReport",
+            _cmd_agent_triage,
+        ),
+        (
+            "eval",
+            "run the agent and compute its task-completion/tool-call/HHH/APF evals",
+            _cmd_agent_eval,
+        ),
+    ]
+    for name, help_text, func in agent_commands:
+        ap = agent_sub.add_parser(name, help=help_text)
+        ap.add_argument(
+            "--agent-mode",
+            choices=["mock", "foundry"],
+            default="mock",
+            help="mock = deterministic offline planner, no credentials (default); "
+            "foundry = live, uncached planner calls (a separate, explicit run)",
+        )
+        ap.add_argument("--split", default="dev", help="comma-separated development splits")
+        ap.add_argument("--limit", type=int, default=None, help="cap the number of documents")
+        ap.add_argument("--out", default=None)
+        _add_service_args(ap)
+        ap.set_defaults(func=func)
     return parser
 
 

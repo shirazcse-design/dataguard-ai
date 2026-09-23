@@ -56,6 +56,24 @@ Synthetic, template-generated data; labels are AI-authored and reviewed by one p
 
 UC4 is complete for v0.1 and the MCP adapter is release-ready under decision A33. It may additionally be called **independently validated** when: (a) a second independent human has reviewed the labels and every disagreement is adjudicated and recorded (then, and only then, does the dataset label drop "second independent review pending"); (b) the 5 dev errors in `hn_public_api_docs_placeholder_keys` are addressed or accepted in writing; (c) the adopted lenient gate is re-confirmed on a freshly generated held-out split, since the locked test split is consumed.
 
+## Update (2026-09-23): Azure AI Foundry Responsible AI, and a real agentic component
+
+Two additions since the verdict above, both scoped and decided by the product owner, neither
+changing the verdict or the frozen hybrid `default` results:
+
+* **Azure AI Foundry Evaluations/Guardrails/Observability and the Responsible AI pillar mapping**
+  (`responsible-ai.md`, decisions A34-A36): scoped HHH/APF (dropping the tool/autonomy sub-measures
+  that do not apply to a non-agentic classifier), an Azure AI Content Safety audit-time second
+  opinion, and a Fairness & Inclusion counterfactual probe (66/66 dev-split documents invariant,
+  rules mode).
+* **The Batch Triage Agent** (`agent-plan.md`, `agent-engine.md`, decision A37): a new, separate,
+  genuinely agentic component — real tools, a real bounded per-document loop, its own real
+  (not scoped-away) HHH/APF. `ClassificationService` itself is unchanged and is still not an
+  autonomous agent. Run on the real dev split (`--agent-mode mock`, no Foundry credentials): task
+  completion 1.0, safety-invariant compliance 1.0 (structural, proven by adversarial tests), APF
+  composite 0.833. A live Foundry planner run (`--agent-mode foundry`) has not been made — see
+  `agent-engine.md`'s Limits.
+
 ## Reproduce
 
 ```

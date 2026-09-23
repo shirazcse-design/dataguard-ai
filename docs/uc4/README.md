@@ -42,4 +42,8 @@
 | [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md) | The single audited locked-test evaluation of the frozen hybrid (report-only): level F1 0.884 [0.758, 0.980], category 0.997, high-risk recall 1.000 |
 | [`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md) | Out-of-sample check of the frozen hybrid on the calibration split (live, recorded); high-risk recall 0.891, all misses in one ambiguous family |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
+| [`agent-plan.md`](agent-plan.md) | Pre-registered Batch Triage Agent plan (written before any agent code); decision A37 |
+| [`agent-engine.md`](agent-engine.md) | Batch Triage Agent architecture, real dev-split results, findings (incl. a caught-and-fixed replay-cache bug), the agent's own HHH/APF |
+| [`results/agent-triage-dev.json`](results/agent-triage-dev.json) | Generated: the full BatchTriageReport for the dev split (`--agent-mode mock`, `--llm-mode replay`) |
+| [`results/agent-eval-dev.json`](results/agent-eval-dev.json) | Generated: task completion, tool-call accuracy, safety-invariant compliance, HHH/APF for the same run |
 

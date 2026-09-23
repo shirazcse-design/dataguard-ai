@@ -20,6 +20,14 @@ that assume tools or autonomy are dropped and named as dropped, and every remain
 computed from a real, already-defined metric — nothing here is a new, unvalidated number invented
 to fill a template. See decision A34.
 
+**Update (2026-09-23, decision A37):** the statement above is still true of the classifier itself —
+`ClassificationService` remains a read/compute service with no tools, no loop, no autonomy, and
+nothing in this document's HHH/APF scoping changes. Separately, UC4 now also includes a genuine
+agentic component, the **Batch Triage Agent**, which does have real tools, a real bounded loop, and
+its own real (not scoped-away) HHH/APF, computed from live runs — see
+[`agent-plan.md`](agent-plan.md) and [`agent-engine.md`](agent-engine.md). The two are governed
+separately: the agent uses `classify_document` as a tool but cannot change what it decides.
+
 ## 1. Evaluations — HHH and APF, scoped (PRD sections 14-15)
 
 `evals/classification/apf.py`, `dataguard-uc4 eval hhh-apf`. Every score carries the raw inputs it
@@ -67,7 +75,7 @@ dataguard-uc4 eval hhh-apf --split dev --llm-mode replay --spans spans.jsonl
 |---|---|---|
 | Input | S0 injection scan (`guardrails/injection.py`); input guard (size/encoding, `guardrails/input.py`) | **Azure AI Content Safety Prompt Shields** — a second opinion, closing the gap `hybrid-engine.md` recorded as "not implemented" |
 | Output | Exact-substring evidence verification (`guardrails/output.py verify_quote`); schema validation; "insufficient information" abstention | **Azure AI Content Safety Groundedness Detection** — a second, semantic opinion alongside the exact-substring check |
-| Behavioral | No tool allowlist needed (no tools). The real equivalent: MCP's deny-by-default caller allowlist and per-caller LLM-tier/cost/latency caps (`config/mcp/mcp.v1.yaml`); the hybrid's `max_llm_calls` budget; fail-safe review escalation instead of any autonomous action | Not applicable — there is no agent loop or tool call to bound further |
+| Behavioral | No tool allowlist needed for the classifier itself (no tools). The real equivalent: MCP's deny-by-default caller allowlist and per-caller LLM-tier/cost/latency caps (`config/mcp/mcp.v1.yaml`); the hybrid's `max_llm_calls` budget; fail-safe review escalation instead of any autonomous action. **The Batch Triage Agent (A37) does have real behavioral guardrails** — a fixed tool allowlist, a step budget, repeated-tool-failure escalation, and the structurally-enforced never-downgrade invariant; see `agent-plan.md`'s "Guardrails" section and `agent-engine.md` | Not applicable to the classifier. The agent's guardrails are custom/structural, not an Azure AI Foundry addition |
 
 **Deliberate design choice (decision A35): this is an audit-time second opinion, not a per-request
 runtime guardrail.** Adding a live external call to the production classify path would introduce a
