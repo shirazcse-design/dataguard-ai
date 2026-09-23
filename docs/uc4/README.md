@@ -24,6 +24,7 @@
 | [`../../data/synthetic/uc4/review/adjudication_sheet.csv`](../../data/synthetic/uc4/review/adjudication_sheet.csv) | The auditable adjudication sheet (127 rows; human columns blank) |
 | [`results/gold-review-decision-brief.md`](results/gold-review-decision-brief.md) | Decision brief for the proposed label/taxonomy changes (A/B/C), with a correction about `source_system` metadata; nothing applied |
 | [`blind-review.md`](blind-review.md) | Blind human-review package: what the reviewer sees, the key kept apart, checks; nothing applied |
+| [`responsible-ai.md`](responsible-ai.md) | Azure AI Foundry Evaluations (HHH/APF, scoped), Guardrails (Content Safety second opinion), and the Responsible AI pillar mapping, incl. the Fairness & Inclusion probe |
 | [`completion-report.md`](completion-report.md) | **Start here for status:** what is complete, the evidence, and what is still open (and who can close it) |
 | [`human-review-round2.md`](human-review-round2.md) | Coordinator's guide for the Round 2 independent human review (ambiguous + disputed families, incl. `amb_aggregate_health_stats`): who, what to hand over, how to compare, how to adjudicate |
 | [`service-plan.md`](service-plan.md) | Pre-registered Phase 8 plan (written before any Phase 8 code) |
@@ -41,4 +42,8 @@
 | [`results/hybrid-locked-test.md`](results/hybrid-locked-test.md) | The single audited locked-test evaluation of the frozen hybrid (report-only): level F1 0.884 [0.758, 0.980], category 0.997, high-risk recall 1.000 |
 | [`results/hybrid-calibration-check.md`](results/hybrid-calibration-check.md) | Out-of-sample check of the frozen hybrid on the calibration split (live, recorded); high-risk recall 0.891, all misses in one ambiguous family |
 | [`results/llm-baseline.md`](results/llm-baseline.md) | Generated three-tier LLM results on dev (replayed from `data/llm_cache`), prompt audit, injection guard |
+| [`agent-plan.md`](agent-plan.md) | Pre-registered Batch Triage Agent plan (written before any agent code); decision A37 |
+| [`agent-engine.md`](agent-engine.md) | Batch Triage Agent architecture, real dev-split results, findings (incl. a caught-and-fixed replay-cache bug), the agent's own HHH/APF |
+| [`results/agent-triage-dev.json`](results/agent-triage-dev.json) | Generated: the full BatchTriageReport for the dev split (`--agent-mode mock`, `--llm-mode replay`) |
+| [`results/agent-eval-dev.json`](results/agent-eval-dev.json) | Generated: task completion, tool-call accuracy, safety-invariant compliance, HHH/APF for the same run |
 

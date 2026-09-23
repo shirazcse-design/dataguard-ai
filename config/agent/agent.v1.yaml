@@ -1,0 +1,19 @@
+# UC4 Batch Triage Agent configuration (docs/uc4/agent-plan.md).
+#
+# This is a NEW, separate orchestrator that uses `classify_document` as a tool; it does not change
+# ClassificationService, the hybrid router, fusion or review logic in any way.
+agent_config_version: 1.0.0
+
+# Same latency reasoning as the MCP adapter's cap: `large` takes up to ~245s per call, far past a
+# usable per-document budget inside a batch loop.
+planner_tier: mid
+
+# A loop that exceeds this many tool calls for one document stops and forces a human-review
+# recommendation with reason "step_budget_exceeded" (fail-safe, never a silent drop).
+max_steps_per_document: 6
+
+# The fixed tool allowlist (docs/uc4/agent-plan.md). Any other tool name is a schema-validation
+# rejection at the function-calling boundary, not a prompt instruction the model could ignore.
+allowed_tools: [classify_document, lookup_taxonomy_definition, request_human_review]
+
+timeout_s: 30.0
