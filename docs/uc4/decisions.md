@@ -260,3 +260,20 @@ Evidence: the Round 2 sheet from one reviewer (`Rahul`; independence per the coo
 |---|---|---|
 | A33 | **The level gate is judged on the lenient level view** (a level inside the gold's acceptable alternatives counts as correct; category macro-F1 and high-risk recall stay strict) on data that did not choose the configuration (locked test and calibration). Consequence: the MCP eval-gates freeze criterion is **met**, every freeze criterion is met, and the MCP adapter is **release-ready for the v0.1 scope**. | `service_report.py` freeze table (adopted-gate row, figures checked against `results/validation-rescore.md`); `mcp-contract.md`. The strict level gate still fails on its lower bound (locked test 0.758); dev, which chose the variant, still fails on either view (0.631) and its 5 genuine errors in `hn_public_api_docs_placeholder_keys` are **not** accepted or fixed by this decision. |
 
+
+## Approved: Azure AI Foundry for Evaluations, Guardrails, Observability; Responsible AI (product owner, 2026-09-22)
+
+| # | Decision | Implementation |
+|---|---|---|
+| A34 | **HHH and APF (PRD 14-15) are scoped down for UC4**: the tool-selection, agent-loop and destructive-action sub-measures do not apply (UC4 has no tools and takes no autonomous action, decisions A6/A19) and are dropped, named as dropped. Every remaining sub-score reuses an already-defined, real metric. | `evals/classification/apf.py`, `config/eval/apf.v1.yaml`; `docs/uc4/responsible-ai.md` |
+| A35 | **Azure AI Content Safety (Prompt Shields, Groundedness Detection) is wired as an audit-time second opinion (`dataguard-uc4 guardrails second-opinion`), not a per-request runtime guardrail.** A live external call on the production classify path would add a new failure mode, latency and cost with no measured justification yet; this can be promoted to a runtime guardrail later if the second-opinion agreement rate justifies it. | `guardrails/azure_content_safety.py`, `evals/classification/guardrail_audit.py` |
+| A36 | **A counterfactual name-swap Fairness & Inclusion probe was added** (`dataguard-uc4 eval fairness-probe`), the first real work against that Responsible AI pillar for UC4. | `evals/classification/fairness_probe.py`; result: 66/66 dev-split documents invariant under a name swap, rules mode |
+
+## Implementation decisions (Azure AI Foundry evaluations/guardrails/Responsible AI)
+
+| # | Decision | Why |
+|---|---|---|
+| D9.21 | The Content Safety adapter is stdlib HTTP only, following `app/llm/foundry.py`'s exact convention (no SDK dependency), config names the env vars holding credentials, never the values, and is tested against a local fake server. | Architectural consistency with the only other external-provider adapter in the codebase; auditable without a heavy dependency. |
+| D9.22 | The two REST contracts (`text:shieldPrompt?api-version=2024-09-01`, `text:detectGroundedness?api-version=2024-02-15-preview`) were verified against Microsoft Learn before writing the client, not assumed from training data. | Same discipline as A14 ("do not assume model names/capabilities until verified"). |
+| D9.23 | The fairness probe's substitute names come from the dataset's own `pools.yaml` ("everything here is invented or generic"), not a newly curated demographic-labeled list. | No new data with a demographic claim is introduced; the probe tests the generator's own stated assumption that these names are interchangeable. |
+| D9.24 | APF's Efficiency sub-score is normalized against the PRD's own tool-call latency budget (`gates.v1.yaml tool_call_limit_s`, 10 s), not an invented threshold; a missing dimension is excluded and the remaining weights renormalized, never treated as zero. | A8: never fabricate a metric; a missing measurement must not silently read as "worst possible" or "best possible". |

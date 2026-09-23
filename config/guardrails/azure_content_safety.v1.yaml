@@ -1,0 +1,21 @@
+# Azure AI Content Safety adapter: a second opinion alongside the custom guardrails, never their
+# replacement. Endpoint and key come from the environment (never this file); see
+# guardrails/azure_content_safety.py and docs/uc4/responsible-ai.md.
+azure_content_safety_version: 1.0.0
+endpoint_env: DATAGUARD_CONTENT_SAFETY_ENDPOINT
+api_key_env: DATAGUARD_CONTENT_SAFETY_API_KEY
+
+# Prompt Shields: an input-guardrail second opinion alongside S0 (guardrails/injection.py). This
+# closes the "injection second opinion" gap noted as not implemented in docs/uc4/hybrid-engine.md.
+prompt_shields:
+  api_version: "2024-09-01"
+  timeout_s: 10.0
+
+# Groundedness Detection: an output-guardrail second opinion alongside the custom evidence
+# verification (guardrails/output.py verify_quote), which checks a claim's exact substring
+# presence; this checks semantic support instead.
+groundedness:
+  api_version: "2024-02-15-preview"
+  timeout_s: 10.0
+  domain: Generic   # Generic | Medical
+  task: QnA         # QnA | Summarization; QnA fits checking one evidence claim against its source

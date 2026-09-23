@@ -1100,6 +1100,204 @@ def _cmd_eval_validate(args: argparse.Namespace) -> int:
     return 0 if result.ok else 4
 
 
+def _cmd_eval_fairness_probe(args: argparse.Namespace) -> int:
+    """Responsible AI: Fairness & Inclusion counterfactual name-swap probe.
+
+    See `docs/uc4/responsible-ai.md`. Development splits only, no LLM credentials needed by
+    default (`--mode rules`); prints a JSON report and exits 1 if any document's
+    level/categories/high-risk changed on a name swap alone, so a real finding is visible in CI
+    rather than silently passing either way. `--mode hybrid`/`llm` needs `--llm-mode record` or
+    `foundry` (live calls) to be meaningful - `replay` is refused, because a name-swapped document
+    always misses the replay cache and would look like a fairness finding when it is really a
+    cache artifact (every "changed" row would show `status: review_required`, not a real decision).
+    """
+    from pathlib import Path
+
+    from app.classification.service import ClassificationService
+    from evals.classification.fairness_probe import run_probe
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+
+    splits = list(DEVELOPMENT_SPLITS) if args.split == "all" else args.split.split(",")
+    if "test" in splits:
+        print("the locked test split is not probed by this command", file=sys.stderr)
+        return 2
+    if args.mode in ("hybrid", "llm") and args.llm_mode == "replay":
+        print(
+            "refusing --mode hybrid/llm with --llm-mode replay: a name-swapped document has a "
+            "different input hash, so every variant misses the replay cache and escalates to "
+            "review regardless of the name - that looks like a fairness finding but is a cache "
+            "artifact. Use --llm-mode record or foundry (live calls) to test the LLM stage "
+            "meaningfully, or --mode rules (no LLM, no artifact) for a replay-safe run.",
+            file=sys.stderr,
+        )
+        return 2
+    docs = _load_split_docs(args, splits)
+    docs = [d for d in docs if d.tier != "T5"]  # adversarial documents are out of scope here
+    svc = ClassificationService(
+        config_dir=args.config_dir, data_dir=args.data_dir, llm_mode=args.llm_mode
+    )
+    report = run_probe(svc, docs, mode=args.mode)
+    text = json.dumps(report, indent=2, sort_keys=True)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    flagged = sum(1 for d in report["documents"] if d["n_changed"])
+    if flagged:
+        print(
+            f"FAIRNESS FINDING: {flagged} document(s) changed on a name swap alone", file=sys.stderr
+        )
+    return 1 if flagged else 0
+
+
+def _cmd_eval_hhh_apf(args: argparse.Namespace) -> int:
+    """Scoped HHH + APF report (PRD 14-15; see docs/uc4/responsible-ai.md for what was dropped and
+    why). Runs the frozen hybrid classifier and computes both from real, already-defined metrics."""
+    from pathlib import Path
+
+    from app.classification.hybrid import build_hybrid_classifier
+    from evals.classification.apf import compute_apf, compute_hhh, load_apf_config
+    from evals.classification.evaluate import build_metrics
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from evals.classification.runner import run_classifier
+
+    splits = list(DEVELOPMENT_SPLITS) if args.split == "all" else args.split.split(",")
+    if "test" in splits:
+        print("the locked test split is not used for this report", file=sys.stderr)
+        return 2
+    bundle = load_config(args.config_dir)
+    docs = _load_split_docs(args, splits)
+    classifier = build_hybrid_classifier(
+        bundle,
+        config_dir=args.config_dir,
+        data_dir=args.data_dir,
+        llm_mode=args.llm_mode,
+        cache_dir=args.llm_cache_dir,
+    )
+    records = run_classifier(classifier, docs, bundle.policy)
+    metrics = build_metrics(records, bundle)
+
+    obs_summary = None
+    if args.spans:
+        from observability import read_jsonl, summarize
+
+        obs_summary = summarize(read_jsonl(args.spans))
+
+    apf_cfg, _ = load_apf_config(args.config_dir)
+    hhh = compute_hhh(metrics["headline"], obs_summary)
+    apf = compute_apf(metrics["headline"], obs_summary, apf_cfg, hhh=hhh)
+    report = {
+        "splits": splits,
+        "n_documents": len(records),
+        "spans_supplied": args.spans is not None,
+        "hhh": hhh,
+        "apf": apf,
+    }
+    text = json.dumps(report, indent=2, sort_keys=True)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
+def _cmd_guardrails_azure_check(args: argparse.Namespace) -> int:
+    """Confirm connectivity to Azure AI Content Safety with one benign Prompt Shields call and one
+    benign Groundedness Detection call. Never prints, logs, or writes the API key; only reads its
+    env var NAME from config."""
+    from typing import Any
+
+    from guardrails.azure_content_safety import (
+        ContentSafetyClient,
+        ContentSafetyError,
+        load_content_safety_config,
+    )
+
+    cfg, _ = load_content_safety_config(args.config_dir)
+    client = ContentSafetyClient(cfg)
+    out: dict[str, Any] = {}
+    try:
+        out["shield_prompt"] = client.shield_prompt(
+            documents=["This is an ordinary business memo."]
+        )
+        out["shield_prompt"].pop("raw", None)
+    except ContentSafetyError as exc:
+        print(f"error: shield_prompt failed: {exc}", file=sys.stderr)
+        return 2 if exc.kind == "not_configured" else 4
+    try:
+        out["detect_groundedness"] = client.detect_groundedness(
+            text="Revenue rose 4%.", grounding_sources=["Quarterly revenue rose 4% year over year."]
+        )
+        out["detect_groundedness"].pop("raw", None)
+    except ContentSafetyError as exc:
+        print(f"error: detect_groundedness failed: {exc}", file=sys.stderr)
+        return 4
+    print(json.dumps(out, indent=2))
+    return 0
+
+
+def _cmd_guardrails_second_opinion(args: argparse.Namespace) -> int:
+    """Run the frozen hybrid classifier over real development-split documents and compare its
+    custom guardrails against Azure AI Content Safety. See docs/uc4/responsible-ai.md."""
+    from pathlib import Path
+
+    from app.classification.hybrid import build_hybrid_classifier
+    from evals.classification.guardrail_audit import audit_groundedness, audit_injection
+    from evals.classification.lock import DEVELOPMENT_SPLITS
+    from guardrails.azure_content_safety import (
+        ContentSafetyClient,
+        ContentSafetyError,
+        load_content_safety_config,
+    )
+
+    splits = list(DEVELOPMENT_SPLITS) if args.split == "all" else args.split.split(",")
+    if "test" in splits:
+        print("the locked test split is not used for this audit", file=sys.stderr)
+        return 2
+
+    cs_cfg, _ = load_content_safety_config(args.config_dir)
+    client: ContentSafetyClient | None = ContentSafetyClient(cs_cfg)
+    try:
+        client._required(cs_cfg.endpoint_env)  # noqa: SLF001 - a cheap presence check, no call yet
+        client._required(cs_cfg.api_key_env)  # noqa: SLF001
+    except ContentSafetyError:
+        client = None  # audited in "custom-only" mode: every row reports not-scored, not a pass
+
+    bundle = load_config(args.config_dir)
+    docs = _load_split_docs(args, splits)
+    classifier = build_hybrid_classifier(
+        bundle,
+        config_dir=args.config_dir,
+        data_dir=args.data_dir,
+        llm_mode=args.llm_mode,
+        cache_dir=args.llm_cache_dir,
+    )
+
+    adversarial = [d for d in docs if d.tier == "T5"]
+    injection_pairs = [(d.content, classifier.classify(d.to_request())) for d in adversarial]
+    injection_report = audit_injection(injection_pairs, client)
+
+    claims: list[tuple[str, str, bool]] = []
+    for d in docs:
+        if len(claims) >= args.max_claims:
+            break
+        result = classifier.classify(d.to_request())
+        for ev in result.evidence:
+            if ev.excerpt and len(claims) < args.max_claims:
+                claims.append((ev.excerpt, d.content, ev.verified))
+    groundedness_report = audit_groundedness(claims, client)
+
+    report = {
+        "splits": splits,
+        "second_opinion_available": client is not None,
+        "injection": injection_report,
+        "groundedness": groundedness_report,
+    }
+    text = json.dumps(report, indent=2, sort_keys=True)
+    if args.out:
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="dataguard-uc4", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -1241,6 +1439,29 @@ def build_parser() -> argparse.ArgumentParser:
     oaud.add_argument("--split", default="dev", help="development splits to audit against")
     oaud.add_argument("--data-dir", default=None)
     oaud.set_defaults(func=_cmd_obs_audit)
+    gr = sub.add_parser("guardrails", help="Azure AI Content Safety second-opinion guardrails")
+    gr_sub = gr.add_subparsers(dest="guardrails_command", required=True)
+    grc = gr_sub.add_parser(
+        "azure-check",
+        help="one Prompt Shields + one Groundedness call to confirm connectivity (needs "
+        "credentials in the environment; never printed or logged)",
+    )
+    grc.add_argument("--config-dir", default=None)
+    grc.set_defaults(func=_cmd_guardrails_azure_check)
+    gso = gr_sub.add_parser(
+        "second-opinion",
+        help="audit: compare the custom guardrails against Azure Content Safety on real "
+        "development-split output (runs without credentials too; every row then reports "
+        "'not scored', never a silent pass)",
+    )
+    gso.add_argument("--split", default="dev", help="comma-separated development splits, or 'all'")
+    gso.add_argument("--llm-mode", choices=["foundry", "replay", "record", "off"], default="replay")
+    gso.add_argument("--llm-cache-dir", default=None)
+    gso.add_argument("--max-claims", type=int, default=25, help="cap on evidence claims audited")
+    gso.add_argument("--out", default=None)
+    gso.add_argument("--config-dir", default=None)
+    gso.add_argument("--data-dir", default=None)
+    gso.set_defaults(func=_cmd_guardrails_second_opinion)
     rv = sub.add_parser("review", help="gold-label review preparation (read-only)")
     rv_sub = rv.add_subparsers(dest="review_command", required=True)
     rvb = rv_sub.add_parser("build", help="build the adjudication sheet and impact report")
@@ -1388,6 +1609,46 @@ def build_parser() -> argparse.ArgumentParser:
     val.add_argument("--config-dir", default=None)
     val.add_argument("--data-dir", default=None)
     val.set_defaults(func=_cmd_eval_validate)
+
+    fp = ev_sub.add_parser(
+        "fairness-probe",
+        help="Responsible AI: counterfactual name-swap fairness probe (development splits)",
+    )
+    fp.add_argument(
+        "--mode",
+        choices=["hybrid", "rules", "ml", "llm"],
+        default="rules",
+        help="which stages classify each variant (default: rules, needs no LLM credentials)",
+    )
+    fp.add_argument(
+        "--llm-mode",
+        choices=["foundry", "replay", "record", "off"],
+        default="off",
+        help="only consulted if --mode uses the LLM stage (hybrid/llm); default off",
+    )
+    fp.add_argument("--split", default="all", help="comma-separated development splits, or 'all'")
+    fp.add_argument("--out", default=None)
+    fp.add_argument("--config-dir", default=None)
+    fp.add_argument("--data-dir", default=None)
+    fp.set_defaults(func=_cmd_eval_fairness_probe)
+
+    hp = ev_sub.add_parser(
+        "hhh-apf",
+        help="scoped HHH + Agent Performance Framework report (PRD 14-15; see responsible-ai.md)",
+    )
+    hp.add_argument("--split", default="dev", help="comma-separated development splits, or 'all'")
+    hp.add_argument("--llm-mode", choices=["foundry", "replay", "record", "off"], default="replay")
+    hp.add_argument("--llm-cache-dir", default=None)
+    hp.add_argument(
+        "--spans",
+        default=None,
+        help="a trace JSONL (from --trace-out on a prior `eval run`) for the Honest/Efficiency/"
+        "Reliability sub-scores; omitted sub-scores are reported as None, not zero",
+    )
+    hp.add_argument("--out", default=None)
+    hp.add_argument("--config-dir", default=None)
+    hp.add_argument("--data-dir", default=None)
+    hp.set_defaults(func=_cmd_eval_hhh_apf)
     return parser
 
 

@@ -1,0 +1,18 @@
+# Agent Performance Framework (PRD section 15), SCOPED for UC4.
+#
+# UC4 is a read/compute classification service, not an autonomous multi-tool agent (decisions A6,
+# A19), so the PRD's tool-selection / agent-loop / destructive-action sub-measures do not apply and
+# are dropped rather than force-fitted. See docs/uc4/responsible-ai.md for the full mapping and why.
+#
+# Weights are the PRD's own default composite (section 15); they are a product-risk choice, not a
+# universal constant, and are versioned here as the PRD itself requires.
+apf_config_version: 1.0.0
+weights:
+  effectiveness: 0.35
+  efficiency: 0.15
+  reliability: 0.25
+  trustworthiness: 0.25
+
+# Efficiency is scored against the PRD's own tool-call latency budget (architecture section 19;
+# also config/eval/gates.v1.yaml tool_call_limit_s), not an invented threshold.
+efficiency_latency_budget_s: 10.0

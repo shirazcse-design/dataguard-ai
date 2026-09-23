@@ -81,4 +81,7 @@ def test_baseline_report_reads_only_development_documents(baseline_report):
     n_dev = len(load_documents(splits=list(DEVELOPMENT_SPLITS)))
     assert f"{n_dev} documents" in baseline_report or f"/{n_dev} (" in baseline_report
     total_test = load_manifest()["files"]["test"]["n_docs"]
-    assert str(n_dev + total_test) not in baseline_report  # the report is not over the full dataset
+    full = str(n_dev + total_test)
+    # a bare substring match on a small number can coincidentally match inside an unrelated hex
+    # string (a commit sha, a hash prefix); require it to appear as a document COUNT, not anywhere.
+    assert f"{full} documents" not in baseline_report and f"/{full} (" not in baseline_report
