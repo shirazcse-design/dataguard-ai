@@ -121,7 +121,7 @@ refused or ignored by construction), not from counting rows in this run.
 
 | Item | State |
 |---|---|
-| A live Foundry planner run (`--agent-mode foundry`) | Not done. Needs real Foundry `mid`-tier credentials and a deployment name (`DATAGUARD_LLM_DEPLOYMENT_MID`); a separate, explicit step, per the plan and `decisions.md` D9.26. `FoundryAgentClient` is built and tested against a local fake server only (`tests/unit/test_foundry_agent_client.py`), never a real endpoint. |
+| A live Foundry planner run (`--agent-mode foundry`) at scale | **Smoke-tested only** (2026-09-23): 3 dev-split documents against the real `uc4-llm-medium` deployment, live. The tool-calling round trip, JSON final-answer parsing, and the safety invariant all held on real output (one document had `classify_document` itself return `review_required`; the agent's `level` correctly stayed `null` and it called `request_human_review` rather than inventing a decision). Rationale text was visibly richer than the offline planner's canned string. Not scaled to a full-split run or written up as a report - see D9.29. |
 | Honest (grounding) score | Not computed; needs a pass over the rationale text (reusing the evidence-substring check or the Content Safety Groundedness second opinion), not yet wired to the agent's own output. |
 | Formal Reliability score | Not computed as a number; two identical runs were confirmed byte-for-byte identical on this deterministic offline policy (a live model would need a real repeat-run comparison). |
 | A run over the full development set (train+calibration+dev) | Not done for this report — train/calibration have no recorded LLM responses (same limit `hybrid-engine.md` states), so a replay run there would be dominated by cache misses, not a real agent measurement. |
@@ -139,7 +139,8 @@ dataguard-uc4 agent eval --split dev --llm-mode replay --out docs/uc4/results/ag
 Synthetic, AI-authored dataset, not yet human reviewed; single dev split, single recorded LLM
 sample per document (no live model variance); the deterministic offline planner is explicitly not a
 claim of model intelligence — it exists so the loop, batch runner and CLI can be exercised without
-credentials; no live Foundry planner run has been made; the safety invariant is enforced
-structurally and proven by adversarial unit tests, not measured as a live-output rate; this is a
-new, unreviewed component and is not covered by the earlier human gold-label review process (which
-reviewed dataset labels, not agent behaviour).
+credentials; the live Foundry planner has only been smoke-tested on 3 documents (D9.29), not run at
+scale or written up as a report; the safety invariant is enforced structurally and proven by
+adversarial unit tests, not measured as a live-output rate; this is a new, unreviewed component and
+is not covered by the earlier human gold-label review process (which reviewed dataset labels, not
+agent behaviour).

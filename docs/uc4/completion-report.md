@@ -71,8 +71,9 @@ changing the verdict or the frozen hybrid `default` results:
   (not scoped-away) HHH/APF. `ClassificationService` itself is unchanged and is still not an
   autonomous agent. Run on the real dev split (`--agent-mode mock`, no Foundry credentials): task
   completion 1.0, safety-invariant compliance 1.0 (structural, proven by adversarial tests), APF
-  composite 0.833. A live Foundry planner run (`--agent-mode foundry`) has not been made — see
-  `agent-engine.md`'s Limits.
+  composite 0.833. A live Foundry planner run (`--agent-mode foundry`) was smoke-tested on 3
+  documents (2026-09-23, decision D9.29) and held the safety invariant on real output; not scaled
+  to a full-split run or recorded as a report — see `agent-engine.md`'s Limits.
 
 ## Reproduce
 
