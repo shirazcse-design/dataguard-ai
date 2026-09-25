@@ -11,8 +11,12 @@ Every stage of the classification path now emits OpenTelemetry-compatible spans 
 request, through a deny-by-default redactor, and a privacy audit proves that no document text or
 sensitive value reaches them (a CI gate). The failure-injection suite covers every row of the
 architecture's failure table end to end (166 tests, 0 failures) and, more importantly, exposed and
-closed real hardening gaps (below). **Export to Azure Monitor / Foundry tracing is not verified**: no
-Application Insights connection string exists here. A static offline dashboard was added later (`dataguard-uc4 obs dashboard --spans S --out D.html`); a shared live dashboard (DG-018) is not built.
+closed real hardening gaps (below). **Export to Azure Monitor is SDK-confirmed, not portal-confirmed**:
+`dataguard-uc4 obs azure-check` ran twice against a real Application Insights resource
+(`dataguard-uc4-appinsights`, 2026-09-22) with no error and a completed `force_flush`; nobody has yet
+checked Transaction search in the portal to confirm the traces actually arrived. A static offline
+dashboard was added later (`dataguard-uc4 obs dashboard --spans S --out D.html`); a shared live
+dashboard (DG-018) is not built.
 
 ## Architecture
 
@@ -107,7 +111,7 @@ numbers vary by machine and are not part of the generated (reproducible) report.
 
 | Item | State |
 |---|---|
-| Azure Monitor / Foundry tracing export | **Unverified**: no Application Insights connection string; the glue (`azure_monitor_sink`) is optional, lazy and never called in tests |
+| Azure Monitor export | **SDK-confirmed, portal-confirmation pending** (2026-09-22): `dataguard-uc4 obs azure-check` succeeded twice against a real Application Insights resource, no error, `force_flush` completed; Transaction search has not yet been checked to confirm arrival. The glue (`azure_monitor_sink`) is optional, lazy, and never called from a unit test (a real call starts a background exporter thread against a live endpoint) |
 | Dashboards (DG-018) | A static, script-free HTML page over the derived metrics is built (`observability/dashboard.py`, tested for escaping and no document text). A shared live dashboard remains platform work |
 | Service surface, frozen result schema, MCP contract | Phase 8 |
 | Real-service failure behaviour (rates, latency under load) | Unmeasured; the suite uses a local fake |

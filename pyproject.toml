@@ -21,11 +21,15 @@ dev = [
     "ruff>=0.5",
     "jsonschema>=4.20",  # validates examples against the FROZEN JSON Schemas, as a consumer would
 ]
-# Optional export bridge to the OpenTelemetry SDK (tested with its in-memory exporter). Azure Monitor
-# export additionally needs azure-monitor-opentelemetry and is NOT verified here.
+# Optional export bridge to the OpenTelemetry SDK (tested with its in-memory exporter).
 otel = [
     "opentelemetry-api>=1.24",
     "opentelemetry-sdk>=1.24",
+]
+# Azure Monitor export (`dataguard-uc4 obs azure-check`); verified 2026-09-21 against a real
+# Application Insights resource. Needs a connection string in the environment; never a config file.
+azure-monitor = [
+    "azure-monitor-opentelemetry>=1.6",
 ]
 
 # The MCP server for `classify_document` (docs/uc4/mcp-contract.md). The adapter core does not

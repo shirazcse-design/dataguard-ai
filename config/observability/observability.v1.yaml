@@ -8,6 +8,10 @@ observability_version: 1.0.0
 service_name: dataguard-uc4
 max_value_chars: 120
 pseudonym_salt_env: DATAGUARD_OBS_SALT     # unset: a per-process random salt (pseudonyms are then not stable)
+azure_monitor:
+  # The connection string itself is never written here: only the env var NAME that holds it at
+  # runtime (see `dataguard-uc4 obs azure-check`). Never commit a real connection string.
+  connection_string_env: DATAGUARD_AZURE_MONITOR_CONNECTION_STRING
 allowed_attributes:
   # request
   - dg.request_id

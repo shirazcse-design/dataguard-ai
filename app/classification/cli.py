@@ -612,6 +612,70 @@ def _cmd_obs_audit(args: argparse.Namespace) -> int:
     return 1
 
 
+def _cmd_obs_azure_check(args: argparse.Namespace) -> int:
+    """Send one small self-check trace through the Azure Monitor bridge and confirm the SDK call
+    succeeded. Never prints, logs or writes the connection string anywhere; only its env var NAME
+    is read. Requires the `azure-monitor` extra. Prints a request id: search for it in Application
+    Insights (Transaction search or Logs) to confirm the trace actually arrived; ingestion can take
+    a few minutes."""
+    import os
+    import tempfile
+    import uuid
+    from pathlib import Path
+
+    from observability import azure_monitor_sink, flush_azure_monitor, load_observability_config
+
+    from .service import ClassificationService
+
+    obs_cfg, _ = load_observability_config(args.config_dir)
+    env_var = obs_cfg.azure_monitor.connection_string_env
+    connection_string = os.environ.get(env_var)
+    if not connection_string:
+        print(f"error: {env_var} is not set in the environment", file=sys.stderr)
+        return 2
+    try:
+        sink = azure_monitor_sink(connection_string)
+    except ImportError:
+        print(
+            "error: the 'azure-monitor' extra is not installed; "
+            "pip install 'dataguard-ai[azure-monitor]'",
+            file=sys.stderr,
+        )
+        return 2
+    trace_path = (
+        Path(args.trace_out)
+        if args.trace_out
+        else Path(tempfile.mkdtemp()) / "azure-check-spans.jsonl"
+    )
+    request_id = f"az-verify-{uuid.uuid4().hex[:12]}"
+    svc = ClassificationService(
+        llm_mode="off", config_dir=args.config_dir, trace_path=trace_path, extra_sinks=[sink]
+    )
+    result = svc.classify_text(
+        "Self-check: quarterly cafeteria menu for next week.", request_id=request_id, mode="rules"
+    )
+    ok = result.status in ("ok", "degraded", "review_required")
+    flushed = flush_azure_monitor()
+    print(
+        json.dumps(
+            {
+                "ok": ok,
+                "status": result.status,
+                "request_id": request_id,
+                "flushed": flushed,
+                "local_spans": str(trace_path),
+            },
+            indent=2,
+        )
+    )
+    print(
+        f"Search Application Insights for request_id {request_id!r} to confirm the trace arrived "
+        "(ingestion can take a few minutes).",
+        file=sys.stderr,
+    )
+    return 0 if ok else 4
+
+
 def _cmd_obs_report(args: argparse.Namespace) -> int:
     from pathlib import Path
 
@@ -1526,6 +1590,14 @@ def build_parser() -> argparse.ArgumentParser:
     oaud.add_argument("--split", default="dev", help="development splits to audit against")
     oaud.add_argument("--data-dir", default=None)
     oaud.set_defaults(func=_cmd_obs_audit)
+    oaz = obs_sub.add_parser(
+        "azure-check",
+        help="send one self-check trace through the Azure Monitor bridge (needs a connection "
+        "string in the environment; never printed or logged)",
+    )
+    oaz.add_argument("--trace-out", default=None, help="also keep the local JSONL copy here")
+    oaz.add_argument("--config-dir", default=None)
+    oaz.set_defaults(func=_cmd_obs_azure_check)
     gr = sub.add_parser("guardrails", help="Azure AI Content Safety second-opinion guardrails")
     gr_sub = gr.add_subparsers(dest="guardrails_command", required=True)
     grc = gr_sub.add_parser(

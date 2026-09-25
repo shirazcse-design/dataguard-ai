@@ -500,16 +500,41 @@ def test_otel_bridge_reemits_spans_with_parents_attributes_events_and_errors():
     assert done["classify"].end_time >= done["S1.rules"].end_time
 
 
-def test_azure_monitor_glue_is_optional_and_unverified():
+def test_azure_monitor_glue_needs_the_optional_extra(monkeypatch):
+    """Forces the absent-package path regardless of whether the extra happens to be installed here,
+    so this is deterministic in every environment. The glue itself is verified against a real
+    Application Insights resource (2026-09-21; docs/uc4/observability-engine.md), never in a unit
+    test: a real call would contact a live service and start a background export thread."""
+    import sys
+
     from observability.sinks import azure_monitor_sink
 
-    try:
-        import azure.monitor.opentelemetry  # noqa: F401
-    except ImportError:
-        with pytest.raises(ImportError):
-            azure_monitor_sink("InstrumentationKey=00000000-0000-0000-0000-000000000000")
-    else:  # pragma: no cover - never contact a real service from a test
-        pytest.skip("azure-monitor-opentelemetry is installed; the glue is not exercised in tests")
+    monkeypatch.setitem(sys.modules, "azure.monitor.opentelemetry", None)
+    with pytest.raises(ImportError):
+        azure_monitor_sink("InstrumentationKey=00000000-0000-0000-0000-000000000000")
+
+
+def test_flush_azure_monitor_is_safe_with_no_provider_configured():
+    from observability.sinks import flush_azure_monitor
+
+    assert flush_azure_monitor() is True  # the default global provider has no force_flush
+
+
+def test_flush_azure_monitor_calls_the_configured_providers_force_flush(monkeypatch):
+    from opentelemetry import trace
+
+    from observability.sinks import flush_azure_monitor
+
+    calls = []
+
+    class FakeProvider:
+        def force_flush(self, timeout_millis):
+            calls.append(timeout_millis)
+            return True
+
+    monkeypatch.setattr(trace, "get_tracer_provider", lambda: FakeProvider())
+    assert flush_azure_monitor(5_000) is True
+    assert calls == [5_000]
 
 
 def test_traced_classifier_exports_a_pseudonymous_caller_never_the_raw_id():
