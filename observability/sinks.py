@@ -4,8 +4,8 @@ The bridge and the Azure Monitor glue are OPTIONAL and lazily imported. The brid
 the SDK's in-memory exporter. The Azure Monitor glue ran successfully against a real Application
 Insights resource (`dataguard-uc4-appinsights`, 2026-09-22, via `dataguard-uc4 obs azure-check`):
 the SDK reported no error and `force_flush` completed without timing out on two separate runs.
-Portal-side confirmation (Transaction search) has not been completed; see
-`docs/uc4/observability-engine.md` for the exact status.
+Portal-confirmed on 2026-09-26: an `obs azure-check --llm` trace was opened in Microsoft Foundry's
+Tracing view (decision D9.31); see `docs/uc4/observability-engine.md` for the exact status.
 """
 
 from __future__ import annotations

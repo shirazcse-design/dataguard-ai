@@ -43,7 +43,7 @@ evaluated on every split. It is **not independently validated**:
   the level gate being judged on the lenient view, a product decision. That is **not** production-hardened:
   stdio identity is asserted not authenticated, the shipped allowlist is a placeholder, there is no rate
   limiting, and the LLM tier is capped at `mid`. See [`docs/uc4/mcp-contract.md`](docs/uc4/mcp-contract.md).
-* **Azure Monitor export is SDK-confirmed, portal-confirmation pending.** A shared live dashboard
+* **Azure Monitor export is portal-confirmed**, including in Microsoft Foundry's Tracing view (D9.31). A shared live dashboard
   and the optional prompt-injection second opinion remain not done.
 
 Out of scope for this stage: RAG, autonomous agents, UI, repository crawling, document parsing,

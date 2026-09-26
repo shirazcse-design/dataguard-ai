@@ -612,6 +612,17 @@ def _cmd_obs_audit(args: argparse.Namespace) -> int:
     return 1
 
 
+# The service builds every tier's client at startup, so all three deployment names are needed even
+# though --llm only calls the mid tier. Kept in step with config/llm/llm.v1.yaml by a unit test.
+_LLM_CHECK_ENV = (
+    "DATAGUARD_FOUNDRY_ENDPOINT",
+    "DATAGUARD_FOUNDRY_API_KEY",
+    "DATAGUARD_LLM_DEPLOYMENT_SMALL",
+    "DATAGUARD_LLM_DEPLOYMENT_MID",
+    "DATAGUARD_LLM_DEPLOYMENT_LARGE",
+)
+
+
 def _cmd_obs_azure_check(args: argparse.Namespace) -> int:
     """Send one small self-check trace through the Azure Monitor bridge and confirm the SDK call
     succeeded. Never prints, logs or writes the connection string anywhere; only its env var NAME
@@ -633,6 +644,14 @@ def _cmd_obs_azure_check(args: argparse.Namespace) -> int:
     if not connection_string:
         print(f"error: {env_var} is not set in the environment", file=sys.stderr)
         return 2
+    if args.llm:
+        # Checked up front so a missing Foundry variable never costs a half-sent trace.
+        missing = [v for v in _LLM_CHECK_ENV if not os.environ.get(v)]
+        if missing:
+            print(
+                f"error: --llm needs {', '.join(missing)} set in the environment", file=sys.stderr
+            )
+            return 2
     try:
         sink = azure_monitor_sink(connection_string)
     except ImportError:
@@ -649,25 +668,40 @@ def _cmd_obs_azure_check(args: argparse.Namespace) -> int:
     )
     request_id = f"az-verify-{uuid.uuid4().hex[:12]}"
     svc = ClassificationService(
-        llm_mode="off", config_dir=args.config_dir, trace_path=trace_path, extra_sinks=[sink]
+        llm_mode="foundry" if args.llm else "off",
+        config_dir=args.config_dir,
+        trace_path=trace_path,
+        extra_sinks=[sink],
     )
+    # --llm: one mid-tier Foundry call, so the trace carries an `llm.call` span (the only span with
+    # `gen_ai.*` attributes, which Foundry's Trace view renders). Mid, not small: the default route
+    # is [mid, large], so capping at small would leave no LLM tier to run at all.
+    options = {"mode": "llm", "max_llm_tier": "mid"} if args.llm else {"mode": "rules"}
     result = svc.classify_text(
-        "Self-check: quarterly cafeteria menu for next week.", request_id=request_id, mode="rules"
+        "Self-check: quarterly cafeteria menu for next week.", request_id=request_id, **options
     )
     ok = result.status in ("ok", "degraded", "review_required")
     flushed = flush_azure_monitor()
-    print(
-        json.dumps(
-            {
-                "ok": ok,
-                "status": result.status,
-                "request_id": request_id,
-                "flushed": flushed,
-                "local_spans": str(trace_path),
-            },
-            indent=2,
-        )
-    )
+    payload = {
+        "ok": ok,
+        "status": result.status,
+        "request_id": request_id,
+        "flushed": flushed,
+        "local_spans": str(trace_path),
+    }
+    if args.llm:
+        llm_spans = [
+            s
+            for s in (
+                json.loads(line) for line in trace_path.read_text(encoding="utf-8").splitlines()
+            )
+            if s.get("name") == "llm.call"
+        ]
+        payload["llm_call_spans"] = len(llm_spans)
+        payload["llm_call_errors"] = sum(1 for s in llm_spans if s.get("status") == "error")
+        ok = ok and bool(llm_spans) and not payload["llm_call_errors"]
+        payload["ok"] = ok
+    print(json.dumps(payload, indent=2))
     print(
         f"Search Application Insights for request_id {request_id!r} to confirm the trace arrived "
         "(ingestion can take a few minutes).",
@@ -1596,6 +1630,12 @@ def build_parser() -> argparse.ArgumentParser:
         "string in the environment; never printed or logged)",
     )
     oaz.add_argument("--trace-out", default=None, help="also keep the local JSONL copy here")
+    oaz.add_argument(
+        "--llm",
+        action="store_true",
+        help="make one mid-tier live Foundry call so the trace includes an llm.call span "
+        "(needs Foundry credentials in the environment too)",
+    )
     oaz.add_argument("--config-dir", default=None)
     oaz.set_defaults(func=_cmd_obs_azure_check)
     gr = sub.add_parser("guardrails", help="Azure AI Content Safety second-opinion guardrails")
