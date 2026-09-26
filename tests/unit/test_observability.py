@@ -500,6 +500,80 @@ def test_otel_bridge_reemits_spans_with_parents_attributes_events_and_errors():
     assert done["classify"].end_time >= done["S1.rules"].end_time
 
 
+def test_llm_call_spans_carry_opentelemetry_genai_attributes_through_the_otel_bridge():
+    """Foundry's Trace view (and any OpenTelemetry GenAI-convention consumer) keys off `gen_ai.*`
+    attributes, not our own `dg.*` namespace - the bridge must add both, derived only from `dg.*`
+    values already cleared by the Redactor (no new data, no allow-list change needed)."""
+    pytest.importorskip("opentelemetry.sdk.trace")
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    allowed = ALLOWED | {"dg.llm.model_id", "dg.tokens_in", "dg.tokens_out"}
+    t = tracer([OtelSink(provider)], allowed=allowed)
+    with (
+        t.trace("classify"),
+        span(
+            "llm.call",
+            dg__llm__model_id="uc4-llm-medium",
+            dg__llm__served_model="gpt-5.4-2026-03-05",
+            dg__tokens_in=100,
+            dg__tokens_out=20,
+        ),
+    ):
+        pass
+    call = next(s for s in exporter.get_finished_spans() if s.name == "llm.call")
+    a = call.attributes
+    assert a["gen_ai.operation.name"] == "chat"
+    assert a["gen_ai.provider.name"] == "azure.ai.openai"
+    assert a["gen_ai.request.model"] == "uc4-llm-medium"
+    assert a["gen_ai.response.model"] == "gpt-5.4-2026-03-05"
+    assert a["gen_ai.usage.input_tokens"] == 100
+    assert a["gen_ai.usage.output_tokens"] == 20
+    assert "error.type" not in a  # no failure on this span
+
+
+def test_a_failed_llm_call_span_gets_the_genai_error_type_attribute_not_tokens():
+    pytest.importorskip("opentelemetry.sdk.trace")
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    allowed = ALLOWED | {"dg.llm.model_id", "dg.llm.error_kind"}
+    t = tracer([OtelSink(provider)], allowed=allowed)
+    with (
+        t.trace("classify"),
+        span("llm.call", dg__llm__model_id="uc4-llm-medium", dg__llm__error_kind="rate_limited"),
+    ):
+        pass
+    call = next(s for s in exporter.get_finished_spans() if s.name == "llm.call")
+    assert call.attributes["error.type"] == "rate_limited"
+    assert "gen_ai.usage.input_tokens" not in call.attributes
+    assert "gen_ai.response.model" not in call.attributes  # no served model on a failed call
+
+
+def test_genai_attributes_are_only_added_to_llm_call_spans():
+    pytest.importorskip("opentelemetry.sdk.trace")
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+    from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+
+    exporter = InMemorySpanExporter()
+    provider = TracerProvider()
+    provider.add_span_processor(SimpleSpanProcessor(exporter))
+    t = tracer([OtelSink(provider)])
+    with t.trace("classify"), span("S1.rules", dg__stage="rules"):
+        pass
+    rules_span = next(s for s in exporter.get_finished_spans() if s.name == "S1.rules")
+    assert not any(k.startswith("gen_ai.") for k in rules_span.attributes)
+
+
 def test_azure_monitor_glue_needs_the_optional_extra(monkeypatch):
     """Forces the absent-package path regardless of whether the extra happens to be installed here,
     so this is deterministic in every environment. The glue itself is verified against a real
