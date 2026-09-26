@@ -107,9 +107,9 @@ Run today, without credentials, `second-opinion` still reports honestly: every r
 
 ## 3. Observability and monitoring (PRD section 16)
 
-Already covered in `docs/uc4/observability-engine.md`. Azure Monitor export is **SDK-confirmed
-against a real Application Insights resource, portal-confirmation pending** (a separate PR;
-decision D9.20 records exactly what that phrase does and does not claim).
+Already covered in `docs/uc4/observability-engine.md`. Azure Monitor export is **portal-confirmed**:
+a live trace was opened in Microsoft Foundry's Tracing view on 2026-09-26 (decision D9.31; D9.20
+records the earlier, weaker "SDK-confirmed" status it replaces).
 
 ## 4. Responsible AI (PRD section 17), pillar by pillar
 

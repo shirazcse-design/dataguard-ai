@@ -11,10 +11,11 @@ Every stage of the classification path now emits OpenTelemetry-compatible spans 
 request, through a deny-by-default redactor, and a privacy audit proves that no document text or
 sensitive value reaches them (a CI gate). The failure-injection suite covers every row of the
 architecture's failure table end to end (166 tests, 0 failures) and, more importantly, exposed and
-closed real hardening gaps (below). **Export to Azure Monitor is SDK-confirmed, not portal-confirmed**:
-`dataguard-uc4 obs azure-check` ran twice against a real Application Insights resource
-(`dataguard-uc4-appinsights`, 2026-09-22) with no error and a completed `force_flush`; nobody has yet
-checked Transaction search in the portal to confirm the traces actually arrived. A static offline
+closed real hardening gaps (below). **Export to Azure Monitor is portal-confirmed** (2026-09-26,
+decision D9.31): a `dataguard-uc4 obs azure-check --llm` trace, including one live Foundry call, was
+found in Microsoft Foundry's Tracing view, read from the Application Insights resource connected to
+the Foundry project (`dataguard-resource-appinsights`). The two earlier 2026-09-22 runs went to a
+different resource (`dataguard-uc4-appinsights`) and were never individually checked. A static offline
 dashboard was added later (`dataguard-uc4 obs dashboard --spans S --out D.html`); a shared live
 dashboard (DG-018) is not built.
 
@@ -111,8 +112,8 @@ numbers vary by machine and are not part of the generated (reproducible) report.
 
 | Item | State |
 |---|---|
-| Azure Monitor export | **SDK-confirmed, portal-confirmation pending** (2026-09-22): `dataguard-uc4 obs azure-check` succeeded twice against a real Application Insights resource, no error, `force_flush` completed; Transaction search has not yet been checked to confirm arrival. The glue (`azure_monitor_sink`) is optional, lazy, and never called from a unit test (a real call starts a background exporter thread against a live endpoint) |
-| Foundry Trace view rendering | `llm.call` spans carry OpenTelemetry GenAI semantic-convention attributes (`gen_ai.operation.name`, `gen_ai.provider.name`, `gen_ai.request.model`, `gen_ai.response.model`, `gen_ai.usage.{input,output}_tokens`, `error.type`), derived at the `OtelSink` export boundary from the existing `dg.*` attributes - no allow-list change, no new data exported (`observability/sinks.py`). Unit-tested against the OpenTelemetry SDK's in-memory exporter; **not yet live-verified against Foundry's actual Trace tab**. The Batch Triage Agent's own calls (planner turns, tool executions) have no span instrumentation at all yet - only the classifier's `llm.call` span is covered |
+| Azure Monitor export | **Portal-confirmed** (2026-09-26, D9.31): an `obs azure-check --llm` trace arrived in `dataguard-resource-appinsights` and was opened in Foundry's Tracing view with its full span tree. (Earlier, 2026-09-22: SDK-confirmed only, twice, against `dataguard-uc4-appinsights`; those runs were never checked in the portal.) The glue (`azure_monitor_sink`) is optional, lazy, and never called from a unit test (a real call starts a background exporter thread against a live endpoint) |
+| Foundry Trace view rendering | `llm.call` spans carry OpenTelemetry GenAI semantic-convention attributes (`gen_ai.operation.name`, `gen_ai.provider.name`, `gen_ai.request.model`, `gen_ai.response.model`, `gen_ai.usage.{input,output}_tokens`, `error.type`), derived at the `OtelSink` export boundary from the existing `dg.*` attributes - no allow-list change, no new data exported (`observability/sinks.py`). Unit-tested against the OpenTelemetry SDK's in-memory exporter, and **live-verified against Foundry's Tracing view** (2026-09-26, D9.31): the `llm.call` span rendered as a typed **Chat** span with its token total (5175 = 5114 in + 61 out), which Foundry derives from the `gen_ai.*` attributes, not from `dg.*`. The Batch Triage Agent's own calls (planner turns, tool executions) have no span instrumentation at all yet - only the classifier's `llm.call` span is covered |
 | Dashboards (DG-018) | A static, script-free HTML page over the derived metrics is built (`observability/dashboard.py`, tested for escaping and no document text). A shared live dashboard remains platform work |
 | Service surface, frozen result schema, MCP contract | Phase 8 |
 | Real-service failure behaviour (rates, latency under load) | Unmeasured; the suite uses a local fake |
