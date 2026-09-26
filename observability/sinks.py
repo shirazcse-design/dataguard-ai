@@ -49,15 +49,17 @@ def read_jsonl(path: Path | str) -> list[Span]:
     return out
 
 
-# Span names that carry an LLM call's own dg.* attributes, for _genai_attrs below. Kept as a set
-# (not a single literal) so a future span shape - e.g. the Batch Triage Agent's own planner call -
-# can opt in by adding its name here, without changing the translation logic itself.
-_LLM_CALL_SPANS = frozenset({"llm.call"})
+# Span names that carry an LLM call's own dg.* attributes, for _genai_attrs below: the classifier's
+# LLM stage and the Batch Triage Agent's planner turn.
+_LLM_CALL_SPANS = frozenset({"llm.call", "agent.planner"})
+_PROVIDER = "azure.ai.openai"
 
 
 def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
     """Derive OpenTelemetry GenAI semantic-convention attributes (`gen_ai.*`, `error.type`) from our
-    own already-redacted `dg.*` attributes, for spans that represent one LLM call.
+    own already-redacted `dg.*` attributes: one LLM call (`llm.call`, `agent.planner`) becomes a
+    `chat` span, the agent's per-document root an `invoke_agent` span, and its tool calls
+    `execute_tool` spans.
 
     This is export-time-only: it does not touch the Redactor or its `dg.*`-only allow-list (PRD 19),
     so the deny-by-default privacy invariant is unchanged - these are additional, DERIVED views of
@@ -65,11 +67,18 @@ def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
     other consumer built on the OpenTelemetry GenAI conventions) can render the same span, since
     that convention is what such tools key off, not our own `dg.*` namespace.
     """
+    if span_name == "agent.document":
+        return _genai_agent_attrs(attrs)
+    if span_name == "agent.tool":
+        return _genai_tool_attrs(attrs)
     if span_name not in _LLM_CALL_SPANS:
+        return {}
+    if span_name == "agent.planner" and not attrs.get("dg.llm.model_id"):
+        # The offline planner is not a model call; labelling it "chat" would misstate what ran.
         return {}
     out: dict[str, Any] = {
         "gen_ai.operation.name": "chat",
-        "gen_ai.provider.name": "azure.ai.openai",
+        "gen_ai.provider.name": _PROVIDER,
     }
     if attrs.get("dg.llm.model_id"):
         out["gen_ai.request.model"] = attrs["dg.llm.model_id"]
@@ -86,6 +95,26 @@ def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
         out["gen_ai.usage.output_tokens"] = attrs["dg.tokens_out"]
     if err:
         out["error.type"] = err
+    return out
+
+
+def _genai_agent_attrs(attrs: dict[str, Any]) -> dict[str, Any]:
+    out: dict[str, Any] = {"gen_ai.operation.name": "invoke_agent"}
+    if attrs.get("dg.agent.name"):
+        out["gen_ai.agent.name"] = attrs["dg.agent.name"]
+    if attrs.get("dg.agent.planner") == "foundry":
+        out["gen_ai.provider.name"] = _PROVIDER
+    if attrs.get("dg.error.type"):
+        out["error.type"] = attrs["dg.error.type"]
+    return out
+
+
+def _genai_tool_attrs(attrs: dict[str, Any]) -> dict[str, Any]:
+    out: dict[str, Any] = {"gen_ai.operation.name": "execute_tool", "gen_ai.tool.type": "function"}
+    if attrs.get("dg.agent.tool"):
+        out["gen_ai.tool.name"] = attrs["dg.agent.tool"]
+    if attrs.get("dg.error.type"):
+        out["error.type"] = attrs["dg.error.type"]
     return out
 
 

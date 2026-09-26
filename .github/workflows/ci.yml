@@ -147,6 +147,9 @@ jobs:
       # Traced dev run (replayed LLM responses), then the privacy gate: exits 1 on any leaked text.
       - run: dataguard-uc4 eval run --classifier hybrid --split dev --trace-out "$RUNNER_TEMP/spans.jsonl" --runs-dir "$RUNNER_TEMP/runs"
       - run: dataguard-uc4 obs audit --spans "$RUNNER_TEMP/spans.jsonl" --split dev
+      # The same privacy gate over the Batch Triage Agent's own spans (offline planner, replayed LLM).
+      - run: dataguard-uc4 agent triage --split dev --llm-mode replay --trace-out "$RUNNER_TEMP/agent-spans.jsonl" --out "$RUNNER_TEMP/agent-report.json" > /dev/null
+      - run: dataguard-uc4 obs audit --spans "$RUNNER_TEMP/agent-spans.jsonl" --split dev
       - run: dataguard-uc4 obs summarize --spans "$RUNNER_TEMP/spans.jsonl"
       - run: dataguard-uc4 obs dashboard --spans "$RUNNER_TEMP/spans.jsonl" --out "$RUNNER_TEMP/dashboard.html"
       - run: dataguard-uc4 obs report --out "$RUNNER_TEMP/observability-baseline.md"

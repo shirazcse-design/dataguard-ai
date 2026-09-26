@@ -70,5 +70,21 @@ allowed_attributes:
   - dg.outcome.review_reasons
   - dg.outcome.provisional
   - dg.outcome.warnings_count
+  # Batch Triage Agent (fixed-vocabulary values only: allow-listed tool names, error kinds, loop
+  # stop/review reasons; never tool arguments, tool results, rationale or free-text review reasons)
+  - dg.agent.name
+  - dg.agent.config_version
+  - dg.agent.planner
+  - dg.agent.step
+  - dg.agent.turn
+  - dg.agent.n_tool_calls
+  - dg.agent.tool
+  - dg.agent.tool_ok
+  - dg.agent.tool_error
+  - dg.agent.tool_calls
+  - dg.agent.stopped_reason
+  - dg.agent.priority
+  - dg.agent.review_requested
+  - dg.agent.review_reason
   # errors (class name only)
   - dg.error.type

@@ -16,6 +16,11 @@ Guardrails enforced HERE, structurally, not left to the prompt:
   agent's own `request_human_review` call and `classify_document`'s own `status ==
   "review_required"` - the agent cannot make a document classify_document already flagged look
   clean by simply not calling the review tool.
+
+Tracing (no-op unless a trace is active, see `app/agent/batch.py`): one `agent.planner` span per
+planner turn and one `agent.tool` span per tool call. Spans carry fixed-vocabulary metadata only -
+step numbers, allow-listed tool names, error kinds, model ids and token counts - never tool
+arguments, tool results, or the planner's own text (which can quote the document).
 """
 
 from __future__ import annotations
@@ -24,10 +29,11 @@ import json
 from dataclasses import dataclass
 
 from evals.classification.dataset.schema import DatasetDocument
+from observability import span
 
 from .schemas import DocumentAnnotation, ToolCallRecord
-from .tools import ToolRegistry
-from .types import AgentError, AgentLLMClient
+from .tools import TOOL_NAMES, ToolRegistry
+from .types import AgentError, AgentLLMClient, AgentTurn
 
 SYSTEM_PROMPT = (
     "You triage one document for a data-security team. Call classify_document exactly once with "
@@ -77,6 +83,32 @@ def _parse_final(text: str) -> tuple[str, str]:
     return "medium", (text or "")[:500]
 
 
+def tool_label(name: str) -> str:
+    """The tool name as it may appear in a span: a planner-invented name is model-generated text
+    (it could be steered by the document's own content), so only the real tool names pass."""
+    return name if name in TOOL_NAMES else "unlisted"
+
+
+def _tool_span(step: int, name: str):
+    return span("agent.tool", dg__agent__step=step, dg__agent__tool=tool_label(name))
+
+
+def _turn_attrs(turn: AgentTurn) -> dict:
+    attrs: dict = {
+        "dg__agent__turn": "tool_calls" if turn.tool_calls else "final",
+        "dg__agent__n_tool_calls": len(turn.tool_calls),
+    }
+    for key, value in (
+        ("dg__llm__model_id", turn.model_id),
+        ("dg__llm__served_model", turn.served_model),
+        ("dg__tokens_in", turn.tokens_in),
+        ("dg__tokens_out", turn.tokens_out),
+    ):
+        if value is not None:
+            attrs[key] = value
+    return attrs
+
+
 def run_document(
     doc: DatasetDocument,
     client: AgentLLMClient,
@@ -92,10 +124,14 @@ def run_document(
     state = _State(tool_calls=[])
 
     for step in range(1, max_steps + 1):
-        try:
-            turn = client.next_turn(messages)
-        except AgentError:
-            return _stopped(doc, state, "tool_failure", "planner_call_failed")
+        with span("agent.planner", dg__agent__step=step) as sp:
+            try:
+                turn = client.next_turn(messages)
+            except AgentError as exc:
+                sp.set(dg__llm__error_kind=exc.kind)
+                sp.fail("AgentError")
+                return _stopped(doc, state, "tool_failure", "planner_call_failed")
+            sp.set(**_turn_attrs(turn))
 
         if not turn.tool_calls:
             priority, rationale = _parse_final(turn.final_text or "")
@@ -116,6 +152,9 @@ def run_document(
         )
         for call in turn.tool_calls:
             if call.name not in allowed_tools:
+                with _tool_span(step, call.name) as tsp:
+                    tsp.set(dg__agent__tool_ok=False, dg__agent__tool_error="tool_not_allowed")
+                    tsp.fail("tool_not_allowed")
                 messages.append(_tool_result_message(call.id, {"error": "tool_not_allowed"}))
                 state.tool_calls.append(
                     ToolCallRecord(
@@ -124,7 +163,12 @@ def run_document(
                 )
                 state.consecutive_failures += 1
                 continue
-            result = registry.call(call.name, call.arguments)
+            with _tool_span(step, call.name) as tsp:
+                result = registry.call(call.name, call.arguments)
+                tsp.set(dg__agent__tool_ok=result.ok)
+                if not result.ok:
+                    tsp.set(dg__agent__tool_error=result.error_kind or "unknown")
+                    tsp.fail(result.error_kind or "unknown")
             messages.append(
                 _tool_result_message(
                     call.id, result.data if result.ok else {"error": result.error_kind}

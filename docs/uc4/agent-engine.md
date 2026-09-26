@@ -127,6 +127,14 @@ refused or ignored by construction), not from counting rows in this run.
 | A run over the full development set (train+calibration+dev) | Not done for this report — train/calibration have no recorded LLM responses (same limit `hybrid-engine.md` states), so a replay run there would be dominated by cache misses, not a real agent measurement. |
 | Enforcing "review requests only for tool-flagged documents" in code | Not built (see Clarifications) — currently a guardrail idea in the plan, not a structural control, unlike the safety invariant itself. |
 
+## Tracing
+
+Each document is one trace (`agent.document` > `agent.planner` / `agent.tool` > the classifier's own
+`classify` tree), exported with OpenTelemetry GenAI attributes so Foundry's Tracing view can render
+it as an agent run (decision D9.32; details in `observability-engine.md`). Tracing never changes a
+decision (unit-tested: identical reports with and without it). `--trace-out` writes the redacted
+spans locally; `--azure-monitor` also exports them.
+
 ## Reproduce
 
 ```

@@ -22,6 +22,12 @@ class AgentTurn:
 
     tool_calls: list[ParsedToolCall] = field(default_factory=list)
     final_text: str | None = None
+    # Call metadata for tracing only (never read by the loop's decisions). None when the client
+    # does not report it, e.g. the offline/scripted planner.
+    model_id: str | None = None
+    served_model: str | None = None
+    tokens_in: int | None = None
+    tokens_out: int | None = None
 
 
 class AgentError(Exception):
