@@ -135,6 +135,29 @@ it as an agent run (decision D9.32; details in `observability-engine.md`). Traci
 decision (unit-tested: identical reports with and without it). `--trace-out` writes the redacted
 spans locally; `--azure-monitor` also exports them.
 
+## Foundry Agent Service
+
+The agent can be registered as a real, versioned agent in Microsoft Foundry Agent Service
+(`app/agent/foundry_service.py`, decision D9.33), so it appears on the portal's Agents page:
+
+```
+pip install -e ".[foundry-agents]"
+export DATAGUARD_FOUNDRY_PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>
+export DATAGUARD_LLM_DEPLOYMENT_MID=uc4-llm-medium
+dataguard-uc4 agent foundry-register                      # creates a new agent version
+dataguard-uc4 agent triage --agent-mode foundry-service --limit 3
+```
+
+Foundry holds the **definition** - `SYSTEM_PROMPT` as instructions, the planner model, the three
+function-tool schemas. It does not hold the tools: Agent Service function tools are executed by the
+caller, so every `function_call` comes back to `loop.py` and runs through the same `ToolRegistry`,
+allowlist, step budget and never-downgrade invariant as the other planners. A portal user can open
+the agent in the playground, but the portal cannot execute its tools (Foundry's own documented
+limit for function tools), so only `agent triage/eval --agent-mode foundry-service` gives a real
+run. Sign-in is Microsoft Entra ID only (`DefaultAzureCredential`, falling back to a browser
+sign-in; no Azure CLI or API key needed). The identity needs a data-plane role on the project,
+e.g. **Azure AI User**.
+
 ## Reproduce
 
 ```

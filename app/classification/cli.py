@@ -1428,6 +1428,10 @@ def _build_agent_batch(args: argparse.Namespace):
     registry = ToolRegistry(svc, svc.bundle)
     if args.agent_mode == "mock":
         client = MockAgentClient(offline_policy)
+    elif args.agent_mode == "foundry-service":
+        client = _foundry_service_client(cfg)
+        if client is None:
+            return None, None, None
     else:
         from app.agent.foundry_agent import build_agent_client
         from app.agent.tools import tool_schemas
@@ -1457,6 +1461,72 @@ def _build_agent_batch(args: argparse.Namespace):
             file=sys.stderr,
         )
     return report, docs, cfg
+
+
+def _planner_deployment(cfg) -> str | None:
+    import os
+
+    deployment_env = f"DATAGUARD_LLM_DEPLOYMENT_{cfg.planner_tier.upper()}"
+    deployment = os.environ.get(deployment_env)
+    if not deployment:
+        print(f"error: {deployment_env} is not set in the environment", file=sys.stderr)
+    return deployment or None
+
+
+def _foundry_project(cfg):
+    """`(project client, planner deployment)` for Foundry Agent Service, or None after printing
+    why (exit code 2). Sign-in is Entra ID; nothing secret is read from or written to disk."""
+    from app.agent import foundry_service as fs
+    from app.agent.types import AgentError
+
+    try:
+        endpoint = fs.project_endpoint()
+    except AgentError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return None
+    deployment = _planner_deployment(cfg)
+    if deployment is None:
+        return None
+    try:
+        return fs.project_client(endpoint), deployment
+    except ImportError:
+        print(
+            "error: the 'foundry-agents' extra is not installed; "
+            "pip install 'dataguard-ai[foundry-agents]'",
+            file=sys.stderr,
+        )
+        return None
+
+
+def _foundry_service_client(cfg):
+    from app.agent.foundry_service import FoundryAgentServiceClient
+
+    made = _foundry_project(cfg)
+    if made is None:
+        return None
+    project, deployment = made
+    return FoundryAgentServiceClient(project.get_openai_client(), deployment)
+
+
+def _cmd_agent_foundry_register(args: argparse.Namespace) -> int:
+    """Register (or add a new version of) the Batch Triage Agent in Foundry Agent Service: its
+    instructions, planner model and three function-tool schemas. The tools themselves still run
+    locally, inside the loop's guardrails (docs/uc4/agent-engine.md, decision D9.33)."""
+    from app.agent.config import load_agent_config
+    from app.agent.foundry_service import register_agent
+
+    cfg, _ = load_agent_config(args.config_dir)
+    made = _foundry_project(cfg)
+    if made is None:
+        return 2
+    project, deployment = made
+    try:
+        name, version = register_agent(project, deployment)
+    except Exception as exc:  # noqa: BLE001 - report the class only; SDK messages can echo input
+        print(f"error: registration failed: {type(exc).__name__}", file=sys.stderr)
+        return 4
+    print(json.dumps({"agent_name": name, "agent_version": version, "model": deployment}, indent=2))
+    return 0
 
 
 def _azure_monitor_sinks(config_dir):
@@ -1915,10 +1985,11 @@ def build_parser() -> argparse.ArgumentParser:
         ap = agent_sub.add_parser(name, help=help_text)
         ap.add_argument(
             "--agent-mode",
-            choices=["mock", "foundry"],
+            choices=["mock", "foundry", "foundry-service"],
             default="mock",
             help="mock = deterministic offline planner, no credentials (default); "
-            "foundry = live, uncached planner calls (a separate, explicit run)",
+            "foundry = live, uncached planner calls (a separate, explicit run); "
+            "foundry-service = the agent registered in Foundry Agent Service (Entra ID sign-in)",
         )
         ap.add_argument("--split", default="dev", help="comma-separated development splits")
         ap.add_argument("--limit", type=int, default=None, help="cap the number of documents")
@@ -1931,6 +2002,12 @@ def build_parser() -> argparse.ArgumentParser:
         )
         _add_service_args(ap)
         ap.set_defaults(func=func)
+    reg = agent_sub.add_parser(
+        "foundry-register",
+        help="register the agent (instructions, model, tool schemas) in Foundry Agent Service",
+    )
+    reg.add_argument("--config-dir", default=None)
+    reg.set_defaults(func=_cmd_agent_foundry_register)
     return parser
 
 

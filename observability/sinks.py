@@ -102,7 +102,7 @@ def _genai_agent_attrs(attrs: dict[str, Any]) -> dict[str, Any]:
     out: dict[str, Any] = {"gen_ai.operation.name": "invoke_agent"}
     if attrs.get("dg.agent.name"):
         out["gen_ai.agent.name"] = attrs["dg.agent.name"]
-    if attrs.get("dg.agent.planner") == "foundry":
+    if attrs.get("dg.agent.planner") in ("foundry", "foundry-agent-service"):
         out["gen_ai.provider.name"] = _PROVIDER
     if attrs.get("dg.error.type"):
         out["error.type"] = attrs["dg.error.type"]
