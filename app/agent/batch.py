@@ -19,13 +19,11 @@ from collections.abc import Iterable
 from evals.classification.dataset.schema import DatasetDocument
 from observability import Tracer
 
-from .config import AgentConfig
+from .config import AGENT_NAME, AgentConfig
 from .loop import run_document
 from .schemas import BatchTriageReport, DocumentAnnotation, ToolCallRecord
 from .tools import ToolRegistry
 from .types import AgentError, AgentLLMClient
-
-AGENT_NAME = "batch_triage"
 
 # Review reasons the loop itself sets (a fixed vocabulary). Anything else came from the planner's
 # own request_human_review call, i.e. model-written text, and is recorded only as "agent_requested".

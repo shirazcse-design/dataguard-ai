@@ -76,6 +76,10 @@ def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
     if span_name == "agent.planner" and not attrs.get("dg.llm.model_id"):
         # The offline planner is not a model call; labelling it "chat" would misstate what ran.
         return {}
+    if attrs.get("dg.llm.cached") is True:
+        # A replayed response: no model was called, so no "chat" span and no token usage - the
+        # recorded tokens would otherwise inflate Foundry's usage and cost views (D9.35).
+        return {}
     out: dict[str, Any] = {
         "gen_ai.operation.name": "chat",
         "gen_ai.provider.name": _PROVIDER,
