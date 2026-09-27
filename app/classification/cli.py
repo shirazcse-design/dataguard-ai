@@ -769,7 +769,7 @@ def _cmd_obs_overhead(args: argparse.Namespace) -> int:
 EXIT_FOR_STATUS = {"ok": 0, "degraded": 0, "review_required": 0, "rejected": 3, "error": 4}
 
 
-def _make_service(args: argparse.Namespace):
+def _make_service(args: argparse.Namespace, *, trace_path=None, extra_sinks=None):
     """Build the service or print a short reason and return None (exit code 2)."""
     from app.llm import LLMError
 
@@ -782,7 +782,8 @@ def _make_service(args: argparse.Namespace):
             variant=args.variant,
             llm_mode=args.llm_mode,
             cache_dir=args.llm_cache_dir,
-            trace_path=args.trace_out,
+            trace_path=trace_path if trace_path is not None else args.trace_out,
+            extra_sinks=extra_sinks,
         )
     except (ConfigError, LLMError, ValueError, OSError) as exc:
         print(f"SERVICE START FAILED: {type(exc).__name__}: {exc}", file=sys.stderr)
@@ -1411,7 +1412,17 @@ def _build_agent_batch(args: argparse.Namespace):
         return None, None, None
 
     cfg, _ = load_agent_config(args.config_dir)
-    svc = _make_service(args)
+    trace_path, extra_sinks = args.trace_out, None
+    if args.azure_monitor:
+        extra_sinks = _azure_monitor_sinks(args.config_dir)
+        if extra_sinks is None:
+            return None, None, None
+        if trace_path is None:
+            import tempfile
+            from pathlib import Path
+
+            trace_path = str(Path(tempfile.mkdtemp()) / "agent-spans.jsonl")
+    svc = _make_service(args, trace_path=trace_path, extra_sinks=extra_sinks)
     if svc is None:
         return None, None, None
     registry = ToolRegistry(svc, svc.bundle)
@@ -1435,7 +1446,41 @@ def _build_agent_batch(args: argparse.Namespace):
     docs = _load_split_docs(args, splits)
     if args.limit is not None:
         docs = docs[: args.limit]
-    return run_batch(docs, client, registry, cfg), docs, cfg
+    report = run_batch(docs, client, registry, cfg, tracer=svc.tracer)
+    if args.azure_monitor:
+        from observability import flush_azure_monitor
+
+        flushed = flush_azure_monitor()
+        print(
+            f"Azure Monitor: {len(docs)} agent trace(s) sent, flushed={flushed}; local spans: "
+            f"{trace_path}",
+            file=sys.stderr,
+        )
+    return report, docs, cfg
+
+
+def _azure_monitor_sinks(config_dir):
+    """The Azure Monitor sink as a one-item list, or None after printing why (exit code 2). The
+    connection string is read from the environment and never printed or logged."""
+    import os
+
+    import observability
+
+    obs_cfg, _ = observability.load_observability_config(config_dir)
+    env_var = obs_cfg.azure_monitor.connection_string_env
+    connection_string = os.environ.get(env_var)
+    if not connection_string:
+        print(f"error: {env_var} is not set in the environment", file=sys.stderr)
+        return None
+    try:
+        return [observability.azure_monitor_sink(connection_string)]
+    except ImportError:
+        print(
+            "error: the 'azure-monitor' extra is not installed; "
+            "pip install 'dataguard-ai[azure-monitor]'",
+            file=sys.stderr,
+        )
+        return None
 
 
 def _cmd_agent_triage(args: argparse.Namespace) -> int:
@@ -1878,6 +1923,12 @@ def build_parser() -> argparse.ArgumentParser:
         ap.add_argument("--split", default="dev", help="comma-separated development splits")
         ap.add_argument("--limit", type=int, default=None, help="cap the number of documents")
         ap.add_argument("--out", default=None)
+        ap.add_argument(
+            "--azure-monitor",
+            action="store_true",
+            help="also export each document's agent trace to Azure Monitor (needs the connection "
+            "string in the environment; never printed or logged)",
+        )
         _add_service_args(ap)
         ap.set_defaults(func=func)
     return parser

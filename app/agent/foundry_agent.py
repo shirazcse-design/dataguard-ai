@@ -34,6 +34,8 @@ class FoundryAgentClient:
     """One chat-completions call per turn, with `tools` attached. `deployment` is the planner
     tier's deployment name (from `DATAGUARD_LLM_DEPLOYMENT_<TIER>`, resolved by the caller)."""
 
+    name = "foundry"
+
     def __init__(
         self,
         cfg: FoundryConfig,
@@ -104,6 +106,13 @@ class FoundryAgentClient:
             message = payload["choices"][0]["message"]
         except (KeyError, IndexError, TypeError):
             raise AgentError("transport", "unexpected response shape") from None
+        usage = payload.get("usage") if isinstance(payload.get("usage"), dict) else {}
+        meta = {
+            "model_id": self.deployment,
+            "served_model": payload.get("model") if isinstance(payload.get("model"), str) else None,
+            "tokens_in": _int_or_none(usage.get("prompt_tokens")),
+            "tokens_out": _int_or_none(usage.get("completion_tokens")),
+        }
         raw_calls = message.get("tool_calls") or []
         if raw_calls:
             calls = []
@@ -114,9 +123,13 @@ class FoundryAgentClient:
                     calls.append(ParsedToolCall(id=c["id"], name=fn["name"], arguments=args))
                 except (KeyError, TypeError, ValueError):
                     raise AgentError("transport", "malformed tool_call in response") from None
-            return AgentTurn(tool_calls=calls)
+            return AgentTurn(tool_calls=calls, **meta)
         content = message.get("content")
-        return AgentTurn(final_text=content if isinstance(content, str) else "")
+        return AgentTurn(final_text=content if isinstance(content, str) else "", **meta)
+
+
+def _int_or_none(value: Any) -> int | None:
+    return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
 
 
 def build_agent_client(

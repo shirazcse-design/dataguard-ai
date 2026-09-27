@@ -240,3 +240,26 @@ def test_build_agent_client_rejects_the_large_planner_tier():
 def test_build_agent_client_accepts_small_and_mid_tiers(tier):
     client = build_agent_client(fcfg(), tier, "d", tool_schemas())
     assert isinstance(client, FoundryAgentClient) and client.deployment == "d"
+
+
+def test_model_and_token_usage_are_reported_on_the_turn_for_tracing(server):
+    url, h = server
+    h.behaviour = {
+        "status": 200, "headers": {},
+        "body": {"model": "gpt-x-2026", "usage": {"prompt_tokens": 812, "completion_tokens": 33},
+                 "choices": [{"message": {"content": '{"priority": "low", "rationale": "ok"}'}}]},
+    }  # fmt: skip
+    turn = client_for(url).next_turn(MESSAGES)
+    assert (turn.model_id, turn.served_model) == ("my-deployment", "gpt-x-2026")
+    assert (turn.tokens_in, turn.tokens_out) == (812, 33)
+
+
+def test_a_missing_or_malformed_usage_block_leaves_token_counts_unset(server):
+    url, h = server
+    h.behaviour = {
+        "status": 200, "headers": {},
+        "body": {"usage": {"prompt_tokens": "lots", "completion_tokens": -1},
+                 "choices": [{"message": {"content": "{}"}}]},
+    }  # fmt: skip
+    turn = client_for(url).next_turn(MESSAGES)
+    assert turn.tokens_in is None and turn.tokens_out is None and turn.served_model is None

@@ -215,6 +215,12 @@ class ClassificationService:
     def max_document_bytes(self) -> int:
         return self._guard.hard_max_bytes
 
+    @property
+    def tracer(self) -> Tracer | None:
+        """The service's tracer (None when tracing is off), so a caller one level up - the Batch
+        Triage Agent - can open its own trace and have this service's spans nest inside it."""
+        return self._tracer
+
     def reject(self, request_id: str, reason: str) -> ClassificationResult:
         """A `rejected` result for input that could not even become a request (an oversize or
         undecodable file, an unparseable JSON line). Carries no sensitivity and no text."""
