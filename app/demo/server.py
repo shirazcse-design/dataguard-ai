@@ -25,10 +25,13 @@ from dataclasses import dataclass, field
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib import resources
+from pathlib import Path
 from typing import Any
 
 from . import examples, metrics
+from .agent import AgentSession
 from .classify import ClassifySession, DemoError
+from .review import DEFAULT_PATH, ReviewStore
 
 MODES = ("replay", "live")
 MAX_BODY = 8 * 1024 * 1024  # the service's own guard rejects documents over 5 MB; this caps JSON
@@ -70,7 +73,10 @@ class DemoApp:
     mode: str = "replay"
     env: dict[str, str] = field(default_factory=lambda: dict(os.environ))
     _metrics: dict[str, Any] | None = None
+    review_path: Path | str = DEFAULT_PATH
     _classifier: ClassifySession | None = None
+    _agent: AgentSession | None = None
+    _review: ReviewStore | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -104,11 +110,59 @@ class DemoApp:
                 self._classifier = ClassifySession(self.mode)
             return self._classifier
 
+    def agent_session(self) -> AgentSession:
+        classify = self.classifier()
+        with self._init_lock:
+            if self._agent is None:
+                self._agent = AgentSession(self.mode, classify, self.env)
+            return self._agent
+
+    def review_store(self) -> ReviewStore:
+        with self._init_lock:
+            if self._review is None:
+                self._review = ReviewStore(self.review_path)
+            return self._review
+
+    def agent_describe(self) -> dict[str, Any]:
+        return self.envelope(self.agent_session().describe(), data_class=self.data_class())
+
+    def agent_run(self, body: dict[str, Any]) -> dict[str, Any]:
+        view = self.agent_session().run(str(body.get("doc", "")))
+        return self.envelope(view, data_class=self.data_class())
+
+    def review_queue(self) -> dict[str, Any]:
+        store = self.review_store()
+        return self.envelope(
+            {"items": store.queue(), "stored_at": store.display_path}, data_class="DEMO-ONLY STATE"
+        )
+
+    def review_seed(self, body: dict[str, Any]) -> dict[str, Any]:
+        """Two REAL classifications with the LLM tiers off; the fail-safe path queues them."""
+        added = []
+        store = self.review_store()
+        for key in ("review", "confidential"):
+            if key in store.seeded:
+                continue  # each fail-safe case is added once per session
+            payload = self.classifier().classify({"example": key, "llm_tiers": "off"})
+            ex = examples.BY_KEY[key]
+            title = ex.title if ex.llm_tiers == "off" else f"{ex.title} (LLM tiers off)"
+            if store.add_from_classify(payload, title):
+                store.seeded.add(key)
+                added.append(payload["request_id"])
+        return self.envelope({"added": added}, data_class=self.data_class())
+
+    def review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.review_store().decide(body), data_class="DEMO-ONLY STATE")
+
     def examples(self) -> dict[str, Any]:
         return self.envelope(examples.listing(), data_class="SYNTHETIC DEV-SPLIT DOCUMENTS")
 
     def classify(self, body: dict[str, Any]) -> dict[str, Any]:
-        return self.envelope(self.classifier().classify(body), data_class=self.data_class())
+        payload = self.classifier().classify(body)
+        ex = examples.BY_KEY.get(body.get("example") or "")
+        title = ex.title if ex else (body.get("filename") or "pasted text")
+        payload["queued_for_review"] = self.review_store().add_from_classify(payload, title)
+        return self.envelope(payload, data_class=self.data_class())
 
     def classify_upload(self, body: dict[str, Any]) -> dict[str, Any]:
         name, data = body.get("name"), body.get("data_base64")
@@ -119,6 +173,7 @@ class DemoApp:
         except (binascii.Error, ValueError):
             raise DemoError("the upload is not valid base64") from None
         out = self.classifier().classify_upload(name[:200], raw, body.get("llm_tiers") or "default")
+        out["queued_for_review"] = self.review_store().add_from_classify(out, name[:200])
         return self.envelope(out, data_class=self.data_class())
 
     def metrics(self) -> dict[str, Any]:
@@ -161,6 +216,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/status": app.status,
                 "/api/metrics": app.metrics,
                 "/api/examples": app.examples,
+                "/api/agent": app.agent_describe,
+                "/api/review": app.review_queue,
             }
             if path in routes:
                 try:
@@ -172,7 +229,13 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
 
         def do_POST(self) -> None:  # noqa: N802 - stdlib name
             path = self.path.split("?", 1)[0]
-            routes = {"/api/classify": app.classify, "/api/classify-upload": app.classify_upload}
+            routes = {
+                "/api/classify": app.classify,
+                "/api/classify-upload": app.classify_upload,
+                "/api/agent/run": app.agent_run,
+                "/api/review/seed": app.review_seed,
+                "/api/review/decide": app.review_decide,
+            }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))
                 return

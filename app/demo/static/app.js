@@ -7,8 +7,8 @@ const PAGES = {
   overview: { title: "Overview", phase: 4 },
   classify: { title: "Classify", render: renderClassify },
   trace: { title: "Decision Trace", render: renderTrace },
-  agent: { title: "Agent Triage", phase: 3 },
-  review: { title: "Human Review", phase: 3 },
+  agent: { title: "Agent Triage", render: renderAgent },
+  review: { title: "Human Review", render: renderReview },
   evaluations: { title: "Evaluations", render: renderEvaluations },
   rai: { title: "Responsible AI / Guardrails", phase: 4 },
   observability: { title: "Observability", phase: 4 },
@@ -17,6 +17,8 @@ const DEFAULT_PAGE = "classify";
 const state = {
   status: null, metrics: null, examples: null, last: null, busy: false,
   input: { example: null, text: "", filename: "pasted.txt", llmOff: false, upload: null },
+  agent: { info: null, results: {}, running: null, selected: null, error: null },
+  review: { items: null, selected: null, error: null, storedAt: null },
 };
 
 // ---- tiny DOM helpers ------------------------------------------------------------------------
@@ -608,6 +610,215 @@ function whyCard() {
   return h("div", { class: "card" }, h("details", { open: true }, h("summary", {}, "Why this decision?"),
     h("ul", { class: "why-list" }, facts.map((f) => h("li", {}, f))),
     h("div", { class: "note" }, "Built only from the result's own fields: level, categories, evidence, high-risk reasons, review codes and routing.")));
+}
+
+// ---- Agent Triage ----------------------------------------------------------------------------
+async function renderAgent(page) {
+  const A = state.agent;
+  if (!A.info) {
+    const env = await getJSON("/api/agent");
+    applyMode(env);
+    A.info = env.data;
+  }
+  const info = A.info, live = info.planner_is_model;
+  const runBtn = h("button", { class: "btn", type: "button" }, A.running ? "Running…" : "Run Agent Triage");
+  runBtn.disabled = Boolean(A.running);
+  runBtn.addEventListener("click", runAgentBatch);
+  const done = Object.keys(A.results).length;
+  const rows = info.batch.map((d, i) => {
+    const r = A.results[d.key];
+    let right;
+    if (A.running === d.key) right = h("span", {}, h("span", { class: "spinner" }), " running");
+    else if (r && r.error) right = statusBadge("Error", "bad");
+    else if (r) {
+      const ann = r.annotation;
+      right = h("span", { class: "badges" },
+        ann.level ? levelChip(ann.level) : statusBadge("No level", "warn"),
+        statusBadge(`priority ${ann.priority}`, ann.priority === "high" ? "bad" : ann.priority === "medium" ? "warn" : "muted"),
+        ann.review_requested ? statusBadge("Review", "warn") : null,
+        r.guardrail_events.length ? statusBadge("Injection flagged", "warn") : null,
+        r.invariant_violated ? statusBadge("Invariant violated", "bad") : statusBadge("Invariant held", "good"));
+    } else right = h("span", { class: "note" }, "queued");
+    const row = h("div", { class: `batch-row${A.selected === d.key ? " sel" : ""}` },
+      h("span", { class: "n" }, String(i + 1)),
+      h("div", { class: "main" }, h("b", {}, d.title), h("div", { class: "why" }, d.why, " · ", h("span", { class: "mono" }, d.family_id))),
+      h("div", { class: "status" }, right));
+    row.addEventListener("click", () => { if (A.results[d.key]) { A.selected = d.key; route(); } });
+    return row;
+  });
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Agent Triage"),
+        h("p", { class: "lead" }, "The Batch Triage Agent, the genuinely agentic part of the system: a bounded loop that uses classify_document as a tool. "
+          + "It never decides the sensitivity level itself.")),
+      dataClass(live ? "LIVE" : "REPLAY")),
+    h("div", { class: `planner-banner${live ? " live" : ""}` },
+      h("div", {}, h("b", {}, "Planner: "), info.planner),
+      statusBadge(live ? "LIVE FOUNDRY" : "REPLAY / LOCAL DEMO", live ? "bad" : "muted")),
+    h("div", { class: "grid cols-2" },
+      card("The bounded loop", dataClass("Static configuration"),
+        h("div", { class: "loop" },
+          ...["Goal", "Planner turn", "Tool call (allow-list)", "classify_document", "Review? (can only add)", "Next turn or stop"]
+            .flatMap((n, i) => [i ? h("span", { class: "arrow" }, "→") : null, h("span", { class: `node${n === "classify_document" ? " hot" : ""}` }, n)])),
+        h("dl", { class: "kv" },
+          h("dt", {}, "Allowed tools"), h("dd", {}, h("div", { class: "chips" }, info.allowed_tools.map((t) => h("span", { class: "chip" }, t)))),
+          h("dt", {}, "Step budget"), h("dd", {}, `${info.max_steps_per_document} planner steps per document`),
+          h("dt", {}, "Stops on"), h("dd", {}, "a final answer, the step budget, or two consecutive tool failures (then forces review)"),
+          h("dt", {}, "Invariant"), h("dd", {}, "the level is copied from classify_document, never from the planner's text")),
+        source(`config/agent/agent.v1.yaml (v${info.agent_config_version})`, "app/agent/loop.py")),
+      card("Goal given to the planner", dataClass("Static configuration"),
+        h("pre", { class: "json wrap" }, info.goal),
+        h("div", { class: "note" }, live ? "Registered as the agent's instructions in Foundry Agent Service."
+          : "The offline planner follows a fixed, inspectable policy instead of a model (app/agent/offline_policy.py)."))),
+    h("div", { class: "grid cols-2" },
+      card(`Batch: ${info.batch.length} synthetic dev-split documents`, dataClass(live ? "LIVE" : "REPLAY"),
+        h("div", {}, rows),
+        h("div", { class: "btn-row" }, runBtn, h("span", { class: "note" }, `${done}/${info.batch.length} processed, one request per document`)),
+        A.error ? h("div", { class: "callout" }, h("b", {}, "Stopped: "), A.error) : null),
+      agentDetail()),
+  );
+}
+
+async function runAgentBatch() {
+  const A = state.agent;
+  if (A.running) return;
+  A.results = {};
+  A.error = null;
+  for (const d of A.info.batch) {
+    A.running = d.key;
+    route();
+    try {
+      const env = await postJSON("/api/agent/run", { doc: d.key });
+      applyMode(env);
+      A.results[d.key] = env.data;
+      A.selected = d.key;
+    } catch (err) {
+      A.results[d.key] = { error: err.message };
+      A.error = err.message;
+      break; // never continue silently after a failure
+    }
+  }
+  A.running = null;
+  route();
+}
+
+function agentDetail() {
+  const A = state.agent, r = A.selected ? A.results[A.selected] : null;
+  if (!r) return card("Run detail", null, h("div", { class: "empty-state" }, h("p", {}, "Run the batch, then pick a document to see the agent's steps.")));
+  if (r.error) return card("Run detail", null, h("div", { class: "callout" }, r.error));
+  const ann = r.annotation;
+  const steps = r.steps.map((st) => h("li", { class: `st-${st.kind === "planner" ? (st.status === "error" ? "failed" : "executed") : (st.ok ? "executed" : "failed")}` },
+    h("div", { class: "dot" }, st.kind === "planner" ? `P${st.step}` : `T${st.step}`),
+    h("div", { class: "body" },
+      h("div", { class: "head" },
+        h("b", {}, st.kind === "planner" ? `Planner turn ${st.step}` : `Tool: ${st.tool}`),
+        st.kind === "planner" ? statusBadge(st.turn === "final" ? "final answer" : `${st.tool_calls} tool call(s)`, "muted")
+          : statusBadge(st.ok ? "ok" : `failed: ${st.error}`, st.ok ? "good" : "bad")),
+      h("div", { class: "meta" }, [
+        `${st.duration_ms.toFixed(1)} ms`,
+        st.model ? `model ${st.model}` : (st.kind === "planner" ? "offline planner, no model" : null),
+        st.tokens && (st.tokens.in || st.tokens.out) ? `${st.tokens.in} in / ${st.tokens.out} out tokens` : null,
+        st.error && st.kind === "planner" ? `error ${st.error}` : null,
+        st.args_rebound ? "planner arguments ignored; original document classified" : null,
+      ].filter(Boolean).join(" · ")))));
+  return card(`Run detail: ${r.doc.title}`, dataClass(state.agent.info.planner_is_model ? "LIVE" : "REPLAY"),
+    r.invariant_violated ? h("div", { class: "violation" }, "SAFETY INVARIANT VIOLATED: the agent's level does not match classify_document's. This run must not be trusted.") : null,
+    h("dl", { class: "kv" },
+      h("dt", {}, "Level"), h("dd", {}, ann.level ? levelChip(ann.level) : "none (review)"),
+      h("dt", {}, "Priority"), h("dd", {}, ann.priority),
+      h("dt", {}, "Review"), h("dd", {}, ann.review_requested ? `requested (${r.review_reason_fixed})` : "not requested"),
+      h("dt", {}, "Termination"), h("dd", {}, h("code", {}, ann.stopped_reason)),
+      h("dt", {}, "Rationale"), h("dd", {}, ann.rationale || "—")),
+    h("h2", { class: "sub" }, "Steps"),
+    h("ol", { class: "timeline" }, steps),
+    h("h2", { class: "sub" }, "Safety checks (from this run's trace)"),
+    h("div", {}, r.checks.map((c) => h("div", { class: "check-row" }, statusBadge(c.holds ? "Holds" : "Violated", c.holds ? "good" : "bad"),
+      h("div", {}, h("b", {}, c.check), h("div", { class: "note" }, c.detail))))),
+    r.guardrail_events.length
+      ? h("div", { class: "callout" }, h("b", {}, "Guardrail: "), r.guardrail_events.map((g) => `${g.type} (${g.trigger}) → ${g.action}`).join("; "),
+        ". The embedded instruction was treated as document data, not obeyed.")
+      : null);
+}
+
+// ---- Human Review ----------------------------------------------------------------------------
+async function renderReview(page) {
+  const R = state.review;
+  const env = await getJSON("/api/review");
+  R.items = env.data.items;
+  R.storedAt = env.data.stored_at;
+  const seed = h("button", { class: "btn btn-quiet", type: "button" }, "Add the fail-safe review cases");
+  seed.addEventListener("click", async () => {
+    try { const e = await postJSON("/api/review/seed", {}); applyMode(e); R.error = null; } catch (err) { R.error = err.message; }
+    route();
+  });
+  const head = h("div", { class: "q-row q-head" }, h("span", {}, "Document"), h("span", {}, "AI classification"), h("span", {}, "Reason for review"), h("span", {}, "Status"));
+  const rows = R.items.map((it) => {
+    const row = h("div", { class: `q-row${R.selected === it.id ? " sel" : ""}` },
+      h("span", {}, h("b", {}, it.title), h("div", { class: "note" }, `${it.source} · ${it.id}`)),
+      h("span", {}, it.ai_level ? levelChip(it.ai_level) : statusBadge("No label", "warn"), it.provisional ? " provisional" : ""),
+      h("span", { class: "mono" }, it.reasons.join(", ")),
+      statusBadge(it.status, it.status === "open" ? "warn" : it.status === "escalated" ? "bad" : "good"));
+    row.addEventListener("click", () => { R.selected = it.id; route(); });
+    return row;
+  });
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Human Review"),
+        h("p", { class: "lead" }, "Classifications the service itself sent to review. A review is a flag, never a block, and a document with no usable level is never defaulted to PUBLIC.")),
+      dataClass("Demo-only state")),
+    h("div", { class: "callout" }, h("b", {}, "Demo reviewer decisions, not gold-label adjudication. "),
+      `Actions here are stored separately in ${R.storedAt}. They never change the dataset, gold labels or any evaluation artifact.`),
+    h("div", { class: "grid cols-2" },
+      card(`Review queue (${R.items.filter((i) => i.status === "open").length} open)`, dataClass("Demo-only state"),
+        R.items.length ? h("div", {}, head, rows)
+          : h("div", { class: "empty-state" }, h("p", {}, "The queue is empty. Classify a document that needs review, or add the fail-safe cases."), seed),
+        R.items.length ? h("div", { class: "btn-row" }, seed) : null,
+        R.error ? h("div", { class: "callout" }, R.error) : null),
+      reviewDetail()),
+  );
+}
+
+function reviewDetail() {
+  const R = state.review, it = (R.items || []).find((i) => i.id === R.selected);
+  if (!it) return card("Inspect", null, h("div", { class: "empty-state" }, h("p", {}, "Select a queued item.")));
+  const note = h("input", { type: "text", "aria-label": "Reviewer note", placeholder: "Reviewer note (optional)" });
+  // No pre-selected level: an override is a deliberate choice, never a default (least of all PUBLIC).
+  const level = h("select", { "aria-label": "Override level" },
+    h("option", { value: "" }, "Choose a level…"),
+    ["PUBLIC", "INTERNAL", "CONFIDENTIAL", "HIGHLY_CONFIDENTIAL"].map((l) => h("option", { value: l }, l)));
+  const act = (action) => async () => {
+    try {
+      await postJSON("/api/review/decide", { id: it.id, action, level: action === "override" ? level.value : undefined, note: note.value });
+      R.error = null;
+    } catch (err) { R.error = err.message; }
+    route();
+  };
+  const approve = h("button", { class: "btn btn-good", type: "button" }, "Approve AI label");
+  approve.disabled = !it.ai_level || it.status !== "open";
+  approve.title = it.ai_level ? "" : "There is no AI label to approve";
+  approve.addEventListener("click", act("approve"));
+  const override = h("button", { class: "btn", type: "button" }, "Override");
+  override.disabled = true;
+  level.addEventListener("change", () => { override.disabled = it.status !== "open" || !level.value; });
+  override.addEventListener("click", act("override"));
+  const escalate = h("button", { class: "btn btn-warn", type: "button" }, "Escalate");
+  escalate.disabled = it.status !== "open";
+  escalate.addEventListener("click", act("escalate"));
+  return card(`Inspect: ${it.title}`, dataClass("Demo-only state"),
+    h("dl", { class: "kv" },
+      h("dt", {}, "AI recommendation"), h("dd", {}, it.ai_level ? levelChip(it.ai_level) : "no label (no stage produced a usable level)"),
+      h("dt", {}, "Confidence"), h("dd", {}, it.confidence ? confidenceText(it.confidence) : "—"),
+      h("dt", {}, "Categories"), h("dd", {}, it.categories.length ? it.categories.join(", ") : "none"),
+      h("dt", {}, "Reason for escalation"), h("dd", {}, h("code", {}, it.reasons.join(", ")), it.stop_reason ? ` (router: ${it.stop_reason})` : ""),
+      h("dt", {}, "Evidence"), h("dd", {}, it.evidence.length ? h("ul", { class: "why-list" }, it.evidence.map((e) => h("li", {}, h("code", {}, e.excerpt || e.id), ` · ${e.supports.axis} ${e.supports.value} · ${e.provenance}`))) : "none returned")),
+    it.decision
+      ? h("div", { class: "callout" }, h("b", {}, `Decided: ${it.decision.action}`), it.decision.final_level ? ` → ${it.decision.final_level}` : "",
+        it.decision.note ? `. Note: ${it.decision.note}` : "", ". Stored as a demo reviewer decision (not gold).")
+      : h("div", {},
+        h("label", { class: "field" }, "Override to", level),
+        h("label", { class: "field" }, "Note", note),
+        h("div", { class: "btn-row" }, approve, override, escalate)),
+    R.error ? h("div", { class: "callout" }, R.error) : null);
 }
 
 // ---- boot ------------------------------------------------------------------------------------
