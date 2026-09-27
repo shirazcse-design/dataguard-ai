@@ -1258,6 +1258,32 @@ def _cmd_eval_fairness_probe(args: argparse.Namespace) -> int:
     return 1 if flagged else 0
 
 
+def _cmd_demo_serve(args: argparse.Namespace) -> int:
+    """Serve the interview demo dashboard on a loopback address (docs/uc4/interview-demo.md).
+    The mode is fixed for the life of the server and shown on every page: replay (no network) or
+    live."""
+    from app.demo.server import DemoApp, build_server
+
+    app = DemoApp(mode=args.mode)
+    try:
+        server = build_server(app, host=args.host, port=args.port)
+    except (ValueError, OSError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    host, port = server.server_address[:2]
+    print(
+        f"DataGuard AI interview demo ({app.mode.upper()}) at http://{host}:{port}/",
+        file=sys.stderr,
+    )
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+    return 0
+
+
 def _cmd_eval_foundry_log(args: argparse.Namespace) -> int:
     """Log the classifier's (and optionally the agent's) results to Foundry's Evaluations page as
     deterministic string_check evals over per-document metadata - never document text
@@ -2109,6 +2135,20 @@ def build_parser() -> argparse.ArgumentParser:
         )
         _add_service_args(ap)
         ap.set_defaults(func=func)
+    demo = sub.add_parser("demo", help="interview demo dashboard (docs/uc4/interview-demo.md)")
+    demo_sub = demo.add_subparsers(dest="demo_command", required=True)
+    ds = demo_sub.add_parser("serve", help="serve the dashboard on a loopback address")
+    ds.add_argument(
+        "--mode",
+        choices=["replay", "live"],
+        default="replay",
+        help="replay = recorded LLM responses and the offline agent planner, no network (default); "
+        "live = real Foundry calls",
+    )
+    ds.add_argument("--host", default="127.0.0.1", help="a loopback address")
+    ds.add_argument("--port", type=int, default=8765)
+    ds.set_defaults(func=_cmd_demo_serve)
+
     reg = agent_sub.add_parser(
         "foundry-register",
         help="register the agent (instructions, model, tool schemas) in Foundry Agent Service",
