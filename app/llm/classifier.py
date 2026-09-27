@@ -171,6 +171,10 @@ class LLMClassifier:
 
         tokens: dict[str, int] = {}
         llm_ms = 0.0
+        # Wall-clock `total` already contains every LIVE call (and its retries). A REPLAYED call
+        # returns instantly, so its RECORDED latency is added in place of the time it actually took;
+        # adding `llm_ms` to the wall clock instead counted every live call twice (D9.38).
+        replay_offset_ms = 0.0
         out: LLMOutput | None = None
         failure: str | None = None
         suffix = ""
@@ -183,6 +187,7 @@ class LLMClassifier:
                 dg__llm__prompt_version=self.builder.version,
                 dg__llm__repair_attempts=repair,
             ) as sp:
+                call_started = time.perf_counter()
                 try:
                     resp, attempts = call_with_retry(
                         lambda s=suffix: self.client.complete_structured(self._request(prompt, s)),
@@ -200,6 +205,9 @@ class LLMClassifier:
                     sp.fail("LLMError")
                     break
                 llm_ms += resp.latency_ms
+                if resp.cached:
+                    call_ms = (time.perf_counter() - call_started) * 1000
+                    replay_offset_ms += resp.latency_ms - call_ms
                 if resp.served_model:
                     self.served_models[resp.served_model] += 1
                 self._add_tokens(tokens, resp)
@@ -227,7 +235,10 @@ class LLMClassifier:
                     sp.set(dg__llm__schema_invalid=True, dg__llm__invalid_reason=bad.reason)
         current_span().set(dg__llm__truncated=prompt.truncated)
         telemetry = Telemetry(
-            latency_ms={"llm": llm_ms, "total": llm_ms + (time.perf_counter() - started) * 1000},
+            latency_ms={
+                "llm": llm_ms,
+                "total": (time.perf_counter() - started) * 1000 + replay_offset_ms,
+            },
             tokens=tokens,
             est_cost_usd=self._cost(tokens),
         )

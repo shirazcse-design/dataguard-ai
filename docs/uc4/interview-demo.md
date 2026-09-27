@@ -92,13 +92,10 @@ dataguard-uc4 demo serve --mode live
   offline planner says *high*), and its rationale on the over-labelling document calls the embedded
   override "untrusted content". The invariant held on all six. Keep REPLAY as the interview default
   and use LIVE only when there is a reason to.
-* **Known issue in LIVE: stage latency is over-reported.** The classification service's
-  `telemetry.latency_ms` counts a live LLM call twice (`app/llm/classifier.py`: the stage total adds
-  the call's own duration to a wall-clock time that already contains it), so the Classify and
-  Decision Trace pages show about 2x the real LLM latency in LIVE (3.6 s reported vs 1.8 s measured
-  in the rehearsal). The span waterfall on Observability shows the true duration. REPLAY numbers and
-  every recorded baseline are unaffected (their wall-clock part is about 0 ms). This is a bug in the
-  frozen service, recorded here rather than patched from the UI.
+* **Fixed after the rehearsal (D9.38): LIVE stage latency was over-reported about 2x.** The
+  classification service's `telemetry.latency_ms` counted a live LLM call twice (3.6 s reported vs
+  1.8 s measured). It now reports the true wall-clock time for live calls; replayed calls still
+  report their recorded latency, so REPLAY numbers and every recorded baseline are unchanged.
 
 ## 7-minute interview script
 
@@ -162,7 +159,6 @@ open"), so it stays current. As of 2026-09-27:
 * The **fairness probe** has only been run in rules mode.
 * Live agent runs were deliberately kept small (3 documents, the trace check, and the 6-document
   dashboard rehearsal).
-* In LIVE mode, the service over-reports LLM stage latency (about 2x; see Live mode above).
 * The dashboard is a local, single-user demo: no authentication, no multi-user state, loopback only.
 
 ## Troubleshooting
