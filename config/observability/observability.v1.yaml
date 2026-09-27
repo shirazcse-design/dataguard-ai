@@ -81,6 +81,7 @@ allowed_attributes:
   - dg.agent.tool
   - dg.agent.tool_ok
   - dg.agent.tool_error
+  - dg.agent.args_rebound
   - dg.agent.tool_calls
   - dg.agent.stopped_reason
   - dg.agent.priority
