@@ -1,4 +1,4 @@
-# UC4 Hybrid routing (Approach D)
+# Sensitive Data Discovery & Classification Agent Hybrid routing (Approach D)
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Plan (pre-registered before any code): [`hybrid-plan.md`](hybrid-plan.md). Generated results:

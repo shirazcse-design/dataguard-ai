@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "dataguard-ai"
 version = "0.1.0"
-description = "DataGuard AI: Agentic Data Security & Insider Risk platform (UC4: Sensitive Data Discovery & Classification)"
+description = "DataGuard AI: Agentic Data Security & Insider Risk platform (Sensitive Data Discovery & Classification Agent)"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

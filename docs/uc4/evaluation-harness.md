@@ -1,4 +1,4 @@
-# UC4 evaluation harness
+# Sensitive Data Discovery & Classification Agent evaluation harness
 
 The harness measures any classifier that implements `app.classification.interfaces.Classifier`
 against the synthetic dataset, so Rules, ML, LLM and Hybrid approaches will all be scored by the

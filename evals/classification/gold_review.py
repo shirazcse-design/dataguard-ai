@@ -358,7 +358,7 @@ def render_report(bundle, rows, decisions, scen, lofo, hyb_errors, meta, preds, 
             fam_type.setdefault(r["family_id"], r["disagreement_type"])
     fam_counts = Counter(fam_type.values())
     s0, s1, s2 = (scen[k] for k in scen)
-    add("# Gold-label review preparation (UC4)")
+    add("# Gold-label review preparation (Sensitive Data Discovery & Classification Agent)")
     add("")
     add(
         "> **Preliminary and AI-assisted; NOT human validation.** Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.** This document proposes; it changes nothing. No gold label, taxonomy, schema, threshold, prompt, model configuration or the frozen hybrid configuration was modified, and the **locked test split was not read, scored or used.**"

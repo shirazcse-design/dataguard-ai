@@ -143,7 +143,7 @@ class ContentSafetyClient:
 
     def shield_prompt(self, *, documents: list[str], user_prompt: str = "") -> dict[str, Any]:
         """Input-guardrail second opinion. `documents` holds the untrusted document text being
-        classified (UC4 has no end-user prompt; `user_prompt` stays empty by default)."""
+        classified (the service has no end-user prompt; `user_prompt` stays empty by default)."""
         cfg = self.cfg.prompt_shields
         payload = self._post(
             "text:shieldPrompt",

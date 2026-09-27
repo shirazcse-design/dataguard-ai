@@ -1,4 +1,4 @@
-# UC4 Hybrid routing (Approach D): pre-registered plan
+# Sensitive Data Discovery & Classification Agent Hybrid routing (Approach D): pre-registered plan
 
 **Status: committed BEFORE any router, fusion or review code is written.** It fixes the design, the
 variants to be compared, the selection rule and the reporting rules, so results cannot shape them.

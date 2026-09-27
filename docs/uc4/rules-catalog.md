@@ -1,4 +1,4 @@
-# UC4 Rules Engine: pre-registered detector catalog (ruleset 1.0.0)
+# Sensitive Data Discovery & Classification Agent Rules Engine: pre-registered detector catalog (ruleset 1.0.0)
 
 **Status: written and committed BEFORE any rule was implemented or evaluated.** It fixes the intended
 scope so the rules are not grown, one family at a time, to fit the synthetic dataset. Anything added
@@ -6,7 +6,7 @@ after the first evaluation is recorded in [`rules-changelog.md`](rules-changelog
 
 ## Purpose
 
-Establish an honest **deterministic baseline** for UC4 and show where rules work well and where
+Establish an honest **deterministic baseline** for Sensitive Data Discovery & Classification Agent and show where rules work well and where
 semantic understanding is required. The goal is *not* for rules to beat ML or an LLM.
 
 Disclosure: the dataset was authored by the same assistant that wrote these rules, so knowledge of

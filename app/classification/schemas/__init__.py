@@ -1,4 +1,7 @@
-"""UC4 input/output/evidence/confidence/config schemas (Pydantic v2)."""
+"""Input/output/evidence/confidence/config schemas (Pydantic v2).
+
+Part of the Sensitive Data Discovery & Classification Agent.
+"""
 
 from .common import SCHEMA_VERSION, sha256_text
 from .confidence import NO_CONFIDENCE, Confidence

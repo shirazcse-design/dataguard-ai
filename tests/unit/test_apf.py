@@ -1,4 +1,4 @@
-"""HHH and APF (PRD 14-15), scoped for UC4: composite scoring over real, already-computed metrics."""
+"""HHH and APF (PRD 14-15), scoped for the classification service: composite scoring over real, already-computed metrics."""
 
 from __future__ import annotations
 

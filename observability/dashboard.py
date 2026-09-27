@@ -13,7 +13,7 @@ from __future__ import annotations
 from html import escape
 from typing import Any
 
-TITLE = "UC4 classification service: observability"
+TITLE = "Sensitive Data Discovery & Classification Agent: observability"
 
 _CSS = """
 :root{color-scheme:light;--surface:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--grid:#e3e2dc;--bar:#2a78d6;--warn:#8a5a00}

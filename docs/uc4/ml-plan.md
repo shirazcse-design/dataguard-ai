@@ -1,4 +1,4 @@
-# UC4 supervised ML classifier (Approach B): pre-registered plan
+# Sensitive Data Discovery & Classification Agent supervised ML classifier (Approach B): pre-registered plan
 
 **Status: committed BEFORE any model is trained or evaluated.** It fixes design, model-selection and
 evaluation rules so results cannot be shaped after the fact. Deviations go in the results document.

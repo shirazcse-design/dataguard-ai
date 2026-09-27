@@ -1,4 +1,4 @@
-# UC4 supervised ML classifier (Approach B)
+# Sensitive Data Discovery & Classification Agent supervised ML classifier (Approach B)
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** Every number
 > below comes from an executed run of `dataguard-uc4 ml report`; see

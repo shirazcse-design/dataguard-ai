@@ -1,6 +1,6 @@
-# UC4 labeling guidelines (taxonomy v1.0.0)
+# Sensitive Data Discovery & Classification Agent labeling guidelines (taxonomy v1.0.0)
 
-These rules define the **gold labels** for the synthetic UC4 dataset. They exist so a label can be
+These rules define the **gold labels** for the synthetic Sensitive Data Discovery & Classification Agent dataset. They exist so a label can be
 justified from written rules rather than from an annotator's intuition. The taxonomy itself
 (`config/taxonomy/taxonomy.v1.yaml`) is the source of truth for definitions; this document adds the
 decision procedure, tie-breakers and overlap rules.

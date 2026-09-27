@@ -1,4 +1,4 @@
-# UC4 observability and failure hardening (Phase 7): pre-registered plan
+# Sensitive Data Discovery & Classification Agent observability and failure hardening (Phase 7): pre-registered plan
 
 **Status: committed BEFORE any Phase 7 code.** It fixes scope, the privacy rules, the failure matrix
 and what "done" means, so the work cannot be reshaped to fit what happens to pass. Deviations go in

@@ -1,4 +1,4 @@
-# UC4 Responsible AI, HHH/APF, and Azure AI Foundry guardrails/evaluations
+# Sensitive Data Discovery & Classification Agent Responsible AI, HHH/APF, and Azure AI Foundry guardrails/evaluations
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Requested by the product owner (2026-09-22): use Azure AI Foundry for Evaluations, Guardrails and
@@ -9,11 +9,11 @@
 
 ## Scope decision, made explicit before anything else
 
-**UC4 is a read/compute classification service. It has no tools, no multi-step loop, and takes no
+**The classification service is read/compute only. It has no tools, no multi-step loop, and takes no
 autonomous action** (decisions A6, A19). The PRD's HHH rubric and its "behavioral guardrails"
 (section 12.3) were written for the platform's autonomous incident-investigation agent — they ask
 about tool allowlists, "no autonomous deletion, account disablement or policy modification," and
-human approval before block/revoke/quarantine actions. **None of that applies to UC4**, because
+human approval before block/revoke/quarantine actions. **None of that applies to the classification service**, because
 none of it exists here to govern. Rather than force-fit those questions (which would trivially
 score "pass" by having nothing to fail), every framework below is **scoped down**: the sub-measures
 that assume tools or autonomy are dropped and named as dropped, and every remaining sub-measure is
@@ -22,7 +22,7 @@ to fill a template. See decision A34.
 
 **Update (2026-09-23, decision A37):** the statement above is still true of the classifier itself —
 `ClassificationService` remains a read/compute service with no tools, no loop, no autonomy, and
-nothing in this document's HHH/APF scoping changes. Separately, UC4 now also includes a genuine
+nothing in this document's HHH/APF scoping changes. Separately, the project now also includes a genuine
 agentic component, the **Batch Triage Agent**, which does have real tools, a real bounded loop, and
 its own real (not scoped-away) HHH/APF, computed from live runs — see
 [`agent-plan.md`](agent-plan.md) and [`agent-engine.md`](agent-engine.md). The two are governed
@@ -36,14 +36,14 @@ trust a label.
 
 ### HHH
 
-| Pillar | PRD's question (agent-scoped) | UC4-scoped formula | Real result (dev, replayed) |
+| Pillar | PRD's question (agent-scoped) | Scoped formula for this service | Real result (dev, replayed) |
 |---|---|---|---|
 | Helpful | Did the agent solve the task, use the right tools, avoid missing evidence? | documents with a usable prediction / headline documents (no tool-selection question — there are no tools) | **1.000** (97/97) |
 | Honest | Unsupported-claim rate via a grounding judge | 1 − evidence-verification failure rate (the existing exact-substring check; requires a trace file) | **1.000** (with a trace file; `None` without one) |
 | Harmless | No autonomous destructive/high-impact action; adversarial safety suite | **high-risk recall** — the harm this service can actually cause is under-classifying a sensitive document as safe, not an autonomous action, because it takes none | **1.000** (111/111 on the locked test; 1.000 on this dev run) |
 
 Dropped, and why: "did it avoid autonomous destructive/high-impact actions" and "did it respect
-tool scope/HITL for block/revoke" (section 14.2) — UC4 has no tools and issues no actions; a result
+tool scope/HITL for block/revoke" (section 14.2) — the classification service has no tools and issues no actions; a result
 is always a recommendation (`docs/uc4/result-schema.md`).
 
 ### APF
@@ -52,7 +52,7 @@ is always a recommendation (`docs/uc4/result-schema.md`).
 own default weights (section 15), a product-risk choice, versioned in `config/eval/apf.v1.yaml`,
 not re-derived here.
 
-| Dimension | PRD's measures (agent-scoped) | UC4-scoped formula | Real result (dev, replayed, with a trace file) |
+| Dimension | PRD's measures (agent-scoped) | Scoped formula for this service | Real result (dev, replayed, with a trace file) |
 |---|---|---|---|
 | Effectiveness | Task success, tool-call correctness | mean(level macro-F1, category macro-F1, high-risk recall) | 0.957 |
 | Efficiency | Latency, tokens, tool calls, cost | 1 − (worst-stage P95 latency / the PRD's own 10 s tool-call budget, `gates.v1.yaml tool_call_limit_s`) — **not an invented threshold** | 0.695 |
@@ -113,7 +113,7 @@ records the earlier, weaker "SDK-confirmed" status it replaces).
 
 ## 4. Responsible AI (PRD section 17), pillar by pillar
 
-| Pillar | PRD requirement | UC4 implementation | Evidence |
+| Pillar | PRD requirement | Implementation | Evidence |
 |---|---|---|---|
 | Privacy & Security | Minimize and protect sensitive context | Synthetic data only; deny-by-default span redaction (only `dg.*` allow-listed keys ever leave the process); content-hash, not text, in traces; input guard rejects oversize/undecodable input | `observability-engine.md` privacy audit; `guardrails/input.py` |
 | Fairness & Inclusion | Avoid unfair conclusions from protected/personal attributes | **New**: a counterfactual name-swap probe (`evals/classification/fairness_probe.py`) — classify the same document with the named person's name swapped across a diverse pool of invented names, holding everything else identical | **66 documents probed, 100% invariant, 31 skipped (no name detected)**, rules mode, all development splits (`dataguard-uc4 eval fairness-probe --split all`) |

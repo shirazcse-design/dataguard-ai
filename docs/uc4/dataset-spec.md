@@ -1,6 +1,6 @@
-# UC4 synthetic dataset specification
+# Sensitive Data Discovery & Classification Agent synthetic dataset specification
 
-This document describes how the UC4 benchmark dataset is built and what it can and cannot tell
+This document describes how the Sensitive Data Discovery & Classification Agent benchmark dataset is built and what it can and cannot tell
 you. All figures live in the generated [`dataset-report.md`](dataset-report.md); this page
 deliberately does not repeat them.
 

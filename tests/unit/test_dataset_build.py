@@ -310,7 +310,9 @@ def test_cli_validate_and_stats_and_report(tmp_path, capsys):
     assert "by_split" in json.loads(capsys.readouterr().out)
     out = tmp_path / "report.md"
     assert main(["dataset", "report", "--out", str(out)]) == 0
-    assert out.read_text().startswith("# UC4 synthetic dataset report")
+    assert out.read_text().startswith(
+        "# Sensitive Data Discovery & Classification Agent synthetic dataset report"
+    )
     sheet = tmp_path / "sheet.csv"
     assert main(["dataset", "review-sheet", "--out", str(sheet)]) == 0
     assert sheet.read_text().splitlines()[0].startswith("family_id,tier,split")
