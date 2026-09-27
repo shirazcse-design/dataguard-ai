@@ -40,7 +40,7 @@ Sources: `results/validation-rescore.md` (side by side with the old labels), `re
 | # | Item | Why it is not done | Who / what closes it |
 |---|---|---|---|
 | 1 | **A second independent human review** of the gold labels | One reviewer so far; independence is the coordinator's statement | A second reviewer using the Round 2 package (`human-review-round2.md`); the label wording then changes |
-| 2 | The **5 dev errors** in `hn_public_api_docs_placeholder_keys` | Genuine model errors (the models are not shown the `source_system` metadata by design); **not** covered by decision A33 | A product/model decision; not tuned on dev here |
+| 2 | ~~The **5 dev errors** in `hn_public_api_docs_placeholder_keys`~~ **Closed 2026-09-26** (A39) | Accepted in writing by the product owner as a known limitation: conservative over-classification (PUBLIC predicted INTERNAL), 0 high-risk misses; not tuned on dev | Done; revisit if a fresh held-out split or real data shows the same pattern |
 | 3 | The four ambiguous locked-test families have **not been human-reviewed** | The blind generator refuses locked-split documents | A separate, explicitly authorised, labelled post-hoc package |
 | 4 | ~~**Azure Monitor export — portal confirmation**~~ **Closed 2026-09-26** (D9.31) | A live `obs azure-check --llm` trace was opened in Microsoft Foundry's Tracing view, rendered with GenAI attributes (a typed Chat span with token counts) | Done |
 | 5 | A **shared live dashboard** (DG-018) | Shared platform work | Not advised for v0.1 |
@@ -54,7 +54,7 @@ Synthetic, template-generated data; labels are AI-authored and reviewed by one p
 
 ## Definition of done from here
 
-UC4 is complete for v0.1 and the MCP adapter is release-ready under decision A33. It may additionally be called **independently validated** when: (a) a second independent human has reviewed the labels and every disagreement is adjudicated and recorded (then, and only then, does the dataset label drop "second independent review pending"); (b) the 5 dev errors in `hn_public_api_docs_placeholder_keys` are addressed or accepted in writing; (c) the adopted lenient gate is re-confirmed on a freshly generated held-out split, since the locked test split is consumed.
+UC4 is complete for v0.1 and the MCP adapter is release-ready under decision A33. It may additionally be called **independently validated** when: (a) a second independent human has reviewed the labels and every disagreement is adjudicated and recorded (then, and only then, does the dataset label drop "second independent review pending"); (b) ~~the 5 dev errors in `hn_public_api_docs_placeholder_keys` are addressed or accepted in writing~~ **met: accepted in writing, A39 (2026-09-26)**; (c) the adopted lenient gate is re-confirmed on a freshly generated held-out split, since the locked test split is consumed.
 
 ## Update (2026-09-23): Azure AI Foundry Responsible AI, and a real agentic component
 

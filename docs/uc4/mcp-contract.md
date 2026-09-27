@@ -101,7 +101,8 @@ pre-extracted synthetic-style text, with results treated as **recommendations**.
   transfers to real data without validation.
 * **Free of known model errors.** On dev, 5 documents of `hn_public_api_docs_placeholder_keys` (public API
   documentation with placeholder keys) are classified INTERNAL against a PUBLIC gold; that is the
-  conservative direction, but it is not fixed.
+  conservative direction, but it is not fixed - accepted as a known limitation by the product owner
+  (decision A39), to be revisited if a fresh held-out split or real data shows the same pattern.
 * **Trusting model text.** `evidence[].excerpt` and rationales derive from an untrusted document and must
   be treated as data, never as instructions.
 
