@@ -28,7 +28,7 @@ from importlib import resources
 from pathlib import Path
 from typing import Any
 
-from . import examples, metrics
+from . import docs_view, examples, metrics
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
 from .review import DEFAULT_PATH, ReviewStore
@@ -154,6 +154,34 @@ class DemoApp:
     def review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
         return self.envelope(self.review_store().decide(body), data_class="DEMO-ONLY STATE")
 
+    def rai(self) -> dict[str, Any]:
+        data = docs_view.responsible_ai()
+        data["agent"] = metrics.agent_eval()
+        return self.envelope(data, data_class="STATIC DOCUMENTATION")
+
+    def observability(self) -> dict[str, Any]:
+        data = docs_view.observability()
+        traces = []
+        for t in list(self.classifier().recent)[-12:][::-1]:
+            spans = t["spans"]
+            if not spans:
+                continue
+            t0 = min(s["start_ns"] for s in spans)
+            traces.append(
+                {
+                    "request_id": t["request_id"],
+                    "root": next(
+                        (s["name"] for s in spans if not s.get("parent")), spans[0]["name"]
+                    ),
+                    "spans": [
+                        {**s, "offset_ms": (s["start_ns"] - t0) / 1e6}
+                        for s in sorted(spans, key=lambda s: s["start_ns"])
+                    ],
+                }
+            )
+        data["session"] = {"data_class": self.data_class(), "traces": traces}
+        return self.envelope(data, data_class="MIXED: see each panel")
+
     def examples(self) -> dict[str, Any]:
         return self.envelope(examples.listing(), data_class="SYNTHETIC DEV-SPLIT DOCUMENTS")
 
@@ -218,6 +246,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/examples": app.examples,
                 "/api/agent": app.agent_describe,
                 "/api/review": app.review_queue,
+                "/api/rai": app.rai,
+                "/api/observability": app.observability,
             }
             if path in routes:
                 try:

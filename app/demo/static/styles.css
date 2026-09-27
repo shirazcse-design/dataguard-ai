@@ -278,3 +278,42 @@ select { font: inherit; font-size: 13.5px; padding: 7px 10px; border-radius: 8px
 .btn-warn { background: var(--warn); border-color: var(--warn); }
 .btn-good { background: var(--good); border-color: var(--good); }
 h2.sub { font-size: 13.5px; margin: 16px 0 8px; color: var(--ink-2); }
+
+/* ---- phase 4: overview, rai, observability, interview mode ---- */
+.toggle { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--nav-ink); background: transparent;
+  border: 1px solid #2b3a52; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.toggle[aria-pressed="true"] { background: #16a3a3; border-color: #16a3a3; color: #fff; }
+.demo-bar { position: sticky; top: 52px; z-index: 9; background: var(--surface); border-bottom: 1px solid var(--line);
+  padding: 10px 20px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.demo-bar[hidden] { display: none; }
+.demo-bar .step-n { font: 600 12px var(--mono); color: var(--ink-3); white-space: nowrap; }
+.demo-bar .say { flex: 1 1 360px; font-size: 13.5px; color: var(--ink-2); }
+.demo-bar .say b { color: var(--ink); }
+.demo-dots { display: flex; gap: 4px; }
+.demo-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: inline-block; }
+.demo-dots i.on { background: var(--accent); }
+body.interview .dev-only { display: none !important; }
+.arch svg { width: 100%; height: auto; display: block; }
+.arch text { font: 13px var(--sans); fill: var(--ink); }
+.arch .quiet { fill: var(--ink-3); font-size: 11.5px; }
+.arch .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.25; }
+.arch .box.svc { stroke: var(--accent); }
+.arch .box.agent { stroke: #16a3a3; }
+.arch .box.review { stroke: var(--warn); }
+.arch .box.off { stroke-dasharray: 4 3; }
+.arch .lane { fill: var(--surface-2); stroke: var(--line); }
+.arch .edge { stroke: var(--ink-3); stroke-width: 1.25; fill: none; }
+.arch .edge.call { stroke: #16a3a3; stroke-dasharray: 5 4; }
+.arch .lane-title { font-weight: 700; font-size: 13.5px; }
+.arch .foundry { fill: var(--accent-soft); stroke: var(--accent); }
+.wf svg { width: 100%; height: auto; display: block; }
+.wf text { font: 12px var(--mono); fill: var(--ink-2); }
+.wf .bar { fill: var(--accent); }
+.wf .bar.llm { fill: #16a3a3; }
+.wf .bar.agent { fill: #7a3fb0; }
+.wf .bar.err { fill: var(--bad); }
+.wf .grid { stroke: var(--line); }
+.trace-pick { display: grid; gap: 6px; }
+.trace-pick button { text-align: left; font: 13px var(--sans); border: 1px solid var(--line); background: var(--surface-2);
+  border-radius: 8px; padding: 8px 10px; cursor: pointer; color: var(--ink); }
+.trace-pick button.active { border-color: var(--accent); background: var(--accent-soft); }

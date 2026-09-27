@@ -233,6 +233,7 @@ def _span_view(s: Span) -> dict[str, Any]:
         "name": s.name,
         "status": s.status,
         "duration_ms": (s.end_ns - s.start_ns) / 1e6,
+        "start_ns": s.start_ns,
         "parent": s.parent_span_id,
         "id": s.span_id,
         "attributes": dict(s.attributes),  # already redacted by the service's Redactor

@@ -4,21 +4,22 @@
 // innerHTML from data), and every panel shows its data class and source.
 
 const PAGES = {
-  overview: { title: "Overview", phase: 4 },
+  overview: { title: "Overview", render: renderOverview },
   classify: { title: "Classify", render: renderClassify },
   trace: { title: "Decision Trace", render: renderTrace },
   agent: { title: "Agent Triage", render: renderAgent },
   review: { title: "Human Review", render: renderReview },
   evaluations: { title: "Evaluations", render: renderEvaluations },
-  rai: { title: "Responsible AI / Guardrails", phase: 4 },
-  observability: { title: "Observability", phase: 4 },
+  rai: { title: "Responsible AI / Guardrails", render: renderRai },
+  observability: { title: "Observability", render: renderObservability },
 };
-const DEFAULT_PAGE = "classify";
+const DEFAULT_PAGE = "overview";
 const state = {
   status: null, metrics: null, examples: null, last: null, busy: false,
   input: { example: null, text: "", filename: "pasted.txt", llmOff: false, upload: null },
   agent: { info: null, results: {}, running: null, selected: null, error: null },
   review: { items: null, selected: null, error: null, storedAt: null },
+  rai: null, obs: { selected: null },
 };
 
 // ---- tiny DOM helpers ------------------------------------------------------------------------
@@ -333,6 +334,11 @@ async function renderClassify(page) {
     const env = await getJSON("/api/examples");
     state.examples = env.data;
   }
+  if (state.pendingExample) {
+    const ex = state.examples.find((e) => e.key === state.pendingExample);
+    if (ex) state.input = { example: ex.key, text: ex.content, filename: ex.filename, llmOff: ex.llm_tiers === "off", upload: null };
+    state.pendingExample = null;
+  }
   const replay = state.status && state.status.mode !== "live";
   const exampleButtons = state.examples.map((ex) => {
     const b = h("button", { class: `example${state.input.example === ex.key ? " active" : ""}`, type: "button" },
@@ -377,8 +383,8 @@ async function renderClassify(page) {
         h("div", { class: "card-head" }, h("h2", {}, "Demo documents"), dataClass("Synthetic dev-split documents")),
         h("div", { class: "examples" }, exampleButtons),
         h("label", { class: "field" }, "Document text (pre-extracted; binary parsing is out of scope)", ta),
-        h("label", { class: "field" }, "File name (a weak signal)", fn),
-        h("label", { class: "field" }, "Or upload a text file (UTF-8, 5 MB max, checked by the service's input guard)", file),
+        h("label", { class: "field dev-only" }, "File name (a weak signal)", fn),
+        h("label", { class: "field dev-only" }, "Or upload a text file (UTF-8, 5 MB max, checked by the service's input guard)", file),
         h("label", { class: "check" }, off,
           h("span", {}, "Turn the LLM tiers off for this request (", h("code", {}, "max_llm_tier: none"),
             "): shows what happens when no LLM verdict is available.")),
@@ -467,8 +473,8 @@ function resultCard() {
         + (L.llm_mode === "replay" && llmRan ? " (LLM part = recorded latency of the original call)" : "")),
       h("dt", {}, "Versions"), h("dd", {}, h("code", {}, `${res.versions.classifier || ""} · rules ${res.versions.ruleset || "—"} · ${res.versions.llm_deployment || "no LLM"}`))),
     h("div", { class: "btn-row" }, (() => { const a = h("a", { href: "#trace", class: "btn btn-quiet" }, "See the decision trace →"); return a; })()),
-    h("details", {}, h("summary", {}, "Raw result (frozen schema v1.0)"), h("pre", { class: "json" }, JSON.stringify(res, null, 2))),
-    h("details", {}, h("summary", {}, `Warnings (${sm.warnings.length})`), h("ul", { class: "why-list" }, sm.warnings.map((w) => h("li", {}, h("code", {}, w))))));
+    h("details", { class: "dev-only" }, h("summary", {}, "Raw result (frozen schema v1.0)"), h("pre", { class: "json" }, JSON.stringify(res, null, 2))),
+    h("details", { class: "dev-only" }, h("summary", {}, `Warnings (${sm.warnings.length})`), h("ul", { class: "why-list" }, sm.warnings.map((w) => h("li", {}, h("code", {}, w))))));
 }
 
 function confidenceText(c) {
@@ -579,7 +585,7 @@ async function renderTrace(page) {
             h("dt", {}, "LLM acceptance"), h("dd", {}, `confidence bucket ≥ ${v.llm_min_confidence}, quotes verified, no conflict`)),
           source("config/routing/routing.v1.yaml")),
         whyCard())),
-    h("div", { class: "grid" }, card("Redacted spans for this request", dataClass(L.data_class),
+    h("div", { class: "grid dev-only" }, card("Redacted spans for this request", dataClass(L.data_class),
       h("p", { class: "note" }, "What the tracer exported: only allow-listed dg.* attributes. No document text, only a content hash."),
       h("div", { class: "table-wrap" }, h("table", {},
         h("thead", {}, h("tr", {}, h("th", {}, "Span"), h("th", {}, "Status"), h("th", { class: "n" }, "Duration"), h("th", {}, "Attributes"))),
@@ -821,6 +827,297 @@ function reviewDetail() {
     R.error ? h("div", { class: "callout" }, R.error) : null);
 }
 
+// ---- Overview --------------------------------------------------------------------------------
+async function ensureMetrics() {
+  if (!state.metrics) {
+    const env = await getJSON("/api/metrics");
+    applyMode(env);
+    state.metrics = env.data;
+  }
+  return state.metrics;
+}
+
+async function renderOverview(page) {
+  const m = await ensureMetrics();
+  const locked = m.headline.find((r) => r.split === "locked test");
+  const st = m.status, a = m.agent;
+  const kpi = (label, value, sub, src) => h("div", { class: "card kpi" },
+    h("div", { class: "l" }, label), h("div", { class: "v" }, value), h("div", { class: "s" }, sub), src ? h("div", { class: "source" }, src) : null);
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Overview"),
+        h("p", { class: "lead" }, "Automatically discover and classify sensitive enterprise data using a hybrid Rules + ML + LLM architecture "
+          + "with human review, guardrails, evaluations, and production observability.")),
+      dataClass("Recorded evaluation")),
+    h("div", { class: "grid cols-3" },
+      kpi("Strict level F1", `${fmt(locked.strict_level_f1.value)}`, `95% CI [${fmt(locked.strict_level_f1.lo)}, ${fmt(locked.strict_level_f1.hi)}]; lower bound below the ${fmt(st.level_gate, 2)} gate`, "locked test, frozen hybrid"),
+      kpi("Category F1", fmt(locked.category_f1.value), "macro-F1 over 8 data categories", "locked test"),
+      kpi("High-risk recall", fmt(locked.high_risk_recall.value), `${locked.high_risk_recall.numerator} of ${locked.high_risk_recall.denominator} high-risk documents flagged`, "locked test"),
+      kpi("v0.1 status", st.implemented && st.evaluated ? "Implemented, evaluated" : "In progress",
+        `one human reviewer; independent validation ${st.independent_validation}`, "completion report"),
+      kpi("Agent task completion", pct(a.task_completion), `${a.n_documents} documents, offline planner`, "dev split, agent eval"),
+      kpi("Agent safety invariant", pct(a.safety_invariant_compliance), "structural: never-downgrade, proven by adversarial tests", "dev split, agent eval")),
+    h("div", { class: "grid" }, card("How it works", dataClass("Static documentation"), architecture(),
+      h("div", { class: "callout" }, h("b", {}, "Two different things, on purpose. "),
+        "The classification service is deterministic and is not an agent: a harness, not a model, owns routing, thresholds and review. "
+        + "The Batch Triage Agent is the genuinely agentic component: it plans and calls tools, but only classify_document can set a level."))),
+    h("p", { class: "note" }, "All data is synthetic. No production traffic metrics exist or are shown."));
+}
+
+function architecture() {
+  const W = 1000, H = 640;
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Architecture: the deterministic classification service and the separate Batch Triage Agent" });
+  svg.append(s("defs", {}, s("marker", { id: "arr", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: "auto-start-reverse" },
+    s("path", { d: "M0 0L10 5L0 10z", fill: "currentColor" }))));
+  const lane = (x, w, title, sub) => [s("rect", { x, y: 14, width: w, height: 548, rx: 12, class: "lane" }),
+    s("text", { x: x + 16, y: 40, class: "lane-title" }, title), s("text", { x: x + 16, y: 58, class: "quiet" }, sub)];
+  const box = (x, y, w, hgt, label, sub, cls) => [s("rect", { x, y, width: w, height: hgt, rx: 8, class: `box ${cls || ""}` }),
+    s("text", { x: x + w / 2, y: y + (sub ? 19 : hgt / 2 + 4), "text-anchor": "middle", "font-weight": 600 }, label),
+    sub ? s("text", { x: x + w / 2, y: y + 35, "text-anchor": "middle", class: "quiet" }, sub) : null];
+  const down = (x, y1, y2) => s("path", { d: `M${x} ${y1}V${y2}`, class: "edge", "marker-end": "url(#arr)", color: "var(--ink-3)" });
+  const L = 30, LW = 540, cx = L + LW / 2, bw = 380, bx = cx - bw / 2;
+  svg.append(...lane(L, LW, "Classification service", "deterministic; not an agent; the only source of a level"));
+  const rows = [
+    [78, "Document", "pre-extracted text; binary parsing out of scope", ""],
+    [140, "Input guard + injection scan", "size/encoding; injection flagged, never obeyed", "svc"],
+    [202, "Hybrid router (harness)", "owns thresholds, escalation, conflicts, review", "svc"],
+  ];
+  rows.forEach(([y, a, b, c]) => svg.append(...box(bx, y, bw, 46, a, b, c)));
+  svg.append(down(cx, 124, 140), down(cx, 186, 202));
+  // Rules | ML | LLM
+  const sy = 270, sw = 116, gap = 16, sx = cx - (3 * sw + 2 * gap) / 2;
+  svg.append(...box(sx, sy, sw, 46, "Rules", "always run", "svc"),
+    ...box(sx + sw + gap, sy, sw, 46, "ML", "off in default variant", "svc off"),
+    ...box(sx + 2 * (sw + gap), sy, sw, 46, "LLM tiers", "mid, then large", "svc"));
+  svg.append(down(cx, 248, 270));
+  svg.append(...box(bx, 340, bw, 46, "Fusion + confidence", "floors; high-risk derived from policy", "svc"), down(cx, 316, 340));
+  svg.append(...box(bx, 402, bw, 46, "Classification (frozen schema v1.0)", "level, categories, evidence, review", "svc"), down(cx, 386, 402));
+  svg.append(...box(bx, 464, bw, 46, "Human review, if required", "a flag, never a block; no default to PUBLIC", "review"), down(cx, 448, 464));
+  svg.append(...box(bx, 526 - 6, bw, 30, "Policy / triage (the consumer)", null, ""), down(cx, 510, 520));
+  // Agent lane
+  const AL = 600, AW = 370, ax = AL + 20, aw = AW - 40, acx = AL + AW / 2;
+  svg.append(...lane(AL, AW, "Batch Triage Agent", "genuinely agentic; bounded loop"));
+  const arows = [
+    [78, "Goal (instructions)", "registered in Foundry Agent Service"],
+    [140, "Planner turn", "offline policy, or the Foundry agent"],
+    [202, "Tool call (allow-list)", "3 tools; step budget 6"],
+    [270, "classify_document", "bound to the original document"],
+    [340, "Review request", "can only add a review, never remove one"],
+    [402, "Stop", "final answer, budget, or repeated failure"],
+  ];
+  arows.forEach(([y, a, b]) => svg.append(...box(ax, y, aw, 46, a, b, "agent")));
+  [[124, 140], [186, 202], [248, 270], [316, 340], [386, 402]].forEach(([a, b]) => svg.append(down(acx, a, b)));
+  // The agent calls the WHOLE service (it enters at the document input), never an LLM directly.
+  const gx = 585;
+  svg.append(s("path", { d: `M${ax} 293H${gx}V101H${bx + bw + 4}`, class: "edge call", "marker-end": "url(#arr)", color: "#16a3a3" }),
+    s("text", { x: (bx + bw + gx) / 2 + 2, y: 150, "text-anchor": "middle", class: "quiet" }, "calls the"),
+    s("text", { x: (bx + bw + gx) / 2 + 2, y: 164, "text-anchor": "middle", class: "quiet" }, "whole service"));
+  // Foundry strip
+  svg.append(s("rect", { x: 30, y: 580, width: 940, height: 46, rx: 10, class: "foundry" }),
+    s("text", { x: 500, y: 600, "text-anchor": "middle", "font-weight": 600 }, "Microsoft Foundry"),
+    s("text", { x: 500, y: 616, "text-anchor": "middle", class: "quiet" }, "model deployments + content filter · Agent Service · Tracing (Application Insights) · Evaluations"));
+  return h("div", { class: "arch" }, svg);
+}
+
+// ---- Responsible AI / Guardrails -------------------------------------------------------------
+const GUARD_STATUS = {
+  implemented: ["Implemented", "good"], ci_gate: ["Implemented · CI gate", "good"],
+  portal_configured: ["Configured in portal", "good"], live_verified: ["Live verified", "good"],
+  fake_server_tested: ["Fake-server tested · not live verified", "warn"], not_applicable: ["Not applicable (by design)", "muted"],
+  unknown: ["Unknown", "bad"],
+};
+
+async function renderRai(page) {
+  if (!state.rai) state.rai = (await getJSON("/api/rai")).data;
+  const r = state.rai, a = r.agent;
+  const table = (cols, rows) => h("div", { class: "table-wrap" }, h("table", {},
+    h("thead", {}, h("tr", {}, cols.map((c) => h("th", {}, c)))), h("tbody", {}, rows)));
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Responsible AI / Guardrails"),
+        h("p", { class: "lead" }, "Only what exists and what it was verified against. Classifier and agent are evaluated separately, and every guardrail states its real status.")),
+      dataClass("Static documentation")),
+    h("div", { class: "grid cols-2" },
+      card("Classifier evaluation: HHH, scoped", dataClass("Recorded evaluation"),
+        table(["Pillar", "Measured as", "Result (dev)"], r.classifier_hhh.map((x) => h("tr", {}, h("td", {}, h("b", {}, x.pillar)), h("td", {}, x.measures), h("td", {}, x.result)))),
+        h("div", { class: "note" }, "Tool-use and autonomy questions are dropped for the classifier: it has no tools and takes no actions."),
+        source("docs/uc4/responsible-ai.md §1")),
+      card("Agent evaluation: HHH + APF", dataClass("Recorded evaluation"),
+        table(["Measure", "Result (dev, offline planner)"], [
+          ["Helpful (task completion)", pct(a.hhh.helpful)], ["Honest", a.hhh.honest === null ? "not computed (by design, D9.27)" : fmt(a.hhh.honest)],
+          ["Harmless", pct(a.hhh.harmless)], ["APF effectiveness", fmt(a.apf.effectiveness)], ["APF efficiency", fmt(a.apf.efficiency)],
+          ["APF reliability", a.apf.reliability === null ? "not computed" : fmt(a.apf.reliability)], ["APF trustworthiness", fmt(a.apf.trustworthiness)],
+          ["APF composite", fmt(a.apf.composite)], ["Safety-invariant compliance", `${pct(a.safety_invariant_compliance)} (structural)`],
+        ].map(([k, v]) => h("tr", {}, h("td", {}, k), h("td", {}, v)))),
+        source("docs/uc4/results/agent-eval-dev.json"))),
+    h("div", { class: "grid" }, card("Classifier evaluation: APF, scoped", dataClass("Recorded evaluation"),
+      table(["Dimension", "Measured as", "Result (dev)"], r.classifier_apf.map((x) => h("tr", {}, h("td", {}, h("b", {}, x.dimension)), h("td", {}, x.measures), h("td", {}, x.result)))),
+      source("docs/uc4/responsible-ai.md §1"))),
+    h("div", { class: "grid" }, card("Guardrails and their real status", dataClass("Static documentation"),
+      table(["Layer", "Guardrail", "Status", "Evidence"], r.guardrails.map((g) => {
+        const [label, kind] = GUARD_STATUS[g.status] || GUARD_STATUS.unknown;
+        return h("tr", {}, h("td", {}, g.layer), h("td", {}, h("b", {}, g.name), h("div", { class: "note" }, h("code", {}, g.where))),
+          h("td", {}, statusBadge(label, kind)), h("td", { class: "note" }, g.evidence));
+      })),
+      h("div", { class: "note" }, "Statuses are derived from the completion report and decisions log, not typed into this page."),
+      source("docs/uc4/responsible-ai.md §2", "docs/uc4/completion-report.md", "docs/uc4/decisions.md"))),
+    h("div", { class: "grid cols-2" },
+      card("Responsible AI pillars", dataClass("Static documentation"),
+        h("div", { class: "status-list" }, r.pillars.map((p) => h("div", { class: "check-row" },
+          h("div", {}, h("b", {}, p.pillar), h("div", { class: "note" }, p.implementation))))),
+        source("docs/uc4/responsible-ai.md §4")),
+      card("Fairness & Inclusion probe: its actual scope", dataClass("Recorded evaluation"),
+        h("dl", { class: "kv" },
+          h("dt", {}, "Test"), h("dd", {}, "same content, only a person's name swapped: does the classification change?"),
+          h("dt", {}, "Result"), h("dd", {}, `${r.fairness.documents} documents × ${r.fairness.substitute_names} substitute names: ${r.fairness.result}`),
+          h("dt", {}, "Mode"), h("dd", {}, statusBadge(`${r.fairness.mode} mode only`, "warn")),
+          h("dt", {}, "Skipped"), h("dd", {}, `${r.fairness.skipped} documents with no detectable name`)),
+        h("div", { class: "callout" }, h("b", {}, "Not claimed: "), r.fairness.not_claimed.join("; "), "."),
+        source("docs/uc4/responsible-ai.md (Fairness & Inclusion)"))),
+  );
+}
+
+// ---- Observability ---------------------------------------------------------------------------
+async function renderObservability(page) {
+  const env = await getJSON("/api/observability");
+  applyMode(env);
+  const o = env.data, O = state.obs, sess = o.session;
+  if (!O.selected && sess.traces.length) O.selected = sess.traces[0].request_id;
+  const sel = sess.traces.find((t) => t.request_id === O.selected);
+  const table = (rows, cols) => h("div", { class: "table-wrap" }, h("table", {},
+    h("thead", {}, h("tr", {}, cols.map((c) => h("th", {}, c)))), h("tbody", {}, rows.map((r) => h("tr", {}, cols.map((c) => h("td", {}, r[c])))))));
+  const picks = sess.traces.map((t) => {
+    const b = h("button", { type: "button", class: t.request_id === O.selected ? "active" : "" },
+      h("b", {}, t.root === "agent.document" ? "Agent run" : "Classification"), " · ", h("span", { class: "mono" }, t.request_id), ` · ${t.spans.length} spans`);
+    b.addEventListener("click", () => { O.selected = t.request_id; route(); });
+    return b;
+  });
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Observability"),
+        h("p", { class: "lead" }, "Every request is one trace of redacted spans: no document text ever leaves the process. Exported to Azure Monitor and rendered in Microsoft Foundry's Tracing view.")),
+      null),
+    h("div", { class: "grid cols-3" }, o.foundry_status.map((f) => card(f.concern, dataClass("Static documentation"),
+      h("div", { class: "badges" }, statusBadge(f.verdict, /verified|confirmed/i.test(f.verdict) && !/only|not/i.test(f.verdict) ? "good" : "warn")),
+      h("details", {}, h("summary", {}, "Details"), h("p", { class: "note" }, f.status)), source("docs/uc4/observability-engine.md")))),
+    h("div", { class: "grid cols-2" },
+      card("This session's traces", dataClass(sess.data_class === "LIVE" ? "LIVE (this demo session)" : "REPLAY (this demo session)"),
+        sess.traces.length ? h("div", { class: "trace-pick" }, picks)
+          : h("div", { class: "empty-state" }, h("p", {}, "No traces yet. Classify a document or run the agent; their spans appear here.")),
+        h("div", { class: "note" }, "Local telemetry from this demo session only. Not production traffic.")),
+      card("Privacy by design", dataClass("Static configuration"),
+        h("dl", { class: "kv" },
+          h("dt", {}, "Allow-list"), h("dd", {}, `${o.allow_listed_keys} dg.* attribute keys; everything else is dropped (deny by default)`),
+          h("dt", {}, "Document text"), h("dd", {}, "never exported: a content hash and byte count instead"),
+          h("dt", {}, "Agent"), h("dd", {}, "fixed-vocabulary values only: no tool arguments, results or rationale"),
+          h("dt", {}, "CI gate"), h("dd", {}, "the privacy audit fails the build on any leaked text")),
+        source("config/observability/observability.v1.yaml"))),
+    sel ? h("div", { class: "grid" }, card(`Trace waterfall: ${sel.request_id}`, dataClass(sess.data_class), waterfall(sel),
+      h("div", { class: "note" }, sess.data_class === "REPLAY" ? "Durations are measured now; a replayed LLM call completes instantly (its recorded latency is on the Decision Trace page)." : ""),
+      h("details", { class: "dev-only" }, h("summary", {}, "Span attributes (redacted)"),
+        h("pre", { class: "json" }, JSON.stringify(sel.spans.map((sp) => ({ name: sp.name, attributes: sp.attributes })), null, 2))))) : null,
+    h("div", { class: "grid cols-2" },
+      card("Recorded baseline: stage latency (dev, 107 traces)", dataClass("Recorded evaluation / demo telemetry"),
+        table(o.baseline.stage_latency, ["stage span", "spans", "errors", "P50", "P95"]),
+        h("div", { class: "note" }, "LLM stage latency is the recorded latency of the benchmark run."),
+        source("docs/uc4/results/observability-baseline.md")),
+      card("Recorded baseline: privacy audit", dataClass("Recorded evaluation / demo telemetry"),
+        table(o.baseline.privacy_audit, ["check", "result"]), source("docs/uc4/results/observability-baseline.md"))),
+    h("div", { class: "grid" }, card("Recorded baseline: failure-injection matrix", dataClass("Recorded evaluation / demo telemetry"),
+      table(o.baseline.failure_matrix, Object.keys(o.baseline.failure_matrix[0] || {})),
+      o.baseline.header_predates_foundry_verification
+        ? h("div", { class: "callout" }, h("b", {}, "Note: "), "this baseline report was generated before the Azure Monitor / Foundry tracing verification, so its header still says export is not verified. The current status is in the cards at the top of this page.")
+        : null,
+      source("docs/uc4/results/observability-baseline.md"))),
+  );
+}
+
+function waterfall(t) {
+  const W = 900, left = 190, right = 70, rowH = 22, top = 10;
+  const end = Math.max(...t.spans.map((sp) => sp.offset_ms + sp.duration_ms), 0.001);
+  const X = (ms) => left + (ms / end) * (W - left - right);
+  const H = top + t.spans.length * rowH + 20;
+  const depth = {};
+  for (const sp of t.spans) depth[sp.id] = sp.parent && depth[sp.parent] !== undefined ? depth[sp.parent] + 1 : 0;
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Span waterfall for this request" });
+  svg.append(s("line", { x1: left, x2: left, y1: 0, y2: H - 16, class: "grid" }));
+  t.spans.forEach((sp, i) => {
+    const y = top + i * rowH, d = depth[sp.id] || 0;
+    const kind = sp.status === "error" ? "err" : sp.name.startsWith("agent.") ? "agent" : (sp.name === "llm.call" || sp.name.startsWith("S3.")) ? "llm" : "";
+    svg.append(
+      s("text", { x: 4 + d * 12, y: y + 14 }, sp.name),
+      s("rect", { x: X(sp.offset_ms), y: y + 4, width: Math.max(2, X(sp.offset_ms + sp.duration_ms) - X(sp.offset_ms)), height: 12, rx: 3, class: `bar ${kind}` }),
+      s("text", { x: Math.min(X(sp.offset_ms + sp.duration_ms) + 6, W - right + 4), y: y + 14 }, `${sp.duration_ms.toFixed(2)} ms`));
+  });
+  svg.append(s("text", { x: left, y: H - 4 }, "0 ms"), s("text", { x: W - right, y: H - 4, "text-anchor": "end" }, `${end.toFixed(2)} ms`));
+  return h("div", { class: "wf" }, svg);
+}
+
+// ---- Interview Demo Mode ---------------------------------------------------------------------
+// Steps navigate and preload; they never press Analyze or Run, so no action (and no Azure/LLM cost
+// in LIVE mode) happens without the presenter's click.
+const DEMO_STEPS = [
+  { page: "overview", say: "<b>The problem and the architecture.</b> A deterministic classification service, plus a separate, genuinely agentic triage agent." },
+  { page: "classify", example: "healthcare", say: "<b>Classify a healthcare document.</b> Click <b>Analyze Document</b>: PHI, HIGHLY_CONFIDENTIAL, high-risk, with evidence." },
+  { page: "trace", say: "<b>Explain the decision.</b> Rules found PHI, the LLM confirmed it, ML is off in this variant; nothing is inferred." },
+  { page: "classify", example: "review", say: "<b>An ambiguous case with the LLM unavailable.</b> Click <b>Analyze Document</b>: it escalates to review with no label, never a default of PUBLIC." },
+  { page: "review", say: "<b>Human in the loop.</b> The escalated case is in the queue; override it with a level and a note. Demo decisions never touch gold labels." },
+  { page: "agent", say: "<b>The agent.</b> Click <b>Run Agent Triage</b>. Open the injection document: the instruction was treated as data, and the invariant held." },
+  { page: "evaluations", say: "<b>Evaluations, honestly.</b> Strict lower bound 0.758 misses the 0.85 gate; the adopted lenient gate passes. Both are shown." },
+  { page: "rai", say: "<b>Guardrails and Responsible AI.</b> Each guardrail with its real status, including what is only fake-server tested." },
+  { page: "observability", say: "<b>Observability.</b> Redacted spans for the requests you just ran, verified in Microsoft Foundry's Tracing view." },
+];
+
+function interviewOn() {
+  try { return localStorage.getItem("dg-interview") === "1"; } catch (_) { return false; }
+}
+function setInterview(on) {
+  try { localStorage.setItem("dg-interview", on ? "1" : "0"); } catch (_) { /* per-viewer convenience only */ }
+  applyInterview();
+}
+function demoStep() {
+  try { return Math.max(0, Math.min(DEMO_STEPS.length - 1, Number(sessionStorage.getItem("dg-step") || 0))); } catch (_) { return 0; }
+}
+function goStep(i) {
+  const step = DEMO_STEPS[i];
+  try { sessionStorage.setItem("dg-step", String(i)); } catch (_) { /* ignore */ }
+  if (step.example && state.examples) {
+    const ex = state.examples.find((e) => e.key === step.example);
+    if (ex) state.input = { example: ex.key, text: ex.content, filename: ex.filename, llmOff: ex.llm_tiers === "off", upload: null };
+  } else if (step.example) {
+    state.pendingExample = step.example;
+  }
+  if (location.hash === `#${step.page}`) route(); else location.hash = step.page;
+  renderDemoBar();
+}
+function renderDemoBar() {
+  const bar = document.getElementById("demo-bar");
+  if (!interviewOn()) { bar.hidden = true; return; }
+  bar.hidden = false;
+  const i = demoStep(), step = DEMO_STEPS[i];
+  const say = h("div", { class: "say" });
+  // Trusted, static step copy (the only markup not built from text nodes); never data.
+  say.innerHTML = step.say;
+  const prev = h("button", { class: "btn btn-quiet", type: "button" }, "Back");
+  prev.disabled = i === 0;
+  prev.addEventListener("click", () => goStep(i - 1));
+  const next = h("button", { class: "btn", type: "button" }, i === DEMO_STEPS.length - 1 ? "Finish" : "Next Demo Step");
+  next.addEventListener("click", () => (i === DEMO_STEPS.length - 1 ? setInterview(false) : goStep(i + 1)));
+  const start = h("button", { class: "btn btn-quiet", type: "button" }, "Start Demo");
+  start.addEventListener("click", () => goStep(0));
+  bar.replaceChildren(
+    h("span", { class: "step-n" }, `Step ${i + 1} of ${DEMO_STEPS.length}`),
+    h("span", { class: "demo-dots" }, DEMO_STEPS.map((_, k) => h("i", { class: k <= i ? "on" : "" }))),
+    say, start, prev, next);
+}
+function applyInterview() {
+  const on = interviewOn();
+  document.body.classList.toggle("interview", on);
+  const t = document.getElementById("interview-toggle");
+  t.setAttribute("aria-pressed", on ? "true" : "false");
+  renderDemoBar();
+}
+
 // ---- boot ------------------------------------------------------------------------------------
 async function boot() {
   try {
@@ -831,6 +1128,12 @@ async function boot() {
     document.getElementById("mode-badge").textContent = "SERVER UNREACHABLE";
   }
   window.addEventListener("hashchange", route);
+  document.getElementById("interview-toggle").addEventListener("click", () => {
+    const on = !interviewOn();
+    setInterview(on);
+    if (on) goStep(demoStep());
+  });
+  applyInterview();
   route();
 }
 document.addEventListener("DOMContentLoaded", boot);

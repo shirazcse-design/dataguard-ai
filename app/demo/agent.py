@@ -148,10 +148,13 @@ def agent_view(annotation: dict[str, Any], spans: list[Span]) -> dict[str, Any]:
                 "name": s.name,
                 "status": s.status,
                 "duration_ms": (s.end_ns - s.start_ns) / 1e6,
+                "start_ns": s.start_ns,
+                "id": s.span_id,
+                "parent": s.parent_span_id,
                 "attributes": dict(s.attributes),
             }
             for s in spans
-        ],  # fmt: skip
+        ],
     }
 
 
