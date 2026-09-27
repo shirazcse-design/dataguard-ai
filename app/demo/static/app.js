@@ -5,16 +5,19 @@
 
 const PAGES = {
   overview: { title: "Overview", phase: 4 },
-  classify: { title: "Classify", phase: 2 },
-  trace: { title: "Decision Trace", phase: 2 },
+  classify: { title: "Classify", render: renderClassify },
+  trace: { title: "Decision Trace", render: renderTrace },
   agent: { title: "Agent Triage", phase: 3 },
   review: { title: "Human Review", phase: 3 },
   evaluations: { title: "Evaluations", render: renderEvaluations },
   rai: { title: "Responsible AI / Guardrails", phase: 4 },
   observability: { title: "Observability", phase: 4 },
 };
-const DEFAULT_PAGE = "evaluations";
-const state = { status: null, metrics: null };
+const DEFAULT_PAGE = "classify";
+const state = {
+  status: null, metrics: null, examples: null, last: null, busy: false,
+  input: { example: null, text: "", filename: "pasted.txt", llmOff: false, upload: null },
+};
 
 // ---- tiny DOM helpers ------------------------------------------------------------------------
 function h(tag, attrs, ...children) {
@@ -299,6 +302,312 @@ function openItems(m) {
     it.note ? h("span", { class: "source" }, it.note.replace(/^Closed /, "")) : null));
   return h("div", { class: "grid" }, card("What is still open", dataClass("Static documentation"),
     h("ul", { class: "items" }, items), source("docs/uc4/completion-report.md")));
+}
+
+async function postJSON(path, body) {
+  const res = await fetch(path, {
+    method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
+  });
+  let payload = null;
+  try { payload = await res.json(); } catch (_) { /* non-JSON error body */ }
+  if (!res.ok) throw new Error((payload && payload.error) || `HTTP ${res.status}`);
+  return payload;
+}
+
+const STATE_LABEL = {
+  executed: ["Executed", "good"], failed: ["Failed / escalated", "warn"], escalated: ["Escalated", "warn"],
+  not_in_variant: ["Not in this variant", "muted"], disabled_by_request: ["LLM not used", "muted"],
+  not_needed: ["Not needed", "muted"], skipped: ["Skipped", "muted"], not_recorded: ["Not recorded", "muted"],
+};
+const OUTCOME_BADGE = {
+  success: (sm) => (sm.degraded ? ["Degraded", "warn"] : ["Classified", "good"]),
+  review: () => ["Review required", "warn"],
+  failure: (sm) => [sm.status === "rejected" ? "Rejected" : "Error", "bad"],
+};
+
+// ---- Classify --------------------------------------------------------------------------------
+async function renderClassify(page) {
+  if (!state.examples) {
+    const env = await getJSON("/api/examples");
+    state.examples = env.data;
+  }
+  const replay = state.status && state.status.mode !== "live";
+  const exampleButtons = state.examples.map((ex) => {
+    const b = h("button", { class: `example${state.input.example === ex.key ? " active" : ""}`, type: "button" },
+      h("span", { class: "t" }, ex.title, ex.expect.level ? levelChip(ex.expect.level) : statusBadge("Review", "warn")),
+      h("span", { class: "d" }, ex.story));
+    b.addEventListener("click", () => {
+      state.input = { example: ex.key, text: ex.content, filename: ex.filename, llmOff: ex.llm_tiers === "off", upload: null };
+      route();
+    });
+    return b;
+  });
+  const ta = h("textarea", { "aria-label": "Document text", spellcheck: "false" });
+  ta.value = state.input.text;
+  ta.addEventListener("input", () => { state.input.text = ta.value; state.input.example = null; state.input.upload = null; });
+  const fn = h("input", { type: "text", "aria-label": "File name" });
+  fn.value = state.input.filename;
+  fn.addEventListener("input", () => { state.input.filename = fn.value; state.input.example = null; });
+  const off = h("input", { type: "checkbox" });
+  off.checked = state.input.llmOff;
+  off.addEventListener("change", () => { state.input.llmOff = off.checked; });
+  const file = h("input", { type: "file", accept: ".txt,.md,.csv,.json,.log,.yaml,.yml,.xml,.html,.py,.js,.ts,.java,.sql,.env,.ini,.cfg,text/*" });
+  file.addEventListener("change", async () => {
+    const f = file.files && file.files[0];
+    if (!f) return;
+    const buf = await f.arrayBuffer();
+    let text = "";
+    try { text = new TextDecoder("utf-8", { fatal: true }).decode(buf); } catch (_) { text = ""; }
+    state.input = { example: null, text, filename: f.name, llmOff: state.input.llmOff, upload: { name: f.name, bytes: new Uint8Array(buf) } };
+    route();
+  });
+  const run = h("button", { class: "btn", type: "button" }, state.busy ? "Analyzing…" : "Analyze Document");
+  run.disabled = state.busy;
+  run.addEventListener("click", analyze);
+
+  page.append(
+    h("div", { class: "page-head" },
+      h("div", {}, h("h1", {}, "Classify"),
+        h("p", { class: "lead" }, "Runs the real classification service on a document. Every field on the right is the frozen v1.0 result, as returned.")),
+      state.last ? dataClass(state.last.data_class) : null),
+    h("div", { class: "grid cols-2" },
+      h("div", { class: "card" },
+        h("div", { class: "card-head" }, h("h2", {}, "Demo documents"), dataClass("Synthetic dev-split documents")),
+        h("div", { class: "examples" }, exampleButtons),
+        h("label", { class: "field" }, "Document text (pre-extracted; binary parsing is out of scope)", ta),
+        h("label", { class: "field" }, "File name (a weak signal)", fn),
+        h("label", { class: "field" }, "Or upload a text file (UTF-8, 5 MB max, checked by the service's input guard)", file),
+        h("label", { class: "check" }, off,
+          h("span", {}, "Turn the LLM tiers off for this request (", h("code", {}, "max_llm_tier: none"),
+            "): shows what happens when no LLM verdict is available.")),
+        h("div", { class: "btn-row" }, run),
+        replay ? h("div", { class: "note" }, "REPLAY mode replays recorded LLM answers, which exist for the demo documents above. New text has no recording, "
+          + "so its LLM stages fail and the document escalates to review. That's correct fail-safe behavior; use LIVE mode for new text.") : null),
+      resultCard()),
+  );
+  if (state.last) page.append(evidenceCard());
+}
+
+async function analyze() {
+  if (state.busy) return;
+  state.busy = true;
+  route();
+  const inp = state.input;
+  try {
+    let env;
+    if (inp.upload) {
+      env = await postJSON("/api/classify-upload", {
+        name: inp.upload.name, data_base64: b64(inp.upload.bytes), llm_tiers: inp.llmOff ? "off" : "default",
+      });
+    } else if (inp.example) {
+      env = await postJSON("/api/classify", { example: inp.example, llm_tiers: inp.llmOff ? "off" : "default" });
+    } else {
+      env = await postJSON("/api/classify", { text: inp.text, filename: inp.filename || "pasted.txt", llm_tiers: inp.llmOff ? "off" : "default" });
+    }
+    applyMode(env);
+    state.last = { ...env.data, data_class: env.data_class, text: inp.text, title: inp.example ? (state.examples.find((e) => e.key === inp.example) || {}).title : inp.filename };
+    state.lastError = null;
+  } catch (err) {
+    state.lastError = err.message;
+  } finally {
+    state.busy = false;
+    route();
+  }
+}
+
+function b64(bytes) {
+  let bin = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+
+function resultCard() {
+  if (state.lastError) return h("div", { class: "card error" }, h("h2", {}, "The request failed"), h("p", {}, state.lastError));
+  if (!state.last) {
+    return h("div", { class: "card" }, h("div", { class: "empty-state" },
+      h("p", {}, "Pick a demo document, then Analyze Document."),
+      h("p", { class: "note" }, "The result appears here exactly as the service returns it.")));
+  }
+  const L = state.last, sm = L.summary, res = L.result;
+  const [otext, okind] = OUTCOME_BADGE[sm.outcome](sm);
+  const verdictClass = sm.outcome === "failure" ? "failure" : `l-${sm.level || "none"}`;
+  const conf = sm.level_confidence;
+  const lat = res.telemetry && res.telemetry.latency_ms ? res.telemetry.latency_ms.total : null;
+  const llmRan = (L.trace.stages || []).some((st) => st.id === "S3" && st.state === "executed");
+  return h("div", { class: "card" },
+    h("div", { class: "card-head" }, h("h2", {}, "Result"), dataClass(L.data_class)),
+    h("div", { class: `verdict ${verdictClass}` },
+      h("div", { class: "lvl-big" }, sm.outcome === "failure" ? "Not classified" : (sm.level ? sm.level.replace("_", " ") : "No level: needs a human")),
+      h("div", { class: "badges" },
+        statusBadge(otext, okind),
+        sm.high_risk === true ? statusBadge("High risk", "bad") : null,
+        sm.provisional ? statusBadge("Provisional label", "warn") : null,
+        sm.guardrail_events.length ? statusBadge(`${sm.guardrail_events.length} guardrail event(s)`, "warn") : statusBadge("Guardrail passed", "good"),
+        L.replay_miss ? statusBadge("Replay: no recording", "warn") : null)),
+    sm.outcome === "failure"
+      ? h("div", { class: "callout" }, h("b", {}, "Never treated as low sensitivity. "), `The service could not classify this input (${sm.failure_reason || sm.status}). Fix the input or retry.`)
+      : null,
+    L.replay_miss
+      ? h("div", { class: "callout" }, h("b", {}, "No recording for this text. "), "In REPLAY mode the LLM stage has no recorded answer for new text, so it escalated to review instead of guessing. Use a demo document, or LIVE mode.")
+      : null,
+    h("dl", { class: "kv" },
+      h("dt", {}, "Status"), h("dd", {}, h("code", {}, sm.status)),
+      h("dt", {}, "Level decided by"), h("dd", {}, sm.level_decided_by || "—"),
+      h("dt", {}, "Confidence"), h("dd", {}, conf ? confidenceText(conf) : "—"),
+      h("dt", {}, "Categories"), h("dd", {}, sm.categories.length
+        ? h("div", { class: "chips" }, sm.categories.map((c) => h("span", { class: "chip", title: c.confidence ? confidenceText(c.confidence) : "" }, `${c.id} · ${c.decided_by}`)))
+        : "none"),
+      h("dt", {}, "High risk"), h("dd", {}, sm.high_risk === null || sm.high_risk === undefined ? "—"
+        : `${sm.high_risk ? "yes" : "no"}${sm.high_risk_reasons.length ? ` (${sm.high_risk_reasons.map((r) => `${r.axis} ${r.value}`).join(", ")})` : ""}, derived from policy config`),
+      h("dt", {}, "Review"), h("dd", {}, sm.review_required ? `required: ${sm.review_reasons.join(", ")}` : "not required"),
+      h("dt", {}, "Route"), h("dd", {}, h("code", {}, (res.routing.stages_run || []).join(" → ") || "—"), res.routing.stop_reason ? ` (${res.routing.stop_reason})` : ""),
+      h("dt", {}, "Latency"), h("dd", {}, lat === null || lat === undefined ? "—" : `${lat.toFixed(1)} ms`
+        + (L.llm_mode === "replay" && llmRan ? " (LLM part = recorded latency of the original call)" : "")),
+      h("dt", {}, "Versions"), h("dd", {}, h("code", {}, `${res.versions.classifier || ""} · rules ${res.versions.ruleset || "—"} · ${res.versions.llm_deployment || "no LLM"}`))),
+    h("div", { class: "btn-row" }, (() => { const a = h("a", { href: "#trace", class: "btn btn-quiet" }, "See the decision trace →"); return a; })()),
+    h("details", {}, h("summary", {}, "Raw result (frozen schema v1.0)"), h("pre", { class: "json" }, JSON.stringify(res, null, 2))),
+    h("details", {}, h("summary", {}, `Warnings (${sm.warnings.length})`), h("ul", { class: "why-list" }, sm.warnings.map((w) => h("li", {}, h("code", {}, w))))));
+}
+
+function confidenceText(c) {
+  const kinds = {
+    verbalized_bucket: "the LLM's own low/medium/high, never calibrated",
+    rule_strength: "rule strength, not a probability",
+    calibrated_probability: "calibrated probability",
+    uncalibrated_score: "uncalibrated score",
+    none: "no confidence",
+  };
+  return `${c.raw ?? "—"} (${kinds[c.kind] || c.kind})`;
+}
+
+function evidenceCard() {
+  const L = state.last, ev = L.result.evidence || [];
+  const located = ev.filter((e) => e.locator && Number.isInteger(e.locator.char_start) && Number.isInteger(e.locator.char_end));
+  let docView = null;
+  if (L.text && located.length) {
+    // Highlight the service's own evidence locators in the text that was sent. Overlapping spans
+    // are merged, and a merged span records every source that pointed at it (rules, LLM or both).
+    const spans = located.map((e) => ({ a: e.locator.char_start, b: e.locator.char_end, src: e.source.startsWith("llm") ? "llm" : "rules", id: e.evidence_id }))
+      .filter((x) => x.a >= 0 && x.b <= L.text.length && x.a < x.b).sort((x, y) => x.a - y.a || y.b - x.b);
+    const merged = [];
+    for (const sp of spans) {
+      const last = merged[merged.length - 1];
+      if (last && sp.a < last.b) {
+        last.b = Math.max(last.b, sp.b); last.srcs.add(sp.src); last.ids.push(sp.id);
+      } else {
+        merged.push({ a: sp.a, b: sp.b, srcs: new Set([sp.src]), ids: [sp.id] });
+      }
+    }
+    const parts = [];
+    let pos = 0;
+    for (const m of merged) {
+      parts.push(L.text.slice(pos, m.a));
+      const cls = m.srcs.size > 1 ? "src-both" : `src-${[...m.srcs][0]}`;
+      parts.push(h("mark", { class: `ev ${cls}`, title: m.ids.join(", ") }, L.text.slice(m.a, m.b)));
+      pos = m.b;
+    }
+    parts.push(L.text.slice(pos));
+    docView = h("div", {}, h("div", { class: "doc" }, parts),
+      h("div", { class: "legend" }, h("span", {}, h("mark", { class: "ev src-rules" }, "rule match")),
+        h("span", {}, h("mark", { class: "ev src-llm" }, "LLM quote")), h("span", {}, h("mark", { class: "ev src-both" }, "rule match + LLM quote"))));
+  }
+  const items = ev.map((e) => h("div", { class: "ev-item" },
+    h("div", { class: "top" }, h("code", {}, e.evidence_id), h("span", { class: "chip" }, `${e.supports.axis}: ${e.supports.value}`),
+      statusBadge(e.provenance, e.provenance === "observed" ? "good" : "muted"),
+      e.verified ? statusBadge("verified quote", "good") : null, e.strength ? h("span", { class: "chip" }, e.strength) : null),
+    h("div", {}, h("code", {}, e.excerpt || "(no excerpt)")),
+    h("div", { class: "note" }, `${e.type}${e.detector ? ` · detector ${e.detector.id}@${e.detector.version}` : ""}`)));
+  return h("div", { class: "grid" }, card("Why: the evidence", dataClass(L.data_class),
+    h("p", { class: "note" }, "Evidence as returned by the service. Excerpts are masked by the service itself; highlighted spans use its own character locators."),
+    docView,
+    ev.length ? h("div", { class: "ev-list" }, items) : h("p", { class: "note" }, "No evidence returned for this result.")));
+}
+
+// ---- Decision Trace --------------------------------------------------------------------------
+async function renderTrace(page) {
+  const head = h("div", { class: "page-head" },
+    h("div", {}, h("h1", {}, "Decision Trace"),
+      h("p", { class: "lead" }, "How the hybrid router reached this decision: each stage marked with what actually happened, from the request's own redacted spans and routing record.")),
+    state.last ? dataClass(state.last.data_class) : null);
+  page.append(head);
+  if (!state.last) {
+    const b = h("button", { class: "btn", type: "button" }, "Classify the healthcare document");
+    b.addEventListener("click", async () => {
+      const ex = (state.examples || (await getJSON("/api/examples")).data).find((e) => e.key === "healthcare");
+      state.examples = state.examples || [ex];
+      state.input = { example: "healthcare", text: ex.content, filename: ex.filename, llmOff: false, upload: null };
+      await analyze();
+    });
+    page.append(h("div", { class: "card" }, h("div", { class: "empty-state" }, h("p", {}, "No document has been classified yet."), b)));
+    return;
+  }
+  const L = state.last, t = L.trace, sm = L.summary;
+  const items = t.stages.map((st) => {
+    const [label, kind] = STATE_LABEL[st.state] || [st.state, "muted"];
+    const meta = [];
+    if (st.latency_ms !== undefined && st.latency_ms !== null) meta.push(`${st.latency_ms.toFixed(1)} ms${st.latency_note ? ` (${st.latency_note})` : ""}`);
+    if (st.model) meta.push(`deployment ${st.model}${st.served_model && st.served_model !== st.model ? `, served by ${st.served_model}` : ""}`);
+    if (st.replayed) meta.push("replayed response");
+    if (st.tokens && (st.tokens.in || st.tokens.out)) meta.push(`${st.tokens.in ?? "?"} in / ${st.tokens.out ?? "?"} out tokens`);
+    if (st.replay_miss) meta.push("no recorded response for this text");
+    return h("li", { class: `st-${st.state}` },
+      h("div", { class: "dot" }, st.id),
+      h("div", { class: "body" },
+        h("div", { class: "head" }, h("b", {}, st.name), statusBadge(label, kind)),
+        st.detail ? h("div", {}, st.detail) : null,
+        meta.length ? h("div", { class: "meta" }, meta.join(" · ")) : null,
+        st.note ? h("div", { class: "why" }, st.note) : null));
+  });
+  const v = t.variant;
+  page.append(
+    h("div", { class: "grid cols-4" },
+      kpiBox("Final", sm.outcome === "failure" ? "Not classified" : (sm.level ? sm.level.replace("_", " ") : "Review")),
+      kpiBox("Stop reason", t.stop_reason || "—", "code"),
+      kpiBox("Escalations", String(t.escalations)),
+      kpiBox("Total latency", t.total_latency_ms === undefined || t.total_latency_ms === null ? "—" : `${t.total_latency_ms.toFixed(0)} ms`)),
+    h("div", { class: "grid cols-2" },
+      card(`Stages: ${L.title || "document"}`, dataClass(L.data_class), h("ol", { class: "timeline" }, items)),
+      h("div", {},
+        card("Routing variant in force", dataClass("Static configuration"),
+          h("dl", { class: "kv" },
+            h("dt", {}, "Variant"), h("dd", {}, h("code", {}, L.variant)),
+            h("dt", {}, "Rules short-circuit"), h("dd", {}, v.rules_short_circuit ? "on" : "off (Rules never skip the LLM)"),
+            h("dt", {}, "ML stage"), h("dd", {}, v.ml_enabled ? "enabled" : "disabled in this variant"),
+            h("dt", {}, "LLM tier order"), h("dd", {}, h("code", {}, v.llm_tier_order.join(" → ")), " (each tier at most once)"),
+            h("dt", {}, "LLM acceptance"), h("dd", {}, `confidence bucket ≥ ${v.llm_min_confidence}, quotes verified, no conflict`)),
+          source("config/routing/routing.v1.yaml")),
+        whyCard())),
+    h("div", { class: "grid" }, card("Redacted spans for this request", dataClass(L.data_class),
+      h("p", { class: "note" }, "What the tracer exported: only allow-listed dg.* attributes. No document text, only a content hash."),
+      h("div", { class: "table-wrap" }, h("table", {},
+        h("thead", {}, h("tr", {}, h("th", {}, "Span"), h("th", {}, "Status"), h("th", { class: "n" }, "Duration"), h("th", {}, "Attributes"))),
+        h("tbody", {}, t.spans.map((sp) => h("tr", {},
+          h("td", { class: "mono" }, sp.name), h("td", {}, sp.status), h("td", { class: "n" }, `${sp.duration_ms.toFixed(2)} ms`),
+          h("td", {}, h("details", {}, h("summary", {}, `${Object.keys(sp.attributes).length} attributes`), h("pre", { class: "json" }, JSON.stringify(sp.attributes, null, 2))))))))),
+      h("div", { class: "note" }, L.llm_mode === "replay" ? "Span durations are measured now; a replayed LLM call completes instantly, which is why its stage latency above is the recorded one." : ""))),
+  );
+}
+
+function kpiBox(label, value, kind) {
+  return h("div", { class: "card kpi" }, h("div", { class: "l" }, label), h("div", { class: kind === "code" ? "v v-code" : "v" }, value));
+}
+
+function whyCard() {
+  const L = state.last, sm = L.summary, ev = L.result.evidence || [];
+  const facts = [];
+  if (sm.outcome === "failure") facts.push(`The input was not classified: ${sm.failure_reason || sm.status}.`);
+  if (sm.level) facts.push(`Level ${sm.level} was set by ${sm.level_decided_by}${sm.level_confidence ? `, confidence ${confidenceText(sm.level_confidence)}` : ""}.`);
+  for (const c of sm.categories) {
+    const refs = ev.filter((e) => c.evidence_ids.includes(e.evidence_id));
+    const obs = refs.filter((e) => e.provenance === "observed").length;
+    facts.push(`${c.id}: decided by ${c.decided_by}, backed by ${refs.length} evidence item(s) (${obs} observed, ${refs.length - obs} inferred).`);
+  }
+  if (sm.high_risk) facts.push(`High risk because of ${sm.high_risk_reasons.map((r) => `${r.axis} ${r.value}`).join(" and ")}, per the high-risk policy config.`);
+  if (sm.review_required) facts.push(`Sent to human review: ${sm.review_reasons.join(", ")}.${sm.level ? "" : " No stage produced a usable level, so there is no label, and no default."}`);
+  if (L.result.routing.stop_reason) facts.push(`The router stopped at ${L.result.routing.stop_reason}.`);
+  return h("div", { class: "card" }, h("details", { open: true }, h("summary", {}, "Why this decision?"),
+    h("ul", { class: "why-list" }, facts.map((f) => h("li", {}, f))),
+    h("div", { class: "note" }, "Built only from the result's own fields: level, categories, evidence, high-risk reasons, review codes and routing.")));
 }
 
 // ---- boot ------------------------------------------------------------------------------------

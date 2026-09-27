@@ -16,17 +16,22 @@ environment variable NAME is set.
 
 from __future__ import annotations
 
+import base64
+import binascii
 import json
 import os
+import threading
 from dataclasses import dataclass, field
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib import resources
 from typing import Any
 
-from . import metrics
+from . import examples, metrics
+from .classify import ClassifySession, DemoError
 
 MODES = ("replay", "live")
+MAX_BODY = 8 * 1024 * 1024  # the service's own guard rejects documents over 5 MB; this caps JSON
 LOOPBACK = {"127.0.0.1", "localhost", "::1"}
 
 # Names only: readiness shows whether each is set, never a value.
@@ -65,6 +70,8 @@ class DemoApp:
     mode: str = "replay"
     env: dict[str, str] = field(default_factory=lambda: dict(os.environ))
     _metrics: dict[str, Any] | None = None
+    _classifier: ClassifySession | None = None
+    _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
         if self.mode not in MODES:
@@ -86,6 +93,33 @@ class DemoApp:
                 },
             }
         )
+
+    def data_class(self) -> str:
+        """What a classification or agent run on this server is: LIVE only in live mode."""
+        return "LIVE" if mode_label(self.mode) == "LIVE" else "REPLAY"
+
+    def classifier(self) -> ClassifySession:
+        with self._init_lock:
+            if self._classifier is None:
+                self._classifier = ClassifySession(self.mode)
+            return self._classifier
+
+    def examples(self) -> dict[str, Any]:
+        return self.envelope(examples.listing(), data_class="SYNTHETIC DEV-SPLIT DOCUMENTS")
+
+    def classify(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.classifier().classify(body), data_class=self.data_class())
+
+    def classify_upload(self, body: dict[str, Any]) -> dict[str, Any]:
+        name, data = body.get("name"), body.get("data_base64")
+        if not isinstance(name, str) or not isinstance(data, str):
+            raise DemoError("an upload needs a file name and base64 data")
+        try:
+            raw = base64.b64decode(data, validate=True)
+        except (binascii.Error, ValueError):
+            raise DemoError("the upload is not valid base64") from None
+        out = self.classifier().classify_upload(name[:200], raw, body.get("llm_tiers") or "default")
+        return self.envelope(out, data_class=self.data_class())
 
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
@@ -123,7 +157,11 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 name, ctype = _STATIC[path]
                 self._send(HTTPStatus.OK, _static(name), ctype)
                 return
-            routes = {"/api/status": app.status, "/api/metrics": app.metrics}
+            routes = {
+                "/api/status": app.status,
+                "/api/metrics": app.metrics,
+                "/api/examples": app.examples,
+            }
             if path in routes:
                 try:
                     self._json(HTTPStatus.OK, routes[path]())
@@ -131,6 +169,33 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                     self._json(HTTPStatus.INTERNAL_SERVER_ERROR, app.envelope(None, error=str(exc)))
                 return
             self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))
+
+        def do_POST(self) -> None:  # noqa: N802 - stdlib name
+            path = self.path.split("?", 1)[0]
+            routes = {"/api/classify": app.classify, "/api/classify-upload": app.classify_upload}
+            if path not in routes:
+                self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))
+                return
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+            except ValueError:
+                length = -1
+            if length < 0 or length > MAX_BODY:
+                self._json(
+                    HTTPStatus.REQUEST_ENTITY_TOO_LARGE, app.envelope(None, error="too large")
+                )
+                return
+            try:
+                body = json.loads(self.rfile.read(length) or b"{}")
+                if not isinstance(body, dict):
+                    raise ValueError
+            except ValueError:
+                self._json(HTTPStatus.BAD_REQUEST, app.envelope(None, error="body must be JSON"))
+                return
+            try:
+                self._json(HTTPStatus.OK, routes[path](body))
+            except DemoError as exc:
+                self._json(exc.status, app.envelope(None, error=str(exc)))
 
     return Handler
 

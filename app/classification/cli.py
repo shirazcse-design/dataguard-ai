@@ -1271,6 +1271,13 @@ def _cmd_demo_serve(args: argparse.Namespace) -> int:
         print(f"error: {exc}", file=sys.stderr)
         return 2
     host, port = server.server_address[:2]
+    session = app.classifier()  # start the classifier now, so a mode that cannot start says so here
+    if session.error:
+        print(
+            f"warning: the classifier did not start in {app.mode} mode ({session.error}); the "
+            "Classify page will report this. Restart with --mode replay to demo without Azure.",
+            file=sys.stderr,
+        )
     print(
         f"DataGuard AI interview demo ({app.mode.upper()}) at http://{host}:{port}/",
         file=sys.stderr,
