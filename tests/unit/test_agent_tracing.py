@@ -251,3 +251,21 @@ def test_agent_triage_azure_monitor_sends_agent_traces_through_the_sink(monkeypa
     assert secret not in out and secret not in err
     assert len(by_name(fake.spans, "agent.document")) == 2
     assert flushed == [1]
+
+
+def test_a_rebound_classify_call_is_flagged_on_its_tool_span(tmp_path):
+    svc, reg, sink = traced(tmp_path)
+    doc = mkdoc("d1", content=PII)
+    altered = ParsedToolCall(id="1", name="classify_document", arguments={"content": "retyped"})
+    exact = classify(doc, "2")
+    for call_, expected in ((altered, True), (exact, False)):
+        sink.spans.clear()
+        run_batch(
+            [doc],
+            MockAgentClient([AgentTurn(tool_calls=[call_]), final()]),
+            reg,
+            CFG,
+            tracer=svc.tracer,
+        )
+        tool = by_name(sink.spans, "agent.tool")[0]
+        assert tool.attributes["dg.agent.args_rebound"] is expected

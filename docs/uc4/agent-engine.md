@@ -121,6 +121,7 @@ refused or ignored by construction), not from counting rows in this run.
 
 | Item | State |
 |---|---|
+| A live Agent Service run (`--agent-mode foundry-service`) at scale | **Registered and smoke-tested only** (2026-09-26, D9.33): `dataguard-batch-triage` v2, 3 dev documents, all completed with the original content classified (D9.34). Not scaled to a full split. |
 | A live Foundry planner run (`--agent-mode foundry`) at scale | **Smoke-tested only** (2026-09-23): 3 dev-split documents against the real `uc4-llm-medium` deployment, live. The tool-calling round trip, JSON final-answer parsing, and the safety invariant all held on real output (one document had `classify_document` itself return `review_required`; the agent's `level` correctly stayed `null` and it called `request_human_review` rather than inventing a decision). Rationale text was visibly richer than the offline planner's canned string. Not scaled to a full-split run or written up as a report - see D9.29. |
 | Honest (grounding) score | Not computed; needs a pass over the rationale text (reusing the evidence-substring check or the Content Safety Groundedness second opinion), not yet wired to the agent's own output. |
 | Formal Reliability score | Not computed as a number; two identical runs were confirmed byte-for-byte identical on this deterministic offline policy (a live model would need a real repeat-run comparison). |
@@ -134,6 +135,33 @@ Each document is one trace (`agent.document` > `agent.planner` / `agent.tool` > 
 it as an agent run (decision D9.32; details in `observability-engine.md`). Tracing never changes a
 decision (unit-tested: identical reports with and without it). `--trace-out` writes the redacted
 spans locally; `--azure-monitor` also exports them.
+
+## Foundry Agent Service
+
+The agent can be registered as a real, versioned agent in Microsoft Foundry Agent Service
+(`app/agent/foundry_service.py`, decision D9.33), so it appears on the portal's Agents page:
+
+```
+pip install -e ".[foundry-agents]"
+export DATAGUARD_FOUNDRY_PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>
+export DATAGUARD_LLM_DEPLOYMENT_MID=uc4-llm-medium
+dataguard-uc4 agent foundry-register                      # creates a new agent version
+dataguard-uc4 agent triage --agent-mode foundry-service --limit 3
+```
+
+`classify_document` takes no arguments: the loop binds it to the document under triage and always
+classifies the original text (D9.34 - the first live Agent Service run showed the planner retyping
+documents, altering 2 of 3 before they reached the classifier).
+
+Foundry holds the **definition** - `SYSTEM_PROMPT` as instructions, the planner model, the three
+function-tool schemas. It does not hold the tools: Agent Service function tools are executed by the
+caller, so every `function_call` comes back to `loop.py` and runs through the same `ToolRegistry`,
+allowlist, step budget and never-downgrade invariant as the other planners. A portal user can open
+the agent in the playground, but the portal cannot execute its tools (Foundry's own documented
+limit for function tools), so only `agent triage/eval --agent-mode foundry-service` gives a real
+run. Sign-in is Microsoft Entra ID only (`DefaultAzureCredential`, falling back to a browser
+sign-in; no Azure CLI or API key needed). The identity needs a data-plane role on the project,
+e.g. **Azure AI User**.
 
 ## Reproduce
 

@@ -105,6 +105,27 @@ def test_the_agent_cannot_smuggle_a_level_through_a_tool_call_argument():
     assert ann.level == "HIGHLY_CONFIDENTIAL"  # the real result, not "PUBLIC"
 
 
+def test_classify_document_always_classifies_the_original_document_never_the_planners_copy():
+    """D9.34: a live planner retypes documents it passes along, and a retyped document can lose the
+    value that makes it sensitive. The loop binds classify_document to the document under triage."""
+    doc = mkdoc(content=PII_DOC_CONTENT, filename="hr.txt")
+    laundered = ParsedToolCall(
+        id="1", name="classify_document",
+        arguments={"content": "Employee record\nNational ID: [removed]\n", "filename": "memo.txt"},
+    )  # fmt: skip
+    client = MockAgentClient([AgentTurn(tool_calls=[laundered]), final()])
+    ann = run_document(doc, client, registry(), allowed_tools=ALL_TOOLS, max_steps=6)
+    assert ann.level == "HIGHLY_CONFIDENTIAL"  # the original was classified, not the laundered copy
+
+
+def test_classify_document_with_no_arguments_classifies_the_document():
+    doc = mkdoc(content=PII_DOC_CONTENT)
+    call = ParsedToolCall(id="1", name="classify_document", arguments={})
+    client = MockAgentClient([AgentTurn(tool_calls=[call]), final()])
+    ann = run_document(doc, client, registry(), allowed_tools=ALL_TOOLS, max_steps=6)
+    assert ann.stopped_reason == "completed" and ann.level == "HIGHLY_CONFIDENTIAL"
+
+
 # ---- review can only be added, never suppressed -----------------------------------------------
 def test_the_agent_can_add_a_review_request_beyond_what_the_tool_flagged():
     doc = mkdoc(content="A completely ordinary internal memo about the office move.")
@@ -175,7 +196,7 @@ def test_exceeding_the_step_budget_forces_review_not_a_silent_drop():
 # ---- repeated tool failure ----------------------------------------------------------------
 def test_two_consecutive_tool_failures_stop_the_document_and_force_review():
     doc = mkdoc(content=PII_DOC_CONTENT)
-    bad = ParsedToolCall(id="1", name="classify_document", arguments={})  # missing "content"
+    bad = ParsedToolCall(id="1", name="lookup_taxonomy_definition", arguments={})  # missing "id"
     client = MockAgentClient([AgentTurn(tool_calls=[bad]), AgentTurn(tool_calls=[bad]), final()])
     ann = run_document(doc, client, registry(), allowed_tools=ALL_TOOLS, max_steps=6)
     assert ann.stopped_reason == "tool_failure" and ann.review_reason == "repeated_tool_failure"
@@ -184,7 +205,7 @@ def test_two_consecutive_tool_failures_stop_the_document_and_force_review():
 
 def test_a_single_failure_followed_by_success_does_not_stop_the_document():
     doc = mkdoc(content=PII_DOC_CONTENT)
-    bad = ParsedToolCall(id="1", name="classify_document", arguments={})
+    bad = ParsedToolCall(id="1", name="lookup_taxonomy_definition", arguments={})
     client = MockAgentClient(
         [AgentTurn(tool_calls=[bad]), AgentTurn(tool_calls=[classify_call(doc, "2")]), final()]
     )

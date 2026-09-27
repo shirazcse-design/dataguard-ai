@@ -12,6 +12,12 @@ Guardrails enforced HERE, structurally, not left to the prompt:
   never from the agent's own text. If `classify_document` was never successfully called, the
   document is forced to review with `review_reason="classify_document_not_called"` rather than
   emitting an unset decision as if it were real.
+* **classify_document is bound to the document under triage**: the loop always classifies the
+  document's ORIGINAL content and filename and ignores whatever arguments the planner sent. A live
+  planner retypes a document it is asked to pass along (found in the 2026-09-26 Agent Service run:
+  2 of 3 documents reached the classifier altered), and a retyped document can silently lose the
+  very value that makes it sensitive - so the classifier's input must not be model-controlled
+  either, or copying its decision verbatim would not be enough (decision D9.34).
 * **The agent can only ADD review, never suppress one**: `review_requested` is the OR of the
   agent's own `request_human_review` call and `classify_document`'s own `status ==
   "review_required"` - the agent cannot make a document classify_document already flagged look
@@ -36,13 +42,14 @@ from .tools import TOOL_NAMES, ToolRegistry
 from .types import AgentError, AgentLLMClient, AgentTurn
 
 SYSTEM_PROMPT = (
-    "You triage one document for a data-security team. Call classify_document exactly once with "
-    "the document's content. You may then call lookup_taxonomy_definition to ground your rationale "
-    "in the real definition, and request_human_review if you believe this document needs a human "
-    "look beyond what classify_document already returned. You do not decide the sensitivity level "
-    "or categories yourself - classify_document's result is final and is not yours to change. "
-    "When you are done, reply with a final JSON object only: "
-    '{"priority": "low"|"medium"|"high", "rationale": "one sentence grounded in the tool results"}.'
+    "You triage one document for a data-security team. Call classify_document exactly once; "
+    "it classifies this document and takes no arguments. You may then call "
+    "lookup_taxonomy_definition to ground your rationale in the real definition, and "
+    "request_human_review if you believe this document needs a human look beyond what "
+    "classify_document already returned. You do not decide the sensitivity level or "
+    "categories yourself - classify_document's result is final and is not yours to change. "
+    'When you are done, reply with a final JSON object only: {"priority": '
+    '"low"|"medium"|"high", "rationale": "one sentence grounded in the tool results"}.'
 )
 
 
@@ -163,8 +170,15 @@ def run_document(
                 )
                 state.consecutive_failures += 1
                 continue
+            arguments = call.arguments
+            if call.name == "classify_document":
+                bound = {"content": doc.content, "filename": doc.filename}
+                rebound = any(k in arguments and arguments[k] != v for k, v in bound.items())
+                arguments = bound
             with _tool_span(step, call.name) as tsp:
-                result = registry.call(call.name, call.arguments)
+                if call.name == "classify_document":
+                    tsp.set(dg__agent__args_rebound=rebound)
+                result = registry.call(call.name, arguments)
                 tsp.set(dg__agent__tool_ok=result.ok)
                 if not result.ok:
                     tsp.set(dg__agent__tool_error=result.error_kind or "unknown")

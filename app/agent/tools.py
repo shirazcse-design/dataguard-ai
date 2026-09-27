@@ -37,17 +37,12 @@ def tool_schemas() -> list[dict[str, Any]]:
             "function": {
                 "name": "classify_document",
                 "description": (
-                    "Classify one pre-extracted document by sensitivity level and data "
-                    "categories. Returns a recommendation; it never blocks or remediates."
+                    "Classify the document under triage by sensitivity level and data "
+                    "categories. Takes no arguments: it is bound to this document, and its exact "
+                    "original text is classified. Returns a recommendation; it never blocks or "
+                    "remediates."
                 ),
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "content": {"type": "string", "description": "the document's text"},
-                        "filename": {"type": "string"},
-                    },
-                    "required": ["content"],
-                },
+                "parameters": {"type": "object", "properties": {}},
             },
         },
         {
@@ -79,6 +74,8 @@ def tool_schemas() -> list[dict[str, Any]]:
     ]
 
 
+# ToolRegistry.classify_document still takes `content`/`filename`: the LOOP supplies them from the
+# document under triage (app/agent/loop.py), never the planner.
 class ToolRegistry:
     def __init__(self, service: ClassificationService, bundle: ConfigBundle) -> None:
         self.service = service
