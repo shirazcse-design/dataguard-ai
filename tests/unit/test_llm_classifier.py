@@ -454,3 +454,45 @@ def test_the_real_config_records_what_each_deployment_accepts(parts):
     assert (t["mid"].api, t["mid"].send_temperature) == ("chat_completions", True)
     assert (t["large"].api, t["large"].send_temperature) == ("responses", False)
     assert parts.cfg.generation.max_output_tokens >= 2000  # reasoning models need headroom
+
+
+# ---- latency telemetry (D9.38) ------------------------------------------------------------------
+class _TimedClient(MockLLMClient):
+    """A client whose call takes `wall_s` of real time and reports `latency_ms`, live or replayed."""
+
+    def __init__(self, script, *, wall_s: float, latency_ms: float, cached: bool) -> None:
+        super().__init__(script, latency_ms=latency_ms)
+        self._wall_s, self._cached = wall_s, cached
+
+    def complete_structured(self, request):
+        import time
+
+        time.sleep(self._wall_s)
+        return super().complete_structured(request).model_copy(update={"cached": self._cached})
+
+
+def _timed(parts, client):
+    return LLMClassifier(
+        client, parts.cfg, parts.bundle.policy,
+        PromptBuilder(parts.cfg, parts.bundle.taxonomy, parts.shots, ROOT),
+        InjectionScanner(parts.guard), tier="small", config_sha256=parts.sha,
+        guardrail_sha256=parts.gsha, sleep=lambda s: None,
+    )  # fmt: skip
+
+
+def test_a_live_call_is_counted_once_in_the_stage_total(parts):
+    """Found in the LIVE dashboard rehearsal: the total added the call's own duration to a wall clock
+    that already contained it, reporting ~2x (3.6 s for a 1.8 s call)."""
+    client = _TimedClient([ans()], wall_s=0.2, latency_ms=200.0, cached=False)
+    lat = _timed(parts, client).classify(request()).telemetry.latency_ms
+    assert lat["llm"] == 200.0
+    assert 200.0 <= lat["total"] < 350.0  # one call's worth plus local overhead, not ~400
+
+
+def test_a_replayed_call_still_reports_its_recorded_latency(parts):
+    """Replay returns instantly; its RECORDED latency stands in for the call, so replay totals (and
+    every report built from them) are unchanged by the fix."""
+    client = _TimedClient([ans()], wall_s=0.0, latency_ms=2000.0, cached=True)
+    lat = _timed(parts, client).classify(request()).telemetry.latency_ms
+    assert lat["llm"] == 2000.0
+    assert 2000.0 <= lat["total"] < 2150.0
