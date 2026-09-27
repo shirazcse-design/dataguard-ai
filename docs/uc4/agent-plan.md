@@ -1,4 +1,4 @@
-# UC4 Batch Triage Agent: pre-registered plan
+# Batch Triage Agent (Sensitive Data Discovery & Classification Agent): pre-registered plan
 
 **Status: committed BEFORE any agent code is written.** It fixes the task, the tools, the loop, the
 guardrails and the eval plan, so results cannot shape them. Deviations go in the results document.
@@ -7,8 +7,9 @@ guardrails and the eval plan, so results cannot shape them. Deviations go in the
 
 ## Why this exists, and the decision it reverses
 
-Decisions A6 and A19 scoped UC4 as a deterministic classification service, explicitly **not** an
-autonomous agent, for this stage. The product owner has now asked for UC4 to also include a real
+Decisions A6 and A19 scoped this use case (then called UC4) as a deterministic classification
+service, explicitly **not** an autonomous agent, for this stage. The product owner has now asked for
+it to also include a real
 agentic component (2026-09-23), reversing that scope narrowly — recorded as decision A37. This plan
 is written to do that honestly: a genuine agent with real tool use and real autonomy over a bounded
 task, not a wrapper around the existing deterministic pipeline relabelled "agentic."
@@ -19,7 +20,7 @@ task, not a wrapper around the existing deterministic pipeline relabelled "agent
 uses `classify_document` (the existing MCP tool, unchanged) as its primary tool, for a document
 batch triage task described below. **The classifier itself (`ClassificationService`, the hybrid
 router, fusion, review logic) is not modified in any way.** The deterministic "harness owns
-routing, never the model" property that the rest of UC4 relies on stays exactly as it is.
+routing, never the model" property that the rest of the system relies on stays exactly as it is.
 
 **Not approved, not built:** giving the classifier's own LLM stage a tool-use loop (that was the
 riskier of two options presented to the product owner and was not chosen); promoting the
@@ -32,7 +33,7 @@ classifier's own live evaluations).
 
 ## The task: Batch Triage
 
-Given a batch of documents (the same pre-extracted-text input contract as UC4 itself), the agent
+Given a batch of documents (the same pre-extracted-text input contract as the classification service itself), the agent
 produces a `BatchTriageReport`: for every document, **the `classify_document` result, unchanged**,
 plus the agent's own annotations — a review-priority tier, a rationale grounded in the tool's own
 returned fields, and whether it requested human review. The agent orders and prioritizes; it never

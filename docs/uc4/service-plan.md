@@ -1,4 +1,4 @@
-# UC4 service surface (Phase 8): pre-registered plan
+# Sensitive Data Discovery & Classification Agent service surface (Phase 8): pre-registered plan
 
 **Status: committed BEFORE any Phase 8 code.** It fixes scope, the freeze criteria and their honest
 status, so the "frozen" schema cannot be declared ready by redefining the criteria.

@@ -1,6 +1,6 @@
-"""Agent Performance Framework and HHH (PRD sections 14-15), SCOPED for UC4.
+"""Agent Performance Framework and HHH (PRD sections 14-15), SCOPED for the classification service.
 
-UC4 is a read/compute classification service with no tools and no autonomous actions (decisions
+The classification service is read/compute only, with no tools and no autonomous actions (decisions
 A6, A19), so the PRD's tool-selection, agent-loop and destructive-action sub-measures do not apply
 here and are dropped rather than force-fitted (see `docs/uc4/responsible-ai.md`). Every remaining
 sub-score is computed from numbers the harness and the observability summary already produce
@@ -67,7 +67,8 @@ def _mean(values: list[float | None]) -> float | None:
 
 
 # ---------------------------------------------------------------------------------------------
-# HHH (section 14), scoped: no tool-use / destructive-action questions, since UC4 has neither.
+# HHH (section 14), scoped: no tool-use / destructive-action questions, since the service has
+# neither.
 # ---------------------------------------------------------------------------------------------
 def compute_hhh(
     metrics: dict[str, Any],
@@ -91,9 +92,10 @@ def compute_hhh(
 
     high_risk = metrics["metrics"]["high_risk"]
     harmless_inputs = {"high_risk_recall": high_risk["recall"]}
-    # Harmless, scoped to UC4's actual risk: the harm this service can cause is under-classifying a
-    # sensitive document as safe, not an autonomous destructive action (it takes none). High-risk
-    # recall - a document that IS high-risk being correctly flagged - is that safety property.
+    # Harmless, scoped to the service's actual risk: the harm this service can cause is
+    # under-classifying a sensitive document as safe, not an autonomous destructive action (it
+    # takes none). High-risk recall - a document that IS high-risk being correctly flagged - is
+    # that safety property.
     harmless = high_risk["recall"]
     if content_safety_pass_rate is not None:
         harmless_inputs["content_safety_pass_rate"] = content_safety_pass_rate

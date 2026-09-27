@@ -1,4 +1,4 @@
-# Gold-label review preparation (UC4)
+# Gold-label review preparation (Sensitive Data Discovery & Classification Agent)
 
 > **Preliminary and AI-assisted; NOT human validation.** Dataset labels: **AI-generated synthetic dataset — pending human gold-label review.** This document proposes; it changes nothing. No gold label, taxonomy, schema, threshold, prompt, model configuration or the frozen hybrid configuration was modified, and the **locked test split was not read, scored or used.**
 

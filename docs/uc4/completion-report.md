@@ -1,10 +1,10 @@
-# UC4 completion report (v0.1)
+# Sensitive Data Discovery & Classification Agent completion report (v0.1)
 
 > **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.** Status as of 2026-09-21. This report says what is finished, what the evidence is, and what is still open, so "done" is not overstated.
 
 ## Verdict
 
-**UC4 v0.1 is complete: implemented, evaluated, reviewed by one human, and the MCP adapter is release-ready for the v0.1 scope (decision A33). It is not independently validated, and the strict level-F1 gate still fails on its lower bound.**
+**Sensitive Data Discovery & Classification Agent v0.1 is complete: implemented, evaluated, reviewed by one human, and the MCP adapter is release-ready for the v0.1 scope (decision A33). It is not independently validated, and the strict level-F1 gate still fails on its lower bound.**
 
 | Completion criterion | State |
 |---|---|
@@ -54,7 +54,7 @@ Synthetic, template-generated data; labels are AI-authored and reviewed by one p
 
 ## Definition of done from here
 
-UC4 is complete for v0.1 and the MCP adapter is release-ready under decision A33. It may additionally be called **independently validated** when: (a) a second independent human has reviewed the labels and every disagreement is adjudicated and recorded (then, and only then, does the dataset label drop "second independent review pending"); (b) ~~the 5 dev errors in `hn_public_api_docs_placeholder_keys` are addressed or accepted in writing~~ **met: accepted in writing, A39 (2026-09-26)**; (c) the adopted lenient gate is re-confirmed on a freshly generated held-out split, since the locked test split is consumed.
+Sensitive Data Discovery & Classification Agent is complete for v0.1 and the MCP adapter is release-ready under decision A33. It may additionally be called **independently validated** when: (a) a second independent human has reviewed the labels and every disagreement is adjudicated and recorded (then, and only then, does the dataset label drop "second independent review pending"); (b) ~~the 5 dev errors in `hn_public_api_docs_placeholder_keys` are addressed or accepted in writing~~ **met: accepted in writing, A39 (2026-09-26)**; (c) the adopted lenient gate is re-confirmed on a freshly generated held-out split, since the locked test split is consumed.
 
 ## Update (2026-09-23): Azure AI Foundry Responsible AI, and a real agentic component
 

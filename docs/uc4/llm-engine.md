@@ -1,4 +1,4 @@
-# UC4 LLM classifier (Approach C)
+# Sensitive Data Discovery & Classification Agent LLM classifier (Approach C)
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Plan (pre-registered before any code): [`llm-plan.md`](llm-plan.md) (deviations are listed below).

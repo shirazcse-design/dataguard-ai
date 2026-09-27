@@ -1,4 +1,7 @@
-"""Build, write, load and verify the UC4 synthetic dataset."""
+"""Build, write, load and verify the synthetic dataset.
+
+Part of the Sensitive Data Discovery & Classification Agent.
+"""
 
 from __future__ import annotations
 

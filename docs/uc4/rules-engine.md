@@ -1,4 +1,4 @@
-# UC4 Rules Engine (Approach A)
+# Sensitive Data Discovery & Classification Agent Rules Engine (Approach A)
 
 The deterministic Rules/Heuristics baseline. Its purpose is **not** to beat ML or an LLM: it is to
 establish an honest baseline and to show where deterministic signals suffice and where semantic

@@ -1,4 +1,4 @@
-"""Shared constants and base model for UC4 schemas."""
+"""Shared constants and base model for Sensitive Data Discovery & Classification Agent schemas."""
 
 from __future__ import annotations
 

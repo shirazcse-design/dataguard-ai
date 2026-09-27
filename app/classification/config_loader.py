@@ -1,4 +1,6 @@
-"""Load and validate the version-controlled UC4 configuration.
+"""Load and validate the version-controlled configuration.
+
+Part of the Sensitive Data Discovery & Classification Agent.
 
 Fails fast: any schema or cross-file inconsistency raises `ConfigError` with the offending file
 named, so a bad taxonomy can never be used partially [architecture section 19].

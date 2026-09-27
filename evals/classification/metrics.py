@@ -1,4 +1,4 @@
-"""Classification metrics for the two-axis UC4 taxonomy.
+"""Classification metrics for the two-axis Sensitive Data Discovery & Classification Agent taxonomy.
 
 Design rules:
 * Confusion structures come from scikit-learn; precision/recall/F1 are derived from the resulting

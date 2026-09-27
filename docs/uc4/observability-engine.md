@@ -1,4 +1,4 @@
-# UC4 observability and failure hardening (Phase 7)
+# Sensitive Data Discovery & Classification Agent observability and failure hardening (Phase 7)
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Plan (pre-registered before any code): [`observability-plan.md`](observability-plan.md). Generated

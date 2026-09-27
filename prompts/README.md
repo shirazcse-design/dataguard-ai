@@ -1,6 +1,6 @@
 # prompts/
 
-Versioned prompt files for the UC4 LLM classifier (Approach C). A prompt change is a new version
+Versioned prompt files for the Sensitive Data Discovery & Classification Agent LLM classifier (Approach C). A prompt change is a new version
 (`prompt.version` in `config/llm/llm.v1.yaml`); the version and the file hash are recorded in every
 run and are part of the replay-cache key.
 

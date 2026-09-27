@@ -1,4 +1,4 @@
-# UC4 working documentation
+# Sensitive Data Discovery & Classification Agent working documentation
 
 | Document | Purpose |
 |---|---|

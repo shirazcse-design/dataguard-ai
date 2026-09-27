@@ -3,14 +3,15 @@
 Agentic Data Security & Insider Risk Platform. The product source of truth is
 [`docs/DataGuard_AI_PRD.docx`](docs/DataGuard_AI_PRD.docx).
 
-## Current focus: Use Case 4 - Sensitive Data Discovery & Classification
+## Current focus: Sensitive Data Discovery & Classification Agent
 
-UC4 is built as a **shared classification service** (not an autonomous agent) that benchmarks
+The Sensitive Data Discovery & Classification Agent (formerly "UC4") is built on a **shared classification service** that benchmarks
 rules, supervised ML, LLM semantic classification and a deterministic hybrid router on a
-two-axis taxonomy (Sensitivity Level x Data Categories).
+two-axis taxonomy (Sensitivity Level x Data Categories), plus a Batch Triage Agent that uses it as a
+tool and never makes the sensitivity decision itself.
 
 * Approved architecture and plan: [`docs/UC4_Technical_Architecture_and_Implementation_Plan.txt`](docs/UC4_Technical_Architecture_and_Implementation_Plan.txt)
-* UC4 working docs, decisions and results: [`docs/uc4/`](docs/uc4/)
+* Sensitive Data Discovery & Classification Agent working docs, decisions and results: [`docs/uc4/`](docs/uc4/)
 
 ### Status
 
@@ -27,7 +28,7 @@ two-axis taxonomy (Sensitivity Level x Data Categories).
 | 8 | Service surface: Python API + CLI, frozen result schema v1.0, MCP contract | done |
 | 9 | MCP adapter (`mcp_adapter/`, `dataguard-uc4-mcp`) and an offline observability dashboard | done; the adapter is **release-ready for the v0.1 scope** (decision A33; not production-hardened, see below) |
 
-### Where UC4 stands (2026-09-21)
+### Where Sensitive Data Discovery & Classification Agent stands (2026-09-21)
 
 See the [completion report](docs/uc4/completion-report.md). The v0.1 scope is implemented, tested and
 evaluated on every split. It is **not independently validated**:

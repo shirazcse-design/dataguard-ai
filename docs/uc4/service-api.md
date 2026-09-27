@@ -1,4 +1,4 @@
-# UC4 classification service: Python API and CLI
+# Sensitive Data Discovery & Classification Agent classification service: Python API and CLI
 
 > A library and CLI for a portfolio MVP, not a production service: no authentication, rate limiting
 > or multi-tenant isolation beyond per-request isolation. Results are recommendations.

@@ -1,4 +1,4 @@
-# UC4 LLM classifier (Approach C): pre-registered plan
+# Sensitive Data Discovery & Classification Agent LLM classifier (Approach C): pre-registered plan
 
 **Status: committed BEFORE any LLM code is written.** It fixes design, data-use and reporting rules so
 results cannot be shaped after the fact. Deviations go in the results document.

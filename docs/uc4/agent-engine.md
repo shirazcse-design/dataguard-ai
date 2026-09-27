@@ -1,4 +1,4 @@
-# UC4 Batch Triage Agent
+# Batch Triage Agent (Sensitive Data Discovery & Classification Agent)
 
 > Dataset labels: **AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending.**
 > Plan (pre-registered before any code): [`agent-plan.md`](agent-plan.md). Decision: A37
