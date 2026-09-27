@@ -1258,6 +1258,77 @@ def _cmd_eval_fairness_probe(args: argparse.Namespace) -> int:
     return 1 if flagged else 0
 
 
+def _cmd_eval_foundry_log(args: argparse.Namespace) -> int:
+    """Log the classifier's (and optionally the agent's) results to Foundry's Evaluations page as
+    deterministic string_check evals over per-document metadata - never document text
+    (evals/classification/foundry_evals.py, decision D9.36). `--dry-run` writes exactly what would
+    be sent and contacts nothing."""
+    from pathlib import Path
+
+    from evals.classification import foundry_evals as fe
+
+    preds = [
+        json.loads(line)
+        for line in Path(args.predictions).read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    payloads = [
+        fe.eval_payload(
+            fe.CLASSIFIER_EVAL,
+            fe.CLASSIFIER_FIELDS,
+            fe.CLASSIFIER_CRITERIA,
+            fe.classifier_rows(preds),
+        )
+    ]
+    if args.agent_report:
+        report = json.loads(Path(args.agent_report).read_text(encoding="utf-8"))
+        levels = {p["doc_id"]: p.get("pred_level") for p in preds}
+        missing = [d["doc_id"] for d in report["documents"] if d["doc_id"] not in levels]
+        if missing:
+            print(
+                f"error: agent report documents not in the predictions: {missing[:5]}",
+                file=sys.stderr,
+            )
+            return 2
+        payloads.append(
+            fe.eval_payload(
+                fe.AGENT_EVAL, fe.AGENT_FIELDS, fe.AGENT_CRITERIA, fe.agent_rows(report, levels)
+            )
+        )
+    local = {p["name"]: fe.local_pass_rates(p["rows"], p["testing_criteria"]) for p in payloads}
+    if args.dry_run:
+        Path(args.dry_run).write_text(json.dumps(payloads, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps({"dry_run": args.dry_run, "local": local}, indent=2))
+        return 0
+
+    from app.agent import foundry_service as fs
+    from app.agent.types import AgentError
+
+    try:
+        endpoint = fs.project_endpoint()
+        project = fs.project_client(endpoint, tenant_id=args.tenant_id or None)
+    except AgentError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    except ImportError:
+        print(
+            "error: the 'foundry-agents' extra is not installed; "
+            "pip install 'dataguard-ai[foundry-agents]'",
+            file=sys.stderr,
+        )
+        return 2
+    openai_client = project.get_openai_client()
+    results = {}
+    for p in payloads:
+        try:
+            results[p["name"]] = fe.run_in_foundry(openai_client, p, args.run_name or p["name"])
+        except Exception as exc:  # noqa: BLE001 - class name only; SDK messages can echo input
+            print(f"error: {p['name']}: {type(exc).__name__}", file=sys.stderr)
+            return 4
+    print(json.dumps({"local": local, "foundry": results}, indent=2))
+    return 0 if all(r["status"] == "completed" for r in results.values()) else 4
+
+
 def _cmd_eval_hhh_apf(args: argparse.Namespace) -> int:
     """Scoped HHH + APF report (PRD 14-15; see docs/uc4/responsible-ai.md for what was dropped and
     why). Runs the frozen hybrid classifier and computes both from real, already-defined metrics."""
@@ -1984,6 +2055,20 @@ def build_parser() -> argparse.ArgumentParser:
     hp.add_argument("--config-dir", default=None)
     hp.add_argument("--data-dir", default=None)
     hp.set_defaults(func=_cmd_eval_hhh_apf)
+
+    fl = ev_sub.add_parser(
+        "foundry-log",
+        help="log results to Foundry's Evaluations page (deterministic string_check graders over "
+        "per-document metadata; never document text)",
+    )
+    fl.add_argument("--predictions", required=True, help="predictions.jsonl from `eval run`")
+    fl.add_argument("--agent-report", default=None, help="a report from `agent triage --out`")
+    fl.add_argument("--run-name", default=None)
+    fl.add_argument(
+        "--dry-run", default=None, metavar="OUT", help="write the exact payload here; send nothing"
+    )
+    fl.add_argument("--tenant-id", default=None, help="the Microsoft Entra tenant (directory) id")
+    fl.set_defaults(func=_cmd_eval_foundry_log)
 
     agent = sub.add_parser(
         "agent", help="Batch Triage Agent (docs/uc4/agent-plan.md) - classify_document as a tool"

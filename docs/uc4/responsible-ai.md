@@ -144,6 +144,40 @@ records the earlier, weaker "SDK-confirmed" status it replaces).
   it (`test_hybrid_mode_with_replay_is_refused_as_a_cache_artifact`). Extend `NAME_PAIRS` if a
   reviewer wants broader coverage.
 
+## 5. Evaluations in Microsoft Foundry's portal
+
+`dataguard-uc4 eval foundry-log` (decision D9.36, `evals/classification/foundry_evals.py`) logs two
+evals to the Foundry project's Evaluations page via the cloud Evals API (`azure-ai-projects` 2.x):
+
+| Eval | Rows | Criteria (all deterministic `string_check`, no judge model) |
+|---|---|---|
+| `dataguard-classifier` | one per document of a development split (`eval run` predictions) | `level_exact` (strict), `level_acceptable` (gold or the gold's own alternatives - the adopted lenient gate, A33), `no_missed_high_risk` |
+| `dataguard-agent` | one per document of an `agent triage` report | `task_completed`, `classify_document_called`, `decision_matches_classifier` (the safety invariant, against an independent classifier run) |
+
+Only per-document metadata is sent - ids, family, tier, gold/predicted labels, high-risk flags, stop
+reason, tool names; never document text, evidence or the agent's rationale. The rows travel inline,
+so no dataset is uploaded to project storage. `--dry-run OUT` writes exactly what would be sent and
+contacts nothing; the CLI prints our own locally computed pass rates next to Foundry's so they can be
+cross-checked.
+
+**How the Foundry numbers relate to the reports:** the eval covers **all tiers** of the split, so
+`level_exact` equals the report's all-tier level accuracy (dev: 102/107 = 0.953), not the
+**headline**, which is tiers T1-T4 only (dev: 92/97 = 0.948; T5 is a slice). Each row carries `tier`,
+so the headline subset can be filtered in the portal. Model-judged Foundry evaluators (task
+adherence, intent resolution, coherence) are deliberately not used: they would need document text
+or the rationale sent to a judge model, and a subjective score is not what the gates measure.
+
+**Live result (2026-09-26, dev split):** Foundry's grading matched the local numbers exactly -
+classifier `level_exact` 102/107, `level_acceptable` 102/107, `no_missed_high_risk` 107/107; agent
+`task_completed`, `classify_document_called` and `decision_matches_classifier` 107/107 each.
+
+```
+dataguard-uc4 eval run --classifier hybrid --hybrid-variant default --split dev --llm-mode replay --runs-dir R
+dataguard-uc4 agent triage --split dev --llm-mode replay --out agent.json
+export DATAGUARD_FOUNDRY_PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>
+dataguard-uc4 eval foundry-log --predictions R/<run>/predictions.jsonl --agent-report agent.json --tenant-id <tenant>
+```
+
 ## What was NOT done, and why
 
 | Item | State |
@@ -151,7 +185,7 @@ records the earlier, weaker "SDK-confirmed" status it replaces).
 | Azure AI Content Safety run against a real resource | Code-complete, fake-server tested; needs a resource (below) |
 | Fairness probe on the ML/LLM stages | Only `rules` mode has been run; the tool supports `hybrid`/`llm` today |
 | A live per-request Content Safety guardrail | Deliberately not built (decision A35) — audit-time only, to avoid a new latency/failure mode without measured justification |
-| Azure AI Evaluation SDK's own evaluator classes (`azure-ai-evaluation` package) | Not used. The stdlib-HTTP Content Safety client covers the two evaluators that map onto this service's real risks (Prompt Shields, Groundedness); the SDK's agent-oriented evaluators (tool-call accuracy, task adherence) do not apply here, matching the same scoping decision as HHH |
+| Azure AI Evaluation SDK's own evaluator classes (`azure-ai-evaluation` package) | Not used (the portal-logged evals use the cloud Evals API instead - section 5; the local `evaluate()` upload path applies only to the classic portal). The stdlib-HTTP Content Safety client covers the two evaluators that map onto this service's real risks (Prompt Shields, Groundedness); the SDK's agent-oriented evaluators (tool-call accuracy, task adherence) do not apply here, matching the same scoping decision as HHH |
 
 ## For the coordinator: creating the Content Safety resource
 
