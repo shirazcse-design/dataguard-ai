@@ -99,7 +99,7 @@ dataguard-uc4 demo serve --mode live
 
 ## 7-minute interview script
 
-Turn on **Interview Demo Mode** (top right). It hides developer controls and shows a guided bar with
+Turn on **Demo Mode** (top right). It hides developer controls and shows a guided bar with
 **Next Demo Step**. Steps move to the right page and preload the right document; they **never press
 Analyze or Run for you**, so nothing happens (and nothing costs money in LIVE) without your click.
 
@@ -173,7 +173,7 @@ open"), so it stays current. As of 2026-09-27:
 | Sign-in fails with error **530035** | The directory's security defaults block device-code sign-in | The dashboard uses browser sign-in; set `DATAGUARD_ENTRA_TENANT_ID` |
 | LIVE classification takes over a minute | The document escalated to the `large` tier (78-245 s) | Expected; use a document the `mid` tier settles |
 | The page looks stale after an update | The browser kept the old page | Reload (the server sends `no-store`), or restart the server for Python changes |
-| Interview mode stuck on a step | Step progress is kept per browser tab | Click **Start Demo**, or toggle Interview Demo Mode off and on |
+| Interview mode stuck on a step | Step progress is kept per browser tab | Click **Start Demo**, or toggle Demo Mode off and on |
 
 ## Implementation
 
