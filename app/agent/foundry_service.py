@@ -29,6 +29,13 @@ from .tools import tool_schemas
 from .types import AgentError, AgentTurn, ParsedToolCall
 
 AGENT_NAME = "dataguard-batch-triage"
+# Shown in the portal's Agents list. States the one thing a portal user must not assume: the agent
+# does not decide sensitivity, and its tools run in DataGuard's own loop, not in Foundry.
+AGENT_DESCRIPTION = (
+    "Triages documents for a data-security team using DataGuard's classify_document; the "
+    "sensitivity decision is never the agent's own. Its tools run in DataGuard's guarded loop "
+    "(dataguard-uc4 agent triage --agent-mode foundry-service), not in the portal."
+)
 PROJECT_ENDPOINT_ENV = "DATAGUARD_FOUNDRY_PROJECT_ENDPOINT"
 
 
@@ -100,6 +107,7 @@ def register_agent(project: Any, model_deployment: str) -> tuple[str, str]:
 
     agent = project.agents.create_version(
         agent_name=AGENT_NAME,
+        description=AGENT_DESCRIPTION,
         definition=PromptAgentDefinition(
             model=model_deployment,
             instructions=SYSTEM_PROMPT,

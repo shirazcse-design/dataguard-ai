@@ -220,6 +220,8 @@ def test_register_agent_creates_a_version_with_the_loops_instructions_and_tools(
 
     project = NS(agents=NS(create_version=create_version))
     assert fs.register_agent(project, "uc4-llm-medium") == ("dataguard-batch-triage", "3")
+    assert seen["description"] == fs.AGENT_DESCRIPTION
+    assert "never the agent's own" in seen["description"] and len(seen["description"]) <= 512
     definition = seen["definition"]
     assert definition.model == "uc4-llm-medium"
     assert definition.instructions == SYSTEM_PROMPT
