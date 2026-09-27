@@ -1053,7 +1053,7 @@ function waterfall(t) {
   return h("div", { class: "wf" }, svg);
 }
 
-// ---- Interview Demo Mode ---------------------------------------------------------------------
+// ---- Demo Mode -------------------------------------------------------------------------------
 // Steps navigate and preload; they never press Analyze or Run, so no action (and no Azure/LLM cost
 // in LIVE mode) happens without the presenter's click.
 const DEMO_STEPS = [

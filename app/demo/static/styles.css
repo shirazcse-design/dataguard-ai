@@ -57,11 +57,6 @@ a { color: var(--accent); }
 }
 .brand-name { font-weight: 650; font-size: 16px; letter-spacing: 0.01em; }
 .brand-sub { font-size: 12.5px; color: var(--nav-ink); }
-.tag {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--nav-ink); border: 1px solid #2b3a52; border-radius: 4px; padding: 2px 7px;
-  white-space: nowrap;
-}
 .topbar-right { display: flex; align-items: center; gap: 10px; }
 
 /* ---- badges ---- */
@@ -96,7 +91,7 @@ main { padding: 24px 28px 64px; min-width: 0; outline: none; }
   .sidenav { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 8px; }
   .sidenav a { white-space: nowrap; }
   main { padding: 16px; }
-  .brand-sub, .tag { display: none; }
+  .brand-sub { display: none; }
 }
 
 /* ---- page parts ---- */
