@@ -70,7 +70,7 @@ def test_each_document_is_one_trace_with_the_classifier_nested_under_its_tool_sp
     for root in roots:
         same = [s for s in sink.spans if s.trace_id == root.trace_id]
         assert root.parent_span_id is None
-        assert root.attributes["dg.agent.name"] == "batch_triage"
+        assert root.attributes["dg.agent.name"] == "dataguard-batch-triage"
         assert root.attributes["dg.agent.planner"] == "mock"
         assert root.attributes["dg.agent.stopped_reason"] == "completed"
         assert by_name(same, "agent.planner")
@@ -204,7 +204,7 @@ def test_agent_spans_carry_invoke_agent_execute_tool_and_chat_genai_attributes(t
 
     root = next(s for s in spans if s.name == "agent.document").attributes
     assert root["gen_ai.operation.name"] == "invoke_agent"
-    assert root["gen_ai.agent.name"] == "batch_triage"
+    assert root["gen_ai.agent.name"] == "dataguard-batch-triage"
     assert root["gen_ai.provider.name"] == "azure.ai.openai"
     tool = next(s for s in spans if s.name == "agent.tool").attributes
     assert tool["gen_ai.operation.name"] == "execute_tool"
@@ -269,3 +269,24 @@ def test_a_rebound_classify_call_is_flagged_on_its_tool_span(tmp_path):
         )
         tool = by_name(sink.spans, "agent.tool")[0]
         assert tool.attributes["dg.agent.args_rebound"] is expected
+
+
+def test_a_replayed_llm_call_is_not_labelled_as_a_model_call_or_counted_as_usage():
+    """D9.35: seen live in Foundry - a replayed classifier response rendered as a Chat span with its
+    recorded tokens, claiming a call (and usage) that never happened."""
+    from observability.sinks import _genai_attrs
+
+    live = {"dg.llm.model_id": "uc4-llm-medium", "dg.tokens_in": 10, "dg.tokens_out": 2}
+    assert _genai_attrs("llm.call", live)["gen_ai.operation.name"] == "chat"
+    assert _genai_attrs("llm.call", {**live, "dg.llm.cached": True}) == {}
+    assert (
+        _genai_attrs("llm.call", {**live, "dg.llm.cached": False})["gen_ai.usage.input_tokens"]
+        == 10
+    )
+
+
+def test_the_trace_agent_name_is_the_registered_foundry_agent_name():
+    from app.agent import foundry_service
+    from app.agent.config import AGENT_NAME
+
+    assert foundry_service.AGENT_NAME == AGENT_NAME == "dataguard-batch-triage"

@@ -11,6 +11,9 @@ from app.classification.config_loader import ConfigError, default_config_dir, re
 from app.classification.schemas.common import SEMVER_RE, StrictModel
 
 AGENT_FILE = "agent/agent.v1.yaml"
+# The agent's one name everywhere: its Foundry Agent Service registration and its traces'
+# `gen_ai.agent.name`, so Foundry can associate the two.
+AGENT_NAME = "dataguard-batch-triage"
 ALLOWED_TOOL_NAMES = {"classify_document", "lookup_taxonomy_definition", "request_human_review"}
 
 

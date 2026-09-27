@@ -24,11 +24,11 @@ import sys
 from collections.abc import Mapping
 from typing import Any
 
+from .config import AGENT_NAME
 from .loop import SYSTEM_PROMPT
 from .tools import tool_schemas
 from .types import AgentError, AgentTurn, ParsedToolCall
 
-AGENT_NAME = "dataguard-batch-triage"
 # Shown in the portal's Agents list. States the one thing a portal user must not assume: the agent
 # does not decide sensitivity, and its tools run in DataGuard's own loop, not in Foundry.
 AGENT_DESCRIPTION = (
