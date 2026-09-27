@@ -50,6 +50,9 @@ mcp = [
 dataguard-uc4 = "app.classification.cli:main"
 dataguard-uc4-mcp = "mcp_adapter.server:main"
 
+[tool.setuptools.package-data]
+"app.demo" = ["static/*"]
+
 [tool.setuptools.packages.find]
 include = ["app*", "rules*", "ml*", "evals*", "guardrails*", "observability*", "mcp_adapter*"]
 

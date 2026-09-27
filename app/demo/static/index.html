@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DataGuard AI · Interview Demo</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <div class="brand-name">DataGuard AI</div>
+      <div class="brand-sub">Sensitive Data Discovery &amp; Classification</div>
+    </div>
+    <span class="tag">UC4 Interview Demo</span>
+  </div>
+  <div class="topbar-right">
+    <button id="interview-toggle" class="toggle" type="button" aria-pressed="false">Interview Demo Mode</button>
+    <span id="mode-badge" class="badge badge-muted" title="Operating mode, reported by the server">MODE…</span>
+  </div>
+</header>
+<div id="demo-bar" class="demo-bar" hidden></div>
+
+<div class="shell">
+  <nav class="sidenav" aria-label="Dashboard pages">
+    <a href="#overview" data-page="overview">Overview</a>
+    <a href="#classify" data-page="classify">Classify</a>
+    <a href="#trace" data-page="trace">Decision Trace</a>
+    <a href="#agent" data-page="agent">Agent Triage</a>
+    <a href="#review" data-page="review">Human Review</a>
+    <a href="#evaluations" data-page="evaluations">Evaluations</a>
+    <a href="#rai" data-page="rai">Responsible AI / Guardrails</a>
+    <a href="#observability" data-page="observability">Observability</a>
+  </nav>
+  <main id="main" tabindex="-1">
+    <section id="page" aria-live="polite"></section>
+  </main>
+</div>
+</body>
+</html>

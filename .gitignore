@@ -11,3 +11,6 @@ dist/
 
 # Evaluation run artifacts are local by default; curated summaries live in docs/uc4/results/
 evals/classification/runs/
+
+# interview demo: demo-only reviewer decisions (never gold labels)
+var/demo/

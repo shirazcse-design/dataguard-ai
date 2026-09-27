@@ -63,5 +63,15 @@ ruff check . && ruff format --check .
 dataguard-uc4 config validate
 ```
 
+### Interview demo dashboard
+
+```bash
+dataguard-uc4 demo serve          # REPLAY mode (no Azure, no network): http://127.0.0.1:8765/
+```
+
+Eight pages over the real service and agent (Classify, Decision Trace, Agent Triage, Human Review,
+Evaluations, Responsible AI, Observability, Overview), with a guided Interview Demo Mode. See
+[`docs/uc4/interview-demo.md`](docs/uc4/interview-demo.md).
+
 All data in this repository is synthetic. **Dataset labels: AI-generated synthetic dataset — reviewed by one human (provenance per coordinator); second independent review pending** (not independently human-validated). No real personal, health, financial or credential data is
 used anywhere.
