@@ -9,6 +9,7 @@ invariant is checked end to end with Agent Service as the planner.
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from types import SimpleNamespace as NS
 
 import pytest
@@ -242,7 +243,7 @@ def test_foundry_register_without_the_planner_deployment_is_a_usage_error(monkey
 def test_foundry_register_prints_the_agent_name_and_version(monkeypatch, capsys):
     monkeypatch.setenv(fs.PROJECT_ENDPOINT_ENV, "https://x.services.ai.azure.com/api/projects/p")
     monkeypatch.setenv("DATAGUARD_LLM_DEPLOYMENT_MID", "uc4-llm-medium")
-    monkeypatch.setattr(fs, "project_client", lambda endpoint: NS(endpoint=endpoint))
+    monkeypatch.setattr(fs, "project_client", lambda endpoint, **kw: NS(endpoint=endpoint))
     monkeypatch.setattr(
         fs, "register_agent", lambda project, model: ("dataguard-batch-triage", "4")
     )
@@ -264,7 +265,7 @@ def test_triage_in_foundry_service_mode_runs_the_registered_agent(monkeypatch, c
         return resp("r2", text=json.dumps({"priority": "medium", "rationale": "ok"}))
 
     openai = NS(responses=NS(create=script))
-    monkeypatch.setattr(fs, "project_client", lambda e: NS(get_openai_client=lambda: openai))
+    monkeypatch.setattr(fs, "project_client", lambda e, **kw: NS(get_openai_client=lambda: openai))
     args = [
         "agent",
         "triage",
@@ -279,3 +280,51 @@ def test_triage_in_foundry_service_mode_runs_the_registered_agent(monkeypatch, c
     report = json.loads(capsys.readouterr().out)
     assert report["n_documents"] == 2
     assert all(d["stopped_reason"] == "completed" for d in report["documents"])
+
+
+def test_device_code_sign_in_is_chosen_and_the_tenant_is_passed_through(monkeypatch, capsys):
+    pytest.importorskip("azure.identity")
+    import azure.identity
+
+    made = {}
+
+    class FakeDeviceCode:
+        def __init__(self, **kwargs):
+            made.update(kwargs)
+
+    monkeypatch.setattr(azure.identity, "DeviceCodeCredential", FakeDeviceCode)
+    fs.credential(device_code=True, tenant_id="tenant-123")
+    assert made["tenant_id"] == "tenant-123"
+    made["prompt_callback"](
+        "https://microsoft.com/devicelogin", "ABC123", datetime(2026, 9, 26, 17, 5)
+    )
+    out, err = capsys.readouterr()
+    assert out == ""  # stdout stays JSON-only
+    assert "ABC123" in err and "devicelogin" in err
+
+
+def test_register_cli_passes_the_sign_in_options(monkeypatch):
+    monkeypatch.setenv(fs.PROJECT_ENDPOINT_ENV, "https://x.services.ai.azure.com/api/projects/p")
+    monkeypatch.setenv("DATAGUARD_LLM_DEPLOYMENT_MID", "uc4-llm-medium")
+    seen = {}
+    monkeypatch.setattr(fs, "project_client", lambda e, **kw: seen.update(kw) or NS())
+    monkeypatch.setattr(fs, "register_agent", lambda project, model: ("a", "1"))
+    assert main(["agent", "foundry-register", "--device-code", "--tenant-id", "t-1"]) == 0
+    assert seen == {"device_code": True, "tenant_id": "t-1"}
+
+
+def test_an_auth_failure_prints_a_sign_in_hint(monkeypatch, capsys):
+    monkeypatch.setenv(fs.PROJECT_ENDPOINT_ENV, "https://x.services.ai.azure.com/api/projects/p")
+    monkeypatch.setenv("DATAGUARD_LLM_DEPLOYMENT_MID", "uc4-llm-medium")
+
+    class ClientAuthenticationError(Exception):
+        pass
+
+    def boom(project, model):
+        raise ClientAuthenticationError("token secret-xyz")
+
+    monkeypatch.setattr(fs, "project_client", lambda e, **kw: NS())
+    monkeypatch.setattr(fs, "register_agent", boom)
+    assert main(["agent", "foundry-register"]) == 4
+    err = capsys.readouterr().err
+    assert "--device-code" in err and "secret-xyz" not in err

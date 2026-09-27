@@ -10,7 +10,9 @@ moves into Foundry.
 
 Auth is Microsoft Entra ID only (Agent Service does not take the resource API key):
 `DefaultAzureCredential`, with the interactive browser sign-in enabled as its last resort, so no
-Azure CLI is needed. The SDKs (`azure-ai-projects`, `azure-identity`, `openai`) are the optional
+Azure CLI is needed; or, with `device_code=True`, a device-code sign-in (a code entered at
+microsoft.com/devicelogin in any browser) for when no browser window can be opened. Tokens are held
+in memory only. The SDKs (`azure-ai-projects`, `azure-identity`, `openai`) are the optional
 `foundry-agents` extra and are imported lazily; unit tests inject fakes and never reach Azure.
 """
 
@@ -18,6 +20,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from collections.abc import Mapping
 from typing import Any
 
@@ -45,13 +48,35 @@ def project_endpoint(env: Mapping[str, str] | None = None) -> str:
     return endpoint
 
 
-def project_client(endpoint: str) -> Any:
+def project_client(
+    endpoint: str, *, device_code: bool = False, tenant_id: str | None = None
+) -> Any:
     """An `AIProjectClient` signed in with Entra ID. Raises `ImportError` without the extra."""
     from azure.ai.projects import AIProjectClient
+
+    return AIProjectClient(endpoint=endpoint, credential=credential(device_code, tenant_id))
+
+
+def credential(device_code: bool = False, tenant_id: str | None = None) -> Any:
+    tenant = {"tenant_id": tenant_id} if tenant_id else {}
+    if device_code:
+        from azure.identity import DeviceCodeCredential
+
+        return DeviceCodeCredential(prompt_callback=_print_device_code, **tenant)
     from azure.identity import DefaultAzureCredential
 
-    credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-    return AIProjectClient(endpoint=endpoint, credential=credential)
+    extra = {"interactive_browser_tenant_id": tenant_id} if tenant_id else {}
+    return DefaultAzureCredential(exclude_interactive_browser_credential=False, **extra)
+
+
+def _print_device_code(verification_uri: str, user_code: str, expires_on: Any) -> None:
+    # stderr, so a command's JSON on stdout stays machine-readable
+    print(
+        f"To sign in, open {verification_uri} and enter the code {user_code} "
+        f"(expires {expires_on:%H:%M} UTC).",
+        file=sys.stderr,
+        flush=True,
+    )
 
 
 def function_tool_specs() -> list[dict[str, Any]]:
