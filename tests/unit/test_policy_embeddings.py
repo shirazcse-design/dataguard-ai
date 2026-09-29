@@ -66,6 +66,23 @@ def test_foundry_request_shape_and_normalised_ordered_output():
     assert out.shape == (2, 3) and np.allclose(np.linalg.norm(out, axis=1), 1.0)
 
 
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        "https://res.cognitiveservices.azure.com",
+        "https://res.cognitiveservices.azure.com/",
+        "https://res.cognitiveservices.azure.com/openai/deployments/emb/embeddings?api-version=2023-05-15",
+        "https://res.cognitiveservices.azure.com/openai/v1/",
+    ],
+)
+def test_pasted_endpoint_forms_resolve_to_the_resource_host(endpoint):
+    captured = []
+    cfg, _ = load_policy_config()
+    env = {**ENV, "EP": endpoint}
+    FoundryEmbeddingClient(FOUNDRY, cfg.embedding, env=env, opener=_opener(captured)).embed(["x"])
+    assert captured[0][0] == "https://res.cognitiveservices.azure.com/openai/v1/embeddings"
+
+
 def test_missing_deployment_env_is_not_configured():
     cfg, _ = load_policy_config()
     with pytest.raises(EmbeddingError) as e:

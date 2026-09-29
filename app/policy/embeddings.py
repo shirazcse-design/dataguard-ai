@@ -23,6 +23,7 @@ from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Protocol
+from urllib.parse import urlparse
 
 import numpy as np
 
@@ -78,6 +79,15 @@ class FoundryEmbeddingClient(FoundryClient):
         super().__init__(foundry, deployment, env=env, token_provider=token_provider, opener=opener)
         self.ecfg = cfg
         self.tokens_used = 0
+
+    def _base(self) -> str:
+        """The resource host. Beyond the UC4 rule (a project endpoint is cut back), a pasted
+        deployment Target URI (`.../openai/deployments/<d>/embeddings?api-version=...`) is cut
+        back too: the portal shows that full URI next to the key, so it is what gets copied."""
+        parsed = urlparse(super()._base())
+        cut = parsed.path.find("/openai")
+        path = parsed.path[:cut] if cut >= 0 else parsed.path
+        return f"{parsed.scheme}://{parsed.netloc}{path}".rstrip("/")
 
     def embed(self, texts: list[str]) -> np.ndarray:
         rows: list[list[float]] = []
