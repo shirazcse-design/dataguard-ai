@@ -209,6 +209,93 @@ def cmd_answers_record(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_diagnose(_: argparse.Namespace) -> int:
+    """LIVE: three fixed, synthetic probes against the generation deployment, printing the HTTP
+    status and the provider's error code/message (UC4's client deliberately discards them). The
+    probes contain only fixed text and the synthetic corpus, never a user question."""
+    import urllib.error
+    import urllib.request
+
+    from app.llm.types import LLMRequest
+
+    from .generate import JSON_SCHEMA
+    from .service import build_copilot
+
+    cfg, _, _ = _load()
+    copilot = build_copilot("record")  # constructs the live Foundry client behind the cache
+    gen = copilot.generator
+    foundry = gen.client.inner  # type: ignore[attr-defined]
+    s01 = (
+        "Can an employee upload confidential customer information to a personal cloud-storage "
+        "account?"
+    )
+    hits = copilot.retriever.retrieve(s01, cfg.levels["advanced"]).hits
+    probes = {
+        "1_plain_chat": LLMRequest(
+            system="Reply with the word OK.",
+            user="Say OK.",
+            json_schema={},
+            prompt_version="probe",
+            temperature=gen.temperature,
+            max_output_tokens=200,
+            timeout_s=60,
+        ),
+        "2_uc6_schema_trivial": LLMRequest(
+            system="Return INSUFFICIENT_EVIDENCE with no claims.",
+            user="No evidence.",
+            schema_name="policy_answer",
+            json_schema=JSON_SCHEMA,
+            prompt_version="probe",
+            temperature=gen.temperature,
+            max_output_tokens=2000,
+            timeout_s=60,
+        ),
+        "3_uc6_real_request_S01": gen.request(s01, copilot.evidence_from(hits)),
+    }
+    report: dict[str, object] = {
+        "endpoint_host": foundry._base(),
+        "deployment": foundry.model_id,
+        "api": foundry.api,
+        "temperature_sent": gen.temperature,
+        "llm_config_tier": cfg.generation.tier,
+    }
+    for name, req in probes.items():
+        body = foundry._body(req)
+        if not req.json_schema:
+            body.pop("response_format", None)
+            body.pop("text", None)
+        http = urllib.request.Request(
+            foundry._url(),
+            data=json.dumps(body).encode(),
+            headers=foundry._headers(),
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(http, timeout=req.timeout_s) as resp:
+                payload = json.loads(resp.read().decode())
+                report[name] = {"http": resp.status, "served_model": payload.get("model")}
+        except urllib.error.HTTPError as err:
+            try:
+                detail = json.loads(err.read().decode()).get("error", {})
+            except (ValueError, UnicodeDecodeError, AttributeError):
+                detail = {}
+            report[name] = {
+                "http": err.code,
+                "error_code": detail.get("code") if isinstance(detail, dict) else None,
+                "error_param": detail.get("param") if isinstance(detail, dict) else None,
+                "error_message": (
+                    str(detail.get("message"))[:300] if isinstance(detail, dict) else None
+                ),
+            }
+        except OSError as err:
+            report[name] = {"transport_error": type(err).__name__}
+    print(json.dumps(report, indent=1))
+    ok = all(
+        isinstance(v, dict) and v.get("http") == 200 for k, v in report.items() if k[0].isdigit()
+    )
+    return 0 if ok else 4
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="dataguard-policy", description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -237,6 +324,9 @@ def build_parser() -> argparse.ArgumentParser:
     rec = ans.add_parser("record", help="LIVE: record golden-set answers for replay")
     rec.add_argument("--levels", default="naive,advanced")
     rec.set_defaults(func=cmd_answers_record)
+    sub.add_parser(
+        "diagnose", help="LIVE: probe the generation deployment and print provider errors"
+    ).set_defaults(func=cmd_diagnose)
     return p
 
 
