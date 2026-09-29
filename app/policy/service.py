@@ -87,18 +87,58 @@ def build_generator(
     )
 
 
+AGENT_BACKENDS = ("chat-completions", "foundry-service")
+AGENT_NAME_ENV = "DATAGUARD_POLICY_AGENT_NAME"
+SERVICE_PROMPT_VERSION = "uc6-agent-service.v1"
+
+
+def foundry_service_planner(cfg: PolicyConfig, llm: LLMConfig, tenant_id: str | None) -> Any:
+    """UC4's Agent Service client pointed at the UC6 agent YOU created in the portal. Nothing is
+    created or updated here: the agent is only referenced by name. Entra ID sign-in (browser)."""
+    from app.agent.foundry_service import (
+        FoundryAgentServiceClient,
+        project_client,
+        project_endpoint,
+    )
+
+    tier = llm.tiers[cfg.generation.tier]
+    deployment = os.environ.get(tier.deployment_env, "") or tier.replay_model_id
+    name = os.environ.get(AGENT_NAME_ENV, "") or cfg.agent.name
+    project = project_client(project_endpoint(), tenant_id=tenant_id)
+    return FoundryAgentServiceClient(project.get_openai_client(), deployment, agent_name=name)
+
+
 def build_agent(
     copilot: PolicyCopilot,
     cfg: PolicyConfig,
     mode: str,
     llm: LLMConfig,
     planner: AgentLLMClient | None = None,
+    *,
+    backend: str = "chat-completions",
+    tenant_id: str | None = None,
 ) -> AgentRunner:
-    """The Agentic RAG runner. Its live planner is chat-completions tool calling on the same `mid`
-    deployment (UC4's FoundryAgentClient). The Foundry Agent Service agent you create manually
-    (docs/uc6/foundry-agent-setup.md) is integrated only after it exists."""
+    """The Agentic RAG runner.
+
+    * `chat-completions` (default): chat-completions tool calling on the `mid` deployment (UC4's
+      FoundryAgentClient); recordings under `<replay model id>/uc6-agent.v1`.
+    * `foundry-service`: the Foundry Agent Service agent created MANUALLY in the portal
+      (docs/uc6/foundry-agent-setup.md); recordings under `<agent name>/uc6-agent-service.v1`.
+    """
+    if backend not in AGENT_BACKENDS:
+        raise ValueError(f"unknown agent backend {backend!r}")
     tier = llm.tiers[cfg.generation.tier]
     tools = tool_schemas()
+    if planner is None and backend == "foundry-service" and mode != "offline":
+        name = os.environ.get(AGENT_NAME_ENV, "") or cfg.agent.name
+        live = foundry_service_planner(cfg, llm, tenant_id) if mode in ("live", "record") else None
+        if mode == "live":
+            planner = live
+        else:
+            planner = ReplayAgentClient(
+                REPO / llm.cache.dir, name, SERVICE_PROMPT_VERSION, tools,
+                inner=live if mode == "record" else None, always_live=True,
+            )  # fmt: skip
     if planner is None:
         if mode == "offline":
             planner = OfflinePlanner()
@@ -122,7 +162,9 @@ def build_agent(
                 )  # fmt: skip
     system = (REPO / cfg.agent.prompt_file).read_text(encoding="utf-8").strip()
     label = {"offline": "offline", "live": "live", "record": "live"}.get(mode, "replay")
-    return AgentRunner(copilot, planner, cfg.agent, system, mode=label)
+    runner = AgentRunner(copilot, planner, cfg.agent, system, mode=label)
+    runner.backend = backend if mode != "offline" else "offline"
+    return runner
 
 
 def build_copilot(
@@ -133,6 +175,8 @@ def build_copilot(
     tracer: Any = None,
     config: tuple[PolicyConfig, Corpus] | None = None,
     agent_planner: AgentLLMClient | None = None,
+    agent_backend: str = "chat-completions",
+    tenant_id: str | None = None,
 ) -> PolicyCopilot:
     if mode not in MODES:
         raise ValueError(f"unknown mode {mode!r}; expected one of {MODES}")
@@ -151,5 +195,7 @@ def build_copilot(
         load_policy_scanner(cfg.guard),
         tracer=tracer,
     )
-    copilot.agent = build_agent(copilot, cfg, mode, llm, agent_planner)
+    copilot.agent = build_agent(
+        copilot, cfg, mode, llm, agent_planner, backend=agent_backend, tenant_id=tenant_id
+    )
     return copilot

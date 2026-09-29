@@ -28,6 +28,9 @@ Planners (all implement UC4's `AgentLLMClient.next_turn`):
 * `ReplayAgentClient`: recorded turns keyed by a hash of the whole conversation; with `inner` set it
   records misses from a live planner.
 * UC4's `FoundryAgentClient`: chat-completions tool calling on `uc4-llm-medium` (live).
+* UC4's `FoundryAgentServiceClient`: the `dataguard-policy-copilot` agent YOU created in Foundry
+  Agent Service, called by name (Responses API + agent_reference, Entra ID sign-in). Foundry holds
+  the agent's instructions and tool DEFINITIONS; the tools still execute here, in this loop.
 * `OfflinePlanner`: deterministic, labelled `offline-planner`. It searches once and quotes the top
   evidence. It exists to exercise the loop with no model and no recordings.
 
@@ -122,8 +125,6 @@ class ReplayAgentClient:
     definitions and the full message list, so any change to evidence or prompt is a miss (an
     `AgentError("replay_miss")`, never a substitute turn)."""
 
-    name = "replay"
-
     def __init__(
         self,
         cache_dir: Path | str,
@@ -132,8 +133,14 @@ class ReplayAgentClient:
         tools: list[dict[str, Any]],
         *,
         inner: AgentLLMClient | None = None,
+        always_live: bool = False,
     ) -> None:
         self.dir = Path(cache_dir) / model_id / prompt_version
+        # `always_live` (recording a STATEFUL planner such as Foundry Agent Service, which chains
+        # turns server-side by previous_response_id): never serve a turn from the cache while
+        # recording, because a replayed turn would leave the live conversation without that turn.
+        self.always_live = always_live
+        self.name = getattr(inner, "name", "replay") if inner is not None else "replay"
         self.model_id = model_id
         self.prompt_version = prompt_version
         self.tools = tools
@@ -156,7 +163,7 @@ class ReplayAgentClient:
     def next_turn(self, messages: list[dict[str, Any]]) -> AgentTurn:
         key = self._key(messages)
         path = self.dir / f"{key}.json"
-        if path.exists():
+        if path.exists() and not (self.always_live and self.inner is not None):
             d = json.loads(path.read_text(encoding="utf-8"))
             if d.get("schema") != CACHE_SCHEMA or d.get("key") != key:
                 raise AgentError("replay_miss", "cache entry does not match its key")
@@ -361,6 +368,8 @@ def parse_final(text: str | None) -> ModelOutput | None:
 
 # -- the loop ------------------------------------------------------------------------------------
 class AgentRunner:
+    backend = "chat-completions"
+
     def __init__(
         self,
         copilot: Any,
@@ -469,6 +478,7 @@ class AgentRunner:
         trace = {
             "name": self.cfg.name,
             "planner": getattr(self.planner, "model_id", type(self.planner).__name__),
+            "backend": self.backend,
             "turns": turns,
             "tool_calls": min(n_calls, self.cfg.max_tool_calls),
             "max_tool_calls": self.cfg.max_tool_calls,

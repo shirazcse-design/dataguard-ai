@@ -256,3 +256,16 @@ def test_foundry_agent_setup_doc_matches_the_code():
         assert f"#### `{t['function']['name']}`" in doc
         assert json.dumps(t["function"]["parameters"], indent=2) in doc
         assert t["function"]["description"] in doc
+
+
+def test_foundry_service_backend_replays_from_its_own_namespace(base, tmp_path):
+    """Agent Service turns are recorded under the agent's name, apart from chat-completions
+    turns; with nothing recorded, replay is UNAVAILABLE (never a chat-completions substitute)."""
+    from app.policy.service import build_copilot as build
+
+    cp = build("replay", embedder=HashingEmbedder(), config=base, agent_backend="foundry-service")
+    assert cp.agent.backend == "foundry-service"
+    assert cp.agent.planner.dir.parts[-2:] == ("dataguard-policy-copilot", "uc6-agent-service.v1")
+    assert cp.agent.planner.always_live is True
+    a = cp.answer("How long must CCTV footage be retained?", "agentic")
+    assert a.status == "UNAVAILABLE" and a.agent["backend"] == "foundry-service"
