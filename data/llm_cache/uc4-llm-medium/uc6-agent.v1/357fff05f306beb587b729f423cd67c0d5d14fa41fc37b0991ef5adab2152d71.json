@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "357fff05f306beb587b729f423cd67c0d5d14fa41fc37b0991ef5adab2152d71",
+ "recorded_at": "2026-09-29T21:01:45+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 904,
+ "tokens_out": 28,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "employee leaves company access removed termination offboarding access revocation timing"
+   },
+   "id": "call_xIZRM1aCeskvpMvrB5VU4fEA",
+   "name": "search_policy"
+  }
+ ]
+}

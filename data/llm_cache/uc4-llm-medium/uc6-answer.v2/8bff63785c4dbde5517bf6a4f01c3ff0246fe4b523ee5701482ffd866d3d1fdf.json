@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 70,
+ "input_hash": "8bff63785c4dbde5517bf6a4f01c3ff0246fe4b523ee5701482ffd866d3d1fdf",
+ "latency_ms": 1333.900875179097,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 949,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:39+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Access must be removed within 24 hours of an employee leaving the company.\",\"evidence_id\":\"E1\",\"quote\":\"All access is removed within 24 hours of an employee leaving.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

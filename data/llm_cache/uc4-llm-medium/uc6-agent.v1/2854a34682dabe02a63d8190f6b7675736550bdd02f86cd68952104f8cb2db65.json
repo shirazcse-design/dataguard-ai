@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "2854a34682dabe02a63d8190f6b7675736550bdd02f86cd68952104f8cb2db65",
+ "recorded_at": "2026-09-29T21:03:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1976,
+ "tokens_out": 30,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "remote access policy VPN company-managed laptops only approved vpn client split tunneling"
+   },
+   "id": "call_gZ9doda3Bj7S0DYHGh6rhpvg",
+   "name": "search_policy"
+  }
+ ]
+}

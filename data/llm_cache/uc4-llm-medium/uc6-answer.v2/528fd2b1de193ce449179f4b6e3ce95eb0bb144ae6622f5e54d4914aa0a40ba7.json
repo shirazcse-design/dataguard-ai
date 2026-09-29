@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 225,
+ "input_hash": "528fd2b1de193ce449179f4b6e3ce95eb0bb144ae6622f5e54d4914aa0a40ba7",
+ "latency_ms": 2064.853000221774,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 993,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You can share Confidential information with a third party only after the data owner approves it and the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\",\"evidence_id\":\"E2\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"A Data Processing Agreement must be signed before sharing begins.\",\"evidence_id\":\"E5\",\"quote\":\"A Data Processing Agreement must be signed before sharing begins.\"},{\"text\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\",\"evidence_id\":\"E4\",\"quote\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 162,
+ "input_hash": "c57b1703d78ee6bbda18c4a484613123c166bcb62d58e53bb3f5d4d382273c0b",
+ "latency_ms": 1949.8218749649823,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1013,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"An employee cannot upload confidential customer information to a personal cloud-storage account.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Confidential information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"},{\"text\":\"Confidential information includes customer personal information and customer financial information.\",\"evidence_id\":\"E4\",\"quote\":\"It includes customer personal information, customer financial information, non-public financial results, employee records and proprietary source code.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

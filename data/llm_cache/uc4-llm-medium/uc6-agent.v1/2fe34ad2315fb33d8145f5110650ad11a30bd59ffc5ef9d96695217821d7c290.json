@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Employees may install software on company devices only from the company software portal, so a personal VPN service is not allowed unless it is available there or reviewed by IT and Information Security.\",\"evidence_id\":\"E11\",\"quote\":\"Only software available from the company software portal may be installed on company devices. Requests for other software are reviewed by IT and Information Security.\"},{\"text\":\"Company devices are for business use, and limited personal use is permitted only if it does not expose the company to risk.\",\"evidence_id\":\"E2\",\"quote\":\"Company devices and accounts are provided for business use. Limited personal use is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "2fe34ad2315fb33d8145f5110650ad11a30bd59ffc5ef9d96695217821d7c290",
+ "recorded_at": "2026-09-29T21:03:03+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2504,
+ "tokens_out": 173,
+ "tool_calls": []
+}

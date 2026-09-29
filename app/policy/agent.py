@@ -404,6 +404,11 @@ class AgentRunner:
                         stopped = f"planner_error:{err.kind}"
                         break
                     ps.set(**_turn_attrs(turn))
+                    replayed = getattr(self.planner, "last_cached", None)
+                    if replayed is not None:
+                        # A replayed turn is not a model call: without this flag the exporter would
+                        # label it `chat` and count its recorded tokens as new usage (UC4 D9.35).
+                        ps.set(dg__llm__cached=bool(replayed))
                 if getattr(self.planner, "last_cached", None) is not None:
                     cached.append(bool(self.planner.last_cached))
                 tokens_in += turn.tokens_in or 0
@@ -434,6 +439,8 @@ class AgentRunner:
                     with span("uc6.tool", dg__agent__step=n_calls, dg__agent__tool=label) as ts:
                         ok, result, err = tools.call(c.name, c.arguments)
                         ts.set(dg__agent__tool_ok=ok)
+                        if ok and c.name == "search_policy" and tools.searches:
+                            ts.set(dg__policy__dense_status=tools.searches[-1]["dense_status"])
                         if err:
                             ts.set(dg__agent__tool_error=err)
                     failures = 0 if ok else failures + 1

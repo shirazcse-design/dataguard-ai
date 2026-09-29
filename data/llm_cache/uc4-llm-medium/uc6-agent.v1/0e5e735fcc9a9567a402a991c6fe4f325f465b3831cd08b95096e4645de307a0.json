@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Sharing PHI with a third party requires approval from both the data owner and the Chief Privacy Officer.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Restricted information requires approval from both the data owner and the Chief Privacy Officer. Sharing protected health information (PHI) additionally requires a signed Business Associate Agreement, and only the minimum necessary PHI may be shared.\"},{\"text\":\"Sharing PHI with a third party additionally requires a signed Business Associate Agreement.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Restricted information requires approval from both the data owner and the Chief Privacy Officer. Sharing protected health information (PHI) additionally requires a signed Business Associate Agreement, and only the minimum necessary PHI may be shared.\"},{\"text\":\"A third party must pass a Vendor Security Assessment before it receives PHI if PHI is treated as Restricted information.\",\"evidence_id\":\"E3\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information. The assessment is repeated every 12 months while sharing continues.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "0e5e735fcc9a9567a402a991c6fe4f325f465b3831cd08b95096e4645de307a0",
+ "recorded_at": "2026-09-29T21:01:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1469,
+ "tokens_out": 236,
+ "tool_calls": []
+}

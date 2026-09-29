@@ -1,7 +1,7 @@
 {
  "provenance": {
   "chunks": 74,
-  "config_sha256": "4892a78be59070a88b28b34d90b7ad2a5e0cf8ece4cf3ac0d0bd78600fe17d9c",
+  "config_sha256": "4a613a0bc6b7206ec90183079ed41280dbb7a4dd7d9c271eedda4dba1774046e",
   "corpus_fingerprint": "e095fb6fc076a35b7fc1c6434527fcd869ede6cf58c033ca1a9a0752810284a3",
   "embed_mode": "replay",
   "embedding_model_id": "uc6-embed-small",

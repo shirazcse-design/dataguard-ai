@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "5ff1a9a04e3957deac27ef13fde7f28146fa25da6e6aa5a4c04511b25f696680",
+ "recorded_at": "2026-09-29T21:01:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 904,
+ "tokens_out": 32,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "PHI sharing with third party approvals required before sharing PHI with a third party"
+   },
+   "id": "call_TL4TDBpcbwDDSVVO4mLbafcQ",
+   "name": "search_policy"
+  }
+ ]
+}

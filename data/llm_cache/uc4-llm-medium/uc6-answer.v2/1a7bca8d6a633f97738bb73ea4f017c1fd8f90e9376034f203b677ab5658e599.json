@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 156,
+ "input_hash": "1a7bca8d6a633f97738bb73ea4f017c1fd8f90e9376034f203b677ab5658e599",
+ "latency_ms": 1729.3233331292868,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1012,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:01+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The data owner decides a document's classification level.\",\"evidence_id\":\"E5\",\"quote\":\"The data owner assigns the classification level and approves access and sharing requests.\"},{\"text\":\"The data owner is responsible for applying the correct label when the document is created.\",\"evidence_id\":\"E1\",\"quote\":\"The data owner is responsible for applying the correct label when the document is created.\"},{\"text\":\"If there is a dispute about classification, it is escalated to the Chief Information Security Officer.\",\"evidence_id\":\"E5\",\"quote\":\"Disputes about classification are escalated to the Chief Information Security Officer.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

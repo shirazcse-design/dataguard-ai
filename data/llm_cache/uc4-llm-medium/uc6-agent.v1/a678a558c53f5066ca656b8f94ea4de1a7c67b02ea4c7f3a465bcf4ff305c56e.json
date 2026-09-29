@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "a678a558c53f5066ca656b8f94ea4de1a7c67b02ea4c7f3a465bcf4ff305c56e",
+ "recorded_at": "2026-09-29T21:02:54+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2029,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "encryption standard algorithm AES-256 at rest policy"
+   },
+   "id": "call_BAbq5QdCFBzJ39oVErlL2a4C",
+   "name": "search_policy"
+  }
+ ]
+}

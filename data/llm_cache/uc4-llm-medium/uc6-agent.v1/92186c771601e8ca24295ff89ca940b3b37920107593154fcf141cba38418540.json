@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "92186c771601e8ca24295ff89ca940b3b37920107593154fcf141cba38418540",
+ "recorded_at": "2026-09-29T21:02:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 32,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "emailing confidential customer data to external partner requirements confidential customer data email external recipient partner"
+   },
+   "id": "call_RPRF87KXJdp6L0tWIihZUXPg",
+   "name": "search_policy"
+  }
+ ]
+}

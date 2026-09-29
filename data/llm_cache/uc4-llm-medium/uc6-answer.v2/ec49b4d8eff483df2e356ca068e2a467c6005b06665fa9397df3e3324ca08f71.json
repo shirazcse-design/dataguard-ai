@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 299,
+ "input_hash": "ec49b4d8eff483df2e356ca068e2a467c6005b06665fa9397df3e3324ca08f71",
+ "latency_ms": 2654.1395001113415,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1001,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Emailing confidential customer data to an external partner requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"The external partner must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"E4\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"A Data Processing Agreement must be signed before sharing begins.\",\"evidence_id\":\"E5\",\"quote\":\"A Data Processing Agreement must be signed before sharing begins.\"},{\"text\":\"The Data Processing Agreement must include confidentiality obligations and a requirement to notify Harbourline of a breach within 72 hours.\",\"evidence_id\":\"E5\",\"quote\":\"It must include confidentiality obligations and a requirement to notify Harbourline of a breach within 72 hours.\"},{\"text\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\",\"evidence_id\":\"E3\",\"quote\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

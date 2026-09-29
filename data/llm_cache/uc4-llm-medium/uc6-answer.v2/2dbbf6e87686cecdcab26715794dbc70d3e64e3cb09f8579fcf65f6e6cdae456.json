@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 34,
+ "input_hash": "2dbbf6e87686cecdcab26715794dbc70d3e64e3cb09f8579fcf65f6e6cdae456",
+ "latency_ms": 1042.3560000490397,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 991,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"INSUFFICIENT_EVIDENCE\",\"claims\":[],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

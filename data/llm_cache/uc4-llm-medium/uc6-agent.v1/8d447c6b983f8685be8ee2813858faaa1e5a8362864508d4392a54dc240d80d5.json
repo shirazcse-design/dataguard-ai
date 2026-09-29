@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "8d447c6b983f8685be8ee2813858faaa1e5a8362864508d4392a54dc240d80d5",
+ "recorded_at": "2026-09-29T21:01:56+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 907,
+ "tokens_out": 28,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "API key committed to Git repository secret exposure credentials repository incident response"
+   },
+   "id": "call_1Pmfsbig7r57UzKFOjUrJUE7",
+   "name": "search_policy"
+  }
+ ]
+}

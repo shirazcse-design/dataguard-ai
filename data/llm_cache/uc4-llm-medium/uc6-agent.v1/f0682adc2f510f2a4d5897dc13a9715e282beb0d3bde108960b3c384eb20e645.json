@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "f0682adc2f510f2a4d5897dc13a9715e282beb0d3bde108960b3c384eb20e645",
+ "recorded_at": "2026-09-29T21:03:04+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 903,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "pets in the office animals workplace office policy"
+   },
+   "id": "call_VxIFS8NOuRBFTEEUeQ0lyRZm",
+   "name": "search_policy"
+  }
+ ]
+}

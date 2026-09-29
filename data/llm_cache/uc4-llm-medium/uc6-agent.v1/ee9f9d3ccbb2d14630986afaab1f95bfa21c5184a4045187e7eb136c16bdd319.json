@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "ee9f9d3ccbb2d14630986afaab1f95bfa21c5184a4045187e7eb136c16bdd319",
+ "recorded_at": "2026-09-29T21:02:46+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 899,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "CCTV footage retention period"
+   },
+   "id": "call_aFekLTYUT6jiJw2O4cw1Grmx",
+   "name": "search_policy"
+  }
+ ]
+}

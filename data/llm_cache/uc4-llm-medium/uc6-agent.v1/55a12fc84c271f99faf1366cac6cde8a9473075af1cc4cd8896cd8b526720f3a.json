@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "55a12fc84c271f99faf1366cac6cde8a9473075af1cc4cd8896cd8b526720f3a",
+ "recorded_at": "2026-09-29T21:01:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 904,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "USB drive removable media copying files from work laptop policy"
+   },
+   "id": "call_j9HEeyexLTuBOsFw0Rveo3VK",
+   "name": "search_policy"
+  }
+ ]
+}

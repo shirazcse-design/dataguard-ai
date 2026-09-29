@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "247ce2d76dc3b810eec1687ae0d750bc0cee8ef56af6c06f3ed3411f8442d958",
+ "recorded_at": "2026-09-29T21:02:22+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 907,
+ "tokens_out": 33,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "stolen work laptop what do I need to do report lost or stolen device incident response"
+   },
+   "id": "call_z45Sp2uLufjzwiTU6H4jkjhA",
+   "name": "search_policy"
+  }
+ ]
+}

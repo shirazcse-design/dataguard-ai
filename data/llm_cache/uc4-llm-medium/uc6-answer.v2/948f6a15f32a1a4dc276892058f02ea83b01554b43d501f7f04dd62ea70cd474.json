@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 84,
+ "input_hash": "948f6a15f32a1a4dc276892058f02ea83b01554b43d501f7f04dd62ea70cd474",
+ "latency_ms": 1201.171708991751,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 961,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:01:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Customer financial records are retained for 7 years after the end of the customer relationship.\",\"evidence_id\":\"E1\",\"quote\":\"Customer financial records, including account statements and transaction histories, are retained for 7 years after the end of the customer relationship.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

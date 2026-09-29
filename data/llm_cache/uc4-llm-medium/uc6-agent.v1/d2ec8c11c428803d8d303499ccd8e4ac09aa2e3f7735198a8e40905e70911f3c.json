@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "d2ec8c11c428803d8d303499ccd8e4ac09aa2e3f7735198a8e40905e70911f3c",
+ "recorded_at": "2026-09-29T21:03:10+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal cloud storage working remotely Internal documents employees store"
+   },
+   "id": "call_uGwiJaBBJpJziG4ts90QEUPv",
+   "name": "search_policy"
+  }
+ ]
+}

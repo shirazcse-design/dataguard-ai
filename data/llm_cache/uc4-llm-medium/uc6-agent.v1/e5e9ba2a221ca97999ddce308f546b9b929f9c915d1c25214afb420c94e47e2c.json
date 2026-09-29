@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Harbourline information may be shared with vendors under policy conditions.\",\"evidence_id\":\"E3\",\"quote\":\"This policy sets the conditions under which Harbourline information may be shared with third parties such as vendors, partners and service providers.\"},{\"text\":\"A vendor must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\",\"evidence_id\":\"E1\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"Sharing Confidential information with a vendor requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E4\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register.\",\"evidence_id\":\"E2\",\"quote\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\"},{\"text\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\",\"evidence_id\":\"E5\",\"quote\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "e5e9ba2a221ca97999ddce308f546b9b929f9c915d1c25214afb420c94e47e2c",
+ "recorded_at": "2026-09-29T21:02:36+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1440,
+ "tokens_out": 288,
+ "tool_calls": []
+}

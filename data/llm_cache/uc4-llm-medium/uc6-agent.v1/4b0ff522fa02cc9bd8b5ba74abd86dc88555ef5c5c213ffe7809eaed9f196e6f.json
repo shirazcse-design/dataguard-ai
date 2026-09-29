@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "4b0ff522fa02cc9bd8b5ba74abd86dc88555ef5c5c213ffe7809eaed9f196e6f",
+ "recorded_at": "2026-09-29T21:02:08+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 906,
+ "tokens_out": 32,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "customer personal data breach notify who must be notified how quickly incident response privacy breach notification"
+   },
+   "id": "call_bk9OG7TpTDlT3hWSvGKpRxyE",
+   "name": "search_policy"
+  }
+ ]
+}

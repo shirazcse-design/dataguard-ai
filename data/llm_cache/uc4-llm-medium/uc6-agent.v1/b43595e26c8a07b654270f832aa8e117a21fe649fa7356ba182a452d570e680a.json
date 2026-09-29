@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"API keys and other secrets must be stored in the company secrets vault.\",\"evidence_id\":\"E1\",\"quote\":\"Secrets must be stored in the company secrets vault.\"},{\"text\":\"API keys are covered by the secrets standard.\",\"evidence_id\":\"E3\",\"quote\":\"This standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "b43595e26c8a07b654270f832aa8e117a21fe649fa7356ba182a452d570e680a",
+ "recorded_at": "2026-09-29T21:01:33+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1439,
+ "tokens_out": 104,
+ "tool_calls": []
+}

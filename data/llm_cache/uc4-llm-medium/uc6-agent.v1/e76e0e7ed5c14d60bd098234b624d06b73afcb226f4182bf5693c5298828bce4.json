@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "e76e0e7ed5c14d60bd098234b624d06b73afcb226f4182bf5693c5298828bce4",
+ "recorded_at": "2026-09-29T21:02:40+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 28,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "monitor employee activity on work laptop acceptable use monitoring company devices privacy"
+   },
+   "id": "call_F1AVhzTOZ5V3DTB5QGgR92lI",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 129,
+ "input_hash": "53c213c915b0eba239a20fde40918958518fcc3a3050389aec89928cbc770cda",
+ "latency_ms": 1448.9682090934366,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 959,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T20:59:50+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Someone can get administrator access to a production system because privileged administrator access is granted just in time through the privileged access management tool.\",\"evidence_id\":\"E2\",\"quote\":\"Privileged (administrator) access is granted just in time through the privileged access management tool, for sessions of at most 8 hours\"},{\"text\":\"Administrator access must be approved by the system owner and Information Security.\",\"evidence_id\":\"E2\",\"quote\":\"must be approved by the system owner and Information Security.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

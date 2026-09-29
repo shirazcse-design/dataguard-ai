@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Harbourline may monitor the use of company devices, accounts and networks.\",\"evidence_id\":\"E1\",\"quote\":\"Harbourline may monitor the use of company devices, accounts and networks, within the limits of applicable law, to protect its information and systems.\"},{\"text\":\"Company devices and accounts are provided for business use.\",\"evidence_id\":\"E2\",\"quote\":\"Company devices and accounts are provided for business use. Limited personal use is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "6c1a6c21ee8fb0dd8910e04c6438c17f4af3ef285edb35bf2efd3cd6e42bc240",
+ "recorded_at": "2026-09-29T21:02:42+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1415,
+ "tokens_out": 141,
+ "tool_calls": []
+}

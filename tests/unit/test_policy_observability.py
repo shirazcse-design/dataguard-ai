@@ -61,3 +61,41 @@ def test_uc6_spans_map_to_genai_conventions():
         == "search_policy"
     )
     assert _genai_attrs("uc6.agent.planner", {}) == {}  # the offline planner is not a model call
+
+
+def test_replayed_agent_turns_are_not_exported_as_model_calls(tmp_path):
+    import json as _json
+
+    from app.agent.mock import MockAgentClient
+    from app.agent.types import AgentTurn, ParsedToolCall
+    from app.policy.agent import ReplayAgentClient, tool_schemas
+    from app.policy.embeddings import HashingEmbedder
+    from app.policy.service import build_copilot
+    from observability.config import build_tracer, load_observability_config
+    from observability.sinks import MemorySink
+
+    final = AgentTurn(final_text=_json.dumps({"status": "INSUFFICIENT_EVIDENCE", "claims": [],
+                                               "conflict_evidence_ids": [], "conflict_note": ""}),
+                      model_id="uc4-llm-medium", tokens_in=100, tokens_out=10)  # fmt: skip
+    search = AgentTurn(tool_calls=[ParsedToolCall("c1", "search_policy", {"query": "api key rotation"})],
+                       model_id="uc4-llm-medium", tokens_in=50, tokens_out=5)  # fmt: skip
+
+    def run(inner):
+        cfg, _ = load_observability_config()
+        sink = MemorySink()
+        tracer, _ = build_tracer(cfg, [sink], deterministic_ids=True)
+        planner = ReplayAgentClient(tmp_path, "uc4-llm-medium", "p", tool_schemas(), inner=inner)
+        cp = build_copilot(
+            "replay", embedder=HashingEmbedder(), tracer=tracer, agent_planner=planner
+        )
+        cp.answer("How often must API keys be rotated?", "agentic")
+        return [s for s in sink.spans if s.name == "uc6.agent.planner"]
+
+    live = run(MockAgentClient([search, final]))
+    assert all(s.attributes["dg.llm.cached"] is False for s in live)
+    assert all(
+        _genai_attrs(s.name, s.attributes).get("gen_ai.operation.name") == "chat" for s in live
+    )
+    replayed = run(None)
+    assert replayed and all(s.attributes["dg.llm.cached"] is True for s in replayed)
+    assert all(_genai_attrs(s.name, s.attributes) == {} for s in replayed)

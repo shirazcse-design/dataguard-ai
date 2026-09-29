@@ -122,9 +122,10 @@ def summarise(spans: list[Span]) -> dict[str, Any]:
             ),
             "dense_status": dict(
                 Counter(
-                    s.attributes.get("dg.policy.dense_status")
+                    s.attributes["dg.policy.dense_status"]
                     for s in mine
-                    if s.name == "uc6.retrieve"
+                    if s.name in ("uc6.retrieve", "uc6.tool")
+                    and "dg.policy.dense_status" in s.attributes
                 )
             ),
         }
@@ -148,7 +149,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"{', '.join(report['levels'])}, through the PRODUCTION tracer and redactor "
         "(`config/observability/observability.v1.yaml`).",
         "* Stage and request timings are LOCAL REPLAY timings (no network). The recorded provider "
-        "latency is reported separately as `recorded_model_latency_ms_p50`.",
+        "latency is reported separately as `recorded_model_latency_ms_p50` (single-shot generation "
+        "only; agent planner turns are recorded without latency).",
         "",
         "## Privacy audit",
         "",

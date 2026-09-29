@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 194,
+ "input_hash": "7d5c204fca5b0487c7c6d686eb4754b85502bdbdcd26e5464bcd66bd584ed0f0",
+ "latency_ms": 1996.9682081136853,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 991,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:57+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\"},{\"text\":\"Only company-approved AI tools listed in the AI Tools Register may be used with company information.\",\"evidence_id\":\"E1\",\"quote\":\"Only the company-approved AI tools listed in the AI Tools Register may be used with company information.\"},{\"text\":\"The data loss prevention policy applies to generative AI tools as a channel through which data can leave the company.\",\"evidence_id\":\"E3\",\"quote\":\"This policy applies to all employees and contractors and to every channel through which data can leave the company: email, web uploads, cloud storage, removable media, collaboration tools and generative AI tools.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

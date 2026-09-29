@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"If a secret is exposed by being committed to a repository, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\",\"evidence_id\":\"E2\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"},{\"text\":\"API keys are covered by this standard as secrets used to access Harbourline systems.\",\"evidence_id\":\"E4\",\"quote\":\"This standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "1858247ea7f8ddf3e29e13325b8ae4187388f7f7b30648d7aa9ce8b3d85aa9ac",
+ "recorded_at": "2026-09-29T21:01:59+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1435,
+ "tokens_out": 155,
+ "tool_calls": []
+}

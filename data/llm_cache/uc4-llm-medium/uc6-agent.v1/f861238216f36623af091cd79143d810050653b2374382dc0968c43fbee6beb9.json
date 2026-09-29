@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\"},{\"text\":\"Only the company-approved AI tools listed in the AI Tools Register may be used with company information.\",\"evidence_id\":\"E1\",\"quote\":\"Only the company-approved AI tools listed in the AI Tools Register may be used with company information.\"},{\"text\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E4\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "f861238216f36623af091cd79143d810050653b2374382dc0968c43fbee6beb9",
+ "recorded_at": "2026-09-29T21:02:18+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1482,
+ "tokens_out": 186,
+ "tool_calls": []
+}

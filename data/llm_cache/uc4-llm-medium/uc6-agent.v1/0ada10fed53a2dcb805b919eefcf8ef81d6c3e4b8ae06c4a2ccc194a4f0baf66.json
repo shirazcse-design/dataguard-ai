@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The minimum password length is 14 characters.\",\"evidence_id\":\"E1\",\"quote\":\"User passwords must be at least 14 characters long, must be stored only in the company-approved password manager, and must be combined with multi-factor authentication.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "0ada10fed53a2dcb805b919eefcf8ef81d6c3e4b8ae06c4a2ccc194a4f0baf66",
+ "recorded_at": "2026-09-29T21:01:44+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1448,
+ "tokens_out": 78,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Writing files to USB drives from company devices is blocked by default.\",\"evidence_id\":\"E1\",\"quote\":\"Writing to USB drives and other removable media is blocked by default on company devices.\"},{\"text\":\"An exception to write to a USB drive requires a service ticket approved by the employee's line manager and by Information Security.\",\"evidence_id\":\"E1\",\"quote\":\"An exception requires a service ticket approved by the employee's line manager and by Information Security.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "2bff2b2011fe224c3647c3d741ec2a62091958e10b11a2229e66e26ba0bb5828",
+ "recorded_at": "2026-09-29T21:01:41+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1453,
+ "tokens_out": 121,
+ "tool_calls": []
+}

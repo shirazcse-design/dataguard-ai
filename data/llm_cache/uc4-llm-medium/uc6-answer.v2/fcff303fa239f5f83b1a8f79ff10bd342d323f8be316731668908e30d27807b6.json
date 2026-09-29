@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 132,
+ "input_hash": "fcff303fa239f5f83b1a8f79ff10bd342d323f8be316731668908e30d27807b6",
+ "latency_ms": 1638.7117919512093,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 965,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T20:59:31+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"API keys and other secrets must be stored in the company secrets vault.\",\"evidence_id\":\"E1\",\"quote\":\"Secrets must be stored in the company secrets vault.\"},{\"text\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\",\"evidence_id\":\"E1\",\"quote\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 314,
+ "input_hash": "a5b301ab4490b389a121c85197aaeebd9965c8b9be00ef9c9d381e4e6fbba373",
+ "latency_ms": 2901.8350827973336,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1005,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:55+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"A personal Dropbox is prohibited for company information classified Internal or above.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Internal information may be stored in a personal cloud-storage account for remote work if the account has multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"},{\"text\":\"Confidential information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security. It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"},{\"text\":\"The approved storage locations for company work are the company's managed OneDrive and SharePoint.\",\"evidence_id\":\"E4\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 says uploading company information classified Internal or above to a personal Dropbox is prohibited, while E2 says Internal information may be stored in personal cloud storage for remote work if multi-factor authentication is enabled.\"}"
+}

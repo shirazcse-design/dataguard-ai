@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Pushing company code to a personal GitHub repository account is prohibited unless the Open Source Program Office has approved the release.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company source code to a public repository, a personal repository account or a public paste site is prohibited unless the Open Source Program Office has approved the release.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "341161904be7c6d20f1d4470c14c94eabce7b39cd17dcab733dc48f9c1ebbdeb",
+ "recorded_at": "2026-09-29T21:02:20+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1463,
+ "tokens_out": 93,
+ "tool_calls": []
+}

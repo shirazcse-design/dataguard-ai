@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 123,
+ "input_hash": "ac21dd59fe59c31370e60ad6053757116882ba4ee3f7b4f6f4198c810ac0d4dc",
+ "latency_ms": 2020.929167047143,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 987,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T20:59:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Writing to USB drives from company devices is blocked by default.\",\"evidence_id\":\"E1\",\"quote\":\"Writing to USB drives and other removable media is blocked by default on company devices.\"},{\"text\":\"You need an exception approved through a service ticket by your line manager and Information Security to write to a USB drive.\",\"evidence_id\":\"E1\",\"quote\":\"An exception requires a service ticket approved by the employee's line manager and by Information Security.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

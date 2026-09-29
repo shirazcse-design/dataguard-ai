@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 66,
+ "input_hash": "3e27a55a8f6b79de6234e0fd6a9f5122e31fecc8773b2aafbaa75e189a203253",
+ "latency_ms": 1427.2420420311391,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 958,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"API keys and other secrets must be stored in the company secrets vault.\",\"evidence_id\":\"E3\",\"quote\":\"Secrets must be stored in the company secrets vault.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

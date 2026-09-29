@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "ca472470b44f0137e289e5a501f9d62e301ba7bda610b8f3c627696b9b6d1e65",
+ "recorded_at": "2026-09-29T21:01:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 899,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "credentials and secrets handling passwords API keys secrets policy"
+   },
+   "id": "call_IWknIPOzHmUhFi020rrofNuQ",
+   "name": "search_policy"
+  }
+ ]
+}

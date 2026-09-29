@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Harbourline keeps different kinds of records for different periods.\",\"evidence_id\":\"E2\",\"quote\":\"This policy sets how long Harbourline keeps records and how they are disposed of at the end of their retention period. This version replaces version 1.0.\"},{\"text\":\"Customer financial records are retained for 7 years after the end of the customer relationship.\",\"evidence_id\":\"E3\",\"quote\":\"Customer financial records, including account statements and transaction histories, are retained for 7 years after the end of the customer relationship.\"},{\"text\":\"Employee personnel records are retained for 6 years after employment ends.\",\"evidence_id\":\"E1\",\"quote\":\"Employee personnel records are retained for 6 years after employment ends.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "7e333147de8c8c5332bd4352ffb27250f313112194056489f68dd926363faacb",
+ "recorded_at": "2026-09-29T21:02:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1388,
+ "tokens_out": 174,
+ "tool_calls": []
+}
