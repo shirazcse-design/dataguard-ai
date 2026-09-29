@@ -1,7 +1,7 @@
 {
  "provenance": {
   "chunks": 74,
-  "config_sha256": "82b515f7e8d691e7b7c3bf7d014cc69079e25f280dca1896c42f8ed0eb33f4f8",
+  "config_sha256": "4892a78be59070a88b28b34d90b7ad2a5e0cf8ece4cf3ac0d0bd78600fe17d9c",
   "corpus_fingerprint": "e095fb6fc076a35b7fc1c6434527fcd869ede6cf58c033ca1a9a0752810284a3",
   "embed_mode": "replay",
   "embedding_model_id": "uc6-embed-small",
@@ -802,6 +802,10 @@
     }
    ],
    "level": {
+    "chunk_injection_scan": true,
+    "enforce_citations": true,
+    "evidence_gate": true,
+    "input_guard": true,
     "metadata_filter": true,
     "query_processing": true,
     "rerank": true,
@@ -1651,6 +1655,10 @@
     }
    ],
    "level": {
+    "chunk_injection_scan": false,
+    "enforce_citations": false,
+    "evidence_gate": false,
+    "input_guard": false,
     "metadata_filter": false,
     "query_processing": false,
     "rerank": false,
@@ -2500,6 +2508,10 @@
     }
    ],
    "level": {
+    "chunk_injection_scan": false,
+    "enforce_citations": false,
+    "evidence_gate": false,
+    "input_guard": false,
     "metadata_filter": false,
     "query_processing": true,
     "rerank": false,
@@ -3349,6 +3361,10 @@
     }
    ],
    "level": {
+    "chunk_injection_scan": false,
+    "enforce_citations": false,
+    "evidence_gate": false,
+    "input_guard": false,
     "metadata_filter": false,
     "query_processing": false,
     "rerank": false,
@@ -4189,6 +4205,10 @@
     }
    ],
    "level": {
+    "chunk_injection_scan": false,
+    "enforce_citations": false,
+    "evidence_gate": false,
+    "input_guard": false,
     "metadata_filter": false,
     "query_processing": false,
     "rerank": false,

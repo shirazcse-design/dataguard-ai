@@ -1,0 +1,33 @@
+# UC6 prompt-injection lexicon for Policy Copilot QUESTIONS and retrieved policy CHUNKS.
+#
+# Why not reuse config/guardrails/injection.v1.yaml as is: several UC4 patterns fire on ordinary
+# policy language ("must not bypass ... policy" -> inj.bypass_rules; "classified as Public" ->
+# inj.dictates_label), which would flag the corpus itself. This file keeps the UC4 patterns that
+# do not collide with policy text (same ids and regexes, copied) and adds question-specific ones.
+# The whole corpus is scanned in a unit test: only the deliberately poisoned draft may match.
+# A lexicon catches known phrasings only; paraphrased attacks are expected to get through, which
+# is why retrieved text is also delimited as data and every citation is verified.
+guardrail_version: 1.0.0
+max_scan_chars: 20000
+patterns:
+  - id: inj.ignore_instructions
+    description: Tells the reader to ignore or void earlier instructions.
+    regex: '\b(?:ignore|disregard|forget|override|void)\b[^.\n]{0,40}\b(?:previous|prior|above|earlier|preceding|safety|all|any)\b[^.\n]{0,30}\b(?:instructions?|rules|prompts?|guidelines|directions)\b'
+  - id: inj.system_override
+    description: Fake system, assistant or admin override banner.
+    regex: '\b(?:system|assistant|admin(?:istrator)?|developer)\s+(?:override|instruction|message|prompt|mode)\b'
+  - id: inj.mode_switch
+    description: Tries to put the model into a different role or mode.
+    regex: '\byou\s+are\s+(?:now|no\s+longer)\b'
+  - id: inj.addressed_to_ai
+    description: Text addressed to an automated reviewer, assistant or model.
+    regex: '\b(?:note|message|instructions?|attention)\s+(?:to|for)\s+(?:the\s+)?(?:automated\s+)?(?:ai|a\.i\.|llm|model|assistants?|copilot|bots?)\b|\bai\s+(?:assistants?|systems?)\s*:'
+  - id: inj.skip_grounding
+    description: Asks the assistant to answer without citations or from its own knowledge.
+    regex: '\b(?:skip|without|no|ignore)\b[^.\n]{0,20}\b(?:citations?|sources?|evidence|grounding)\b|\bfrom\s+your\s+(?:own\s+)?(?:knowledge|memory|training)\b'
+  - id: inj.exfiltrate
+    description: Asks to print full policy text, secrets or the system prompt.
+    regex: '\b(?:print|dump|reveal|show|output|list)\b[^.\n]{0,40}\b(?:full\s+text|every\s+secret|all\s+secrets|secrets?\s+stored|system\s+prompt|your\s+instructions)\b'
+  - id: inj.dictate_answer
+    description: Dictates what the assistant must answer or confirm.
+    regex: '\b(?:confirm|answer|say|state|respond)\s+that\b[^.\n]{0,80}\b(?:allowed|permitted|approved|may\s+be\s+shared|is\s+fine)\b'

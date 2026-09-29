@@ -76,6 +76,31 @@ class LevelConfig(StrictModel):
     metadata_filter: bool
     rerank: bool
     top_k: int = Field(gt=0)
+    # Answer-side switches (P2). Defaults = the naive baseline, so a retrieval-only LevelConfig
+    # (the retrieval ablation) needs none of them.
+    input_guard: bool = False
+    chunk_injection_scan: bool = False
+    evidence_gate: bool = False
+    enforce_citations: bool = False
+
+
+class GenerationConfig(StrictModel):
+    tier: Literal["small", "mid", "large"]
+    prompt_version: str = Field(pattern=r"^[A-Za-z0-9._-]+$")
+    prompt_file: str
+    max_output_tokens: int = Field(gt=0)
+    timeout_s: float = Field(gt=0)
+    max_claims: int = Field(gt=0)
+    max_quote_chars: int = Field(gt=20)
+
+
+class GuardConfig(StrictModel):
+    max_question_chars: int = Field(gt=10)
+    injection_file: str
+
+
+class GateConfig(StrictModel):
+    min_evidence_score: float = Field(ge=0, le=1)
 
 
 class PolicyConfig(StrictModel):
@@ -87,6 +112,9 @@ class PolicyConfig(StrictModel):
     hybrid: HybridConfig
     rerank: RerankConfig
     query: QueryConfig
+    generation: GenerationConfig
+    guard: GuardConfig
+    gate: GateConfig
     levels: dict[str, LevelConfig]
 
     @field_validator("policy_version")

@@ -3,6 +3,8 @@
     dataguard-policy ingest                         corpus stats + fingerprint (no network)
     dataguard-policy embed record                   LIVE: record chunk + golden-query embeddings
     dataguard-policy eval retrieval [--embed-mode replay|offline]
+    dataguard-policy ask "question" [--level naive|advanced] [--mode replay|offline|live]
+    dataguard-policy answers record [--levels naive,advanced]   LIVE: record golden answers
 
 `--embed-mode`: `replay` (default) uses recorded vectors only and needs no Azure; `offline` uses the
 non-semantic hashing embedder and says so in every output; `record` (embed command only) calls the
@@ -155,6 +157,58 @@ def cmd_eval_retrieval(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ask(args: argparse.Namespace) -> int:
+    from .service import build_copilot
+
+    answer = build_copilot(args.mode).answer(args.question, args.level)
+    if args.json:
+        print(answer.model_dump_json(indent=1))
+        return 0
+    print(f"[{answer.mode.upper()}] level={answer.level} status={answer.status}")
+    for c in answer.claims:
+        mark = "verified" if c.verified else "UNVERIFIED"
+        print(f"- {c.text}  [{c.citation or c.evidence_id}, {mark}]")
+    for c in answer.dropped_claims:
+        print(f"  dropped ({c.drop_reason}): cited {c.evidence_id}")
+    for k in answer.conflicts:
+        print(f"conflict ({k.kind}, {k.resolution}): {', '.join(k.citations)}")
+    if answer.review.required:
+        print(f"human review: {', '.join(answer.review.reasons)}")
+    print("stages: " + " -> ".join(f"{s.name}:{s.status}" for s in answer.stages))
+    return 0
+
+
+def cmd_answers_record(args: argparse.Namespace) -> int:
+    """Answer every golden question at each level in `record` mode. Prints counts only: no
+    question, policy or answer text."""
+    from evals.policy.golden import load_golden
+
+    from .service import build_copilot
+
+    levels = [lv.strip() for lv in args.levels.split(",") if lv.strip()]
+    items, _ = load_golden()
+    copilot = build_copilot("record")
+    summary: dict[str, dict] = {}
+    for level in levels:
+        counts: dict[str, int] = {}
+        stats = {"llm_calls": 0, "replayed": 0, "tokens_in": 0, "tokens_out": 0, "errors": {}}
+        for item in items:
+            a = copilot.answer(item.question, level)
+            counts[a.status] = counts.get(a.status, 0) + 1
+            if a.llm is not None:
+                stats["llm_calls"] += 1
+                stats["replayed"] += int(a.llm.cached)
+                stats["tokens_in"] += a.llm.tokens_in or 0
+                stats["tokens_out"] += a.llm.tokens_out or 0
+            gen = next((s for s in a.stages if s.name == "generation"), None)
+            if gen is not None and gen.detail.get("error"):
+                kind = gen.detail["error"]
+                stats["errors"][kind] = stats["errors"].get(kind, 0) + 1
+        summary[level] = {"statuses": counts, **stats}
+    print(json.dumps(summary, indent=1, sort_keys=True))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="dataguard-policy", description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -172,6 +226,17 @@ def build_parser() -> argparse.ArgumentParser:
     er.add_argument("--embed-mode", choices=("replay", "offline"), default="replay")
     er.add_argument("--no-write", action="store_true", help="print a summary; write no files")
     er.set_defaults(func=cmd_eval_retrieval)
+    ask = sub.add_parser("ask", help="answer one question (prints policy text locally)")
+    ask.add_argument("question")
+    ask.add_argument("--level", choices=("naive", "advanced"), default="advanced")
+    ask.add_argument("--mode", choices=("replay", "offline", "live"), default="replay")
+    ask.add_argument("--json", action="store_true", help="print the full PolicyAnswer")
+    ask.set_defaults(func=cmd_ask)
+    ans = sub.add_parser("answers", help="answer recording commands")
+    ans = ans.add_subparsers(dest="sub", required=True)
+    rec = ans.add_parser("record", help="LIVE: record golden-set answers for replay")
+    rec.add_argument("--levels", default="naive,advanced")
+    rec.set_defaults(func=cmd_answers_record)
     return p
 
 

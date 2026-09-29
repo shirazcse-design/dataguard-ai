@@ -79,6 +79,34 @@ query:
     admin: [privileged access]
     administrator: [privileged access]
 
+generation:
+  # Reuses the UC4 `mid` tier (deployment `uc4-llm-medium`, config/llm/llm.v1.yaml): no new
+  # generation deployment. Temperature, retry and the Foundry adapter come from that file.
+  tier: mid
+  prompt_version: uc6-answer.v1
+  prompt_file: prompts/uc6/answer.v1.md
+  max_output_tokens: 4000       # reasoning deployment: hidden reasoning counts against the cap
+  timeout_s: 120.0
+  max_claims: 6
+  max_quote_chars: 400
+
+guard:
+  max_question_chars: 1000
+  injection_file: guardrails/injection_policy.v1.yaml
+
+gate:
+  # Pre-generation evidence gate (levels with `evidence_gate`): no LLM call when the best reranked
+  # hit scores below this. Deliberately LOW: on the golden set the top-1 rerank scores of
+  # answerable and unanswerable questions overlap (0.40 vs 0.65, docs/uc6/results/retrieval.json),
+  # so a retrieval score cannot decide "the evidence answers the question". The gate only
+  # short-circuits clear non-matches; the model's INSUFFICIENT_EVIDENCE status and citation
+  # verification do the rest. Chosen after looking at that distribution (not independently
+  # validated).
+  min_evidence_score: 0.35
+
+# Each level is a set of switches over the SAME components (docs/uc6/architecture.md).
+# Naive is the experimental baseline: no application guardrails beyond the input-size check, and
+# citation verification is MEASURED but not ENFORCED, so the evaluation shows what the harness adds.
 levels:
   naive:
     query_processing: false
@@ -86,15 +114,27 @@ levels:
     metadata_filter: false
     rerank: false
     top_k: 5
+    input_guard: false
+    chunk_injection_scan: false
+    evidence_gate: false
+    enforce_citations: false
   advanced:
     query_processing: true
     retrieval: hybrid
     metadata_filter: true
     rerank: true
     top_k: 5
+    input_guard: true
+    chunk_injection_scan: true
+    evidence_gate: true
+    enforce_citations: true
   agentic:
     query_processing: true
     retrieval: hybrid
     metadata_filter: true
     rerank: true
     top_k: 5
+    input_guard: true
+    chunk_injection_scan: true
+    evidence_gate: true
+    enforce_citations: true

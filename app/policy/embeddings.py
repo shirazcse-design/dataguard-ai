@@ -167,8 +167,12 @@ class CachedEmbedder:
         dimensions: int | None = None,
         *,
         inner: Embedder | None = None,
+        persist: bool = True,
     ) -> None:
         self.dir = Path(cache_dir) / model_id
+        # persist=False (LIVE demo mode): misses are embedded live and kept in memory only, so
+        # ad-hoc questions typed into the demo never land in the committed cache.
+        self.persist = persist
         self.model_id = model_id
         self.dimensions = dimensions
         self.inner = inner
@@ -209,6 +213,8 @@ class CachedEmbedder:
         for n, key in enumerate(keys):  # unique: `embed` de-duplicates before recording
             self._index[key] = base + n
         self.recorded += len(texts)
+        if not self.persist:
+            return
         self.dir.mkdir(parents=True, exist_ok=True)
         np.save(self.dir / "vectors.npy", self._vectors)
         self._meta = {
