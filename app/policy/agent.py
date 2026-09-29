@@ -387,7 +387,10 @@ class AgentRunner:
         cached: list[bool] = []
         stopped, final = "final_answer", None
         t0 = time.perf_counter()
-        with span("uc6.agent", dg__agent__name=self.cfg.name) as agent_span:
+        planner_kind = getattr(self.planner, "name", "unknown")
+        with span(
+            "uc6.agent", dg__agent__name=self.cfg.name, dg__agent__planner=planner_kind
+        ) as agent_span:
             while True:
                 if turns >= self.cfg.max_turns:
                     stopped = "step_budget_exceeded"

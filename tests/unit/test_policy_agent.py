@@ -244,3 +244,15 @@ def test_agent_telemetry_has_no_question_query_or_policy_text(base):
     blob = json.dumps([s.model_dump() for s in sink.spans])
     for secret in ("Zanzibar", "7741", "QZX", "rotated at least"):
         assert secret not in blob
+
+
+def test_foundry_agent_setup_doc_matches_the_code():
+    """The manual setup guide must paste EXACTLY what the application expects."""
+    from pathlib import Path
+
+    doc = Path("docs/uc6/foundry-agent-setup.md").read_text(encoding="utf-8")
+    assert Path("prompts/uc6/agent.v1.md").read_text(encoding="utf-8").strip() in doc
+    for t in tool_schemas():
+        assert f"#### `{t['function']['name']}`" in doc
+        assert json.dumps(t["function"]["parameters"], indent=2) in doc
+        assert t["function"]["description"] in doc

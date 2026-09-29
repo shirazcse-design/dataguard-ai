@@ -162,7 +162,7 @@ class PolicyCopilot:
             s.set(
                 dg__policy__n_hits=len(retrieval.hits),
                 dg__policy__dense_status=retrieval.trace.dense_status,
-                dg__policy__stages=",".join(retrieval.trace.stages),
+                dg__policy__stages=list(retrieval.trace.stages),
             )
         evidence = self.evidence_from(retrieval.hits)
         run.stages.append(
@@ -463,16 +463,22 @@ def _llm_attrs(call: Any) -> dict[str, Any]:
 
 
 def _outcome_attrs(a: PolicyAnswer) -> dict[str, Any]:
+    """Root-span outcome. Lists of plain tokens (the redactor masks free text and long joined
+    strings), citations as `POL-DLP:4.2` policy/section ids: identifiers, never policy text."""
     return {
         "dg__policy__status": a.status,
         "dg__policy__mode": a.mode,
         "dg__policy__n_claims": len(a.claims),
         "dg__policy__n_dropped": len(a.dropped_claims),
-        "dg__policy__citations": ",".join(a.citations)[:120],
+        "dg__policy__drop_reasons": sorted(
+            {c.drop_reason for c in a.dropped_claims if c.drop_reason}
+        ),
+        "dg__policy__cited": [c.replace(" §", ":").replace(" v", "@") for c in a.citations],
         "dg__policy__evidence_status": a.evidence_status,
         "dg__policy__n_conflicts": len(a.conflicts),
+        "dg__policy__n_evidence": len(a.evidence),
         "dg__outcome__review_required": a.review.required,
-        "dg__outcome__review_reasons": ",".join(a.review.reasons),
-        "dg__policy__n_guardrail_events": len(a.guardrail_events),
+        "dg__outcome__review_reasons": list(a.review.reasons),
+        "dg__guardrail__type": sorted({e.type for e in a.guardrail_events}),
         "dg__latency_ms": a.latency_ms,
     }

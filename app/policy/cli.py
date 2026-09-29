@@ -191,6 +191,34 @@ def cmd_eval_answers(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_obs_report(args: argparse.Namespace) -> int:
+    from evals.policy.golden import load_golden
+    from evals.policy.observability_report import (
+        privacy_audit,
+        render_markdown,
+        run_traced,
+        summarise,
+    )
+    from evals.policy.report import RESULTS_DIR
+
+    items, _ = load_golden()
+    levels = [lv.strip() for lv in args.levels.split(",") if lv.strip()]
+    spans, copilot = run_traced(args.mode, levels, items)
+    report = {
+        "mode": args.mode,
+        "levels": levels,
+        "privacy_audit": privacy_audit(spans, items, copilot.corpus),
+        "telemetry": summarise(spans),
+    }
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    (RESULTS_DIR / "observability.json").write_text(
+        json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    (RESULTS_DIR / "observability.md").write_text(render_markdown(report), encoding="utf-8")
+    print(f"privacy audit clean: {report['privacy_audit']['clean']}; wrote observability.md")
+    return 0 if report["privacy_audit"]["clean"] else 5
+
+
 def cmd_ask(args: argparse.Namespace) -> int:
     from .service import build_copilot
 
@@ -373,6 +401,12 @@ def build_parser() -> argparse.ArgumentParser:
     rec = ans.add_parser("record", help="LIVE: record golden-set answers for replay")
     rec.add_argument("--levels", default="naive,advanced,agentic")
     rec.set_defaults(func=cmd_answers_record)
+    obs = sub.add_parser("obs", help="observability commands")
+    obs = obs.add_subparsers(dest="sub", required=True)
+    orp = obs.add_parser("report", help="traced golden run + privacy audit + telemetry summary")
+    orp.add_argument("--mode", choices=("replay", "offline"), default="replay")
+    orp.add_argument("--levels", default="naive,advanced,agentic")
+    orp.set_defaults(func=cmd_obs_report)
     sub.add_parser(
         "diagnose", help="LIVE: probe the generation deployment and print provider errors"
     ).set_defaults(func=cmd_diagnose)

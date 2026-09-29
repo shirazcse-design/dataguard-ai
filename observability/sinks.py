@@ -51,7 +51,11 @@ def read_jsonl(path: Path | str) -> list[Span]:
 
 # Span names that carry an LLM call's own dg.* attributes, for _genai_attrs below: the classifier's
 # LLM stage and the Batch Triage Agent's planner turn.
-_LLM_CALL_SPANS = frozenset({"llm.call", "agent.planner"})
+# UC6 (Data Security Policy Copilot) spans map onto the same conventions: `uc6.generate` and
+# `uc6.agent.planner` are model calls, `uc6.agent` an agent invocation, `uc6.tool` a tool call.
+_LLM_CALL_SPANS = frozenset({"llm.call", "agent.planner", "uc6.generate", "uc6.agent.planner"})
+_AGENT_SPANS = frozenset({"agent.document", "uc6.agent"})
+_TOOL_SPANS = frozenset({"agent.tool", "uc6.tool"})
 _PROVIDER = "azure.ai.openai"
 
 
@@ -67,13 +71,13 @@ def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
     other consumer built on the OpenTelemetry GenAI conventions) can render the same span, since
     that convention is what such tools key off, not our own `dg.*` namespace.
     """
-    if span_name == "agent.document":
+    if span_name in _AGENT_SPANS:
         return _genai_agent_attrs(attrs)
-    if span_name == "agent.tool":
+    if span_name in _TOOL_SPANS:
         return _genai_tool_attrs(attrs)
     if span_name not in _LLM_CALL_SPANS:
         return {}
-    if span_name == "agent.planner" and not attrs.get("dg.llm.model_id"):
+    if span_name in ("agent.planner", "uc6.agent.planner") and not attrs.get("dg.llm.model_id"):
         # The offline planner is not a model call; labelling it "chat" would misstate what ran.
         return {}
     if attrs.get("dg.llm.cached") is True:
