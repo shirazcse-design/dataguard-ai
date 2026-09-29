@@ -1,0 +1,100 @@
+# Data Security Policy Copilot (UC6) configuration. Version-controlled; the hash is recorded in
+# every evaluation report. See docs/uc6/architecture.md.
+#
+# NO MODEL OR DEPLOYMENT NAMES appear here: the embedding deployment is read from the environment
+# variable named by `embedding.deployment_env`, exactly like the UC4 LLM tiers.
+policy_version: 1.0.0
+
+corpus:
+  dir: data/policy_corpus
+  # Draft documents are indexed (so Naive RAG can retrieve them, as a naive system would) but the
+  # Advanced/Agentic metadata filter excludes every status not listed here.
+  eligible_statuses: [current, superseded]
+
+chunking:
+  # Chunks follow the policy's own numbered sections (the citation unit). A section longer than
+  # max_words is split into parts with `overlap_words` of overlap.
+  max_words: 180
+  overlap_words: 30
+  # Prepend "<title> §<section> <heading>" to the text that is EMBEDDED and keyword-indexed (a
+  # contextual chunk header). Citation quotes are always verified against the section body alone.
+  contextual_header: true
+
+sparse:
+  bm25_k1: 1.2
+  bm25_b: 0.75
+
+embedding:
+  # Filled in after the manual Foundry deployment (docs/uc6/foundry-embeddings-setup.md). The
+  # endpoint and key reuse the UC4 Foundry variables (config/llm/llm.v1.yaml `foundry`).
+  deployment_env: DATAGUARD_EMBEDDING_DEPLOYMENT
+  # The directory name recordings are stored under (a name, not a secret); must match the
+  # deployment the recordings were made with.
+  replay_model_id: uc6-embed-small
+  url_template: "{endpoint}/openai/v1/embeddings"
+  dimensions: null        # null = the model's native dimensionality
+  batch_size: 32
+  timeout_s: 60.0
+  cache_dir: data/embedding_cache
+
+hybrid:
+  # Reciprocal Rank Fusion: score = sum over legs of 1 / (rrf_k + rank). Rank-based, so BM25 and
+  # cosine scores never need to be put on the same scale.
+  rrf_k: 60
+  candidates_per_leg: 20
+
+rerank:
+  # Deterministic reranker (docs/uc6/architecture.md). score = w_coverage * query-term coverage of
+  # the chunk + w_heading * coverage of the section heading + w_fused * normalised fused score.
+  w_coverage: 0.5
+  w_heading: 0.2
+  w_fused: 0.3
+  superseded_penalty: 0.15   # subtracted; superseded text stays retrievable so conflicts surface
+
+query:
+  # Deterministic query expansion (Advanced/Agentic only). Keys are matched case-insensitively as
+  # whole phrases; the values are APPENDED to the query, never substituted.
+  expansions:
+    phi: [protected health information]
+    protected health information: [PHI]
+    pii: [personal information]
+    secrets: [credentials, API keys, passwords, secrets vault]
+    secret: [credentials, API keys, secrets vault]
+    credentials: [secrets, passwords, API keys]
+    api key: [secrets, credentials, rotation]
+    personal cloud: [personal cloud storage, Dropbox, Google Drive, OneDrive]
+    dropbox: [personal cloud storage]
+    google drive: [personal cloud storage]
+    vendor: [third party]
+    vendors: [third party]
+    third party: [vendor]
+    partner: [third party]
+    keep: [retained, retention]
+    retention: [retained]
+    github: [source code, public repository]
+    usb: [removable media]
+    chatgpt: [generative AI tools]
+    ai tool: [generative AI tools]
+    breach: [incident, notification]
+    admin: [privileged access]
+    administrator: [privileged access]
+
+levels:
+  naive:
+    query_processing: false
+    retrieval: dense            # dense | sparse | hybrid
+    metadata_filter: false
+    rerank: false
+    top_k: 5
+  advanced:
+    query_processing: true
+    retrieval: hybrid
+    metadata_filter: true
+    rerank: true
+    top_k: 5
+  agentic:
+    query_processing: true
+    retrieval: hybrid
+    metadata_filter: true
+    rerank: true
+    top_k: 5
