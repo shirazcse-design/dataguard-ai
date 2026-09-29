@@ -1,7 +1,21 @@
 # Manual setup: Foundry Agent Service agent `dataguard-policy-copilot` (UC6)
 
-**Owner: Shiraz (manual, in the Foundry portal).** Nothing in this repository creates, registers
-or updates this agent. UC4's `agent foundry-register` command is deliberately NOT used for UC6.
+**Status (2026-09-29): created.** The product owner started the agent in the portal (versions 1-4)
+and then explicitly asked Claude Code to complete it. Version **5** was created with
+`dataguard-policy agent register --tenant-id <tenant>` (Entra browser sign-in). It uses exactly
+the instructions and tool definitions below, on `uc4-llm-medium`. The command only ever ADDS a
+version; it never deletes or edits one. Evaluations, guardrails and observability remain manual
+(see the other `foundry-*-setup.md` guides).
+
+Live check (same day, `--agent-backend foundry-service`, 11 Agent Service calls, no errors):
+S01 ANSWERED, M01 ANSWERED, I02 INSUFFICIENT_EVIDENCE (three refined searches, then
+`request_human_review`), C02 ANSWERED with the current v2.0, and X01 BLOCKED by the application's
+input guard before the agent ran. Recorded under `data/llm_cache/dataguard-policy-copilot/`, so
+it replays offline. That run had no embedding key, so the agent's NEW search queries used keyword
+retrieval only (`dense_status: not_configured`, shown in the trace).
+
+The sections below remain the specification: what to check in the portal, and how to recreate
+the agent by hand.
 
 The application-side agent already works locally in REPLAY/OFFLINE, and LIVE via chat-completions
 tool calling (`app/policy/agent.py`). The Foundry agent you create here becomes a second planner

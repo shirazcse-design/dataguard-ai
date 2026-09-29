@@ -485,6 +485,7 @@ class AgentRunner:
             "stopped_reason": stopped,
             "steps": steps,
             "agent_review_reasons": tools.review_reasons,
+            "search_dense_status": [x["dense_status"] for x in tools.searches],
             "tokens_in": tokens_in or None,
             "tokens_out": tokens_out or None,
         }

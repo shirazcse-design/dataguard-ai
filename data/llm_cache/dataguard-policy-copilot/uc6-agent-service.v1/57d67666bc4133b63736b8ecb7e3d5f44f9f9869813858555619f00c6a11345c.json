@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"INSUFFICIENT_EVIDENCE\",\"claims\":[],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "57d67666bc4133b63736b8ecb7e3d5f44f9f9869813858555619f00c6a11345c",
+ "recorded_at": "2026-09-29T22:58:55+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2369,
+ "tokens_out": 31,
+ "tool_calls": []
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "8486f9053175be0e1d4f18d31643ff1dfdb74c4163ab545e6b1970ba5eb86c2f",
+ "recorded_at": "2026-09-29T22:58:57+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 820,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "retention requirement for customer financial information"
+   },
+   "id": "call_8YrvzySj8KDB2hdCcstdRxXC",
+   "name": "search_policy"
+  }
+ ]
+}

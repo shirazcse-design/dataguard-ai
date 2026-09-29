@@ -108,6 +108,53 @@ def foundry_service_planner(cfg: PolicyConfig, llm: LLMConfig, tenant_id: str | 
     return FoundryAgentServiceClient(project.get_openai_client(), deployment, agent_name=name)
 
 
+AGENT_DESCRIPTION = (
+    "UC6 Data Security Policy Copilot: answers data-security policy questions only from "
+    "retrieved, cited policy evidence. Tools execute in the DataGuard application "
+    "(dataguard-policy ask --level agentic --agent-backend foundry-service), not in the portal."
+)
+
+
+def register_policy_agent(cfg: PolicyConfig, llm: LLMConfig, tenant_id: str | None) -> dict:
+    """Create a NEW VERSION of the UC6 agent in Foundry Agent Service: instructions
+    (prompts/uc6/agent.v1.md), the `mid` deployment and the four function-tool DEFINITIONS.
+    Additive: earlier versions (including any started in the portal) are kept; runs use the
+    latest. Done at the product owner's explicit request (2026-09-29); evaluations, guardrails and
+    observability remain manual."""
+    from azure.ai.projects.models import FunctionTool, PromptAgentDefinition
+
+    from app.agent.foundry_service import project_client, project_endpoint
+
+    tier = llm.tiers[cfg.generation.tier]
+    deployment = os.environ.get(tier.deployment_env, "") or tier.replay_model_id
+    instructions = (REPO / cfg.agent.prompt_file).read_text(encoding="utf-8").strip()
+    project = project_client(project_endpoint(), tenant_id=tenant_id)
+    agent = project.agents.create_version(
+        agent_name=cfg.agent.name,
+        description=AGENT_DESCRIPTION,
+        definition=PromptAgentDefinition(
+            model=deployment,
+            instructions=instructions,
+            tools=[
+                FunctionTool(
+                    name=t["function"]["name"],
+                    description=t["function"]["description"],
+                    parameters=t["function"]["parameters"],
+                    strict=False,
+                )
+                for t in tool_schemas()
+            ],
+        ),
+    )
+    return {
+        "name": agent.name,
+        "version": str(agent.version),
+        "model": deployment,
+        "tools": [t["function"]["name"] for t in tool_schemas()],
+        "instructions_version": cfg.agent.prompt_version,
+    }
+
+
 def build_agent(
     copilot: PolicyCopilot,
     cfg: PolicyConfig,

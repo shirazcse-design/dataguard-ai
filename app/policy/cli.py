@@ -219,10 +219,21 @@ def cmd_obs_report(args: argparse.Namespace) -> int:
     return 0 if report["privacy_audit"]["clean"] else 5
 
 
+def cmd_agent_register(args: argparse.Namespace) -> int:
+    """LIVE: create a new version of dataguard-policy-copilot in Foundry Agent Service."""
+    from .service import load_llm_config, register_policy_agent
+
+    cfg, _, _ = _load()
+    print(json.dumps(register_policy_agent(cfg, load_llm_config(), args.tenant_id), indent=1))
+    return 0
+
+
 def cmd_ask(args: argparse.Namespace) -> int:
     from .service import build_copilot
 
-    answer = build_copilot(args.mode).answer(args.question, args.level)
+    answer = build_copilot(
+        args.mode, agent_backend=args.agent_backend, tenant_id=args.tenant_id
+    ).answer(args.question, args.level)
     if args.json:
         print(answer.model_dump_json(indent=1))
         return 0
@@ -253,7 +264,10 @@ def cmd_answers_record(args: argparse.Namespace) -> int:
 
     levels = [lv.strip() for lv in args.levels.split(",") if lv.strip()]
     items, _ = load_golden()
-    copilot = build_copilot("record")
+    if args.ids:
+        wanted = {i.strip() for i in args.ids.split(",")}
+        items = [i for i in items if i.id in wanted]
+    copilot = build_copilot("record", agent_backend=args.agent_backend, tenant_id=args.tenant_id)
     summary: dict[str, dict] = {}
     for level in levels:
         counts: dict[str, int] = {}
@@ -261,6 +275,13 @@ def cmd_answers_record(args: argparse.Namespace) -> int:
         for item in items:
             a = copilot.answer(item.question, level)
             counts[a.status] = counts.get(a.status, 0) + 1
+            if args.ids:  # a named subset: per-item outcome (ids, statuses and citations only)
+                stats.setdefault("items", {})[item.id] = {
+                    "status": a.status,
+                    "citations": a.citations,
+                    "tools": [st["tool"] for st in (a.agent or {}).get("steps", [])],
+                    "dense": sorted(set((a.agent or {}).get("search_dense_status", []))),
+                }
             if a.llm is not None:
                 stats["llm_calls"] += 1
                 stats["replayed"] += int(a.llm.cached)
@@ -395,12 +416,28 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("--level", choices=("naive", "advanced", "agentic"), default="advanced")
     ask.add_argument("--mode", choices=("replay", "offline", "live"), default="replay")
     ask.add_argument("--json", action="store_true", help="print the full PolicyAnswer")
+    ask.add_argument(
+        "--agent-backend", choices=("chat-completions", "foundry-service"),
+        default="chat-completions",
+    )  # fmt: skip
+    ask.add_argument("--tenant-id", default=None, help="Entra tenant id (foundry-service sign-in)")
     ask.set_defaults(func=cmd_ask)
     ans = sub.add_parser("answers", help="answer recording commands")
     ans = ans.add_subparsers(dest="sub", required=True)
     rec = ans.add_parser("record", help="LIVE: record golden-set answers for replay")
     rec.add_argument("--levels", default="naive,advanced,agentic")
+    rec.add_argument("--ids", default="", help="comma-separated golden ids (default: all)")
+    rec.add_argument(
+        "--agent-backend", choices=("chat-completions", "foundry-service"),
+        default="chat-completions",
+    )  # fmt: skip
+    rec.add_argument("--tenant-id", default=None, help="Entra tenant id (foundry-service sign-in)")
     rec.set_defaults(func=cmd_answers_record)
+    ag = sub.add_parser("agent", help="Foundry Agent Service commands")
+    ag = ag.add_subparsers(dest="sub", required=True)
+    agr = ag.add_parser("register", help="LIVE: create a new version of dataguard-policy-copilot")
+    agr.add_argument("--tenant-id", default=None, help="Entra tenant id for the browser sign-in")
+    agr.set_defaults(func=cmd_agent_register)
     obs = sub.add_parser("obs", help="observability commands")
     obs = obs.add_subparsers(dest="sub", required=True)
     orp = obs.add_parser("report", help="traced golden run + privacy audit + telemetry summary")
