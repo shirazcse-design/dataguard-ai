@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 79,
+ "input_hash": "6e6ca22c877faa4b2090067e7650e89764ee6c2ff14187a96520f7d4b1c910b5",
+ "latency_ms": 1637.287083081901,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 921,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Access to production databases containing customer data is time-bound for a maximum of 90 days.\",\"evidence_id\":\"E1\",\"quote\":\"Access to production databases containing customer data is time-bound, for a maximum of 90 days.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

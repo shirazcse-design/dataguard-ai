@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 188,
+ "input_hash": "d62bb0face09d72fcb4604e8ae6391b931c0892486d93c6fa040ae7cad098dcb",
+ "latency_ms": 2583.3917499985546,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 918,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:27+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You must report a lost or stolen company device to the IT Service Desk within 24 hours.\",\"evidence_id\":\"E1\",\"quote\":\"Lost or stolen company devices must be reported to the IT Service Desk within 24 hours.\"},{\"text\":\"You must report any suspected security incident, including suspected data loss, to the Security Operations Center within 1 hour of discovery through the security hotline or the incident portal.\",\"evidence_id\":\"E3\",\"quote\":\"Any suspected security incident, including suspected data loss, must be reported to the Security Operations Center within 1 hour of discovery, through the security hotline or the incident portal.\"},{\"text\":\"You must not investigate the suspected incident yourself.\",\"evidence_id\":\"E3\",\"quote\":\"Employees must not investigate a suspected incident themselves.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

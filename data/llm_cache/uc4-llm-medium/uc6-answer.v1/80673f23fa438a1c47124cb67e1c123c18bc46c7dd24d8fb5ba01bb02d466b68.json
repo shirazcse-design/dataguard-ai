@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 138,
+ "input_hash": "80673f23fa438a1c47124cb67e1c123c18bc46c7dd24d8fb5ba01bb02d466b68",
+ "latency_ms": 1624.6546660549939,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 913,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:54+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A vendor must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\",\"evidence_id\":\"E3\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"Sharing confidential customer information with a third party requires data owner approval after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E2\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

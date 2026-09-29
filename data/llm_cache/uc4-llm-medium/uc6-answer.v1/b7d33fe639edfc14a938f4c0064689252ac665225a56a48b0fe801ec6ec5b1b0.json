@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "b7d33fe639edfc14a938f4c0064689252ac665225a56a48b0fe801ec6ec5b1b0",
+ "latency_ms": 1854.08666706644,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 931,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:14+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Before sharing PHI with a third party, approval from both the data owner and the Chief Privacy Officer is required.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Restricted information requires approval from both the data owner and the Chief Privacy Officer.\"},{\"text\":\"Before sharing PHI with a third party, a signed Business Associate Agreement is required.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing protected health information (PHI) additionally requires a signed Business Associate Agreement\"},{\"text\":\"Before a third party receives PHI, it must pass a Vendor Security Assessment.\",\"evidence_id\":\"E3\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

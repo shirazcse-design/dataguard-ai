@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 80,
+ "input_hash": "753c98f61e90ac755d947f87c8d4f451939368c832cc11221564a9e33ed78daf",
+ "latency_ms": 1209.7032079473138,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 847,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:49+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\",\"evidence_id\":\"E2\",\"quote\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

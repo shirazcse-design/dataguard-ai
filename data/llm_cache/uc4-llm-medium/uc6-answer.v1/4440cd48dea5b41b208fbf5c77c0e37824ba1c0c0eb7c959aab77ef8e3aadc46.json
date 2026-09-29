@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 213,
+ "input_hash": "4440cd48dea5b41b208fbf5c77c0e37824ba1c0c0eb7c959aab77ef8e3aadc46",
+ "latency_ms": 2326.9648330751806,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 925,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:11+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"If you accidentally commit an API key to a Git repository, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\",\"evidence_id\":\"E1\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"},{\"text\":\"API keys and service credentials must be rotated immediately if exposure is suspected.\",\"evidence_id\":\"E3\",\"quote\":\"API keys and service credentials are rotated at least every 90 days, and immediately if exposure is suspected.\"},{\"text\":\"Secrets must never be stored in source code or in configuration files committed to a repository.\",\"evidence_id\":\"E4\",\"quote\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

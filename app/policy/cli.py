@@ -157,6 +157,39 @@ def cmd_eval_retrieval(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_eval_answers(args: argparse.Namespace) -> int:
+    from evals.policy.answer_eval import evaluate_level
+    from evals.policy.golden import load_golden
+    from evals.policy.report import write_answers_report
+
+    from .service import build_copilot
+
+    cfg, digest, corpus = _load()
+    items, golden_sha = load_golden()
+    copilot = build_copilot(args.mode)
+    levels = [lv.strip() for lv in args.levels.split(",") if lv.strip()]
+    report = {
+        "provenance": {
+            "mode": args.mode,
+            "generator": copilot.generator.model_id,
+            "embedding_model_id": copilot.retriever.embedding_model_id,
+            "golden_items": len(items),
+            "golden_sha256": golden_sha,
+            "corpus_fingerprint": corpus.fingerprint(),
+            "config_sha256": digest,
+            "prompt_version": cfg.generation.prompt_version,
+        },
+        "levels": {lv: evaluate_level(copilot, items, lv) for lv in levels},
+    }
+    if args.no_write:
+        out = {lv: v["summary"] for lv, v in report["levels"].items()}
+        print(json.dumps(out, indent=1))
+        return 0
+    js, md = write_answers_report(report)
+    print(f"wrote {md.relative_to(REPO)} and {js.relative_to(REPO)}")
+    return 0
+
+
 def cmd_ask(args: argparse.Namespace) -> int:
     from .service import build_copilot
 
@@ -313,6 +346,11 @@ def build_parser() -> argparse.ArgumentParser:
     er.add_argument("--embed-mode", choices=("replay", "offline"), default="replay")
     er.add_argument("--no-write", action="store_true", help="print a summary; write no files")
     er.set_defaults(func=cmd_eval_retrieval)
+    ea = ev.add_parser("answers", help="answer-level metrics per level (replay by default)")
+    ea.add_argument("--mode", choices=("replay", "offline"), default="replay")
+    ea.add_argument("--levels", default="naive,advanced")
+    ea.add_argument("--no-write", action="store_true", help="print a summary; write no files")
+    ea.set_defaults(func=cmd_eval_answers)
     ask = sub.add_parser("ask", help="answer one question (prints policy text locally)")
     ask.add_argument("question")
     ask.add_argument("--level", choices=("naive", "advanced"), default="advanced")

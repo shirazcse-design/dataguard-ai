@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 289,
+ "input_hash": "5c32caf7be1b6adec24702c9dc065efbd17ee3644d05b330462bff277759ee6d",
+ "latency_ms": 2726.466791005805,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 937,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Uploading company information classified Internal or above to a personal Dropbox is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Uploads to unsanctioned cloud services generate a DLP alert for review by the Data Protection team.\",\"evidence_id\":\"E3\",\"quote\":\"Uploads to unsanctioned cloud services generate a DLP alert for review by the Data Protection team.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 prohibits uploading company information classified Internal or above to personal cloud-storage accounts such as personal Dropbox, while E2 allows storing Internal information in personal cloud-storage accounts when working remotely if protected with multi-factor authentication.\"}"
+}

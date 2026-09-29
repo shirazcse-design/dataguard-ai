@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "9d6f07d3862da6e626cf5ea6318ebdf7fc2fabfa3d0a5aa485a6709c07158e1f",
+ "latency_ms": 2012.8980830777436,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 892,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:24+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Administrator access can be granted just in time through the privileged access management tool for sessions of at most 8 hours.\",\"evidence_id\":\"E1\",\"quote\":\"Privileged (administrator) access is granted just in time through the privileged access management tool, for sessions of at most 8 hours\"},{\"text\":\"Administrator access must be approved by the system owner and Information Security.\",\"evidence_id\":\"E1\",\"quote\":\"must be approved by the system owner and Information Security.\"},{\"text\":\"If the production system holds Confidential or Restricted information, access also requires approval from the data owner of that system.\",\"evidence_id\":\"E4\",\"quote\":\"Access to systems holding Confidential or Restricted information also requires approval from the data owner of that system.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

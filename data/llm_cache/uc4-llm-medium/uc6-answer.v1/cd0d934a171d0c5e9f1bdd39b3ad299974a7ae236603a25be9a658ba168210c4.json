@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 138,
+ "input_hash": "cd0d934a171d0c5e9f1bdd39b3ad299974a7ae236603a25be9a658ba168210c4",
+ "latency_ms": 1947.253833990544,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 884,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:05+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"API keys are rotated at least every 90 days.\",\"evidence_id\":\"E1\",\"quote\":\"API keys and service credentials are rotated at least every 90 days, and immediately if exposure is suspected.\"},{\"text\":\"If an API key is exposed, it must be revoked or rotated immediately.\",\"evidence_id\":\"E3\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 171,
+ "input_hash": "164572f74e0de679dba0deedc38b1b5381b41063ac5d84d6b184469daa6f8475",
+ "latency_ms": 2029.3783750385046,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 921,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Writing to USB drives from company devices is blocked by default.\",\"evidence_id\":\"E1\",\"quote\":\"Writing to USB drives and other removable media is blocked by default on company devices.\"},{\"text\":\"You can get an exception to write to a USB drive only with a service ticket approved by your line manager and Information Security.\",\"evidence_id\":\"E1\",\"quote\":\"An exception requires a service ticket approved by the employee's line manager and by Information Security.\"},{\"text\":\"The approved storage locations for company work are the company's managed OneDrive and SharePoint.\",\"evidence_id\":\"E3\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

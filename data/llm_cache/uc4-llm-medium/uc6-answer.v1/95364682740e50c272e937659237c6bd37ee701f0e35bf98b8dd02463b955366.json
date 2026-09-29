@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 98,
+ "input_hash": "95364682740e50c272e937659237c6bd37ee701f0e35bf98b8dd02463b955366",
+ "latency_ms": 1746.3342498522252,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 913,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You are not allowed to upload company source code to a personal repository account unless the Open Source Program Office has approved the release.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company source code to a public repository, a personal repository account or a public paste site is prohibited unless the Open Source Program Office has approved the release.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

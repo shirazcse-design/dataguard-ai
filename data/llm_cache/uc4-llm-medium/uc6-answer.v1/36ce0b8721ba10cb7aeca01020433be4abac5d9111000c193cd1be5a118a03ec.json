@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 161,
+ "input_hash": "36ce0b8721ba10cb7aeca01020433be4abac5d9111000c193cd1be5a118a03ec",
+ "latency_ms": 1998.3046669512987,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 914,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:37+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The company may monitor the use of company devices, accounts and networks to protect its information and systems.\",\"evidence_id\":\"E1\",\"quote\":\"Harbourline may monitor the use of company devices, accounts and networks, within the limits of applicable law, to protect its information and systems.\"},{\"text\":\"A work laptop is a company device provided for business use, with limited personal use permitted under stated conditions.\",\"evidence_id\":\"E2\",\"quote\":\"Company devices and accounts are provided for business use. Limited personal use is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

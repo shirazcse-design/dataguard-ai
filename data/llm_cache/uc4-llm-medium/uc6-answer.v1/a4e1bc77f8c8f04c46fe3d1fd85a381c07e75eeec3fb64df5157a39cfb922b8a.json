@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 172,
+ "input_hash": "a4e1bc77f8c8f04c46fe3d1fd85a381c07e75eeec3fb64df5157a39cfb922b8a",
+ "latency_ms": 1855.5374590214342,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 851,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:35+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Employee personnel records are kept for 6 years after employment ends.\",\"evidence_id\":\"E1\",\"quote\":\"Employee personnel records are retained for 6 years after employment ends.\"},{\"text\":\"Customer financial records are kept for 7 years after the end of the customer relationship.\",\"evidence_id\":\"E4\",\"quote\":\"Customer financial records, including account statements and transaction histories, are retained for 7 years after the end of the customer relationship.\"},{\"text\":\"Security logs are kept for 1 year in searchable storage and for 2 years in total.\",\"evidence_id\":\"E5\",\"quote\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

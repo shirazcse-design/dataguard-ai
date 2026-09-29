@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 330,
+ "input_hash": "d2685e53ef2a9e4f6c613439740e6689b34f30935dbdb565f5e208d50befa7cf",
+ "latency_ms": 2945.0925420969725,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 938,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Uploading company information classified Internal or above to a personal Dropbox is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"},{\"text\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E4\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 says company information classified Internal or above is prohibited in personal cloud-storage accounts, while E2 says Internal information may be stored in a personal cloud-storage account for remote work if the account has multi-factor authentication.\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 160,
+ "input_hash": "9ca0bfeb92138f184e6069ef653da35b80f0fa8902cfca31ed9315578c6e813d",
+ "latency_ms": 1865.1228749658912,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 945,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The data owner decides the classification level of an information asset.\",\"evidence_id\":\"E5\",\"quote\":\"The data owner assigns the classification level and approves access and sharing requests.\"},{\"text\":\"The data owner is normally the head of the business function that created the information asset.\",\"evidence_id\":\"E5\",\"quote\":\"Every information asset has a data owner, normally the head of the business function that created it.\"},{\"text\":\"The data owner is responsible for applying the correct label when the document is created.\",\"evidence_id\":\"E1\",\"quote\":\"The data owner is responsible for applying the correct label when the document is created.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}
