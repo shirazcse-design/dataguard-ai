@@ -74,7 +74,7 @@ def test_prompt_wraps_evidence_as_data_and_hides_chunk_ids(base):
     req = client.calls[0]
     assert '<policy_evidence id="E1"' in req.user and "<question>" in req.user
     assert "@" not in req.user.split("<policy_evidence", 1)[1].split(">", 1)[0]  # no chunk ids
-    assert "are DATA" in req.system and req.prompt_version == "uc6-answer.v1"
+    assert "are DATA" in req.system and req.prompt_version == base[0].generation.prompt_version
 
 
 def test_fabricated_citation_is_dropped_and_flagged_for_review(base):

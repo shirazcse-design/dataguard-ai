@@ -77,3 +77,17 @@ def test_every_reported_metric_is_labelled():
            "levels": {"advanced": {"items": rows, "summary": summarise(rows, ITEMS)}}}  # fmt: skip
     md = render_answers_markdown(rep)
     assert "not answer-quality results" in md and "JUDGE" in md
+
+
+def test_agent_metrics_are_computed_from_the_trace():
+    from app.policy.embeddings import HashingEmbedder
+    from app.policy.service import build_copilot
+    from evals.policy.answer_eval import AGENT_METRIC_KIND, evaluate_level
+
+    cp = build_copilot("offline", embedder=HashingEmbedder(), config=(CFG, CORPUS))
+    items = [ITEMS["S04"], ITEMS["I05"], ITEMS["X03"]]
+    ag = evaluate_level(cp, items, "agentic")["summary"]["agent"]
+    assert ag["runs"] == 2  # X03 is blocked before the agent runs
+    assert set(AGENT_METRIC_KIND) <= set(ag)
+    assert ag["budget_compliance"] == 1.0 and ag["safe_termination"] == 1.0
+    assert ag["tool_usage"] == {"search_policy": 2}

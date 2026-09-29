@@ -83,8 +83,12 @@ generation:
   # Reuses the UC4 `mid` tier (deployment `uc4-llm-medium`, config/llm/llm.v1.yaml): no new
   # generation deployment. Temperature, retry and the Foundry adapter come from that file.
   tier: mid
-  prompt_version: uc6-answer.v1
-  prompt_file: prompts/uc6/answer.v1.md
+  # v2 (2026-09-29) narrows the conflict rule after the v1 evaluation showed over-escalation on
+  # S01/P01 (a real AUP/DLP disagreement about Internal data flagged for a Confidential-data
+  # question). A POST-HOC change made after seeing golden-set results; v1 results are kept in
+  # docs/uc6/results/answers.uc6-answer.v1.md for comparison.
+  prompt_version: uc6-answer.v2
+  prompt_file: prompts/uc6/answer.v2.md
   max_output_tokens: 4000       # reasoning deployment: hidden reasoning counts against the cap
   timeout_s: 120.0
   max_claims: 6
@@ -103,6 +107,19 @@ gate:
   # verification do the rest. Chosen after looking at that distribution (not independently
   # validated).
   min_evidence_score: 0.35
+
+agent:
+  # Agentic RAG (docs/uc6/architecture.md). The name the agent will have when YOU create it in
+  # Foundry Agent Service (docs/uc6/foundry-agent-setup.md); nothing here registers it.
+  name: dataguard-policy-copilot
+  prompt_version: uc6-agent.v1
+  prompt_file: prompts/uc6/agent.v1.md
+  allowed_tools: [search_policy, get_policy_section, lookup_policy_metadata, request_human_review]
+  max_tool_calls: 6                  # step budget; exceeding it stops the run safely
+  max_turns: 8                       # planner turns (tool-call turns + the final answer)
+  max_consecutive_tool_failures: 2
+  max_output_tokens: 4000
+  search_top_k: 5
 
 # Each level is a set of switches over the SAME components (docs/uc6/architecture.md).
 # Naive is the experimental baseline: no application guardrails beyond the input-size check, and

@@ -103,6 +103,18 @@ class GateConfig(StrictModel):
     min_evidence_score: float = Field(ge=0, le=1)
 
 
+class AgentConfig(StrictModel):
+    name: str = Field(pattern=r"^[a-z0-9-]+$")
+    prompt_version: str = Field(pattern=r"^[A-Za-z0-9._-]+$")
+    prompt_file: str
+    allowed_tools: list[str] = Field(min_length=1)
+    max_tool_calls: int = Field(gt=0, le=20)
+    max_turns: int = Field(gt=1, le=30)
+    max_consecutive_tool_failures: int = Field(gt=0)
+    max_output_tokens: int = Field(gt=0)
+    search_top_k: int = Field(gt=0, le=10)
+
+
 class PolicyConfig(StrictModel):
     policy_version: str
     corpus: CorpusConfig
@@ -115,6 +127,7 @@ class PolicyConfig(StrictModel):
     generation: GenerationConfig
     guard: GuardConfig
     gate: GateConfig
+    agent: AgentConfig
     levels: dict[str, LevelConfig]
 
     @field_validator("policy_version")

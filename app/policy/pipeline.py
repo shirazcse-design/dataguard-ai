@@ -3,6 +3,10 @@
     input guard -> retrieval -> evidence injection scan -> evidence gate -> generation
                 -> citation verification -> conflict resolution -> PolicyAnswer
 
+Agentic RAG (`app/policy/agent.py`) replaces retrieval..generation with a bounded tool loop and
+then goes through the SAME input guard and the SAME verification/conflict/outcome code
+(`decide`), so the agent cannot produce an answer the non-agentic path would not accept.
+
 `PolicyAnswer.stages` lists exactly the stages that ran, in order, with their outcome; a stage
 that did not run is not listed (a short-circuit ends the list). Every decision about status,
 citations and conflicts is made here from verifiable facts; the model contributes claims and
@@ -19,6 +23,7 @@ import secrets
 import time
 from collections.abc import Callable
 from contextlib import nullcontext
+from dataclasses import dataclass, field
 from typing import Any
 
 from guardrails.injection import InjectionScanner
@@ -26,11 +31,42 @@ from observability import span
 
 from .config import LevelConfig, PolicyConfig
 from .corpus import Corpus
-from .generate import Generator
+from .generate import Generator, ModelOutput
 from .guard import check_question, scan_chunk
 from .retrieval import Hit, Retriever
-from .schemas import Evidence, GuardrailEvent, PolicyAnswer, Review, Stage
+from .schemas import Evidence, GuardrailEvent, LLMCall, PolicyAnswer, Review, Stage
 from .verify import model_reported_conflict, verify_claims, version_conflicts
+
+
+@dataclass
+class Run:
+    """Per-request state shared by the pipeline stages and the agent."""
+
+    request_id: str
+    level: str
+    embedding_model_id: str | None
+    started: float = field(default_factory=time.perf_counter)
+    stages: list[Stage] = field(default_factory=list)
+    review: Review = field(default_factory=Review)
+    events: list[GuardrailEvent] = field(default_factory=list)
+
+    def finish(self, status: str, mode: str, **kw: Any) -> PolicyAnswer:
+        return PolicyAnswer(
+            request_id=self.request_id,
+            level=self.level,
+            mode=mode,
+            status=status,
+            claims=kw.pop("claims", []),
+            citations=kw.pop("citations", []),
+            evidence=kw.pop("evidence", []),
+            evidence_status=kw.pop("evidence_status", "none"),
+            review=self.review,
+            guardrail_events=self.events,
+            stages=self.stages,
+            embedding_model_id=self.embedding_model_id,
+            latency_ms=round((time.perf_counter() - self.started) * 1000, 1),
+            **kw,
+        )
 
 
 class PolicyCopilot:
@@ -54,31 +90,33 @@ class PolicyCopilot:
         self.tracer = tracer
         self.salt = salt
         self.new_id = id_factory
+        self.agent: Any = None  # an AgentRunner (app/policy/agent.py), set by build_copilot
 
     # -- helpers -----------------------------------------------------------------------------
+    def evidence_item(self, chunk_id: str, label: str, rank: int, score: float) -> Evidence:
+        c = self.corpus.by_id[chunk_id]
+        return Evidence(
+            evidence_id=label,
+            chunk_id=c.chunk_id,
+            citation=c.citation,
+            policy_id=c.policy_id,
+            title=c.title,
+            version=c.version,
+            effective_date=c.effective_date,
+            status=c.status,
+            section=c.section,
+            heading=c.heading,
+            policy_owner=c.policy_owner,
+            body=c.body,
+            rank=rank,
+            score=round(score, 4),
+        )
+
     def evidence_from(self, hits: list[Hit]) -> list[Evidence]:
-        out = []
-        for n, h in enumerate(hits, start=1):
-            c = self.corpus.by_id[h.chunk_id]
-            out.append(
-                Evidence(
-                    evidence_id=f"E{n}",
-                    chunk_id=c.chunk_id,
-                    citation=c.citation,
-                    policy_id=c.policy_id,
-                    title=c.title,
-                    version=c.version,
-                    effective_date=c.effective_date,
-                    status=c.status,
-                    section=c.section,
-                    heading=c.heading,
-                    policy_owner=c.policy_owner,
-                    body=c.body,
-                    rank=h.rank,
-                    score=round(h.evidence_score, 4),
-                )
-            )
-        return out
+        return [
+            self.evidence_item(h.chunk_id, f"E{n}", h.rank, h.evidence_score)
+            for n, h in enumerate(hits, start=1)
+        ]
 
     def _mode(self, llm_cached: bool | None) -> str:
         if self.generator.mode == "offline":
@@ -107,64 +145,15 @@ class PolicyCopilot:
     def _answer(
         self, question: str, level_name: str, level: LevelConfig, request_id: str
     ) -> PolicyAnswer:
-        started = time.perf_counter()
-        stages: list[Stage] = []
-        review = Review()
-        events: list[GuardrailEvent] = []
+        run = Run(request_id, level_name, self.retriever.embedding_model_id)
 
-        def finish(status: str, **kw: Any) -> PolicyAnswer:
-            llm = kw.pop("llm", None)
-            return PolicyAnswer(
-                request_id=request_id,
-                level=level_name,
-                mode=self._mode(llm.cached if llm else None),
-                status=status,
-                claims=kw.pop("claims", []),
-                citations=kw.pop("citations", []),
-                evidence=kw.pop("evidence", []),
-                evidence_status=kw.pop("evidence_status", "none"),
-                review=review,
-                guardrail_events=events,
-                stages=stages,
-                llm=llm,
-                embedding_model_id=self.retriever.embedding_model_id,
-                latency_ms=round((time.perf_counter() - started) * 1000, 1),
-                **kw,
-            )
-
-        # 1. input guard ------------------------------------------------------------------------
-        t = time.perf_counter()
-        with span("uc6.input_guard") as s:
-            verdict = check_question(question, self.cfg.guard, self.scanner, scan=level.input_guard)
-            s.set(dg__policy__guard_ok=verdict.ok, dg__input__reason=verdict.reason or "ok")
-        detail = {"scanned": level.input_guard, "chars": len(question)}
-        if not verdict.ok:
-            stages.append(
-                Stage(
-                    name="input_guard",
-                    status="blocked",
-                    ms=_ms(t),
-                    detail={**detail, "reason": verdict.reason, "rules": list(verdict.rules)},
-                )
-            )
-            if verdict.reason == "prompt_injection":
-                events.append(
-                    GuardrailEvent(
-                        type="prompt_injection_suspected",
-                        trigger=",".join(verdict.rules),
-                        action="blocked",
-                    )
-                )
-                review.add("guardrail_injection")
-            else:
-                events.append(
-                    GuardrailEvent(
-                        type="input_rejected", trigger=verdict.reason or "", action="blocked"
-                    )
-                )
-                review.add("input_rejected")
-            return finish("BLOCKED")
-        stages.append(Stage(name="input_guard", status="ok", ms=_ms(t), detail=detail))
+        blocked = self.input_guard(question, level, run)
+        if blocked is not None:
+            return blocked
+        if level_name == "agentic":
+            if self.agent is None:
+                raise ValueError("the agentic level needs an agent runner (build_copilot)")
+            return self.agent.run(question, level, run)
 
         # 2. retrieval ----------------------------------------------------------------------------
         t = time.perf_counter()
@@ -176,7 +165,7 @@ class PolicyCopilot:
                 dg__policy__stages=",".join(retrieval.trace.stages),
             )
         evidence = self.evidence_from(retrieval.hits)
-        stages.append(
+        run.stages.append(
             Stage(
                 name="retrieval",
                 status="ok" if evidence else "failed",
@@ -189,50 +178,22 @@ class PolicyCopilot:
             )
         )
         top = evidence[0].score if evidence else None
+        mode = self._mode(None)
 
         # 3. evidence injection scan ------------------------------------------------------------
-        used = evidence
-        if level.chunk_injection_scan:
-            t = time.perf_counter()
-            flagged = 0
-            for e in evidence:
-                rules = scan_chunk(e.body, self.scanner)
-                if rules:
-                    e.flagged_injection = True
-                    flagged += 1
-                    events.append(
-                        GuardrailEvent(
-                            type="prompt_injection_in_evidence",
-                            trigger=",".join(rules),
-                            action="excluded_from_prompt",
-                            chunk_id=e.chunk_id,
-                        )
-                    )
-            used = [e for e in evidence if not e.flagged_injection]
-            if flagged:
-                review.add("evidence_injection")
-            stages.append(
-                Stage(
-                    name="evidence_scan",
-                    status="ok",
-                    ms=_ms(t),
-                    detail={"scanned": len(evidence), "excluded": flagged},
-                )
-            )
+        used = self.scan_evidence(evidence, run) if level.chunk_injection_scan else evidence
 
         # 4. evidence gate ------------------------------------------------------------------------
         if not used and not level.evidence_gate:
-            review.add("insufficient_evidence")
-            return finish(
-                "INSUFFICIENT_EVIDENCE",
-                evidence=evidence,
-                retrieval=retrieval.trace,
+            run.review.add("insufficient_evidence")
+            return run.finish(
+                "INSUFFICIENT_EVIDENCE", mode, evidence=evidence, retrieval=retrieval.trace,
                 top_evidence_score=top,
-            )
+            )  # fmt: skip
         if level.evidence_gate:
             best = max((e.score for e in used), default=0.0)
             passed = bool(used) and best >= self.cfg.gate.min_evidence_score
-            stages.append(
+            run.stages.append(
                 Stage(
                     name="evidence_gate",
                     status="ok" if passed else "short_circuit",
@@ -243,13 +204,11 @@ class PolicyCopilot:
                 )
             )
             if not passed:
-                review.add("insufficient_evidence")
-                return finish(
-                    "INSUFFICIENT_EVIDENCE",
-                    evidence=evidence,
-                    retrieval=retrieval.trace,
+                run.review.add("insufficient_evidence")
+                return run.finish(
+                    "INSUFFICIENT_EVIDENCE", mode, evidence=evidence, retrieval=retrieval.trace,
                     top_evidence_score=top,
-                )
+                )  # fmt: skip
 
         # 5. generation ---------------------------------------------------------------------------
         t = time.perf_counter()
@@ -258,7 +217,7 @@ class PolicyCopilot:
             s.set(**_llm_attrs(gen.call), dg__llm__status="ok" if gen.error is None else "error")
             if gen.error:
                 s.set(dg__llm__error_kind=gen.error)
-        stages.append(
+        run.stages.append(
             Stage(
                 name="generation",
                 status="ok" if gen.output else "failed",
@@ -271,17 +230,103 @@ class PolicyCopilot:
                 },
             )
         )
+        mode = self._mode(gen.call.cached if gen.call else None)
         if gen.output is None:
-            review.add("generation_unavailable")
-            return finish(
-                "UNAVAILABLE",
-                evidence=evidence,
-                retrieval=retrieval.trace,
-                top_evidence_score=top,
-                llm=gen.call,
-            )
-        out = gen.output
+            run.review.add("generation_unavailable")
+            return run.finish(
+                "UNAVAILABLE", mode, evidence=evidence, retrieval=retrieval.trace,
+                top_evidence_score=top, llm=gen.call,
+            )  # fmt: skip
+        return self.decide(
+            gen.output, used, evidence, level, run, mode=mode, top=top,
+            retrieval=retrieval.trace, llm=gen.call,
+        )  # fmt: skip
 
+    # -- stages shared with the agent ----------------------------------------------------------
+    def input_guard(self, question: str, level: LevelConfig, run: Run) -> PolicyAnswer | None:
+        """Step 1. Returns a BLOCKED answer, or None when the question may proceed."""
+        t = time.perf_counter()
+        with span("uc6.input_guard") as s:
+            verdict = check_question(question, self.cfg.guard, self.scanner, scan=level.input_guard)
+            s.set(dg__policy__guard_ok=verdict.ok, dg__input__reason=verdict.reason or "ok")
+        detail = {"scanned": level.input_guard, "chars": len(question)}
+        if verdict.ok:
+            run.stages.append(Stage(name="input_guard", status="ok", ms=_ms(t), detail=detail))
+            return None
+        run.stages.append(
+            Stage(
+                name="input_guard",
+                status="blocked",
+                ms=_ms(t),
+                detail={**detail, "reason": verdict.reason, "rules": list(verdict.rules)},
+            )
+        )
+        if verdict.reason == "prompt_injection":
+            run.events.append(
+                GuardrailEvent(
+                    type="prompt_injection_suspected",
+                    trigger=",".join(verdict.rules),
+                    action="blocked",
+                )
+            )
+            run.review.add("guardrail_injection")
+        else:
+            run.events.append(
+                GuardrailEvent(
+                    type="input_rejected", trigger=verdict.reason or "", action="blocked"
+                )
+            )
+            run.review.add("input_rejected")
+        return run.finish("BLOCKED", self._mode(None))
+
+    def scan_evidence(
+        self, evidence: list[Evidence], run: Run, *, record: bool = True
+    ) -> list[Evidence]:
+        """Step 3. Flags evidence carrying instruction-override text and returns the rest."""
+        t = time.perf_counter()
+        flagged = 0
+        for e in evidence:
+            rules = scan_chunk(e.body, self.scanner)
+            if rules:
+                e.flagged_injection = True
+                flagged += 1
+                run.events.append(
+                    GuardrailEvent(
+                        type="prompt_injection_in_evidence",
+                        trigger=",".join(rules),
+                        action="excluded_from_prompt",
+                        chunk_id=e.chunk_id,
+                    )
+                )
+        if flagged:
+            run.review.add("evidence_injection")
+        if record:
+            run.stages.append(
+                Stage(
+                    name="evidence_scan",
+                    status="ok",
+                    ms=_ms(t),
+                    detail={"scanned": len(evidence), "excluded": flagged},
+                )
+            )
+        return [e for e in evidence if not e.flagged_injection]
+
+    def decide(
+        self,
+        out: ModelOutput,
+        used: list[Evidence],
+        evidence: list[Evidence],
+        level: LevelConfig,
+        run: Run,
+        *,
+        mode: str,
+        top: float | None,
+        retrieval: Any = None,
+        llm: LLMCall | None = None,
+        agent: dict[str, Any] | None = None,
+    ) -> PolicyAnswer:
+        """Steps 6-8: citation verification, conflict resolution and the final status."""
+        review = run.review
         # 6. citation verification ----------------------------------------------------------------
         t = time.perf_counter()
         with span("uc6.citation_verify") as s:
@@ -303,7 +348,7 @@ class PolicyCopilot:
             dropped = [c for c in claims if not c.verified]
         else:
             kept, dropped = claims, []
-        stages.append(
+        run.stages.append(
             Stage(
                 name="citation_verification",
                 status="ok",
@@ -336,7 +381,7 @@ class PolicyCopilot:
             review.add("policy_conflict")
         elif out.status == "CONFLICT" and not any(c.kind == "version" for c in conflicts):
             review.add("conflict_unverified")
-        stages.append(
+        run.stages.append(
             Stage(
                 name="conflict_check",
                 status="ok",
@@ -376,9 +421,10 @@ class PolicyCopilot:
         else:
             evidence_status = "partially_grounded" if n_ok else "ungrounded"
         citations = list(dict.fromkeys(c.citation for c in kept if c.verified and c.citation))
-        stages.append(Stage(name="result", status="ok", detail={"status": status}))
-        return finish(
+        run.stages.append(Stage(name="result", status="ok", detail={"status": status}))
+        return run.finish(
             status,
+            mode,
             claims=kept,
             dropped_claims=dropped,
             citations=citations,
@@ -387,8 +433,9 @@ class PolicyCopilot:
             conflict_note=out.conflict_note.strip()[:500] if cross is not None else None,
             evidence_status=evidence_status,
             top_evidence_score=top,
-            retrieval=retrieval.trace,
-            llm=gen.call,
+            retrieval=retrieval,
+            llm=llm,
+            agent=agent,
         )
 
 

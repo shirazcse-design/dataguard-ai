@@ -19,10 +19,18 @@ Per item, from a `PolicyAnswer`:
 * superseded_cited        DETERMINISTIC  the shown answer cites a superseded policy version
 * point coverage          HEURISTIC      share of expected_answer_points found in the answer
 * forbidden_hit           HEURISTIC      a forbidden answer point appears in the answer
+
+Agent-only (Agentic RAG), all DETERMINISTIC from the agent trace:
+* task_completion         the run ended with a final answer AND an acceptable status
+* retrieval_tool_used     search_policy or get_policy_section was called at least once
+* unnecessary_calls       repeated identical calls + failed calls
+* budget_compliance       tool calls <= the configured budget (enforced; reported as evidence)
+* safe_termination        a run that did not end with a final answer did not return ANSWERED
 """
 
 from __future__ import annotations
 
+import json
 from statistics import mean
 from typing import Any
 
@@ -45,6 +53,14 @@ METRIC_KIND = {
     "citation_recall": "deterministic",
     "answer_point_coverage": "heuristic",
     "forbidden_point_rate": "heuristic",
+}
+AGENT_METRIC_KIND = {
+    "task_completion": "deterministic",
+    "retrieval_tool_used": "deterministic",
+    "avg_tool_calls": "deterministic",
+    "unnecessary_calls_per_run": "deterministic",
+    "budget_compliance": "deterministic (enforced)",
+    "safe_termination": "deterministic (enforced)",
 }
 
 
@@ -86,6 +102,24 @@ def score_item(item: GoldenItem, a: PolicyAnswer, corpus: Corpus) -> dict[str, A
         found = sum(any(p.lower() in text for p in group) for group in item.expected_answer_points)
         row["answer_point_coverage"] = found / len(item.expected_answer_points)
     row["forbidden_hit"] = any(f.lower() in text for f in item.forbidden_answer_points)
+    if a.agent is not None:
+        steps = a.agent["steps"]
+        seen: set[str] = set()
+        repeats = 0
+        for st in steps:
+            key = json.dumps([st["tool"], st["arguments"]], sort_keys=True)
+            repeats += key in seen
+            seen.add(key)
+        row["agent"] = {
+            "tool_calls": a.agent["tool_calls"],
+            "max_tool_calls": a.agent["max_tool_calls"],
+            "tools": [st["tool"] for st in steps],
+            "stopped_reason": a.agent["stopped_reason"],
+            "retrieval_tool_used": any(
+                st["tool"] in ("search_policy", "get_policy_section") for st in steps
+            ),
+            "unnecessary_calls": repeats + sum(not st["ok"] for st in steps),
+        }
     return row
 
 
@@ -106,7 +140,39 @@ def summarise(rows: list[dict[str, Any]], items: dict[str, GoldenItem]) -> dict[
     adversarial = [r for r in rows if items[r["id"]].category == "adversarial"]
     answered = [r for r in rows if r["status"] == "ANSWERED"]
     claims = sum(r["claims_generated"] for r in rows)
+    ran = [r for r in rows if "agent" in r]
+    agent = None
+    if ran:
+        agent = {
+            "runs": len(ran),
+            "task_completion": _rate(
+                ran, lambda r: r["agent"]["stopped_reason"] == "final_answer" and r["status_ok"]
+            ),
+            "retrieval_tool_used": _rate(ran, lambda r: r["agent"]["retrieval_tool_used"]),
+            "avg_tool_calls": round(mean(r["agent"]["tool_calls"] for r in ran), 3),
+            "unnecessary_calls_per_run": round(
+                mean(r["agent"]["unnecessary_calls"] for r in ran), 3
+            ),
+            "budget_compliance": _rate(
+                ran, lambda r: r["agent"]["tool_calls"] <= r["agent"]["max_tool_calls"]
+            ),
+            "safe_termination": _rate(
+                ran,
+                lambda r: (
+                    r["agent"]["stopped_reason"] == "final_answer" or r["status"] != "ANSWERED"
+                ),
+            ),
+            "stopped_reasons": {
+                k: sum(r["agent"]["stopped_reason"] == k for r in ran)
+                for k in sorted({r["agent"]["stopped_reason"] for r in ran})
+            },
+            "tool_usage": {
+                t: sum(r["agent"]["tools"].count(t) for r in ran)
+                for t in sorted({t for r in ran for t in r["agent"]["tools"]})
+            },
+        }
     return {
+        "agent": agent,
         "n": len(rows),
         "status_counts": {
             s: sum(r["status"] == s for r in rows) for s in sorted({r["status"] for r in rows})

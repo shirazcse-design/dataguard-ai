@@ -140,7 +140,7 @@ def render_answers_markdown(report: dict[str, Any]) -> str:
         "* Semantic groundedness and answer relevance need a JUDGE (LLM or human) and are **not** "
         "measured here; the deterministic rows are proxies, labelled as such.",
         "",
-        "## Naive vs Advanced",
+        "## Naive vs Advanced vs Agentic",
         "",
         "| Metric | Kind | " + " | ".join(levels) + " |",
         "|---|---|" + "---|" * len(levels),
@@ -148,6 +148,21 @@ def render_answers_markdown(report: dict[str, Any]) -> str:
     for key, label in ANSWER_ROWS:
         cells = [_fmt(report["levels"][lv]["summary"]["metrics"][key]) for lv in levels]
         lines.append(f"| {label} | {METRIC_KIND[key]} | " + " | ".join(cells) + " |")
+    agent_levels = [lv for lv in levels if report["levels"][lv]["summary"].get("agent")]
+    if agent_levels:
+        from .answer_eval import AGENT_METRIC_KIND
+
+        lines += ["", "## Agent behaviour (Agentic RAG)", "", "| Metric | Kind | " + " | ".join(agent_levels) + " |",
+                  "|---|---|" + "---|" * len(agent_levels)]  # fmt: skip
+        for key, kind in AGENT_METRIC_KIND.items():
+            cells = [_fmt(report["levels"][lv]["summary"]["agent"][key]) for lv in agent_levels]
+            lines.append(f"| {key.replace('_', ' ')} | {kind} | " + " | ".join(cells) + " |")
+        for lv in agent_levels:
+            ag = report["levels"][lv]["summary"]["agent"]
+            lines.append("")
+            lines.append(
+                f"* {lv}: stop reasons {ag['stopped_reasons']}; tool usage {ag['tool_usage']}"
+            )
     lines += ["", "## Status counts", "", "| Level | Statuses | Generation errors | Claims generated |",
               "|---|---|---|---|"]  # fmt: skip
     for lv in levels:
@@ -179,8 +194,10 @@ def render_answers_markdown(report: dict[str, Any]) -> str:
 
 def write_answers_report(report: dict[str, Any], out_dir: Path = RESULTS_DIR) -> tuple[Path, Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
-    js = out_dir / "answers.json"
-    md = out_dir / "answers.md"
+    # One file pair per prompt version, so an earlier prompt's results are never overwritten.
+    stem = f"answers.{report['provenance']['prompt_version']}"
+    js = out_dir / f"{stem}.json"
+    md = out_dir / f"{stem}.md"
     js.write_text(json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     md.write_text(render_answers_markdown(report), encoding="utf-8")
     return js, md

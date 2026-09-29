@@ -3,8 +3,9 @@
     dataguard-policy ingest                         corpus stats + fingerprint (no network)
     dataguard-policy embed record                   LIVE: record chunk + golden-query embeddings
     dataguard-policy eval retrieval [--embed-mode replay|offline]
-    dataguard-policy ask "question" [--level naive|advanced] [--mode replay|offline|live]
-    dataguard-policy answers record [--levels naive,advanced]   LIVE: record golden answers
+    dataguard-policy ask "question" [--level naive|advanced|agentic] [--mode replay|offline|live]
+    dataguard-policy answers record [--levels naive,advanced,agentic]   LIVE: record answers
+    dataguard-policy eval answers [--mode replay|offline]
 
 `--embed-mode`: `replay` (default) uses recorded vectors only and needs no Azure; `offline` uses the
 non-semantic hashing embedder and says so in every output; `record` (embed command only) calls the
@@ -207,6 +208,10 @@ def cmd_ask(args: argparse.Namespace) -> int:
         print(f"conflict ({k.kind}, {k.resolution}): {', '.join(k.citations)}")
     if answer.review.required:
         print(f"human review: {', '.join(answer.review.reasons)}")
+    if answer.agent:
+        for st in answer.agent["steps"]:
+            print(f"  agent step {st['step']}: {st['tool']} ok={st['ok']} -> {st['evidence_ids']}")
+        print(f"  agent stopped: {answer.agent['stopped_reason']}")
     print("stages: " + " -> ".join(f"{s.name}:{s.status}" for s in answer.stages))
     return 0
 
@@ -234,8 +239,14 @@ def cmd_answers_record(args: argparse.Namespace) -> int:
                 stats["tokens_in"] += a.llm.tokens_in or 0
                 stats["tokens_out"] += a.llm.tokens_out or 0
             gen = next((s for s in a.stages if s.name == "generation"), None)
-            if gen is not None and gen.detail.get("error"):
-                kind = gen.detail["error"]
+            kind = gen.detail.get("error") if gen is not None else None
+            if a.agent is not None:
+                stats["llm_calls"] += a.agent["turns"]
+                stats["tokens_in"] += a.agent["tokens_in"] or 0
+                stats["tokens_out"] += a.agent["tokens_out"] or 0
+                if a.agent["stopped_reason"] != "final_answer":
+                    kind = a.agent["stopped_reason"]
+            if kind:
                 stats["errors"][kind] = stats["errors"].get(kind, 0) + 1
         summary[level] = {"statuses": counts, **stats}
     print(json.dumps(summary, indent=1, sort_keys=True))
@@ -348,19 +359,19 @@ def build_parser() -> argparse.ArgumentParser:
     er.set_defaults(func=cmd_eval_retrieval)
     ea = ev.add_parser("answers", help="answer-level metrics per level (replay by default)")
     ea.add_argument("--mode", choices=("replay", "offline"), default="replay")
-    ea.add_argument("--levels", default="naive,advanced")
+    ea.add_argument("--levels", default="naive,advanced,agentic")
     ea.add_argument("--no-write", action="store_true", help="print a summary; write no files")
     ea.set_defaults(func=cmd_eval_answers)
     ask = sub.add_parser("ask", help="answer one question (prints policy text locally)")
     ask.add_argument("question")
-    ask.add_argument("--level", choices=("naive", "advanced"), default="advanced")
+    ask.add_argument("--level", choices=("naive", "advanced", "agentic"), default="advanced")
     ask.add_argument("--mode", choices=("replay", "offline", "live"), default="replay")
     ask.add_argument("--json", action="store_true", help="print the full PolicyAnswer")
     ask.set_defaults(func=cmd_ask)
     ans = sub.add_parser("answers", help="answer recording commands")
     ans = ans.add_subparsers(dest="sub", required=True)
     rec = ans.add_parser("record", help="LIVE: record golden-set answers for replay")
-    rec.add_argument("--levels", default="naive,advanced")
+    rec.add_argument("--levels", default="naive,advanced,agentic")
     rec.set_defaults(func=cmd_answers_record)
     sub.add_parser(
         "diagnose", help="LIVE: probe the generation deployment and print provider errors"

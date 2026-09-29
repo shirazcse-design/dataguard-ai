@@ -16,12 +16,15 @@ import os
 from pathlib import Path
 from typing import Any
 
+from app.agent.foundry_agent import FoundryAgentClient
+from app.agent.types import AgentError, AgentLLMClient
 from app.classification.config_loader import default_config_dir, read_yaml
 from app.llm.config import LLMConfig
 from app.llm.foundry import FoundryClient
 from app.llm.replay import ReplayLLMClient
 from app.llm.types import LLMClient, LLMError
 
+from .agent import AgentRunner, OfflinePlanner, ReplayAgentClient, tool_schemas
 from .config import PolicyConfig, load_policy_config
 from .corpus import Corpus, load_corpus
 from .embeddings import CachedEmbedder, Embedder, FoundryEmbeddingClient
@@ -84,6 +87,44 @@ def build_generator(
     )
 
 
+def build_agent(
+    copilot: PolicyCopilot,
+    cfg: PolicyConfig,
+    mode: str,
+    llm: LLMConfig,
+    planner: AgentLLMClient | None = None,
+) -> AgentRunner:
+    """The Agentic RAG runner. Its live planner is chat-completions tool calling on the same `mid`
+    deployment (UC4's FoundryAgentClient). The Foundry Agent Service agent you create manually
+    (docs/uc6/foundry-agent-setup.md) is integrated only after it exists."""
+    tier = llm.tiers[cfg.generation.tier]
+    tools = tool_schemas()
+    if planner is None:
+        if mode == "offline":
+            planner = OfflinePlanner()
+        else:
+
+            def foundry() -> AgentLLMClient:
+                deployment = os.environ.get(tier.deployment_env, "")
+                if not deployment:
+                    raise AgentError("not_configured", f"{tier.deployment_env} is not set")
+                return FoundryAgentClient(
+                    llm.foundry, deployment, tools=tools,
+                    max_output_tokens=cfg.agent.max_output_tokens,
+                )  # fmt: skip
+
+            if mode == "live":
+                planner = foundry()
+            else:
+                planner = ReplayAgentClient(
+                    REPO / llm.cache.dir, tier.replay_model_id, cfg.agent.prompt_version, tools,
+                    inner=foundry() if mode == "record" else None,
+                )  # fmt: skip
+    system = (REPO / cfg.agent.prompt_file).read_text(encoding="utf-8").strip()
+    label = {"offline": "offline", "live": "live", "record": "live"}.get(mode, "replay")
+    return AgentRunner(copilot, planner, cfg.agent, system, mode=label)
+
+
 def build_copilot(
     mode: str = "replay",
     *,
@@ -91,6 +132,7 @@ def build_copilot(
     embedder: Embedder | None = None,
     tracer: Any = None,
     config: tuple[PolicyConfig, Corpus] | None = None,
+    agent_planner: AgentLLMClient | None = None,
 ) -> PolicyCopilot:
     if mode not in MODES:
         raise ValueError(f"unknown mode {mode!r}; expected one of {MODES}")
@@ -101,7 +143,7 @@ def build_copilot(
         cfg, corpus = config
     llm = load_llm_config()
     retriever = Retriever(corpus, cfg, embedder or build_embedder(cfg, mode, llm))
-    return PolicyCopilot(
+    copilot = PolicyCopilot(
         corpus,
         cfg,
         retriever,
@@ -109,3 +151,5 @@ def build_copilot(
         load_policy_scanner(cfg.guard),
         tracer=tracer,
     )
+    copilot.agent = build_agent(copilot, cfg, mode, llm, agent_planner)
+    return copilot
