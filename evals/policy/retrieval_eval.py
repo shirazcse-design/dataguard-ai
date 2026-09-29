@@ -9,7 +9,7 @@ All metrics here are DETERMINISTIC: they compare retrieved section keys with the
 * MRR         = 1 / rank of the first relevant hit (0 if none in the top 10)
 
 Plus two retrieval-safety measures over ALL items: how often a `draft` (unapproved) chunk reaches
-the top K, and, for conflict items, whether every conflicting section is surfaced in the top K.
+the top K, and, for items with `conflict_sections`, whether all of them are in the top K.
 
 The variants form an ablation ladder: naive (dense only) -> sparse only -> hybrid -> hybrid + query
 processing -> advanced (hybrid + query processing + metadata filter + rerank). Agentic RAG calls the
@@ -76,8 +76,9 @@ def evaluate_variant(
         if item.expected_sections:
             row.update(_item_metrics(keys, set(item.expected_sections)))
         if item.conflict_sections:
-            wanted = set(item.conflict_sections) | set(item.expected_sections)
-            row["conflict_surfaced"] = wanted <= set(keys[: level.top_k])
+            # Every CONFLICTING section must reach the top k (so the conflict can be shown).
+            # Requiring the expected sections too was unsatisfiable for A02 (7 sections, k=5).
+            row["conflict_surfaced"] = set(item.conflict_sections) <= set(keys[: level.top_k])
         per_item.append(row)
     return {"level": level.model_dump(), "items": per_item, "summary": summarise(per_item)}
 
