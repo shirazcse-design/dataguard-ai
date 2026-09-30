@@ -113,5 +113,7 @@ def test_summary_reads_committed_results(app):
 def test_policy_page_is_served_and_registered():
     js = _static("policy.js").decode()
     assert "PAGES.policy" in js and ".innerHTML" not in js
+    # the shared pages get a "Jump to" bar; buttons, not "#" links (the hash is the page router)
+    assert "jumpBar(" in js and "Jump to:" in js and 'href: "#uc' not in js
     html = _static("index.html").decode()
     assert "/static/policy.js" in html and 'data-page="policy"' in html

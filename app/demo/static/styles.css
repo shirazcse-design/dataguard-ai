@@ -329,3 +329,13 @@ body.interview .dev-only { display: none !important; }
 .uc6-head { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 #pc-result .verdict .lead { margin-top: 4px; }
 #pc-queue { margin-top: 16px; }
+.jump-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 16px; padding: 8px 12px;
+  border: 1px solid var(--line); border-left: 3px solid #16a3a3; border-radius: 8px; background: var(--surface); font-size: 13px; }
+.jump-label { color: var(--ink-3); font-weight: 600; }
+.jump-sep { color: var(--ink-3); }
+.jump-link { font: inherit; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 2px 4px;
+  border-radius: 4px; cursor: pointer; }
+.jump-link:hover { background: var(--accent-soft); }
+.jump-link:disabled { color: var(--ink-3); cursor: default; background: none; }
+/* Keep a jumped-to heading clear of the sticky top bar. */
+#page .page-head, #page .uc6-head { scroll-margin-top: 72px; }
