@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import io
 import json
-import re
 import urllib.error
 import urllib.request
 from typing import Any
@@ -109,21 +108,33 @@ def _flags(results: Any) -> list[str]:
     return out
 
 
+def _triggered(obj: Any, found: set[str]) -> None:
+    """Categories whose verdict object says filtered/detected, anywhere in an error body."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k in _FLAG_KEYS and isinstance(v, dict) and (v.get("filtered") or v.get("detected")):
+                found.update(_flags({k: v}))
+            else:
+                _triggered(v, found)
+    elif isinstance(obj, list):
+        for v in obj:
+            _triggered(v, found)
+
+
 def _error_verdict(status: int | None, body: Any) -> dict[str, Any]:
     err = body.get("error", body) if isinstance(body, dict) else {}
     err = err if isinstance(err, dict) else {}
     inner = err.get("innererror") if isinstance(err.get("innererror"), dict) else {}
-    flags = _flags(inner.get("content_filter_result"))
-    text = json.dumps(body)[:4000] if body is not None else ""
-    if not flags:  # other shapes (Agent Service): scan the error JSON for known category names
-        flags = sorted({k for k in _FLAG_KEYS if re.search(rf'"{k}"', text)})
+    found: set[str] = set()
+    _triggered(body, found)  # only categories whose own verdict says filtered/detected
+    text = json.dumps(body) if body is not None else ""
     code = err.get("code") or inner.get("code")
     blocked = code in ("content_filter", "ResponsibleAIPolicyViolation") or "content_filter" in text
     return {
         "outcome": "blocked" if blocked else "error",
         "http": status,
         "code": code,
-        "flags": flags,
+        "flags": sorted(found),
     }
 
 
@@ -382,6 +393,8 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"| **{c['id']}** {c['name']} | {cell(c.get('app_advanced'))} | {cell(c.get('app_agentic'))} "
             f"| {cell(c.get('direct_model'))} | {cell(c.get('direct_agent'))} |"
         )
+    if report.get("note"):
+        lines += ["", f"> {report['note']}"]
     lines += ["", "## Who stopped what", ""]
     for c in report["cases"]:
         lines.append(f"* **{c['id']}**: {c.get('verdict', '')}")
@@ -397,6 +410,9 @@ def verdict(case: dict[str, Any]) -> str:
     f_blocks = [r for r in foundry_direct if r and r.get("outcome") == "blocked"]
     parts = []
     parts.append(f"application: {', '.join(app_by) if app_by else 'did not stop it'}")
+    if not any(foundry_direct):
+        parts.append("Foundry: not applicable (local, scripted case)")
+        return "; ".join(parts)
     parts.append(
         f"Foundry alone: {'blocked on ' + str(len(f_blocks)) + ' of 2 direct paths' if f_blocks else 'did not block'}"
     )

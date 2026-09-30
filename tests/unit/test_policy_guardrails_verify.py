@@ -27,12 +27,12 @@ def test_error_verdict_keeps_codes_and_flags_but_no_text():
     assert "SECRETPROMPT" not in json.dumps(v)
 
 
-def test_agent_service_error_shapes_fall_back_to_category_names():
-    v = gv._error_verdict(
-        400,
-        {"code": "content_filter", "content_filters": [{"indirect_attack": {"filtered": True}}]},
-    )
-    assert v["outcome"] == "blocked" and v["flags"] == ["indirect_attack"]
+def test_other_error_shapes_list_only_categories_that_triggered():
+    body = {"code": "content_filter", "content_filters": [
+        {"indirect_attack": {"filtered": True, "detected": True}},
+        {"hate": {"filtered": False, "severity": "safe"}, "violence": {"filtered": False}}]}  # fmt: skip
+    v = gv._error_verdict(400, body)
+    assert v["outcome"] == "blocked" and v["flags"] == ["indirect_attack:detected+filtered"]
 
 
 def test_g8_fabricated_citations_are_stopped_by_verification():
