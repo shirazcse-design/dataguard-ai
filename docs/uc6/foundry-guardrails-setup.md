@@ -1,5 +1,13 @@
 # Manual setup: Foundry guardrails for the Policy Copilot (UC6)
 
+**Status (2026-09-29): configured by the product owner.** `uc6-policy-copilot-guardrail` is
+assigned to agent `dataguard-policy-copilot` only: jailbreak block (user input); indirect prompt
+injections block (user input + tool output); content safety medium block (input + output);
+protected material for code and text block (output). `CustomContentFilter412` remains on all three
+UC4 deployments, unchanged. (An initial assignment that also covered `uc4-llm-medium` was
+reverted, so UC4 is unchanged.) Verification: `dataguard-policy guardrails verify` →
+[`results/guardrails-verification.md`](results/guardrails-verification.md).
+
 **Owner: Shiraz (manual, in the Foundry portal).** Claude Code does not create or change content
 filters, Prompt Shields or any guardrail resource. After you configure them, Claude Code runs the
 verification test plan in section 5 and reports what each layer did.

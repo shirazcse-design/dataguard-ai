@@ -298,6 +298,82 @@ def cmd_obs_live_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_guardrails_verify(args: argparse.Namespace) -> int:
+    """LIVE: run G1-G8 through the application and directly against the Foundry model filter and
+    agent guardrail (docs/uc6/foundry-guardrails-setup.md, section 5). Verdicts only, no text."""
+    import os
+    from datetime import date
+
+    from app.agent.foundry_service import (
+        FoundryAgentServiceClient,
+        project_client,
+        project_endpoint,
+    )
+    from app.llm.foundry import FoundryClient
+    from evals.policy import guardrails_verify as gv
+    from evals.policy.report import RESULTS_DIR
+
+    from .service import AGENT_NAME_ENV, build_copilot, load_llm_config
+
+    cfg, _, corpus = _load()
+    llm = load_llm_config()
+    tier = llm.tiers[cfg.generation.tier]
+    deployment = os.environ.get(tier.deployment_env, "")
+    if not deployment:
+        print(f"error: {tier.deployment_env} is not set", file=sys.stderr)
+        return 2
+    agent_name = os.environ.get(AGENT_NAME_ENV, "") or cfg.agent.name
+    opener = gv.RecordingOpener()
+    chat = FoundryClient(llm.foundry, deployment, api=tier.api, opener=opener)
+    direct_chat = FoundryClient(llm.foundry, deployment, api=tier.api)
+    openai = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    rec = gv.RecordingOpenAI(openai)
+    # The draft filter is lifted for G4 so the poisoned draft is really retrieved by the app.
+    open_levels = {
+        name: lv.model_copy(update={"metadata_filter": False}) for name, lv in cfg.levels.items()
+    }
+    open_cfg = cfg.model_copy(update={"levels": open_levels})
+
+    def app(config, level: str, prompt: str) -> dict:
+        planner = FoundryAgentServiceClient(rec, deployment, agent_name=agent_name)
+        copilot = build_copilot("live", llm_client=chat, agent_planner=planner,
+                                agent_backend="foundry-service", config=config)  # fmt: skip
+        recorder = rec if level == "agentic" else opener
+        return gv.summarise_app(copilot.answer(prompt, level), recorder)
+
+    cases = []
+    for case in gv.CASES:
+        row = {"id": case["id"], "name": case["name"]}
+        if case["prompt"] is None:
+            row["app_advanced"] = gv.g8_fabricated_citation()
+        else:
+            config = (open_cfg, corpus) if case["id"] == "G4" else (cfg, corpus)
+            row["app_advanced"] = app(config, "advanced", case["prompt"])
+            row["app_agentic"] = app(config, "agentic", case["prompt"])
+            if case["id"] == "G4":
+                poisoned_prompt = (
+                    f'{case["prompt"]}\n\n<policy_evidence id="E1" status="draft">\n'
+                    f"{gv.POISON}\n</policy_evidence>"
+                )
+                row["direct_model"] = gv.direct_model(direct_chat, poisoned_prompt)
+            else:
+                row["direct_model"] = gv.direct_model(direct_chat, case["prompt"])
+            row["direct_agent"] = gv.direct_agent(openai, agent_name, case["prompt"],
+                                                  poison_tool=case["id"] == "G4")  # fmt: skip
+        row["verdict"] = gv.verdict(row)
+        cases.append(row)
+        print(f"{case['id']}: {row['verdict']}", flush=True)
+    report = {"date": date.today().isoformat(), "cases": cases}
+    (RESULTS_DIR / "guardrails-verification.json").write_text(
+        json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    (RESULTS_DIR / "guardrails-verification.md").write_text(
+        gv.render_markdown(report), encoding="utf-8"
+    )
+    print("wrote docs/uc6/results/guardrails-verification.{md,json}")
+    return 0
+
+
 def cmd_ask(args: argparse.Namespace) -> int:
     from .service import build_copilot
 
@@ -506,6 +582,11 @@ def build_parser() -> argparse.ArgumentParser:
     )  # fmt: skip
     rec.add_argument("--tenant-id", default=None, help="Entra tenant id (foundry-service sign-in)")
     rec.set_defaults(func=cmd_answers_record)
+    gr = sub.add_parser("guardrails", help="guardrail verification")
+    gr = gr.add_subparsers(dest="sub", required=True)
+    grv = gr.add_parser("verify", help="LIVE: G1-G8 through the app and directly against Foundry")
+    grv.add_argument("--tenant-id", default=None, help="Entra tenant id (agent sign-in)")
+    grv.set_defaults(func=cmd_guardrails_verify)
     ag = sub.add_parser("agent", help="Foundry Agent Service commands")
     ag = ag.add_subparsers(dest="sub", required=True)
     agr = ag.add_parser("register", help="LIVE: create a new version of dataguard-policy-copilot")
