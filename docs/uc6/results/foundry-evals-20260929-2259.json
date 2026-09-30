@@ -1,0 +1,1040 @@
+{
+ "created": "20260929-2259",
+ "judge": "uc4-llm-medium",
+ "outcomes": {
+  "eval_id": "eval_b06b5da9970f40b9934287185b3beb2b",
+  "local": {
+   "no_fabricated_citation": {
+    "passed": 108,
+    "rate": 1.0,
+    "total": 108
+   },
+   "no_forbidden_phrase": {
+    "passed": 108,
+    "rate": 1.0,
+    "total": 108
+   },
+   "no_unverified_shown": {
+    "passed": 108,
+    "rate": 1.0,
+    "total": 108
+   },
+   "status_ok": {
+    "passed": 101,
+    "rate": 0.9351851851851852,
+    "total": 108
+   }
+  },
+  "per_criterion": {
+   "no_fabricated_citation": {
+    "failed": 0,
+    "passed": 108
+   },
+   "no_forbidden_phrase": {
+    "failed": 0,
+    "passed": 108
+   },
+   "no_unverified_shown": {
+    "failed": 0,
+    "passed": 108
+   },
+   "status_ok": {
+    "failed": 7,
+    "passed": 101
+   }
+  },
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_b06b5da9970f40b9934287185b3beb2b/run/evalrun_a402db420bea41c88747d02f1d1af8d3",
+  "run_id": "evalrun_a402db420bea41c88747d02f1d1af8d3",
+  "status": "completed"
+ },
+ "quality": {
+  "eval_id": "eval_6f2229fe0c784b829661e2ef300b78a6",
+  "per_criterion": {
+   "groundedness": {
+    "failed": 0,
+    "passed": 76
+   },
+   "relevance": {
+    "failed": 0,
+    "passed": 76
+   },
+   "retrieval": {
+    "failed": 0,
+    "passed": 76
+   }
+  },
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_6f2229fe0c784b829661e2ef300b78a6/run/evalrun_50eec31300154f72aff4f9af7a5c622e",
+  "rows": [
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S01-naive",
+    "item_id": "S01",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S02-naive",
+    "item_id": "S02",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S03-naive",
+    "item_id": "S03",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S04-naive",
+    "item_id": "S04",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S05-naive",
+    "item_id": "S05",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S06-naive",
+    "item_id": "S06",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S07-naive",
+    "item_id": "S07",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S08-naive",
+    "item_id": "S08",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "M01-naive",
+    "item_id": "M01",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M02-naive",
+    "item_id": "M02",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M03-naive",
+    "item_id": "M03",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "M04-naive",
+    "item_id": "M04",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M05-naive",
+    "item_id": "M05",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M06-naive",
+    "item_id": "M06",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P02-naive",
+    "item_id": "P02",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P03-naive",
+    "item_id": "P03",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P04-naive",
+    "item_id": "P04",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P05-naive",
+    "item_id": "P05",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P06-naive",
+    "item_id": "P06",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A01-naive",
+    "item_id": "A01",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A03-naive",
+    "item_id": "A03",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "insufficient",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "I04-naive",
+    "item_id": "I04",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 4.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "C02-naive",
+    "item_id": "C02",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "C03-naive",
+    "item_id": "C03",
+    "level": "naive",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "X02-naive",
+    "item_id": "X02",
+    "level": "naive",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S01-advanced",
+    "item_id": "S01",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S02-advanced",
+    "item_id": "S02",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S03-advanced",
+    "item_id": "S03",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S04-advanced",
+    "item_id": "S04",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S05-advanced",
+    "item_id": "S05",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "S06-advanced",
+    "item_id": "S06",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S07-advanced",
+    "item_id": "S07",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S08-advanced",
+    "item_id": "S08",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M01-advanced",
+    "item_id": "M01",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "M02-advanced",
+    "item_id": "M02",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M03-advanced",
+    "item_id": "M03",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M04-advanced",
+    "item_id": "M04",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M05-advanced",
+    "item_id": "M05",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M06-advanced",
+    "item_id": "M06",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P02-advanced",
+    "item_id": "P02",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P03-advanced",
+    "item_id": "P03",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P04-advanced",
+    "item_id": "P04",
+    "level": "advanced",
+    "relevance": 3.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P05-advanced",
+    "item_id": "P05",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P06-advanced",
+    "item_id": "P06",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A01-advanced",
+    "item_id": "A01",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A02-advanced",
+    "item_id": "A02",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A03-advanced",
+    "item_id": "A03",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "C02-advanced",
+    "item_id": "C02",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "C03-advanced",
+    "item_id": "C03",
+    "level": "advanced",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "X02-advanced",
+    "item_id": "X02",
+    "level": "advanced",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S01-agentic",
+    "item_id": "S01",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S02-agentic",
+    "item_id": "S02",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S03-agentic",
+    "item_id": "S03",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S04-agentic",
+    "item_id": "S04",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S05-agentic",
+    "item_id": "S05",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S06-agentic",
+    "item_id": "S06",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S07-agentic",
+    "item_id": "S07",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "straightforward",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "S08-agentic",
+    "item_id": "S08",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M01-agentic",
+    "item_id": "M01",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M02-agentic",
+    "item_id": "M02",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M03-agentic",
+    "item_id": "M03",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "M04-agentic",
+    "item_id": "M04",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 4.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "M05-agentic",
+    "item_id": "M05",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "multi_policy",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "M06-agentic",
+    "item_id": "M06",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "P02-agentic",
+    "item_id": "P02",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P03-agentic",
+    "item_id": "P03",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P04-agentic",
+    "item_id": "P04",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P05-agentic",
+    "item_id": "P05",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "paraphrase",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "P06-agentic",
+    "item_id": "P06",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A01-agentic",
+    "item_id": "A01",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "A02-agentic",
+    "item_id": "A02",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "ambiguous",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "A03-agentic",
+    "item_id": "A03",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "insufficient",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "I04-agentic",
+    "item_id": "I04",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 3.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "C02-agentic",
+    "item_id": "C02",
+    "level": "agentic",
+    "relevance": 4.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "conflict",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "C03-agentic",
+    "item_id": "C03",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "X02-agentic",
+    "item_id": "X02",
+    "level": "agentic",
+    "relevance": 5.0,
+    "relevance_passed": true,
+    "retrieval": 5.0,
+    "retrieval_passed": true
+   }
+  ],
+  "run_id": "evalrun_50eec31300154f72aff4f9af7a5c622e",
+  "status": "completed",
+  "summary": {
+   "by_level": {
+    "advanced": {
+     "groundedness": {
+      "mean": 4.92,
+      "n_scored": 25,
+      "passed": 25
+     },
+     "relevance": {
+      "mean": 4.4,
+      "n_scored": 25,
+      "passed": 25
+     },
+     "retrieval": {
+      "mean": 5.0,
+      "n_scored": 25,
+      "passed": 25
+     }
+    },
+    "agentic": {
+     "groundedness": {
+      "mean": 4.808,
+      "n_scored": 26,
+      "passed": 26
+     },
+     "relevance": {
+      "mean": 4.5,
+      "n_scored": 26,
+      "passed": 26
+     },
+     "retrieval": {
+      "mean": 4.885,
+      "n_scored": 26,
+      "passed": 26
+     }
+    },
+    "naive": {
+     "groundedness": {
+      "mean": 4.88,
+      "n_scored": 25,
+      "passed": 25
+     },
+     "relevance": {
+      "mean": 4.56,
+      "n_scored": 25,
+      "passed": 25
+     },
+     "retrieval": {
+      "mean": 4.96,
+      "n_scored": 25,
+      "passed": 25
+     }
+    }
+   },
+   "verified_but_judged_ungrounded": []
+  }
+ }
+}

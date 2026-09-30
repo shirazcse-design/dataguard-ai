@@ -374,6 +374,47 @@ def cmd_guardrails_verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_eval_foundry_run(args: argparse.Namespace) -> int:
+    """LIVE: create UC6 evaluations in Foundry (cloud Evals API) and wait for their results. Done
+    at the product owner's explicit request; see evals/policy/foundry_evals.py."""
+    from datetime import datetime
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from evals.policy import foundry_evals as fe
+    from evals.policy.report import RESULTS_DIR
+
+    data = REPO / "data" / "uc6" / "foundry_eval"
+    client = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    stamp = datetime.now().strftime("%Y%m%d-%H%M")
+    out: dict = {"created": stamp, "judge": args.judge}
+    if args.which in ("outcomes", "both"):
+        rows = fe.load_rows(data / "outcomes.jsonl", fe.OUTCOME_FIELDS)
+        p = fe.payload(fe.OUTCOMES_EVAL, fe.OUTCOME_FIELDS, fe.OUTCOME_CRITERIA, rows)
+        res = fe.run_in_foundry(client, p, f"uc6-outcomes-{stamp}", timeout_s=args.timeout)
+        out["outcomes"] = {**res, "local": fe.local_outcome_counts(rows)}
+        print(json.dumps({"outcomes": out["outcomes"]}, indent=1), flush=True)
+    if args.which in ("quality", "both"):
+        rows = fe.load_rows(data / "answers.jsonl", fe.QUALITY_FIELDS)
+        local = {
+            json.loads(line)["id"]: json.loads(line)
+            for line in (data / "answers.jsonl").read_text(encoding="utf-8").splitlines() if line
+        }  # fmt: skip
+        p = fe.payload(fe.QUALITY_EVAL, fe.QUALITY_FIELDS, fe.quality_criteria(args.judge), rows)
+        res = fe.run_in_foundry(client, p, f"uc6-quality-{stamp}", timeout_s=args.timeout)
+        scores = []
+        if res["status"] == "completed":
+            scores = fe.per_row_scores(client, res["eval_id"], res["run_id"])
+        out["quality"] = {**res, "summary": fe.summarise_scores(scores, local), "rows": scores}
+        print(json.dumps({"quality": {k: v for k, v in out["quality"].items() if k != "rows"}},
+                         indent=1), flush=True)  # fmt: skip
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    (RESULTS_DIR / f"foundry-evals-{stamp}.json").write_text(
+        json.dumps(out, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8"
+    )
+    print(f"wrote docs/uc6/results/foundry-evals-{stamp}.json")
+    return 0
+
+
 def cmd_ask(args: argparse.Namespace) -> int:
     from .service import build_copilot
 
@@ -560,6 +601,14 @@ def build_parser() -> argparse.ArgumentParser:
     ef = ev.add_parser("foundry-export", help="write JSONL files to upload to Foundry Evaluations")
     ef.add_argument("--levels", default="naive,advanced,agentic")
     ef.set_defaults(func=cmd_eval_foundry_export)
+    efr = ev.add_parser(
+        "foundry-run", help="LIVE: create the UC6 evaluations in Foundry and run them"
+    )
+    efr.add_argument("--which", choices=("outcomes", "quality", "both"), default="both")
+    efr.add_argument("--judge", default="uc4-llm-medium", help="judge deployment (quality eval)")
+    efr.add_argument("--timeout", type=float, default=1500.0)
+    efr.add_argument("--tenant-id", default=None, help="Entra tenant id")
+    efr.set_defaults(func=cmd_eval_foundry_run)
     ask = sub.add_parser("ask", help="answer one question (prints policy text locally)")
     ask.add_argument("question")
     ask.add_argument("--level", choices=("naive", "advanced", "agentic"), default="advanced")
