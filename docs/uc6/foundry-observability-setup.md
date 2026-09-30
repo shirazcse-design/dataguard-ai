@@ -1,5 +1,9 @@
 # Manual setup: Foundry observability and monitoring for the Policy Copilot (UC6)
 
+**Status (2026-09-29):** live check run; canary test passed for DataGuard's telemetry. Foundry
+Agent Service's own content recording stores agent conversations, and the owner decided to keep
+it on for the demo. See [`results/observability-foundry-verification.md`](results/observability-foundry-verification.md).
+
 **Owner: Shiraz (manual, in the Foundry and Azure portals).** Claude Code does not create or
 configure tracing, Application Insights, dashboards or alerts. The application side is already
 instrumented, and a local privacy audit of it is clean
