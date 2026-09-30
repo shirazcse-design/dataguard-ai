@@ -459,13 +459,32 @@ async function uc6ObservabilityPanels(page) {
           (c, k) => { const val = o.by_level[c][k]; return typeof val === "number" && !Number.isInteger(val) ? fmt(val, 3) : String(val); }))));
 }
 
+// A "Jump to" bar at the top of the shared pages. Buttons, not "#" links: the dashboard routes pages
+// by the URL hash, so an anchor link would switch pages instead of scrolling.
+function jumpBar(uc4Target, uc6Target) {
+  const go = (label, target) => {
+    const b = h("button", { class: "jump-link", type: "button" }, label);
+    if (!target) { b.disabled = true; b.title = "This section is not available"; }
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    b.addEventListener("click", () => target && target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }));
+    return b;
+  };
+  return h("nav", { class: "jump-bar", "aria-label": "Jump to a use case on this page" },
+    h("span", { class: "jump-label" }, "Jump to:"),
+    go("Sensitive Data Discovery & Classification", uc4Target),
+    h("span", { class: "jump-sep", "aria-hidden": "true" }, "·"),
+    go("Data Security Policy Copilot", uc6Target));
+}
+
 function extendPage(key, extra) {
   const def = PAGES[key];
   if (!def || !def.render) return;
   const orig = def.render;
   def.render = async (page) => {
     await orig(page);
+    const uc4Top = page.firstElementChild;
     try { await extra(page); } catch (err) { page.append(h("div", { class: "card error" }, `UC6 panel unavailable: ${err.message}`)); }
+    page.prepend(jumpBar(uc4Top, page.querySelector(".uc6-head")));
   };
 }
 
