@@ -320,6 +320,11 @@ body.interview .dev-only { display: none !important; }
   background: var(--accent-soft); color: var(--accent); font-size: 11.5px; font-weight: 700;
   letter-spacing: 0.04em; line-height: 1.35; text-transform: uppercase; }
 .nav-group:first-child { margin-top: 0; }
+/* Pages that report on both use cases (Evaluations, Guardrails, Observability): brand teal, so the
+   heading reads as "shared", not as a third product. */
+.nav-group-shared { border-left-color: #16a3a3; background: rgba(22, 163, 163, 0.12); color: #0f7f7f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nav-group-shared { color: #4fd1d1; } }
+:root[data-theme="dark"] .nav-group-shared { color: #4fd1d1; }
 @media (max-width: 760px) { .nav-group { margin: 0 4px; white-space: nowrap; } }
 .uc6-head { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 #pc-result .verdict .lead { margin-top: 4px; }
