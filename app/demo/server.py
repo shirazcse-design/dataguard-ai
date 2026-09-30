@@ -31,6 +31,7 @@ from typing import Any
 from . import docs_view, examples, metrics
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
+from .policy import PolicySession
 from .review import DEFAULT_PATH, ReviewStore
 
 MODES = ("replay", "live")
@@ -51,6 +52,7 @@ _STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/static/styles.css": ("styles.css", "text/css; charset=utf-8"),
+    "/static/policy.js": ("policy.js", "text/javascript; charset=utf-8"),
 }
 _HEADERS = {
     "Cache-Control": "no-store",
@@ -77,6 +79,8 @@ class DemoApp:
     _classifier: ClassifySession | None = None
     _agent: AgentSession | None = None
     _review: ReviewStore | None = None
+    _policy: PolicySession | None = None
+    policy_review_path: Path | str | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -204,6 +208,28 @@ class DemoApp:
         out["queued_for_review"] = self.review_store().add_from_classify(out, name[:200])
         return self.envelope(out, data_class=self.data_class())
 
+    # -- Data Security Policy Copilot (UC6) ----------------------------------------------------
+    def policy_session(self) -> PolicySession:
+        with self._init_lock:
+            if self._policy is None:
+                kw = {"review_path": self.policy_review_path} if self.policy_review_path else {}
+                self._policy = PolicySession(self.mode, self.env, **kw)
+            return self._policy
+
+    def policy_describe(self) -> dict[str, Any]:
+        return self.envelope(self.policy_session().describe(), data_class="RECORDED + SYNTHETIC")
+
+    def policy_ask(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.policy_session().ask(body), data_class=self.data_class())
+
+    def policy_review(self) -> dict[str, Any]:
+        return self.envelope(self.policy_session().review_queue(), data_class="DEMO-ONLY STATE")
+
+    def policy_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(
+            self.policy_session().review_decide(body), data_class="DEMO-ONLY STATE"
+        )
+
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
             self._metrics = metrics.all_metrics()
@@ -248,6 +274,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/review": app.review_queue,
                 "/api/rai": app.rai,
                 "/api/observability": app.observability,
+                "/api/policy": app.policy_describe,
+                "/api/policy/review": app.policy_review,
             }
             if path in routes:
                 try:
@@ -265,6 +293,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/agent/run": app.agent_run,
                 "/api/review/seed": app.review_seed,
                 "/api/review/decide": app.review_decide,
+                "/api/policy/ask": app.policy_ask,
+                "/api/policy/review/decide": app.policy_review_decide,
             }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))

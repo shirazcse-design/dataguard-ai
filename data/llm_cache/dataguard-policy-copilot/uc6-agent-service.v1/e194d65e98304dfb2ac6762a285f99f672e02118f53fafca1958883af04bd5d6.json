@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "e194d65e98304dfb2ac6762a285f99f672e02118f53fafca1958883af04bd5d6",
+ "recorded_at": "2026-09-29T22:58:43+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 823,
+ "tokens_out": 32,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "PHI third party sharing approvals required before sharing PHI with a third party"
+   },
+   "id": "call_J2ZwSL0Mn0Lf2kpTagTrZW1x",
+   "name": "search_policy"
+  }
+ ]
+}

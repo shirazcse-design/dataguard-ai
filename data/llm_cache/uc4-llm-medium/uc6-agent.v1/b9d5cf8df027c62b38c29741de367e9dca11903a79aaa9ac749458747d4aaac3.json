@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "b9d5cf8df027c62b38c29741de367e9dca11903a79aaa9ac749458747d4aaac3",
+ "recorded_at": "2026-09-29T21:02:43+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 902,
+ "tokens_out": 23,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "travel expense reimbursement limit for international trips"
+   },
+   "id": "call_ANKPlhYtxQKge4eCTIC9109H",
+   "name": "search_policy"
+  }
+ ]
+}

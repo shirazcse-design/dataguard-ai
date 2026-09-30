@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 153,
+ "input_hash": "940b5ee160f6eb3d44af6d9da0195a0ccefa7537c63e06679bc4cec9dc3d3918",
+ "latency_ms": 1879.1799589525908,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 953,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:18+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The Chief Privacy Officer assesses whether a breach of personal information must be notified.\",\"evidence_id\":\"E1\",\"quote\":\"The Chief Privacy Officer assesses whether a breach of personal information must be notified.\"},{\"text\":\"Where notification is required, the relevant regulator must be notified within 72 hours of the breach being confirmed.\",\"evidence_id\":\"E1\",\"quote\":\"the relevant regulator is notified within 72 hours of the breach being confirmed\"},{\"text\":\"Where notification is required, affected customers must be notified without undue delay.\",\"evidence_id\":\"E1\",\"quote\":\"affected customers are notified without undue delay.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

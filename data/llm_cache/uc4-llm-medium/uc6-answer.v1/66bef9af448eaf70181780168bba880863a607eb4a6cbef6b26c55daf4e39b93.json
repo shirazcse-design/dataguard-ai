@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 79,
+ "input_hash": "66bef9af448eaf70181780168bba880863a607eb4a6cbef6b26c55daf4e39b93",
+ "latency_ms": 1274.817458121106,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 902,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You must report a lost or stolen company device to the IT Service Desk within 24 hours.\",\"evidence_id\":\"E1\",\"quote\":\"Lost or stolen company devices must be reported to the IT Service Desk within 24 hours.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "1660a40ca9a243503e95b9e6e81241627097f80b799fd4915df7a838f3499cae",
+ "recorded_at": "2026-09-29T22:58:52+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1821,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "surveillance policy CCTV footage retention video recordings retained"
+   },
+   "id": "call_YNL52LMRJBlpMVUYHRxUwRMF",
+   "name": "search_policy"
+  }
+ ]
+}

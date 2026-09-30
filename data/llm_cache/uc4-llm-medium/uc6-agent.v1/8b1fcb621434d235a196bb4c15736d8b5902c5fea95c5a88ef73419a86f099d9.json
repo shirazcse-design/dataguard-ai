@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"One current policy says personal Dropbox is prohibited for company information classified Internal or above.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Another current policy says employees may store Internal information in personal cloud storage when working remotely if the account has multi-factor authentication.\",\"evidence_id\":\"E4\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication. Confidential and Restricted information must never be stored in personal cloud storage.\"}],\"conflict_evidence_ids\":[\"E1\",\"E4\"],\"conflict_note\":\"Current policy evidence disagrees on whether Internal information may be stored in personal cloud storage for remote work.\"}",
+ "key": "8b1fcb621434d235a196bb4c15736d8b5902c5fea95c5a88ef73419a86f099d9",
+ "recorded_at": "2026-09-29T21:02:14+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1478,
+ "tokens_out": 184,
+ "tool_calls": []
+}

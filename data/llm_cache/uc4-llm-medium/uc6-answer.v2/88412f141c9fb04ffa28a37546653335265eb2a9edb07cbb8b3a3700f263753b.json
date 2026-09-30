@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 120,
+ "input_hash": "88412f141c9fb04ffa28a37546653335265eb2a9edb07cbb8b3a3700f263753b",
+ "latency_ms": 1515.579333063215,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 917,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:01:09+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Customer financial records are kept for 7 years after the customer relationship ends.\",\"evidence_id\":\"E3\",\"quote\":\"Customer financial records, including account statements and transaction histories, are retained for 7 years after the end of the customer relationship.\"},{\"text\":\"Employee personnel records are kept for 6 years after employment ends.\",\"evidence_id\":\"E1\",\"quote\":\"Employee personnel records are retained for 6 years after employment ends.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

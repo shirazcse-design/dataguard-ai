@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"INSUFFICIENT_EVIDENCE\",\"claims\":[],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "4aa5ecab7eb8be0e9554f4cb2b6afcbab96a4a3761b4eda7aa0aea0553d7b034",
+ "recorded_at": "2026-09-29T21:03:06+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1476,
+ "tokens_out": 30,
+ "tool_calls": []
+}

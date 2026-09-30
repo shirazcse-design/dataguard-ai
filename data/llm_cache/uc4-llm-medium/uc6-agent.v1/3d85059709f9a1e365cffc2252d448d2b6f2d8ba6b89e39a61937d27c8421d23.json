@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "3d85059709f9a1e365cffc2252d448d2b6f2d8ba6b89e39a61937d27c8421d23",
+ "recorded_at": "2026-09-29T21:02:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 901,
+ "tokens_out": 22,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "data at rest encryption algorithm required"
+   },
+   "id": "call_fmupIolHoLEOlRNLa9kNNz8s",
+   "name": "search_policy"
+  }
+ ]
+}

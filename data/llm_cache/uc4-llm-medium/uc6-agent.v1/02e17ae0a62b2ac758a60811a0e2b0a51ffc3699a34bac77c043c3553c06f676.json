@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "02e17ae0a62b2ac758a60811a0e2b0a51ffc3699a34bac77c043c3553c06f676",
+ "recorded_at": "2026-09-29T21:01:42+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 898,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "minimum password length password policy"
+   },
+   "id": "call_y5iKjvyWmiGTY3En8XhwbSAD",
+   "name": "search_policy"
+  }
+ ]
+}

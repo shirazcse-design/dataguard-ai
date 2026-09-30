@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Email containing Restricted information to an external recipient is blocked unless it is encrypted and the data owner has approved the transfer.\",\"evidence_id\":\"E1\",\"quote\":\"Email containing Restricted information to an external recipient is blocked unless it is encrypted and the data owner has approved the transfer.\"},{\"text\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E2\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\",\"evidence_id\":\"E4\",\"quote\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\"},{\"text\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\",\"evidence_id\":\"E5\",\"quote\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "93e9394b65ee8a5a432c3a90a9c644b1ece0ead16b4f6eaa74d0439644480f28",
+ "recorded_at": "2026-09-29T21:02:03+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1464,
+ "tokens_out": 274,
+ "tool_calls": []
+}

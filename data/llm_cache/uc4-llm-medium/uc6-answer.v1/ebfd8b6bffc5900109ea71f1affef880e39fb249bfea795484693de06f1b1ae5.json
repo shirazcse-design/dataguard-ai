@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 407,
+ "input_hash": "ebfd8b6bffc5900109ea71f1affef880e39fb249bfea795484693de06f1b1ae5",
+ "latency_ms": 3285.0857079029083,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 937,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Sharing confidential customer information with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\",\"evidence_id\":\"E2\",\"quote\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\"},{\"text\":\"Restricted information must never be sent as an email attachment to a third party.\",\"evidence_id\":\"E2\",\"quote\":\"Restricted information must never be sent as an email attachment to a third party.\"},{\"text\":\"Confidential information sent outside the company must be encrypted in transit and sent only to recipients with a business need.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential information sent outside the company must be encrypted in transit (TLS 1.2 or higher, or an encrypted attachment) and sent only to recipients with a business need.\"},{\"text\":\"Email containing Restricted information to an external recipient is blocked unless it is encrypted and the data owner has approved the transfer.\",\"evidence_id\":\"E4\",\"quote\":\"Email containing Restricted information to an external recipient is blocked unless it is encrypted and the data owner has approved the transfer.\"},{\"text\":\"Sending Confidential or Restricted information to a personal email account is prohibited.\",\"evidence_id\":\"E5\",\"quote\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\"}],\"conflict_evidence_ids\":[\"E2\",\"E4\"],\"conflict_note\":\"E2 says \\\"Restricted information must never be sent as an email attachment to a third party,\\\" while E4 says email containing Restricted information to an external recipient is blocked unless it is encrypted and the data owner has approved the transfer.\"}"
+}

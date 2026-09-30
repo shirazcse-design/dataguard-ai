@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "40c0f070e11ff4137444216caaf57248a85d7509047ef02f746fbd3fc1696d0e",
+ "recorded_at": "2026-09-29T21:02:26+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 899,
+ "tokens_out": 28,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "who decides how sensitive a document is data classification document owner sensitivity"
+   },
+   "id": "call_ItUfxTN4rNpRUFNlqYVd78So",
+   "name": "search_policy"
+  }
+ ]
+}

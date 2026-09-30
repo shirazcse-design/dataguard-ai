@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 119,
+ "input_hash": "5a6580807ec3321fed564474b05008c44abb501dc9c07d38850b0b4387a3c87f",
+ "latency_ms": 1618.7948328442872,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 981,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The company may monitor the use of company devices, accounts and networks.\",\"evidence_id\":\"E1\",\"quote\":\"Harbourline may monitor the use of company devices, accounts and networks, within the limits of applicable law, to protect its information and systems.\"},{\"text\":\"A work laptop is a company device provided for business use.\",\"evidence_id\":\"E2\",\"quote\":\"Company devices and accounts are provided for business use.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

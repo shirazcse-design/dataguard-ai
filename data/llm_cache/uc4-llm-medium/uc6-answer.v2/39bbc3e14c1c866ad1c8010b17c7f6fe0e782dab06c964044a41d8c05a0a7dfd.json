@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 213,
+ "input_hash": "39bbc3e14c1c866ad1c8010b17c7f6fe0e782dab06c964044a41d8c05a0a7dfd",
+ "latency_ms": 2470.52437486127,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 971,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:46+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"If an API key is committed to a repository, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\",\"evidence_id\":\"E2\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"},{\"text\":\"API keys are covered by this standard as secrets used to access Harbourline systems.\",\"evidence_id\":\"E3\",\"quote\":\"This standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\"},{\"text\":\"Secrets must never be stored in source code or in configuration files committed to a repository.\",\"evidence_id\":\"E4\",\"quote\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

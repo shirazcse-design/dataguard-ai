@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 204,
+ "input_hash": "30a74d7767ca125f08eff5e6ed0af383bd6c3661168be798ac3410bf836ca0a4",
+ "latency_ms": 2140.4164161067456,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 991,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T20:59:28+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"An employee cannot upload confidential customer information to a personal cloud-storage account.\",\"evidence_id\":\"E1\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E2\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Confidential information may only be stored in company-managed systems approved by Information Security, not in personal cloud-storage accounts.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security. It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

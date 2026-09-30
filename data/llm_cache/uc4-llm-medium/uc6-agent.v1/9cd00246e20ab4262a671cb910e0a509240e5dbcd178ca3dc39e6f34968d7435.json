@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "9cd00246e20ab4262a671cb910e0a509240e5dbcd178ca3dc39e6f34968d7435",
+ "recorded_at": "2026-09-29T21:02:53+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1455,
+ "tokens_out": 23,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "encryption at rest AES storage standard"
+   },
+   "id": "call_D57J15SEUE6L7535WmpEbayx",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "b0926b9d73f1833b9207eeb7e2824541866cf30a7e76856b50a54611366de25f",
+ "recorded_at": "2026-09-29T21:03:20+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 902,
+ "tokens_out": 31,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "vendor receive customer data before security assessment third party customer data assessment required before sharing"
+   },
+   "id": "call_PdYhUWAHMnQqA6dkE48RW1V8",
+   "name": "search_policy"
+  }
+ ]
+}

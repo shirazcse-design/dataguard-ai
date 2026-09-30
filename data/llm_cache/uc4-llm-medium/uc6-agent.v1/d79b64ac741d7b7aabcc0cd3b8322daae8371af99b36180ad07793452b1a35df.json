@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "d79b64ac741d7b7aabcc0cd3b8322daae8371af99b36180ad07793452b1a35df",
+ "recorded_at": "2026-09-29T21:01:37+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 904,
+ "tokens_out": 22,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "maximum duration access production customer database"
+   },
+   "id": "call_NRFAkpdY5e7USUTVohzDMDFz",
+   "name": "search_policy"
+  }
+ ]
+}

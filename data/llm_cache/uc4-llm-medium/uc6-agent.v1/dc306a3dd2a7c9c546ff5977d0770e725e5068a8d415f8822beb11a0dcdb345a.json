@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\",\"evidence_id\":\"E1\",\"quote\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "dc306a3dd2a7c9c546ff5977d0770e725e5068a8d415f8822beb11a0dcdb345a",
+ "recorded_at": "2026-09-29T21:03:18+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1375,
+ "tokens_out": 76,
+ "tool_calls": []
+}

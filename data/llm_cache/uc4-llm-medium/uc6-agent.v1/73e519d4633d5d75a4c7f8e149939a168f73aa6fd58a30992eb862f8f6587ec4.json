@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A suspected security incident must be reported to the Security Operations Center within 1 hour of discovery.\",\"evidence_id\":\"E1\",\"quote\":\"Any suspected security incident, including suspected data loss, must be reported to the Security Operations Center within 1 hour of discovery, through the security hotline or the incident portal.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "73e519d4633d5d75a4c7f8e149939a168f73aa6fd58a30992eb862f8f6587ec4",
+ "recorded_at": "2026-09-29T21:01:29+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1414,
+ "tokens_out": 91,
+ "tool_calls": []
+}

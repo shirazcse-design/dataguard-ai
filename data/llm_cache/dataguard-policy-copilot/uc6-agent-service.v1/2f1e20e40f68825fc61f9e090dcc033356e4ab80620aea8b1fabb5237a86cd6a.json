@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "2f1e20e40f68825fc61f9e090dcc033356e4ab80620aea8b1fabb5237a86cd6a",
+ "recorded_at": "2026-09-29T22:58:39+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 824,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal cloud storage confidential customer information employee upload policy"
+   },
+   "id": "call_8FLfyfbgGNYSMbVoZAcA8GND",
+   "name": "search_policy"
+  }
+ ]
+}

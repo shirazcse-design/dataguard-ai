@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "45cc6b3221866bb0dea763546ec7327b06892ac0f29a2714d9c3dae0d289921b",
+ "recorded_at": "2026-09-29T21:02:59+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1437,
+ "tokens_out": 29,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "VPN company laptops personal VPN prohibited network security remote access policy company VPN"
+   },
+   "id": "call_sVWBLzGzmacnr3cTNT6poAv5",
+   "name": "search_policy"
+  }
+ ]
+}

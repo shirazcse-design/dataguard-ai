@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 127,
+ "input_hash": "101dfe862b9d2642c5d43a9cda13769a4cd5fc5cbbf9027d8c0b912960c72459",
+ "latency_ms": 1545.1677090022713,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 956,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:01:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A second factor is required for remote access, which applies to logging in from home.\",\"evidence_id\":\"E1\",\"quote\":\"Multi-factor authentication is required for all remote access and for every privileged account.\"},{\"text\":\"User passwords must be combined with multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"User passwords must be at least 14 characters long, must be stored only in the company-approved password manager, and must be combined with multi-factor authentication.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 280,
+ "input_hash": "17ab10c4c66b1746d854cd842d03b87d3f2652174b4f89c3ab952f4d1da93e68",
+ "latency_ms": 2792.009625118226,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 925,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Uploading company information classified Internal or above to a personal Dropbox is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E3\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 prohibits uploading company information classified Internal or above to a personal cloud-storage account, while E2 allows storing Internal information in a personal cloud-storage account for remote work if the account has multi-factor authentication.\"}"
+}

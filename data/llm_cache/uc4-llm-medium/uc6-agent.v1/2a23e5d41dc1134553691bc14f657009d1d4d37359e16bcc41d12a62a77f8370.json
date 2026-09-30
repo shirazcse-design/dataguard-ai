@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "2a23e5d41dc1134553691bc14f657009d1d4d37359e16bcc41d12a62a77f8370",
+ "recorded_at": "2026-09-29T21:01:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 901,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "suspected security incident reported how quickly incident reporting timeframe"
+   },
+   "id": "call_qVTu2Q5Fm2BUzWra4aPR9tYf",
+   "name": "search_policy"
+  }
+ ]
+}

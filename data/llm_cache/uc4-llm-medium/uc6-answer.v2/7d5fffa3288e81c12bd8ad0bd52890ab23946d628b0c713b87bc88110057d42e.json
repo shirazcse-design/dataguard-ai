@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 145,
+ "input_hash": "7d5fffa3288e81c12bd8ad0bd52890ab23946d628b0c713b87bc88110057d42e",
+ "latency_ms": 1837.959500029683,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 914,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:20+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"One current policy says security logs are kept for 1 year in searchable storage and 2 years in total.\",\"evidence_id\":\"E2\",\"quote\":\"Security logs are retained for 1 year in searchable storage and for 2 years in total.\"},{\"text\":\"One superseded policy says security logs are retained for 90 days.\",\"evidence_id\":\"E1\",\"quote\":\"Security logs are retained for 90 days.\"}],\"conflict_evidence_ids\":[\"E2\",\"E1\"],\"conflict_note\":\"The current security log retention period in E2 differs from the superseded security log retention period in E1.\"}"
+}

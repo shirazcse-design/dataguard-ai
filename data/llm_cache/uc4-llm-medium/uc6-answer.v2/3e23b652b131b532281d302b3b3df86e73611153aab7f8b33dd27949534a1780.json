@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 181,
+ "input_hash": "3e23b652b131b532281d302b3b3df86e73611153aab7f8b33dd27949534a1780",
+ "latency_ms": 2047.1232498530298,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 978,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Employees may use a personal VPN service on company laptops only if it is software available from the company software portal or has been requested for review by IT and Information Security.\",\"evidence_id\":\"E4\",\"quote\":\"Only software available from the company software portal may be installed on company devices. Requests for other software are reviewed by IT and Information Security.\"},{\"text\":\"Limited personal use on company laptops is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\",\"evidence_id\":\"E2\",\"quote\":\"Company devices and accounts are provided for business use. Limited personal use is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

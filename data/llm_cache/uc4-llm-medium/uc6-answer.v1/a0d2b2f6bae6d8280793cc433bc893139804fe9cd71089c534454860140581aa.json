@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "a0d2b2f6bae6d8280793cc433bc893139804fe9cd71089c534454860140581aa",
+ "latency_ms": 1873.408333864063,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 891,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"API keys and other secrets must be stored in the company secrets vault.\",\"evidence_id\":\"E3\",\"quote\":\"Secrets must be stored in the company secrets vault.\"},{\"text\":\"API keys, tokens, certificates and other secrets are covered by this standard.\",\"evidence_id\":\"E2\",\"quote\":\"This standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\"},{\"text\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\",\"evidence_id\":\"E3\",\"quote\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

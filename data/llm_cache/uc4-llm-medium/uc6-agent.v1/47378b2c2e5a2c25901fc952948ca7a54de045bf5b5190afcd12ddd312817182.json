@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "47378b2c2e5a2c25901fc952948ca7a54de045bf5b5190afcd12ddd312817182",
+ "recorded_at": "2026-09-29T21:02:37+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 898,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "records retention how long do we keep records"
+   },
+   "id": "call_38LKTJtEg41UXLE4I71Fjet8",
+   "name": "search_policy"
+  }
+ ]
+}

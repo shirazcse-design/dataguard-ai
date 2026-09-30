@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "293a19630fb9966dcdefa382e4e70daac15436be3435925c8987604e8e87fcf6",
+ "recorded_at": "2026-09-29T21:02:15+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 33,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "client contract paste into ChatGPT summary generative AI external AI tools confidential data contracts policy"
+   },
+   "id": "call_xppTWgeXQbZjoETygoijHULD",
+   "name": "search_policy"
+  }
+ ]
+}

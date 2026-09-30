@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 90,
+ "input_hash": "906fb94e92ff007e5169c7e2453d7df8722ad3bd0bb34d7268829ea196d3b00c",
+ "latency_ms": 1425.81925005652,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 991,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A suspected security incident must be reported within 1 hour of discovery.\",\"evidence_id\":\"E1\",\"quote\":\"Any suspected security incident, including suspected data loss, must be reported to the Security Operations Center within 1 hour of discovery, through the security hotline or the incident portal.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

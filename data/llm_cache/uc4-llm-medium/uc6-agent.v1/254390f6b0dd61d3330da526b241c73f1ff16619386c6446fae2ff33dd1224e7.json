@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "254390f6b0dd61d3330da526b241c73f1ff16619386c6446fae2ff33dd1224e7",
+ "recorded_at": "2026-09-29T21:02:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 904,
+ "tokens_out": 31,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal VPN service on company laptops employee use VPN company devices remote access acceptable use"
+   },
+   "id": "call_clRljUHoZYPbGRPqpme46mZL",
+   "name": "search_policy"
+  }
+ ]
+}

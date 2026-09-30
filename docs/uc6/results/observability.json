@@ -1,0 +1,182 @@
+{
+ "levels": [
+  "naive",
+  "advanced",
+  "agentic"
+ ],
+ "mode": "replay",
+ "privacy_audit": {
+  "clean": true,
+  "leaks": [],
+  "pattern_checks": 5,
+  "sources_checked": 110,
+  "spans_audited": 608,
+  "windows_checked": 1831
+ },
+ "telemetry": {
+  "attribute_keys": [
+   "dg.agent.n_tool_calls",
+   "dg.agent.name",
+   "dg.agent.planner",
+   "dg.agent.step",
+   "dg.agent.stopped_reason",
+   "dg.agent.tool",
+   "dg.agent.tool_calls",
+   "dg.agent.tool_ok",
+   "dg.guardrail.type",
+   "dg.input.reason",
+   "dg.latency_ms",
+   "dg.llm.attempts",
+   "dg.llm.cached",
+   "dg.llm.model_id",
+   "dg.llm.served_model",
+   "dg.llm.status",
+   "dg.outcome.review_reasons",
+   "dg.outcome.review_required",
+   "dg.policy.cited",
+   "dg.policy.claims",
+   "dg.policy.claims_unverified",
+   "dg.policy.dense_status",
+   "dg.policy.drop_reasons",
+   "dg.policy.evidence_status",
+   "dg.policy.fabricated_citations",
+   "dg.policy.guard_ok",
+   "dg.policy.level",
+   "dg.policy.mode",
+   "dg.policy.n_claims",
+   "dg.policy.n_conflicts",
+   "dg.policy.n_dropped",
+   "dg.policy.n_evidence",
+   "dg.policy.n_hits",
+   "dg.policy.stages",
+   "dg.policy.status",
+   "dg.request_id",
+   "dg.tokens_in",
+   "dg.tokens_out"
+  ],
+  "by_level": {
+   "advanced": {
+    "agent_stop_reasons": {},
+    "claims_unverified": 0,
+    "dense_status": {
+     "ok": 33
+    },
+    "fabricated_citations": 0,
+    "guardrail_events": {
+     "prompt_injection_suspected": 3
+    },
+    "insufficient_evidence_rate": 0.1667,
+    "model_calls": 33,
+    "model_calls_replayed": 33,
+    "recorded_model_latency_ms_p50": 1545.2,
+    "request_ms_p50": 0.58,
+    "request_ms_p95": 0.7,
+    "requests": 36,
+    "review_required_rate": 0.3056,
+    "stage_ms_p50": {
+     "uc6.citation_verify": 0.01,
+     "uc6.generate": 0.09,
+     "uc6.input_guard": 0.01,
+     "uc6.request": 0.58,
+     "uc6.retrieve": 0.37
+    },
+    "statuses": {
+     "ANSWERED": 25,
+     "BLOCKED": 3,
+     "CONFLICT_REVIEW": 2,
+     "INSUFFICIENT_EVIDENCE": 6
+    },
+    "tokens_in": 32157,
+    "tokens_out": 4348,
+    "tool_calls": {},
+    "tool_errors": {}
+   },
+   "agentic": {
+    "agent_stop_reasons": {
+     "final_answer": 33
+    },
+    "claims_unverified": 0,
+    "dense_status": {
+     "ok": 38
+    },
+    "fabricated_citations": 0,
+    "guardrail_events": {
+     "prompt_injection_suspected": 3
+    },
+    "insufficient_evidence_rate": 0.1389,
+    "model_calls": 76,
+    "model_calls_replayed": 76,
+    "recorded_model_latency_ms_p50": null,
+    "request_ms_p50": 0.72,
+    "request_ms_p95": 0.93,
+    "requests": 36,
+    "review_required_rate": 0.2778,
+    "stage_ms_p50": {
+     "uc6.agent": 0.65,
+     "uc6.agent.planner": 0.06,
+     "uc6.citation_verify": 0.01,
+     "uc6.input_guard": 0.01,
+     "uc6.request": 0.72,
+     "uc6.tool": 0.47
+    },
+    "statuses": {
+     "ANSWERED": 26,
+     "BLOCKED": 3,
+     "CONFLICT_REVIEW": 2,
+     "INSUFFICIENT_EVIDENCE": 5
+    },
+    "tokens_in": 97185,
+    "tokens_out": 5576,
+    "tool_calls": {
+     "request_human_review": 5,
+     "search_policy": 38
+    },
+    "tool_errors": {}
+   },
+   "naive": {
+    "agent_stop_reasons": {},
+    "claims_unverified": 0,
+    "dense_status": {
+     "ok": 36
+    },
+    "fabricated_citations": 0,
+    "guardrail_events": {},
+    "insufficient_evidence_rate": 0.2222,
+    "model_calls": 36,
+    "model_calls_replayed": 36,
+    "recorded_model_latency_ms_p50": 1638.7,
+    "request_ms_p50": 0.21,
+    "request_ms_p95": 0.31,
+    "requests": 36,
+    "review_required_rate": 0.3056,
+    "stage_ms_p50": {
+     "uc6.citation_verify": 0.01,
+     "uc6.generate": 0.09,
+     "uc6.input_guard": 0.0,
+     "uc6.request": 0.21,
+     "uc6.retrieve": 0.05
+    },
+    "statuses": {
+     "ANSWERED": 25,
+     "CONFLICT_REVIEW": 3,
+     "INSUFFICIENT_EVIDENCE": 8
+    },
+    "tokens_in": 35136,
+    "tokens_out": 4773,
+    "tool_calls": {},
+    "tool_errors": {}
+   }
+  },
+  "span_names": {
+   "uc6.agent": 33,
+   "uc6.agent.planner": 76,
+   "uc6.citation_verify": 102,
+   "uc6.generate": 69,
+   "uc6.input_guard": 108,
+   "uc6.request": 108,
+   "uc6.retrieve": 69,
+   "uc6.tool": 43
+  },
+  "spans": 608
+ }
+}

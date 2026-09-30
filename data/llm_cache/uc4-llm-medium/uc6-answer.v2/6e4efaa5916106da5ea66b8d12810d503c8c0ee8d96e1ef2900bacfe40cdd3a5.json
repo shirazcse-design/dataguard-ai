@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 112,
+ "input_hash": "6e4efaa5916106da5ea66b8d12810d503c8c0ee8d96e1ef2900bacfe40cdd3a5",
+ "latency_ms": 1492.9785418789834,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 988,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:00:34+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The maximum duration of access to production databases containing customer data is 90 days.\",\"evidence_id\":\"E1\",\"quote\":\"Access to production databases containing customer data is time-bound, for a maximum of 90 days.\"},{\"text\":\"Access to production customer databases is never granted permanently.\",\"evidence_id\":\"E1\",\"quote\":\"Renewal requires a new approval; access is never granted permanently.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

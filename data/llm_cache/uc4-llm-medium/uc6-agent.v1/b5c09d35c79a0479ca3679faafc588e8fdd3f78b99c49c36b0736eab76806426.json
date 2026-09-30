@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A vendor cannot receive customer data before passing a Vendor Security Assessment.\",\"evidence_id\":\"E1\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"Sharing confidential customer information with a third party requires data owner approval after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E2\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "b5c09d35c79a0479ca3679faafc588e8fdd3f78b99c49c36b0736eab76806426",
+ "recorded_at": "2026-09-29T21:03:22+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1450,
+ "tokens_out": 130,
+ "tool_calls": []
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "5e5b7f12a8ab30a29b4313c6e3e72d7ad8c4c4d0b4fd9bfeca05f71afeab32c8",
+ "recorded_at": "2026-09-29T21:03:07+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 902,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "annual leave new employees days leave entitlement policy"
+   },
+   "id": "call_9EjVEKC4szZyVmtkK4ecM9PM",
+   "name": "search_policy"
+  }
+ ]
+}

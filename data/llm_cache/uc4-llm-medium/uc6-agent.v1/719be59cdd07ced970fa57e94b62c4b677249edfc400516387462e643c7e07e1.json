@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "719be59cdd07ced970fa57e94b62c4b677249edfc400516387462e643c7e07e1",
+ "recorded_at": "2026-09-29T21:01:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 901,
+ "tokens_out": 27,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "API keys and other secrets stored secrets management policy credentials storage"
+   },
+   "id": "call_I8IoNVSB0sDQHUkpb2dPMRlw",
+   "name": "search_policy"
+  }
+ ]
+}

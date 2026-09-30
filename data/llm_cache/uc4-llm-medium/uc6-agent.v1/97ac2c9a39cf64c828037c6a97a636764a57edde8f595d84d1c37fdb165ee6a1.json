@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "97ac2c9a39cf64c828037c6a97a636764a57edde8f595d84d1c37fdb165ee6a1",
+ "recorded_at": "2026-09-29T21:02:32+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 899,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "vendor sharing third party data sharing with vendors policy"
+   },
+   "id": "call_E7Al8XHYz4n34dLcyoJOkxmM",
+   "name": "search_policy"
+  }
+ ]
+}

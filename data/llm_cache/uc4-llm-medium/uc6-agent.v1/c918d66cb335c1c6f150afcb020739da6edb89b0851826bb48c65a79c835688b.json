@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Access must be removed within 24 hours of an employee leaving the company.\",\"evidence_id\":\"E1\",\"quote\":\"All access is removed within 24 hours of an employee leaving.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "c918d66cb335c1c6f150afcb020739da6edb89b0851826bb48c65a79c835688b",
+ "recorded_at": "2026-09-29T21:01:46+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1414,
+ "tokens_out": 66,
+ "tool_calls": []
+}

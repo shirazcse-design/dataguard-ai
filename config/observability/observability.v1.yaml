@@ -87,5 +87,25 @@ allowed_attributes:
   - dg.agent.priority
   - dg.agent.review_requested
   - dg.agent.review_reason
+  # Data Security Policy Copilot (UC6; docs/uc6/observability.md). Ids, counts, statuses, fixed
+  # vocabularies and policy/section identifiers only: never the question, search queries, policy
+  # text, quotes or claim text.
+  - dg.policy.level
+  - dg.policy.mode
+  - dg.policy.status
+  - dg.policy.guard_ok
+  - dg.policy.n_hits
+  - dg.policy.dense_status
+  - dg.policy.stages
+  - dg.policy.claims
+  - dg.policy.claims_unverified
+  - dg.policy.fabricated_citations
+  - dg.policy.n_claims
+  - dg.policy.n_dropped
+  - dg.policy.drop_reasons
+  - dg.policy.cited
+  - dg.policy.evidence_status
+  - dg.policy.n_conflicts
+  - dg.policy.n_evidence
   # errors (class name only)
   - dg.error.type

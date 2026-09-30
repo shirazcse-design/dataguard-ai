@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "b0f84371148ed894e1759a933871e1db7cced3c1a45dfd55271f3a8f513d258d",
+ "recorded_at": "2026-09-29T21:02:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1387,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "CCTV video surveillance retention"
+   },
+   "id": "call_HbFsSpTRaKrC5G5e8wpsn9RB",
+   "name": "search_policy"
+  }
+ ]
+}

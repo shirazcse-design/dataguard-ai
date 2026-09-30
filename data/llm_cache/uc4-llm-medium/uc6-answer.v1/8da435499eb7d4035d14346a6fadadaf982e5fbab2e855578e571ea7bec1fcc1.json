@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 76,
+ "input_hash": "8da435499eb7d4035d14346a6fadadaf982e5fbab2e855578e571ea7bec1fcc1",
+ "latency_ms": 1451.4775418210775,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 891,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:41:59+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The maximum duration of access to a production customer database is 90 days.\",\"evidence_id\":\"E1\",\"quote\":\"Access to production databases containing customer data is time-bound, for a maximum of 90 days.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

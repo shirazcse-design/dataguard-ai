@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 364,
+ "input_hash": "1116f5d1c7d720d339ddc03ee0b881838b4713f79ccaef24c853de5519e98471",
+ "latency_ms": 3167.4391250126064,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 891,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:17+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Passwords must never be shared.\",\"evidence_id\":\"E3\",\"quote\":\"Passwords must never be shared.\"},{\"text\":\"Service credentials are shared only by granting access through the secrets vault's access policies, never by sending the secret itself.\",\"evidence_id\":\"E3\",\"quote\":\"Service credentials are shared only by granting access through the secrets vault's access policies, never by sending the secret itself.\"},{\"text\":\"User passwords must be at least 14 characters long, stored only in the company-approved password manager, and combined with multi-factor authentication.\",\"evidence_id\":\"E1\",\"quote\":\"User passwords must be at least 14 characters long, must be stored only in the company-approved password manager, and must be combined with multi-factor authentication.\"},{\"text\":\"API keys and service credentials are rotated at least every 90 days, and immediately if exposure is suspected.\",\"evidence_id\":\"E4\",\"quote\":\"API keys and service credentials are rotated at least every 90 days, and immediately if exposure is suspected.\"},{\"text\":\"If a secret is exposed, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\",\"evidence_id\":\"E5\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"},{\"text\":\"The standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\",\"evidence_id\":\"E2\",\"quote\":\"This standard covers passwords, API keys, tokens, certificates and other secrets used to access Harbourline systems.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

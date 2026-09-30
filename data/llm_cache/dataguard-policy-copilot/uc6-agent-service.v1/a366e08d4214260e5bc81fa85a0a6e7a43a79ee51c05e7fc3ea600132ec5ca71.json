@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "a366e08d4214260e5bc81fa85a0a6e7a43a79ee51c05e7fc3ea600132ec5ca71",
+ "recorded_at": "2026-09-29T22:58:50+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1311,
+ "tokens_out": 27,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "CCTV video surveillance footage retained days policy camera footage"
+   },
+   "id": "call_fiCQ39OpE2xPIfL6gpi0td9p",
+   "name": "search_policy"
+  }
+ ]
+}

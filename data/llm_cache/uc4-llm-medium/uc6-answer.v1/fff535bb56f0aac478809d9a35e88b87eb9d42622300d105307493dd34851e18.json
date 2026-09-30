@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 238,
+ "input_hash": "fff535bb56f0aac478809d9a35e88b87eb9d42622300d105307493dd34851e18",
+ "latency_ms": 2273.6991660203785,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 930,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:47+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E1\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"},{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E2\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E3\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 allows Internal information in personal cloud storage for remote work if protected with multi-factor authentication, while E2 prohibits uploading company information classified Internal or above to a personal cloud-storage account.\"}"
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 200,
+ "input_hash": "93e9b4baf781e7c77d9e28b3ca47a1669750709f49e490d95b854a73fbd35a09",
+ "latency_ms": 1957.8978749923408,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 924,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Secrets must never be stored in chat messages or in email.\",\"evidence_id\":\"E3\",\"quote\":\"Secrets must never be stored in source code, in configuration files committed to a repository, in tickets, in chat messages or in email.\"},{\"text\":\"If a secret is pasted into a chat, it must be revoked or rotated immediately and reported as a security incident.\",\"evidence_id\":\"E2\",\"quote\":\"If a secret is exposed, for example committed to a repository or pasted into a chat, it must be revoked or rotated immediately and reported as a security incident under the Incident Response Policy.\"},{\"text\":\"Access to systems holding Restricted information requires approval from the data owner of that system.\",\"evidence_id\":\"E5\",\"quote\":\"Access to systems holding Confidential or Restricted information also requires approval from the data owner of that system.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

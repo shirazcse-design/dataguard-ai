@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "2503fa22ece306827f5b644fd71ebdbe8aad4f216fc5d18fb2c172baf644bd50",
+ "recorded_at": "2026-09-29T22:58:47+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 818,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "CCTV footage retention period CCTV policy retain footage"
+   },
+   "id": "call_H4NuE9W8ND6afnehqDpizYKj",
+   "name": "search_policy"
+  }
+ ]
+}

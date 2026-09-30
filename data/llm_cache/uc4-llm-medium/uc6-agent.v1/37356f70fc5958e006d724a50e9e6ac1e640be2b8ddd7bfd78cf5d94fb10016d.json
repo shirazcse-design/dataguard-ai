@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "37356f70fc5958e006d724a50e9e6ac1e640be2b8ddd7bfd78cf5d94fb10016d",
+ "recorded_at": "2026-09-29T21:01:24+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal cloud storage confidential customer information employee upload policy"
+   },
+   "id": "call_M4SNAWihp8eXQc1Ck185NQ8P",
+   "name": "search_policy"
+  }
+ ]
+}

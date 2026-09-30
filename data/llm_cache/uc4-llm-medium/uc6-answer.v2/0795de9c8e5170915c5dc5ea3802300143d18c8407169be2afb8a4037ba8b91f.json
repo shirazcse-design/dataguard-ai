@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 122,
+ "input_hash": "0795de9c8e5170915c5dc5ea3802300143d18c8407169be2afb8a4037ba8b91f",
+ "latency_ms": 1682.2388330474496,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 990,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T20:59:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\"},{\"text\":\"Only the company-approved AI tools listed in the AI Tools Register may be used with company information.\",\"evidence_id\":\"E1\",\"quote\":\"Only the company-approved AI tools listed in the AI Tools Register may be used with company information.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

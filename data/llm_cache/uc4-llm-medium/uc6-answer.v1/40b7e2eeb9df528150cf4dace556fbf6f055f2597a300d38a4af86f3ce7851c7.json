@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 74,
+ "input_hash": "40b7e2eeb9df528150cf4dace556fbf6f055f2597a300d38a4af86f3ce7851c7",
+ "latency_ms": 1561.44666695036,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 923,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:43:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"The data owner is responsible for applying the correct label when the document is created.\",\"evidence_id\":\"E2\",\"quote\":\"The data owner is responsible for applying the correct label when the document is created.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

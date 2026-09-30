@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "e42e967d897b7d643958803b448222f6cf0e290f4e2ebcb9ff3055c75a0f3b79",
+ "recorded_at": "2026-09-29T21:02:29+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 903,
+ "tokens_out": 27,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "second factor log in from home remote access MFA authentication home"
+   },
+   "id": "call_WAv2Ewyry0YsJRIvV73OlF7E",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "c19ddf12d58df2b06da9931bb272652d3b4c7ef438678da72cf5c7488fd9cc98",
+ "recorded_at": "2026-09-29T22:58:53+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2317,
+ "tokens_out": 23,
+ "tool_calls": [
+  {
+   "arguments": {
+    "reason": "insufficient_evidence"
+   },
+   "id": "call_SHWZ00z0YdXvYIfZw53QSVQs",
+   "name": "request_human_review"
+  }
+ ]
+}

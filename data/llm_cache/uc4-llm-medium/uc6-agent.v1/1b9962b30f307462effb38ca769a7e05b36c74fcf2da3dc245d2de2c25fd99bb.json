@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "1b9962b30f307462effb38ca769a7e05b36c74fcf2da3dc245d2de2c25fd99bb",
+ "recorded_at": "2026-09-29T21:02:19+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 905,
+ "tokens_out": 29,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal GitHub company code source code repositories allowed push to personal account"
+   },
+   "id": "call_QFmyCDxMYHogu4LOIxAn7hCe",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 165,
+ "input_hash": "3ac6f41fc7eacea7e6b9c3162ba406f5590e2b12f1d30f8d9ad340cc2e2ae788",
+ "latency_ms": 1748.356666881591,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 911,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:42+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Employees may use company laptops for limited personal use only if it does not interfere with work, does not break the law and does not expose the company to risk.\",\"evidence_id\":\"E2\",\"quote\":\"Limited personal use is permitted if it does not interfere with work, does not break the law and does not expose the company to risk.\"},{\"text\":\"Only software from the company software portal may be installed on company devices, and other software requires review by IT and Information Security.\",\"evidence_id\":\"E4\",\"quote\":\"Only software available from the company software portal may be installed on company devices. Requests for other software are reviewed by IT and Information Security.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

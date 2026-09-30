@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You must report any suspected security incident, including suspected data loss, to the Security Operations Center within 1 hour of discovery through the security hotline or the incident portal.\",\"evidence_id\":\"E2\",\"quote\":\"Any suspected security incident, including suspected data loss, must be reported to the Security Operations Center within 1 hour of discovery, through the security hotline or the incident portal.\"},{\"text\":\"You must not investigate a suspected incident yourself.\",\"evidence_id\":\"E2\",\"quote\":\"Employees must not investigate a suspected incident themselves.\"},{\"text\":\"Lost or stolen company devices must be reported to the IT Service Desk within 24 hours.\",\"evidence_id\":\"E3\",\"quote\":\"Lost or stolen company devices must be reported to the IT Service Desk within 24 hours.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}",
+ "key": "7ce7a129bc3cb1ccff0f6d7b7bc5165b160cf665f56db3449cfeaff25b5555e1",
+ "recorded_at": "2026-09-29T21:02:25+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1448,
+ "tokens_out": 183,
+ "tool_calls": []
+}

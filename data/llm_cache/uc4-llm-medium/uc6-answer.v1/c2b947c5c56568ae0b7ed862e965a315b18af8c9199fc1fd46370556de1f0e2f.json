@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 264,
+ "input_hash": "c2b947c5c56568ae0b7ed862e965a315b18af8c9199fc1fd46370556de1f0e2f",
+ "latency_ms": 2663.2422499824315,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 926,
+ "prompt_version": "uc6-answer.v1",
+ "recorded_at": "2026-09-29T20:42:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"You can share Confidential information with a vendor only after the data owner approves it and the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"A vendor must pass a Vendor Security Assessment before receiving any Confidential or Restricted information.\",\"evidence_id\":\"E2\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"A Data Processing Agreement must be signed before sharing begins.\",\"evidence_id\":\"E5\",\"quote\":\"A Data Processing Agreement must be signed before sharing begins.\"},{\"text\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\",\"evidence_id\":\"E4\",\"quote\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\"},{\"text\":\"Restricted information must never be sent as an email attachment to a third party.\",\"evidence_id\":\"E4\",\"quote\":\"Restricted information must never be sent as an email attachment to a third party.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

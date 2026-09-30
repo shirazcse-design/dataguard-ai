@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "634a4f4a0da2c7d9f71efae6116b8bb7df8d90f68319b4b2fe4f2ab5267478d4",
+ "recorded_at": "2026-09-29T21:02:11+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 913,
+ "tokens_out": 30,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "customer spreadsheet personal Dropbox work from home personal cloud storage approved storage remote work"
+   },
+   "id": "call_esK7vwhH6RFKCkPFdyVDvmvB",
+   "name": "search_policy"
+  }
+ ]
+}

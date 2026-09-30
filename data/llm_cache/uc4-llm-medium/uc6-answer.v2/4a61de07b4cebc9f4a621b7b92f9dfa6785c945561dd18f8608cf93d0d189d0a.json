@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 296,
+ "input_hash": "4a61de07b4cebc9f4a621b7b92f9dfa6785c945561dd18f8608cf93d0d189d0a",
+ "latency_ms": 2750.977207906544,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 978,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-09-29T21:01:07+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Harbourline information may be shared with vendors under conditions set by this policy.\",\"evidence_id\":\"E4\",\"quote\":\"This policy sets the conditions under which Harbourline information may be shared with third parties such as vendors, partners and service providers.\"},{\"text\":\"A vendor must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\",\"evidence_id\":\"E1\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"Sharing Confidential information with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E3\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register.\",\"evidence_id\":\"E2\",\"quote\":\"Every approved sharing arrangement must be recorded in the Third-Party Data Register, including the data categories shared, the approvers and the review date.\"},{\"text\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\",\"evidence_id\":\"E5\",\"quote\":\"Information must be transferred using the company managed file transfer service or another approved secure transfer method.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "4a81267352d9da4161b224eeafd81d67b0ac4d89bf8ca56bc27f568876fb4126",
+ "recorded_at": "2026-09-29T21:02:04+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 908,
+ "tokens_out": 27,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "administrator access production system approval privileged access production admin access approve"
+   },
+   "id": "call_ZJXKR7QmEf5G4mhb8UtGgHN0",
+   "name": "search_policy"
+  }
+ ]
+}
