@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted / HIGHLY_CONFIDENTIAL and includes TRADE_SECRET content with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"P3\"},{\"text\":\"Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud account on dropbox.com and is not known to the user.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "a0dfeb9b2ca5eabf4c6e15c54190d7bbf44dc0102e5e686d188657c3671c42e7",
+ "recorded_at": "2026-10-02T05:50:35+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1247,
+ "tokens_out": 148,
+ "tool_calls": []
+}

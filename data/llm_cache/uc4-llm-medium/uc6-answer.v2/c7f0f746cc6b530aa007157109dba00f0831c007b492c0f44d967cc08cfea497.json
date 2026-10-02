@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 153,
+ "input_hash": "c7f0f746cc6b530aa007157109dba00f0831c007b492c0f44d967cc08cfea497",
+ "latency_ms": 1738.795458106324,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1007,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:30+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Proprietary source code cannot be uploaded to a public repository or public paste site unless the Open Source Program Office has approved the release.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company source code to a public repository, a personal repository account or a public paste site is prohibited unless the Open Source Program Office has approved the release.\"},{\"text\":\"Proprietary source code is Confidential information.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential information would cause significant harm if disclosed. It includes customer personal information, customer financial information, non-public financial results, employee records and proprietary source code.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

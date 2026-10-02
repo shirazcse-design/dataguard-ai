@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 199,
+ "input_hash": "49908509d124931b00f5ffef55e49fd2c9f802393212eb7e00c8e00b1e47c51c",
+ "latency_ms": 2336.5309168584645,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1008,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:15+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Restricted information includes information about planned mergers and acquisitions.\",\"evidence_id\":\"E4\",\"quote\":\"It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"},{\"text\":\"Restricted information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security. It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

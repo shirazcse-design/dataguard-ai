@@ -50,6 +50,7 @@ mcp = [
 dataguard-uc4 = "app.classification.cli:main"
 dataguard-uc4-mcp = "mcp_adapter.server:main"
 dataguard-policy = "app.policy.cli:main"
+dataguard-dlp = "app.dlp.cli:main"
 
 [tool.setuptools.package-data]
 "app.demo" = ["static/*"]
@@ -87,6 +88,8 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/policy/report.py" = ["E501"]
 "evals/policy/guardrails_verify.py" = ["E501"]
 "evals/policy/foundry_evals.py" = ["E501"]
+"evals/dlp/metrics.py" = ["E501"]
+"evals/dlp/report.py" = ["E501"]
 "evals/classification/blind_review.py" = ["E501"]
 "evals/classification/blind_compare.py" = ["E501"]
 "evals/classification/blind_compare_round2.py" = ["E501"]

@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "9d0ef790f9b7f59ba52d84b90edd788aa071a1399278c4df5f0cfc1bf7a92e4e",
+ "recorded_at": "2026-10-02T05:49:06+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1207,
+ "tokens_out": 61,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "Internal information external website unknown external destination approved destinations personal cloud-storage MFA requirements"
+   },
+   "id": "call_YIPmExenkuNaks2m3xUgy8S2",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_MEKfnSasjt0u5n2fT7sXf6yE",
+   "name": "get_user_activity"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential intellectual property with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an external partner, so the third-party sharing policy applies.\",\"evidence_id\":\"P3\"},{\"text\":\"Policy requires approval from the data owner and a passed Vendor Security Assessment before Confidential information is shared with a third party.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "3d8418fd7fae352b5b8abe75ec17cdd97670af5a309a1623bed19a526d271695",
+ "recorded_at": "2026-10-02T06:18:18+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1183,
+ "tokens_out": 122,
+ "tool_calls": []
+}

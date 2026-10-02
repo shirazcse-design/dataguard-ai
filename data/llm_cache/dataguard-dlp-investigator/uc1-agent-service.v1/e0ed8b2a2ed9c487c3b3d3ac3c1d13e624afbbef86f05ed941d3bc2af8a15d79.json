@@ -1,0 +1,39 @@
+{
+ "final_text": null,
+ "key": "e0ed8b2a2ed9c487c3b3d3ac3c1d13e624afbbef86f05ed941d3bc2af8a15d79",
+ "recorded_at": "2026-10-02T06:18:24+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1076,
+ "tokens_out": 96,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_ucFVidLCE3PKHtjMarNZaHMh",
+   "name": "check_dlp_exception"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_jklu3BYE5eMVFXFyuhKyjERR",
+   "name": "get_user_activity"
+  },
+  {
+   "arguments": {
+    "policy_id": "POL-DLP",
+    "section": "4.2"
+   },
+   "id": "call_q9910cWsJccgWF6dk5jYx0fT",
+   "name": "get_policy_section"
+  },
+  {
+   "arguments": {
+    "policy_id": "POL-AUP",
+    "section": "5.3"
+   },
+   "id": "call_QNu0PzhwaCOeokfbNemOKHET",
+   "name": "get_policy_section"
+  }
+ ]
+}

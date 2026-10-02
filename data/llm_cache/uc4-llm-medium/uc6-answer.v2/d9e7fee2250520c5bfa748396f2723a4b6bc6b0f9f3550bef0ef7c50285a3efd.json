@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 125,
+ "input_hash": "d9e7fee2250520c5bfa748396f2723a4b6bc6b0f9f3550bef0ef7c50285a3efd",
+ "latency_ms": 1684.705208055675,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1010,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:45+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information, including authentication credentials and secrets, must not be pasted into public generative AI tools.\",\"evidence_id\":\"E1\",\"quote\":\"Pasting Confidential or Restricted information into public generative AI tools is prohibited.\"},{\"text\":\"Authentication credentials and secrets are classified as Restricted information.\",\"evidence_id\":\"E2\",\"quote\":\"It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

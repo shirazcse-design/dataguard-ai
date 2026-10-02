@@ -1,0 +1,57 @@
+# UC1 deterministic risk / response rubric. The harness owns the final response; the agent's
+# findings can only ADD review (never lower the outcome). Every point and rule shows up as a reason
+# code. Changing any number here is a new rubric_version.
+#
+# Changelog
+# 1.1.0 (2026-10-01) exposure gating: sensitivity, identity and behaviour points count only when the
+#       destination carries exposure (destination points > 0). Found in the FIRST OFFLINE DRY RUN of
+#       the golden set (offline planner, no model results): v1.0.0 escalated a Confidential financial
+#       file moving to the company's own managed file transfer (D03, score 60) purely on sensitivity.
+#       Sensitive data inside an approved corporate system is not a DLP exposure. Golden set unchanged.
+# 1.0.0 (2026-10-01) initial rubric.
+rubric_version: 1.1.0
+gate_data_points_on_exposure: true
+
+points:
+  level: {PUBLIC: 0, INTERNAL: 10, CONFIDENTIAL: 25, HIGHLY_CONFIDENTIAL: 40}
+  high_risk_category: 10            # UC4 flagged a high-risk category (config/taxonomy/high_risk.v1.yaml)
+  destination: {approved_corporate: 0, partner_external: 15, unknown_external: 20, personal_email: 30, personal_cloud: 30, generative_ai: 30, restricted: 40}
+  policy_effect: {allowed: 0, requires_approval: 10, prohibited: 25, unknown: 5}
+  behavior: {NORMAL: 0, ELEVATED: 10, UNUSUAL: 20}
+  identity: {contractor: 5, privileged: 5, notice_period: 15}
+  verified_exception: -20           # only a matching, unexpired record returned by check_dlp_exception
+
+bands:                               # score -> band; first match from the top
+  - {min: 60, outcome: ESCALATE}
+  - {min: 30, outcome: WARN}
+  - {min: -1000, outcome: ALLOW}
+
+# Floors: a verified prohibition can never be scored below these (applied before the exception
+# discount is allowed to lower the band, so an exception can lower ESCALATE to WARN, never to ALLOW).
+floors:
+  - {when: prohibited_and_level_at_least, level: CONFIDENTIAL, outcome: ESCALATE, exception_floor: WARN}
+  - {when: prohibited_and_level_at_least, level: INTERNAL, outcome: WARN, exception_floor: WARN}
+  - {when: destination_is, destination: restricted, level: INTERNAL, outcome: ESCALATE, exception_floor: ESCALATE}
+
+# Any of these makes the response HUMAN_REVIEW (reason code in brackets is reported).
+human_review_triggers:
+  - classification_uncertain         # UC4 review_required, no level, or rejected/error
+  - policy_conflict                  # UC6 CONFLICT_REVIEW, or verified effects that disagree
+  - policy_insufficient_high_impact  # UC6 insufficient AND level >= CONFIDENTIAL AND destination not approved
+  - stage_failure                    # a mandatory stage (identity, behaviour, policy) failed
+  - agent_disagreement_up            # the agent proposed a higher severity than the rubric
+  - agent_requested_review           # the agent called request_human_review
+  - injection_with_sensitive_data    # injection text flagged in the document or justification AND level >= CONFIDENTIAL
+  - agent_failure_high_impact        # the agent stopped without a usable answer AND the band is WARN or higher
+
+# ESCALATE is a recommendation for a human analyst: it always carries human_review_required and a
+# SIMULATED action proposal that needs approval. Nothing is ever blocked, deleted or quarantined.
+escalate_requires_human_approval: true
+simulated_actions:
+  personal_cloud: Block the upload (simulated - requires analyst approval)
+  personal_email: Hold the email (simulated - requires analyst approval)
+  generative_ai: Block the paste (simulated - requires analyst approval)
+  restricted: Block the post (simulated - requires analyst approval)
+  partner_external: Hold the share pending approval (simulated)
+  unknown_external: Hold the transfer (simulated - requires analyst approval)
+  approved_corporate: No action

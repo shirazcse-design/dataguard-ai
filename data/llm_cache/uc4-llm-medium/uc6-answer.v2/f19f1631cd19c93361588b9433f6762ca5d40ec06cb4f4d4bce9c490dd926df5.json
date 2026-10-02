@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 121,
+ "input_hash": "f19f1631cd19c93361588b9433f6762ca5d40ec06cb4f4d4bce9c490dd926df5",
+ "latency_ms": 1826.4139578677714,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1023,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Confidential information may be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E4\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"},{\"text\":\"Customer personal information and employee records are included in Confidential information.\",\"evidence_id\":\"E1\",\"quote\":\"It includes customer personal information, customer financial information, non-public financial results, employee records and proprietary source code.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

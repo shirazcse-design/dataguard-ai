@@ -107,5 +107,20 @@ allowed_attributes:
   - dg.policy.evidence_status
   - dg.policy.n_conflicts
   - dg.policy.n_evidence
+  # UC1 Agentic DLP (docs/uc1/observability.md). Fixed vocabularies and numbers only: a
+  # schema-validated case id, outcome/band/risk enums, rubric reason codes, simulated-fault names,
+  # destination class (never the host), counts. Never a user id, host, filename or document text.
+  - dg.dlp.case_id
+  - dg.dlp.outcome
+  - dg.dlp.band
+  - dg.dlp.score
+  - dg.dlp.risk_level
+  - dg.dlp.reason_codes
+  - dg.dlp.simulated_faults
+  - dg.dlp.destination_class
+  - dg.dlp.behavior_band
+  - dg.dlp.n_signals
+  - dg.dlp.n_findings
+  - dg.dlp.policy_effect
   # errors (class name only)
   - dg.error.type

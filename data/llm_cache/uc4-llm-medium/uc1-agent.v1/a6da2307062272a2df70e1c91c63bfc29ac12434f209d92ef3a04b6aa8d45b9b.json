@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account (icloud.com).\",\"evidence_id\":\"P1\"},{\"text\":\"Policy evidence in the pack conflicts: one clause says uploading Internal or above to a personal cloud-storage account is prohibited, while another says Internal information may be stored in a personal cloud-storage account under remote-work and MFA conditions.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"A human analyst review was requested due to conflicting policy evidence.\",\"evidence_id\":\"E1\"}],\"missing_evidence\":[]}",
+ "key": "a6da2307062272a2df70e1c91c63bfc29ac12434f209d92ef3a04b6aa8d45b9b",
+ "recorded_at": "2026-10-02T05:50:21+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1270,
+ "tokens_out": 161,
+ "tool_calls": []
+}

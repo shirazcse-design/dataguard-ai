@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 127,
+ "input_hash": "4d09df1b4b92b0dd1392f8641be7bb6aeae2662c9ea9fcac0499287ea51b6da8",
+ "latency_ms": 1869.5588749833405,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1019,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:36+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information cannot be sent to a personal email account.\",\"evidence_id\":\"E2\",\"quote\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\"},{\"text\":\"Protected health information is Restricted information.\",\"evidence_id\":\"E3\",\"quote\":\"Restricted information would cause severe harm if disclosed. It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

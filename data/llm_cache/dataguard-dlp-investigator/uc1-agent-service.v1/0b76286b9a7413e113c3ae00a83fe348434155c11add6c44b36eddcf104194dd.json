@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is the company's managed OneDrive, classified as an approved corporate storage location.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy allows Internal information to be stored in the company's managed OneDrive or SharePoint.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "0b76286b9a7413e113c3ae00a83fe348434155c11add6c44b36eddcf104194dd",
+ "recorded_at": "2026-10-02T06:18:13+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1038,
+ "tokens_out": 93,
+ "tool_calls": []
+}

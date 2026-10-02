@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 214,
+ "input_hash": "6329be75edbb5e842e944d2e81a124ca69386ee23e7c934e8290a11e7f5a2059",
+ "latency_ms": 2309.268959099427,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1010,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:50:52+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security. It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"E3\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication. Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Payment card data is classified as Restricted information.\",\"evidence_id\":\"E4\",\"quote\":\"Restricted information would cause severe harm if disclosed. It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

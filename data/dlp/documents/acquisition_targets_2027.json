@@ -1,0 +1,7 @@
+{
+ "doc_ref": "uc1:acquisition_targets_2027",
+ "filename": "Acquisition_Targets_2027.xlsx",
+ "synthetic": true,
+ "note": "Extracted text of a synthetic spreadsheet. Every company, person and figure is invented. Deliberately has no classification label and no SSN/card-style pattern: its sensitivity is semantic.",
+ "content": "Sheet: Shortlist\nTarget | Sector | Est. revenue (USD m) | Indicative EV range (USD m) | Strategic rationale | Status\nKestrel Sensor Systems | Industrial IoT | 84 | 410-460 | Adds edge sensing to our fleet tracker line | Preliminary outreach planned for Q1\nArdent Flowworks | Water-quality analytics | 37 | 150-180 | Closes the gap in our probe software roadmap | Board briefing pending\nBluefen Analytics | Predictive maintenance | 22 | 95-120 | Data science team and two utility customers | Watch list\n\nSheet: Approach plan\n1. Approach Kestrel through an intermediary before its Series D closes.\n2. Keep the Ardent discussion inside the deal team until the board votes in March.\n3. Synergy case: 6-9% cost savings in year two from shared manufacturing.\n\nSheet: Notes\nDo not discuss these names outside the corporate development deal team. Financing assumes a mix of cash on hand and a new credit facility."
+}

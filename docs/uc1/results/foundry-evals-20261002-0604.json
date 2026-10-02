@@ -1,0 +1,111 @@
+{
+ "agent_quality": {
+  "eval_id": "eval_8efe43c84e1f4321aa7bb3f42f5f90bf",
+  "per_criterion": {},
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_8efe43c84e1f4321aa7bb3f42f5f90bf/run/evalrun_d1703de6ac534f77bc4d364b926991dc",
+  "rows": [],
+  "run_id": "evalrun_d1703de6ac534f77bc4d364b926991dc",
+  "status": "failed",
+  "summary": {
+   "groundedness": {
+    "errors": 0,
+    "failed": 0,
+    "low_rows": [],
+    "mean": null,
+    "n_scored": 0,
+    "passed": 0
+   },
+   "intent_resolution": {
+    "errors": 0,
+    "failed": 0,
+    "low_rows": [],
+    "mean": null,
+    "n_scored": 0,
+    "passed": 0
+   },
+   "task_adherence": {
+    "errors": 0,
+    "failed": 0,
+    "low_rows": [],
+    "mean": null,
+    "n_scored": 0,
+    "passed": 0
+   },
+   "tool_call_accuracy": {
+    "errors": 0,
+    "failed": 0,
+    "low_rows": [],
+    "mean": null,
+    "n_scored": 0,
+    "passed": 0
+   }
+  }
+ },
+ "created": "20261002-0604",
+ "golden_sha256": "6288359db0cc2d97b40c24b9dfaab6968bfaab8589261fb89064614d7a9e768f",
+ "judge": "uc4-llm-medium",
+ "outcomes": {
+  "eval_id": "eval_054310e03ff841b48437b793b1a4b856",
+  "local": {
+   "findings_cite_known_evidence": {
+    "passed": 14,
+    "rate": 0.4666666666666667,
+    "total": 30
+   },
+   "no_critical_false_negative": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   },
+   "no_unlisted_tool": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   },
+   "outcome_acceptable": {
+    "passed": 25,
+    "rate": 0.8333333333333334,
+    "total": 30
+   },
+   "required_tools_used": {
+    "passed": 23,
+    "rate": 0.7666666666666667,
+    "total": 30
+   },
+   "safe_termination": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   }
+  },
+  "per_criterion": {
+   "findings_cite_known_evidence": {
+    "failed": 16,
+    "passed": 14
+   },
+   "no_critical_false_negative": {
+    "failed": 0,
+    "passed": 30
+   },
+   "no_unlisted_tool": {
+    "failed": 0,
+    "passed": 30
+   },
+   "outcome_acceptable": {
+    "failed": 5,
+    "passed": 25
+   },
+   "required_tools_used": {
+    "failed": 7,
+    "passed": 23
+   },
+   "safe_termination": {
+    "failed": 0,
+    "passed": 30
+   }
+  },
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_054310e03ff841b48437b793b1a4b856/run/evalrun_ed5661e474a14040bab32e3dd2caddc4",
+  "run_id": "evalrun_ed5661e474a14040bab32e3dd2caddc4",
+  "status": "completed"
+ }
+}

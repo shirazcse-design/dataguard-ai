@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 175,
+ "input_hash": "0d72c33e1c6a6aa51018ba8c7e805340fa299538c3b15a6aa3718608c5fdfc02",
+ "latency_ms": 2267.4377921503037,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1018,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:51+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"},{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

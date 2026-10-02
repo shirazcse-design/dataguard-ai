@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 180,
+ "input_hash": "96715078a255123bcf187d4e07962fbc648627ed8d14af0f48940db3eb814085",
+ "latency_ms": 1901.3727908022702,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 999,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information, including payment card data, cannot be sent to a personal email account.\",\"evidence_id\":\"E1\",\"quote\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\"},{\"text\":\"Payment card data is classified as Restricted information.\",\"evidence_id\":\"E2\",\"quote\":\"Restricted information would cause severe harm if disclosed. It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"},{\"text\":\"Restricted information must never be stored in personal email accounts.\",\"evidence_id\":\"E5\",\"quote\":\"It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

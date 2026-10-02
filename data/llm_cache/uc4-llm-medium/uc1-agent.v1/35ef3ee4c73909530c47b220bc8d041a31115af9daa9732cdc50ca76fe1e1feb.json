@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an unknown external site and was flagged as a new destination for the user.\",\"evidence_id\":\"P2\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Current DLP policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Current policy states the company's managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E4\"},{\"text\":\"Recent activity shows one prior external upload in the last 7 days and the destination is not known to the user, which does not reduce concern.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "35ef3ee4c73909530c47b220bc8d041a31115af9daa9732cdc50ca76fe1e1feb",
+ "recorded_at": "2026-10-02T05:49:09+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1886,
+ "tokens_out": 188,
+ "tool_calls": []
+}

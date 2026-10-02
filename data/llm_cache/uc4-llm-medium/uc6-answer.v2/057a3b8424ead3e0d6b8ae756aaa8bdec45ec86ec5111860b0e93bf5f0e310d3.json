@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 185,
+ "input_hash": "057a3b8424ead3e0d6b8ae756aaa8bdec45ec86ec5111860b0e93bf5f0e310d3",
+ "latency_ms": 1965.969291049987,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1003,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:50:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 says Internal information in personal cloud storage is prohibited, while E2 allows Internal information in personal cloud storage when working remotely with multi-factor authentication.\"}"
+}

@@ -53,9 +53,11 @@ def read_jsonl(path: Path | str) -> list[Span]:
 # LLM stage and the Batch Triage Agent's planner turn.
 # UC6 (Data Security Policy Copilot) spans map onto the same conventions: `uc6.generate` and
 # `uc6.agent.planner` are model calls, `uc6.agent` an agent invocation, `uc6.tool` a tool call.
-_LLM_CALL_SPANS = frozenset({"llm.call", "agent.planner", "uc6.generate", "uc6.agent.planner"})
-_AGENT_SPANS = frozenset({"agent.document", "uc6.agent"})
-_TOOL_SPANS = frozenset({"agent.tool", "uc6.tool"})
+# UC1 (Agentic DLP) follows the same shape: `uc1.agent.planner` / `uc1.agent` / `uc1.tool`.
+_PLANNER_SPANS = frozenset({"agent.planner", "uc6.agent.planner", "uc1.agent.planner"})
+_LLM_CALL_SPANS = frozenset({"llm.call", "uc6.generate", *_PLANNER_SPANS})
+_AGENT_SPANS = frozenset({"agent.document", "uc6.agent", "uc1.agent"})
+_TOOL_SPANS = frozenset({"agent.tool", "uc6.tool", "uc1.tool"})
 _PROVIDER = "azure.ai.openai"
 
 
@@ -77,7 +79,7 @@ def _genai_attrs(span_name: str, attrs: dict[str, Any]) -> dict[str, Any]:
         return _genai_tool_attrs(attrs)
     if span_name not in _LLM_CALL_SPANS:
         return {}
-    if span_name in ("agent.planner", "uc6.agent.planner") and not attrs.get("dg.llm.model_id"):
+    if span_name in _PLANNER_SPANS and not attrs.get("dg.llm.model_id"):
         # The offline planner is not a model call; labelling it "chat" would misstate what ran.
         return {}
     if attrs.get("dg.llm.cached") is True:
@@ -169,11 +171,18 @@ def azure_monitor_sink(connection_string: str) -> OtelSink:
     is not installed. The caller must supply the connection string from the environment or a secret
     store, never a literal in code, a config file or a log line.
     """
+    import os
+
     from azure.monitor.opentelemetry import (
         configure_azure_monitor,  # type: ignore[import-not-found]
     )
     from opentelemetry import trace
 
+    # azure-monitor-opentelemetry >= 1.8 defaults to a rate-limited sampler (5 traces/s). This
+    # sink re-emits a whole request's spans in one burst, so that default dropped spans from the
+    # middle of traces (found in the UC1 live check, 2026-10-01). Export every span unless the
+    # operator chose a sampler explicitly. Sampling changes completeness only, never content.
+    os.environ.setdefault("OTEL_TRACES_SAMPLER", "always_on")
     configure_azure_monitor(connection_string=connection_string)
     return OtelSink(trace.get_tracer_provider())
 

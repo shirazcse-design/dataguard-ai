@@ -1,0 +1,32 @@
+{
+ "final_text": null,
+ "key": "9625ef2fa0165696c471f904448bb0c21d8295b284e45d5da6d93b7d48617ac0",
+ "recorded_at": "2026-10-02T05:50:02+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1047,
+ "tokens_out": 90,
+ "tool_calls": [
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_DYNPxfVPDlPIE5aylmVumb4E",
+   "name": "get_user_activity"
+  },
+  {
+   "arguments": {
+    "query": "handling of files with unknown or unclassified sensitivity to external partner destinations and review required"
+   },
+   "id": "call_DjavPIdzQlcrenI9FJFWXM5J",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "query": "partner_external destination finance data sharing external portal new destination exception review required"
+   },
+   "id": "call_outiCo5HlJVotHSB1NemaRk1",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal email account at gmail.com and is not known to the user.\",\"evidence_id\":\"P2\"},{\"text\":\"User behaviour is elevated with a new_destination signal.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception applies for this user and destination for the file sensitivity level.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Internal information is intended for use inside Harbourline and is not approved for public release.\",\"evidence_id\":\"E5\"},{\"text\":\"Recent activity does not show prior external uploads in the last 7 days, which makes this destination novel in the observed window.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[{\"text\":\"No policy section was found that explicitly states whether Internal information may or may not be sent to a personal email account.\",\"evidence_id\":\"E1\"}]}",
+ "key": "e56755330a45be1df433041839232baf76a114107d3aaf490b6ea807ee538f75",
+ "recorded_at": "2026-10-02T05:48:55+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1795,
+ "tokens_out": 207,
+ "tool_calls": []
+}

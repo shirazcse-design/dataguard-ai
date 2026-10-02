@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential and includes Intellectual Property with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"The destination is a personal cloud-storage account (Dropbox personal account).\",\"evidence_id\":\"P3\"},{\"text\":\"Policy prohibits uploading company information classified Internal or above to a personal cloud-storage account.\",\"evidence_id\":\"P3\"},{\"text\":\"Policy states Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"User behavior is scored UNUSUAL with signals including after-hours activity, frequent external uploads, unusual download volume, high sensitive file access, and a new destination.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "eb2b30046f2debf8ece8517b7649b3189efbb9cf03332613f7c693a4a24114c4",
+ "recorded_at": "2026-10-02T05:49:55+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1270,
+ "tokens_out": 181,
+ "tool_calls": []
+}

@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 124,
+ "input_hash": "af05711b179e1389969d51b0190f2c478f12fcf050bc2f8fde41a217d135bede",
+ "latency_ms": 1635.8356249984354,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 988,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:50:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Public information requires no special handling.\",\"evidence_id\":\"E1\",\"quote\":\"Public information has been approved for release outside the company, such as published marketing material, press releases and public product documentation. No special handling is required.\"},{\"text\":\"The company's managed OneDrive and SharePoint are approved storage locations for company work.\",\"evidence_id\":\"E2\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

@@ -1,0 +1,16 @@
+# UC1 read-only context tools added to the EXISTING UC4 MCP server (docs/uc1/agent-and-tools.md).
+#
+# Separate file so the frozen UC4 MCP config schema (config/mcp/mcp.v1.yaml) is unchanged. The
+# server exposes these only when started with --dlp-tools; without it the server is exactly UC4's.
+#
+# DENY-BY-DEFAULT per tool: a caller not listed under a tool is refused before the tool runs.
+# Deliberately NOT exposed: simulate_block_action (a simulated action proposal is a harness output
+# that needs human approval), calculate_risk_score, check_dlp_exception (event-bound in the agent).
+mcp_tools_version: 1.0.0
+tools:
+  search_policy:
+    callers: [dlp-investigation-agent]
+  get_user_profile:
+    callers: [dlp-investigation-agent]
+  get_user_activity:
+    callers: [dlp-investigation-agent]

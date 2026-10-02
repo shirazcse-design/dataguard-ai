@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file classification is missing: level and policy term are null, and classification review is required.\",\"evidence_id\":\"P2\"},{\"text\":\"The destination is a personal cloud service (drive.google.com), which is not an approved enterprise destination class in this event context.\",\"evidence_id\":\"P3\"},{\"text\":\"User behavior is elevated with a new destination signal.\",\"evidence_id\":\"P1\"},{\"text\":\"Recent activity shows one external upload in the last 7 days and 5 sensitive file accesses.\",\"evidence_id\":\"ACTIVITY\"},{\"text\":\"Policy evaluation was not run and the effect is unknown.\",\"evidence_id\":\"P4\"}],\"missing_evidence\":[\"Confirmed file sensitivity/classification\",\"Applicable policy determination for this event\",\"Any approved exception record, if policy would otherwise permit handling to this destination\"]}",
+ "key": "490391c7514242d9df9675d770295232fbb3065bc4c5063af2dd21243e0fe572",
+ "recorded_at": "2026-10-02T05:50:01+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1207,
+ "tokens_out": 182,
+ "tool_calls": []
+}

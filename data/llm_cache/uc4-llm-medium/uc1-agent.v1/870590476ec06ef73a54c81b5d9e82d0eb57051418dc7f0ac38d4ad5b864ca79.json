@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file classification is missing and marked review required, so the sensitivity needed for a high-impact sharing decision is not established.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an external partner portal and is new to the user.\",\"evidence_id\":\"P2\"},{\"text\":\"The user behavior score is ELEVATED with a new_destination signal.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Third-party sharing controls depend on the data category shared, including register, assessment and approval requirements for Confidential or Restricted information.\",\"evidence_id\":\"E1\"},{\"text\":\"A human analyst review was requested because evidence is insufficient for a confident outcome.\",\"evidence_id\":\"E1\"}],\"missing_evidence\":[\"Confirmed data classification/sensitivity of the file\",\"Whether this destination and sharing arrangement are approved in the Third-Party Data Register\",\"Whether any required vendor security assessment and data-owner approval exist for this data category\"]}",
+ "key": "870590476ec06ef73a54c81b5d9e82d0eb57051418dc7f0ac38d4ad5b864ca79",
+ "recorded_at": "2026-10-02T05:50:10+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2354,
+ "tokens_out": 223,
+ "tool_calls": []
+}

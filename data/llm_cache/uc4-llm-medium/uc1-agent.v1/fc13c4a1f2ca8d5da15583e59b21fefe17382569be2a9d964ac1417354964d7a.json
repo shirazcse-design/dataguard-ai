@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account (Dropbox personal account).\",\"evidence_id\":\"P1\"},{\"text\":\"Policy evidence in the pack conflicts: one clause says uploading Internal or above to a personal cloud account is prohibited, while another says Internal may be stored in a personal cloud account under remote-work and MFA conditions.\",\"evidence_id\":\"P1\"},{\"text\":\"The policy status is CONFLICT_REVIEW with unknown effect, so a high-impact decision cannot be resolved from the pack alone.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Human analyst review was requested because the available policy evidence is conflicting.\",\"evidence_id\":\"E1\"}],\"missing_evidence\":[\"Whether POL-AUP §5.3 is an approved exception path applicable to this upload event and, if so, whether its conditions are satisfied.\"]}",
+ "key": "fc13c4a1f2ca8d5da15583e59b21fefe17382569be2a9d964ac1417354964d7a",
+ "recorded_at": "2026-10-02T05:50:17+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1271,
+ "tokens_out": 227,
+ "tool_calls": []
+}

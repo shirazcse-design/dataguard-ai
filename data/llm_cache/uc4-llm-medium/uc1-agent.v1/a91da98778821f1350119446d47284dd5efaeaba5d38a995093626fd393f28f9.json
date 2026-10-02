@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "a91da98778821f1350119446d47284dd5efaeaba5d38a995093626fd393f28f9",
+ "recorded_at": "2026-10-02T05:48:58+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1196,
+ "tokens_out": 18,
+ "tool_calls": [
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_vFzq2HpAkJdAuDitNOHy6jbq",
+   "name": "get_user_activity"
+  }
+ ]
+}

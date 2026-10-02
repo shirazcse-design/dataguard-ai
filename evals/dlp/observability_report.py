@@ -1,0 +1,145 @@
+"""UC1 observability evidence: every golden case through the PRODUCTION tracer and redactor, a
+privacy audit of the exported spans, and a telemetry summary (outcomes, stages, agent, faults).
+
+Reuses UC4's `observability.audit.audit_spans` (five-word windows, filenames, sensitive-value
+patterns) and adds UC1-specific checks: no user id, destination host, justification or policy
+section text may appear in any exported span.
+"""
+
+from __future__ import annotations
+
+import json
+from collections import Counter
+from types import SimpleNamespace
+from typing import Any
+
+from evals.policy.observability_report import _pct
+from observability.audit import audit_spans
+from observability.config import build_tracer, load_observability_config
+from observability.sinks import MemorySink
+from observability.types import Span
+
+
+def run_traced(mode: str, cases: list) -> tuple[list[Span], Any]:
+    from app.dlp.service import build_investigator
+
+    cfg, _ = load_observability_config()
+    sink = MemorySink()
+    tracer, _ = build_tracer(cfg, [sink], deterministic_ids=True)
+    inv = build_investigator(mode, tracer=tracer)
+    for c in cases:
+        inv.investigate(c.event)
+    return sink.spans, inv
+
+
+def privacy_audit(spans: list[Span], cases: list, inv: Any) -> dict[str, Any]:
+    from app.dlp.integration import DocumentStore
+
+    store = DocumentStore()
+    sources = []
+    for c in cases:
+        d = store.get(c.event.document_ref)
+        sources.append(SimpleNamespace(content=d.content, filename=d.filename, doc_id=c.id,
+                                       gold_evidence_spans=[]))  # fmt: skip
+    for ch in inv.copilot.corpus.chunks:
+        sources.append(SimpleNamespace(content=ch.body, filename="", doc_id=ch.chunk_id,
+                                       gold_evidence_spans=[]))  # fmt: skip
+    blob = json.dumps([s.model_dump() for s in spans], default=str)
+    res = audit_spans(blob, sources)
+    leaks = [list(x) for x in res.leaks]
+    identifiers = 0
+    for c in cases:
+        e = c.event
+        for value, kind in ((e.user_id, "user_id"), (e.destination.host, "destination_host")):
+            identifiers += 1
+            if value in blob:
+                leaks.append([kind, c.id])
+        if e.user_justification:
+            identifiers += 1
+            if e.user_justification[:40] in blob:
+                leaks.append(["justification", c.id])
+    return {
+        "clean": not leaks,
+        "spans_audited": len(spans),
+        "sources_checked": len(sources),
+        "windows_checked": res.windows_checked,
+        "pattern_checks": res.pattern_checks,
+        "identifier_checks": identifiers,
+        "leaks": leaks,
+    }
+
+
+def summarise(spans: list[Span]) -> dict[str, Any]:
+    roots = [s for s in spans if s.name == "uc1.investigation"]
+    planners = [s for s in spans if s.name == "uc1.agent.planner"]
+    tools = [s for s in spans if s.name == "uc1.tool"]
+    agents = [s for s in spans if s.name == "uc1.agent"]
+    names = sorted({s.name for s in spans})
+
+    def count(values) -> dict:
+        return dict(sorted(Counter(values).items()))
+
+    return {
+        "spans": len(spans),
+        "investigations": len(roots),
+        "span_names": dict(sorted(Counter(s.name for s in spans).items())),
+        "attribute_keys": sorted({k for s in spans for k in s.attributes}),
+        "outcomes": count(r.attributes.get("dg.dlp.outcome") for r in roots),
+        "review_reasons": dict(sorted(Counter(
+            c for r in roots for c in r.attributes.get("dg.dlp.reason_codes", [])
+            if c.startswith("review:")).items())),
+        "simulated_faults": dict(sorted(Counter(
+            f for r in roots for f in r.attributes.get("dg.dlp.simulated_faults", [])).items())),
+        "investigation_ms_p50": _pct([r.duration_ms for r in roots], 0.5),
+        "investigation_ms_p95": _pct([r.duration_ms for r in roots], 0.95),
+        "stage_ms_p50": {n: _pct([s.duration_ms for s in spans if s.name == n], 0.5)
+                         for n in names if n != "uc1.investigation"},
+        "planner_turns": len(planners),
+        "planner_turns_replayed": sum(bool(s.attributes.get("dg.llm.cached")) for s in planners),
+        "tokens_in": sum(s.attributes.get("dg.tokens_in", 0) for s in planners),
+        "tokens_out": sum(s.attributes.get("dg.tokens_out", 0) for s in planners),
+        "tool_calls": count(s.attributes.get("dg.agent.tool") for s in tools),
+        "tool_errors": dict(sorted(Counter(
+            s.attributes["dg.agent.tool_error"] for s in tools
+            if "dg.agent.tool_error" in s.attributes).items())),
+        "agent_stop_reasons": dict(sorted(Counter(
+            s.attributes.get("dg.agent.stopped_reason") for s in agents).items())),
+    }  # fmt: skip
+
+
+def render_markdown(report: dict[str, Any]) -> str:
+    a, t = report["privacy_audit"], report["telemetry"]
+    lines = [
+        "# UC1 observability evidence (generated)",
+        "",
+        "Generated by `dataguard-dlp obs report`. Do not edit by hand.",
+        "",
+        f"* Run mode: **{report['mode'].upper()}**, all {t['investigations']} golden cases "
+        "(including every SIMULATED fault) through the PRODUCTION tracer and redactor "
+        "(`config/observability/observability.v1.yaml`). Timings are local replay timings.",
+        "",
+        "## Privacy audit",
+        "",
+        f"* Result: **{'CLEAN' if a['clean'] else 'LEAKS FOUND'}**. {a['spans_audited']} spans "
+        f"audited against {a['sources_checked']} sources (case documents and every policy "
+        f"section): {a['windows_checked']} word windows, {a['pattern_checks']} sensitive-value "
+        f"patterns, {a['identifier_checks']} user-id / destination-host / justification checks.",
+    ]
+    if a["leaks"]:
+        lines.append(f"* Leaks: {a['leaks']}")
+    lines += [
+        f"* Exported attribute keys ({len(t['attribute_keys'])}): "
+        + ", ".join(f"`{k}`" for k in t["attribute_keys"]),
+        "",
+        "## Telemetry",
+        "",
+        "| Signal | Value |",
+        "|---|---|",
+    ]
+    for k in ("investigations", "outcomes", "review_reasons", "simulated_faults",
+              "investigation_ms_p50", "investigation_ms_p95", "planner_turns",
+              "planner_turns_replayed", "tokens_in", "tokens_out", "tool_calls", "tool_errors",
+              "agent_stop_reasons", "stage_ms_p50"):  # fmt: skip
+        lines.append(f"| {k} | {str(t[k]).replace('|', '/')} |")
+    lines += ["", "## Span names", "", ", ".join(f"`{k}` x{v}" for k, v in t["span_names"].items())]
+    return "\n".join(lines) + "\n"

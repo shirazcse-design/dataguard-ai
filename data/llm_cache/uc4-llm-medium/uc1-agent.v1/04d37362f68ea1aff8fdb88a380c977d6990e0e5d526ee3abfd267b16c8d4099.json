@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Public with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is the company's managed OneDrive, which is an approved storage location for company work.\",\"evidence_id\":\"P2\"},{\"text\":\"The applicable policy answer is allowed with no policy conflict indicated.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "04d37362f68ea1aff8fdb88a380c977d6990e0e5d526ee3abfd267b16c8d4099",
+ "recorded_at": "2026-10-02T05:50:46+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1150,
+ "tokens_out": 89,
+ "tool_calls": []
+}

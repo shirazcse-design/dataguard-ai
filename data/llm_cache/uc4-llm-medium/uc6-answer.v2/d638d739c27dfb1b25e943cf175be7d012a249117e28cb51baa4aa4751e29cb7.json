@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 83,
+ "input_hash": "d638d739c27dfb1b25e943cf175be7d012a249117e28cb51baa4aa4751e29cb7",
+ "latency_ms": 1719.4468330126256,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1003,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:16+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Internal information can be stored in the company's managed OneDrive or SharePoint because they are approved storage locations for company work.\",\"evidence_id\":\"E2\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

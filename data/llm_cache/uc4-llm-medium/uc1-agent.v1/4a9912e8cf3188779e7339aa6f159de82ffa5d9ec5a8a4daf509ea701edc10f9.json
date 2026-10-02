@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account on dropbox.com.\",\"evidence_id\":\"P1\"},{\"text\":\"Current DLP policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Current Acceptable Use Policy states that employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\"},{\"text\":\"An approved DLP exception exists for this user and destination host, allowing up to Internal data through 2026-10-30.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The policy evidence is explicitly marked as conflicting, so a high-impact decision requires analyst review.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "4a9912e8cf3188779e7339aa6f159de82ffa5d9ec5a8a4daf509ea701edc10f9",
+ "recorded_at": "2026-10-02T05:50:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1666,
+ "tokens_out": 200,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted / Highly Confidential and includes merger and acquisition strategy content.\",\"evidence_id\":\"P2\"},{\"text\":\"Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Restricted information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The destination is a personal cloud account on dropbox.com, which is not a company-managed approved system.\",\"evidence_id\":\"P3\"},{\"text\":\"Recent user activity shows elevated external upload and download behavior, with 6 recent external uploads and 1800 MB downloaded versus a 300 MB baseline in the last 7 days.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "b84a1c415a7a7e3e5afbd3e9840965b0856ab96ad3c6b25af3c211b0019fe1f4",
+ "recorded_at": "2026-10-02T05:49:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1360,
+ "tokens_out": 185,
+ "tool_calls": []
+}

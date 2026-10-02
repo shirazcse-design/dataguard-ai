@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Public with high confidence and no review required.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states Public information does not require special handling.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states the prohibition on personal cloud-storage accounts applies to company information classified Internal or above, so this restriction does not apply to Public data.\",\"evidence_id\":\"P2\"},{\"text\":\"The policy service has already answered this scenario as allowed for uploading Public information to a personal cloud-storage account.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "97cf927a6c00107be0a3d3d4d0a1883c8c02ac74f9c50fbcfd820acd4a377a22",
+ "recorded_at": "2026-10-02T05:48:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1132,
+ "tokens_out": 130,
+ "tool_calls": []
+}
