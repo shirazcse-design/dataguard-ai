@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The user attempted to send a file by email at 2026-09-15T10:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal email account at gmail.com and is not known to the user.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The policy service returned INSUFFICIENT_EVIDENCE with unknown effect for the question asked.\",\"evidence_id\":\"POLICY\"},{\"text\":\"No approved DLP exception applies; the exception check returned no match because the exception is expired or the file level exceeds the exception.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The user's behavior risk band is ELEVATED, with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"In the last 7 days, the user had 0 recent external uploads, 120 MB of downloads versus a 110 MB baseline, and 3 sensitive file accesses.\",\"evidence_id\":\"ACTIVITY\"},{\"text\":\"Policy prohibits sending Confidential or Restricted information to a personal email account, including forwarding it to yourself.\",\"evidence_id\":\"E1\"}],\"missing_evidence\":[\"No cited policy clause was found that expressly permits or prohibits sending Internal information to a personal email account.\"]}",
+ "key": "dff4a119825f34f8ad49cf98fd3cbbaf57349a5e7b3db8dca4e2f37a9046abe0",
+ "recorded_at": "2026-10-02T15:11:08+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1980,
+ "tokens_out": 280,
+ "tool_calls": []
+}

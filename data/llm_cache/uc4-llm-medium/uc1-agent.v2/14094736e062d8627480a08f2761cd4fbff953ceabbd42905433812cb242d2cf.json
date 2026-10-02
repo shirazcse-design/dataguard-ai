@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The event is an upload performed at 2026-09-15T10:12.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an approved corporate location hosted at onedrive.harbourline.example using a corporate account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Prechecks identified the destination as approved_corporate.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The file is classified as INTERNAL with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user is an active employee with standard privilege level in the Financial Analyst role.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is in the NORMAL band with no listed signals.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The policy service answered this case as allowed with no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Internal information can be stored in the company's managed OneDrive or SharePoint because they are approved storage locations for company work.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "14094736e062d8627480a08f2761cd4fbff953ceabbd42905433812cb242d2cf",
+ "recorded_at": "2026-10-02T15:10:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1311,
+ "tokens_out": 222,
+ "tool_calls": []
+}

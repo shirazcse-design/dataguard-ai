@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The user attempted to send a file by email at 2026-09-15T14:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal email account on gmail.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL and categorized as PHI with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user activity risk band is ELEVATED, with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy states that Restricted information cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that protected health information is Restricted information.\",\"evidence_id\":\"P2\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this event.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The policy service status is ANSWERED with effect prohibited and no conflict.\",\"evidence_id\":\"POLICY\"}],\"missing_evidence\":[]}",
+ "key": "1dea1f184e9185248204a088728e4155d17d36b190c467359f67407c110a706e",
+ "recorded_at": "2026-10-02T15:11:46+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1408,
+ "tokens_out": 217,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The user attempted to upload the file at 2026-09-15T11:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an approved corporate system at sharepoint.harbourline.example using a corporate account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Prechecks identified the destination as approved_corporate.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The file is classified as CONFIDENTIAL with high confidence and includes PII.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Policy states that Confidential information may be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that customer personal information and employee records are included in Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"The user's recent behavior band is NORMAL with no listed signals.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The user is an active employee with standard privilege and the role HR Business Partner.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"The policy service reported no policy conflict and an answered question for this scenario.\",\"evidence_id\":\"POLICY\"}],\"missing_evidence\":[]}",
+ "key": "b62686d988e03cb7c9b27265e048068a47a433ff8492d7a0765d8533985e359a",
+ "recorded_at": "2026-10-02T15:10:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1348,
+ "tokens_out": 244,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The attempted action was an upload.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud service at drive.google.com using a personal account type.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Prechecks identified the destination as personal_cloud.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The file classification is unresolved and marked review_required, with no level, policy term, or confidence recorded.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user's recent behavior band is ELEVATED and includes a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The user is an active employee in R&D with standard privilege.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Policy evaluation was not run and the current policy effect is unknown.\",\"evidence_id\":\"POLICY\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[{\"text\":\"Applicable policy determination is missing because policy status is NOT_RUN and effect is unknown.\",\"evidence_id\":\"POLICY\"},{\"text\":\"A data classification level is missing because the classification record has no level or confidence and requires review.\",\"evidence_id\":\"CLASSIFICATION\"}]}",
+ "key": "41a33b36f7cb0034cd6415234fbe9565f28cdc9280e201b57ea4895340b2865f",
+ "recorded_at": "2026-10-02T15:12:04+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1357,
+ "tokens_out": 268,
+ "tool_calls": []
+}

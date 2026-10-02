@@ -381,18 +381,28 @@ class DLPInvestigator:
     def _pack(
         self, event, pre, classification, level, identity, behavior, policy, justification
     ) -> dict:
-        """The agent's evidence pack: facts and ids only. Never the document text."""
+        """The agent's evidence pack: facts and ids only. Never the document text. Every section
+        carries an `evidence_id` so each finding can cite the section that states its fact
+        (uc1-agent.v2; v1 had ids only on policy claims, and the Foundry judges found findings
+        citing policy ids for destination / classification facts)."""
         term = self.mapping.levels[level].policy_term if level else None
+        user = (
+            {"evidence_id": "IDENTITY", **identity.model_dump(exclude={"manager"})}
+            if identity
+            else {"evidence_id": "IDENTITY", "unavailable": True}
+        )
         return {
-            "event": {"action": event.action, "timestamp": event.timestamp},
+            "event": {"evidence_id": "EVENT", "action": event.action, "timestamp": event.timestamp},
             "destination": {
+                "evidence_id": "DESTINATION",
                 "class": pre.destination_class,
                 "host": event.destination.host,
                 "account_type": event.destination.account_type,
                 "known_to_user": pre.destination_known_to_user,
             },
-            "prechecks": pre.findings,
+            "prechecks": {"evidence_id": "PRECHECKS", "findings": pre.findings},
             "classification": {
+                "evidence_id": "CLASSIFICATION",
                 "level": level,
                 "policy_term": term,
                 "categories": classification.categories if classification else [],
@@ -402,12 +412,14 @@ class DLPInvestigator:
                 if classification
                 else False,
             },
-            "user": (identity.model_dump(exclude={"manager"}) if identity else None),
+            "user": user,
             "behavior": {
+                "evidence_id": "BEHAVIOR",
                 "band": behavior.band if behavior else "UNKNOWN",
                 "signals": behavior.signals if behavior else [],
             },
             "policy": {
+                "evidence_id": "POLICY",
                 "question": policy.question if policy else None,
                 "status": policy.status if policy else "NOT_RUN",
                 "effect": policy.effect if policy else "unknown",

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The user attempted to upload a file at 2026-09-15T15:20.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an approved corporate location on onedrive.harbourline.example using a corporate account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Prechecks identified the destination as approved_corporate and detected strong SOURCE_CODE patterns at CONFIDENTIAL level.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The file is classified as CONFIDENTIAL with category SOURCE_CODE at high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user is an active contractor in Engineering with standard privilege, in the Software Engineer role.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is in the ELEVATED band with the signal unusual_download_volume.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy status is ANSWERED with effect allowed and no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that proprietary source code is Confidential information.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that the company's managed OneDrive and SharePoint are approved storage locations for company work.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that Confidential information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"P3\"}],\"missing_evidence\":[]}",
+ "key": "40b8c2147aaa0089321b36639bf860bba35d4728d4a480ee4a09126bbc4e10fb",
+ "recorded_at": "2026-10-02T15:10:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1408,
+ "tokens_out": 284,
+ "tool_calls": []
+}

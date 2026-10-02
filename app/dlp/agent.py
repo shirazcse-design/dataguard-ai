@@ -254,11 +254,12 @@ class DlpTools:
             self.ranks,
             self.event.timestamp,
         )
+        # A "no exception" result is evidence too (uc1-agent.v2), so it carries the id; only a
+        # matching record sets `verified_exception`, the one thing that can lower the score.
         if res["match"]:
             self.verified_exception = res["exception"]
-            self.evidence.add("EXCEPTION")
-            return True, {"_tool": "check_dlp_exception", "evidence_id": "EXCEPTION", **res}, None
-        return True, {"_tool": "check_dlp_exception", **res}, None
+        self.evidence.add("EXCEPTION")
+        return True, {"_tool": "check_dlp_exception", "evidence_id": "EXCEPTION", **res}, None
 
     def _request_human_review(self, args):
         reason = args.get("reason")
@@ -285,6 +286,9 @@ class DlpAgent:
 
     def run(self, pack: dict[str, Any], tools: DlpTools) -> AgentResult:
         tools.evidence |= {c["evidence_id"] for c in pack["policy"]["claims"]}
+        tools.evidence |= {
+            v["evidence_id"] for v in pack.values() if isinstance(v, dict) and "evidence_id" in v
+        }
         messages: list[dict[str, Any]] = [
             {"role": "system", "content": self.system},
             {"role": "user", "content": json.dumps(pack, sort_keys=True, ensure_ascii=False)},

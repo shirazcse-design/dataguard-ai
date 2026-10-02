@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential and includes Intellectual Property with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is a partner_external external account at mail.alderpoint-advisors.example.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The policy service states the applicable effect is requires_approval for sharing this data to this type of destination.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Confidential information can be shared with a third party only with approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"P1\"},{\"text\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"User behavior is elevated and includes a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception covers this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "0e4a8ab339d36ed53c1daea25db8bbd8f61e33bb1c62b318a7146774975b050c",
+ "recorded_at": "2026-10-02T16:19:21+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1384,
+ "tokens_out": 205,
+ "tool_calls": []
+}

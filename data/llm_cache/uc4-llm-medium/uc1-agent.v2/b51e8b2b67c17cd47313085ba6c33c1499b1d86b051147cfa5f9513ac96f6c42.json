@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Public with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is a personal cloud account on dropbox.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The policy service status is ANSWERED with effect allowed and no conflict reported.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Public information does not require special handling.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that the prohibition on personal cloud-storage accounts applies to company information classified Internal or above.\",\"evidence_id\":\"P2\"},{\"text\":\"The user's recent behavior band is NORMAL with no signals listed.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "b51e8b2b67c17cd47313085ba6c33c1499b1d86b051147cfa5f9513ac96f6c42",
+ "recorded_at": "2026-10-02T15:10:41+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1324,
+ "tokens_out": 156,
+ "tool_calls": []
+}

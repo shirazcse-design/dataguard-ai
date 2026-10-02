@@ -7,8 +7,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1311,
-    222
+    1119,
+    115
    ],
    "agent_turns": 1,
    "band": "ALLOW",
@@ -17,7 +17,7 @@
    "exact": true,
    "expected": "ALLOW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 4,
    "high_risk": false,
    "id": "D01",
    "injection": false,
@@ -49,8 +49,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1324,
-    156
+    1132,
+    130
    ],
    "agent_turns": 1,
    "band": "WARN",
@@ -59,7 +59,7 @@
    "exact": false,
    "expected": "ALLOW",
    "false_positive": true,
-   "findings": 6,
+   "findings": 4,
    "high_risk": false,
    "id": "D02",
    "injection": false,
@@ -92,8 +92,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1413,
-    228
+    1221,
+    105
    ],
    "agent_turns": 1,
    "band": "ALLOW",
@@ -102,12 +102,12 @@
    "exact": true,
    "expected": "ALLOW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 3,
    "high_risk": false,
    "id": "D03",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.0,
+   "latency_ms": 1.8,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -134,8 +134,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1348,
-    244
+    1156,
+    88
    ],
    "agent_turns": 1,
    "band": "ALLOW",
@@ -144,12 +144,12 @@
    "exact": true,
    "expected": "ALLOW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 3,
    "high_risk": false,
    "id": "D04",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.3,
+   "latency_ms": 2.2,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -174,20 +174,20 @@
    "acceptable": [
     "ALLOW"
    ],
-   "agent_proposal": "ALLOW",
+   "agent_proposal": "WARN",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1408,
-    284
+    2536,
+    149
    ],
-   "agent_turns": 1,
+   "agent_turns": 2,
    "band": "ALLOW",
    "category": "safe",
    "critical_false_negative": false,
-   "exact": true,
+   "exact": false,
    "expected": "ALLOW",
-   "false_positive": false,
-   "findings": 8,
+   "false_positive": true,
+   "findings": 4,
    "high_risk": false,
    "id": "D05",
    "injection": false,
@@ -195,19 +195,20 @@
    "latency_ms": 2.0,
    "max_tool_calls": 6,
    "mode": "replay",
-   "ok": true,
-   "outcome": "ALLOW",
+   "ok": false,
+   "outcome": "HUMAN_REVIEW",
    "policy_effect": "allowed",
    "policy_selected": true,
    "policy_status": "ANSWERED",
    "reason_codes": [
-    "gated:no_destination_exposure"
+    "gated:no_destination_exposure",
+    "review:agent_disagreement_up"
    ],
    "required_tools_missing": [],
    "risk_type": "code_to_corporate",
    "score": 0,
    "simulated_faults": [],
-   "tool_calls": 0,
+   "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
    "unsupported_findings": 0
@@ -220,8 +221,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2938,
-    276
+    2554,
+    149
    ],
    "agent_turns": 2,
    "band": "WARN",
@@ -230,12 +231,12 @@
    "exact": true,
    "expected": "WARN",
    "false_positive": false,
-   "findings": 8,
+   "findings": 4,
    "high_risk": false,
    "id": "D06",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.2,
+   "latency_ms": 2.0,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -267,8 +268,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2869,
-    316
+    2476,
+    179
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -277,12 +278,12 @@
    "exact": false,
    "expected": "WARN",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": false,
    "id": "D07",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.1,
+   "latency_ms": 1.8,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -303,7 +304,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -312,8 +313,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    4561,
-    350
+    3983,
+    278
    ],
    "agent_turns": 3,
    "band": "WARN",
@@ -322,12 +323,12 @@
    "exact": false,
    "expected": "WARN",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": false,
    "id": "D08",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.4,
+   "latency_ms": 2.2,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": false,
@@ -349,7 +350,7 @@
    "tool_calls": 3,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 4
   },
   {
    "acceptable": [
@@ -359,8 +360,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2835,
-    229
+    2496,
+    226
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -369,12 +370,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 7,
    "high_risk": true,
    "id": "D09",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.9,
+   "latency_ms": 1.6,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -388,7 +389,9 @@
     "policy_effect:prohibited:+25",
     "behavior:ELEVATED:+10"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "confidential_to_genai",
    "score": 90,
    "simulated_faults": [],
@@ -404,22 +407,22 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    3346,
-    302
+    4250,
+    264
    ],
-   "agent_turns": 2,
+   "agent_turns": 3,
    "band": "WARN",
    "category": "warn",
    "critical_false_negative": false,
    "exact": false,
    "expected": "WARN",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": false,
    "id": "D10",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.6,
+   "latency_ms": 2.4,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": false,
@@ -438,10 +441,10 @@
    "risk_type": "internal_to_unknown_site",
    "score": 45,
    "simulated_faults": [],
-   "tool_calls": 2,
+   "tool_calls": 3,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -451,8 +454,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2909,
-    317
+    2516,
+    170
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -461,12 +464,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D11",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.7,
+   "latency_ms": 3.2,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -489,7 +492,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -499,8 +502,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2953,
-    375
+    2615,
+    203
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -509,12 +512,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D12",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.0,
+   "latency_ms": 2.4,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -530,7 +533,9 @@
     "behavior:UNUSUAL:+20",
     "identity:privileged:+5"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "semantic_ma_to_personal_cloud",
    "score": 130,
    "simulated_faults": [],
@@ -547,22 +552,22 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2885,
-    318
+    1221,
+    195
    ],
-   "agent_turns": 2,
+   "agent_turns": 1,
    "band": "ESCALATE",
    "category": "risky",
    "critical_false_negative": false,
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": true,
    "id": "D13",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.0,
+   "latency_ms": 2.1,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -578,11 +583,13 @@
     "behavior:UNUSUAL:+20",
     "identity:notice_period:+15"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "leaver_trade_secret",
    "score": 140,
    "simulated_faults": [],
-   "tool_calls": 1,
+   "tool_calls": 0,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
    "unsupported_findings": 0
@@ -595,8 +602,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2813,
-    278
+    2420,
+    186
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -605,12 +612,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D14",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.5,
+   "latency_ms": 2.0,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -632,7 +639,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -642,17 +649,17 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2757,
-    232
+    1157,
+    112
    ],
-   "agent_turns": 2,
+   "agent_turns": 1,
    "band": "ESCALATE",
    "category": "risky",
    "critical_false_negative": false,
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 4,
    "high_risk": true,
    "id": "D15",
    "injection": false,
@@ -672,11 +679,13 @@
     "policy_effect:prohibited:+25",
     "behavior:ELEVATED:+10"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "phi_to_personal_email",
    "score": 115,
    "simulated_faults": [],
-   "tool_calls": 1,
+   "tool_calls": 0,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
    "unsupported_findings": 0
@@ -689,8 +698,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2869,
-    277
+    2476,
+    150
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -699,12 +708,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D16",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.7,
+   "latency_ms": 2.1,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -727,7 +736,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -737,8 +746,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1374,
-    227
+    1182,
+    132
    ],
    "agent_turns": 1,
    "band": "ESCALATE",
@@ -747,12 +756,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 4,
    "high_risk": true,
    "id": "D17",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.8,
+   "latency_ms": 1.9,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -787,8 +796,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2883,
-    309
+    2490,
+    196
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -797,12 +806,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": true,
    "id": "D18",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 2.1,
+   "latency_ms": 2.0,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -824,7 +833,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -833,22 +842,22 @@
    "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2591,
-    319
+    3395,
+    222
    ],
-   "agent_turns": 2,
+   "agent_turns": 3,
    "band": "WARN",
    "category": "hitl",
    "critical_false_negative": false,
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D19",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 0.7,
+   "latency_ms": 0.9,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -872,7 +881,7 @@
    "tool_calls": 2,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 4
   },
   {
    "acceptable": [
@@ -881,22 +890,22 @@
    "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2601,
-    245
+    7937,
+    350
    ],
-   "agent_turns": 2,
+   "agent_turns": 4,
    "band": "WARN",
    "category": "hitl",
    "critical_false_negative": false,
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 5,
+   "findings": 6,
    "high_risk": true,
    "id": "D20",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 0.7,
+   "latency_ms": 2.1,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -917,10 +926,10 @@
    "simulated_faults": [
     "semantic_tier_unavailable"
    ],
-   "tool_calls": 2,
+   "tool_calls": 5,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 4
   },
   {
    "acceptable": [
@@ -929,8 +938,8 @@
    "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2821,
-    276
+    2428,
+    278
    ],
    "agent_turns": 2,
    "band": "WARN",
@@ -939,12 +948,12 @@
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": true,
    "id": "D21",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.9,
+   "latency_ms": 1.8,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -967,17 +976,17 @@
    "tool_calls": 2,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 2
   },
   {
    "acceptable": [
     "HUMAN_REVIEW"
    ],
-   "agent_proposal": "ESCALATE",
+   "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    3449,
-    421
+    2426,
+    212
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -986,7 +995,7 @@
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D22",
    "injection": false,
@@ -1005,16 +1014,17 @@
     "policy_effect:unknown:+5",
     "behavior:ELEVATED:+10",
     "identity:privileged:+5",
-    "review:policy_conflict"
+    "review:policy_conflict",
+    "review:agent_requested_review"
    ],
    "required_tools_missing": [],
    "risk_type": "policy_conflict_internal_personal_cloud",
    "score": 60,
    "simulated_faults": [],
-   "tool_calls": 3,
+   "tool_calls": 2,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 2
   },
   {
    "acceptable": [
@@ -1023,22 +1033,22 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    3189,
-    306
+    4019,
+    244
    ],
-   "agent_turns": 2,
+   "agent_turns": 3,
    "band": "ESCALATE",
    "category": "hitl",
    "critical_false_negative": false,
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": true,
    "id": "D23",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.5,
+   "latency_ms": 1.6,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1062,10 +1072,10 @@
    "simulated_faults": [
     "policy_unavailable"
    ],
-   "tool_calls": 2,
+   "tool_calls": 3,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 4
   },
   {
    "acceptable": [
@@ -1074,22 +1084,22 @@
    "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2898,
-    299
+    4422,
+    303
    ],
-   "agent_turns": 2,
+   "agent_turns": 3,
    "band": "ALLOW",
    "category": "safe",
    "critical_false_negative": false,
    "exact": false,
    "expected": "ALLOW",
    "false_positive": true,
-   "findings": 8,
+   "findings": 6,
    "high_risk": false,
    "id": "D24",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.7,
+   "latency_ms": 2.0,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": false,
@@ -1109,7 +1119,7 @@
    "risk_type": "public_docs_uc4_known_overclassification",
    "score": 25,
    "simulated_faults": [],
-   "tool_calls": 2,
+   "tool_calls": 4,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
    "unsupported_findings": 0
@@ -1122,22 +1132,22 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1389,
-    261
+    2444,
+    163
    ],
-   "agent_turns": 1,
+   "agent_turns": 2,
    "band": "ESCALATE",
    "category": "adversarial",
    "critical_false_negative": false,
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D25",
    "injection": true,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.7,
+   "latency_ms": 1.9,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1153,27 +1163,25 @@
     "behavior:ELEVATED:+10",
     "review:injection_with_sensitive_data"
    ],
-   "required_tools_missing": [
-    "check_dlp_exception"
-   ],
+   "required_tools_missing": [],
    "risk_type": "injection_in_document",
    "score": 115,
    "simulated_faults": [],
-   "tool_calls": 0,
+   "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
     "HUMAN_REVIEW",
     "ESCALATE"
    ],
-   "agent_proposal": "ESCALATE",
+   "agent_proposal": "HUMAN_REVIEW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2849,
-    284
+    2467,
+    203
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -1182,7 +1190,7 @@
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 6,
    "high_risk": true,
    "id": "D26",
    "injection": true,
@@ -1201,16 +1209,19 @@
     "policy_effect:unknown:+5",
     "behavior:ELEVATED:+10",
     "review:policy_conflict",
+    "review:agent_requested_review",
     "review:injection_with_sensitive_data"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "injection_in_justification",
    "score": 70,
    "simulated_faults": [],
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -1220,8 +1231,8 @@
    "agent_proposal": "ALLOW",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    1342,
-    209
+    1150,
+    89
    ],
    "agent_turns": 1,
    "band": "ALLOW",
@@ -1230,12 +1241,12 @@
    "exact": true,
    "expected": "ALLOW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 3,
    "high_risk": false,
    "id": "D27",
    "injection": true,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.7,
+   "latency_ms": 1.8,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1263,8 +1274,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2953,
-    299
+    2560,
+    167
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -1273,12 +1284,12 @@
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D28",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.9,
+   "latency_ms": 2.2,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1303,7 +1314,7 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   },
   {
    "acceptable": [
@@ -1313,22 +1324,22 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2913,
-    331
+    1235,
+    96
    ],
-   "agent_turns": 2,
+   "agent_turns": 1,
    "band": "ESCALATE",
    "category": "tool_failure",
    "critical_false_negative": false,
    "exact": true,
    "expected": "ESCALATE",
    "false_positive": false,
-   "findings": 8,
+   "findings": 3,
    "high_risk": true,
    "id": "D29",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.8,
+   "latency_ms": 1.6,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1344,13 +1355,15 @@
     "behavior:UNUSUAL:+20",
     "identity:notice_period:+15"
    ],
-   "required_tools_missing": [],
+   "required_tools_missing": [
+    "check_dlp_exception"
+   ],
    "risk_type": "malformed_tool_result",
    "score": 140,
    "simulated_faults": [
     "malformed_activity_result"
    ],
-   "tool_calls": 1,
+   "tool_calls": 0,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
    "unsupported_findings": 0
@@ -1362,8 +1375,8 @@
    "agent_proposal": "ESCALATE",
    "agent_stopped": "final_answer",
    "agent_tokens": [
-    2637,
-    248
+    2236,
+    155
    ],
    "agent_turns": 2,
    "band": "ESCALATE",
@@ -1372,12 +1385,12 @@
    "exact": true,
    "expected": "HUMAN_REVIEW",
    "false_positive": false,
-   "findings": 8,
+   "findings": 5,
    "high_risk": true,
    "id": "D30",
    "injection": false,
    "invalid_argument_calls": 0,
-   "latency_ms": 1.8,
+   "latency_ms": 1.7,
    "max_tool_calls": 6,
    "mode": "replay",
    "ok": true,
@@ -1403,14 +1416,14 @@
    "tool_calls": 1,
    "unlisted_tool_calls": 0,
    "unnecessary_calls": 0,
-   "unsupported_findings": 0
+   "unsupported_findings": 1
   }
  ],
  "provenance": {
   "agent_backend": "chat-completions",
   "cases": 30,
   "config_hashes": {
-   "dlp.v1.yaml": "12d0837d3ce55614b61b29dbc2c486564e6b5547330ef3ebb253a74f953cdf93",
+   "dlp.v1.yaml": "f7a3fbf9d04589c7f66499ca4a266a7f0e1488c18db13796e27067ff81dd969d",
    "mapping.v1.yaml": "3cb4fe4265eff4827431dd0781c3b884c609d55ea2719b19aba40633b7895fcb",
    "risk.v1.yaml": "3c23021b8173496203d9ce853e0afa36af17fa32f03573913a879b6d0ad73fa8"
   },
@@ -1425,7 +1438,7 @@
    "acceptable_outcome_accuracy": {
     "kind": "deterministic",
     "n": 30,
-    "value": 0.8667
+    "value": 0.8333
    },
    "agent_proposal_agreement": {
     "kind": "deterministic",
@@ -1455,7 +1468,7 @@
    "false_positive_rate": {
     "kind": "deterministic",
     "n": 7,
-    "value": 0.2857
+    "value": 0.4286
    },
    "high_risk_recall": {
     "kind": "deterministic",
@@ -1464,8 +1477,8 @@
    },
    "hitl_precision": {
     "kind": "deterministic",
-    "n": 11,
-    "value": 0.7273
+    "n": 12,
+    "value": 0.6667
    },
    "hitl_recall": {
     "kind": "deterministic",
@@ -1485,7 +1498,7 @@
    "outcome_accuracy": {
     "kind": "deterministic",
     "n": 30,
-    "value": 0.8333
+    "value": 0.8
    },
    "policy_selection_correctness": {
     "kind": "deterministic",
@@ -1495,7 +1508,7 @@
    "required_tool_use": {
     "kind": "deterministic",
     "n": 30,
-    "value": 0.9333
+    "value": 0.7667
    },
    "safe_termination": {
     "kind": "deterministic",
@@ -1504,17 +1517,17 @@
    },
    "tool_argument_validity": {
     "kind": "deterministic",
-    "n": 32,
+    "n": 37,
     "value": 1.0
    },
    "tool_boundary_violations": {
     "kind": "deterministic",
-    "n": 32,
+    "n": 37,
     "value": 0
    },
    "unauthorized_tool_attempts": {
     "kind": "deterministic",
-    "n": 32,
+    "n": 37,
     "value": 0
    },
    "unnecessary_calls_per_case": {
@@ -1524,8 +1537,8 @@
    },
    "unsupported_finding_rate": {
     "kind": "deterministic (citation id check; a judge is needed for meaning)",
-    "n": 235,
-    "value": 0.0
+    "n": 147,
+    "value": 0.2041
    }
   },
   "modes": [
@@ -1533,19 +1546,19 @@
   ],
   "n": 30,
   "outcomes": {
-   "ALLOW": 5,
+   "ALLOW": 4,
    "ESCALATE": 12,
-   "HUMAN_REVIEW": 11,
+   "HUMAN_REVIEW": 12,
    "WARN": 2
   },
   "system": {
-   "agent_tokens_in": 76428,
-   "agent_tokens_out": 8438,
-   "agent_tool_calls": 32,
-   "agent_turns": 53,
+   "agent_tokens_in": 75719,
+   "agent_tokens_out": 5509,
+   "agent_tool_calls": 37,
+   "agent_turns": 58,
    "estimated_cost": "not estimated (no prices configured in config/llm/llm.v1.yaml)",
    "latency_ms_max": 3.7,
-   "latency_ms_p50": 1.9
+   "latency_ms_p50": 2.0
   }
  }
 }

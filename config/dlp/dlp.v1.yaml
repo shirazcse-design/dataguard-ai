@@ -41,8 +41,8 @@ policy_question: "Can {level_term} information, such as {category_phrase}, be {a
 # The investigation agent (bounded). Enforced in code.
 agent:
   name: dataguard-dlp-investigator
-  prompt_version: uc1-agent.v1
-  prompt_file: prompts/uc1/agent.v1.md
+  prompt_version: uc1-agent.v2
+  prompt_file: prompts/uc1/agent.v2.md
   allowed_tools: [search_policy, get_policy_section, get_user_activity, check_dlp_exception, request_human_review]
   max_tool_calls: 6
   max_turns: 8

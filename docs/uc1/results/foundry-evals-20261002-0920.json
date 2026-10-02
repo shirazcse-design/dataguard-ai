@@ -1,0 +1,530 @@
+{
+ "agent_quality": {
+  "eval_id": "eval_0568b846a44144f8bfa9059124434f7e",
+  "per_criterion": {
+   "groundedness": {
+    "failed": 0,
+    "passed": 30
+   },
+   "intent_resolution": {
+    "failed": 2,
+    "passed": 28
+   },
+   "task_adherence": {
+    "failed": 2,
+    "passed": 28
+   },
+   "tool_call_accuracy": {
+    "failed": 4,
+    "passed": 18
+   }
+  },
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_0568b846a44144f8bfa9059124434f7e/run/evalrun_224edb22462d4449b6858f9873bf3377",
+  "rows": [
+   {
+    "category": "safe",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D01",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ALLOW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "safe",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D02",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "WARN",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "safe",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D03",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ALLOW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "safe",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D04",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ALLOW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "safe",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D05",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "ALLOW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "warn",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D06",
+    "intent_resolution": 2.0,
+    "intent_resolution_passed": false,
+    "outcome": "WARN",
+    "task_adherence": 0.0,
+    "task_adherence_passed": false,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "warn",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D07",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "warn",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "D08",
+    "intent_resolution": 2.0,
+    "intent_resolution_passed": false,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 2.0,
+    "tool_call_accuracy_passed": false
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D09",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "warn",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "D10",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "flagship",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D11",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D12",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 0.0,
+    "task_adherence_passed": false,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D13",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D14",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D15",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 2.0,
+    "tool_call_accuracy_passed": false
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D16",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D17",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "risky",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D18",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "hitl",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D19",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "hitl",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D20",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 2.0,
+    "tool_call_accuracy_passed": false
+   },
+   {
+    "category": "hitl",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D21",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "hitl",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D22",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "hitl",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D23",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "safe",
+    "groundedness": 4.0,
+    "groundedness_passed": true,
+    "id": "D24",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D25",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D26",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 2.0,
+    "tool_call_accuracy_passed": false
+   },
+   {
+    "category": "adversarial",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D27",
+    "intent_resolution": 5.0,
+    "intent_resolution_passed": true,
+    "outcome": "ALLOW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": null,
+    "tool_call_accuracy_passed": null
+   },
+   {
+    "category": "tool_failure",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D28",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "tool_failure",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D29",
+    "intent_resolution": 4.0,
+    "intent_resolution_passed": true,
+    "outcome": "ESCALATE",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   },
+   {
+    "category": "tool_failure",
+    "groundedness": 5.0,
+    "groundedness_passed": true,
+    "id": "D30",
+    "intent_resolution": 3.0,
+    "intent_resolution_passed": true,
+    "outcome": "HUMAN_REVIEW",
+    "task_adherence": 1.0,
+    "task_adherence_passed": true,
+    "tool_call_accuracy": 5.0,
+    "tool_call_accuracy_passed": true
+   }
+  ],
+  "run_id": "evalrun_224edb22462d4449b6858f9873bf3377",
+  "status": "completed",
+  "summary": {
+   "groundedness": {
+    "errors": 0,
+    "failed": 0,
+    "low_rows": [],
+    "mean": 4.9,
+    "n_scored": 30,
+    "passed": 30
+   },
+   "intent_resolution": {
+    "errors": 0,
+    "failed": 2,
+    "low_rows": [
+     "D06",
+     "D08"
+    ],
+    "mean": 4.133,
+    "n_scored": 30,
+    "passed": 28
+   },
+   "task_adherence": {
+    "errors": 0,
+    "failed": 2,
+    "low_rows": [
+     "D06",
+     "D12"
+    ],
+    "mean": 0.933,
+    "n_scored": 30,
+    "passed": 28
+   },
+   "tool_call_accuracy": {
+    "errors": 0,
+    "failed": 4,
+    "low_rows": [
+     "D08",
+     "D15",
+     "D20",
+     "D26"
+    ],
+    "mean": 4.455,
+    "n_scored": 22,
+    "passed": 18
+   }
+  }
+ },
+ "created": "20261002-0920",
+ "golden_sha256": "6288359db0cc2d97b40c24b9dfaab6968bfaab8589261fb89064614d7a9e768f",
+ "judge": "uc4-llm-medium",
+ "outcomes": {
+  "eval_id": "eval_5580cae490744fd5ace7bdf6a54a82b7",
+  "local": {
+   "findings_cite_known_evidence": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   },
+   "no_critical_false_negative": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   },
+   "no_unlisted_tool": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   },
+   "outcome_acceptable": {
+    "passed": 26,
+    "rate": 0.8666666666666667,
+    "total": 30
+   },
+   "required_tools_used": {
+    "passed": 28,
+    "rate": 0.9333333333333333,
+    "total": 30
+   },
+   "safe_termination": {
+    "passed": 30,
+    "rate": 1.0,
+    "total": 30
+   }
+  },
+  "per_criterion": {
+   "findings_cite_known_evidence": {
+    "failed": 0,
+    "passed": 30
+   },
+   "no_critical_false_negative": {
+    "failed": 0,
+    "passed": 30
+   },
+   "no_unlisted_tool": {
+    "failed": 0,
+    "passed": 30
+   },
+   "outcome_acceptable": {
+    "failed": 4,
+    "passed": 26
+   },
+   "required_tools_used": {
+    "failed": 2,
+    "passed": 28
+   },
+   "safe_termination": {
+    "failed": 0,
+    "passed": 30
+   }
+  },
+  "report_url": "https://ai.azure.com/nextgen/r/7MKzqMmxSMG-oUYw3oqf_A,rg-shirazcse-6271,,dataguard-resource,dataguard/build/evaluations/eval_5580cae490744fd5ace7bdf6a54a82b7/run/evalrun_7f85b2b4de414e2ca2b37abd2bfc7155",
+  "run_id": "evalrun_7f85b2b4de414e2ca2b37abd2bfc7155",
+  "status": "completed"
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud service hosted at dropbox.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified HIGHLY_CONFIDENTIAL, maps to the policy term Restricted, and includes the category TRADE_SECRET with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Deterministic policy evaluation found the requested action prohibited with no policy conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that Restricted information may only be stored in company-managed systems approved by Information Security, not in personal cloud-storage accounts.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"P3\"},{\"text\":\"The user's recent behavior band is ELEVATED with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The user is an active employee in an R&D Research Scientist role with standard privilege.\",\"evidence_id\":\"IDENTITY\"}],\"missing_evidence\":[]}",
+ "key": "a5975a35e7f4b0d29113f7062f50850733bd1d1d1140d8ba656235cdbe20dde5",
+ "recorded_at": "2026-10-02T15:12:33+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1389,
+ "tokens_out": 261,
+ "tool_calls": []
+}

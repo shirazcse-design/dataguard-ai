@@ -204,8 +204,42 @@ def test_event_schema_refuses_malformed_input():
 def test_foundry_agent_setup_doc_matches_the_code():
     """The manual setup guide must paste EXACTLY what the application expects."""
     doc = Path("docs/uc1/foundry-agent-setup.md").read_text(encoding="utf-8")
-    assert Path("prompts/uc1/agent.v1.md").read_text(encoding="utf-8").strip() in doc
+    from app.dlp.config import load_dlp_configs
+
+    prompt = load_dlp_configs()[0].agent.prompt_file
+    assert Path(prompt).read_text(encoding="utf-8").strip() in doc
     for t in tool_schemas():
         assert f"#### `{t['function']['name']}`" in doc
         assert json.dumps(t["function"]["parameters"], indent=2) in doc
         assert t["function"]["description"] in doc
+
+
+def test_every_pack_section_has_its_own_evidence_id(inv):
+    seen = {}
+
+    class Grab:
+        name = "grab"
+
+        def next_turn(self, messages):
+            seen["pack"] = json.loads(messages[1]["content"])
+            return final("ESCALATE", [{"text": "Personal cloud destination.",
+                                       "evidence_id": "DESTINATION"}])  # fmt: skip
+
+    with_planner(inv, Grab())
+    out = inv.investigate(CASES["D11"].event)
+    pack = seen["pack"]
+    ids = {k: v["evidence_id"] for k, v in pack.items() if isinstance(v, dict)}
+    assert ids == {"event": "EVENT", "destination": "DESTINATION", "prechecks": "PRECHECKS",
+                   "classification": "CLASSIFICATION", "user": "IDENTITY",
+                   "behavior": "BEHAVIOR", "policy": "POLICY"}  # fmt: skip
+    assert out.agent.findings[0]["verified"] is True  # a section id is a known evidence id
+
+
+def test_a_no_exception_result_is_citable_but_never_lowers_risk(inv):
+    with_planner(inv, MockAgentClient([call("check_dlp_exception"), final("ALLOW", [
+        {"text": "No approved exception.", "evidence_id": "EXCEPTION"}])]))  # fmt: skip
+    out = inv.investigate(CASES["D11"].event)
+    assert out.agent.findings[0]["verified"] is True
+    assert out.agent.verified_exception is None
+    assert not any(r.startswith("verified_exception") for r in out.decision.reason_codes)
+    assert out.decision.outcome in ("ESCALATE", "HUMAN_REVIEW")

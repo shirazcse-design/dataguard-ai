@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The attempted action was to send a file by email at 2026-09-15T11:45.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal email account on gmail.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as Confidential with high confidence and includes PII.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Policy states that Confidential information cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that customer personal information and employee records are included in Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"The policy service marked this scenario as prohibited.\",\"evidence_id\":\"POLICY\"},{\"text\":\"User behavior is in the ELEVATED band with signals of unusual download volume and a new destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"User identity details are unavailable in the evidence pack.\",\"evidence_id\":\"IDENTITY\"}],\"missing_evidence\":[]}",
+ "key": "b1c45f279a667f4f3779917d03df9e09c1f56a7f3178dc08eb180344aa4c5878",
+ "recorded_at": "2026-10-02T15:12:56+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1348,
+ "tokens_out": 233,
+ "tool_calls": []
+}

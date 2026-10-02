@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage account hosted at onedrive.live.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified Confidential with category PII and high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"User behavior is in the ELEVATED band with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy service status was unavailable, so no deterministic policy claim was provided in the evidence pack.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\"},{\"text\":\"Confidential information may only be stored in company-managed systems approved by Information Security and must never be stored in personal accounts, including personal cloud-storage accounts.\",\"evidence_id\":\"E3\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "48f2f70797e6964901b19faf4dd67d5e8614d5cfc4cb18cdfed223b932c62133",
+ "recorded_at": "2026-10-02T15:12:25+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1925,
+ "tokens_out": 248,
+ "tool_calls": []
+}

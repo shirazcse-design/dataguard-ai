@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "80560aa97a00fe42954d547b139e5c0969811bb77a26badb40d13e38815f9e7b",
+ "recorded_at": "2026-10-02T16:19:32+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1314,
+ "tokens_out": 16,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_MtXY3NYR1kdjYhuwKJrM6VFR",
+   "name": "check_dlp_exception"
+  }
+ ]
+}

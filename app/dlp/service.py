@@ -40,7 +40,7 @@ from .pipeline import DLPInvestigator
 REPO = Path(__file__).resolve().parents[2]
 MODES = ("replay", "offline", "live", "record")
 AGENT_NAME_ENV = "DATAGUARD_DLP_AGENT_NAME"
-SERVICE_PROMPT_VERSION = "uc1-agent-service.v1"
+SERVICE_PROMPT_VERSION = "uc1-agent-service.v2"
 
 
 def _planner(mode: str, backend: str, dlp, tenant_id: str | None):
@@ -103,7 +103,7 @@ AGENT_DESCRIPTION = (
 
 def register_dlp_agent(tenant_id: str | None, rai_policy_id: str | None = None) -> dict:
     """Create a NEW VERSION of `dataguard-dlp-investigator` in Foundry Agent Service: the
-    instructions (prompts/uc1/agent.v1.md), the `mid` deployment and the five function-tool
+    instructions (`dlp.agent.prompt_file`), the `mid` deployment and the five function-tool
     DEFINITIONS (the tools still execute here). Additive: it never edits or deletes a version.
     Done at the product owner's explicit request (2026-10-01); guardrails, observability and
     evaluations remain manual. `rai_policy_id` (the full ARM id of an existing RAI policy) attaches

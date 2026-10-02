@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The user attempted to paste data at 2026-09-15T16:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal account on a generative AI service hosted at chat.public-ai.example.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The data is classified as HIGHLY_CONFIDENTIAL and categorized as CREDENTIALS_SECRETS with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user is a privileged active employee with role VP Engineering.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is rated ELEVATED with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy status is ANSWERED with effect prohibited and no conflict for this question.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Restricted information, including authentication credentials and secrets, must not be pasted into public generative AI tools.\",\"evidence_id\":\"P1\"},{\"text\":\"Authentication credentials and secrets are classified as Restricted information.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "978a4ec3ce7c150d90293874230bee141b7b6fce03c799653c88208238af5d36",
+ "recorded_at": "2026-10-02T15:11:54+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1374,
+ "tokens_out": 227,
+ "tool_calls": []
+}

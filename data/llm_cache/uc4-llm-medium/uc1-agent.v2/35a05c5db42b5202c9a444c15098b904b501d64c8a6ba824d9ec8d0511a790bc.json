@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The action under review is a share event at 2026-09-15T13:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is classified as partner_external, hosted at mail.alderpoint-advisors.example, using an external account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as Confidential with category INTELLECTUAL_PROPERTY and high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The applicable policy status is ANSWERED with effect requires_approval.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Confidential information can be shared with a third party only with approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that a third party must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that the policy applies to sharing Harbourline information with third parties such as vendors and partners.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"User behavior is in the ELEVATED band with signal new_destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The user is an active employee in R&D with standard privilege level and role Research Scientist.\",\"evidence_id\":\"IDENTITY\"}],\"missing_evidence\":[]}",
+ "key": "35a05c5db42b5202c9a444c15098b904b501d64c8a6ba824d9ec8d0511a790bc",
+ "recorded_at": "2026-10-02T15:11:01+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1464,
+ "tokens_out": 301,
+ "tool_calls": []
+}

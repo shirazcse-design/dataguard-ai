@@ -1,0 +1,23 @@
+{
+ "final_text": null,
+ "key": "a455fd15ba0cfbf67d664fbe410793699d5335f3391904dac0cf758d7c44efd5",
+ "recorded_at": "2026-10-02T15:12:10+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1349,
+ "tokens_out": 51,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_OKt9gHjT6SLD2Wz8nFNsNyXN",
+   "name": "check_dlp_exception"
+  },
+  {
+   "arguments": {
+    "reason": "conflicting_evidence"
+   },
+   "id": "call_JOrKsc6Ng8j4V0V18pYiDyDr",
+   "name": "request_human_review"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is an approved corporate location hosted at onedrive.harbourline.example.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Policy states that Internal information can be stored in the company's managed OneDrive or SharePoint because they are approved storage locations for company work.\",\"evidence_id\":\"P1\"},{\"text\":\"The applicable policy status is answered with allowed effect and no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Recent behavior is in the NORMAL band with no signals listed.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "1251776a6958fd374489ccfcd42e74779a696917f736ef0ca7828a764a4f53fd",
+ "recorded_at": "2026-10-02T16:19:16+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1230,
+ "tokens_out": 162,
+ "tool_calls": []
+}
