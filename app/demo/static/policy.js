@@ -459,32 +459,42 @@ async function uc6ObservabilityPanels(page) {
           (c, k) => { const val = o.by_level[c][k]; return typeof val === "number" && !Number.isInteger(val) ? fmt(val, 3) : String(val); }))));
 }
 
-// A "Jump to" bar at the top of the shared pages. Buttons, not "#" links: the dashboard routes pages
-// by the URL hash, so an anchor link would switch pages instead of scrolling.
-function jumpBar(uc4Target, uc6Target) {
-  const go = (label, target) => {
+// A "Jump to" bar at the top of the shared pages, one button per use case on the page. Buttons,
+// not "#" links: the dashboard routes pages by the URL hash, so an anchor link would switch pages
+// instead of scrolling. Each use case's panels start with a header carrying `data-jump`.
+const JUMP_TARGETS = [
+  ["Sensitive Data Discovery & Classification", "[data-jump-top]"],
+  ["Data Security Policy Copilot", ".uc6-head"],
+];
+function jumpBar(page) {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const items = JUMP_TARGETS.flatMap(([label, sel], i) => {
+    const target = page.querySelector(sel);
     const b = h("button", { class: "jump-link", type: "button" }, label);
     if (!target) { b.disabled = true; b.title = "This section is not available"; }
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     b.addEventListener("click", () => target && target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }));
-    return b;
-  };
+    return [i ? h("span", { class: "jump-sep", "aria-hidden": "true" }, "·") : null, b];
+  });
   return h("nav", { class: "jump-bar", "aria-label": "Jump to a use case on this page" },
-    h("span", { class: "jump-label" }, "Jump to:"),
-    go("Sensitive Data Discovery & Classification", uc4Target),
-    h("span", { class: "jump-sep", "aria-hidden": "true" }, "·"),
-    go("Data Security Policy Copilot", uc6Target));
+    h("span", { class: "jump-label" }, "Jump to:"), items);
 }
 
-function extendPage(key, extra) {
+// Appends a use case's panels to a shared page. Safe to stack (UC6 here, UC1 in dlp.js): the first
+// wrapper marks the shared page's own first element as the UC4 target, and the bar is rebuilt once
+// all panels are on the page.
+function extendPage(key, extra, label = "UC6") {
   const def = PAGES[key];
   if (!def || !def.render) return;
   const orig = def.render;
   def.render = async (page) => {
     await orig(page);
-    const uc4Top = page.firstElementChild;
-    try { await extra(page); } catch (err) { page.append(h("div", { class: "card error" }, `UC6 panel unavailable: ${err.message}`)); }
-    page.prepend(jumpBar(uc4Top, page.querySelector(".uc6-head")));
+    if (!page.querySelector("[data-jump-top]")) {
+      const top = [...page.children].find((c) => !c.classList.contains("jump-bar"));
+      if (top) top.dataset.jumpTop = "1";
+    }
+    try { await extra(page); } catch (err) { page.append(h("div", { class: "card error" }, `${label} panel unavailable: ${err.message}`)); }
+    page.querySelectorAll(":scope > .jump-bar").forEach((b) => b.remove());
+    page.prepend(jumpBar(page));
   };
 }
 

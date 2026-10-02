@@ -339,3 +339,7 @@ body.interview .dev-only { display: none !important; }
 .jump-link:disabled { color: var(--ink-3); cursor: default; background: none; }
 /* Keep a jumped-to heading clear of the sticky top bar. */
 #page .page-head, #page .uc6-head { scroll-margin-top: 72px; }
+
+/* UC1 DLP Investigation */
+.btn-small { font-size: 12.5px; padding: 5px 10px; }
+.chip + .chip { margin-left: 4px; }
