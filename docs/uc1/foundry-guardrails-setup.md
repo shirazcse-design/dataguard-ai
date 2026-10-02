@@ -9,7 +9,8 @@ only after checking that no policy with that name existed). Its settings are cop
 * indirect attack: block, on user input and on tool output (`PostToolCall`);
 * protected material text and code: block.
 
-It is attached **only** to agent `dataguard-dlp-investigator` **version 2** through
+It is attached **only** to agent `dataguard-dlp-investigator`: **version 2** and, since the
+evidence-id fix, **version 3** (prompt `uc1-agent.v2`; the probes below ran on version 2), through
 `rai_config`, the same mechanism as UC6 (`dataguard-dlp agent register --rai-policy-id <id>`).
 `CustomContentFilter412`, `uc6-policy-copilot-guardrail` and every deployment are unchanged. No
 task-adherence control was added (the UC6 template has none).

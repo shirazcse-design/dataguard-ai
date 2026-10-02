@@ -37,8 +37,8 @@ FOUNDRY_RECORDED = ("D01", "D07", "D11", "D21", "D26")
 EXAMPLES: list[dict[str, Any]] = [
     {"key": "flagship", "id": "D11", "title": "Flagship: acquisition targets to personal Dropbox",
      "what": "Corporate Development director, 23:40, unlabelled M&A spreadsheet, personal cloud"},
-    {"key": "safe", "id": "D01", "title": "Safe: public file to corporate OneDrive",
-     "what": "Approved destination, public data"},
+    {"key": "safe", "id": "D01", "title": "Safe: internal file to corporate OneDrive",
+     "what": "Approved corporate destination, Internal data: no exposure"},
     {"key": "warn", "id": "D06", "title": "Partner portal with a valid exception",
      "what": "Confidential file to a partner, covered by an approved DLP exception"},
     {"key": "low_conf", "id": "D19", "title": "Low confidence: classifier unavailable",

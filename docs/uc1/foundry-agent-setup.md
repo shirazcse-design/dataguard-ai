@@ -1,6 +1,14 @@
 # Manual setup: Foundry Agent Service agent `dataguard-dlp-investigator` (UC1)
 
-**Status (2026-10-01): created, version 1.** The product owner explicitly asked Claude Code to
+**Status (2026-10-02): current version 3.** Version history (each added with
+`dataguard-dlp agent register`, never edited or deleted):
+* v1 (2026-10-01): prompt `uc1-agent.v1`, five tools;
+* v2 (2026-10-01): the same, plus guardrail `uc1-dlp-investigator-guardrail` (`--rai-policy-id`);
+* v3 (2026-10-02): prompt `uc1-agent.v2` (evidence-id fix), same tools and guardrail.
+
+The original note for version 1 follows.
+
+**Version 1 (2026-10-01).** The product owner explicitly asked Claude Code to
 create the agent. Version **1** was created with
 `dataguard-dlp agent register --tenant-id <tenant>` (Entra browser sign-in), on `uc4-llm-medium`,
 with exactly the instructions and five tool definitions below. The command only ever ADDS a
