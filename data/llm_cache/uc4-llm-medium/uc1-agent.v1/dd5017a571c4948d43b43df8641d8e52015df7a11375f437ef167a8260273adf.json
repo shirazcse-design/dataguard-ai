@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "dd5017a571c4948d43b43df8641d8e52015df7a11375f437ef167a8260273adf",
+ "recorded_at": "2026-10-02T05:50:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1122,
+ "tokens_out": 58,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal cloud storage Confidential PII personal information upload personal account"
+   },
+   "id": "call_I6g35QGaNheLucpH9NWWUata",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_5mHVwIqh7Yp127jUCr34c1Dj",
+   "name": "get_user_activity"
+  }
+ ]
+}

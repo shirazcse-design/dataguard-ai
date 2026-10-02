@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted based on payment card data detection with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"Restricted information, including payment card data, cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"Restricted information must never be stored in personal email accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The destination is a personal email account at yahoo.com.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "15e655472c2fc71f68fb43ae6d2d9d2cddfd22faa11d58c09ba2c851a2ca2a5f",
+ "recorded_at": "2026-10-02T05:49:43+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1263,
+ "tokens_out": 135,
+ "tool_calls": []
+}

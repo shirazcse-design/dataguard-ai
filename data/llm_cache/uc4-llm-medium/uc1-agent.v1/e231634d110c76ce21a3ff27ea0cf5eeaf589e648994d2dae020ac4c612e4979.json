@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified Confidential and includes PII with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account (personal OneDrive) and is not known to the user.\",\"evidence_id\":\"P2\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Policy prohibits uploading company information classified Internal or above to a personal cloud-storage account.\",\"evidence_id\":\"E1\"},{\"text\":\"Policy states Confidential information, including customer or employee personal information, must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\"},{\"text\":\"Recent behavior is elevated and includes a new destination signal.\",\"evidence_id\":\"P3\"}],\"missing_evidence\":[]}",
+ "key": "e231634d110c76ce21a3ff27ea0cf5eeaf589e648994d2dae020ac4c612e4979",
+ "recorded_at": "2026-10-02T05:50:26+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1825,
+ "tokens_out": 171,
+ "tool_calls": []
+}

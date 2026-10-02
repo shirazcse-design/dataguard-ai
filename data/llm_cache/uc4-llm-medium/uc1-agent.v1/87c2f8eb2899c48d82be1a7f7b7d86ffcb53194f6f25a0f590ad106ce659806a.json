@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"Confidential information cannot be pasted into public generative AI tools.\",\"evidence_id\":\"P1\"},{\"text\":\"Only company-approved AI tools listed in the AI Tools Register may be used with company information.\",\"evidence_id\":\"P2\"},{\"text\":\"The destination is a personal account on a public generative AI host, which is not an approved company AI tool in the evidence pack.\",\"evidence_id\":\"P2\"},{\"text\":\"The policy applies to generative AI tools as a channel through which data can leave the company.\",\"evidence_id\":\"P3\"},{\"text\":\"User behavior is elevated with a new_destination signal for this event.\",\"evidence_id\":\"P1\"},{\"text\":\"Recent activity shows 3 external uploads in 7 days and 2 sensitive file accesses in 7 days.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "87c2f8eb2899c48d82be1a7f7b7d86ffcb53194f6f25a0f590ad106ce659806a",
+ "recorded_at": "2026-10-02T05:49:02+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1300,
+ "tokens_out": 208,
+ "tool_calls": []
+}

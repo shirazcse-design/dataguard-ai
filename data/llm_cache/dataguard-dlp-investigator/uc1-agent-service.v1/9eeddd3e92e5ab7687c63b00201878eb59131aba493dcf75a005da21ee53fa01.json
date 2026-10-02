@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted/HIGHLY_CONFIDENTIAL and includes merger and acquisition strategy content.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy further states Restricted information may only be stored in company-managed approved systems and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The destination is a personal cloud account at dropbox.com, which is not company-managed.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent activity is unusual, including 6 external uploads in 7 days, 1800 MB downloaded versus a 300 MB baseline, and access to 14 sensitive files.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "9eeddd3e92e5ab7687c63b00201878eb59131aba493dcf75a005da21ee53fa01",
+ "recorded_at": "2026-10-02T06:18:22+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1321,
+ "tokens_out": 208,
+ "tool_calls": []
+}

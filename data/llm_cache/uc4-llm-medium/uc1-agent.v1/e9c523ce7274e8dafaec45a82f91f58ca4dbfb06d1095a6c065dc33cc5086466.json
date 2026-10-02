@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential and contains PII with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that Confidential information cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal email account on gmail.com.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"User behavior is rated ELEVATED with signals for unusual download volume and a new destination.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "e9c523ce7274e8dafaec45a82f91f58ca4dbfb06d1095a6c065dc33cc5086466",
+ "recorded_at": "2026-10-02T05:50:59+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1143,
+ "tokens_out": 140,
+ "tool_calls": []
+}

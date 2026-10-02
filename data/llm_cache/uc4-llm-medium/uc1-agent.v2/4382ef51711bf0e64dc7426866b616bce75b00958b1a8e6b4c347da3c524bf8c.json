@@ -1,0 +1,30 @@
+{
+ "final_text": null,
+ "key": "4382ef51711bf0e64dc7426866b616bce75b00958b1a8e6b4c347da3c524bf8c",
+ "recorded_at": "2026-10-02T15:12:15+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1348,
+ "tokens_out": 83,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_0JUsHRzrFhiGBnVKkzG9gzYi",
+   "name": "check_dlp_exception"
+  },
+  {
+   "arguments": {
+    "query": "personal cloud Internal prohibited exception remote work MFA conflict POL-DLP 4.2 POL-AUP 5.3"
+   },
+   "id": "call_T0ll50851GFRefFz69xESxnt",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_ahvV2NyTyamhvXWBPZaYsIvD",
+   "name": "get_user_activity"
+  }
+ ]
+}

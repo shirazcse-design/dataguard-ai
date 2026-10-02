@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The attempted action was an upload on 2026-09-15T10:15.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an approved corporate location hosted at onedrive.harbourline.example using a corporate account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Prechecks identified the destination as approved_corporate.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The file is classified as Public with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user's recent behavior band is NORMAL with no listed signals.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy status is ANSWERED with effect allowed and no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Public information requires no special handling.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that the company's managed OneDrive and SharePoint are approved storage locations for company work.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "447bd1bff2a1bef833c98cc608e72d5522dd60b55286a7aedfc5573f18d8548b",
+ "recorded_at": "2026-10-02T15:12:41+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1342,
+ "tokens_out": 209,
+ "tool_calls": []
+}

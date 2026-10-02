@@ -31,6 +31,7 @@ from typing import Any
 from . import docs_view, examples, metrics
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
+from .dlp import DlpSession
 from .policy import PolicySession
 from .review import DEFAULT_PATH, ReviewStore
 
@@ -53,6 +54,7 @@ _STATIC = {
     "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/static/styles.css": ("styles.css", "text/css; charset=utf-8"),
     "/static/policy.js": ("policy.js", "text/javascript; charset=utf-8"),
+    "/static/dlp.js": ("dlp.js", "text/javascript; charset=utf-8"),
 }
 _HEADERS = {
     "Cache-Control": "no-store",
@@ -81,6 +83,8 @@ class DemoApp:
     _review: ReviewStore | None = None
     _policy: PolicySession | None = None
     policy_review_path: Path | str | None = None
+    _dlp: DlpSession | None = None
+    dlp_review_path: Path | str | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -230,6 +234,26 @@ class DemoApp:
             self.policy_session().review_decide(body), data_class="DEMO-ONLY STATE"
         )
 
+    # -- Agentic DLP (UC1) ----------------------------------------------------------------------
+    def dlp_session(self) -> DlpSession:
+        with self._init_lock:
+            if self._dlp is None:
+                kw = {"review_path": self.dlp_review_path} if self.dlp_review_path else {}
+                self._dlp = DlpSession(self.mode, self.env, **kw)
+            return self._dlp
+
+    def dlp_describe(self) -> dict[str, Any]:
+        return self.envelope(self.dlp_session().describe(), data_class="RECORDED + SYNTHETIC")
+
+    def dlp_investigate(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.dlp_session().investigate(body), data_class=self.data_class())
+
+    def dlp_review(self) -> dict[str, Any]:
+        return self.envelope(self.dlp_session().review_queue(), data_class="DEMO-ONLY STATE")
+
+    def dlp_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.dlp_session().review_decide(body), data_class="DEMO-ONLY STATE")
+
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
             self._metrics = metrics.all_metrics()
@@ -276,6 +300,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/observability": app.observability,
                 "/api/policy": app.policy_describe,
                 "/api/policy/review": app.policy_review,
+                "/api/dlp": app.dlp_describe,
+                "/api/dlp/review": app.dlp_review,
             }
             if path in routes:
                 try:
@@ -295,6 +321,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/review/decide": app.review_decide,
                 "/api/policy/ask": app.policy_ask,
                 "/api/policy/review/decide": app.policy_review_decide,
+                "/api/dlp/investigate": app.dlp_investigate,
+                "/api/dlp/review/decide": app.dlp_review_decide,
             }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))

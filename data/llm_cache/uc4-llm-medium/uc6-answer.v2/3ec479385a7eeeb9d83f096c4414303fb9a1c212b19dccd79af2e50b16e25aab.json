@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 196,
+ "input_hash": "3ec479385a7eeeb9d83f096c4414303fb9a1c212b19dccd79af2e50b16e25aab",
+ "latency_ms": 2229.704082943499,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1014,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:44+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Confidential information can be shared with a third party only with approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"},{\"text\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"E2\",\"quote\":\"A third party must pass a Vendor Security Assessment before it receives any Confidential or Restricted information.\"},{\"text\":\"The policy applies to sharing Harbourline information with third parties such as vendors and partners.\",\"evidence_id\":\"E3\",\"quote\":\"This policy sets the conditions under which Harbourline information may be shared with third parties such as vendors, partners and service providers.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

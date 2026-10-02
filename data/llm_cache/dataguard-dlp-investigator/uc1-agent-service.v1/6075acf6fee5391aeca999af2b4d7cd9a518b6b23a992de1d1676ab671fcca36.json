@@ -1,0 +1,23 @@
+{
+ "final_text": null,
+ "key": "6075acf6fee5391aeca999af2b4d7cd9a518b6b23a992de1d1676ab671fcca36",
+ "recorded_at": "2026-10-02T06:18:19+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1152,
+ "tokens_out": 49,
+ "tool_calls": [
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_CpVw7P9wx0pPWyUlZfAo2gbR",
+   "name": "get_user_activity"
+  },
+  {
+   "arguments": {},
+   "id": "call_JpVKAyFhlo0dxfsLuU83xLx0",
+   "name": "check_dlp_exception"
+  }
+ ]
+}

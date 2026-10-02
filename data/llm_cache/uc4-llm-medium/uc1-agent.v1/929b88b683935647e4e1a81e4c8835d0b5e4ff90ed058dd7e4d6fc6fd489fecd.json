@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential proprietary source code.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states proprietary source code cannot be uploaded to a public repository or public paste site unless the Open Source Program Office has approved the release.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a restricted personal account on gist.github.com, which is a public paste/code-sharing site context for this event.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent behavior for this event was scored UNUSUAL with signals including after-hours activity, unusual download volume, and a new destination.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "929b88b683935647e4e1a81e4c8835d0b5e4ff90ed058dd7e4d6fc6fd489fecd",
+ "recorded_at": "2026-10-02T05:49:34+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1235,
+ "tokens_out": 171,
+ "tool_calls": []
+}

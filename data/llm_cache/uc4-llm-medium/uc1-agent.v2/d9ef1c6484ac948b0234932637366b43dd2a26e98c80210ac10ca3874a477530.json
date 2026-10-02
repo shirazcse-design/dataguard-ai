@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "d9ef1c6484ac948b0234932637366b43dd2a26e98c80210ac10ca3874a477530",
+ "recorded_at": "2026-10-02T15:11:04+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1322,
+ "tokens_out": 55,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "Internal information personal email personal account send policy"
+   },
+   "id": "call_BokeBMth4DlOY6YQ8VwXunDf",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_MKOlNDeI05iuH9a9ZStOacwz",
+   "name": "get_user_activity"
+  }
+ ]
+}

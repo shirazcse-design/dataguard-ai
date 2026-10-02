@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 139,
+ "input_hash": "fb80aeab18a5c7bebf1e059e249cd160fe1a9d9bf8191cd0c2733e29cb1fe5b5",
+ "latency_ms": 1991.163541097194,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 994,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:21+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Public information does not require special handling.\",\"evidence_id\":\"E4\",\"quote\":\"Public information has been approved for release outside the company, such as published marketing material, press releases and public product documentation. No special handling is required.\"},{\"text\":\"The prohibition on personal cloud-storage accounts applies to company information classified Internal or above.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

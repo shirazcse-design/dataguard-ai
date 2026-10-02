@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload that occurred at 2026-09-15T21:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud service on drive.google.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL with category FINANCIAL_PCI and policy term Restricted.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Prechecks found definitive FINANCIAL_PCI patterns and HIGHLY_CONFIDENTIAL pattern level.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"Policy status is ANSWERED with effect prohibited and no policy conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Restricted information must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P1\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"P2\"},{\"text\":\"Payment card data is classified as Restricted information.\",\"evidence_id\":\"P3\"},{\"text\":\"The user has an UNUSUAL behavior band with signals including after-hours activity, frequent external uploads, unusual download volume, high sensitive file access, and a new destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"The user is an employee Product Manager with standard privilege and is in notice_period employment status.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this event.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "5d7d340615c24c61b601b5b8765864f00de767c43ffc39f8eab26f290ac1f09c",
+ "recorded_at": "2026-10-02T15:12:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1486,
+ "tokens_out": 316,
+ "tool_calls": []
+}

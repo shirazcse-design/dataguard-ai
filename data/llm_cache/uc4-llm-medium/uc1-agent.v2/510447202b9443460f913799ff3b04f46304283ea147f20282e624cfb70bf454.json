@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The attempted action was to email the file.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal email account at yahoo.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL and categorized as FINANCIAL_PCI.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user is a Finance Director with privileged access and active employee status.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is in the ELEVATED band with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy status is ANSWERED with effect prohibited for sending this data type to this destination type.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Restricted information, including payment card data, cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that payment card data is classified as Restricted information.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that Restricted information must never be stored in personal email accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception exists for this user and destination covering the file sensitivity.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "510447202b9443460f913799ff3b04f46304283ea147f20282e624cfb70bf454",
+ "recorded_at": "2026-10-02T15:11:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1464,
+ "tokens_out": 262,
+ "tool_calls": []
+}

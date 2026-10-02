@@ -2,6 +2,9 @@
 
     DATAGUARD_MCP_CALLER_ID=example-agent dataguard-uc4-mcp --llm-mode replay
 
+`--dlp-tools` (UC1, opt-in) adds the read-only `search_policy`, `get_user_profile` and
+`get_user_activity` tools (app/dlp/mcp_tools.py). Without it the server is exactly UC4's.
+
 stdout carries only the protocol; diagnostics go to stderr. The caller identity comes from the
 environment of whoever launches the server; over stdio it is asserted, not authenticated.
 """
@@ -44,7 +47,13 @@ def _frozen_output_schema(config_dir: Path | str | None) -> dict[str, Any] | Non
     return schema
 
 
-def build_server(adapter: ClassifyDocumentAdapter, *, config_dir: Path | str | None = None) -> Any:
+def build_server(
+    adapter: ClassifyDocumentAdapter,
+    *,
+    config_dir: Path | str | None = None,
+    extra_tools: Any = None,
+) -> Any:
+    """`extra_tools` is an optional registry (UC1 `DlpMcpTools`) with `tools`, `get` and `call`."""
     from anyio import to_thread
     from mcp import types
     from mcp.server.lowlevel.server import Server
@@ -59,16 +68,38 @@ def build_server(adapter: ClassifyDocumentAdapter, *, config_dir: Path | str | N
         annotations=types.ToolAnnotations(read_only_hint=True, destructive_hint=False),
     )
 
+    extras = [
+        types.Tool(
+            name=t.name,
+            title=t.title,
+            description=t.description,
+            input_schema=t.input_schema(),
+            annotations=types.ToolAnnotations(read_only_hint=True, destructive_hint=False),
+        )
+        for t in (extra_tools.tools if extra_tools is not None else [])
+    ]
+
     async def on_list_tools(ctx: Any, params: Any) -> types.ListToolsResult:
-        return types.ListToolsResult(tools=[tool])
+        return types.ListToolsResult(tools=[tool, *extras])
 
     async def on_call_tool(ctx: Any, params: types.CallToolRequestParams) -> types.CallToolResult:
-        if params.name != adapter.tool_name:
+        args = params.arguments or {}
+        if params.name == adapter.tool_name:
+            try:
+                result = await to_thread.run_sync(adapter.classify_document, args)
+            except McpAuthorizationError as exc:
+                raise MCPError(AUTH_ERROR_CODE, str(exc)) from None
+        elif extra_tools is not None and extra_tools.get(params.name) is not None:
+            from app.dlp.mcp_tools import ToolInputError, ToolRefused
+
+            try:
+                result = await to_thread.run_sync(extra_tools.call, params.name, args)
+            except ToolRefused as exc:
+                raise MCPError(AUTH_ERROR_CODE, str(exc)) from None
+            except ToolInputError as exc:
+                raise MCPError(-32602, str(exc)) from None
+        else:
             raise MCPError(-32602, f"unknown tool {params.name!r}")
-        try:
-            result = await to_thread.run_sync(adapter.classify_document, params.arguments or {})
-        except McpAuthorizationError as exc:
-            raise MCPError(AUTH_ERROR_CODE, str(exc)) from None
         return types.CallToolResult(
             content=[types.TextContent(type="text", text=json.dumps(result))],
             structured_content=result,
@@ -90,6 +121,11 @@ def _parse(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--variant", default=None)
     p.add_argument("--config-dir", default=None)
     p.add_argument("--trace-out", default=None, help="JSONL spans (no document text)")
+    p.add_argument(
+        "--dlp-tools",
+        action="store_true",
+        help="also expose UC1's read-only search_policy / get_user_profile / get_user_activity",
+    )
     return p.parse_args(argv)
 
 
@@ -122,7 +158,14 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    server = build_server(adapter, config_dir=args.config_dir)
+    extra = None
+    if args.dlp_tools:
+        from app.dlp.mcp_tools import DlpMcpTools
+        from app.policy.service import build_copilot
+
+        policy_mode = {"foundry": "live", "record": "record"}.get(args.llm_mode or "", "replay")
+        extra = DlpMcpTools(caller, copilot_factory=lambda: build_copilot(policy_mode))
+    server = build_server(adapter, config_dir=args.config_dir, extra_tools=extra)
 
     async def run() -> None:
         async with stdio_server() as (read, write):

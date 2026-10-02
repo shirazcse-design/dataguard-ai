@@ -1,0 +1,32 @@
+{
+ "final_text": null,
+ "key": "398adcdc9aa70d7c192f26ba5080e84cdeba8723ac0cdc2efdfa6b465fc093a7",
+ "recorded_at": "2026-10-02T05:50:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1151,
+ "tokens_out": 81,
+ "tool_calls": [
+  {
+   "arguments": {
+    "policy_id": "POL-DLP",
+    "section": "4.2"
+   },
+   "id": "call_tquwXZAUE8x9zJTPmb8qlJRJ",
+   "name": "get_policy_section"
+  },
+  {
+   "arguments": {
+    "policy_id": "POL-AUP",
+    "section": "5.3"
+   },
+   "id": "call_1FJxe3snBthIjaspDLFf5kAV",
+   "name": "get_policy_section"
+  },
+  {
+   "arguments": {},
+   "id": "call_Mgxnd0ePKrSzp2kSZywOcTMu",
+   "name": "check_dlp_exception"
+  }
+ ]
+}

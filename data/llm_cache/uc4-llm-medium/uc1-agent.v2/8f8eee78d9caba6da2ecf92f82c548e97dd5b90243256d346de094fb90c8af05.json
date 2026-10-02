@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage service hosted at drive.google.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified Confidential with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The user has standard privilege and is an active employee in a sales role.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is rated ELEVATED and includes a new destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy review status is CONFLICT_REVIEW and the policy effect is unknown for this question.\",\"evidence_id\":\"POLICY\"},{\"text\":\"One cited policy claim says uploading company information classified Internal or above to a personal cloud-storage account is prohibited, including Confidential information.\",\"evidence_id\":\"P1\"},{\"text\":\"A cited policy claim says Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"P2\"},{\"text\":\"A cited policy claim says Confidential information must never be stored in personal accounts, including personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "8f8eee78d9caba6da2ecf92f82c548e97dd5b90243256d346de094fb90c8af05",
+ "recorded_at": "2026-10-02T15:12:38+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1454,
+ "tokens_out": 269,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload that occurred at 2026-09-15T23:45.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is personal cloud storage on dropbox.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL with category MA_CORP_STRATEGY and policy term Restricted.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Prechecks found destination:personal_cloud and strong MA_CORP_STRATEGY patterns at HIGHLY_CONFIDENTIAL level.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"The policy service status is ANSWERED with effect prohibited and no conflict for uploading this data to this destination type.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that Restricted information includes information about planned mergers and acquisitions.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that Restricted information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The user's recent behavior band is UNUSUAL, with signals including after-hours activity, frequent external uploads, unusual download volume, high sensitive file access, and a new destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this case.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The user is an active employee in Corporate Development with privileged access and the role Director, Corporate Development.\",\"evidence_id\":\"IDENTITY\"}],\"missing_evidence\":[]}",
+ "key": "c0402e3f2691a1d4e3167853e370f2979380b94a6ba430487aa7e8823c00a420",
+ "recorded_at": "2026-10-02T15:11:30+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1506,
+ "tokens_out": 360,
+ "tool_calls": []
+}

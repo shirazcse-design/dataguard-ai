@@ -1,0 +1,23 @@
+{
+ "final_text": null,
+ "key": "ba6e45a1ec81b276d1a6ebc36da251953b0904632fc60ff9712418a28272c068",
+ "recorded_at": "2026-10-02T15:12:21+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1264,
+ "tokens_out": 58,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "personal cloud storage confidential PII employee personal information upload allowed prohibited"
+   },
+   "id": "call_qXcMzl3C8F7wrb1VtiTniVQ8",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_zHYVeUdoDddFY1FhvV0hILy6",
+   "name": "check_dlp_exception"
+  }
+ ]
+}

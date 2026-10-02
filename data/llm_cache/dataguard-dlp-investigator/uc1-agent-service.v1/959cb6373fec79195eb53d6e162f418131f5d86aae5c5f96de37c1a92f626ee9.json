@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified Confidential with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account (drive.google.com).\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited, including Confidential information.\",\"evidence_id\":\"P1\"},{\"text\":\"A second policy claim states Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"P2\"},{\"text\":\"A third policy claim states Confidential information must never be stored in personal accounts, including personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"No approved DLP exception exists for this user and destination covering the file sensitivity.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent behavior is elevated and includes a new destination signal.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "959cb6373fec79195eb53d6e162f418131f5d86aae5c5f96de37c1a92f626ee9",
+ "recorded_at": "2026-10-02T06:18:32+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1173,
+ "tokens_out": 197,
+ "tool_calls": []
+}

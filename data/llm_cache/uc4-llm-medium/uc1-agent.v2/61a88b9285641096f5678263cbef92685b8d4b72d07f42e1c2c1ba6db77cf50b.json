@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload performed at 2026-09-15T20:30.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud service hosted on dropbox.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL with category MA_CORP_STRATEGY and high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Policy states that Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that Restricted information includes information about planned mergers and acquisitions.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states that Restricted information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The policy service answered this case as prohibited with no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"User behavior is rated UNUSUAL, with signals including after-hours activity, frequent external uploads, unusual download volume, high sensitive file access, and a new destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "61a88b9285641096f5678263cbef92685b8d4b72d07f42e1c2c1ba6db77cf50b",
+ "recorded_at": "2026-10-02T15:12:47+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1506,
+ "tokens_out": 284,
+ "tool_calls": []
+}

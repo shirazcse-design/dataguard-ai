@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file content is classified as Restricted and includes authentication credentials and secrets.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy explicitly states that Restricted information, including authentication credentials and secrets, must not be pasted into public generative AI tools.\",\"evidence_id\":\"P1\"},{\"text\":\"The attempted action was a paste to a personal account on a public generative AI destination.\",\"evidence_id\":\"P1\"},{\"text\":\"User behavior for this event is elevated with a new destination signal.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "ce99688424d1406247c569bed15a362b8a69534d7b14bc4569c71b121265ec99",
+ "recorded_at": "2026-10-02T05:49:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1182,
+ "tokens_out": 132,
+ "tool_calls": []
+}

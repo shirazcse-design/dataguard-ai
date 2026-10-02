@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file classification is unresolved and marked review required, so sensitivity is not established from the current evidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is a partner external destination using an external account on host portal.fernbrook-logistics.example.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The policy service was not run and its effect is unknown, so no applicable policy outcome is available in the pack.\",\"evidence_id\":\"POLICY\"},{\"text\":\"User behavior is elevated with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[\"Applicable policy determination for this event is missing because POLICY status is NOT_RUN.\",\"File sensitivity/classification level is missing because CLASSIFICATION level is null and review_required is true.\"]}",
+ "key": "8034f31adc7b464b8fbe105cb640c4f84e0a736028320f487f29c64af1113388",
+ "recorded_at": "2026-10-02T15:12:08+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1362,
+ "tokens_out": 194,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted because it contains protected health information (PHI) with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"Restricted information cannot be sent to a personal email account.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal email account at gmail.com.\",\"evidence_id\":\"P1\"},{\"text\":\"User behavior is elevated and includes a new destination signal.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "96c1373d985b636953f58a19336efd33cfdaf1cdd73601a9e7882d1730ad7208",
+ "recorded_at": "2026-10-02T05:49:38+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1157,
+ "tokens_out": 112,
+ "tool_calls": []
+}

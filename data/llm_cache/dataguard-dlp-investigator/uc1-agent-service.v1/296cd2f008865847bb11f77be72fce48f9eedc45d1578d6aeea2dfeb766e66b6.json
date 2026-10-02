@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified Internal with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is a personal cloud-storage account on dropbox.com.\",\"evidence_id\":\"P1\"},{\"text\":\"Current policy text conflicts: POL-DLP §4.2 says uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Current policy text also says employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\"},{\"text\":\"No approved DLP exception exists for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent behavior shows this is a new destination and there were 0 recent external uploads in the last 7 days.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[\"Whether the user is working remotely and whether the personal Dropbox account is protected with multi-factor authentication are not established by cited evidence.\",\"The applicable precedence between POL-DLP §4.2 and POL-AUP §5.3 is not established by cited evidence.\"]}",
+ "key": "296cd2f008865847bb11f77be72fce48f9eedc45d1578d6aeea2dfeb766e66b6",
+ "recorded_at": "2026-10-02T06:18:28+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1612,
+ "tokens_out": 247,
+ "tool_calls": []
+}

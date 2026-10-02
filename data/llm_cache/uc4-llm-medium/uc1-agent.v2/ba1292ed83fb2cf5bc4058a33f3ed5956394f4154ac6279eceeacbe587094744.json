@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage service hosted at icloud.com using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The policy status is conflict review with unknown effect because the supplied policy claims conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"One current policy section states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Another current policy section states that employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\"},{\"text\":\"A current DLP policy section states that a business need that conflicts with the policy requires a DLP exception request approved by the data owner and the Head of Data Protection.\",\"evidence_id\":\"E3\"},{\"text\":\"No approved DLP exception was found for this user and destination covering this event.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The user is a privileged employee with the role VP Engineering.\",\"evidence_id\":\"IDENTITY\"},{\"text\":\"Recent behavior is in the ELEVATED band and includes a new destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"In the last 7 days, the user had 1 recent external upload, 200 MB of downloads versus a 220 MB baseline, and 3 sensitive file accesses.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "ba1292ed83fb2cf5bc4058a33f3ed5956394f4154ac6279eceeacbe587094744",
+ "recorded_at": "2026-10-02T15:12:19+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2101,
+ "tokens_out": 338,
+ "tool_calls": []
+}

@@ -1,0 +1,53 @@
+# Integration contract: UC4 (classification) terminology -> UC6 (policy corpus) terminology, and the
+# DETERMINISTIC effect of a VERIFIED UC6 citation on a DLP event. Neither UC4's taxonomy nor UC6's
+# corpus is renamed or changed; the LLM never infers this mapping.
+mapping_version: 1.0.0
+
+# UC4 level id -> the term the Harbourline Data Classification Standard (UC6 POL-CLS) uses.
+# Known platform consideration: UC4 calls the top level HIGHLY_CONFIDENTIAL, the policy calls it
+# Restricted (POL-CLS 2.4). This table is the only place the two are joined.
+levels:
+  PUBLIC: {rank: 0, policy_term: Public}
+  INTERNAL: {rank: 1, policy_term: Internal}
+  CONFIDENTIAL: {rank: 2, policy_term: Confidential}
+  HIGHLY_CONFIDENTIAL: {rank: 3, policy_term: Restricted}
+
+# UC4 category id -> plain phrase used in the policy question, and the minimum policy level the
+# classification standard assigns to that kind of information (POL-CLS 2.3 / 2.4).
+categories:
+  PII: {phrase: customer or employee personal information, min_level: CONFIDENTIAL}
+  PHI: {phrase: protected health information, min_level: HIGHLY_CONFIDENTIAL}
+  FINANCIAL_PCI: {phrase: payment card or customer financial data, min_level: CONFIDENTIAL}
+  SOURCE_CODE: {phrase: proprietary source code, min_level: CONFIDENTIAL}
+  CREDENTIALS_SECRETS: {phrase: credentials and secrets, min_level: HIGHLY_CONFIDENTIAL}
+  INTELLECTUAL_PROPERTY: {phrase: unpublished intellectual property, min_level: CONFIDENTIAL}
+  TRADE_SECRET: {phrase: trade secrets, min_level: HIGHLY_CONFIDENTIAL}
+  MA_CORP_STRATEGY: {phrase: merger and acquisition plans, min_level: HIGHLY_CONFIDENTIAL}
+
+# Destination class -> how it reads in the policy question.
+destination_phrases:
+  approved_corporate: {action: stored in, phrase: "the company's managed OneDrive or SharePoint"}
+  personal_cloud: {action: uploaded to, phrase: a personal cloud-storage account}
+  personal_email: {action: sent to, phrase: a personal email account}
+  partner_external: {action: shared with, phrase: an external partner or vendor}
+  generative_ai: {action: pasted into, phrase: a public generative AI tool}
+  restricted: {action: posted to, phrase: a public paste site or public code repository}
+  unknown_external: {action: sent to, phrase: an external website}
+
+# Effect of a policy section on an event, applied ONLY when UC6 returned that section as a
+# VERIFIED citation for the event's own question. effect: prohibited | requires_approval | allowed.
+# min_level / max_level bound the event's (mapped) level the rule speaks about.
+policy_effects:
+  - {section: "POL-DLP@2.1#4.2", destinations: [personal_cloud], min_level: INTERNAL, effect: prohibited}
+  - {section: "POL-AUP@4.0#5.3", destinations: [personal_cloud], min_level: CONFIDENTIAL, effect: prohibited}
+  - {section: "POL-AUP@4.0#5.3", destinations: [personal_cloud], min_level: INTERNAL, max_level: INTERNAL, effect: allowed}
+  - {section: "POL-CLS@3.0#3.2", destinations: [personal_cloud, personal_email], min_level: CONFIDENTIAL, effect: prohibited}
+  - {section: "POL-DLP@2.1#4.1", destinations: [personal_email], min_level: CONFIDENTIAL, effect: prohibited}
+  - {section: "POL-DLP@2.1#4.3", destinations: [restricted], min_level: CONFIDENTIAL, effect: prohibited}
+  - {section: "POL-DLP@2.1#4.4", destinations: [generative_ai], min_level: CONFIDENTIAL, effect: prohibited}
+  - {section: "POL-AUP@4.0#5.1", destinations: [approved_corporate], min_level: PUBLIC, effect: allowed}
+  - {section: "POL-CLS@3.0#3.3", destinations: [partner_external, unknown_external], min_level: CONFIDENTIAL, effect: requires_approval}
+  - {section: "POL-TPS@1.3#4.1", destinations: [partner_external], min_level: CONFIDENTIAL, max_level: CONFIDENTIAL, effect: requires_approval}
+  - {section: "POL-TPS@1.3#3.1", destinations: [partner_external], min_level: CONFIDENTIAL, effect: requires_approval}
+  - {section: "POL-TPS@1.3#4.2", destinations: [partner_external], min_level: HIGHLY_CONFIDENTIAL, effect: requires_approval}
+  - {section: "POL-CLS@3.0#2.1", destinations: [personal_cloud, personal_email, partner_external, unknown_external, generative_ai], min_level: PUBLIC, max_level: PUBLIC, effect: allowed}

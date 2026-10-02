@@ -1,0 +1,23 @@
+{
+ "final_text": null,
+ "key": "55e4a8c91b1c00a49b2861089f81b5c3e9971886b0278448973efafd1cac89c4",
+ "recorded_at": "2026-10-02T15:11:16+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1349,
+ "tokens_out": 73,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_oqeWGNQLAWqlf80le8YQZZeM",
+   "name": "check_dlp_exception"
+  },
+  {
+   "arguments": {
+    "query": "policy for Internal information to unknown external websites or external file-sharing sites; whether personal cloud-storage account exception applies only to personal accounts and approved protections"
+   },
+   "id": "call_kaCdcT1hRZ8wzrdapUr5KVoM",
+   "name": "search_policy"
+  }
+ ]
+}

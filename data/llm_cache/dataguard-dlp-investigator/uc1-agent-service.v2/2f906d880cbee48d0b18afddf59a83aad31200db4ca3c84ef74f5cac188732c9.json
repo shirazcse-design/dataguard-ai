@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event was an upload attempt.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud account at dropbox.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL and mapped to the policy term Restricted, with category MA_CORP_STRATEGY.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Policy states that Restricted information, including merger and acquisition plans, must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that Restricted information may only be stored in company-managed systems approved by Information Security and must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P3\"},{\"text\":\"The applicable policy status is ANSWERED with effect prohibited and no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this file sensitivity.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent behavior is in the UNUSUAL band.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "2f906d880cbee48d0b18afddf59a83aad31200db4ca3c84ef74f5cac188732c9",
+ "recorded_at": "2026-10-02T16:19:25+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1404,
+ "tokens_out": 232,
+ "tool_calls": []
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted / Highly Confidential and includes TRADE_SECRET content with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"The destination is a personal cloud-storage account (drive.google.com, personal account).\",\"evidence_id\":\"P3\"},{\"text\":\"Policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"P3\"},{\"text\":\"Policy states that Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"P1\"},{\"text\":\"The user’s recent behavior is UNUSUAL, including after-hours activity, frequent external uploads, unusual download volume, high sensitive file access, and a new destination.\",\"evidence_id\":\"P1\"},{\"text\":\"The user is in notice period, increasing concern for attempted transfer of sensitive information.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "fab4976bcaea75bfa7d241481ec1719412e7b94cfd0538344822eb8bcd7f766a",
+ "recorded_at": "2026-10-02T05:49:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1221,
+ "tokens_out": 195,
+ "tool_calls": []
+}

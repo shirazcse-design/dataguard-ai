@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 249,
+ "input_hash": "bc2388452ed94c0b91eda822059ca926bed59ce5a68a50b277f500a59b6ebbee",
+ "latency_ms": 2551.405084086582,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 5318,
+ "prompt_version": "classifier.v1",
+ "recorded_at": "2026-10-02T05:49:12+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"level\":\"HIGHLY_CONFIDENTIAL\",\"categories\":[\"MA_CORP_STRATEGY\"],\"evidence\":[{\"quote\":\"Kestrel Sensor Systems | Industrial IoT | 84 | 410-460 | Adds edge sensing to our fleet tracker line | Preliminary outreach planned for Q1\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Ardent Flowworks | Water-quality analytics | 37 | 150-180 | Closes the gap in our probe software roadmap | Board briefing pending\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"1. Approach Kestrel through an intermediary before its Series D closes.\",\"supports_axis\":\"category\",\"supports_value\":\"MA_CORP_STRATEGY\"},{\"quote\":\"Do not discuss these names outside the corporate development deal team.\",\"supports_axis\":\"level\",\"supports_value\":\"HIGHLY_CONFIDENTIAL\"}],\"rationale\":\"This is a non-public acquisition-target shortlist with valuation ranges, approach plans, financing assumptions, and board-related deal planning. That clearly fits M&A / Corporate Strategy and warrants the highest sensitivity level.\",\"level_confidence\":\"high\",\"category_confidence\":\"high\",\"insufficient_information\":false}"
+}

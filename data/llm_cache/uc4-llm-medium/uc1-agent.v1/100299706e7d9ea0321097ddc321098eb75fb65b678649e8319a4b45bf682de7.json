@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Confidential with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an external partner, so third-party sharing rules apply.\",\"evidence_id\":\"P3\"},{\"text\":\"Policy requires data owner approval and a passed Vendor Security Assessment before Confidential information is shared with a third party.\",\"evidence_id\":\"P1\"},{\"text\":\"An approved DLP exception exists for this user and destination host, covers data up to Confidential, and is currently valid through 2026-10-13.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "100299706e7d9ea0321097ddc321098eb75fb65b678649e8319a4b45bf682de7",
+ "recorded_at": "2026-10-02T05:48:42+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1354,
+ "tokens_out": 134,
+ "tool_calls": []
+}

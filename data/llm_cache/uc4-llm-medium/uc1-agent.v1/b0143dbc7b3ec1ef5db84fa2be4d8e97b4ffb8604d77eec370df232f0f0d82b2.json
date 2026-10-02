@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "b0143dbc7b3ec1ef5db84fa2be4d8e97b4ffb8604d77eec370df232f0f0d82b2",
+ "recorded_at": "2026-10-02T05:49:41+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1213,
+ "tokens_out": 15,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_7z8Mi5ADwTxZVurlcTE0oS2E",
+   "name": "check_dlp_exception"
+  }
+ ]
+}

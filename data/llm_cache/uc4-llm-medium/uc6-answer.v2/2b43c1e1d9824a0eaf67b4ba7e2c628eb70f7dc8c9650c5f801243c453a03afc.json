@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 239,
+ "input_hash": "2b43c1e1d9824a0eaf67b4ba7e2c628eb70f7dc8c9650c5f801243c453a03afc",
+ "latency_ms": 2471.5135409496725,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1018,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:50:38+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"CONFLICT\",\"claims\":[{\"text\":\"Uploading company information classified Internal or above to a personal cloud-storage account is prohibited, which includes Confidential information.\",\"evidence_id\":\"E1\",\"quote\":\"Uploading company information classified Internal or above to a personal cloud-storage account, such as a personal Dropbox, personal Google Drive or personal OneDrive, is prohibited.\"},{\"text\":\"Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information must never be stored in personal cloud storage.\"},{\"text\":\"Confidential information must never be stored in personal accounts, including personal cloud-storage accounts.\",\"evidence_id\":\"E3\",\"quote\":\"It must never be stored on personal devices or in personal accounts, including personal email and personal cloud-storage accounts.\"}],\"conflict_evidence_ids\":[\"E1\",\"E2\"],\"conflict_note\":\"E1 prohibits uploading Internal or above information to personal cloud-storage accounts, while E2 allows Internal information in personal cloud-storage accounts with multi-factor authentication. For Confidential information, both E2 and E3 say it must never be stored in personal cloud storage.\"}"
+}

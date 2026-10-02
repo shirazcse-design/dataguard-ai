@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "b343d008692fe3f364a9c97932cc95c5b9120525e3c226285bca62c5f3c905e7",
+ "recorded_at": "2026-10-02T05:48:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1121,
+ "tokens_out": 56,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "Internal information personal email allowed prohibited personal email account"
+   },
+   "id": "call_rbrEPdOY59uVng6YQQkYAfQy",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_QaYAutS3E6sydZvbsIagYhYg",
+   "name": "get_user_activity"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is a personal cloud account on dropbox.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The action was an upload.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The policy evidence in the pack is conflicting, so policy effect is unknown and status is CONFLICT_REVIEW.\",\"evidence_id\":\"POLICY\"},{\"text\":\"One cited policy claim says uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"P1\"},{\"text\":\"A different cited policy claim says employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"P2\"},{\"text\":\"No approved DLP exception was found for this user and destination covering this case.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"User behavior is elevated and includes a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "eaa89e1b6ca9689619d88db47bc1160a2c47420d67c3dc542334bbc2cca53769",
+ "recorded_at": "2026-10-02T15:12:13+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1472,
+ "tokens_out": 225,
+ "tool_calls": []
+}

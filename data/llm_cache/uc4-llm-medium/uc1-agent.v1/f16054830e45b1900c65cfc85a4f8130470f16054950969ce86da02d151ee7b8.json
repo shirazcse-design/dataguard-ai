@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"WARN\",\"findings\":[{\"text\":\"The file is classified as Confidential proprietary source code.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is the company's managed OneDrive, which is an approved storage location for company work.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy allows Confidential information to be stored only in company-managed systems approved by Information Security, which matches this destination.\",\"evidence_id\":\"P3\"},{\"text\":\"Recent activity shows elevated download volume versus baseline in the last 7 days (900 MB vs 200 MB).\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "f16054830e45b1900c65cfc85a4f8130470f16054950969ce86da02d151ee7b8",
+ "recorded_at": "2026-10-02T05:48:36+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1320,
+ "tokens_out": 131,
+ "tool_calls": []
+}

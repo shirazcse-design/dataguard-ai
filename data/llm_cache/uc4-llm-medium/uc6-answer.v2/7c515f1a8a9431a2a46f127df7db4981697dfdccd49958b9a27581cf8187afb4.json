@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 120,
+ "input_hash": "7c515f1a8a9431a2a46f127df7db4981697dfdccd49958b9a27581cf8187afb4",
+ "latency_ms": 1872.5425410084426,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1004,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:50:56+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Confidential information cannot be sent to a personal email account.\",\"evidence_id\":\"E1\",\"quote\":\"Sending Confidential or Restricted information to a personal email account, including forwarding it to yourself, is prohibited.\"},{\"text\":\"Customer personal information and employee records are included in Confidential information.\",\"evidence_id\":\"E2\",\"quote\":\"It includes customer personal information, customer financial information, non-public financial results, employee records and proprietary source code.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

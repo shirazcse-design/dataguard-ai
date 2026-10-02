@@ -18,3 +18,8 @@ callers:
     max_cost_usd: 0.05
     max_latency_ms: 10000
     allow_evidence: true
+  dlp-investigation-agent:         # UC1 Agentic DLP (docs/uc1/architecture.md). Added 2026-10-01; additive.
+    max_llm_tier: mid              # same latency reasoning as above; also keeps every UC1 call replayable
+    max_cost_usd: 0.05
+    max_latency_ms: 10000
+    allow_evidence: false          # UC1 never needs model-derived excerpts of the document

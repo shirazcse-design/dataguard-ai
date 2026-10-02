@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 137,
+ "input_hash": "df330be1fe553ca622215c5da661a87960fbe9688b940de16ecd6205170d149e",
+ "latency_ms": 1513.3995420765132,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1046,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:49:03+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Internal information is intended for use inside Harbourline and is not approved for public release.\",\"evidence_id\":\"E1\",\"quote\":\"Internal information is intended for use inside Harbourline and is not approved for public release\"},{\"text\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\",\"evidence_id\":\"E5\",\"quote\":\"Employees may store Internal information in a personal cloud-storage account when working remotely, provided the account is protected with multi-factor authentication.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

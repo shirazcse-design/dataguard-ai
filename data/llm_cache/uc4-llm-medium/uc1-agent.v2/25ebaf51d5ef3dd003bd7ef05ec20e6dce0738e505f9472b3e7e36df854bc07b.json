@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The user attempted to share a file on 2026-09-15T11:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an external partner host, portal.fernbrook-logistics.example.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as Confidential with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The applicable policy answer indicates sharing this type of data externally requires approval.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy states that Confidential information can be shared with a third party only with data owner approval after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that a third party must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"An approved DLP exception exists for this user and destination host up to CONFIDENTIAL data.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The exception is currently valid from 2026-07-15 until 2026-10-13.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"The user's recent behavior band is NORMAL with no listed signals.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "25ebaf51d5ef3dd003bd7ef05ec20e6dce0738e505f9472b3e7e36df854bc07b",
+ "recorded_at": "2026-10-02T15:10:56+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1546,
+ "tokens_out": 261,
+ "tool_calls": []
+}

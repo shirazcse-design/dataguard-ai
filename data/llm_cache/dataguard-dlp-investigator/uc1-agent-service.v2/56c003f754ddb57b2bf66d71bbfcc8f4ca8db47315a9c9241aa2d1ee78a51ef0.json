@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified Confidential with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The attempted action was an upload.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage account on drive.google.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The destination was new to the user and behavior was rated Elevated.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy review status is CONFLICT_REVIEW with effect unknown.\",\"evidence_id\":\"POLICY\"},{\"text\":\"Policy claim states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited, including Confidential information.\",\"evidence_id\":\"P1\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "56c003f754ddb57b2bf66d71bbfcc8f4ca8db47315a9c9241aa2d1ee78a51ef0",
+ "recorded_at": "2026-10-02T16:19:36+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1436,
+ "tokens_out": 180,
+ "tool_calls": []
+}

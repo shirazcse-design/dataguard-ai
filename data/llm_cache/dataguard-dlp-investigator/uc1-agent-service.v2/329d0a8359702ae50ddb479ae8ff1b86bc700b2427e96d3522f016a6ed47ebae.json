@@ -1,0 +1,30 @@
+{
+ "final_text": null,
+ "key": "329d0a8359702ae50ddb479ae8ff1b86bc700b2427e96d3522f016a6ed47ebae",
+ "recorded_at": "2026-10-02T16:19:27+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1268,
+ "tokens_out": 88,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_emqNOVzJ7qbcaFl6oOLHcpuO",
+   "name": "check_dlp_exception"
+  },
+  {
+   "arguments": {
+    "query": "personal cloud storage Internal personal account prohibited remote work MFA exception conflict POL-DLP 4.2 POL-AUP 5.3 precedence"
+   },
+   "id": "call_LC0GDiEJZRAUM8vRSxiD5t4B",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_zZqCyeJKi1XkcXPCSdEZYr2D",
+   "name": "get_user_activity"
+  }
+ ]
+}

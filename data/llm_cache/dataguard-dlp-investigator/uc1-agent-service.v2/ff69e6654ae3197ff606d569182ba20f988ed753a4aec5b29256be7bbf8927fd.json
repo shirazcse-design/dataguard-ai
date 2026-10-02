@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The event is an upload action.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage account on dropbox.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"User behavior is elevated and includes a new destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Policy review is currently in conflict status with unknown effect.\",\"evidence_id\":\"POLICY\"},{\"text\":\"The Data Loss Prevention Policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"The Acceptable Use Policy states that employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"E2\"},{\"text\":\"The Data Loss Prevention Policy states that a business need conflicting with the policy requires a DLP exception request approved through the exception process.\",\"evidence_id\":\"E4\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"Recent activity shows zero external uploads in the last 7 days.\",\"evidence_id\":\"ACTIVITY\"}],\"missing_evidence\":[]}",
+ "key": "ff69e6654ae3197ff606d569182ba20f988ed753a4aec5b29256be7bbf8927fd",
+ "recorded_at": "2026-10-02T16:19:31+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2044,
+ "tokens_out": 271,
+ "tool_calls": []
+}

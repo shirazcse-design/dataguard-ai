@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The file is classified Confidential with high confidence.\",\"evidence_id\":\"P3\"},{\"text\":\"The destination is a personal cloud-storage account.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy claims in the evidence pack state that uploading Internal or above, including Confidential information, to personal cloud storage is prohibited.\",\"evidence_id\":\"P1\"},{\"text\":\"A second policy claim states Confidential information must never be stored in personal cloud storage.\",\"evidence_id\":\"P2\"},{\"text\":\"The policy result is marked CONFLICT_REVIEW with unknown effect, so the applicable policy outcome is unresolved in the evidence pack.\",\"evidence_id\":\"P1\"},{\"text\":\"Human review was requested due to conflicting evidence.\",\"evidence_id\":\"E1\"}],\"missing_evidence\":[\"Resolved policy determination for the cited conflict review.\"]}",
+ "key": "4239b05148ee773317cce09d05e96bd5d3a6bed3056fa5c1a1331efffd491a93",
+ "recorded_at": "2026-10-02T05:50:42+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1264,
+ "tokens_out": 181,
+ "tool_calls": []
+}

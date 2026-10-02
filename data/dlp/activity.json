@@ -1,0 +1,12 @@
+{
+ "u-1001": {"recent_external_upload_count_7d": 0, "recent_download_volume_mb_7d": 120, "baseline_download_volume_mb_7d": 110, "sensitive_file_access_count_7d": 3},
+ "u-1002": {"recent_external_upload_count_7d": 2, "recent_download_volume_mb_7d": 900, "baseline_download_volume_mb_7d": 200, "sensitive_file_access_count_7d": 4},
+ "u-1003": {"recent_external_upload_count_7d": 6, "recent_download_volume_mb_7d": 1800, "baseline_download_volume_mb_7d": 300, "sensitive_file_access_count_7d": 14},
+ "u-1004": {"recent_external_upload_count_7d": 3, "recent_download_volume_mb_7d": 150, "baseline_download_volume_mb_7d": 140, "sensitive_file_access_count_7d": 2},
+ "u-1005": {"recent_external_upload_count_7d": 7, "recent_download_volume_mb_7d": 2400, "baseline_download_volume_mb_7d": 250, "sensitive_file_access_count_7d": 12},
+ "u-1006": {"recent_external_upload_count_7d": 1, "recent_download_volume_mb_7d": 80, "baseline_download_volume_mb_7d": 90, "sensitive_file_access_count_7d": 0},
+ "u-1007": {"recent_external_upload_count_7d": 0, "recent_download_volume_mb_7d": 60, "baseline_download_volume_mb_7d": 70, "sensitive_file_access_count_7d": 6},
+ "u-1008": {"recent_external_upload_count_7d": 1, "recent_download_volume_mb_7d": 300, "baseline_download_volume_mb_7d": 280, "sensitive_file_access_count_7d": 5},
+ "u-1009": {"recent_external_upload_count_7d": 0, "recent_download_volume_mb_7d": 100, "baseline_download_volume_mb_7d": 100, "sensitive_file_access_count_7d": 8},
+ "u-1010": {"recent_external_upload_count_7d": 1, "recent_download_volume_mb_7d": 200, "baseline_download_volume_mb_7d": 220, "sensitive_file_access_count_7d": 3}
+}

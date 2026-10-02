@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Restricted and contains payment card data with high confidence.\",\"evidence_id\":\"P3\"},{\"text\":\"Restricted information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an approved corporate system, and policy states the company's managed OneDrive and SharePoint are approved storage locations for company work.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "3dc4c92ae2c1179f226ad938136956cb5a6e5dc0e1aea71ef51a2bc11888f285",
+ "recorded_at": "2026-10-02T05:48:27+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1221,
+ "tokens_out": 105,
+ "tool_calls": []
+}

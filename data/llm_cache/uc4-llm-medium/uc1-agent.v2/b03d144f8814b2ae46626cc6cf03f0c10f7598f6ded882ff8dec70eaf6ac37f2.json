@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The user attempted to paste data at 2026-09-15T12:00.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a public generative AI service on host chat.public-ai.example using a personal account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The data is classified as Confidential with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Policy states that Confidential information cannot be pasted into public generative AI tools.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that only company-approved AI tools listed in the AI Tools Register may be used with company information.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy status is answered with prohibited effect and no conflict.\",\"evidence_id\":\"POLICY\"},{\"text\":\"User behavior is Elevated with a new_destination signal.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "b03d144f8814b2ae46626cc6cf03f0c10f7598f6ded882ff8dec70eaf6ac37f2",
+ "recorded_at": "2026-10-02T15:11:13+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1447,
+ "tokens_out": 214,
+ "tool_calls": []
+}

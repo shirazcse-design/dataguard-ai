@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Restricted / Highly Confidential and contains FINANCIAL_PCI with high confidence.\",\"evidence_id\":\"P3\"},{\"text\":\"Restricted information must never be stored in personal cloud-storage accounts.\",\"evidence_id\":\"P1\"},{\"text\":\"Confidential and Restricted information must never be stored in personal cloud storage.\",\"evidence_id\":\"P2\"}],\"missing_evidence\":[]}",
+ "key": "74bc511b7f2642b0c1f778999eb5080ea4d03b5ad44416615db2052ec164cf58",
+ "recorded_at": "2026-10-02T05:50:53+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1235,
+ "tokens_out": 96,
+ "tool_calls": []
+}

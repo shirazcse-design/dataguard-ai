@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"HUMAN_REVIEW\",\"findings\":[{\"text\":\"The user attempted to upload a file at 2026-09-15T14:30.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is a personal cloud-storage account on dropbox.com.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The policy evidence in the pack is conflicting and marked CONFLICT_REVIEW with unknown effect.\",\"evidence_id\":\"POLICY\"},{\"text\":\"One cited policy claim says uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"P1\"},{\"text\":\"Another cited policy claim says employees may store Internal information in a personal cloud-storage account when working remotely if the account is protected with multi-factor authentication.\",\"evidence_id\":\"P2\"},{\"text\":\"An approved DLP exception exists for this user and destination host, valid through 2026-10-30, covering data up to Internal.\",\"evidence_id\":\"EXCEPTION\"},{\"text\":\"A human review was requested because the policy evidence is conflicting.\",\"evidence_id\":\"POLICY\"}],\"missing_evidence\":[]}",
+ "key": "a87e41e03c85599e9f5077ff6698346d1abc5cb6dcfce8ad5fd7120dd89956f9",
+ "recorded_at": "2026-10-02T15:12:30+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1555,
+ "tokens_out": 248,
+ "tool_calls": []
+}

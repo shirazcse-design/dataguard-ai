@@ -1,0 +1,51 @@
+# UC1 Agentic DLP configuration (docs/uc1/architecture.md). Version-controlled; its hash is recorded
+# in every investigation and evaluation report. Synthetic: no real company, person or customer.
+dlp_version: 1.0.0
+
+# Deterministic destination catalogue. A destination is classified by host + account type, never by
+# a model. Anything not listed is `unknown_external` (treated as external and unapproved).
+destinations:
+  approved_corporate:
+    description: Company-managed storage and transfer services (AUP 5.1)
+    hosts: [onedrive.harbourline.example, sharepoint.harbourline.example, mft.harbourline.example]
+  personal_cloud:
+    description: Personal cloud-storage accounts (DLP 4.2)
+    hosts: [dropbox.com, drive.google.com, onedrive.live.com, icloud.com]
+  personal_email:
+    description: Personal email accounts (DLP 4.1)
+    hosts: [gmail.com, outlook.com, yahoo.com, proton.me]
+  partner_external:
+    description: A third party's portal or mailbox (Third-Party Data Sharing Policy)
+    hosts: [portal.fernbrook-logistics.example, mail.alderpoint-advisors.example]
+  generative_ai:
+    description: Public generative AI tools (DLP 4.4)
+    hosts: [chat.public-ai.example, assistant.public-ai.example]
+  restricted:
+    description: Known restricted destinations (public paste sites, public code hosting)
+    hosts: [pastebin.com, paste.example, gist.github.com]
+# A corporate tenant of a consumer service (e.g. a company Dropbox) is approved only when the event
+# says account_type=corporate AND the host is listed here.
+corporate_tenants: [dropbox.com]
+
+# Deterministic behaviour bands (UC1 only). UC2 replaces this provider behind the same interface.
+behavior:
+  business_hours: {start: 7, end: 20}          # local hour, end exclusive
+  external_upload_count_7d: 5                  # >= is a signal
+  download_volume_ratio: 3.0                   # 7-day volume / baseline >= is a signal
+  sensitive_file_access_7d: 10
+  bands: {ELEVATED: 1, UNUSUAL: 3}             # number of signals at or above which the band applies
+
+# The UC6 question asked for every event (filled from deterministic facts only; no model input).
+policy_question: "Can {level_term} information, such as {category_phrase}, be {action_phrase} {destination_phrase}?"
+
+# The investigation agent (bounded). Enforced in code.
+agent:
+  name: dataguard-dlp-investigator
+  prompt_version: uc1-agent.v2
+  prompt_file: prompts/uc1/agent.v2.md
+  allowed_tools: [search_policy, get_policy_section, get_user_activity, check_dlp_exception, request_human_review]
+  max_tool_calls: 6
+  max_turns: 8
+  max_consecutive_tool_failures: 2
+  max_output_tokens: 4000
+  max_justification_chars: 500

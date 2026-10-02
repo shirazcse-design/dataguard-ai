@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Confidential and includes Intellectual Property with high confidence.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an external partner system, which is a third party under the applicable sharing policy.\",\"evidence_id\":\"P3\"},{\"text\":\"Policy requires approval from the data owner before Confidential information can be shared with a third party, and only after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"P1\"},{\"text\":\"Policy states that a third party must pass a Vendor Security Assessment before it receives any Confidential information.\",\"evidence_id\":\"P2\"},{\"text\":\"No approved DLP exception exists for this user and destination covering this transfer.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "e4f8dbffcdbab330acee20f52771184bd9476b167065667427eaa89106b1760d",
+ "recorded_at": "2026-10-02T05:48:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1263,
+ "tokens_out": 164,
+ "tool_calls": []
+}

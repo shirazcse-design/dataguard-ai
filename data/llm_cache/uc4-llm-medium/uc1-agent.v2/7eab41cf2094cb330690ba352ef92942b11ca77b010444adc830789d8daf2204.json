@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ESCALATE\",\"findings\":[{\"text\":\"The file is classified as Internal with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"The destination is an unknown external site using an external account, and it is not known to the user.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"Recent behavior is elevated and includes use of a new destination.\",\"evidence_id\":\"BEHAVIOR\"},{\"text\":\"Internal information is intended for use inside Harbourline and is not approved for public release.\",\"evidence_id\":\"P1\"},{\"text\":\"Current DLP policy states that uploading company information classified Internal or above to a personal cloud-storage account is prohibited.\",\"evidence_id\":\"E1\"},{\"text\":\"Current policy states that company-managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E4\"},{\"text\":\"Current DLP policy requires an approved DLP exception when a business need conflicts with policy.\",\"evidence_id\":\"E5\"},{\"text\":\"No approved DLP exception was found for this user and destination.\",\"evidence_id\":\"EXCEPTION\"}],\"missing_evidence\":[]}",
+ "key": "7eab41cf2094cb330690ba352ef92942b11ca77b010444adc830789d8daf2204",
+ "recorded_at": "2026-10-02T15:11:20+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1997,
+ "tokens_out": 229,
+ "tool_calls": []
+}

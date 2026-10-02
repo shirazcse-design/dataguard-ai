@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The file is classified as Confidential and contains PII with high confidence.\",\"evidence_id\":\"P2\"},{\"text\":\"Policy states Confidential information may be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"P1\"},{\"text\":\"The destination is an approved corporate SharePoint host.\",\"evidence_id\":\"P1\"}],\"missing_evidence\":[]}",
+ "key": "734fec98196d9637150523cdb3ab85380c1d3c15793910a55661e45a8af81b47",
+ "recorded_at": "2026-10-02T05:48:30+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1156,
+ "tokens_out": 88,
+ "tool_calls": []
+}

@@ -1,0 +1,5 @@
+[
+ {"exception_id": "DLPX-2026-014", "user_id": "u-1006", "destination_host": "dropbox.com", "max_level": "INTERNAL", "purpose": "Agency file exchange for the spring campaign", "approved_by": ["data owner: Brand", "Head of Data Protection"], "valid_from": "2026-08-01", "expires": "2026-10-30"},
+ {"exception_id": "DLPX-2026-009", "user_id": "u-1004", "destination_host": "portal.fernbrook-logistics.example", "max_level": "CONFIDENTIAL", "purpose": "Shipment manifests for an assessed logistics vendor", "approved_by": ["data owner: Enterprise Sales", "Head of Data Protection"], "valid_from": "2026-07-15", "expires": "2026-10-13"},
+ {"exception_id": "DLPX-2026-003", "user_id": "u-1001", "destination_host": "gmail.com", "max_level": "INTERNAL", "purpose": "Expired travel-period exception", "approved_by": ["data owner: Corporate Finance", "Head of Data Protection"], "valid_from": "2026-05-01", "expires": "2026-07-30"}
+]

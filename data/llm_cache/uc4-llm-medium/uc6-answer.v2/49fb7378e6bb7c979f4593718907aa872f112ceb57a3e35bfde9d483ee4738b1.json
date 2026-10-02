@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 174,
+ "input_hash": "49fb7378e6bb7c979f4593718907aa872f112ceb57a3e35bfde9d483ee4738b1",
+ "latency_ms": 1952.45720888488,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 998,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:33+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Proprietary source code is Confidential information.\",\"evidence_id\":\"E1\",\"quote\":\"Confidential information would cause significant harm if disclosed. It includes customer personal information, customer financial information, non-public financial results, employee records and proprietary source code.\"},{\"text\":\"The company's managed OneDrive and SharePoint are approved storage locations for company work.\",\"evidence_id\":\"E4\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"},{\"text\":\"Confidential information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E5\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

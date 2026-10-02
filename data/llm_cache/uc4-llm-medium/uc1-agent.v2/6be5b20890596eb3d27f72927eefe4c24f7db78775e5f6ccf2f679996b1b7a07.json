@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"proposed_outcome\":\"ALLOW\",\"findings\":[{\"text\":\"The user attempted to upload the file at 2026-09-15T09:30.\",\"evidence_id\":\"EVENT\"},{\"text\":\"The destination is an approved corporate location on mft.harbourline.example using a corporate account.\",\"evidence_id\":\"DESTINATION\"},{\"text\":\"The file is classified as HIGHLY_CONFIDENTIAL and categorized as FINANCIAL_PCI with high confidence.\",\"evidence_id\":\"CLASSIFICATION\"},{\"text\":\"Prechecks found a definitive FINANCIAL_PCI pattern and HIGHLY_CONFIDENTIAL pattern level.\",\"evidence_id\":\"PRECHECKS\"},{\"text\":\"Payment card data is Restricted information.\",\"evidence_id\":\"P3\"},{\"text\":\"Restricted information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"P1\"},{\"text\":\"The policy service reports status ANSWERED with effect allowed and no conflict for this policy question.\",\"evidence_id\":\"POLICY\"},{\"text\":\"The user's recent behavior band is NORMAL with no listed signals.\",\"evidence_id\":\"BEHAVIOR\"}],\"missing_evidence\":[]}",
+ "key": "6be5b20890596eb3d27f72927eefe4c24f7db78775e5f6ccf2f679996b1b7a07",
+ "recorded_at": "2026-10-02T15:10:44+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1413,
+ "tokens_out": 228,
+ "tool_calls": []
+}

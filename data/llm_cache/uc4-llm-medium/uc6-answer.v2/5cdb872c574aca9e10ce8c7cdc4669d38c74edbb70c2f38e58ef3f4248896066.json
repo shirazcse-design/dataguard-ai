@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 166,
+ "input_hash": "5cdb872c574aca9e10ce8c7cdc4669d38c74edbb70c2f38e58ef3f4248896066",
+ "latency_ms": 1783.3995828405023,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1017,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-02T05:48:25+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information may only be stored in company-managed systems approved by Information Security.\",\"evidence_id\":\"E2\",\"quote\":\"Confidential and Restricted information may only be stored in company-managed systems approved by Information Security.\"},{\"text\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\",\"evidence_id\":\"E4\",\"quote\":\"The company's managed OneDrive and SharePoint are the approved storage locations for company work.\"},{\"text\":\"Payment card data is Restricted information.\",\"evidence_id\":\"E1\",\"quote\":\"It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}
