@@ -47,9 +47,12 @@ def test_foundry_backend_replays_its_own_recording_or_says_it_is_not_recorded(ap
     assert r["decision"]["outcome"] != "ALLOW"  # a replay miss never becomes an ALLOW
 
 
-def test_simulated_fault_is_labelled(app):
-    r = app.dlp_investigate({"case_id": "D28"})["data"]
-    assert r["simulated_faults"] == ["activity_tool_error"]
+def test_simulated_stage_failure_is_labelled_and_routed_to_review(app):
+    r = app.dlp_investigate({"case_id": "D30"})["data"]
+    assert r["simulated_faults"] == ["identity_unavailable"]
+    assert {s["name"]: s["status"] for s in r["stages"]}["identity"] == "failed"
+    assert r["decision"]["outcome"] == "HUMAN_REVIEW"
+    assert "review:stage_failure" in r["decision"]["reason_codes"]
 
 
 def test_inputs_are_validated(app):
