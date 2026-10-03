@@ -221,7 +221,7 @@ function timelineCard(r) {
       h("span", { class: "dot" }, String(i + 1)),
       h("div", { class: "body" },
         h("div", { class: "head" }, h("b", {}, DLP_STAGE_TEXT[s.name] || s.name), statusBadge(s.status, s.status === "ok" ? "good" : s.status === "skipped" ? "muted" : "warn")),
-        h("div", { class: "meta" }, detail(s.detail), s.ms !== null && s.ms !== undefined ? ` · ${fmt(s.ms, 1)} ms` : ""))))),
+        h("div", { class: "meta" }, [detail(s.detail), s.ms !== null && s.ms !== undefined ? `${fmt(s.ms, 1)} ms` : ""].filter(Boolean).join(" · ")))))),
     h("p", { class: "note" }, "A failed or skipped stage is shown, not hidden; the harness turns it into a review trigger where the decision depends on it."));
 }
 
@@ -236,7 +236,7 @@ function contextCard(r) {
       h("dt", {}, "Categories"), h("dd", {}, c && c.categories.length ? c.categories.map((x) => h("span", { class: "chip" }, x)) : "none"),
       h("dt", {}, "User"), h("dd", {}, id ? `${id.role}, ${id.department} · ${id.employment_type}, ${id.employment_status.replace(/_/g, " ")} · ${id.privilege_level}` : statusBadge("identity unavailable", "warn")),
       h("dt", {}, "Behaviour"), h("dd", {}, b ? statusBadge(b.band, b.band === "NORMAL" ? "good" : b.band === "UNUSUAL" ? "bad" : "warn") : "-",
-        b && b.signals.length ? [" ", b.signals.map((x) => h("span", { class: "chip" }, x))] : "")),
+        b && b.signals.length ? [" ", ...b.signals.map((x) => h("span", { class: "chip" }, x))] : "")),
     h("p", { class: "note" }, "The document text never leaves UC4: the agent and the telemetry see only the level, categories and codes."));
 }
 
