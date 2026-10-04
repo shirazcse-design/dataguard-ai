@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY_BAND\",\"NO_SENSITIVITY_CONTEXT\",\"NO_POLICY_OR_APPROVAL_EVIDENCE\",\"LIMITED_CORROBORATION\"],\"rationale\":\"The authoritative anomaly result is NORMAL, not elevated, and the behavior finding states the activity is somewhat unusual but below the model threshold for elevated concern [AS][SERIES][STAT]. The main change is isolated new repository access (4 versus a baseline of 0), while other observed activity remains within or near the user's recent range, including files downloaded and sensitive files accessed [AS][SERIES][STAT]. There is no identity context, no data sensitivity result, no verified policy finding, no investigation finding, and no verified approval evidence in the bundle, so there is insufficient corroborating evidence to recommend a stronger outcome [AS].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"medium\",\"uncertainty\":[\"Identity context is unavailable, limiting access and role-based interpretation.\",\"Data sensitivity context is missing.\",\"No verified policy findings are present.\",\"No investigation findings or verified approvals are present.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. If additional verified context becomes available, especially data sensitivity, identity/access context, policy findings, or corroborating investigation results, reassess the activity.\"}",
+ "key": "fe9e003b5d5c513a57664c7732deb7bf33383cd9c0c3c7e510b705ebb0fe80e6",
+ "recorded_at": "2026-10-04T18:29:03+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1181,
+ "tokens_out": 275,
+ "tool_calls": []
+}

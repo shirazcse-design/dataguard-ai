@@ -1,0 +1,57 @@
+{
+ "final_text": null,
+ "key": "87380c8af0ee596d830a23d20091ac836325eac3773868e21bc72d7a02ce6942",
+ "recorded_at": "2026-10-04T20:54:17+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1280,
+ "tokens_out": 179,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-21",
+    "event_types": [
+     "repo_access_new",
+     "auth_failure",
+     "access_request",
+     "change_ticket",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-13"
+   },
+   "id": "call_t7BjdQkEe6Fy7ktmnxDY9wLo",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_pQP3u6fNBjYMe5Z2iW4vsdIC",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_yD2UQkFmiHGF74Db4jhSN4uu",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_gAbPAtt4cfZ8Qxcm9UymKsyw",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "new repository access approvals justifications access requests change tickets failed access attempts after-hours activity expected repositories data classes"
+   },
+   "id": "call_whSEASAfwMwI9xP7JIM6qwCq",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "query": "access to repositories outside expected repositories approval requirements least privilege denied or failed access attempt handling documentation justifications"
+   },
+   "id": "call_UZSgsgVJuJjdvVNyHGPSnaPc",
+   "name": "search_policy"
+  }
+ ]
+}

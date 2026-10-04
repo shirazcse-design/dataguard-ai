@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "f250916d71ee9130a003f648d02ddb9a35acf7c0db6df3e3cfe3145a8528634f",
+ "recorded_at": "2026-10-04T18:36:43+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1181,
+ "tokens_out": 151,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-25",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "after_hours_login",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-17"
+   },
+   "id": "call_qAFev0Bvp4R5Ii80gDOHOewE",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_Qgr1UyER3f75YgbUZMdeO7rU",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_OX3kXgiGxvc9PlTnL4XaLoHE",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_2ojtGWqImGvQQZiLCsfY0xMZ",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours repository access downloads approvals justifications expected access role repositories sensitive files bulk download"
+   },
+   "id": "call_CilCSt4zH7neCVCzDIiUV9iV",
+   "name": "search_policy"
+  }
+ ]
+}

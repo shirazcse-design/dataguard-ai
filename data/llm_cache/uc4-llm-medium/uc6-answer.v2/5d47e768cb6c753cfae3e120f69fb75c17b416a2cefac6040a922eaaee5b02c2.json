@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 182,
+ "input_hash": "5d47e768cb6c753cfae3e120f69fb75c17b416a2cefac6040a922eaaee5b02c2",
+ "latency_ms": 2089.362124912441,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 964,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-04T07:16:04+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Access is requested through the Identity portal and approved by the requester's line manager.\",\"evidence_id\":\"E3\",\"quote\":\"Access is requested through the Identity portal and approved by the requester's line manager.\"},{\"text\":\"Access to systems holding Confidential or Restricted information also requires approval from the data owner of that system.\",\"evidence_id\":\"E4\",\"quote\":\"Access to systems holding Confidential or Restricted information also requires approval from the data owner of that system.\"},{\"text\":\"When an employee changes role, their access is reviewed within 5 business days and access no longer needed is removed.\",\"evidence_id\":\"E5\",\"quote\":\"When an employee changes role, their access is reviewed within 5 business days and access no longer needed is removed.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

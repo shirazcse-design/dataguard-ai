@@ -1,0 +1,39 @@
+{
+ "final_text": null,
+ "key": "908469edd5c72c5e32e4a4620e359947bc52903fe7d71611594c500fa720a1fb",
+ "recorded_at": "2026-10-04T18:38:33+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1453,
+ "tokens_out": 151,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret elevated anomaly for 2026-08-12 against user's baseline and nearby days, especially failed access attempts and after-hours activity."
+   },
+   "id": "call_fVAcdDyyNq5rFhcPkHbbTiiM",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {
+    "focus_event_types": [
+     "auth_failure",
+     "after_hours_login",
+     "login",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Build a timeline for 2026-08-12 focused on failed access attempts and after-hours activity. Verify any approvals, justifications, or operational context, and identify gaps or conflicts."
+   },
+   "id": "call_aBg0ggYQbDu8U6O0ubVt05Z2",
+   "name": "delegate_investigation"
+  },
+  {
+   "arguments": {},
+   "id": "call_G3luD3bNxpseNG9iNvWleN4R",
+   "name": "get_identity_context"
+  }
+ ]
+}

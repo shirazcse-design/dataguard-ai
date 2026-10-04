@@ -1,0 +1,47 @@
+{
+ "final_text": null,
+ "key": "66e3773332bcabaa19dbf015c55e71c6d635d1eca7aa5ed7dc931c58af9b29f4",
+ "recorded_at": "2026-10-04T21:02:01+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1374,
+ "tokens_out": 206,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY on 2026-08-19 for u-2016 against the user's baseline, especially external upload volume, downloads, sensitive file access, and after-hours activity."
+   },
+   "id": "call_QaLC82jwTTlkKIAdQvyC6LWr",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {
+    "focus_event_types": [
+     "login",
+     "after_hours_login",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment",
+     "partner_transfer_approval"
+    ],
+    "question": "Build a timeline for u-2016 on 2026-08-19 covering logins, after-hours activity, file access/downloads, any external uploads, and any recorded approvals, justifications, comments, or change/access tickets. Note gaps or conflicts."
+   },
+   "id": "call_RsDold14M5uXEc2VHdypN3d2",
+   "name": "delegate_investigation"
+  },
+  {
+   "arguments": {},
+   "id": "call_DBPNzeQB61nbOaMMSYNmoD11",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_mlxzsVQEME7krpX8f2qiXieB",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

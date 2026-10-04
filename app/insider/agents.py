@@ -9,6 +9,10 @@ Enforced HERE, in code, not by prompt (the same harness patterns as UC1 and UC4)
   and reported (`unsupported_conclusion`), never shown as the agent's finding;
 * evidence ids are assigned by tools, never invented: a cited id that no tool returned is unknown.
 
+Tool-call arguments are written into the conversation in CANONICAL form (sorted keys): the replay
+cache stores them sorted, so a live model's key order must not change the replay key (found when a
+multi-argument tool call made a live UC2 run unreplayable, 2026-10-04).
+
 Each agent gets a FRESH conversation: a system prompt plus ONE typed payload. No agent sees another
 agent's conversation, and raw logs exist only in the tools of the agent that needs them.
 """
@@ -191,7 +195,7 @@ class BoundedAgent:
                         break
                     continue
                 msgs.append({"role": "assistant", "content": None, "tool_calls": [
-                    {"id": c.id, "type": "function", "function": {"name": c.name, "arguments": json.dumps(c.arguments)}}
+                    {"id": c.id, "type": "function", "function": {"name": c.name, "arguments": json.dumps(c.arguments, sort_keys=True)}}
                     for c in turn.tool_calls]})  # fmt: skip
                 stop = False
                 for c in turn.tool_calls:

@@ -1,0 +1,48 @@
+{
+ "final_text": null,
+ "key": "beb4ea0b771c6bd76fb75302380789393376e70d1acfadf148b8d7e53e8c1a7b",
+ "recorded_at": "2026-10-04T18:34:15+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1459,
+ "tokens_out": 206,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY on 2026-08-17 for user u-2027 against their baseline and recent history, especially external upload volume, downloads, and sensitive file access."
+   },
+   "id": "call_YxdbeAnriR0727HJQBS4Kt3i",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_RUk2SGJhMGDIhDWZDOIcji1a",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_7D7xndmHLpIXyDTLmoyymCFY",
+   "name": "check_data_sensitivity"
+  },
+  {
+   "arguments": {
+    "focus_event_types": [
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "partner_transfer_approval",
+     "justification_note",
+     "change_ticket",
+     "access_request",
+     "log_comment",
+     "repo_access_new",
+     "login",
+     "after_hours_login"
+    ],
+    "question": "Build a timeline for 2026-08-17 around the anomalous activity for user u-2027. Verify whether the 800 MB external upload, related downloads/accesses, and any approvals or justifications are present, and identify gaps or conflicts."
+   },
+   "id": "call_MBCc7LGURAkGK4CLd3wJse8N",
+   "name": "delegate_investigation"
+  }
+ ]
+}

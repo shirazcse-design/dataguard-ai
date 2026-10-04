@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 136,
+ "input_hash": "f639ab1b5cd95268e600de76f20123c355c79764f2522b5e7025c115528c8d3e",
+ "latency_ms": 2557.525916956365,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1009,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-04T07:21:53+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Restricted information may be shared only with approval from both the data owner and the Chief Privacy Officer.\",\"evidence_id\":\"E5\",\"quote\":\"Sharing Restricted information requires approval from both the data owner and the Chief Privacy Officer.\"},{\"text\":\"Trade secrets are not mentioned in the provided evidence, but Restricted information includes \\\"authentication credentials and secrets.\\\"\",\"evidence_id\":\"E1\",\"quote\":\"It includes protected health information (PHI), payment card data, authentication credentials and secrets, and information about planned mergers and acquisitions.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

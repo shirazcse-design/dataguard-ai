@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "23f2016cc44da242bd176c017eecee09f88e3cea8eb1e066fcf0c30e801d7f93",
+ "recorded_at": "2026-10-04T19:58:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3810,
+ "tokens_out": 16,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_qoZ3AKWJtImzCqMHgJYUiFHh",
+   "name": "request_risk_assessment"
+  }
+ ]
+}

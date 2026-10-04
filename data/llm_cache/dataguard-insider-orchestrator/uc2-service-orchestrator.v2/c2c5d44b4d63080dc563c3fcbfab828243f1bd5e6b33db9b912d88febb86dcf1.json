@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "c2c5d44b4d63080dc563c3fcbfab828243f1bd5e6b33db9b912d88febb86dcf1",
+ "recorded_at": "2026-10-04T21:02:49+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2071,
+ "tokens_out": 17,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_pl5n9uQ1fufxxPr5z3kDqH9M",
+   "name": "request_risk_assessment"
+  }
+ ]
+}

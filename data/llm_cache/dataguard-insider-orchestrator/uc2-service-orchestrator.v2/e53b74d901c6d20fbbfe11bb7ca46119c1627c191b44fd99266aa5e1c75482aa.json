@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "e53b74d901c6d20fbbfe11bb7ca46119c1627c191b44fd99266aa5e1c75482aa",
+ "recorded_at": "2026-10-04T18:49:54+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 4905,
+ "tokens_out": 27,
+ "tool_calls": [
+  {
+   "arguments": {
+    "reason": "high_impact_needs_analyst"
+   },
+   "id": "call_CJN2jRIvc8xfDpr2J1sEOPZp",
+   "name": "request_human_review"
+  }
+ ]
+}

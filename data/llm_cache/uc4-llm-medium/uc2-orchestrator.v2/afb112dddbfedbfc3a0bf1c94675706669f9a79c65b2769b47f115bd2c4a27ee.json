@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "afb112dddbfedbfc3a0bf1c94675706669f9a79c65b2769b47f115bd2c4a27ee",
+ "recorded_at": "2026-10-04T18:32:38+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1455,
+ "tokens_out": 101,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret HIGH_ANOMALY on 2026-08-05 for u-2005 against personal baseline and nearby days, especially external upload volume, new repository access, after-hours activity, and files downloaded."
+   },
+   "id": "call_Sn1bHvuOEVUndVJDqlREvN60",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_NAMjZnUg0paSqvGWpOpICTdE",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_osmB8SKV8nbKpKl8xDAWYq7Y",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

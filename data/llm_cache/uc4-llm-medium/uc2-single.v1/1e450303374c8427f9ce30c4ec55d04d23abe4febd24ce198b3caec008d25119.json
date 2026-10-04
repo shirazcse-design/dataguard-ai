@@ -1,0 +1,57 @@
+{
+ "final_text": null,
+ "key": "1e450303374c8427f9ce30c4ec55d04d23abe4febd24ce198b3caec008d25119",
+ "recorded_at": "2026-10-04T18:41:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1499,
+ "tokens_out": 149,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_zsNo6OnzsFs4kaTSADHevzmQ",
+   "name": "get_behavior_profile"
+  },
+  {
+   "arguments": {},
+   "id": "call_6suiKNFIX4jWbviE89P2Dqy6",
+   "name": "get_statistical_baseline_result"
+  },
+  {
+   "arguments": {},
+   "id": "call_uLUT4iZVDJ1dFZN6SySOfm6R",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_yYNztBuxjyPbh1Cj9ZrOdAvk",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_RLpnwenmpovjZeMfkosuZprO",
+   "name": "get_activity_series"
+  },
+  {
+   "arguments": {
+    "end_date": "2026-08-13",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "travel_record",
+     "justification_note"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-05"
+   },
+   "id": "call_ha6x9r7cL1TMms1P18ovJQNO",
+   "name": "search_security_logs"
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "final_text": null,
+ "key": "97e64b7b86596bb28bd204c0c82348bd210c7d2cb0ddbb8ca43833d7fbd3d658",
+ "recorded_at": "2026-10-04T21:00:57+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1227,
+ "tokens_out": 159,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-26",
+    "event_types": [
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-18"
+   },
+   "id": "call_R20X4diFDpi7TuzaHCU0wTPF",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_RF9wsdji55luniS2I8FrCcgd",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_VjQJH3QkjG5mVm3aU5zrPnsx",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_KZsPrOgdCUgcan088GwDDLNp",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "policy for bulk downloads sensitive file access external uploads approvals justifications access failures least privilege need to know"
+   },
+   "id": "call_kfmLp6PvzAFqs7kjY5OE7mQe",
+   "name": "search_policy"
+  }
+ ]
+}

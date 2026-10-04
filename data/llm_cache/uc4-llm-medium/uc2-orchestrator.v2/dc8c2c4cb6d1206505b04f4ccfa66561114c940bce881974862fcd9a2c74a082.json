@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "dc8c2c4cb6d1206505b04f4ccfa66561114c940bce881974862fcd9a2c74a082",
+ "recorded_at": "2026-10-04T18:36:24+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3931,
+ "tokens_out": 18,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "external_transfer"
+   },
+   "id": "call_uGKnZKamgqcQrMMVFFQmtRDv",
+   "name": "check_policy"
+  }
+ ]
+}

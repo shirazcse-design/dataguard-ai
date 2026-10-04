@@ -225,3 +225,123 @@ def test_foundry_setup_guide_matches_the_code():
         for t in tool_schemas(role):
             assert f"#### Tool `{t['function']['name']}`" in doc
             assert json.dumps(t["function"]["parameters"], indent=2) in doc
+
+
+def test_cli_accepts_the_recording_script_arguments(monkeypatch):
+    """The P8 script's exact invocations must parse (a missing flag once stopped a live run)."""
+    from app.insider import cli
+
+    seen = []
+    monkeypatch.setattr(cli, "cmd_record", lambda a: seen.append(a) or 0)
+    monkeypatch.setattr(cli, "cmd_eval", lambda a: seen.append(a) or 0)
+    for argv in (["record", "--arch", "full", "--label", "full36"],
+                 ["record", "--arch", "single,lean", "--ids", "I01,I13", "--label", "subset12"],
+                 ["record", "--arch", "full", "--ids", "I13", "--backend", "foundry-service",
+                  "--tenant-id", "t", "--label", "foundry4"],
+                 ["eval", "--mode", "replay", "--arch", "full"]):  # fmt: skip
+        assert cli.main(argv) == 0
+    assert seen[2].tenant_id == "t" and seen[0].label == "full36"
+
+
+def test_a_recorded_live_run_replays_exactly_with_multi_argument_tool_calls(tmp_path):
+    """Record with a 'live' planner whose argument key order differs from sorted order, then
+    replay: every turn must hit the cache and the outcome must match (replay fidelity)."""
+    from app.insider.service import build_services
+    from app.policy.agent import ReplayAgentClient
+
+    turns = [AgentTurn(tool_calls=[ParsedToolCall("c1", "search_security_logs",
+                                                  {"start_date": "2026-08-24", "end_date": "2026-08-25",
+                                                   "limit": 20, "event_types": ["external_upload"]})],
+                       model_id="m"),
+             final({"timeline": [], "observed_facts": [], "data_findings": [], "policy_findings": [],
+                    "correlated_events": [], "conflicting_evidence": [], "missing_evidence": [],
+                    "evidence_ids": [], "confidence": "low"})]  # fmt: skip
+    schemas = tool_schemas("investigation")
+
+    def run_with(planner):
+        p = offline_planners()
+        p["investigation"] = planner
+        p["orchestrator"] = MockAgentClient([call("delegate_investigation", 1, question="Timeline of the case day.",
+                                                  focus_event_types=["external_upload"]),
+                                             call("request_risk_assessment", 2)])  # fmt: skip
+        inv = build_investigator("offline", planners=p)
+        inv.svc = build_services("offline")
+        return inv.investigate(CASES["I13"])
+
+    live = ReplayAgentClient(tmp_path, "m", "v", schemas, inner=MockAgentClient(list(turns)))
+    first = run_with(live)
+    replay = ReplayAgentClient(tmp_path, "m", "v", schemas)
+    second = run_with(replay)
+    inv = next(x for x in second.runs if x.name.endswith("investigator"))
+    assert inv.stopped_reason == "final_answer"  # no replay_miss
+    assert second.decision.outcome == first.decision.outcome
+
+
+def test_orchestrator_budget_exhaustion_still_gets_a_risk_assessment():
+    """Fix 2: an orchestrator that exhausts its budget after specialist work still yields a Risk
+    Agent recommendation (graceful stop), recorded as an early stop, not an agent failure."""
+    turns = [call("delegate_behavior", 1)] + [call("get_identity_context", n) for n in range(2, 12)]
+    r = with_planner("orchestrator", MockAgentClient(turns)).investigate(CASES["I13"])
+    assert r.runs[0].stopped_reason.endswith("budget_exceeded")  # turn or tool budget
+    assert r.ctx.risk is not None and r.ctx.early_stop.endswith("budget_exceeded")
+    assert any(c.startswith("orchestrator_stopped_early") for c in r.decision.reason_codes)
+    assert "review:agent_failure" not in r.decision.reason_codes
+
+
+def test_uc6_conflict_not_material_at_a_unanimous_level():
+    """Fix 3: UC6 CONFLICT_REVIEW with unanimous mapped effects at this level is not material."""
+    from app.dlp.schemas import PolicyContext
+    from app.insider.services import EvidenceStore, PolicyService
+
+    class Intel:
+        def __init__(self, effects):
+            self.effects = effects
+
+        def assess(self, q, dest, level, mapping):
+            kinds = {e["effect"] for e in self.effects}
+            return PolicyContext(question=q, status="CONFLICT_REVIEW", claims=[], effects=self.effects,
+                                 effect="unknown", conflict=True, conflict_reason="uc6_conflict_review",
+                                 citations=[], cited_sections=[], review_reasons=[]) if kinds else None  # fmt: skip
+
+    from app.dlp.config import load_dlp_configs
+
+    dlp, mapping, _, _ = load_dlp_configs()
+    svc = PolicyService.__new__(PolicyService)
+    svc.dlp_cfg, svc.mapping = dlp, mapping
+    svc.intel = Intel(
+        [{"section": "a", "effect": "prohibited"}, {"section": "b", "effect": "prohibited"}]
+    )
+    r = svc.external_transfer("HIGHLY_CONFIDENTIAL", [], "personal_cloud", EvidenceStore())
+    assert (
+        r.conflict is False
+        and r.effect == "prohibited"
+        and r.conflict_note == "uc6_conflict_not_material_at_level"
+    )
+    svc.intel = Intel(
+        [{"section": "a", "effect": "prohibited"}, {"section": "b", "effect": "allowed"}]
+    )
+    r = svc.external_transfer("INTERNAL", [], "personal_cloud", EvidenceStore())
+    assert r.conflict is True  # a genuine disagreement at this level still goes to review
+
+
+def test_only_evidence_cited_conflicts_force_review():
+    """Fix 4."""
+
+    def inv_with(conflicts):
+        return final({"timeline": [], "observed_facts": [], "data_findings": [], "policy_findings": [],
+                      "correlated_events": [], "conflicting_evidence": conflicts, "missing_evidence": [],
+                      "evidence_ids": [], "confidence": "medium"})  # fmt: skip
+
+    orch = [
+        call("delegate_investigation", 1, question="Timeline of the case day."),
+        call("request_risk_assessment", 2),
+    ]
+    uncited = MockAgentClient([call("search_security_logs", 1, start_date="2026-08-25", end_date="2026-08-25"),
+                               inv_with([{"text": "something seems off", "evidence_ids": []}])])  # fmt: skip
+    p = offline_planners()
+    p["orchestrator"], p["investigation"] = MockAgentClient(list(orch)), uncited
+    r = build_investigator("offline", planners=p).investigate(
+        CASES["I13"]
+    )  # HIGH band: rule applies
+    assert "review:specialist_conflict" not in r.decision.reason_codes
+    assert any(c.startswith("conflicts_uncited_logged") for c in r.decision.reason_codes)

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY\",\"EXPECTED_DATA_ACCESS\",\"NO_POLICY_OR_APPROVAL_EVIDENCE\",\"NO_EXTERNAL_TRANSFER_SIGNAL\"],\"rationale\":\"Monitoring is appropriate because the authoritative anomaly remains in the NORMAL band with only modest deviations from this user's baseline (AS, STAT). The accessed data is CONFIDENTIAL PII, but that data class is expected for this user's People Operations role and expected repositories (D1, IDN). The behavior finding notes no external upload volume, no new repository access, and no failed access attempts in the recent series (SERIES). There are no verified policy findings, investigation findings, or verified approvals in the bundle, so there is no additional corroborating evidence to raise this beyond monitoring.\",\"evidence_ids\":[\"AS\",\"STAT\",\"SERIES\",\"D1\",\"IDN\"],\"confidence\":\"high\",\"uncertainty\":[\"A single after-hours event is present and is new within the recent 7-day series, but its magnitude is limited to 1 event and the overall anomaly remains NORMAL (AS, SERIES).\",\"No policy findings or investigation findings are present, limiting corroboration beyond the behavioral context.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. If future activity shows stronger anomaly severity, external transfer behavior, access outside expected repositories, or conflicting policy/investigation evidence, reassess for analyst investigation.\"}",
+ "key": "cdf69c2dd243a3b679a5a0b3e95fbf348b75a9040a44b0bbe3884d3b30f18945",
+ "recorded_at": "2026-10-04T18:26:17+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1541,
+ "tokens_out": 287,
+ "tool_calls": []
+}

@@ -5,10 +5,10 @@ model_tier: mid                     # uc4-llm-medium for every agent (fair 1/2/4
 agents:
   orchestrator:
     name: dataguard-insider-orchestrator
-    prompt_version: uc2-orchestrator.v1
-    prompt_file: prompts/uc2/orchestrator.v1.md
-    max_turns: 8
-    max_tool_calls: 7
+    prompt_version: uc2-orchestrator.v2   # v2 (2026-10-04): budget 7 -> 10 after live run 1 (12/36 exhausted)
+    prompt_file: prompts/uc2/orchestrator.v2.md
+    max_turns: 10
+    max_tool_calls: 10
     max_delegations: {behavior: 1, investigation: 2, risk: 1}
     max_consecutive_tool_failures: 2
   behavior:
@@ -20,8 +20,8 @@ agents:
     max_consecutive_tool_failures: 2
   investigation:
     name: dataguard-insider-investigator
-    prompt_version: uc2-investigator.v1
-    prompt_file: prompts/uc2/investigator.v1.md
+    prompt_version: uc2-investigator.v2   # v2 (2026-10-04): defines conflicts (live run 2: supporting findings reported as conflicts)
+    prompt_file: prompts/uc2/investigator.v2.md
     max_turns: 8
     max_tool_calls: 8
     max_consecutive_tool_failures: 2

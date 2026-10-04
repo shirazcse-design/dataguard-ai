@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "680c97168fcabe9fe0a4b4cd194ac4050e42deeaa702654d60a3c548bcac02d4",
+ "recorded_at": "2026-10-04T18:33:12+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1459,
+ "tokens_out": 98,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY relative to this user's baseline and recent history, especially the 800 MB external upload, increased downloads, and sensitive file access on 2026-08-17."
+   },
+   "id": "call_Ae2CBYGO6c6X9OPgid2qhCNT",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_y3bBrDzFgH6FKuK3jQU0GNdL",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_nIedWIiT2fInxtyWUsykqWrX",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

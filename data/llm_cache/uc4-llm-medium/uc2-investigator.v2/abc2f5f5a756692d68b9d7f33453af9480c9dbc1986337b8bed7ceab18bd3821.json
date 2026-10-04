@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "abc2f5f5a756692d68b9d7f33453af9480c9dbc1986337b8bed7ceab18bd3821",
+ "recorded_at": "2026-10-04T20:58:40+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1290,
+ "tokens_out": 152,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-21",
+    "event_types": [
+     "after_hours_login",
+     "external_upload",
+     "partner_transfer_approval",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "repo_access_new",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-13"
+   },
+   "id": "call_vbaJOjMDhZ6EdrtJdI4xnt1L",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_qMdrHp8ea9qiWyFth8ZLvYU9",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_IfZ8GrCKoxpurvYxPeGwmdPj",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_wYcwVGk6OfKHIhe10N337WKs",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access external upload approvals justifications partner transfer expected repositories finance sensitive data"
+   },
+   "id": "call_lG8O8Y2YBP6KWsXa2Tp9szho",
+   "name": "search_policy"
+  }
+ ]
+}

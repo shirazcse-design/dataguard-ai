@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "c180490cf321757feb1a522d2a70f56751d00503590a320c288f8588d748b45f",
+ "recorded_at": "2026-10-04T18:22:36+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1210,
+ "tokens_out": 169,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-26",
+    "event_types": [
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-18"
+   },
+   "id": "call_hKLfPRUZr0JeZhYhfeghpesv",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_zfYdBmR3HGajqDkOF9Tjwkbs",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access external uploads bulk downloads failed access attempts approvals justifications change tickets access requests sensitive data handling repository access"
+   },
+   "id": "call_xNO7Md5SX9tiMtTfLdptUPY1",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_WTwCjmLGs3FJDMhcwfw2W3zC",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_hx9zU2hQdk6fAkVt5etf6uKK",
+   "name": "get_permissions"
+  }
+ ]
+}

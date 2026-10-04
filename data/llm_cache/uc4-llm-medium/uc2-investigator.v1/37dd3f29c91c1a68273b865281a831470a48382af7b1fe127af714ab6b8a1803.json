@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "37dd3f29c91c1a68273b865281a831470a48382af7b1fe127af714ab6b8a1803",
+ "recorded_at": "2026-10-04T18:34:25+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1206,
+ "tokens_out": 158,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "partner_transfer_approval",
+     "justification_note",
+     "change_ticket",
+     "access_request",
+     "log_comment",
+     "repo_access_new",
+     "login",
+     "after_hours_login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_mClv9NiFVr2f9J9xPFqKap6j",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_fKFtwm0CCLnReOgg7gj9HHtz",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_WZS0R7BJoJsM82trIiFyEFZx",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_lSuMrXotaQqU4GA6y68xDCP4",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "external uploads approvals justifications sensitive data downloads repository access after-hours login"
+   },
+   "id": "call_yNBIByvHLLbKKdAeVlu7WdNO",
+   "name": "search_policy"
+  }
+ ]
+}

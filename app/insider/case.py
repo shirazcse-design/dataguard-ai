@@ -67,6 +67,7 @@ class CaseContext:
     guardrail_events: list[dict[str, str]] = field(default_factory=list)
     logs_seen: dict[str, dict[str, Any]] = field(default_factory=dict)  # event id -> metadata
     policy_tool: Any = None  # UC6 PolicyTools for this case (agentic search)
+    early_stop: str | None = None  # the orchestrator stopped before requesting the risk assessment
 
     # -- facts -----------------------------------------------------------------------------------
     @property

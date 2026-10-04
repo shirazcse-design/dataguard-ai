@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"INVESTIGATE\",\"reason_codes\":[\"HIGH_ANOMALY\",\"SENSITIVE_DATA_ACCESS\",\"AFTER_HOURS_ACTIVITY\",\"NEW_REPOSITORY_ACCESS\",\"NO_VERIFIED_APPROVAL\"],\"rationale\":\"A standard analyst investigation is warranted because the bundle shows a high anomaly user-day with multiple correlated deviations from the user's recent baseline, including elevated downloads, elevated sensitive-file access, first observed new repository access, and after-hours activity [AS, SERIES, STAT]. The accessed data includes HIGHLY_CONFIDENTIAL files in the FINANCIAL_PCI category, which is aligned to the user's expected data classes but still increases risk significance for review [D1, D2, IDN]. There is no verified approval in the bundle to justify the unusual pattern [AS, D1, D2]. Escalation is not supported because the bundle does not contain evidence of an external transfer or similarly strong correlated exfiltration indicators, and human review for unreliable evidence is not required because the findings are internally consistent and high-confidence [AS, SERIES, STAT].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\",\"D1\",\"D2\",\"IDN\"],\"confidence\":\"high\",\"uncertainty\":[],\"conflicting_findings\":[],\"recommended_human_action\":\"Review the 2026-08-27 activity in context: confirm which repository was newly accessed, validate whether the after-hours work and elevated downloads were business-related, and check for any missing documented approval or task context associated with access to HIGHLY_CONFIDENTIAL FINANCIAL_PCI files.\"}",
+ "key": "60c31efb7c9648ed899d395ef4df5c3acd6545ac1ddedb7f6566d1cf5b1c03a9",
+ "recorded_at": "2026-10-04T18:27:08+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1624,
+ "tokens_out": 320,
+ "tool_calls": []
+}

@@ -375,9 +375,17 @@ class PolicyService:
 
         q = policy_question(level, categories, dest_class, self.dlp_cfg, self.mapping)
         ctx = self.intel.assess(q, dest_class, level, self.mapping)
+        effect, conflict, note = ctx.effect, ctx.conflict, ctx.conflict_reason
+        kinds = {e["effect"] for e in ctx.effects}
+        if ctx.conflict and ctx.conflict_reason == "uc6_conflict_review" and len(kinds) == 1:
+            # Level-aware rule (approved 2026-10-04): UC6 reports the corpus conflict (Acceptable
+            # Use allows INTERNAL data in personal cloud; DLP prohibits it), but at THIS case's
+            # level the versioned mapping of UC6's own VERIFIED citations is unanimous. The
+            # conflict is not material here; UC6's answer and citations stay as returned.
+            effect, conflict, note = kinds.pop(), False, "uc6_conflict_not_material_at_level"
         return VerifiedPolicyResult(topic="external_transfer", question=q, status=ctx.status,
-                                    claims=self._claims(ctx.claims, store), effect=ctx.effect,
-                                    conflict=ctx.conflict, insufficient=ctx.status == "INSUFFICIENT_EVIDENCE")  # fmt: skip
+                                    claims=self._claims(ctx.claims, store), effect=effect, conflict=conflict,
+                                    insufficient=ctx.status == "INSUFFICIENT_EVIDENCE", conflict_note=note)  # fmt: skip
 
     def topic(self, topic: str, store: EvidenceStore) -> VerifiedPolicyResult:
         q = POLICY_TOPICS[topic]

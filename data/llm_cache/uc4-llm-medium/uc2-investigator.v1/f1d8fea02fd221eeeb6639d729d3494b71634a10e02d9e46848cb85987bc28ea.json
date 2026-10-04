@@ -1,0 +1,51 @@
+{
+ "final_text": null,
+ "key": "f1d8fea02fd221eeeb6639d729d3494b71634a10e02d9e46848cb85987bc28ea",
+ "recorded_at": "2026-10-04T18:38:43+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1168,
+ "tokens_out": 145,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-13",
+    "event_types": [
+     "auth_failure",
+     "after_hours_login",
+     "login",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-05"
+   },
+   "id": "call_8qYPRN43NPWrWlVKJmUgzy0Q",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_4aiSzlkiPXKBj04Bgem7gD1F",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_uVrFY9sEOPfMg27iieQNHcvH",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access failed access attempts approvals justifications operational context change ticket access request"
+   },
+   "id": "call_5atv84cFgTOgO5Sq1X23s7s3",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_nBcAhb8OnUC1PukLg4IQ6b6v",
+   "name": "classify_case_files"
+  }
+ ]
+}

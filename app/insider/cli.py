@@ -208,7 +208,13 @@ def cmd_register(args) -> int:
     """LIVE: create a new version of each UC2 agent in Foundry Agent Service (additive)."""
     from .service import register_agents
 
-    print(json.dumps(register_agents(args.tenant_id), indent=1))
+    roles = tuple(r.strip() for r in args.roles.split(",")) if args.roles else None
+    print(
+        json.dumps(
+            register_agents(args.tenant_id, roles) if roles else register_agents(args.tenant_id),
+            indent=1,
+        )
+    )
     return 0
 
 
@@ -243,6 +249,8 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument(
         "--backend", choices=("chat-completions", "foundry-service"), default="chat-completions"
     )
+    r.add_argument("--label", default="run")
+    r.add_argument("--tenant-id", default=None)
     r.set_defaults(func=cmd_record)
     a = sub.add_parser("agent").add_subparsers(dest="sub", required=True)
     s = a.add_parser("schemas")
@@ -262,6 +270,9 @@ def main(argv: list[str] | None = None) -> int:
         "register", help="LIVE: create a new version of the four UC2 agents in Foundry"
     )
     rg.add_argument("--tenant-id", default=None)
+    rg.add_argument(
+        "--roles", default="", help="comma list of roles to register (default: all four)"
+    )
     rg.set_defaults(func=cmd_register)
     args = p.parse_args(argv)
     return args.func(args)

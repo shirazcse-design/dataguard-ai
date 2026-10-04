@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "b249aeec6ab707115918fa02b3a064c3eeebdfc86114e3bbe3eccd1c5cc0fe08",
+ "recorded_at": "2026-10-04T20:56:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1309,
+ "tokens_out": 162,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-15",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-07"
+   },
+   "id": "call_Wms8KA6lpuDf22oDi89jer8m",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_oQkRY7G2HixHHc2hA70WOarp",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_Y1R5P3ecO6EhU5CVcEY6C3ou",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_ZtYKCj2YV4v64MXgOm1KdK9d",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access approvals change tickets external upload sensitive data repositories expected repositories downloads justification requirements"
+   },
+   "id": "call_hjo8sQZQFfDQeVfx3mNlZiDe",
+   "name": "search_policy"
+  }
+ ]
+}

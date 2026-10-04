@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "359e104b057c640c6f5d9e934ebda6bd0e2dd33075def4a4c6362b53dd7fcacf",
+ "recorded_at": "2026-10-04T20:54:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1319,
+ "tokens_out": 161,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "partner_transfer_approval",
+     "justification_note",
+     "change_ticket",
+     "access_request",
+     "log_comment",
+     "repo_access_new",
+     "login",
+     "after_hours_login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_6vmezX441oWK69MPrkXDVInm",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_LGbGfP96HWoTsscblKaJmLzJ",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_lzkEP4a9eKI8eLYxJGBDbAEo",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_zDtWeLRwLuS3jOwVzlamtRBQ",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "external upload approvals sensitive files downloads repository access expected repositories data classes justification approvals partner transfer"
+   },
+   "id": "call_zlIbTevnALfrTOQzqWCI37rz",
+   "name": "search_policy"
+  }
+ ]
+}

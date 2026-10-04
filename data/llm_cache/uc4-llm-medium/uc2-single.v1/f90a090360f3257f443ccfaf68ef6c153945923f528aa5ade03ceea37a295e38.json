@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "f90a090360f3257f443ccfaf68ef6c153945923f528aa5ade03ceea37a295e38",
+ "recorded_at": "2026-10-04T18:40:46+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1501,
+ "tokens_out": 132,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_d9UFffJUV1Xn8b1BTBoq8S1z",
+   "name": "get_behavior_profile"
+  },
+  {
+   "arguments": {},
+   "id": "call_3YAwAArUs7bAFrznCAhfJ9u8",
+   "name": "get_statistical_baseline_result"
+  },
+  {
+   "arguments": {},
+   "id": "call_bp0x1YwVeAgB5nDkqd7EEGLJ",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_42RlZPeLZNxtJPcOYQPhJtMU",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {},
+   "id": "call_m6YbUhdjOmb1YPdnj76ONgOp",
+   "name": "check_data_sensitivity"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_HeMelWeuW2xI6nXFCdAsV2mO",
+   "name": "get_activity_series"
+  },
+  {
+   "arguments": {
+    "end_date": "2026-08-14",
+    "limit": 50,
+    "start_date": "2026-08-06"
+   },
+   "id": "call_TVD9ssv9hBPZc7Dmqasl140w",
+   "name": "search_security_logs"
+  }
+ ]
+}

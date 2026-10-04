@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "dedc78aac0532e7382bfd70a998c40ebbe0fa52b5f2dc98e07eb04d166855ab3",
+ "recorded_at": "2026-10-04T18:43:20+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3745,
+ "tokens_out": 50,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_nWJIs8gEO9r60KTe55KmpOJq",
+   "name": "check_policy"
+  },
+  {
+   "arguments": {
+    "topic": "monitoring"
+   },
+   "id": "call_wNZdEp3CREQ1Nio8ZvvtFSAf",
+   "name": "check_policy"
+  }
+ ]
+}

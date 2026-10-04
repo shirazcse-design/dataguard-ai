@@ -1,0 +1,46 @@
+{
+ "final_text": null,
+ "key": "d4e35658502815ea4dab8cc9ba15bf818b9d3bbe50adcf6b72ed895921356543",
+ "recorded_at": "2026-10-04T21:00:45+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1377,
+ "tokens_out": 200,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY on 2026-08-25 for subject u-2043 against their baseline, especially external upload volume, download spike, sensitive file access, and failed access attempts."
+   },
+   "id": "call_Fmrkzrnd2ehXDw4KA9YHAHyj",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {
+    "focus_event_types": [
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Build a timeline for 2026-08-25 for subject u-2043 covering downloads, sensitive file access, any external upload destinations/transfers, failed access attempts, approvals/justifications/change tickets, and note any gaps or conflicts."
+   },
+   "id": "call_9H3kNkQgGSaNoPQ3UmKuo8MS",
+   "name": "delegate_investigation"
+  },
+  {
+   "arguments": {},
+   "id": "call_NOmmjsIcoAIVEk5k9qJ6d6Hl",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_a3GSBag9BVGWOmalU32Z1V4W",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

@@ -132,7 +132,10 @@ def score_case(case: dict[str, Any], r: Any) -> dict[str, Any]:
         **{k: v for k, v in r.totals().items() if k != "cost_usd"}, "cost_usd": "NOT_ESTIMATED",
         "latency_ms": round(r.ms, 1),
         "agents": [{"name": run.name, "stopped": run.stopped_reason, "tool_calls": run.tool_calls, "turns": run.turns,
-                    "tokens_in": run.tokens_in, "tokens_out": run.tokens_out} for run in r.runs],
+                    "tokens_in": run.tokens_in, "tokens_out": run.tokens_out,
+                    "tools": [s["tool"] + ("" if s["ok"] else f"!{s['error']}") for s in run.steps],
+                    "output": run.output.model_dump() if run.output is not None else None} for run in r.runs],
+        "early_stop": ctx.early_stop,
     }  # fmt: skip
 
 

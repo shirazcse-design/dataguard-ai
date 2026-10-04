@@ -1,0 +1,50 @@
+{
+ "final_text": null,
+ "key": "8a0b3a97c96db99c50829f851806680f2fac7bde255438ed021e77016867e040",
+ "recorded_at": "2026-10-04T18:45:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1181,
+ "tokens_out": 144,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-27",
+    "event_types": [
+     "after_hours_login",
+     "external_upload",
+     "partner_transfer_approval",
+     "change_ticket",
+     "log_comment",
+     "justification_note"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-19"
+   },
+   "id": "call_mX08LuuGmdIlW5mRQLDUFCn5",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_6g9vKMQK1f3box8LBSoXq3Yg",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {
+    "query": "after-hours activity external upload approvals tickets routine business context partner transfer sensitive files"
+   },
+   "id": "call_3JKnE4olPbff4UHlYQKeaeAU",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_sUByzQBcu3xE2yosKLegqDbM",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_FRL17VE6YqURWa4cWtbEgxBu",
+   "name": "get_permissions"
+  }
+ ]
+}

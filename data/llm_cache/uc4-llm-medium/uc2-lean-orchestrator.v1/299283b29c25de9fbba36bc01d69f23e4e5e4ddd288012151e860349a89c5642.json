@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY_BAND\",\"WITHIN_ROLE_EXPECTATIONS\",\"INTERNAL_DATA_ONLY\",\"NO_EXTERNAL_TRANSFER_SIGNAL\",\"NO_STRONG_CORRELATED_EVIDENCE\"],\"rationale\":\"The authoritative model score for the case date is in the NORMAL band, with only modest deviation in sensitive files accessed (5 vs baseline median 3) and near-baseline downloads (34 vs 32.5) [AS]. The subject is a Systems Administrator with privileged access, and the expected data classes include INTERNAL, SOURCE_CODE, and CREDENTIALS_SECRETS, with broad repository access expected for the role [IDN]. The reviewed file in scope is classified as INTERNAL with high confidence and no review requirement [D1]. On the case date and across the recent activity series, there is no external upload volume, no new repository access on the case date, and no failed access attempts on the case date [AS, SERIES]. Based on the available verified evidence, there is not strong correlated evidence supporting escalation or further investigation.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"IDN\",\"D1\"],\"confidence\":\"high\",\"uncertainty\":[\"Referral basis is not described in the provided evidence.\",\"Only one file reference is in scope for sensitivity review, so file-level coverage is limited to that referenced item.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring and review future activity for material changes or new correlated evidence.\",\"behavior_summary\":\"On 2026-08-18, the user showed 34 downloads, accessed 5 sensitive files, had 1 after-hours activity event, 0 MB external uploads, 0 new repository accesses, 0 failed access attempts, and touched 5 repositories; these values are generally close to the user’s baseline and consistent with a privileged IT Operations systems administrator role [AS, IDN].\"}",
+ "key": "299283b29c25de9fbba36bc01d69f23e4e5e4ddd288012151e860349a89c5642",
+ "recorded_at": "2026-10-04T18:46:47+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3081,
+ "tokens_out": 385,
+ "tool_calls": []
+}

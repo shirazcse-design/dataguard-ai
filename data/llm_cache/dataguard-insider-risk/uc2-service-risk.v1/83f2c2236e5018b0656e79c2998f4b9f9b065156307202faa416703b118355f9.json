@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"ANOMALY_NORMAL\",\"BEHAVIOR_CONSISTENT_WITH_BASELINE\",\"NO_EXTERNAL_TRANSFER_SIGNAL\",\"MISSING_CONTEXT_NONBLOCKING\"],\"rationale\":\"The authoritative anomaly result is in the NORMAL band with a score below the elevated threshold [AS]. The behavior finding states the activity was generally consistent with the user's historical pattern, and the statistical detector did not flag the day [AS][STAT]. Observed activity shows downloads and after-hours activity were near recent norms, while sensitive file access was only a modest increase and still within the recent observed range [SERIES]. There is no observed external upload volume on the day, reducing urgency for immediate investigation [SERIES]. Identity and data sensitivity context are unavailable, which limits risk context, but the available evidence is internally consistent and does not by itself warrant escalation or standard investigation [AS][SERIES][STAT].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"high\",\"uncertainty\":[\"Identity context is unavailable because identity.available is false.\",\"Data sensitivity context is unavailable because data_sensitivity is null.\",\"No policy or verified approval records are present, so no policy-based justification applies.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. No immediate analyst investigation is indicated based on the current bundle; review future activity for changes if additional context becomes available.\"}",
+ "key": "83f2c2236e5018b0656e79c2998f4b9f9b065156307202faa416703b118355f9",
+ "recorded_at": "2026-10-04T21:02:53+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1301,
+ "tokens_out": 287,
+ "tool_calls": []
+}

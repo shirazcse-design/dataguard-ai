@@ -1,0 +1,25 @@
+{
+ "final_text": null,
+ "key": "a8cb0bf94714e5b12f5bfca77e3a68c260edeb3271bf7380cd174c1f73425c61",
+ "recorded_at": "2026-10-04T21:01:12+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 4323,
+ "tokens_out": 52,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "external_transfer"
+   },
+   "id": "call_1W4j495WCS9WiFwz5gN6qLJe",
+   "name": "check_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_w8lO4376CbsBz6mLHNfzhGlH",
+   "name": "check_policy"
+  }
+ ]
+}

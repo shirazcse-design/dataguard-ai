@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY\",\"NO_SENSITIVITY_EVIDENCE\",\"NO_POLICY_OR_APPROVAL_CONTEXT_NEEDED\",\"NO_CORROBORATING_RISK_SIGNALS\",\"IDENTITY_CONTEXT_MISSING_BUT_NOT_CONFLICTING\"],\"rationale\":\"Recommend MONITOR because the authoritative anomaly is in the NORMAL band with a low score and the behavioral evidence describes activity as within the user's normal range overall [AS, SERIES, STAT]. The observed differences are limited to a small increase in files downloaded and lower repository diversity, while sensitive file access, after-hours activity, external upload volume, new repository access, and failed access attempts were all at baseline-like zero levels [SERIES, STAT]. There is no bundled evidence of sensitive data involvement because data sensitivity is absent, and there are no investigation findings, verified policy findings, or verified approvals that would justify elevating concern [AS]. Missing identity context is a limitation, but it does not conflict with the available evidence.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"high\",\"uncertainty\":[\"Identity context is unavailable.\",\"Data sensitivity context is unavailable.\",\"No investigation findings or policy findings are present in the bundle.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. No immediate analyst investigation is warranted on this bundle alone; reassess only if new corroborating evidence appears, especially verified sensitive-data context, policy findings, or new anomalous transfer signals.\"}",
+ "key": "646a3381fe5012684ac7050e510ddfa0db10edef2835adfad4cb4bee2959d4e7",
+ "recorded_at": "2026-10-04T18:25:26+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1318,
+ "tokens_out": 303,
+ "tool_calls": []
+}

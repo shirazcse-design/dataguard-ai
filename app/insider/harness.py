@@ -109,6 +109,8 @@ def decide(
     bounded = _max(scored, floor)
     outcome: str = bounded
 
+    if ctx.early_stop:
+        codes.append(f"orchestrator_stopped_early:{ctx.early_stop.split(':')[0]}:risk_assessed")
     rec = getattr(recommendation, "recommended_outcome", None)
     triggers: list[str] = []
     if rec == "HUMAN_REVIEW":
@@ -142,12 +144,18 @@ def decide(
             codes += [f"missing:{m}" for m in missing]
         if cls is not None and cls.uncertain:
             triggers.append("data_uncertain")
-        if any(i.conflicting_evidence for i in ctx.investigations):
+        cited, uncited = cited_conflicts(ctx)
+        if cited:
             triggers.append("specialist_conflict")
+        if uncited:
+            codes.append(f"conflicts_uncited_logged:{uncited}")
         if recommendation is None:
             triggers.append("agent_failure")
     if any(r.conflict for r in ctx.policies.values()):
         triggers.append("policy_conflict")
+    for r in ctx.policies.values():
+        if r.conflict_note == "uc6_conflict_not_material_at_level":
+            codes.append(f"policy:{r.topic}:uc6_conflict_not_material_at_level")
     if band == "HIGH_ANOMALY" and ctx.policies and all(r.insufficient for r in ctx.policies.values()) \
             and "prohibited" not in effects:  # fmt: skip
         triggers.append("policy_insufficient_material")
@@ -163,6 +171,21 @@ def decide(
         reason_codes=codes, contributing_factors=factors, analyst_review_required=outcome != "MONITOR",
         agent_recommendation=rec, summary=summary(ctx, outcome, xfer),
     )  # fmt: skip
+
+
+def cited_conflicts(ctx: CaseContext) -> tuple[int, int]:
+    """Fix 4 (approved 2026-10-04): an investigator-reported conflict forces review only when it
+    cites at least one evidence id that exists in this case. Uncited conflicts are logged."""
+    known = ctx.known_ids()
+    cited = uncited = 0
+    for inv in ctx.investigations:
+        for c in inv.conflicting_evidence:
+            ids = c.get("evidence_ids") or ([c["evidence_id"]] if c.get("evidence_id") else [])
+            if any(isinstance(i, str) and i in known for i in ids):
+                cited += 1
+            else:
+                uncited += 1
+    return cited, uncited
 
 
 def within_role(ctx: CaseContext) -> bool:

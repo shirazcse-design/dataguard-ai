@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "14dd2ab20bf0f9f62cbbef462b920033651e1ec2c8f02711ee4cda1728e4429b",
+ "recorded_at": "2026-10-04T18:49:01+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2939,
+ "tokens_out": 23,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "PTA-0912"
+   },
+   "id": "call_TjETl6d3lmGO9QrRJ4bFZcLT",
+   "name": "check_approval"
+  }
+ ]
+}

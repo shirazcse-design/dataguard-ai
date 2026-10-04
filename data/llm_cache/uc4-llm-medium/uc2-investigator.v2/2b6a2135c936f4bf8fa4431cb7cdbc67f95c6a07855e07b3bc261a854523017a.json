@@ -1,0 +1,62 @@
+{
+ "final_text": null,
+ "key": "2b6a2135c936f4bf8fa4431cb7cdbc67f95c6a07855e07b3bc261a854523017a",
+ "recorded_at": "2026-10-04T19:59:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1323,
+ "tokens_out": 202,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-26",
+    "event_types": [
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-18"
+   },
+   "id": "call_zd8tHzAha3uHMCHg0S2d7XdL",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_0rVBQqcP510bv0oFVyqBJOPe",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_fOaMmAVUS2T3hR5xdwUEotg3",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_wft1XfpUZK65HKdJAyJbYdX9",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access external upload bulk download sensitive data access approvals justifications change ticket access request repository access failed access attempts"
+   },
+   "id": "call_ZnARZTVK6khNR1D0xmjwxwuO",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "query": "requirements for verified approvals partner transfer approvals data egress external uploads least privilege expected repositories and handling of sensitive files"
+   },
+   "id": "call_Qqx4pKIybOxl7k068FHGotoV",
+   "name": "search_policy"
+  }
+ ]
+}

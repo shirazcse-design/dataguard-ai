@@ -1,0 +1,53 @@
+{
+ "final_text": null,
+ "key": "c353bb961cd676d5fd060f7e36f7a4130f6365dd35a1e2cb7f88cb2aada88a04",
+ "recorded_at": "2026-10-04T20:01:20+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1307,
+ "tokens_out": 160,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-14",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "access_request",
+     "change_ticket",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-06"
+   },
+   "id": "call_7RJ1EEkFxOit69Ictr5A2yV2",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_LjDAusc8UE0ZlM6go5WIkYyb",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_TzsX3zkj9UmrywxfPABYnC3r",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_JKxU1Asg0rwYlYMxJNZnVKFX",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "policy for repository access, data downloads, external uploads/transfers, approvals required for sensitive files and new repositories"
+   },
+   "id": "call_ZxDYnSZeKdSMFprsLFFZZvD1",
+   "name": "search_policy"
+  }
+ ]
+}

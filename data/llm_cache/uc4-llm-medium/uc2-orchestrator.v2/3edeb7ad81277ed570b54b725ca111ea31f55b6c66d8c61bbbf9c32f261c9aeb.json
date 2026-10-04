@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "3edeb7ad81277ed570b54b725ca111ea31f55b6c66d8c61bbbf9c32f261c9aeb",
+ "recorded_at": "2026-10-04T18:34:05+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3909,
+ "tokens_out": 20,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_fYHiSUYhXYo79AKwA0072Otl",
+   "name": "check_policy"
+  }
+ ]
+}

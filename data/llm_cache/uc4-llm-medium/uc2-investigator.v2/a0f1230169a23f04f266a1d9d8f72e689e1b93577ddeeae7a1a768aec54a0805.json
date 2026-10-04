@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "a0f1230169a23f04f266a1d9d8f72e689e1b93577ddeeae7a1a768aec54a0805",
+ "recorded_at": "2026-10-04T20:54:40+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3549,
+ "tokens_out": 22,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "PTA-0912"
+   },
+   "id": "call_vl7PqaavRsCT0uYkx30mPcwS",
+   "name": "check_approval"
+  }
+ ]
+}

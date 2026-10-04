@@ -104,6 +104,7 @@ class VerifiedPolicyResult(Strict):
     effect: Literal["prohibited", "requires_approval", "allowed", "unknown"] = "unknown"
     conflict: bool = False
     insufficient: bool = False
+    conflict_note: str | None = None  # e.g. "uc6_conflict_not_material_at_level"
 
 
 class BehaviorFinding(Strict):

@@ -329,6 +329,16 @@ class InsiderInvestigator:
                 )
                 run = orch.run(packet.model_dump())
                 ctx.agent_runs.insert(0, run)
+                if (
+                    ctx.risk is None
+                    and not run.stopped_reason.startswith("terminal:")
+                    and (ctx.behavior or ctx.investigations)
+                ):
+                    # Graceful stop: the orchestrator ran out of budget (or stopped early) after
+                    # specialist findings exist, so DataGuard runs the Risk Agent on what was
+                    # gathered and records that the investigation stopped early.
+                    ctx.early_stop = run.stopped_reason
+                    self._run_risk(ctx)
                 rec = ctx.risk
             elif self.arch == "lean":
                 lean = self._agent(

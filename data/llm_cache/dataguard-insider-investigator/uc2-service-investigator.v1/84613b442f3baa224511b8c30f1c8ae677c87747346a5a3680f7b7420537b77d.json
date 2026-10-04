@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "84613b442f3baa224511b8c30f1c8ae677c87747346a5a3680f7b7420537b77d",
+ "recorded_at": "2026-10-04T18:49:38+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1122,
+ "tokens_out": 167,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_0yc7RAf3qwed4chU1Sc2Q1Bq",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_jzzqUMDCgEaFHukUE8srgbnd",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_RWDuWazx8YzZg5JfVeTXJSN3",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_dC1h35XW0lsJQbQwThCdzUQM",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access bulk download external upload approvals tickets justifications partner transfer sensitive files need-to-know authorized repositories"
+   },
+   "id": "call_OvLZvj1ggs9FjD5CeUmxZiQz",
+   "name": "search_policy"
+  }
+ ]
+}
