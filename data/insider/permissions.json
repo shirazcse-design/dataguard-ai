@@ -1,0 +1,2104 @@
+{
+ "u-2001": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2002": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2003": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2004": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2005": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2006": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2007": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2008": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2009": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2010": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2011": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2012": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2013": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2014": {
+  "repositories": [
+   {
+    "name": "eng-repo-01",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-02",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-03",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-04",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-05",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-06",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-07",
+    "access": "read-write"
+   },
+   {
+    "name": "eng-repo-08",
+    "access": "read-write"
+   }
+  ],
+  "expected_data_classes": [
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2015": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2016": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2017": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2018": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2019": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2020": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2021": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2022": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2023": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2024": {
+  "repositories": [
+   {
+    "name": "fin-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "fin-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "FINANCIAL_PCI",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2025": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2026": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2027": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2028": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2029": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2030": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2031": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2032": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2033": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2034": {
+  "repositories": [
+   {
+    "name": "sales-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "sales-repo-05",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CUSTOMER_CONTACTS",
+   "INTERNAL"
+  ]
+ },
+ "u-2035": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2036": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2037": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2038": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2039": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2040": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2041": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2042": {
+  "repositories": [
+   {
+    "name": "rnd-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "rnd-repo-07",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTELLECTUAL_PROPERTY",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2043": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2044": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2045": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2046": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2047": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2048": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2049": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2050": {
+  "repositories": [
+   {
+    "name": "prod-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "prod-repo-06",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "INTERNAL",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2051": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2052": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2053": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2054": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2055": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2056": {
+  "repositories": [
+   {
+    "name": "ops-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-04",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-05",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-06",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-07",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-08",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-09",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-10",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-11",
+    "access": "read"
+   },
+   {
+    "name": "ops-repo-12",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "CREDENTIALS_SECRETS",
+   "SOURCE_CODE",
+   "INTERNAL"
+  ]
+ },
+ "u-2057": {
+  "repositories": [
+   {
+    "name": "people-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-04",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "PII",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2058": {
+  "repositories": [
+   {
+    "name": "people-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-04",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "PII",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2059": {
+  "repositories": [
+   {
+    "name": "people-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-04",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "PII",
+   "CONFIDENTIAL"
+  ]
+ },
+ "u-2060": {
+  "repositories": [
+   {
+    "name": "people-repo-01",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-02",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-03",
+    "access": "read"
+   },
+   {
+    "name": "people-repo-04",
+    "access": "read"
+   }
+  ],
+  "expected_data_classes": [
+   "PII",
+   "CONFIDENTIAL"
+  ]
+ }
+}

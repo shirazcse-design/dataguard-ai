@@ -1,0 +1,14 @@
+# UC2 read-only tools on the existing DataGuard MCP server (`--insider-tools`). docs/uc2/tools.md
+# DENY-BY-DEFAULT per tool: a caller not listed under a tool is refused before the tool runs.
+# Deliberately NOT exposed: any action (disable, revoke, delete, quarantine, HR, policy change),
+# risk scoring, or the agents' delegation tools.
+mcp_tools_version: 1.0.0
+tools:
+  get_behavior_profile:
+    callers: [insider-risk-agent]
+  search_security_logs:
+    callers: [insider-risk-agent]
+  get_permissions:
+    callers: [insider-risk-agent]
+  get_access_context:
+    callers: [insider-risk-agent]

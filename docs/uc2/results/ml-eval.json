@@ -1,0 +1,473 @@
+{
+ "bands": {
+  "if_elevated_or_higher": {
+   "alert_rate": 0.0706,
+   "alerts": 127,
+   "precision": 0.142,
+   "recall": 1.0,
+   "true_positives": 18
+  },
+  "if_high": {
+   "alert_rate": 0.0217,
+   "alerts": 39,
+   "precision": 0.359,
+   "recall": 0.778,
+   "true_positives": 14
+  },
+  "statistical_rule": {
+   "alert_rate": 0.065,
+   "alerts": 117,
+   "precision": 0.154,
+   "recall": 1.0,
+   "true_positives": 18
+  }
+ },
+ "flagship": {
+  "anomaly_band": "HIGH_ANOMALY",
+  "anomaly_score": 0.7996,
+  "contributing_signals": [
+   {
+    "baseline_median": 0.0,
+    "feature": "external_upload_volume_mb",
+    "observed": 2400.0,
+    "ratio_to_baseline": null,
+    "robust_z": 240.0,
+    "score_drop_if_reset": 0.0353
+   },
+   {
+    "baseline_median": 14.5,
+    "feature": "files_downloaded",
+    "observed": 262.0,
+    "ratio_to_baseline": 18.1,
+    "robust_z": 66.8,
+    "score_drop_if_reset": 0.0283
+   },
+   {
+    "baseline_median": 0.0,
+    "feature": "failed_access_attempts",
+    "observed": 4.0,
+    "ratio_to_baseline": null,
+    "robust_z": 4.0,
+    "score_drop_if_reset": 0.0243
+   },
+   {
+    "baseline_median": 3.0,
+    "feature": "sensitive_files_accessed",
+    "observed": 78.0,
+    "ratio_to_baseline": 26.0,
+    "robust_z": 25.3,
+    "score_drop_if_reset": 0.0177
+   }
+  ],
+  "date": "2026-08-25",
+  "inputs": [
+   "z_files_downloaded",
+   "z_sensitive_files_accessed",
+   "z_after_hours_activity",
+   "z_external_upload_volume_mb",
+   "z_new_repository_access",
+   "z_failed_access_attempts",
+   "z_distinct_repositories",
+   "log_download_ratio"
+  ],
+  "model_fingerprint": "3c540600954b",
+  "model_id": "uc2-isolation-forest",
+  "model_version": "1.0.0",
+  "thresholds": {
+   "elevated": 0.5273,
+   "high": 0.6025
+  },
+  "user_id": "u-2043"
+ },
+ "matched_budget": {
+  "1": {
+   "isolation_forest": {
+    "alert_rate": 0.0167,
+    "alerts": 30,
+    "precision": 0.467,
+    "recall": 0.778,
+    "true_positives": 14
+   },
+   "statistical_baseline": {
+    "alert_rate": 0.0167,
+    "alerts": 30,
+    "precision": 0.4,
+    "recall": 0.667,
+    "true_positives": 12
+   }
+  },
+  "3": {
+   "isolation_forest": {
+    "alert_rate": 0.05,
+    "alerts": 90,
+    "precision": 0.2,
+    "recall": 1.0,
+    "true_positives": 18
+   },
+   "statistical_baseline": {
+    "alert_rate": 0.05,
+    "alerts": 90,
+    "precision": 0.189,
+    "recall": 0.944,
+    "true_positives": 17
+   }
+  },
+  "5": {
+   "isolation_forest": {
+    "alert_rate": 0.0833,
+    "alerts": 150,
+    "precision": 0.12,
+    "recall": 1.0,
+    "true_positives": 18
+   },
+   "statistical_baseline": {
+    "alert_rate": 0.0833,
+    "alerts": 150,
+    "precision": 0.113,
+    "recall": 0.944,
+    "true_positives": 17
+   }
+  }
+ },
+ "per_scenario": [
+  {
+   "if_alert_band": 18,
+   "if_bands": {
+    "ELEVATED": 7,
+    "HIGH_ANOMALY": 11,
+    "NORMAL": 2
+   },
+   "if_caught_at_budget": 6,
+   "if_max_score": 0.725,
+   "kind": "legitimate",
+   "scenario": "H1-month-end-close",
+   "stat_caught_at_budget": 6,
+   "stat_rule_flag": 20,
+   "user_days": 20
+  },
+  {
+   "if_alert_band": 15,
+   "if_bands": {
+    "ELEVATED": 10,
+    "HIGH_ANOMALY": 5,
+    "NORMAL": 14
+   },
+   "if_caught_at_budget": 7,
+   "if_max_score": 0.658,
+   "kind": "legitimate",
+   "scenario": "H2-release-week",
+   "stat_caught_at_budget": 15,
+   "stat_rule_flag": 26,
+   "user_days": 29
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.697,
+   "kind": "legitimate",
+   "scenario": "H3-approved-migration",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "ELEVATED": 1,
+    "NORMAL": 2
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.556,
+   "kind": "legitimate",
+   "scenario": "H4-travel-after-hours",
+   "stat_caught_at_budget": 3,
+   "stat_rule_flag": 3,
+   "user_days": 3
+  },
+  {
+   "if_alert_band": 0,
+   "if_bands": {
+    "NORMAL": 1
+   },
+   "if_caught_at_budget": 0,
+   "if_max_score": 0.515,
+   "kind": "legitimate",
+   "scenario": "H5-project-onboarding",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.8,
+   "kind": "anomaly",
+   "scenario": "S1-flagship",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.655,
+   "kind": "anomaly",
+   "scenario": "S1-precursor",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 10,
+   "if_bands": {
+    "ELEVATED": 3,
+    "HIGH_ANOMALY": 7
+   },
+   "if_caught_at_budget": 10,
+   "if_max_score": 0.72,
+   "kind": "anomaly",
+   "scenario": "S2-slow-drip",
+   "stat_caught_at_budget": 10,
+   "stat_rule_flag": 10,
+   "user_days": 10
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.69,
+   "kind": "anomaly",
+   "scenario": "S3-source-code-grab",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.639,
+   "kind": "anomaly",
+   "scenario": "S4-repo-exploration",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "ELEVATED": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.592,
+   "kind": "anomaly",
+   "scenario": "S5-credential-probing",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.697,
+   "kind": "anomaly",
+   "scenario": "S6-after-hours-bulk",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.691,
+   "kind": "anomaly",
+   "scenario": "S7-subtle",
+   "stat_caught_at_budget": 0,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  },
+  {
+   "if_alert_band": 1,
+   "if_bands": {
+    "HIGH_ANOMALY": 1
+   },
+   "if_caught_at_budget": 1,
+   "if_max_score": 0.715,
+   "kind": "anomaly",
+   "scenario": "S8-upload-spike",
+   "stat_caught_at_budget": 1,
+   "stat_rule_flag": 1,
+   "user_days": 1
+  }
+ ],
+ "provenance": {
+  "hard_legitimate": 54,
+  "holdout_user_days": 1800,
+  "insider_version": "1.0.0",
+  "model_fingerprint": "3c540600954b",
+  "positives": 18,
+  "review_budget_per_day": 3,
+  "train_user_days": 1920,
+  "verification": "OFFLINE (deterministic, no model calls)"
+ },
+ "role_family_alert_rates": {
+  "engineering": {
+   "if_alert_rate": 0.0593,
+   "normal_user_days": 388,
+   "stat_flag_rate": 0.0438
+  },
+  "finance": {
+   "if_alert_rate": 0.0148,
+   "normal_user_days": 270,
+   "stat_flag_rate": 0.0148
+  },
+  "it_operations": {
+   "if_alert_rate": 0.0894,
+   "normal_user_days": 179,
+   "stat_flag_rate": 0.0559
+  },
+  "people_operations": {
+   "if_alert_rate": 0.025,
+   "normal_user_days": 120,
+   "stat_flag_rate": 0.0167
+  },
+  "product": {
+   "if_alert_rate": 0.0126,
+   "normal_user_days": 238,
+   "stat_flag_rate": 0.0126
+  },
+  "research": {
+   "if_alert_rate": 0.0378,
+   "normal_user_days": 238,
+   "stat_flag_rate": 0.0168
+  },
+  "sales": {
+   "if_alert_rate": 0.0542,
+   "normal_user_days": 295,
+   "stat_flag_rate": 0.0271
+  }
+ },
+ "separation": {
+  "isolation_forest_scores": {
+   "anomaly": {
+    "max": 0.8,
+    "median": 0.661,
+    "min": 0.584,
+    "n": 18,
+    "p90": 0.717
+   },
+   "legitimate": {
+    "max": 0.725,
+    "median": 0.561,
+    "min": 0.448,
+    "n": 54,
+    "p90": 0.651
+   },
+   "normal": {
+    "max": 0.667,
+    "median": 0.374,
+    "min": 0.33,
+    "n": 1728,
+    "p90": 0.479
+   }
+  },
+  "roc_auc": {
+   "isolation_forest": 0.9942,
+   "statistical_baseline": 0.9937
+  },
+  "statistical_scores": {
+   "anomaly": {
+    "max": 240.0,
+    "median": 9.0,
+    "min": 2.833,
+    "n": 18,
+    "p90": 48.5
+   },
+   "legitimate": {
+    "max": 121.667,
+    "median": 5.0,
+    "min": 2.5,
+    "n": 54,
+    "p90": 8.926
+   },
+   "normal": {
+    "max": 7.0,
+    "median": 1.0,
+    "min": 0.0,
+    "n": 1728,
+    "p90": 2.023
+   }
+  }
+ },
+ "statement": "Unsupervised model training does not use anomaly labels; labels are used only for evaluation.",
+ "threshold_sweep": [
+  {
+   "alert_rate": 0.1206,
+   "alerts": 217,
+   "precision": 0.083,
+   "recall": 1.0,
+   "threshold": 0.4869,
+   "train_percentile": 90,
+   "true_positives": 18
+  },
+  {
+   "alert_rate": 0.0706,
+   "alerts": 127,
+   "precision": 0.142,
+   "recall": 1.0,
+   "threshold": 0.5273,
+   "train_percentile": 95,
+   "true_positives": 18
+  },
+  {
+   "alert_rate": 0.0433,
+   "alerts": 78,
+   "precision": 0.231,
+   "recall": 1.0,
+   "threshold": 0.5611,
+   "train_percentile": 97,
+   "true_positives": 18
+  },
+  {
+   "alert_rate": 0.0217,
+   "alerts": 39,
+   "precision": 0.359,
+   "recall": 0.778,
+   "threshold": 0.6025,
+   "train_percentile": 99,
+   "true_positives": 14
+  },
+  {
+   "alert_rate": 0.0133,
+   "alerts": 24,
+   "precision": 0.542,
+   "recall": 0.722,
+   "threshold": 0.6283,
+   "train_percentile": 99.5,
+   "true_positives": 13
+  }
+ ],
+ "thresholds": {
+  "elevated": 0.5273,
+  "high": 0.6025
+ }
+}

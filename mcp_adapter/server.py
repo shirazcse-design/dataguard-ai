@@ -53,7 +53,9 @@ def build_server(
     config_dir: Path | str | None = None,
     extra_tools: Any = None,
 ) -> Any:
-    """`extra_tools` is an optional registry (UC1 `DlpMcpTools`) with `tools`, `get` and `call`."""
+    """`extra_tools` is an optional registry, or a list of registries (UC1 `DlpMcpTools`, UC2
+    `InsiderMcpTools`), each with `tools`, `get` and `call`. Tool names must be unique across the
+    server: a duplicate is refused at build time rather than silently shadowed."""
     from anyio import to_thread
     from mcp import types
     from mcp.server.lowlevel.server import Server
@@ -68,6 +70,17 @@ def build_server(
         annotations=types.ToolAnnotations(read_only_hint=True, destructive_hint=False),
     )
 
+    registries = (
+        []
+        if extra_tools is None
+        else extra_tools
+        if isinstance(extra_tools, list)
+        else [extra_tools]
+    )
+    names = [adapter.tool_name] + [t.name for r in registries for t in r.tools]
+    dupes = sorted({n for n in names if names.count(n) > 1})
+    if dupes:
+        raise ValueError(f"duplicate MCP tool names: {dupes}")
     extras = [
         types.Tool(
             name=t.name,
@@ -76,7 +89,8 @@ def build_server(
             input_schema=t.input_schema(),
             annotations=types.ToolAnnotations(read_only_hint=True, destructive_hint=False),
         )
-        for t in (extra_tools.tools if extra_tools is not None else [])
+        for r in registries
+        for t in r.tools
     ]
 
     async def on_list_tools(ctx: Any, params: Any) -> types.ListToolsResult:
@@ -89,11 +103,13 @@ def build_server(
                 result = await to_thread.run_sync(adapter.classify_document, args)
             except McpAuthorizationError as exc:
                 raise MCPError(AUTH_ERROR_CODE, str(exc)) from None
-        elif extra_tools is not None and extra_tools.get(params.name) is not None:
+        elif (
+            owner := next((r for r in registries if r.get(params.name) is not None), None)
+        ) is not None:
             from app.dlp.mcp_tools import ToolInputError, ToolRefused
 
             try:
-                result = await to_thread.run_sync(extra_tools.call, params.name, args)
+                result = await to_thread.run_sync(owner.call, params.name, args)
             except ToolRefused as exc:
                 raise MCPError(AUTH_ERROR_CODE, str(exc)) from None
             except ToolInputError as exc:
@@ -125,6 +141,12 @@ def _parse(argv: list[str] | None) -> argparse.Namespace:
         "--dlp-tools",
         action="store_true",
         help="also expose UC1's read-only search_policy / get_user_profile / get_user_activity",
+    )
+    p.add_argument(
+        "--insider-tools",
+        action="store_true",
+        help="also expose UC2's read-only get_behavior_profile / search_security_logs / "
+        "get_permissions / get_access_context",
     )
     return p.parse_args(argv)
 
@@ -158,14 +180,18 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    extra = None
+    extra: list[Any] = []
     if args.dlp_tools:
         from app.dlp.mcp_tools import DlpMcpTools
         from app.policy.service import build_copilot
 
         policy_mode = {"foundry": "live", "record": "record"}.get(args.llm_mode or "", "replay")
-        extra = DlpMcpTools(caller, copilot_factory=lambda: build_copilot(policy_mode))
-    server = build_server(adapter, config_dir=args.config_dir, extra_tools=extra)
+        extra.append(DlpMcpTools(caller, copilot_factory=lambda: build_copilot(policy_mode)))
+    if args.insider_tools:
+        from app.insider.mcp_tools import InsiderMcpTools
+
+        extra.append(InsiderMcpTools(caller))
+    server = build_server(adapter, config_dir=args.config_dir, extra_tools=extra or None)
 
     async def run() -> None:
         async with stdio_server() as (read, write):

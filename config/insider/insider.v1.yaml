@@ -1,0 +1,51 @@
+# UC2 Insider Risk: synthetic dataset and behavioural ML configuration (docs/uc2/ml-design.md).
+# Changing any value here is a new insider_version and invalidates committed results.
+insider_version: 1.0.0
+
+dataset:
+  seed: 20261003
+  start_date: "2026-06-01"
+  days: 90
+  train_days: 60            # days 1-60: historical period, NORMAL behaviour only, used to train
+  # days 61-90: holdout = normal + hard legitimate + injected anomalies (labels used ONLY to evaluate)
+  users_per_family:
+    engineering: 14
+    finance: 10
+    sales: 10
+    research: 8
+    product: 8
+    it_operations: 6
+    people_operations: 4
+
+features:
+  # The 6 PRD features + 2 justified additions. No demographic, HR or employment attributes.
+  raw: [files_downloaded, sensitive_files_accessed, after_hours_activity, external_upload_volume_mb,
+        new_repository_access, failed_access_attempts, distinct_repositories]
+  baseline_window_days: 28  # holdout scores use the FROZEN last 28 training days (historical baseline)
+  # Robust z = (x - median) / max(1.4826 * MAD, floor). The floor stops a zero-variance history
+  # (e.g. a user who never uploads) from turning one small event into an extreme value.
+  scale_floor:
+    files_downloaded: 3.0
+    sensitive_files_accessed: 1.5
+    after_hours_activity: 1.0
+    external_upload_volume_mb: 10.0
+    new_repository_access: 0.5
+    failed_access_attempts: 1.0
+    distinct_repositories: 1.0
+
+isolation_forest:
+  n_estimators: 200
+  max_samples: 256
+  random_state: 20261003
+  # Bands from score percentiles on the TRAINING distribution (no labels involved).
+  elevated_percentile: 95
+  high_percentile: 99
+
+statistical_baseline:
+  # Flag a user-day when any feature's robust z > single_z, or at least `multi_count` features > multi_z.
+  single_z: 3.0
+  multi_z: 2.0
+  multi_count: 2
+
+evaluation:
+  review_budget_per_day: 3   # analyst alerts per day used for the matched-budget comparison

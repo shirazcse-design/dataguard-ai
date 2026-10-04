@@ -23,3 +23,8 @@ callers:
     max_cost_usd: 0.05
     max_latency_ms: 10000
     allow_evidence: false          # UC1 never needs model-derived excerpts of the document
+  insider-risk-agent:              # UC2 Insider Risk (docs/uc2/architecture.md). Added 2026-10-03; additive.
+    max_llm_tier: mid
+    max_cost_usd: 0.05
+    max_latency_ms: 10000
+    allow_evidence: false          # UC2 agents never receive model-derived document excerpts

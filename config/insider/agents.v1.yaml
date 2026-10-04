@@ -1,0 +1,53 @@
+# UC2 agents: names, prompts and HARD budgets (enforced in code, not by prompt). docs/uc2/agents.md
+agents_version: 1.0.0
+model_tier: mid                     # uc4-llm-medium for every agent (fair 1/2/4-agent comparison)
+
+agents:
+  orchestrator:
+    name: dataguard-insider-orchestrator
+    prompt_version: uc2-orchestrator.v1
+    prompt_file: prompts/uc2/orchestrator.v1.md
+    max_turns: 8
+    max_tool_calls: 7
+    max_delegations: {behavior: 1, investigation: 2, risk: 1}
+    max_consecutive_tool_failures: 2
+  behavior:
+    name: dataguard-insider-behavior
+    prompt_version: uc2-behavior.v1
+    prompt_file: prompts/uc2/behavior.v1.md
+    max_turns: 4
+    max_tool_calls: 3
+    max_consecutive_tool_failures: 2
+  investigation:
+    name: dataguard-insider-investigator
+    prompt_version: uc2-investigator.v1
+    prompt_file: prompts/uc2/investigator.v1.md
+    max_turns: 8
+    max_tool_calls: 8
+    max_consecutive_tool_failures: 2
+    max_log_events_per_call: 50
+  risk:
+    name: dataguard-insider-risk
+    prompt_version: uc2-risk.v1
+    prompt_file: prompts/uc2/risk.v1.md
+    max_turns: 2                    # one answer + one repair attempt on invalid JSON
+    max_tool_calls: 0
+    max_consecutive_tool_failures: 1
+  # Architecture experiment baselines (app-side only; not Foundry agents).
+  single:
+    name: dataguard-insider-single
+    prompt_version: uc2-single.v1
+    prompt_file: prompts/uc2/single.v1.md
+    max_turns: 14
+    max_tool_calls: 12
+    max_consecutive_tool_failures: 2
+  lean_orchestrator:
+    name: dataguard-insider-lean-orchestrator
+    prompt_version: uc2-lean-orchestrator.v1
+    prompt_file: prompts/uc2/lean_orchestrator.v1.md
+    max_turns: 10
+    max_tool_calls: 9
+    max_delegations: {investigation: 2}
+    max_consecutive_tool_failures: 2
+
+max_text_chars: 400                 # any single free-text field in a finding is cut to this

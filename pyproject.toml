@@ -51,6 +51,7 @@ dataguard-uc4 = "app.classification.cli:main"
 dataguard-uc4-mcp = "mcp_adapter.server:main"
 dataguard-policy = "app.policy.cli:main"
 dataguard-dlp = "app.dlp.cli:main"
+dataguard-insider = "app.insider.cli:main"
 
 [tool.setuptools.package-data]
 "app.demo" = ["static/*"]
@@ -90,6 +91,18 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/policy/foundry_evals.py" = ["E501"]
 "evals/dlp/metrics.py" = ["E501"]
 "evals/dlp/report.py" = ["E501"]
+"ml/insider/synth.py" = ["E501"]                  # UC2 scenario and role-family data tables
+"evals/insider/golden_build.py" = ["E501"]        # UC2 golden case table
+"evals/insider/ml_eval.py" = ["E501"]             # UC2 ML report tables
+"evals/insider/agent_eval.py" = ["E501"]          # UC2 investigation metrics
+"app/insider/services.py" = ["E501"]             # UC2 capability payload builders
+"app/insider/agents.py" = ["E501"]               # UC2 agent loop (span attribute lines)
+"app/insider/case.py" = ["E501"]                 # UC2 tool descriptions
+"app/insider/harness.py" = ["E501"]              # UC2 summary templates
+"app/insider/pipeline.py" = ["E501"]             # UC2 architectures and offline scripts
+"app/insider/service.py" = ["E501"]              # UC2 client wiring
+"app/insider/mcp_tools.py" = ["E501"]            # UC2 MCP tool descriptions
+"app/insider/cli.py" = ["E501"]                  # UC2 report renderers
 "evals/classification/blind_review.py" = ["E501"]
 "evals/classification/blind_compare.py" = ["E501"]
 "evals/classification/blind_compare_round2.py" = ["E501"]
