@@ -66,6 +66,16 @@ class LeanReport(RiskRecommendation):
     behavior_summary: str = ""
 
 
+def pseudonym(user_id: str) -> str:
+    """A stable pseudonymous subject id for telemetry: a salted hash, never the user id itself.
+    The salt comes from DATAGUARD_TELEMETRY_SALT (a fixed demo salt for the synthetic data)."""
+    import hashlib
+    import os
+
+    salt = os.environ.get("DATAGUARD_TELEMETRY_SALT", "dataguard-uc2-demo")
+    return "subj-" + hashlib.sha256(f"{salt}|{user_id}".encode()).hexdigest()[:12]
+
+
 def load_agent_config() -> dict[str, Any]:
     return yaml.safe_load((REPO / "config" / "insider" / "agents.v1.yaml").read_text("utf-8"))
 
@@ -306,11 +316,15 @@ class InsiderInvestigator:
         ctx = CaseContext(case=case, svc=self.svc)
         cp = self.svc.copilot
         ctx.policy_tool = PolicyTools(cp, cp.cfg.levels["agentic"], Run(f"uc2-{case['id']}", "agentic", cp.retriever.embedding_model_id), cp.cfg.agent)  # fmt: skip
-        with span(
+        root_cm = (
+            self.tracer.trace if self.tracer is not None else span
+        )  # activates the shared tracer
+        with root_cm(
             "uc2.case",
             dg__ir__case_id=case["id"],
             dg__ir__architecture=self.arch,
             dg__ir__trigger=case["trigger"],
+            dg__ir__subject=pseudonym(case["user_id"]),
         ) as root:
             with span("uc2.anomaly") as s:
                 ctx.anomaly = self.svc.behavior.anomaly(case["user_id"], case["date"], ctx.store)
@@ -370,7 +384,10 @@ class InsiderInvestigator:
             with span("uc2.hitl") as s:
                 s.set(dg__ir__analyst_review_required=decision.analyst_review_required)
             root.set(dg__ir__outcome=decision.outcome, dg__ir__band=ctx.anomaly.anomaly_band,
-                     dg__ir__agents_run=len(ctx.agent_runs), dg__ir__delegations=sum(ctx.delegations.values()))  # fmt: skip
+                     dg__ir__agents_run=len(ctx.agent_runs), dg__ir__delegations=sum(ctx.delegations.values()),
+                     dg__ir__early_stop=(ctx.early_stop or "none").split(":")[0],
+                     dg__ir__simulated_faults=list(case.get("faults", [])),
+                     dg__guardrail__type=sorted({e["type"] for e in ctx.guardrail_events}))  # fmt: skip
         return InvestigationResult(case["id"], self.arch, self.mode, packet, decision, ctx, list(ctx.agent_runs), rec,
                                    (time.perf_counter() - t0) * 1000)  # fmt: skip
 

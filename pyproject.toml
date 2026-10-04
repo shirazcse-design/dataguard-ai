@@ -95,6 +95,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/insider/golden_build.py" = ["E501"]        # UC2 golden case table
 "evals/insider/ml_eval.py" = ["E501"]             # UC2 ML report tables
 "evals/insider/agent_eval.py" = ["E501"]          # UC2 investigation metrics
+"evals/insider/observability_report.py" = ["E501"] # UC2 telemetry report
 "app/insider/services.py" = ["E501"]             # UC2 capability payload builders
 "app/insider/agents.py" = ["E501"]               # UC2 agent loop (span attribute lines)
 "app/insider/case.py" = ["E501"]                 # UC2 tool descriptions

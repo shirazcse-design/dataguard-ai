@@ -13,6 +13,8 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from typing import Any
 
+from observability import span
+
 from .agents import Tool, params
 from .schemas import (
     AnomalyResult,
@@ -105,10 +107,16 @@ class CaseContext:
                 self.subject, self.store, unavailable=self.fault("identity_unavailable")
             )
 
-        try:
-            self.identity = self.store.cached("identity", go)
-        except ServiceError as e:
-            return self._fail("identity", e.kind)
+        with span("uc2.identity") as sp:
+            try:
+                self.identity = self.store.cached("identity", go)
+            except ServiceError as e:
+                sp.set(dg__error__type=e.kind)
+                return self._fail("identity", e.kind)
+            sp.set(
+                dg__ir__privilege=self.identity.privilege_level,
+                dg__ir__role_family=self.identity.role_family,
+            )
         return True, self.identity.model_dump(), None
 
     def classify(self) -> tuple[bool, dict[str, Any], str | None]:
@@ -120,10 +128,19 @@ class CaseContext:
             return self.svc.data_uc4.classify(refs, self.case["id"], self.store,
                                           semantic_unavailable=self.fault("semantic_tier_unavailable"))  # fmt: skip
 
-        try:
-            self.classification = self.store.cached("uc4", go)
-        except (ServiceError, OSError, RuntimeError, ValueError):  # UC4 / document store failure
-            return self._fail("data", "uc4_unavailable")
+        with span("uc2.data") as sp:
+            try:
+                self.classification = self.store.cached("uc4", go)
+            except (
+                ServiceError,
+                OSError,
+                RuntimeError,
+                ValueError,
+            ):  # UC4 / document store failure
+                sp.set(dg__error__type="uc4_unavailable")
+                return self._fail("data", "uc4_unavailable")
+            sp.set(dg__ir__n_files=len(self.classification.files), dg__ir__max_level=self.classification.max_level or "UNKNOWN",
+                   dg__ir__data_uncertain=self.classification.uncertain)  # fmt: skip
         return True, self.classification.model_dump(), None
 
     def transfer(self) -> dict[str, Any] | None:
@@ -187,7 +204,10 @@ class CaseContext:
             return self.svc.policy.topic(topic, self.store)
 
         try:
-            res = self.store.cached(f"policy:{topic}", go)
+            with span("uc2.policy", dg__ir__policy_topic=topic) as sp:
+                res = self.store.cached(f"policy:{topic}", go)
+                sp.set(dg__ir__policy_status=res.status, dg__ir__policy_effect=res.effect,
+                       dg__ir__policy_conflict=res.conflict, dg__ir__policy_n_claims=len(res.claims))  # fmt: skip
         except ServiceError as e:
             if e.kind in ("no_external_transfer",):
                 return (

@@ -122,5 +122,38 @@ allowed_attributes:
   - dg.dlp.n_signals
   - dg.dlp.n_findings
   - dg.dlp.policy_effect
+  # UC2 Insider Risk (docs/uc2/observability.md). Codes, scores and counts only: a schema case id,
+  # a PSEUDONYMOUS subject (salted hash, never the user id), the authoritative anomaly score/band
+  # and model version, role family and privilege (access context, not HR), UC4 max level, UC6
+  # topic/status/effect, delegation and outcome codes. Never raw logs, document or policy text,
+  # agent reasoning, justifications, names or repository names.
+  - dg.ir.case_id
+  - dg.ir.subject
+  - dg.ir.architecture
+  - dg.ir.trigger
+  - dg.ir.anomaly_score
+  - dg.ir.anomaly_band
+  - dg.ir.model_version
+  - dg.ir.n_signals
+  - dg.ir.role_family
+  - dg.ir.privilege
+  - dg.ir.n_files
+  - dg.ir.max_level
+  - dg.ir.data_uncertain
+  - dg.ir.policy_topic
+  - dg.ir.policy_status
+  - dg.ir.policy_effect
+  - dg.ir.policy_conflict
+  - dg.ir.policy_n_claims
+  - dg.ir.score
+  - dg.ir.band
+  - dg.ir.floor
+  - dg.ir.outcome
+  - dg.ir.reason_codes
+  - dg.ir.analyst_review_required
+  - dg.ir.agents_run
+  - dg.ir.delegations
+  - dg.ir.early_stop
+  - dg.ir.simulated_faults
   # errors (class name only)
   - dg.error.type

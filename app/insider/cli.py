@@ -218,6 +218,68 @@ def cmd_register(args) -> int:
     return 0
 
 
+def cmd_obs_report(args) -> int:
+    """All 36 cases replayed through the production tracer: privacy audit + telemetry summary."""
+    from evals.insider.observability_report import privacy_audit, render, run_traced, summarise
+
+    spans, cases, inv = run_traced(args.mode)
+    report = {
+        "mode": args.mode,
+        "privacy_audit": privacy_audit(spans, cases, inv),
+        "telemetry": summarise(spans),
+    }
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / "observability.json").write_text(
+        json.dumps(report, indent=1, sort_keys=True, default=str) + "\n", "utf-8"
+    )
+    (RESULTS / "observability.md").write_text(render(report), encoding="utf-8")
+    print(
+        f"privacy audit clean: {report['privacy_audit']['clean']}; wrote docs/uc2/results/observability.md"
+    )
+    return 0 if report["privacy_audit"]["clean"] else 5
+
+
+def cmd_obs_live_check(args) -> int:
+    """LIVE: investigations through the Foundry agents with spans exported to Application Insights.
+    A fresh CANARY is planted in the flagship's security logs (a non-instruction note), so a search
+    in App Insights can prove whether DataGuard's or Foundry's telemetry stores log content. UC4 and
+    UC6 replay from the recorded caches; the connection string comes from the Foundry project via
+    Entra sign-in and is held in memory only, never printed."""
+    import secrets
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from evals.insider.agent_eval import load_golden
+    from observability import azure_monitor_sink, flush_azure_monitor, load_observability_config
+    from observability.config import build_tracer
+
+    from .pipeline import InsiderInvestigator, pseudonym
+    from .service import _planners, build_services
+
+    obs_cfg, _ = load_observability_config()
+    project = project_client(project_endpoint(), tenant_id=args.tenant_id)
+    conn = project.telemetry.get_application_insights_connection_string()
+    tracer, _ = build_tracer(obs_cfg, [azure_monitor_sink(conn)])
+    del conn
+    canary = f"CANARY{secrets.token_hex(4).upper()}"
+    cases = {c["id"]: c for c in load_golden()}
+    flag = dict(cases["I13"])
+    flag["id"] = "OBS-CANARY"
+    flag["overlays"] = [
+        *flag["overlays"],
+        {"type": "log_comment", "hour": 21, "text": f"build agent reference {canary}"},
+    ]
+    planners = _planners("live", "foundry-service", args.tenant_id)
+    inv = InsiderInvestigator(build_services("replay"), planners, architecture="full", mode="live",
+                              backend="foundry-service", tracer=tracer)  # fmt: skip
+    out = []
+    for case in (cases["I13"], flag, cases["I30"]):
+        r = inv.investigate(case)
+        out.append({"case_id": case["id"], "outcome": r.decision.outcome, "subject": pseudonym(case["user_id"]),
+                    "agents": {x.name.split("-")[-1]: x.stopped_reason for x in r.runs}})  # fmt: skip
+    print(json.dumps({"canary": canary, "flushed": flush_azure_monitor(), "runs": out}, indent=1))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="dataguard-insider", description="UC2 Insider Risk")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -252,6 +314,13 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--label", default="run")
     r.add_argument("--tenant-id", default=None)
     r.set_defaults(func=cmd_record)
+    o = sub.add_parser("obs").add_subparsers(dest="sub", required=True)
+    orp = o.add_parser("report")
+    orp.add_argument("--mode", choices=("offline", "replay"), default="replay")
+    orp.set_defaults(func=cmd_obs_report)
+    olc = o.add_parser("live-check")
+    olc.add_argument("--tenant-id", default=None)
+    olc.set_defaults(func=cmd_obs_live_check)
     a = sub.add_parser("agent").add_subparsers(dest="sub", required=True)
     s = a.add_parser("schemas")
     s.add_argument(
