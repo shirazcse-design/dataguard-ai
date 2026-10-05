@@ -179,13 +179,14 @@ def build_investigator(mode: str = "offline", *, architecture: str = "full", bac
 
 
 def register_agents(
-    tenant_id: str | None, roles: tuple[str, ...] = FOUNDRY_ROLES
+    tenant_id: str | None, roles: tuple[str, ...] = FOUNDRY_ROLES, rai_policy_id: str | None = None
 ) -> list[dict[str, Any]]:
     """Create a NEW VERSION of each UC2 agent in Foundry Agent Service: instructions, the `mid`
     deployment and the function-tool DEFINITIONS (the tools still execute in DataGuard). Additive:
     it never edits or deletes a version. Done at the product owner's explicit request (2026-10-03).
+    `rai_policy_id` (the full ARM id of an existing guardrail) attaches it, as for UC1 and UC6.
     """
-    from azure.ai.projects.models import FunctionTool, PromptAgentDefinition
+    from azure.ai.projects.models import FunctionTool, PromptAgentDefinition, RaiConfig
 
     from app.agent.foundry_service import project_client, project_endpoint
     from app.policy.service import load_llm_config
@@ -202,8 +203,10 @@ def register_agents(
         agent = project.agents.create_version(
             agent_name=a["name"], description=DESCRIPTIONS[role],
             definition=PromptAgentDefinition(model=deployment, instructions=(REPO / a["prompt_file"]).read_text("utf-8").strip(),
-                                             tools=tools or None),
+                                             tools=tools or None,
+                                             rai_config=RaiConfig(rai_policy_name=rai_policy_id) if rai_policy_id else None),
         )  # fmt: skip
         out.append({"role": role, "name": agent.name, "version": str(agent.version), "model": deployment,
-                    "tools": [t.name for t in tools], "instructions_version": a["prompt_version"]})  # fmt: skip
+                    "tools": [t.name for t in tools], "instructions_version": a["prompt_version"],
+                    "guardrail": rai_policy_id.rsplit("/", 1)[-1] if rai_policy_id else None})  # fmt: skip
     return out

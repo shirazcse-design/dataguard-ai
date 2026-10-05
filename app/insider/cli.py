@@ -209,12 +209,8 @@ def cmd_register(args) -> int:
     from .service import register_agents
 
     roles = tuple(r.strip() for r in args.roles.split(",")) if args.roles else None
-    print(
-        json.dumps(
-            register_agents(args.tenant_id, roles) if roles else register_agents(args.tenant_id),
-            indent=1,
-        )
-    )
+    roles = roles or ("orchestrator", "behavior", "investigation", "risk")
+    print(json.dumps(register_agents(args.tenant_id, roles, args.rai_policy_id), indent=1))
     return 0
 
 
@@ -280,6 +276,34 @@ def cmd_obs_live_check(args) -> int:
     return 0
 
 
+def cmd_guardrails_verify(args) -> int:
+    """LIVE: the adversarial suite through the four Foundry agents (verdicts only)."""
+    import os
+    from datetime import date
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from evals.insider import guardrails_verify as gv
+
+    from .pipeline import load_agent_config
+    from .service import AGENT_ENV
+
+    cfg = load_agent_config()["agents"]
+    names = {r: os.environ.get(AGENT_ENV[r], "") or cfg[r]["name"] for r in AGENT_ENV}
+    openai = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    rows = gv.run(
+        openai, os.environ.get("DATAGUARD_LLM_DEPLOYMENT_MID", "") or "uc4-llm-medium", names
+    )
+    prov = {"date": date.today().isoformat(), "guardrail": "uc2-insider-risk-guardrail",
+            "agents": "orchestrator v3, behavior v2, investigator v3, risk v2", "uc4_uc6": "replay"}  # fmt: skip
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / "guardrails-verification.json").write_text(
+        json.dumps({"provenance": prov, "probes": rows}, indent=1, default=str) + "\n", "utf-8"
+    )
+    (RESULTS / "guardrails-verification.md").write_text(gv.render(rows, prov), encoding="utf-8")
+    print(gv.render(rows, prov))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="dataguard-insider", description="UC2 Insider Risk")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -321,6 +345,10 @@ def main(argv: list[str] | None = None) -> int:
     olc = o.add_parser("live-check")
     olc.add_argument("--tenant-id", default=None)
     olc.set_defaults(func=cmd_obs_live_check)
+    gr = sub.add_parser("guardrails").add_subparsers(dest="sub", required=True)
+    grv = gr.add_parser("verify")
+    grv.add_argument("--tenant-id", default=None)
+    grv.set_defaults(func=cmd_guardrails_verify)
     a = sub.add_parser("agent").add_subparsers(dest="sub", required=True)
     s = a.add_parser("schemas")
     s.add_argument(
@@ -342,6 +370,7 @@ def main(argv: list[str] | None = None) -> int:
     rg.add_argument(
         "--roles", default="", help="comma list of roles to register (default: all four)"
     )
+    rg.add_argument("--rai-policy-id", default=None, help="full ARM id of an existing guardrail")
     rg.set_defaults(func=cmd_register)
     args = p.parse_args(argv)
     return args.func(args)
