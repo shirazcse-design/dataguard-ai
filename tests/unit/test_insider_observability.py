@@ -38,6 +38,15 @@ def test_subject_is_pseudonymous_and_the_tree_is_complete(traced):
     assert summarise(spans)["outcomes"]
 
 
+def test_review_reasons_are_counted_for_every_human_review(traced):
+    """The reason codes sit on uc2.deterministic_risk, not the root (the first report read the
+    root and showed no review reasons beside 8 HUMAN_REVIEW outcomes)."""
+    spans, _, _ = traced
+    t = summarise(spans)
+    n_review = t["outcomes"].get("HUMAN_REVIEW", 0)
+    assert n_review and sum(t["review_reasons"].values()) >= n_review
+
+
 def test_uc2_spans_map_to_genai_conventions():
     assert (
         _genai_attrs("uc2.risk_agent", {"dg.agent.name": "dataguard-insider-risk"})[

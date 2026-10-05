@@ -32,6 +32,7 @@ from . import docs_view, examples, metrics
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
 from .dlp import DlpSession
+from .insider import InsiderSession
 from .policy import PolicySession
 from .review import DEFAULT_PATH, ReviewStore
 
@@ -55,6 +56,7 @@ _STATIC = {
     "/static/styles.css": ("styles.css", "text/css; charset=utf-8"),
     "/static/policy.js": ("policy.js", "text/javascript; charset=utf-8"),
     "/static/dlp.js": ("dlp.js", "text/javascript; charset=utf-8"),
+    "/static/insider.js": ("insider.js", "text/javascript; charset=utf-8"),
 }
 _HEADERS = {
     "Cache-Control": "no-store",
@@ -85,6 +87,8 @@ class DemoApp:
     policy_review_path: Path | str | None = None
     _dlp: DlpSession | None = None
     dlp_review_path: Path | str | None = None
+    _insider: InsiderSession | None = None
+    insider_review_path: Path | str | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -254,6 +258,28 @@ class DemoApp:
     def dlp_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
         return self.envelope(self.dlp_session().review_decide(body), data_class="DEMO-ONLY STATE")
 
+    # -- Insider Risk Investigation (UC2) -------------------------------------------------------
+    def insider_session(self) -> InsiderSession:
+        with self._init_lock:
+            if self._insider is None:
+                kw = {"review_path": self.insider_review_path} if self.insider_review_path else {}
+                self._insider = InsiderSession(self.mode, self.env, **kw)
+            return self._insider
+
+    def insider_describe(self) -> dict[str, Any]:
+        return self.envelope(self.insider_session().describe(), data_class="RECORDED + SYNTHETIC")
+
+    def insider_investigate(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.insider_session().investigate(body), data_class=self.data_class())
+
+    def insider_review(self) -> dict[str, Any]:
+        return self.envelope(self.insider_session().review_queue(), data_class="DEMO-ONLY STATE")
+
+    def insider_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(
+            self.insider_session().review_decide(body), data_class="DEMO-ONLY STATE"
+        )
+
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
             self._metrics = metrics.all_metrics()
@@ -302,6 +328,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/policy/review": app.policy_review,
                 "/api/dlp": app.dlp_describe,
                 "/api/dlp/review": app.dlp_review,
+                "/api/insider": app.insider_describe,
+                "/api/insider/review": app.insider_review,
             }
             if path in routes:
                 try:
@@ -323,6 +351,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/policy/review/decide": app.policy_review_decide,
                 "/api/dlp/investigate": app.dlp_investigate,
                 "/api/dlp/review/decide": app.dlp_review_decide,
+                "/api/insider/investigate": app.insider_investigate,
+                "/api/insider/review/decide": app.insider_review_decide,
             }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))

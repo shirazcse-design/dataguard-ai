@@ -76,6 +76,7 @@ def privacy_audit(spans: list[Any], cases: list[dict], inv: Any) -> dict[str, An
 
 def summarise(spans: list[Any]) -> dict[str, Any]:
     roots = [s for s in spans if s.name == "uc2.case"]
+    risk = [s for s in spans if s.name == "uc2.deterministic_risk"]  # reason codes live here
     agents = [
         s
         for s in spans
@@ -95,7 +96,7 @@ def summarise(spans: list[Any]) -> dict[str, Any]:
         "attribute_keys": sorted({k for s in spans for k in s.attributes}),
         "outcomes": count(r.attributes.get("dg.ir.outcome") for r in roots),
         "anomaly_bands": count(r.attributes.get("dg.ir.band") for r in roots),
-        "review_reasons": count(c for r in roots for c in r.attributes.get("dg.ir.reason_codes", []) if c.startswith("review:")),
+        "review_reasons": count(c for r in risk for c in r.attributes.get("dg.ir.reason_codes", []) if c.startswith("review:")),
         "agent_stop_reasons": count(f"{s.attributes.get('dg.agent.name')}:{s.attributes.get('dg.agent.stopped_reason')}" for s in agents),
         "tool_calls": count(s.attributes.get("dg.agent.tool") for s in tools),
         "tool_errors": count(s.attributes["dg.agent.tool_error"] for s in tools if "dg.agent.tool_error" in s.attributes),

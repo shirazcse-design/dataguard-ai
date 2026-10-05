@@ -98,6 +98,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "evals/insider/observability_report.py" = ["E501"] # UC2 telemetry report
 "evals/insider/guardrails_verify.py" = ["E501"]   # UC2 probe table
 "evals/insider/foundry_evals.py" = ["E501"]       # UC2 Foundry eval rows
+"app/demo/insider.py" = ["E501"]                  # UC2 demo case table
 "app/insider/services.py" = ["E501"]             # UC2 capability payload builders
 "app/insider/agents.py" = ["E501"]               # UC2 agent loop (span attribute lines)
 "app/insider/case.py" = ["E501"]                 # UC2 tool descriptions

@@ -343,3 +343,7 @@ body.interview .dev-only { display: none !important; }
 /* UC1 DLP Investigation */
 .btn-small { font-size: 12.5px; padding: 5px 10px; }
 .chip + .chip { margin-left: 4px; }
+
+/* UC2 Insider Risk Investigation: let chip lists wrap inside key-value rows. */
+.kv dd .chip { display: inline-block; margin: 0 4px 4px 0; }
+.kv dd .chip + .chip { margin-left: 0; }

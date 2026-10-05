@@ -106,7 +106,7 @@
    "dg.tokens_in",
    "dg.tokens_out"
   ],
-  "case_ms_p50": 63.55,
+  "case_ms_p50": 64.66,
   "cases": 36,
   "genai_operations": {
    "execute_tool": 419,
@@ -123,7 +123,12 @@
   },
   "planner_turns": 266,
   "planner_turns_replayed": 266,
-  "review_reasons": {},
+  "review_reasons": {
+   "review:agent_disagreement": 5,
+   "review:required_capability_failed": 2,
+   "review:required_evidence_missing": 2,
+   "review:specialist_conflict": 1
+  },
   "span_names": {
    "S0.guardrails": 34,
    "S1.rules": 34,
@@ -151,19 +156,19 @@
   },
   "spans": 1403,
   "stage_ms_p50": {
-   "uc2.agent.planner": 0.19,
-   "uc2.anomaly": 29.29,
-   "uc2.behavior_agent": 29.62,
-   "uc2.case": 63.55,
+   "uc2.agent.planner": 0.23,
+   "uc2.anomaly": 29.8,
+   "uc2.behavior_agent": 30.22,
+   "uc2.case": 64.66,
    "uc2.data": 0.89,
    "uc2.deterministic_risk": 0.06,
    "uc2.hitl": 0.0,
    "uc2.identity": 0.01,
-   "uc2.investigation_agent": 1.61,
-   "uc2.orchestrator": 33.75,
+   "uc2.investigation_agent": 1.88,
+   "uc2.orchestrator": 34.76,
    "uc2.policy": 0.82,
-   "uc2.risk_agent": 0.23,
-   "uc2.tool": 0.09
+   "uc2.risk_agent": 0.27,
+   "uc2.tool": 0.12
   },
   "tokens_in": 622274,
   "tokens_out": 76301,
