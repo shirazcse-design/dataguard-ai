@@ -122,7 +122,7 @@ allowed_attributes:
   - dg.dlp.n_signals
   - dg.dlp.n_findings
   - dg.dlp.policy_effect
-  # UC2 Insider Risk (docs/uc2/observability.md). Codes, scores and counts only: a schema case id,
+  # UC2 Insider Risk (docs/uc2/foundry-observability-setup.md). Codes, scores and counts only: a schema case id,
   # a PSEUDONYMOUS subject (salted hash, never the user id), the authoritative anomaly score/band
   # and model version, role family and privilege (access context, not HR), UC4 max level, UC6
   # topic/status/effect, delegation and outcome codes. Never raw logs, document or policy text,

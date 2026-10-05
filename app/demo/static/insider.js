@@ -227,7 +227,7 @@ function irSummaryCard(r) {
       ? h("ul", { class: "items" }, s.map((x) => h("li", {}, h("span", {}, "•"),
           h("span", {}, x.text, " ", h("span", { class: "chip" }, x.claim_type.replace(/_/g, " ").toLowerCase()), " ", h("span", { class: "chip" }, x.evidence_id)))))
       : h("p", { class: "placeholder" }, "No summary."),
-    h("p", { class: "note" }, "Each line is a fixed template filled from evidence and labelled observed fact, inferred anomaly, verified policy or missing evidence. It never states intent, guilt or an employment action."));
+    h("p", { class: "note" }, "Each line is a fixed template filled from evidence and labelled observed fact, inferred anomaly, policy requirement or agent interpretation. It never states intent, guilt or an employment action."));
 }
 
 function irContextCard(r) {

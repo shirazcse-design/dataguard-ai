@@ -1,4 +1,4 @@
-# UC2 agents: names, prompts and HARD budgets (enforced in code, not by prompt). docs/uc2/agents.md
+# UC2 agents: names, prompts and HARD budgets (enforced in code, not by prompt). docs/uc2/agent-and-tools.md
 agents_version: 1.0.0
 model_tier: mid                     # uc4-llm-medium for every agent (fair 1/2/4-agent comparison)
 
