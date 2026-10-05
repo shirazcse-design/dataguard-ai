@@ -1,0 +1,309 @@
+{
+ "source": {
+  "run": "docs/uc2/results/agents-live-run3-full36.json",
+  "verification": "LIVE-VERIFIED (recorded for replay)",
+  "feedback": {
+   "seed": 6,
+   "demo": 0
+  }
+ },
+ "patterns": [
+  {
+   "signal": "agent_reliability",
+   "key": "tool_failure",
+   "cases": [
+    "I07",
+    "I27"
+   ],
+   "n": 2,
+   "outcomes": [
+    "HUMAN_REVIEW"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "analyst_disagree_lower",
+   "key": "outcome:ESCALATE",
+   "cases": [
+    "I21"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  },
+  {
+   "signal": "analyst_disagree_lower",
+   "key": "outcome:HUMAN_REVIEW",
+   "cases": [
+    "I05",
+    "I11"
+   ],
+   "n": 2,
+   "outcomes": [
+    "HUMAN_REVIEW"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "analyst_needs_more_information",
+   "key": "outcome:HUMAN_REVIEW",
+   "cases": [
+    "I07"
+   ],
+   "n": 1,
+   "outcomes": [
+    "HUMAN_REVIEW"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "false_review",
+   "key": "outcome:INVESTIGATE",
+   "cases": [
+    "I08"
+   ],
+   "n": 1,
+   "outcomes": [
+    "INVESTIGATE"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "false_review",
+   "key": "review:agent_disagreement",
+   "cases": [
+    "I05",
+    "I11"
+   ],
+   "n": 2,
+   "outcomes": [
+    "HUMAN_REVIEW"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "false_review",
+   "key": "review:required_evidence_missing",
+   "cases": [
+    "I07"
+   ],
+   "n": 1,
+   "outcomes": [
+    "HUMAN_REVIEW"
+   ],
+   "safety_sensitive": false
+  },
+  {
+   "signal": "over_escalation",
+   "key": "band:ELEVATED",
+   "cases": [
+    "I15"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  },
+  {
+   "signal": "over_escalation",
+   "key": "band:HIGH_ANOMALY",
+   "cases": [
+    "I21"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  }
+ ],
+ "eval_candidates": [
+  {
+   "id": "EC01",
+   "pattern": "analyst_disagree_lower:outcome:HUMAN_REVIEW + false_review:review:agent_disagreement",
+   "seed_cases": [
+    "I05",
+    "I11"
+   ],
+   "categories": [
+    "hard_legitimate",
+    "normal"
+   ],
+   "proposal": "a fresh synthetic variant of I05, I11 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  },
+  {
+   "id": "EC02",
+   "pattern": "analyst_needs_more_information:outcome:HUMAN_REVIEW + false_review:review:required_evidence_missing",
+   "seed_cases": [
+    "I07"
+   ],
+   "categories": [
+    "hard_legitimate"
+   ],
+   "proposal": "a fresh synthetic variant of I07 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  },
+  {
+   "id": "EC03",
+   "pattern": "agent_reliability:tool_failure",
+   "seed_cases": [
+    "I07",
+    "I27"
+   ],
+   "categories": [
+    "hard_legitimate",
+    "tool_failure"
+   ],
+   "proposal": "a fresh synthetic variant of I07, I27 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  },
+  {
+   "id": "EC04",
+   "pattern": "false_review:outcome:INVESTIGATE",
+   "seed_cases": [
+    "I08"
+   ],
+   "categories": [
+    "hard_legitimate"
+   ],
+   "proposal": "a fresh synthetic variant of I08 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  },
+  {
+   "id": "EC05",
+   "pattern": "over_escalation:band:ELEVATED",
+   "seed_cases": [
+    "I15"
+   ],
+   "categories": [
+    "anomaly"
+   ],
+   "proposal": "a fresh synthetic variant of I15 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  },
+  {
+   "id": "EC06",
+   "pattern": "analyst_disagree_lower:outcome:ESCALATE + over_escalation:band:HIGH_ANOMALY",
+   "seed_cases": [
+    "I21"
+   ],
+   "categories": [
+    "anomaly"
+   ],
+   "proposal": "a fresh synthetic variant of I21 (different user and day)",
+   "status": "NEEDS_HUMAN_LABEL"
+  }
+ ],
+ "human_review_items": [
+  {
+   "signal": "analyst_disagree_lower",
+   "key": "outcome:ESCALATE",
+   "cases": [
+    "I21"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  },
+  {
+   "signal": "over_escalation",
+   "key": "band:ELEVATED",
+   "cases": [
+    "I15"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  },
+  {
+   "signal": "over_escalation",
+   "key": "band:HIGH_ANOMALY",
+   "cases": [
+    "I21"
+   ],
+   "n": 1,
+   "outcomes": [
+    "ESCALATE"
+   ],
+   "safety_sensitive": true
+  }
+ ],
+ "candidate": {
+  "path": "config/insider/candidates/risk.v1.3.0-candidate.yaml",
+  "rubric_version": "1.3.0-candidate",
+  "kind": "harness rule",
+  "sha256": "a34ac61426bc3f122067deea7abd29aa0ad0a368b0f0a23ef5f806e8dde31379",
+  "targets": "false_review:review:agent_disagreement",
+  "mined_from": [
+   "I05",
+   "I11"
+  ]
+ },
+ "gate": {
+  "baseline": {
+   "acceptable": 31,
+   "cases": 36,
+   "critical_misses": 0,
+   "false_reviews": 4,
+   "hitl_recall": 0.571,
+   "hitl_precision": 0.5,
+   "unsupported_ids": 0,
+   "agent_failures": 3
+  },
+  "candidate": {
+   "acceptable": 33,
+   "cases": 36,
+   "critical_misses": 0,
+   "false_reviews": 2,
+   "hitl_recall": 0.571,
+   "hitl_precision": 0.667,
+   "unsupported_ids": 0,
+   "agent_failures": 3
+  },
+  "changed_cases": [
+   {
+    "id": "I05",
+    "category": "normal",
+    "expected": "MONITOR",
+    "before": "HUMAN_REVIEW",
+    "after": "MONITOR",
+    "ok_after": true
+   },
+   {
+    "id": "I11",
+    "category": "hard_legitimate",
+    "expected": "MONITOR",
+    "before": "HUMAN_REVIEW",
+    "after": "MONITOR",
+    "ok_after": true
+   }
+  ],
+  "checks": {
+   "no_critical_miss": true,
+   "acceptable_not_lower": true,
+   "hitl_recall_not_lower": true,
+   "flagship_escalates": true,
+   "no_escalation_lowered": true,
+   "no_adversarial_case_lowered": true,
+   "no_unsupported_evidence": true,
+   "no_new_agent_failures": true
+  },
+  "verdict": "PASS",
+  "in_sample_only": true,
+  "caveat": "The candidate was mined from the golden set it is gated on: passing is necessary, not sufficient. Label the eval candidates and re-run the gate on them before promotion."
+ },
+ "status": "AWAITING_HUMAN_APPROVAL",
+ "runtime_rubric": {
+  "rubric_version": "1.2.0",
+  "unchanged": true
+ },
+ "protected_files_unchanged": true
+}

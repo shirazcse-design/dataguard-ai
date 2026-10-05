@@ -29,6 +29,9 @@ def load_rubric() -> dict[str, Any]:
     return yaml.safe_load((REPO / "config" / "insider" / "risk.v1.yaml").read_text("utf-8"))
 
 
+BAND_RANK = {"NORMAL": 0, "ELEVATED": 1, "HIGH_ANOMALY": 2}
+
+
 def _max(a: str, b: str) -> str:
     return a if SEVERITY[a] >= SEVERITY[b] else b
 
@@ -113,7 +116,17 @@ def decide(
         codes.append(f"orchestrator_stopped_early:{ctx.early_stop.split(':')[0]}:risk_assessed")
     rec = getattr(recommendation, "recommended_outcome", None)
     triggers: list[str] = []
-    if rec == "HUMAN_REVIEW":
+    # Optional (absent in 1.2.0, so the default is unchanged): below `min_band`, a review request
+    # on a case the rubric scores MONITOR is logged for the analyst instead of forcing review.
+    req_min = (rubric.get("agent_review_request") or {}).get("min_band")
+    if (
+        rec == "HUMAN_REVIEW"
+        and req_min
+        and BAND_RANK[band] < BAND_RANK[req_min]
+        and bounded == "MONITOR"
+    ):
+        codes.append("agent_review_request_logged:below_min_band")
+    elif rec == "HUMAN_REVIEW":
         triggers.append("agent_disagreement")
         codes.append("agent_recommended_human_review")
     elif rec in SEVERITY:

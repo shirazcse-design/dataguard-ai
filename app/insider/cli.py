@@ -363,6 +363,33 @@ def cmd_foundry_eval(args) -> int:
     return 0
 
 
+def cmd_learn_run(args) -> int:
+    """OFFLINE: mine runs and feedback, gate a candidate on all 36 golden cases (replay)."""
+    from evals.insider import learning_loop as ll
+
+    r = ll.run(Path(args.candidate).resolve())
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / "learning-loop.json").write_text(
+        json.dumps(r, indent=1, default=str) + "\n", "utf-8"
+    )
+    (RESULTS / "learning-loop.md").write_text(ll.render(r), encoding="utf-8")
+    print(f"{r['candidate']['rubric_version']}: gate {r['gate']['verdict']} -> {r['status']}")
+    print("wrote docs/uc2/results/learning-loop.md")
+    return 0 if r["gate"]["verdict"] == "PASS" else 1
+
+
+def cmd_learn_approve(args) -> int:
+    """Record a HUMAN decision on a gated candidate. Deploys nothing."""
+    from evals.insider import learning_loop as ll
+
+    rec = ll.approve(Path(args.candidate).resolve(), args.approver, args.decision, args.reason)
+    print(json.dumps(rec, indent=1))
+    print(
+        "Recorded. Nothing was deployed: promotion is a reviewed change to config/insider/risk.v1.yaml."
+    )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="dataguard-insider", description="UC2 Insider Risk")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -404,6 +431,18 @@ def main(argv: list[str] | None = None) -> int:
     olc = o.add_parser("live-check")
     olc.add_argument("--tenant-id", default=None)
     olc.set_defaults(func=cmd_obs_live_check)
+    ln = sub.add_parser("learn", help="controlled learning loop (offline)").add_subparsers(
+        dest="sub", required=True
+    )
+    lr = ln.add_parser("run", help="mine, propose eval candidates, gate a candidate (replay)")
+    lr.add_argument("--candidate", default="config/insider/candidates/risk.v1.3.0-candidate.yaml")
+    lr.set_defaults(func=cmd_learn_run)
+    la = ln.add_parser("approve", help="record a human approve/reject decision (deploys nothing)")
+    la.add_argument("--candidate", required=True)
+    la.add_argument("--approver", required=True)
+    la.add_argument("--decision", choices=("approve", "reject"), required=True)
+    la.add_argument("--reason", required=True)
+    la.set_defaults(func=cmd_learn_approve)
     fx = sub.add_parser("foundry-eval", help="export UC2 Foundry eval rows; --run creates them")
     fx.add_argument("--run", action="store_true", help="LIVE: create and run in Foundry")
     fx.add_argument("--judge", default="uc4-llm-medium")
