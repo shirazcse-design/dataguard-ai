@@ -304,6 +304,65 @@ def cmd_guardrails_verify(args) -> int:
     return 0
 
 
+def cmd_foundry_eval(args) -> int:
+    """Export the UC2 Foundry evaluation rows (replay of live run 3); with --run, create the three
+    evaluations in Foundry (cloud Evals API) and wait. --run is done at the product owner's explicit
+    request (2026-10-04, P11); see evals/insider/foundry_evals.py."""
+    from datetime import datetime
+
+    from evals.insider import foundry_evals as fe
+
+    ids = {i.strip() for i in args.ids.split(",") if i.strip()} or None
+    outcomes, tools, risk = fe.build_rows(ids)
+    fe.write_jsonl(fe.DATA / "outcomes.jsonl", outcomes)
+    fe.write_jsonl(fe.DATA / "agents.jsonl", tools)
+    fe.write_jsonl(fe.DATA / "risk.jsonl", risk)
+    print(
+        f"wrote {len(outcomes)} outcome rows, {len(tools)} tool-agent rows, {len(risk)} risk-agent rows"
+    )
+    if not args.run:
+        return 0
+    from app.agent.foundry_service import project_client, project_endpoint
+
+    client = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    stamp = datetime.now().strftime("%Y%m%d-%H%M")
+    out: dict = {
+        "created": stamp,
+        "judge": args.judge,
+        "source": "replay of live run 3 (full system)",
+    }
+    if args.which in ("outcomes", "all"):
+        rows = fe.load_rows(fe.DATA / "outcomes.jsonl", fe.OUTCOME_FIELDS)
+        res = fe.run_in_foundry(client, fe.payload(fe.OUTCOMES_EVAL, fe.OUTCOME_FIELDS, fe.OUTCOME_CRITERIA, rows),
+                                f"uc2-outcomes-{stamp}", timeout_s=args.timeout)  # fmt: skip
+        out["outcomes"] = {**res, "local": fe.local_outcome_counts(rows)}
+        print(json.dumps({"outcomes": out["outcomes"]}, indent=1, default=str), flush=True)
+    for key, name, fields, mapping, path in (
+        ("agent_quality", fe.AGENT_EVAL, fe.AGENT_FIELDS, fe.AGENT_MAPPING, "agents.jsonl"),
+        ("risk_quality", fe.RISK_EVAL, fe.RISK_FIELDS, fe.RISK_MAPPING, "risk.jsonl"),
+    ):
+        if args.which not in (key.split("_")[0], "all"):
+            continue
+        rows = fe.load_list_rows(fe.DATA / path, fields)
+        p = fe.list_payload(name, fields, fe.criteria(mapping, args.judge), rows)
+        res = fe.run_in_foundry(
+            client, p, f"uc2-{key.replace('_', '-')}-{stamp}", timeout_s=args.timeout
+        )
+        scores = fe.per_row_scores(client, res["eval_id"], res["run_id"])
+        out[key] = {**res, "per_agent": fe.per_agent(scores, tuple(mapping)), "rows": scores}
+        print(
+            json.dumps(
+                {key: {k: v for k, v in out[key].items() if k != "rows"}}, indent=1, default=str
+            ),
+            flush=True,
+        )
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    path = RESULTS / f"foundry-evals-{stamp}.json"
+    path.write_text(json.dumps(out, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8")
+    print(f"wrote {path.relative_to(RESULTS.parents[2])}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="dataguard-insider", description="UC2 Insider Risk")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -345,6 +404,16 @@ def main(argv: list[str] | None = None) -> int:
     olc = o.add_parser("live-check")
     olc.add_argument("--tenant-id", default=None)
     olc.set_defaults(func=cmd_obs_live_check)
+    fx = sub.add_parser("foundry-eval", help="export UC2 Foundry eval rows; --run creates them")
+    fx.add_argument("--run", action="store_true", help="LIVE: create and run in Foundry")
+    fx.add_argument("--judge", default="uc4-llm-medium")
+    fx.add_argument("--which", choices=("outcomes", "agent", "risk", "all"), default="all")
+    fx.add_argument(
+        "--ids", default="", help="agent-quality cases (default: the 12 live-sample cases)"
+    )
+    fx.add_argument("--timeout", type=float, default=1800.0)
+    fx.add_argument("--tenant-id", default=None)
+    fx.set_defaults(func=cmd_foundry_eval)
     gr = sub.add_parser("guardrails").add_subparsers(dest="sub", required=True)
     grv = gr.add_parser("verify")
     grv.add_argument("--tenant-id", default=None)
