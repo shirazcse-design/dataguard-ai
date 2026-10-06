@@ -155,5 +155,29 @@ allowed_attributes:
   - dg.ir.delegations
   - dg.ir.early_stop
   - dg.ir.simulated_faults
+  # UC3 Access Governance (docs/uc3/README.md). Codes, ids and counts only: a request id, a PSEUDONYMOUS
+  # subject (salted hash, never the user id), the catalogue entitlement id, UC4 level, POL-ACC citations,
+  # deterministic signal and reason codes, outcomes, HITL reasons. Never justifications, tool payloads,
+  # other users' data or agent reasoning.
+  - dg.ag.request_id
+  - dg.ag.subject
+  - dg.ag.entitlement
+  - dg.ag.failures
+  - dg.ag.justification_flagged
+  - dg.ag.sensitivity
+  - dg.ag.policy_sections
+  - dg.ag.policy_missing
+  - dg.ag.signals
+  - dg.ag.deterministic_outcome
+  - dg.ag.outcome
+  - dg.ag.reason_codes
+  - dg.ag.agent_effect
+  - dg.ag.rubric_version
+  - dg.ag.hitl_required
+  - dg.ag.hitl_reasons
+  - dg.ag.agent_recommendation
+  - dg.ag.provisioned
+  - dg.ag.model_calls
+  - dg.ag.tool_calls
   # errors (class name only)
   - dg.error.type

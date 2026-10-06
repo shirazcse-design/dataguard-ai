@@ -1,0 +1,34 @@
+# UC3 deterministic authorization harness (AUTHORITATIVE). The agent recommends; this decides the
+# bounded outcome from the precheck FACTS (never from the agent's tool calls). Rules are applied in
+# order; the first that fires sets the deterministic outcome. Every rule is a reason code.
+# Changing a rule = a new rubric_version.
+rubric_version: 1.0.0
+
+rules:
+  - {id: required_capability_failed, when: "identity, UC4 or UC6 failed",                          outcome: HUMAN_REVIEW}
+  - {id: sod_conflict,               when: "SoD conflict, no approved exception",                   outcome: RECOMMEND_REJECT}
+  - {id: sod_conflict_with_exception, when: "SoD conflict covered by an approved exception",        outcome: HUMAN_REVIEW}
+  - {id: business_purpose_missing,   when: "no recognised purpose category",                         outcome: HUMAN_REVIEW}
+  - {id: existing_access_sufficient, when: "existing access already meets the stated need",          outcome: RECOMMEND_REJECT}
+  - {id: conflicting_evidence,       when: "the request cites a project the user is not assigned to", outcome: HUMAN_REVIEW}
+  - {id: policy_evidence_missing,    when: "a required POL-ACC section is unmapped or not returned",  outcome: HUMAN_REVIEW}
+  - {id: privileged_access,          when: "administrator access (POL-ACC 3.3: JIT, owner + InfoSec)", outcome: HUMAN_REVIEW}
+  - {id: stale_access_review,        when: "the user holds stale access (POL-ACC 4, 5)",              outcome: HUMAN_REVIEW}
+  - {id: least_privilege_alternative, when: "a narrower entitlement or shorter duration meets the need", outcome: RECOMMEND_LIMITED_TIME_BOUND_ACCESS}
+  - {id: high_sensitivity_write,     when: "write to Highly Confidential data with no narrower option", outcome: HUMAN_REVIEW}
+  - {id: policy_time_bound,          when: "the policy requires time-bound access (a maximum duration)", outcome: RECOMMEND_LIMITED_TIME_BOUND_ACCESS}
+  - {id: approve,                    when: "none of the above",                                      outcome: RECOMMEND_APPROVE}
+
+# The agent's view: stricter is adopted as HUMAN_REVIEW (it raises a concern; it cannot reject on its
+# own), one level more lenient is ignored, more lenient by two or more is logged for the analyst.
+# The agent can never lower the deterministic outcome.
+agent:
+  failure_outcome_floor: HUMAN_REVIEW   # an agent that fails cannot leave APPROVE / LIMITED unexplained
+  action_claim_floor: HUMAN_REVIEW      # the agent claimed it changed access (withheld)
+
+# Human approval is required for every outcome except an unconditional approve of non-privileged,
+# read-only access to Public or Internal data (POL-ACC 3.2: Confidential+ needs the data owner).
+hitl_free:
+  outcome: RECOMMEND_APPROVE
+  levels: [PUBLIC, INTERNAL]
+  privilege: read

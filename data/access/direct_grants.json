@@ -1,0 +1,34 @@
+[
+ {
+  "grant_id": "DG-01",
+  "user_id": "u-3019",
+  "entitlement_id": "payments_create",
+  "granted": "2024-02-01",
+  "expires": null,
+  "reason": "previous role"
+ },
+ {
+  "grant_id": "DG-02",
+  "user_id": "u-3006",
+  "entitlement_id": "cust_prod_read_full",
+  "granted": "2026-03-01",
+  "expires": "2026-05-30",
+  "reason": "Q1 audit support"
+ },
+ {
+  "grant_id": "DG-03",
+  "user_id": "u-3022",
+  "entitlement_id": "platform_admin",
+  "granted": "2026-09-30",
+  "expires": "2026-09-30",
+  "reason": "JIT maintenance session"
+ },
+ {
+  "grant_id": "DG-04",
+  "user_id": "u-3016",
+  "entitlement_id": "payments_approve",
+  "granted": "2026-01-05",
+  "expires": "2026-12-31",
+  "reason": "approver cover during migration"
+ }
+]

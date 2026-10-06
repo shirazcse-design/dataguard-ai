@@ -57,14 +57,20 @@ def read_jsonl(path: Path | str) -> list[Span]:
 # UC2 (Insider Risk): one span per agent (`uc2.orchestrator`, `uc2.behavior_agent`,
 # `uc2.investigation_agent`, `uc2.risk_agent`, `uc2.single_agent`), `uc2.agent.planner`, `uc2.tool`.
 _PLANNER_SPANS = frozenset(
-    {"agent.planner", "uc6.agent.planner", "uc1.agent.planner", "uc2.agent.planner"}
+    {
+        "agent.planner",
+        "uc6.agent.planner",
+        "uc1.agent.planner",
+        "uc2.agent.planner",
+        "uc3.agent.planner",
+    }
 )
 _LLM_CALL_SPANS = frozenset({"llm.call", "uc6.generate", *_PLANNER_SPANS})
 _AGENT_SPANS = frozenset({
     "agent.document", "uc6.agent", "uc1.agent", "uc2.orchestrator", "uc2.behavior_agent",
-    "uc2.investigation_agent", "uc2.risk_agent", "uc2.single_agent",
+    "uc2.investigation_agent", "uc2.risk_agent", "uc2.single_agent", "uc3.agent",
 })  # fmt: skip
-_TOOL_SPANS = frozenset({"agent.tool", "uc6.tool", "uc1.tool", "uc2.tool"})
+_TOOL_SPANS = frozenset({"agent.tool", "uc6.tool", "uc1.tool", "uc2.tool", "uc3.tool"})
 _PROVIDER = "azure.ai.openai"
 
 

@@ -1,0 +1,80 @@
+[
+ {
+  "user_id": "u-3017",
+  "entitlement_id": "cust_analytics_read",
+  "last_used": "2026-09-29",
+  "uses_90d": 41
+ },
+ {
+  "user_id": "u-3017",
+  "entitlement_id": "wiki_read",
+  "last_used": "2026-09-30",
+  "uses_90d": 77
+ },
+ {
+  "user_id": "u-3004",
+  "entitlement_id": "cust_prod_read_full",
+  "last_used": "2026-09-28",
+  "uses_90d": 63
+ },
+ {
+  "user_id": "u-3005",
+  "entitlement_id": "cust_prod_read_full",
+  "last_used": "2026-09-24",
+  "uses_90d": 22
+ },
+ {
+  "user_id": "u-3006",
+  "entitlement_id": "cust_prod_read_full",
+  "last_used": "2026-05-12",
+  "uses_90d": 0
+ },
+ {
+  "user_id": "u-3019",
+  "entitlement_id": "payments_create",
+  "last_used": "2026-06-10",
+  "uses_90d": 0
+ },
+ {
+  "user_id": "u-3016",
+  "entitlement_id": "payments_create",
+  "last_used": "2026-09-30",
+  "uses_90d": 210
+ },
+ {
+  "user_id": "u-3016",
+  "entitlement_id": "payments_approve",
+  "last_used": "2026-09-29",
+  "uses_90d": 35
+ },
+ {
+  "user_id": "u-3021",
+  "entitlement_id": "payments_create",
+  "last_used": "2026-09-30",
+  "uses_90d": 188
+ },
+ {
+  "user_id": "u-3008",
+  "entitlement_id": "repo_core_write",
+  "last_used": "2026-09-30",
+  "uses_90d": 140
+ },
+ {
+  "user_id": "u-3010",
+  "entitlement_id": "repo_core_read",
+  "last_used": "2026-09-30",
+  "uses_90d": 96
+ },
+ {
+  "user_id": "u-3014",
+  "entitlement_id": "vendor_master_read",
+  "last_used": "2026-09-25",
+  "uses_90d": 18
+ },
+ {
+  "user_id": "u-3022",
+  "entitlement_id": "prod_deploy",
+  "last_used": "2026-09-29",
+  "uses_90d": 52
+ }
+]
