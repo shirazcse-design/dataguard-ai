@@ -60,16 +60,23 @@ an instruction; App Insights queried through the Entra-authenticated API, counts
 | GenAI view | 3 invoke_agent, 8 chat, 27 execute_tool | its own spans |
 | Canary from the justification | **0** | 6 records |
 | Flagship justification text | **0** | 12 records |
-| Raw user ids (u-3014, u-3017, u-3024) | **0** | **0** (the agent sees only an alias) |
+| Raw user ids (u-3014, u-3017, u-3024) | **0** | **0** for these three requests (see the correction below) |
 | AR-015 injection text | **0** | **0** (withheld by DataGuard before the agent saw it) |
 | Agent-facing alias (`req-…`) | **0** | 136 records |
 
 **Finding.** DataGuard's telemetry is clean. **Foundry Agent Service records the agent's
 conversation** (`gen_ai.input.messages` / `output.messages`), which includes the business
 justification and the request alias the agent legitimately reads. It is the same platform behaviour
-found in UC1, UC2 and UC6. Unlike UC2, no raw user id reaches Foundry: UC3's context engineering
-gives the agent a fixed-salt alias, and instruction-like justifications are withheld before the agent
-sees them.
+found in UC1, UC2 and UC6. Instruction-like justifications are withheld before the agent sees them, so the AR-015
+injection text never reached Foundry.
+
+**Correction (2026-10-06, found while building the Foundry evaluation rows).** The agent's subject
+is an alias (`req-…`), but some tool results still carry the requester's **raw** user id: the
+inherited grant paths (`get_current_entitlements`, `get_access_path`), the SoD `held_via` paths
+(`check_sod`) and an exception record. It happens on 7 of the 16 golden requests (AR-005, 006, 008,
+010, 011, 013, 016), not on the three requests in this live check, which is why the count above is
+0. So raw (synthetic) user ids can reach Foundry's recorded conversation, as in UC2. Fix (open):
+alias the user id inside tool results too.
 
 **Decision (product owner, 2026-10-06): (a) keep it on for the synthetic demo**, as in UC1, UC2 and
 UC6: all users, requests and resources are synthetic. Before production: turn off agent content recording in the

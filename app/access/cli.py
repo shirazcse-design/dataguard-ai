@@ -8,6 +8,7 @@ agent export                      the Foundry agent's instructions, tool schemas
                                   as files for MANUAL creation in the portal (nothing is created)
 obs report                        traced golden run + privacy audit (offline)
 obs live-check                    LIVE: 3 requests via the Foundry agent -> Application Insights
+foundry-eval [--run]              export the Foundry evaluation rows; --run creates the evaluations
 """
 
 from __future__ import annotations
@@ -215,6 +216,35 @@ def cmd_obs_live_check(args) -> int:
     return 0
 
 
+def cmd_foundry_eval(args) -> int:
+    """Export the UC3 Foundry evaluation rows (replay of live run 2); with --run (LIVE, Entra sign-in)
+    create the two evaluations in Foundry and wait. See evals/access/foundry_evals.py."""
+    from datetime import datetime
+
+    from evals.access import foundry_evals as fe
+
+    outcomes, agents = fe.build_rows()
+    fe.write_jsonl(fe.DATA / "outcomes.jsonl", outcomes)
+    fe.write_jsonl(fe.DATA / "agent.jsonl", agents)
+    print(
+        f"wrote {len(outcomes)} outcome rows, {len(agents)} agent rows to data/access/foundry_eval/"
+    )
+    if not args.run:
+        return 0
+    from app.agent.foundry_service import project_client, project_endpoint
+
+    client = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    stamp = datetime.now().strftime("%Y%m%d-%H%M")
+    out = fe.run_all(client, args.judge, stamp, args.which, args.timeout)
+    print(json.dumps({k: {kk: vv for kk, vv in v.items() if kk != "rows"} if isinstance(v, dict) else v
+                      for k, v in out.items()}, indent=1, default=str))  # fmt: skip
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    path = RESULTS / f"foundry-evals-{stamp}.json"
+    path.write_text(json.dumps(out, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8")
+    print(f"wrote {path.relative_to(REPO)}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="dataguard-access", description="UC3 AI Data Access Governance Agent"
@@ -263,6 +293,15 @@ def main(argv: list[str] | None = None) -> int:
     olc = o.add_parser("live-check", help="LIVE: 3 requests via the Foundry agent -> App Insights")
     olc.add_argument("--tenant-id", default=None)
     olc.set_defaults(func=cmd_obs_live_check)
+    fx = sub.add_parser(
+        "foundry-eval", help="export the Foundry evaluation rows; --run creates them"
+    )
+    fx.add_argument("--run", action="store_true")
+    fx.add_argument("--which", choices=("outcomes", "agent", "all"), default="all")
+    fx.add_argument("--judge", default="uc4-llm-medium")
+    fx.add_argument("--timeout", type=float, default=900.0)
+    fx.add_argument("--tenant-id", default=None)
+    fx.set_defaults(func=cmd_foundry_eval)
     args = p.parse_args(argv)
     return args.func(args)
 
