@@ -1,0 +1,60 @@
+{
+ "final_text": null,
+ "key": "4bcafa0d1cb1ad9c01aed4a9c671b74e2c9ec3b20922c39f33a0ba7d20e414a9",
+ "recorded_at": "2026-10-06T21:44:30+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1541,
+ "tokens_out": 165,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-8507c50d88"
+   },
+   "id": "call_bOEtcuc9mpjkjGVmQ0TzEnkc",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-8507c50d88"
+   },
+   "id": "call_sM3RpEXgprUnU1zhH9oYf1Cz",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "platform_admin_console"
+   },
+   "id": "call_x8AU2UvoYcyefrWNMhQxSvvL",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "platform_admin_console"
+   },
+   "id": "call_s7WXfnyjlNWXfncZiWGoYx6X",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "platform_admin"
+   },
+   "id": "call_fLUK5zynd5oxi1Jf1QEn8DkY",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "platform_admin"
+   },
+   "id": "call_VWar3q1LWla3CoHbHWJmwG1b",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "platform admin privileged access least privilege time-bound admin maintenance suspicious justification flagged"
+   },
+   "id": "call_msNMnZXLmQGR2KXJ7fNLLal3",
+   "name": "search_policy"
+  }
+ ]
+}

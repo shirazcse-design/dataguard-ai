@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "01f4afe0ebef5319f45688ad3952ded3a25df41573c4d60b2b49828d53ed8f09",
+ "recorded_at": "2026-10-06T21:44:46+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1554,
+ "tokens_out": 188,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-583458238a"
+   },
+   "id": "call_osCapM6ScVbfInpXU0GMa1Cd",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-583458238a"
+   },
+   "id": "call_WjFh9K7nUPriaSPo6kCudBkI",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_CcJC7vxkN34M4JcJZnzJMN52",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_cliD0pQRleJHeJ0S4ZphjiSV",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_dcENTNYJ2SmidrVTEtJpdy0v",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_aJZZYueBGthfqY0ByKaR7ZVC",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_GQxmSazZhh3umWmPeMqunMB0",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "access requests least privilege existing access segregation of duties time-bound access reporting wiki read suspicious justification ignore rules group change"
+   },
+   "id": "call_Si20N4RtKESrkZ7E4Nx1fqwl",
+   "name": "search_policy"
+  }
+ ]
+}

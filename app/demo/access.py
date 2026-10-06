@@ -170,7 +170,7 @@ class AccessSession:
         run_path, run = latest("eval-record-run2")
         if run is None:
             run_path, run = latest("eval-record-run1")
-        f_path, foundry = latest("eval-record-run2-foundry4")
+        f_path, foundry = latest("eval-record-foundry-run2-foundry4")
         guard = _load_json(RESULTS / "guardrails-verification.json") or {}
         obs = _load_json(RESULTS / "observability.json") or {}
         return {"eval": (run or {}).get("summary"), "eval_verification": (run or {}).get("verification"),
@@ -201,9 +201,12 @@ def result_view(x: Any) -> dict[str, Any]:
     g = x.state.svc.graph
     uid = f.request["user_id"]
     grants = g.grants(uid) if f.identity else []
-    alt_paths = []
-    if d.alternative and f.identity:
-        alt_paths = [p.view() for p in g.paths(uid, g.resource_of(d.alternative.entitlement_id))]
+    # Existing access to the requested resource AND to the other resources of its family (e.g. the
+    # sanitized dataset next to the production database): the context an approver needs.
+    family_paths = []
+    if f.identity:
+        resources = {g.resource_of(e) for e in g.family(f.request["entitlement_id"])}
+        family_paths = [p.view() for p in g.grants(uid) if p.resource_id in resources]
     return {
         "request_id": f.request["request_id"],
         "facts": {"failures": f.failures, "identity": f.identity, "sensitivity": f.sensitivity,
@@ -213,7 +216,8 @@ def result_view(x: Any) -> dict[str, Any]:
                   "grants": [gr.view() for gr in grants],
                   "usage": g.last_use(uid, f.request["entitlement_id"]) if f.identity else None,
                   "peer": g.peer_rate(uid, f.request["entitlement_id"]) if f.identity else None,
-                  "alternative_paths": alt_paths},
+                  "family_paths": family_paths,
+                  "alternative_resource": g.resource_of(d.alternative.entitlement_id) if d.alternative else None},
         "recommendation": rec.model_dump() if rec else None,
         "decision": d.model_dump(),
         "agent": {"name": run.name, "stopped_reason": run.stopped_reason, "turns": run.turns, "tool_calls": run.tool_calls,

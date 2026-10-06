@@ -104,3 +104,19 @@ def test_page_is_served_registered_and_safe():
         *(names(_static(f).decode()) for f in ("app.js", "policy.js", "dlp.js", "insider.js"))
     )
     assert not names(js) & others
+
+
+@pytest.mark.parametrize("backend", ["chat-completions", "foundry-service"])
+def test_flagship_replays_the_recorded_live_run(app, backend):
+    r = app.access_investigate({"request_id": "AR-002", "backend": backend})["data"]
+    d = r["decision"]
+    assert (
+        d["outcome"] == "RECOMMEND_LIMITED_TIME_BOUND_ACCESS"
+        and d["agent_recommendation"] == d["outcome"]
+    )
+    assert d["alternative"] == {"entitlement_id": "cust_prod_read_full", "duration_days": 21.0}
+    assert r["agent"]["stopped_reason"] == "final_answer"
+    assert r["facts"]["alternative_resource"] == "customer_prod_db"
+    assert any(
+        p["entitlement_id"] == "cust_analytics_read" for p in r["facts"]["family_paths"]
+    )  # what they hold today

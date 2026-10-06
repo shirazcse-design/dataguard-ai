@@ -194,35 +194,39 @@ function agControlCard(r) {
     h("p", { class: "note" }, "The harness recomputes identity, graph, UC4, UC6, least-privilege and SoD facts itself. An agent that skipped a tool cannot change this result."));
 }
 
-// The access graph: each path drawn as nodes and labelled edges, plus the requested edge (dashed).
+// The access graph: existing paths to the requested resource and its family (solid), the request
+// (dashed) and, when the harness proposes one, the least-privilege alternative (accent, dashed).
 function agGraphCard(r) {
-  const f = r.facts, req = r.request;
-  const rows = [...f.paths.map((p) => ({ path: p.path, kind: p.active ? (p.inherited ? "inherited" : "direct") : "expired" })),
-    ...f.alternative_paths.map((p) => ({ path: p.path, kind: "alternative" }))];
-  const w = 760, rowH = 64, top = 40;
-  const lines = [...rows, { path: [req.user_id, "REQUESTS", req.entitlement_id, "PERMITS", req.resource_id], kind: "requested" }];
-  const height = top + lines.length * rowH + 8;
-  const svg = s("svg", { viewBox: `0 0 ${w} ${height}`, role: "img", "aria-label": "Access paths from the requester to the resource", class: "ag-graph" },
+  const f = r.facts, req = r.request, d = r.decision;
+  const lines = f.family_paths.map((p) => ({ path: p.path, kind: p.active ? (p.inherited ? `has today (${p.via})` : "has today (direct)") : "expired", cls: p.active ? "has" : "expired" }));
+  lines.push({ path: [req.user_id, "REQUESTS", req.entitlement_id, "PERMITS", req.resource_id], kind: `requested: ${req.duration_days} days`, cls: "requested" });
+  if (d.alternative) {
+    lines.push({ path: [req.user_id, "ALTERNATIVE", d.alternative.entitlement_id, "PERMITS", f.alternative_resource],
+      kind: `proposed: ${agDays(d.alternative.duration_days)}`, cls: "alternative" });
+  }
+  const w = 760, rowH = 72, top = 52;
+  const svg = s("svg", { viewBox: `0 0 ${w} ${top + lines.length * rowH + 4}`, role: "img", "aria-label": "Access paths from the requester to the resource", class: "ag-graph" },
     s("defs", {}, s("marker", { id: "ag-arrow", viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "6", markerHeight: "6", orient: "auto-start-reverse" },
       s("path", { d: "M0 0L10 5L0 10z", fill: "var(--ink-3)" }))),
-    s("text", { x: "12", y: "22", class: "ag-graph-title" }, "How the requester reaches the resource today, and what the request would add"));
+    s("text", { x: "12", y: "22", class: "ag-graph-title" }, "What the requester has today, what was requested, and the narrower alternative"));
   lines.forEach((ln, i) => {
     const nodes = ln.path.filter((_, j) => j % 2 === 0), rels = ln.path.filter((_, j) => j % 2 === 1);
-    const n = nodes.length, nw = 150, gap = (w - 24 - n * nw) / Math.max(n - 1, 1), y = top + i * rowH;
+    const n = nodes.length, nw = n >= 4 ? 150 : 200, gap = (w - 24 - n * nw) / Math.max(n - 1, 1), y = top + i * rowH;
+    const fit = Math.floor((nw - 12) / 6.6);
     nodes.forEach((node, j) => {
       const x = 12 + j * (nw + gap);
-      svg.append(s("rect", { x, y, width: nw, height: 34, rx: 8, class: `ag-node ag-${ln.kind}${j === n - 1 ? " ag-res" : ""}` }),
-        s("text", { x: x + nw / 2, y: y + 21, "text-anchor": "middle", class: "ag-node-text" }, node.length > 22 ? `${node.slice(0, 21)}…` : node));
+      svg.append(s("rect", { x, y, width: nw, height: 34, rx: 8, class: `ag-node ag-${ln.cls}` }),
+        s("text", { x: x + nw / 2, y: y + 21, "text-anchor": "middle", class: "ag-node-text" }, node.length > fit ? `${node.slice(0, fit - 1)}…` : node));
       if (j < n - 1) {
         const x1 = x + nw, x2 = x + nw + gap;
-        svg.append(s("line", { x1, y1: y + 17, x2: x2 - 2, y2: y + 17, class: `ag-edge ag-${ln.kind}`, "marker-end": "url(#ag-arrow)" }),
-          s("text", { x: (x1 + x2) / 2, y: y + 11, "text-anchor": "middle", class: "ag-edge-text" }, rels[j]));
+        svg.append(s("line", { x1, y1: y + 17, x2: x2 - 2, y2: y + 17, class: `ag-edge ag-${ln.cls}`, "marker-end": "url(#ag-arrow)" }),
+          s("text", { x: (x1 + x2) / 2, y: y - 6, "text-anchor": "middle", class: "ag-edge-text" }, rels[j]));
       }
     });
     svg.append(s("text", { x: w - 12, y: y + 50, "text-anchor": "end", class: "ag-graph-note" }, ln.kind));
   });
   return card("Access graph", dataClass("Deterministic graph · observed fact"), svg,
-    h("p", { class: "note" }, f.paths.length ? "Paths come from the typed access graph; the model never adds an edge." : "No current path to this resource: the request would be new access."));
+    h("p", { class: "note" }, "Existing paths come from the typed access graph; the model never adds an edge. Dashed lines are the request and the proposed alternative, not access anyone holds."));
 }
 
 function agAccessCard(r) {
@@ -245,7 +249,7 @@ function agContextCard(r) {
   const f = r.facts, c = f.sensitivity;
   return card("Data and policy context", dataClass("UC4 + UC6"),
     h("dl", { class: "kv" },
-      h("dt", {}, "Sensitivity (UC4)"), h("dd", {}, c ? [levelChip(c.level), " ", c.categories.map((x) => h("span", { class: "chip" }, x)), " ", agClaim("DETERMINISTIC_CONTROL_RESULT")] : statusBadge("unavailable", "warn"))),
+      h("dt", {}, "Sensitivity (UC4)"), h("dd", {}, c ? [levelChip(c.level), " ", ...c.categories.map((x) => h("span", { class: "chip" }, x)), " ", agClaim("DETERMINISTIC_CONTROL_RESULT")] : statusBadge("unavailable", "warn"))),
     f.policy.length
       ? h("ul", { class: "items" }, f.policy.map((p) => h("li", {}, h("span", {}, "✓"), h("span", {}, h("b", {}, p.citation), " ", p.text, " ", agClaim("POLICY_REQUIREMENT")))))
       : h("p", { class: "placeholder" }, "No policy section was returned."),
