@@ -87,7 +87,7 @@
    "tokens_out": 623,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 9.2,
+   "latency_ms": 9.6,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -224,7 +224,7 @@
    "tokens_out": 710,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.9,
+   "latency_ms": 6.7,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -377,7 +377,7 @@
    "tokens_out": 1182,
    "turns": 4,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.4,
+   "latency_ms": 7.5,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -453,7 +453,7 @@
    "tokens_out": 538,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 5.9,
+   "latency_ms": 7.0,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -466,10 +466,11 @@
    ],
    "reason_codes": [
     "rule:existing_access_sufficient",
-    "signal:EXISTING_ACCESS_SUFFICIENT"
+    "signal:EXISTING_ACCESS_SUFFICIENT",
+    "guardrail:justification_names_other_user"
    ],
    "hitl_reasons": [
-    "rule:existing_access_sufficient"
+    "justification_names_other_user"
    ],
    "recommendation": {
     "recommended_outcome": "RECOMMEND_REJECT",

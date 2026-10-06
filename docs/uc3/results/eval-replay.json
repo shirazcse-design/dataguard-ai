@@ -87,7 +87,7 @@
    "tokens_out": 626,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 8.5,
+   "latency_ms": 9.4,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -218,7 +218,7 @@
    "tokens_out": 761,
    "turns": 3,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.3,
+   "latency_ms": 7.4,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -505,7 +505,7 @@
    "tokens_out": 753,
    "turns": 4,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.0,
+   "latency_ms": 7.3,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -767,7 +767,7 @@
    "tokens_out": 606,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.3,
+   "latency_ms": 6.2,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -898,7 +898,7 @@
    "tokens_out": 749,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.8,
+   "latency_ms": 6.6,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1048,7 +1048,7 @@
    "tokens_out": 817,
    "turns": 3,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.1,
+   "latency_ms": 7.0,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1194,7 +1194,7 @@
    "tokens_out": 928,
    "turns": 3,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.2,
+   "latency_ms": 6.0,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1355,7 +1355,7 @@
    "tokens_out": 773,
    "turns": 3,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 5.9,
+   "latency_ms": 5.8,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1503,7 +1503,7 @@
    "tokens_out": 741,
    "turns": 4,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.3,
+   "latency_ms": 7.2,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1641,7 +1641,7 @@
    "tokens_out": 737,
    "turns": 3,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 8.4,
+   "latency_ms": 8.1,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1787,7 +1787,7 @@
    "tokens_out": 697,
    "turns": 4,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.2,
+   "latency_ms": 6.6,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -1907,7 +1907,7 @@
    "tokens_out": 172,
    "turns": 1,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 1.9,
+   "latency_ms": 2.1,
    "tools": [
     "get_user_profile!tool_unavailable",
     "get_current_entitlements!tool_unavailable"
@@ -1975,7 +1975,7 @@
    "tokens_out": 1194,
    "turns": 4,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 7.3,
+   "latency_ms": 7.5,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -2119,7 +2119,7 @@
    "tokens_out": 547,
    "turns": 2,
    "cost_usd": "NOT_ESTIMATED",
-   "latency_ms": 6.0,
+   "latency_ms": 6.2,
    "tools": [
     "get_user_profile",
     "get_current_entitlements",
@@ -2132,10 +2132,11 @@
    ],
    "reason_codes": [
     "rule:existing_access_sufficient",
-    "signal:EXISTING_ACCESS_SUFFICIENT"
+    "signal:EXISTING_ACCESS_SUFFICIENT",
+    "guardrail:justification_names_other_user"
    ],
    "hitl_reasons": [
-    "rule:existing_access_sufficient"
+    "justification_names_other_user"
    ],
    "recommendation": {
     "recommended_outcome": "RECOMMEND_REJECT",

@@ -7,6 +7,7 @@ record [--ids ...] --label ...    LIVE: run and record agent turns for replay
 agent export                      the Foundry agent's instructions, tool schemas and output schema
                                   as files for MANUAL creation in the portal (nothing is created)
 obs report                        traced golden run + privacy audit (offline)
+obs live-check                    LIVE: 3 requests via the Foundry agent -> Application Insights
 """
 
 from __future__ import annotations
@@ -172,6 +173,42 @@ def cmd_obs_report(args) -> int:
     return 0 if report["privacy_audit"]["clean"] else 1
 
 
+def cmd_obs_live_check(args) -> int:
+    """LIVE: three requests through the Foundry agent with spans exported to Application Insights. A
+    fresh CANARY rides in the flagship's justification as a ticket reference (not an instruction), so a
+    search in App Insights can prove whether DataGuard's or Foundry's telemetry stores request text.
+    UC4 and UC6 replay from the recorded caches; the connection string comes from the Foundry project
+    via Entra sign-in and is held in memory only, never printed."""
+    import secrets
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from observability import azure_monitor_sink, flush_azure_monitor, load_observability_config
+    from observability.config import build_tracer
+
+    from . import synth
+    from .service import build_governor
+    from .services import pseudonym
+
+    obs_cfg, _ = load_observability_config()
+    project = project_client(project_endpoint(), tenant_id=args.tenant_id)
+    conn = project.telemetry.get_application_insights_connection_string()
+    tracer, _ = build_tracer(obs_cfg, [azure_monitor_sink(conn)])
+    del conn
+    canary = f"CANARY{secrets.token_hex(4).upper()}"
+    reqs = {r["request_id"]: r for r in synth.REQUESTS}
+    flag = dict(reqs["AR-002"])
+    flag["request_id"] = "AR-OBS"
+    flag["justification"] = f"{flag['justification']} Ticket reference {canary}."
+    gov = build_governor("live", backend="foundry-service", tenant_id=args.tenant_id, tracer=tracer)
+    out = []
+    for req in (reqs["AR-001"], flag, reqs["AR-015"]):
+        x = gov.decide(req)
+        out.append({"request_id": req["request_id"], "outcome": x.decision.outcome, "subject": pseudonym(req["user_id"]),
+                    "agent_stop": x.run.stopped_reason if x.run else None})  # fmt: skip
+    print(json.dumps({"canary": canary, "flushed": flush_azure_monitor(), "runs": out}, indent=1))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="dataguard-access", description="UC3 AI Data Access Governance Agent"
@@ -217,6 +254,9 @@ def main(argv: list[str] | None = None) -> int:
     orp = o.add_parser("report")
     orp.add_argument("--mode", choices=("offline", "replay"), default="replay")
     orp.set_defaults(func=cmd_obs_report)
+    olc = o.add_parser("live-check", help="LIVE: 3 requests via the Foundry agent -> App Insights")
+    olc.add_argument("--tenant-id", default=None)
+    olc.set_defaults(func=cmd_obs_live_check)
     args = p.parse_args(argv)
     return args.func(args)
 

@@ -71,3 +71,24 @@ def test_cli_has_the_guardrails_command():
     with contextlib.redirect_stdout(io.StringIO()), pytest.raises(SystemExit) as e:
         main(["guardrails", "verify", "--help"])
     assert e.value.code == 0
+
+
+def test_another_users_id_in_the_justification_is_never_auto_approved():
+    """GP6 (live 2026-10-06): a justification asking for u-3021's access was auto-approved. A request
+    naming another user can no longer skip a person; naming only yourself changes nothing."""
+    from app.access.harness import decide
+    from app.access.service import build_governor
+    from app.access.services import compute_facts, other_users
+
+    gov = build_governor("offline")
+    probe = gv.probe_request(gv.PROBES[5], 6)
+    assert other_users(probe) == 1
+    assert other_users(probe | {"justification": f"Runbook for {probe['user_id']}."}) == 0
+    base = decide(
+        compute_facts(gov.svc, probe | {"justification": "Runbook."}), gov.svc.graph, None
+    )
+    assert base.outcome == "RECOMMEND_APPROVE"
+    d = gov.decide(probe).decision
+    assert d.outcome == "HUMAN_REVIEW" and d.hitl_required
+    assert "justification_names_other_user" in d.hitl_reasons
+    assert "guardrail:justification_names_other_user" in d.reason_codes

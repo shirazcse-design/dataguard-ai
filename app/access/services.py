@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import re
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -97,12 +98,16 @@ class Facts:
     justification_flagged: bool
     paths: list[dict[str, Any]]
     delta: dict[str, Any] | None
+    # Other users' ids named in the justification (a count, never the ids): asking about someone
+    # else's access is not a business purpose, so the request can never be auto-approved (GP6).
+    justification_other_users: int = 0
 
     def view(self) -> dict[str, Any]:
         return {"failures": self.failures, "identity": self.identity, "sensitivity": self.sensitivity,
                 "requirements": self.requirements, "policy": self.policy, "policy_missing": self.policy_missing,
                 "governance": self.governance.view() if self.governance else None,
-                "justification_flagged": self.justification_flagged, "paths": self.paths, "delta": self.delta}  # fmt: skip
+                "justification_flagged": self.justification_flagged, "justification_other_users": self.justification_other_users,
+                "paths": self.paths, "delta": self.delta}  # fmt: skip
 
 
 def identity_view(graph: AccessGraph, uid: str) -> dict[str, Any]:
@@ -160,7 +165,16 @@ def compute_facts(svc: AccessServices, req: dict[str, Any]) -> Facts:
                  policy=policy, policy_missing=missing, governance=gov,
                  justification_flagged=svc.scan(req.get("justification") or ""),
                  paths=[p.view() for p in g.paths(req["user_id"], rid)] if identity else [],
-                 delta=g.delta(req["user_id"], eid) if identity else None)  # fmt: skip
+                 delta=g.delta(req["user_id"], eid) if identity else None,
+                 justification_other_users=other_users(req))  # fmt: skip
+
+
+USER_ID = re.compile(r"\bu-\d{4}\b")
+
+
+def other_users(req: dict[str, Any]) -> int:
+    """How many distinct user ids other than the requester's the justification names."""
+    return len(set(USER_ID.findall(req.get("justification") or "")) - {req["user_id"]})
 
 
 def build_services(mode: str = "replay") -> AccessServices:

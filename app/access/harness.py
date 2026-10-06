@@ -120,6 +120,11 @@ def decide(f: Facts, graph: Any, rec: AccessRecommendation | None, *, agent_fail
         if outcome == "RECOMMEND_APPROVE":
             outcome = "HUMAN_REVIEW"
         hitl_reasons.append("instruction_like_justification")
+    if f.justification_other_users:
+        reasons.append("guardrail:justification_names_other_user")
+        if outcome == "RECOMMEND_APPROVE":
+            outcome = "HUMAN_REVIEW"
+        hitl_reasons.append("justification_names_other_user")
     if outcome in ("HUMAN_REVIEW", "RECOMMEND_REJECT"):
         alt = alt if outcome == "HUMAN_REVIEW" else None
     level = (f.sensitivity or {}).get("level")
