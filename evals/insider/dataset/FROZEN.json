@@ -1,0 +1,13 @@
+{
+ "frozen_at": "2026-10-03T18:13:13-07:00",
+ "statement": "Golden set, synthetic data and detector configuration frozen BEFORE any holdout evaluation of the anomaly detector or any agent run. Labels are evaluation-only; never edited to improve results.",
+ "sha256": {
+  "evals/insider/dataset/golden.v1.jsonl": "ab35ffed1bac39a5a4b9287037e6446b9dcc2e0a530e525baf60d6154de32a44",
+  "data/insider/activity.csv": "342742df0b65d229932d96a314214565c8789b5f476623715d1a5e497cde24d8",
+  "data/insider/eval_labels.csv": "fc1e83b1226f05af701b7ece964eccf7665081fd6bf484ad1386cdce79408903",
+  "data/insider/approvals.json": "e78a4b4770855169c481b4b98e7274ae390d98dbe562f306d02917071baeb5a5",
+  "data/insider/permissions.json": "c5731eff94de8f39f1490eb59d0a064ab24859c602aa5951219378722e07df7e",
+  "data/insider/users.json": "8bb4bb1372f6ed716cc817b5f34444c891fff437932f9c1bebc601d43013727c",
+  "config/insider/insider.v1.yaml": "5c466e2b76856ca9adbf8a2690cf282f04c78355a7edee774e3e3c2e7e3b4566"
+ }
+}

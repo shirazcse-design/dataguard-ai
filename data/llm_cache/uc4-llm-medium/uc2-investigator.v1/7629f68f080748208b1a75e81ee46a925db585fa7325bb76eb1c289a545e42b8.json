@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "7629f68f080748208b1a75e81ee46a925db585fa7325bb76eb1c289a545e42b8",
+ "recorded_at": "2026-10-04T18:33:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1194,
+ "tokens_out": 153,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_DitJAYSsy0VnfUXoXUwSfGED",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_oC5HyXOaUoieHGuEMPE3tLWD",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {
+    "query": "data download external upload partner transfer approvals sensitive data handling least privilege expected repositories role alignment"
+   },
+   "id": "call_K1dDr3L6WX0gtUN8JL876ZMH",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_BOz2KVxnyVZ9ephxi9s5aHHe",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_xTCIiTn2TgvLMUPXSFxNvbek",
+   "name": "get_permissions"
+  }
+ ]
+}

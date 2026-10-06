@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "4e0e62e2ca10fd2338111335809f6c536ee662badc532afc2845c2d9551a4d8b",
+ "recorded_at": "2026-10-04T21:00:17+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1281,
+ "tokens_out": 150,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "external_upload",
+     "file_download_batch",
+     "bulk_download",
+     "after_hours_login",
+     "partner_transfer_approval",
+     "change_ticket",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_NtdrwjYQn0dKP1XrjhoZZB5o",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_6RsP73Y9MlIq4QGM7TDHc7ry",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_MwWXOM6TXJyXjOXRP4JEYIL5",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_CLRdSJsPAoNaJHUVw41vpAwk",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "external uploads downloads after-hours access approvals business justification partner transfer sensitive data"
+   },
+   "id": "call_bdAEmHMthZDgKOTc4RIyZoX5",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY_BAND\",\"BEHAVIOR_WITHIN_BASELINE\",\"NO_SENSITIVE_DATA_EVIDENCE\",\"NO_EXTERNAL_TRANSFER_SIGNAL\",\"MISSING_IDENTITY_CONTEXT\"],\"rationale\":\"The authoritative anomaly result is in the NORMAL band with a low score, so the bundle does not show elevated anomalous activity for this user-day [AS]. The behavior finding states the activity is within the user's normal range and that files downloaded, repository access, after-hours activity, external upload volume, and failed access attempts were consistent with baseline, with no elevated external uploads or sensitive-file access on this day [AS, SERIES, STAT]. There is no data sensitivity finding, no verified policy issue, no investigation finding, and no verified approval to change that assessment. Identity context is unavailable, which limits context, but the available authoritative and behavioral evidence is internally consistent and does not indicate a need for immediate investigation [AS, SERIES, STAT].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"medium\",\"uncertainty\":[\"Identity context is unavailable, limiting role and access interpretation.\",\"Data sensitivity context is missing, so no sensitivity-based weighting can be applied.\",\"No policy or investigation findings are present in the bundle.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Monitor only. If additional context becomes available, verify identity/access context and data sensitivity, but no immediate analyst investigation is warranted based on the current bundle.\"}",
+ "key": "51927f01730bf38e1130e1dca52cb98316f7f0970db2188a446cf602d05c067f",
+ "recorded_at": "2026-10-04T18:26:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1397,
+ "tokens_out": 301,
+ "tool_calls": []
+}

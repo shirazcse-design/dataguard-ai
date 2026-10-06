@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "5f713205cbf3f27a7e0722432a610e4cbfecc76e18dbc2a92618c43217cfed29",
+ "recorded_at": "2026-10-04T20:53:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1307,
+ "tokens_out": 153,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_V8ZJGllCODgx6iFsexnjsPMf",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_DKYpkfJc6NLDP4SJs6pkCJpM",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_o30fk3Xs1CamW6oP0POKCSiI",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_U085Mwt2SbRw2oSx8YpcPKqC",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "policy for sensitive data access external uploads approvals repository access expected role transfers partner approvals justification notes"
+   },
+   "id": "call_1WnzFt9ElwbnS2CIz2zfqVGS",
+   "name": "search_policy"
+  }
+ ]
+}

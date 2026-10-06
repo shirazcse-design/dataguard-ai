@@ -1,0 +1,32 @@
+{
+ "final_text": null,
+ "key": "224b82d2d92e5caba03590f53f2087352874a19880c1e84cc33e3f4736485341",
+ "recorded_at": "2026-10-04T18:22:37+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3533,
+ "tokens_out": 73,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "src-core-platform"
+   },
+   "id": "call_Tyksxp0mf8trLa38udPHuawl",
+   "name": "check_approval"
+  },
+  {
+   "arguments": {
+    "ref": "cust-data-exports"
+   },
+   "id": "call_GgXCIy1MMtHU2qqzTW1qE04L",
+   "name": "check_approval"
+  },
+  {
+   "arguments": {
+    "ref": "fin-billing-ledger"
+   },
+   "id": "call_Jge4sIS2NiRahiaIYoLTvBu9",
+   "name": "check_approval"
+  }
+ ]
+}

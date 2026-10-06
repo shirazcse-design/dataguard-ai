@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"HUMAN_REVIEW\",\"reason_codes\":[\"IDENTITY_CONTEXT_MISSING\",\"DATA_SENSITIVITY_MISSING\",\"NO_POLICY_OR_APPROVAL_CONTEXT\",\"ELEVATED_ANOMALY_REQUIRES_VALIDATION\"],\"rationale\":\"The bundle shows an ELEVATED anomaly driven mainly by a same-day spike in failed access attempts and after-hours activity, but the assessment context is incomplete. The anomaly is supported by the authoritative result and behavioral evidence (AS, SERIES, STAT). However, identity context is unavailable, data sensitivity is null, and there are no policy findings, investigation findings, or verified approvals to validate whether the activity has benign business context or heightened risk. Because key evidence needed to interpret the anomaly reliably is missing, an automated outcome should not be trusted.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"high\",\"uncertainty\":[\"Identity is unavailable due to a capability failure, so the actor and access context cannot be validated.\",\"Data sensitivity is missing, so the potential impact of the accessed data cannot be assessed.\",\"No verified policy findings are present.\",\"No verified approvals are present.\",\"No prior investigation findings are present to add corroborating or mitigating context.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Obtain the missing identity and access context, determine whether any accessed resources involved sensitive data, and check for any verified policy findings or documented approvals before deciding whether to monitor or open a standard investigation.\"}",
+ "key": "4b02a79519e40f502d702d8f75685dc6de55a73ef5dd8de8651e6a6a43bd6dc6",
+ "recorded_at": "2026-10-04T18:36:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1343,
+ "tokens_out": 297,
+ "tool_calls": []
+}

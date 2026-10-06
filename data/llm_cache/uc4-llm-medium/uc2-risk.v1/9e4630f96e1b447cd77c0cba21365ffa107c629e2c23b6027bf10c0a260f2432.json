@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"ANOMALY_NORMAL\",\"MODEST_DEVIATION_WITHIN_BASELINE\",\"DATA_INTERNAL_ONLY\",\"NO_POLICY_OR_APPROVAL_CONTEXT_NEEDED\"],\"rationale\":\"The authoritative anomaly result is NORMAL, indicating the activity is within the user's typical historical range overall [AS]. The observed increases were modest and previously seen in the recent history, with none reaching the detector's alert threshold [AS, SERIES, STAT]. The data sensitivity in scope is INTERNAL only, with no high-risk categories identified [D1]. There are no investigation findings, policy violations, or verified approvals in the bundle that would add correlated risk context [D1]. Based on the available bundle, no immediate investigation is warranted and monitoring is the proportionate outcome.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\",\"D1\"],\"confidence\":\"high\",\"uncertainty\":[],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. If future bundles add higher anomaly severity, sensitive data exposure, external transfer context, policy findings, or verified approvals, reassess for investigation.\"}",
+ "key": "9e4630f96e1b447cd77c0cba21365ffa107c629e2c23b6027bf10c0a260f2432",
+ "recorded_at": "2026-10-04T18:38:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1477,
+ "tokens_out": 227,
+ "tool_calls": []
+}

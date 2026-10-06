@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"INVESTIGATE\",\"reason_codes\":[\"HIGH_ANOMALY_NEW_REPOSITORY_ACCESS\",\"OUTSIDE_EXPECTED_SCOPE_AND_ENTITLEMENTS\",\"FAILED_ACCESS_BURST\",\"NO_VERIFIED_APPROVALS_OR_REQUEST_RECORDS\",\"SENSITIVITY_UNCONFIRMED\"],\"rationale\":\"A standard analyst investigation is warranted because the case shows a high anomaly centered on six first-time-like repository accesses and a same-day burst of eight failed access attempts [AS, SERIES, L-930698]. The accessed repositories were outside the user's expected repository scope and do not appear in current entitlements [IDN, PERM]. No verified approvals are present, and the investigation finding reports no access-request, change-ticket, or justification-note records in the allowed window to explain the activity [E3, E4]. Escalation is not recommended because there is no authoritative UC4 data-sensitivity classification for specific files in this case and no evidence here of external transfer [missing evidence noted in investigation findings].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"IDN\",\"PERM\",\"L-98350f\",\"L-0db447\",\"L-34981e\",\"L-a0fc1a\",\"L-47b3a2\",\"L-4fc2b5\",\"L-930698\",\"E3\",\"E4\"],\"confidence\":\"high\",\"uncertainty\":[\"No authoritative UC4 data-sensitivity classification is available for specific files or repositories in this case.\",\"The target systems or repositories for the eight failed authentication attempts are not identified in the bundle.\",\"No verified approval records are present; approvals may exist outside the retrieved window but are not evidenced here.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Have an analyst verify whether any out-of-band approvals exist, confirm whether the six repositories were legitimately in scope for the user's work, and review authentication context for the 13:00 failure burst to determine what resources were targeted.\"}",
+ "key": "3938dbeefcaf060e7a7d546faed0352ce9f7fced117315db40e5f86a5f01981c",
+ "recorded_at": "2026-10-04T20:57:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2898,
+ "tokens_out": 400,
+ "tool_calls": []
+}

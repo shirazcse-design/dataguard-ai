@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "ce72bc429191cb0488b1a6d10c2f4c0749ced741fe8c9cf20509040bf82d41f9",
+ "recorded_at": "2026-10-04T21:02:39+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1247,
+ "tokens_out": 42,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret this NORMAL-band anomaly against the user's baseline and over time for case I34 on 2026-08-18."
+   },
+   "id": "call_Kg8EzVK1W3y1tNdUSVBoUfQ8",
+   "name": "delegate_behavior"
+  }
+ ]
+}

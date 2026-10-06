@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "065fbb91260a6e5f3b086db7f61c1b1d1e2c906c261929ef5e99cf67b1d578f7",
+ "recorded_at": "2026-10-04T18:27:42+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1455,
+ "tokens_out": 91,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret NORMAL-band anomaly for 2026-08-05 against this user's baseline, with emphasis on after-hours activity and whether the day appears materially unusual over time."
+   },
+   "id": "call_teQKzS08J1xQMJp54JggkjEH",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_iFPCAXMLcSOLgLYfvnXhpDTX",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_SpTzMIDJI24tT3ZLMhrsbzmO",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

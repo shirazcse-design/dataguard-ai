@@ -1,0 +1,47 @@
+{
+ "final_text": null,
+ "key": "541eeecba3a00ed4b40d33102832a1720d3e186e6a9563343b987ecd55e412f2",
+ "recorded_at": "2026-10-04T18:27:10+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1395,
+ "tokens_out": 210,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret HIGH_ANOMALY on 2026-08-28 for u-2022 against personal baseline and recent trend, especially files downloaded, sensitive files accessed, and after-hours activity."
+   },
+   "id": "call_eu74ZVyHq5CfomMnR2F31SxM",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_C3Nyro4JolxlLqIA6TTWNRVf",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_n6O0yZw2N04QkWw2zZAyKe1B",
+   "name": "check_data_sensitivity"
+  },
+  {
+   "arguments": {
+    "focus_event_types": [
+     "after_hours_login",
+     "file_download_batch",
+     "bulk_download",
+     "repo_access_new",
+     "external_upload",
+     "partner_transfer_approval",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Build a timeline for 2026-08-28 for u-2022. Verify after-hours activity, file download volume, access to sensitive files, and whether there was any external upload or approved partner transfer related to the case files. Note approvals, justifications, gaps, and conflicts."
+   },
+   "id": "call_00P3ggvU2hUDPAIHPkttoTgr",
+   "name": "delegate_investigation"
+  }
+ ]
+}

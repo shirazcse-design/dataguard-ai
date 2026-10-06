@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY\",\"NO_SENSITIVITY_EVIDENCE\",\"NO_POLICY_OR_APPROVAL_CONTEXT\",\"NO_CORROBORATING_INVESTIGATION_FINDINGS\"],\"rationale\":\"The authoritative anomaly result is in the NORMAL band with a moderate score, and the behavior finding states the activity remains within the user's typical range overall rather than standing out sharply [AS, SERIES, STAT]. The observed deviations are limited and have recent precedent in the time series, including the failed access attempt and elevated repository count [SERIES]. The bundle also states there was no after-hours activity, no new repository access, and no external upload volume on the date in question [AS]. No data sensitivity finding, verified policy finding, verified approvals, identity context, or investigation findings are present to add corroborating risk context [bundle fields: data_sensitivity, policy, verified_approvals, identity, investigation_findings]. Based on the available bundle evidence, no immediate investigation is warranted.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"medium\",\"uncertainty\":[\"Identity context is unavailable, limiting assessment of access context.\",\"No data sensitivity finding is present.\",\"No verified policy finding is present.\",\"No investigation findings are present.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. If additional verified context becomes available, especially data sensitivity, policy findings, identity/access context, or new corroborating investigation evidence, reassess the case.\"}",
+ "key": "a0d06289d3577bcab9afcb29f7235c84dfd7375c4b2c2cec1f90652cf94ece09",
+ "recorded_at": "2026-10-04T18:25:43+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1374,
+ "tokens_out": 305,
+ "tool_calls": []
+}

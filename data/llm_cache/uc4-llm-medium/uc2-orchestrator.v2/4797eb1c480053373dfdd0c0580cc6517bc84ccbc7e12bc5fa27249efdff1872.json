@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "4797eb1c480053373dfdd0c0580cc6517bc84ccbc7e12bc5fa27249efdff1872",
+ "recorded_at": "2026-10-04T18:25:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1454,
+ "tokens_out": 53,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret this NORMAL-band anomaly for 2026-08-19 against the user's baseline and recent pattern, especially failed access attempt, slightly higher repository count, and one case file reference."
+   },
+   "id": "call_4o1FnhKzCPLdQxGcZkoD0EoM",
+   "name": "delegate_behavior"
+  }
+ ]
+}

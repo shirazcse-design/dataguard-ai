@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "3ffb09175d91a840b23b84dd1898c6f675093e0fadc5077134b3862e235b7f73",
+ "recorded_at": "2026-10-04T21:00:47+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 628,
+ "tokens_out": 63,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_6VRlXwp3vOUEj4nAaScl14YN",
+   "name": "get_behavior_profile"
+  },
+  {
+   "arguments": {
+    "days": 14
+   },
+   "id": "call_Om9MQUsRO7EVTyx4Vzuc3PJQ",
+   "name": "get_activity_series"
+  },
+  {
+   "arguments": {},
+   "id": "call_7zeGVNOlpYbjkwMVnhfL47w9",
+   "name": "get_statistical_baseline_result"
+  }
+ ]
+}

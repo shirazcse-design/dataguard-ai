@@ -1,0 +1,53 @@
+{
+ "final_text": null,
+ "key": "c20f89da93cb430de25122916ad5580db569cc33c05b474492db9f90ab297945",
+ "recorded_at": "2026-10-04T20:57:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1301,
+ "tokens_out": 161,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "bulk_download",
+     "file_download_batch",
+     "external_upload",
+     "repo_access_new",
+     "change_ticket",
+     "partner_transfer_approval",
+     "justification_note",
+     "after_hours_login",
+     "login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_CSwvXXNeeDQ7NlOPtAwN0zCj",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_GMQyZgNrLMzmN7d4PcfdBcDR",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_WRcHsGi4cIK1d1hVTwdKpP8I",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_OuKuPI51Zub8Iq9nEyTiW3Tn",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access approvals external uploads partner transfers bulk downloads repository access scope least privilege approved repositories sensitive data handling justification tickets"
+   },
+   "id": "call_gkp36Bz8GLKq0kkliv4UFaIT",
+   "name": "search_policy"
+  }
+ ]
+}

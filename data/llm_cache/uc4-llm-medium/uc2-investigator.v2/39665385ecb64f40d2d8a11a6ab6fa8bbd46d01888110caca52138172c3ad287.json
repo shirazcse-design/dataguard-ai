@@ -1,0 +1,34 @@
+{
+ "final_text": null,
+ "key": "39665385ecb64f40d2d8a11a6ab6fa8bbd46d01888110caca52138172c3ad287",
+ "recorded_at": "2026-10-04T19:59:33+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4227,
+ "tokens_out": 109,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-26",
+    "event_types": [
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-18"
+   },
+   "id": "call_rjWTCNNIciNfkAfPLBXx9ZCz",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "query": "after-hours activity monitoring approvals for temporary access new repository access failed authentication attempts anomaly review bulk downloads sensitive repositories"
+   },
+   "id": "call_1TPIlBqciLbs8bpjU17YmawS",
+   "name": "search_policy"
+  }
+ ]
+}

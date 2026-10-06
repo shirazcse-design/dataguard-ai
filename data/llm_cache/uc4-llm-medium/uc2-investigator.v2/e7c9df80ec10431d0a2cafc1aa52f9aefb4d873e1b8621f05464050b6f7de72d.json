@@ -1,0 +1,62 @@
+{
+ "final_text": null,
+ "key": "e7c9df80ec10431d0a2cafc1aa52f9aefb4d873e1b8621f05464050b6f7de72d",
+ "recorded_at": "2026-10-04T20:00:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1318,
+ "tokens_out": 191,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-25",
+    "event_types": [
+     "repo_access_new",
+     "after_hours_login",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "access_request",
+     "change_ticket",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment",
+     "login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-17"
+   },
+   "id": "call_PLhtrhJ75PSNxEeJ2Wim5iag",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_efQVYXV99dFSFL6bYcv2JPE2",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_U1PkeQkcvk95AGBnfdVODHIz",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_lid51yEMfY1LG3W564i7kAnE",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access new repository access bulk download external upload approvals change tickets justification notes sensitive data handling"
+   },
+   "id": "call_n59IZutLARFHOWHNyAipa3Ys",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "query": "data transfer to external destinations partner approvals approved repositories least privilege need-to-know"
+   },
+   "id": "call_MwVLZaRxwTkbN87onxXdDzz4",
+   "name": "search_policy"
+  }
+ ]
+}

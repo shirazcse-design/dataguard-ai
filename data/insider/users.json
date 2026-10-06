@@ -1,0 +1,1186 @@
+[
+ {
+  "user_id": "u-2001",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2002",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2003",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2004",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2005",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2006",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2007",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2008",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2009",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2010",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2011",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2012",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2013",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2014",
+  "role_family": "engineering",
+  "role": "Software Engineer",
+  "department": "Engineering",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "eng-repo-01",
+   "eng-repo-02",
+   "eng-repo-03",
+   "eng-repo-04",
+   "eng-repo-05",
+   "eng-repo-06",
+   "eng-repo-07",
+   "eng-repo-08"
+  ]
+ },
+ {
+  "user_id": "u-2015",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2016",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2017",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2018",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2019",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2020",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2021",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2022",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2023",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2024",
+  "role_family": "finance",
+  "role": "Financial Analyst",
+  "department": "Finance",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "fin-repo-01",
+   "fin-repo-02",
+   "fin-repo-03",
+   "fin-repo-04",
+   "fin-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2025",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2026",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2027",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2028",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2029",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2030",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2031",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2032",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2033",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2034",
+  "role_family": "sales",
+  "role": "Account Executive",
+  "department": "Sales",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "sales-repo-01",
+   "sales-repo-02",
+   "sales-repo-03",
+   "sales-repo-04",
+   "sales-repo-05"
+  ]
+ },
+ {
+  "user_id": "u-2035",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2036",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2037",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2038",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2039",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2040",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2041",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2042",
+  "role_family": "research",
+  "role": "Research Scientist",
+  "department": "R&D",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "rnd-repo-01",
+   "rnd-repo-02",
+   "rnd-repo-03",
+   "rnd-repo-04",
+   "rnd-repo-05",
+   "rnd-repo-06",
+   "rnd-repo-07"
+  ]
+ },
+ {
+  "user_id": "u-2043",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2044",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2045",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2046",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2047",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2048",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2049",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2050",
+  "role_family": "product",
+  "role": "Product Manager",
+  "department": "Product",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "prod-repo-01",
+   "prod-repo-02",
+   "prod-repo-03",
+   "prod-repo-04",
+   "prod-repo-05",
+   "prod-repo-06"
+  ]
+ },
+ {
+  "user_id": "u-2051",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2052",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2053",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2054",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2055",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2056",
+  "role_family": "it_operations",
+  "role": "Systems Administrator",
+  "department": "IT Operations",
+  "privilege_level": "privileged",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "ops-repo-01",
+   "ops-repo-02",
+   "ops-repo-03",
+   "ops-repo-04",
+   "ops-repo-05",
+   "ops-repo-06",
+   "ops-repo-07",
+   "ops-repo-08",
+   "ops-repo-09",
+   "ops-repo-10",
+   "ops-repo-11",
+   "ops-repo-12"
+  ]
+ },
+ {
+  "user_id": "u-2057",
+  "role_family": "people_operations",
+  "role": "People Partner",
+  "department": "People Operations",
+  "privilege_level": "standard",
+  "work_hours": [
+   9,
+   18
+  ],
+  "known_repositories": [
+   "people-repo-01",
+   "people-repo-02",
+   "people-repo-03",
+   "people-repo-04"
+  ]
+ },
+ {
+  "user_id": "u-2058",
+  "role_family": "people_operations",
+  "role": "People Partner",
+  "department": "People Operations",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "people-repo-01",
+   "people-repo-02",
+   "people-repo-03",
+   "people-repo-04"
+  ]
+ },
+ {
+  "user_id": "u-2059",
+  "role_family": "people_operations",
+  "role": "People Partner",
+  "department": "People Operations",
+  "privilege_level": "standard",
+  "work_hours": [
+   8,
+   17
+  ],
+  "known_repositories": [
+   "people-repo-01",
+   "people-repo-02",
+   "people-repo-03",
+   "people-repo-04"
+  ]
+ },
+ {
+  "user_id": "u-2060",
+  "role_family": "people_operations",
+  "role": "People Partner",
+  "department": "People Operations",
+  "privilege_level": "standard",
+  "work_hours": [
+   10,
+   19
+  ],
+  "known_repositories": [
+   "people-repo-01",
+   "people-repo-02",
+   "people-repo-03",
+   "people-repo-04"
+  ]
+ }
+]

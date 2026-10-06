@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "38b7a76787b38fd64d85417716ed18f7819dac833a24788808aa2bea3c9b92cf",
+ "recorded_at": "2026-10-04T20:55:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3440,
+ "tokens_out": 15,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_mPESjdlZowARN131gUeYoQ4k",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

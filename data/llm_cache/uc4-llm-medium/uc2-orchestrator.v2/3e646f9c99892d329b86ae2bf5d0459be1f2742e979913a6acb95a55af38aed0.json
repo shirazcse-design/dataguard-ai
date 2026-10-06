@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "3e646f9c99892d329b86ae2bf5d0459be1f2742e979913a6acb95a55af38aed0",
+ "recorded_at": "2026-10-04T18:26:53+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1456,
+ "tokens_out": 104,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY user-day against the user's baseline and over time, especially spikes in files_downloaded, sensitive_files_accessed, new_repository_access, and after_hours_activity on 2026-08-27."
+   },
+   "id": "call_FocLp1mgcISEmfGB8LEunHh8",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_VmPpLXPFtJT1cJieVmEFRdjP",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_mRnoVz3rEWwRsIewNPC0C9A7",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

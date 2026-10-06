@@ -1,0 +1,54 @@
+{
+ "final_text": null,
+ "key": "47fa7ab74f693a9e13cbce7b3537604b0f6b124823b034ca38a24da100a9c95d",
+ "recorded_at": "2026-10-04T20:00:27+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1285,
+ "tokens_out": 159,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-11",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "after_hours_login",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_fjh2xoOMPiD7FD5ZDpDqRiy7",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_YzxbOspyJSznFCmQ8hjwB6SW",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_ozmbrE8wEjmNvRHCmd9Cx8Mn",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_SlFuTs5VAgcRGk5PMOGpNefD",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access bulk download external upload approvals partner transfer sensitive data repositories expected repositories"
+   },
+   "id": "call_RQL3qcK8KLHMpmda3tmirlXn",
+   "name": "search_policy"
+  }
+ ]
+}

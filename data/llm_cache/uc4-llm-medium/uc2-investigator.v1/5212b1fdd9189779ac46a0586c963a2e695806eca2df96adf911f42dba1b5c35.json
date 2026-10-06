@@ -1,0 +1,51 @@
+{
+ "final_text": null,
+ "key": "5212b1fdd9189779ac46a0586c963a2e695806eca2df96adf911f42dba1b5c35",
+ "recorded_at": "2026-10-04T18:44:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1154,
+ "tokens_out": 148,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-14",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "external_upload",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-06"
+   },
+   "id": "call_AFCU5uZmBhOPjfIctT2NZMIM",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_1MCapvDBM4OCpj75aZduhnla",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_pY0g3DiNXo2lwrg40VGhOtNJ",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_XOpQevrstdwWOjjR6jBKuMxx",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "policy for new repository access approvals justification notes change tickets external uploads sensitive files data transfers"
+   },
+   "id": "call_5LeKmR7yEYW2ykKFqPRNmSTO",
+   "name": "search_policy"
+  }
+ ]
+}

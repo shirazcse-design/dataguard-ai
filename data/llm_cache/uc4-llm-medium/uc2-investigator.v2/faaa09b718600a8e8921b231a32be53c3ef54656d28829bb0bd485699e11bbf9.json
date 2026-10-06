@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "faaa09b718600a8e8921b231a32be53c3ef54656d28829bb0bd485699e11bbf9",
+ "recorded_at": "2026-10-04T20:00:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4390,
+ "tokens_out": 64,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-21",
+    "event_types": [
+     "repo_access_new",
+     "partner_transfer_approval",
+     "justification_note",
+     "access_request",
+     "change_ticket",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-13"
+   },
+   "id": "call_wR5NRBD56DeZCKXK76sxI3n7",
+   "name": "search_security_logs"
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "final_text": null,
+ "key": "a6addca3c7119d4523f469c508c146ae292e9d05522629d26345853da45a5687",
+ "recorded_at": "2026-10-04T18:32:11+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1207,
+ "tokens_out": 171,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-27",
+    "event_types": [
+     "after_hours_login",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "repo_access_new",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-19"
+   },
+   "id": "call_af4FvH7E5CifY78vA0Ha7PeJ",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_IEu0fOTQlPTASTLn4MT9ptiD",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_9ewwdvsptSCnTSYWlqgkXQSy",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_Wu8JdvdmZGqpSLkRz6aNn0WQ",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "approvals and business justification for external uploads, bulk or batch file downloads, after-hours access, repository access outside expected scope, partner transfers"
+   },
+   "id": "call_ge6GhwrUwlC0nUSv6208mK0x",
+   "name": "search_policy"
+  }
+ ]
+}

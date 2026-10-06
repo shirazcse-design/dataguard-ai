@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "90db728ce7dbafa56efa6eb2f91f7b92484f06625b890c4ce2bf6f9e6f9fa3ba",
+ "recorded_at": "2026-10-04T18:31:02+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2591,
+ "tokens_out": 31,
+ "tool_calls": [
+  {
+   "arguments": {
+    "query": "least privilege approved access requests change tickets access must match role and permissions repository access"
+   },
+   "id": "call_7xKrLsDgbMpIS0tLPGWLxC5g",
+   "name": "search_policy"
+  }
+ ]
+}

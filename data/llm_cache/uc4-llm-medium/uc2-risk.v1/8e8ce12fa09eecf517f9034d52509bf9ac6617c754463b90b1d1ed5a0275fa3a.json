@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY_BAND\",\"NO_EXTERNAL_TRANSFER\",\"EXPECTED_DATA_ACCESS\",\"NO_POLICY_OR_APPROVAL_CONTEXT\"],\"rationale\":\"The authoritative anomaly result places this activity in the NORMAL band rather than indicating a materially unusual day for this user [AS]. Behavior analysis also states the day was not materially unusual overall, despite some after-hours activity, and notes no external upload volume on the date and across the observed 14-day series [AS, SERIES, STAT]. The accessed data was CONFIDENTIAL source code, but that data class is expected for this Engineering Software Engineer role and expected repositories are defined for the identity context [D1, IDN]. There are no verified policy findings, approvals, or investigation findings in the bundle to support a stronger outcome [IDN].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\",\"D1\",\"IDN\"],\"confidence\":\"high\",\"uncertainty\":[],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring. If future activity shows a higher anomaly band, external transfer, policy findings, or other corroborating evidence, reassess for analyst investigation.\"}",
+ "key": "8e8ce12fa09eecf517f9034d52509bf9ac6617c754463b90b1d1ed5a0275fa3a",
+ "recorded_at": "2026-10-04T18:27:55+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1595,
+ "tokens_out": 240,
+ "tool_calls": []
+}

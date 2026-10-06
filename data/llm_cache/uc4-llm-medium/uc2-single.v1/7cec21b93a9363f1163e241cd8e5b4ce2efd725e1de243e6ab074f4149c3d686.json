@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "7cec21b93a9363f1163e241cd8e5b4ce2efd725e1de243e6ab074f4149c3d686",
+ "recorded_at": "2026-10-04T18:41:16+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1501,
+ "tokens_out": 180,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_4heNUWGINCjoRFv8hH3h3UPt",
+   "name": "get_behavior_profile"
+  },
+  {
+   "arguments": {},
+   "id": "call_VbzIH5uywlwynDKIek0MxHsF",
+   "name": "get_statistical_baseline_result"
+  },
+  {
+   "arguments": {},
+   "id": "call_3eI6tbs5VkMcLh2J6bY42Jok",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_LhRIpT78HLJCig70FmAp2J30",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {},
+   "id": "call_9ltydRe7zVFUA2h6OFDuwPoW",
+   "name": "check_data_sensitivity"
+  },
+  {
+   "arguments": {
+    "days": 7
+   },
+   "id": "call_CNjnEwQ41gCSfJrkbVhEsif1",
+   "name": "get_activity_series"
+  },
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "travel_record",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_ktx9JpHYBdqUCp6UVeHDTpG6",
+   "name": "search_security_logs"
+  }
+ ]
+}

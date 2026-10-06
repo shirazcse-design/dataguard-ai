@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 92,
+ "input_hash": "c27bc1357590b39e7e1222ac6777052d17ba9239f36e918e76ba1398d39176d9",
+ "latency_ms": 1391.263124998659,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 947,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-04T07:29:48+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Harbourline may monitor the use of company devices, accounts and networks to protect its information and systems.\",\"evidence_id\":\"E2\",\"quote\":\"Harbourline may monitor the use of company devices, accounts and networks, within the limits of applicable law, to protect its information and systems.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

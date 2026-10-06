@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "a8318064b624f4a759411e9fcc01a9fb86a792670b5d8a31bf953a7d08d440f9",
+ "recorded_at": "2026-10-04T18:22:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 706,
+ "tokens_out": 62,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_dHSrCMy406G0Q1TbXI1dIXho",
+   "name": "get_behavior_profile"
+  },
+  {
+   "arguments": {
+    "days": 14
+   },
+   "id": "call_9XF3X1sLR4K1V0m28FSk8Adu",
+   "name": "get_activity_series"
+  },
+  {
+   "arguments": {},
+   "id": "call_zS9OhEx6MJvucra9TtF7EVz6",
+   "name": "get_statistical_baseline_result"
+  }
+ ]
+}

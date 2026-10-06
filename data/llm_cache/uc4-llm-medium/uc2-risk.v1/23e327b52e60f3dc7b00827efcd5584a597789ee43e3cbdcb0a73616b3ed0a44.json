@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"HUMAN_REVIEW\",\"reason_codes\":[\"MISSING_IDENTITY_CONTEXT\",\"MISSING_DATA_SENSITIVITY\",\"MISSING_POLICY_CONTEXT\",\"INSUFFICIENT_CORROBORATION\"],\"rationale\":\"Automated assessment should not be trusted because key contextual findings are missing from the bundle: identity context is unavailable, data sensitivity is null, and there is no verified policy or approval context to determine whether any business justification exists or whether higher-risk assets were involved [AS]. The available behavioral evidence indicates the activity remained in the NORMAL anomaly band with no sensitive file access and no external upload volume recorded, which does not by itself provide strong corroboration for escalation or a standard investigation [AS, SERIES, STAT].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"medium\",\"uncertainty\":[\"Identity context is unavailable in the bundle.\",\"Data sensitivity is missing (null).\",\"No verified policy findings are present.\",\"No verified approvals are present.\",\"No investigation findings are present to corroborate or resolve the observed behavior.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Obtain the missing identity, data sensitivity, and verified policy context; confirm whether any relevant approvals exist; then reassess the NORMAL-band after-hours activity in light of that context.\"}",
+ "key": "23e327b52e60f3dc7b00827efcd5584a597789ee43e3cbdcb0a73616b3ed0a44",
+ "recorded_at": "2026-10-04T18:28:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1454,
+ "tokens_out": 262,
+ "tool_calls": []
+}

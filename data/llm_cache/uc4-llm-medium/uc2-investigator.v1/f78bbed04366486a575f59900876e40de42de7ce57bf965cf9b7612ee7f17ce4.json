@@ -1,0 +1,54 @@
+{
+ "final_text": null,
+ "key": "f78bbed04366486a575f59900876e40de42de7ce57bf965cf9b7612ee7f17ce4",
+ "recorded_at": "2026-10-04T18:42:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1169,
+ "tokens_out": 163,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-12",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-04"
+   },
+   "id": "call_rQ0J5mAY02Lr0KxmJFIyu5sn",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_ySGrFUZ54LSLWSZtO5TCUXAm",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_dDpNw43XghTBPy9mH560pAxd",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_Rzjpn54J6AOpWZaDKo2JHcPJ",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access, repository access, downloads, external uploads, approvals or justifications required for sensitive data access and bulk downloads"
+   },
+   "id": "call_90OdVUiMhM37OfMo9hnB2g08",
+   "name": "search_policy"
+  }
+ ]
+}

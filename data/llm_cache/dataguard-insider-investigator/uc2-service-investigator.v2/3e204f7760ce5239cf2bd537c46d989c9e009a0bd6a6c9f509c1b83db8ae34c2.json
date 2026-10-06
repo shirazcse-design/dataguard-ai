@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "3e204f7760ce5239cf2bd537c46d989c9e009a0bd6a6c9f509c1b83db8ae34c2",
+ "recorded_at": "2026-10-04T21:01:34+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1234,
+ "tokens_out": 165,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-18",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-10"
+   },
+   "id": "call_S7uqrzH0XjMTxsA9Ws9cZ2O6",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_O138Nyrcp3hULHsYMasvf9Ij",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_kdmQynCA7tCYaj6QREIHuxXM",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_sgGKNCEcNAbBfwDFR4F8kzFh",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "policy for bulk downloads external uploads sensitive files approvals justification need-to-know authorized repositories after-hours access"
+   },
+   "id": "call_BZCIE8eBd1JoyyXwRRxshfXk",
+   "name": "search_policy"
+  }
+ ]
+}

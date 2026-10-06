@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"HUMAN_REVIEW\",\"reason_codes\":[\"MISSING_IDENTITY_CONTEXT\",\"MISSING_DATA_SENSITIVITY\"],\"rationale\":\"The available behavioral evidence indicates a NORMAL anomaly result rather than an elevated or severe pattern (AS, SERIES, STAT). However, key contextual findings needed for a reliable automated insider-risk assessment are missing: identity context is unavailable and data sensitivity is null. Because the bundle lacks those authoritative context elements, the automated assessment should not be trusted even though the observed activity appears within the user's usual range overall.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"medium\",\"uncertainty\":[\"Identity context is unavailable in the bundle.\",\"Data sensitivity is missing (null).\",\"No verified policy findings or approvals are present to add contextual justification.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Obtain the missing identity/access context and data sensitivity classification, then reassess. If those remain unavailable, retain as low-priority manual review given the NORMAL anomaly and absence of reported external upload volume, new repository access, or failed access attempts in SERIES.\"}",
+ "key": "04ec81da16c5d4734d07e56da246f2becc9ed404993b3ed3e256b20b7e4501e9",
+ "recorded_at": "2026-10-04T18:26:33+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1342,
+ "tokens_out": 226,
+ "tool_calls": []
+}

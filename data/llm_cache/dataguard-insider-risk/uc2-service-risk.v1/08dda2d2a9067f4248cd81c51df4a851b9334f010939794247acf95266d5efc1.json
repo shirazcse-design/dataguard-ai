@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY\",\"BEHAVIOR_WITHIN_BASELINE\",\"NO_CORROBORATING_RISK_SIGNALS\",\"MISSING_SENSITIVITY_CONTEXT\"],\"rationale\":\"The authoritative anomaly result classifies the activity as NORMAL with a score below the elevated threshold, and the behavior finding states the day's pattern is within the user's historical variation rather than notably unusual [AS][SERIES][STAT]. Downloads were near baseline, sensitive file access was only moderately above baseline and not flagged by the statistical detector, and there were no external uploads, no new repository access, and no failed access attempts reported for the day [AS][SERIES][STAT]. Identity context indicates the user is a privileged Systems Administrator in IT Operations whose expected data classes include credentials/secrets, source code, and internal data, which makes some access to sensitive material plausibly consistent with role expectations, but this does not by itself increase the need for immediate investigation [IDN]. Data sensitivity context is missing, so the bundle does not support a stronger risk conclusion on sensitivity grounds.\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\",\"IDN\"],\"confidence\":\"high\",\"uncertainty\":[\"Data sensitivity findings are absent, limiting assessment of whether any accessed material was highly sensitive.\",\"No investigation findings, policy findings, or verified approvals are present, so there is no additional corroborating or explanatory context beyond the anomaly and identity data.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring only. If additional corroborating evidence later appears, especially verified data sensitivity or transfer-related context, reassess the case using the full bundle.\"}",
+ "key": "08dda2d2a9067f4248cd81c51df4a851b9334f010939794247acf95266d5efc1",
+ "recorded_at": "2026-10-04T18:50:19+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1375,
+ "tokens_out": 338,
+ "tool_calls": []
+}

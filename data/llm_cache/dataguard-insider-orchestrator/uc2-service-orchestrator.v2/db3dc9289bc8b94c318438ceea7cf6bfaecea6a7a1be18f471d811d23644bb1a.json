@@ -1,0 +1,45 @@
+{
+ "final_text": null,
+ "key": "db3dc9289bc8b94c318438ceea7cf6bfaecea6a7a1be18f471d811d23644bb1a",
+ "recorded_at": "2026-10-04T18:49:36+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2650,
+ "tokens_out": 158,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus_event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Timeline for u-2016 on 2026-08-19: logins, after-hours activity, repo/file access, downloads, external upload, destinations, links to case file, and any approvals/tickets/justifications or gaps."
+   },
+   "id": "call_FiuahR04b7je476IyXkEoWHV",
+   "name": "delegate_investigation"
+  },
+  {
+   "arguments": {
+    "topic": "external_transfer"
+   },
+   "id": "call_HSH2YBNEp4P2AZHpqGaOygSi",
+   "name": "check_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_IpITkBBjSENedDPrAsp3ZSGP",
+   "name": "check_policy"
+  }
+ ]
+}

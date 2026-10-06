@@ -1,0 +1,50 @@
+{
+ "final_text": null,
+ "key": "493e88f22fe1922c3b6e65c4b5f2283855a1bed76b66eae9b89ffee820727f22",
+ "recorded_at": "2026-10-04T20:01:40+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1286,
+ "tokens_out": 148,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-21",
+    "event_types": [
+     "repo_access_new",
+     "auth_failure",
+     "access_request",
+     "change_ticket",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-13"
+   },
+   "id": "call_c19YR8jGUzxtwPFCnaObMvmY",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_GgCS9W2D7tLHBpr0YpAbSzkr",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_7iJr0XJvTKGn5bRQ132eHVnR",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {},
+   "id": "call_HZptSeBKiV33sDU8fD4RgnC5",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {
+    "query": "repository access scope failed access attempts approvals justifications change tickets after-hours access least privilege expected repositories data classes"
+   },
+   "id": "call_rAhfdsqMp2bvbKkn18EPVtS4",
+   "name": "search_policy"
+  }
+ ]
+}

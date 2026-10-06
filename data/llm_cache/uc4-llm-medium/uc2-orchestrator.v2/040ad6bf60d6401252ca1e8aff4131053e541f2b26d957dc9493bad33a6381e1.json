@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "040ad6bf60d6401252ca1e8aff4131053e541f2b26d957dc9493bad33a6381e1",
+ "recorded_at": "2026-10-04T18:31:59+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1456,
+ "tokens_out": 97,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret HIGH_ANOMALY user-day against the user's baseline and recent history, with attention to external upload volume, files downloaded, and after-hours activity on 2026-08-26."
+   },
+   "id": "call_LRxntHtEfItzHKGEftB8DdRq",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_qZCpKqe5HI6R3AsGHW16okcV",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_8RZ9wqS5f5IKQR5kO4E76tPZ",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

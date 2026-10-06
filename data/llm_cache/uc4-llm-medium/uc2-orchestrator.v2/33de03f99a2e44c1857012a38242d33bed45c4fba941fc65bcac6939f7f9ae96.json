@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "33de03f99a2e44c1857012a38242d33bed45c4fba941fc65bcac6939f7f9ae96",
+ "recorded_at": "2026-10-04T18:25:45+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1328,
+ "tokens_out": 45,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the NORMAL-band anomaly for user-day 2026-08-18 against the user's own baseline and whether any change over time is notable."
+   },
+   "id": "call_Kp8Q733sDOudErjn1C6qooM1",
+   "name": "delegate_behavior"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "fd90b7eb1a4e4ee88d9958bb5b4a9bb56c859e252c90a76b00e61272bd42dae7",
+ "recorded_at": "2026-10-04T18:39:50+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 5042,
+ "tokens_out": 18,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "monitoring"
+   },
+   "id": "call_RlQdz8wiaDYhk7o8tWM70vyu",
+   "name": "check_policy"
+  }
+ ]
+}

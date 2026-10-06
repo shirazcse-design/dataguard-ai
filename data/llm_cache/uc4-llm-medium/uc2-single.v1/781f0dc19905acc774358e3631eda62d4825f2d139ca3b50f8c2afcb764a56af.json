@@ -1,0 +1,32 @@
+{
+ "final_text": null,
+ "key": "781f0dc19905acc774358e3631eda62d4825f2d139ca3b50f8c2afcb764a56af",
+ "recorded_at": "2026-10-04T18:41:52+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 5080,
+ "tokens_out": 65,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "external_transfer"
+   },
+   "id": "call_QpmBiskLt9T8QORfhHSzUmN1",
+   "name": "check_policy"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_MyvVrKDF1UrSoXhN7jK8eYJ4",
+   "name": "check_policy"
+  },
+  {
+   "arguments": {
+    "topic": "monitoring"
+   },
+   "id": "call_kIUVs8LJ7YsaBmeN0UWS4A0o",
+   "name": "check_policy"
+  }
+ ]
+}

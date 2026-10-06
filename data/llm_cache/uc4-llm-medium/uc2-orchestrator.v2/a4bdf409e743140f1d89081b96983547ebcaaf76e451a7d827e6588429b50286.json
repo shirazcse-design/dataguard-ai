@@ -1,0 +1,30 @@
+{
+ "final_text": null,
+ "key": "a4bdf409e743140f1d89081b96983547ebcaaf76e451a7d827e6588429b50286",
+ "recorded_at": "2026-10-04T18:29:49+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3027,
+ "tokens_out": 81,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus_event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "external_upload",
+     "after_hours_login",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Build 2026-08-10 to 2026-08-11 timeline; verify approvals and explanations."
+   },
+   "id": "call_lSxfZBZ8g7LdMOqyhPWKtcGj",
+   "name": "delegate_investigation"
+  }
+ ]
+}

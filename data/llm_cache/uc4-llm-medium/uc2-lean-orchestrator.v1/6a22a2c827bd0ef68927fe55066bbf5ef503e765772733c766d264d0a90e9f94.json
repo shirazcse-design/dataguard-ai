@@ -1,0 +1,30 @@
+{
+ "final_text": null,
+ "key": "6a22a2c827bd0ef68927fe55066bbf5ef503e765772733c766d264d0a90e9f94",
+ "recorded_at": "2026-10-04T18:42:54+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3437,
+ "tokens_out": 82,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus_event_types": [
+     "login",
+     "after_hours_login",
+     "repo_access_new",
+     "bulk_download",
+     "external_upload",
+     "auth_failure",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "log_comment"
+    ],
+    "question": "Verify 2026-08-11 after-hours logins, repos accessed, adjacent-day activity, and any verified ticket or justification."
+   },
+   "id": "call_wZMw123RdhcJoC0x054rVqH6",
+   "name": "delegate_investigation"
+  }
+ ]
+}

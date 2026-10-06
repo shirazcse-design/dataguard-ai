@@ -1,0 +1,53 @@
+{
+ "final_text": null,
+ "key": "4746d5a0c379bd75e9140c953cfc14572c41be870a05032d68246d269cc3256a",
+ "recorded_at": "2026-10-04T20:53:38+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1297,
+ "tokens_out": 158,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-06",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "after_hours_login",
+     "external_upload",
+     "partner_transfer_approval",
+     "justification_note",
+     "change_ticket",
+     "access_request",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-07-29"
+   },
+   "id": "call_pxUtb5R6OxaoU6TgZlgPEXss",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_6fJU4QzCm7HUQGt65lJshfxD",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_Xn03xs5QgW0BhAK2dHgLbdB3",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_iapDy3jpsvGZtIxuQZq8CytV",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access new repository access downloads external upload approvals justification least privilege sensitive data handling partner transfer"
+   },
+   "id": "call_Rvv8cQ8TfJUXBuhmFaJvRVdL",
+   "name": "search_policy"
+  }
+ ]
+}

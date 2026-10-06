@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "853bb80d6616602286549c0dd17e471f96bde1ddc339d7fe9554382ac173a2d8",
+ "recorded_at": "2026-10-04T18:45:49+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2571,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "L-da1873"
+   },
+   "id": "call_AGLUtBneR3QDrfLFOEkKanO3",
+   "name": "check_approval"
+  }
+ ]
+}

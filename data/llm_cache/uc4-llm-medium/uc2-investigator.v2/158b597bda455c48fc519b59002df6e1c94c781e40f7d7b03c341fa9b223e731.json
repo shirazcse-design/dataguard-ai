@@ -1,0 +1,55 @@
+{
+ "final_text": null,
+ "key": "158b597bda455c48fc519b59002df6e1c94c781e40f7d7b03c341fa9b223e731",
+ "recorded_at": "2026-10-04T19:58:31+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1315,
+ "tokens_out": 173,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "repo_access_new",
+     "file_download_batch",
+     "bulk_download",
+     "after_hours_login",
+     "change_ticket",
+     "access_request",
+     "justification_note",
+     "partner_transfer_approval",
+     "external_upload",
+     "log_comment",
+     "login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_UXTjonXFlHK1mSYXqujKS8wW",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_lmj5jjfJ3pnaa1y0NBjv9dz2",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_67nOOMjgKz2vzS8tA5J9AsuW",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_lK7lKoxTw4imsWqzSgT8uzYe",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "approvals or change tickets required for access to sensitive files, external uploads/partner transfers, after-hours access, repository access outside expected repositories"
+   },
+   "id": "call_PYkqixVT35Nv7tW7vK5tVPsB",
+   "name": "search_policy"
+  }
+ ]
+}

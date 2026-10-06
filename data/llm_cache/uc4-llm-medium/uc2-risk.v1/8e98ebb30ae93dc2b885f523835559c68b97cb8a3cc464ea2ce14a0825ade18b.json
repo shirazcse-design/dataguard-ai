@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"MONITOR\",\"reason_codes\":[\"NORMAL_ANOMALY_BAND\",\"MODEST_VARIATION_WITHIN_RECENT_PATTERN\",\"NO_SENSITIVITY_CONTEXT\",\"NO_POLICY_OR_APPROVAL_EVIDENCE\"],\"rationale\":\"The authoritative anomaly result is in the NORMAL band with a moderate score, which does not indicate materially unusual activity on its own [AS]. The behavior finding states the day remained in the NORMAL band and describes the differences from baseline as not materially unusual overall [AS, SERIES, STAT]. Recent-context observations indicate the higher file downloads, zero after-hours activity, lower sensitive-file access, and lower repository count are all within the user’s recent short-term variation rather than isolated deviations [SERIES]. There is no identity context available, no data sensitivity finding, no verified policy finding, no investigation findings, and no verified approvals in the bundle, so there is insufficient corroborating evidence for a stronger outcome [AS].\",\"evidence_ids\":[\"AS\",\"SERIES\",\"STAT\"],\"confidence\":\"high\",\"uncertainty\":[\"Identity context is unavailable.\",\"No data sensitivity finding is provided.\",\"No verified policy finding is provided.\",\"No investigation findings are provided.\",\"No verified approvals are present.\"],\"conflicting_findings\":[],\"recommended_human_action\":\"Continue routine monitoring only. If future activity produces a higher anomaly band or adds corroborating context such as verified policy, sensitivity, access, or investigation findings, reassess then.\"}",
+ "key": "8e98ebb30ae93dc2b885f523835559c68b97cb8a3cc464ea2ce14a0825ade18b",
+ "recorded_at": "2026-10-04T18:26:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1533,
+ "tokens_out": 292,
+ "tool_calls": []
+}

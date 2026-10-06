@@ -1,0 +1,48 @@
+[
+ {
+  "ref": "TKT-4471",
+  "type": "change_ticket",
+  "user_id": "u-2052",
+  "valid_from": "2026-08-18",
+  "valid_to": "2026-08-20",
+  "scope": "Customer-data platform migration: bulk export to the new warehouse (internal destination).",
+  "approved_by": [
+   "data owner: Customer Platform",
+   "Change Advisory Board"
+  ]
+ },
+ {
+  "ref": "AR-2208",
+  "type": "access_request",
+  "user_id": "u-2008",
+  "valid_from": "2026-08-09",
+  "valid_to": "2026-11-07",
+  "scope": "Access to eng-repo-09..12 for the payments-refactor project.",
+  "approved_by": [
+   "manager",
+   "repo owner"
+  ]
+ },
+ {
+  "ref": "PTA-0912",
+  "type": "partner_transfer_approval",
+  "user_id": "u-2027",
+  "valid_from": "2026-06-30",
+  "valid_to": "2026-07-31",
+  "scope": "Quarterly shipment report to an assessed logistics partner.",
+  "approved_by": [
+   "data owner: Enterprise Sales"
+  ]
+ },
+ {
+  "ref": "TRV-0310",
+  "type": "travel_record",
+  "user_id": "u-2028",
+  "valid_from": "2026-08-09",
+  "valid_to": "2026-08-13",
+  "scope": "Customer visits, UTC+9 time zone.",
+  "approved_by": [
+   "manager"
+  ]
+ }
+]

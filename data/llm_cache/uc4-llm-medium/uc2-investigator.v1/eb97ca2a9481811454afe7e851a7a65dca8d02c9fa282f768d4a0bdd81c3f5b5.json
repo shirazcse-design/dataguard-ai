@@ -1,0 +1,52 @@
+{
+ "final_text": null,
+ "key": "eb97ca2a9481811454afe7e851a7a65dca8d02c9fa282f768d4a0bdd81c3f5b5",
+ "recorded_at": "2026-10-04T18:46:21+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1168,
+ "tokens_out": 149,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "external_upload",
+     "file_download_batch",
+     "bulk_download",
+     "after_hours_login",
+     "partner_transfer_approval",
+     "change_ticket",
+     "justification_note",
+     "log_comment"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_72jJqrvmr99twXAwSRcBCWpV",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_aTArGTES3CPU5Xs6eE4vGMcf",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {
+    "query": "external upload downloads after-hours activity business justification approvals sensitive data handling"
+   },
+   "id": "call_dDxzIqEHUYoe3tjjcSqvafNg",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_bF1xXxMV952TxF6LMV0C88GK",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_KlAzcgvR6G95X0L9R5maYKNe",
+   "name": "get_permissions"
+  }
+ ]
+}

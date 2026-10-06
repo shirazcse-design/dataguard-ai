@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "750244698b23fb3efd3957ea668151d49562b43cac4c53a3c7b01c28e0fb7291",
+ "recorded_at": "2026-10-04T18:27:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1461,
+ "tokens_out": 102,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the HIGH_ANOMALY against the user's baseline and recent pattern, especially spikes in files_downloaded, sensitive_files_accessed, after_hours_activity, and distinct_repositories on 2026-08-19."
+   },
+   "id": "call_AvR6hytIX96pt6mc7sgXF7g3",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_hfcwo5ad2F91qN4ojHVljDzr",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_9fmN9X5fvSYZwPNGhrFt74tb",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}

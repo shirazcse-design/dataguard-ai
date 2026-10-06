@@ -1,0 +1,68 @@
+# CANDIDATE - NOT PROMOTED. Produced by the UC2 controlled learning loop (P13), evaluated
+# offline by `dataguard-insider learn run`. The runtime never reads this directory: it loads only
+# config/insider/risk.v1.yaml. Promotion is a human decision, made by a reviewed change to that file.
+#
+# UC2 deterministic risk harness (AUTHORITATIVE). The Risk Agent recommends; this decides the
+# bounded outcome. Every point and rule is a reason code. Changing a number = new rubric_version.
+#
+# Deliberately NOT inputs (Responsible AI): demographics or any protected characteristic, HR or
+# disciplinary data, employment status, notice period. (UC1's rubric still uses notice period;
+# platform-wide harmonisation is FUTURE work - docs/uc2/responsible-ai.md.)
+# Changelog
+# 1.3.0-candidate (2026-10-05) agent review requests on quiet days: on a NORMAL-band case that the
+#       rubric scores MONITOR, a risk-agent HUMAN_REVIEW recommendation is LOGGED for the analyst
+#       (agent_review_request_logged) instead of forcing review. Elsewhere it still triggers
+#       review. Mined from: false reviews on normal days (I05, I11; review:agent_disagreement).
+# 1.2.0 (2026-10-03) role-context gating, approved by the product owner: UC4 data points (level and
+#       high-risk category) count only when a case file's categories fall OUTSIDE the role's expected
+#       data classes, or when the case day includes an external transfer to a non-corporate
+#       destination. Without identity context the points always count (conservative). Found in the
+#       first offline dry run: month-end finance work on financial data (I07, I08) escalated as if it
+#       were out of role. Golden set unchanged.
+# 1.1.0 (2026-10-03) approval ceiling: a VERIFIED approval caps the scored outcome at INVESTIGATE
+#       (an analyst confirms the scope) unless the case day includes a transfer to a personal or
+#       unknown destination. Found in the FIRST OFFLINE DRY RUN (offline planners, no model
+#       results): 1.0.0 escalated an approved migration (I10, score 70) on volume and sensitivity
+#       alone, contradicting the approval's meaning. Golden set unchanged.
+# 1.0.0 (2026-10-03) initial rubric.
+rubric_version: 1.3.0-candidate
+
+points:
+  anomaly_band: {NORMAL: 0, ELEVATED: 15, HIGH_ANOMALY: 35}
+  contributing_signal: 5            # per Isolation Forest contributing signal
+  max_contributing_signals: 3
+  data_level: {PUBLIC: 0, INTERNAL: 5, CONFIDENTIAL: 15, HIGHLY_CONFIDENTIAL: 25}  # UC4, max over files (role-context gated, 1.2.0)
+  high_risk_category: 10            # any UC4 high-risk category among the case files
+  external_transfer: {personal: 15, unknown_external: 15, restricted: 15, partner_external: 5, approved_corporate: 0}
+  policy_effect: {prohibited: 15, requires_approval: 5, allowed: 0, unknown: 0}
+  privileged_access: 5              # access context (not HR): privileged accounts can reach more
+  verified_approval: -20            # ONLY an approval the register verifies for this user and date
+
+bands:
+  - {min: 60, outcome: ESCALATE}
+  - {min: 30, outcome: INVESTIGATE}
+  - {min: -1000, outcome: MONITOR}
+
+ceilings:
+  - {when: verified_approval_without_personal_transfer, outcome: INVESTIGATE}
+
+floors:
+  - {when: band_is, band: HIGH_ANOMALY, outcome: INVESTIGATE}
+  - {when: high_band_sensitive_external, outcome: ESCALATE}   # HIGH_ANOMALY + HIGHLY_CONFIDENTIAL + external transfer
+
+# Any of these makes the outcome HUMAN_REVIEW: the automated assessment is not reliable.
+human_review_triggers:
+  - required_capability_failed      # identity, logs, UC4 or the behaviour series failed (incl. SIMULATED faults)
+  - required_evidence_missing       # ELEVATED+: no log timeline, or files never classified; HIGH: no policy result
+  - data_uncertain                  # UC4 could not classify a case file (ELEVATED+)
+  - policy_conflict                 # UC6 conflict, or verified effects that disagree
+  - policy_insufficient_material    # HIGH_ANOMALY and UC6 had insufficient evidence and no verified prohibition
+  - specialist_conflict             # the investigation reported conflicting evidence (ELEVATED+)
+  - agent_disagreement              # the recommendation is 2+ levels below the bounded outcome, or HUMAN_REVIEW
+  - agent_failure                   # a required agent stopped without a valid result (ELEVATED+)
+  - unsupported_conclusion          # guilt / intent / employment language was produced and withheld
+
+agent_review_request: {min_band: ELEVATED}   # 1.3.0-candidate
+learning_loop: {targets: "false_review:review:agent_disagreement"}   # loop metadata; dropped on promotion
+agent_raise: adopt                  # a HIGHER recommendation is adopted and logged (agent_raised)
+analyst_review_required_above: MONITOR

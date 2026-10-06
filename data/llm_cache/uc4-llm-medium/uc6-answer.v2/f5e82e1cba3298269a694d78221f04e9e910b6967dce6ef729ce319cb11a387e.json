@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 208,
+ "input_hash": "f5e82e1cba3298269a694d78221f04e9e910b6967dce6ef729ce319cb11a387e",
+ "latency_ms": 2032.6126250438392,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1006,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-04T07:30:10+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"A suspected data-security incident must be reported to the Security Operations Center within 1 hour of discovery through the security hotline or the incident portal.\",\"evidence_id\":\"E1\",\"quote\":\"Any suspected security incident, including suspected data loss, must be reported to the Security Operations Center within 1 hour of discovery, through the security hotline or the incident portal.\"},{\"text\":\"Systems involved in an incident must not be powered off or wiped without instruction from the Security Operations Center.\",\"evidence_id\":\"E2\",\"quote\":\"Systems involved in an incident must not be powered off or wiped without instruction from the Security Operations Center, and relevant logs must be preserved.\"},{\"text\":\"Relevant logs must be preserved.\",\"evidence_id\":\"E2\",\"quote\":\"Systems involved in an incident must not be powered off or wiped without instruction from the Security Operations Center, and relevant logs must be preserved.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

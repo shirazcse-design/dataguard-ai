@@ -1,0 +1,53 @@
+{
+ "final_text": null,
+ "key": "ba439bfc5dbe939694170510162c29fbd9632913d6c75aa6d739f1e4af277ef2",
+ "recorded_at": "2026-10-04T18:42:27+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1188,
+ "tokens_out": 163,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end_date": "2026-08-20",
+    "event_types": [
+     "bulk_download",
+     "file_download_batch",
+     "external_upload",
+     "repo_access_new",
+     "change_ticket",
+     "partner_transfer_approval",
+     "justification_note",
+     "after_hours_login",
+     "login"
+    ],
+    "limit": 50,
+    "start_date": "2026-08-12"
+   },
+   "id": "call_8O8cCABsIXtOo5rAnigjRg1t",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {},
+   "id": "call_9vxgpdIVuM9JsgdiMeggTCEx",
+   "name": "classify_case_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_OaqsRkQFIZLCaIYk0DWfyKhi",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_vivC196mK7CnNQAbjtLbj5ug",
+   "name": "get_permissions"
+  },
+  {
+   "arguments": {
+    "query": "after-hours access approvals change tickets justification notes partner transfer approvals external uploads bulk downloads repository access scope expected repositories sensitive data handling"
+   },
+   "id": "call_rOgLC2SF8OaODdeil9F65Crv",
+   "name": "search_policy"
+  }
+ ]
+}

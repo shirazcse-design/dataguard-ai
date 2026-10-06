@@ -1,0 +1,28 @@
+{
+ "final_text": null,
+ "key": "9c3bf807e03211f1ded97a8398348a69d4b1bdcc6acc8fca52daae693b0881a5",
+ "recorded_at": "2026-10-04T18:30:16+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1454,
+ "tokens_out": 86,
+ "tool_calls": [
+  {
+   "arguments": {
+    "focus": "Interpret the elevated anomaly for 2026-08-20 against the user's baseline, especially first-time external upload volume and after-hours activity."
+   },
+   "id": "call_E0TAhKPmmzqyuC5qFKx4dGXa",
+   "name": "delegate_behavior"
+  },
+  {
+   "arguments": {},
+   "id": "call_O7Ha9E2MTTwn5zVyizAeUUDJ",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_xAEV9SPZ3tVY8kmJPpUattGk",
+   "name": "check_data_sensitivity"
+  }
+ ]
+}
