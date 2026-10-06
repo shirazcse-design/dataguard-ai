@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "5ec284d63cd826181ef244fcfc45bddeda8a3fceb555623fe5d9bb32433ed25e",
+ "recorded_at": "2026-10-06T21:21:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1619,
+ "tokens_out": 223,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-0e92f00709"
+   },
+   "id": "call_59jHbOPfAZupUqPaVKRpLFtY",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-0e92f00709"
+   },
+   "id": "call_VWE2S7WXwPMplWoNqviH2NzZ",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_iEAZ61lOWOMWG94YPGOqJiRW",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_dUvV4h2yk6wEzVzLWTBYltmm",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_IHe8RR2kGxdxxxnnDzXnyU0v",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_0s61mEPkk3XafIb1st2LOhwI",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_PS0cCR3zBGuIMCrlfW1YSG9Y",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC wiki read internal team wiki reporting least privilege duration standard access sensitive data approvals"
+   },
+   "id": "call_u5VhEPIkWVeIFKicaw4dDp6x",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_t4qvzc3rXhEwPLPmcxbuU2Dd",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_wopBxWY0ixgC1rlCuBLSqlyt",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

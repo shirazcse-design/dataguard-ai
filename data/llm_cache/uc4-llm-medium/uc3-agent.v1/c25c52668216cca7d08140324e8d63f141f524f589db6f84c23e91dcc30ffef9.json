@@ -1,0 +1,33 @@
+{
+ "final_text": null,
+ "key": "c25c52668216cca7d08140324e8d63f141f524f589db6f84c23e91dcc30ffef9",
+ "recorded_at": "2026-10-06T21:21:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3901,
+ "tokens_out": 79,
+ "tool_calls": [
+  {
+   "arguments": {
+    "policy_id": "POL-ACC",
+    "section": "2"
+   },
+   "id": "call_hid6k1ISm4djRrv0FZeR0xLd",
+   "name": "get_policy_section"
+  },
+  {
+   "arguments": {
+    "reason": "sod_conflict"
+   },
+   "id": "call_JHWXWOdBjZQX3TJvsP9eePiy",
+   "name": "request_human_review"
+  },
+  {
+   "arguments": {
+    "reason": "suspicious_request"
+   },
+   "id": "call_4wglZJFcy06EDHTvNAfzPNHp",
+   "name": "request_human_review"
+  }
+ ]
+}

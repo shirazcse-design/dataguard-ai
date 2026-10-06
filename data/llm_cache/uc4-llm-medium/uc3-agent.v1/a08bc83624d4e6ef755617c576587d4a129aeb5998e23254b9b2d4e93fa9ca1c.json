@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "a08bc83624d4e6ef755617c576587d4a129aeb5998e23254b9b2d4e93fa9ca1c",
+ "recorded_at": "2026-10-06T21:22:00+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1631,
+ "tokens_out": 227,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-0796fa1495"
+   },
+   "id": "call_eDkpqSiSbQv0N3yUtsJP7400",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-0796fa1495"
+   },
+   "id": "call_5hOdcf9Ql2jHoF26Q8S6SeIw",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_IKo1S1maNsMVfARxdFMQ3VFh",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_kt4BLGzW9c6U0En9y4c1oNM0",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_WHjFa6QjYGRbNZEzEYnxj2RW",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_Us9zmeRnlS1AT9TdTmY2c8YV",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_2Rs6HC8eOYu36X6AnlbpsME8",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "record investigation production customer data read access least privilege time-bound platform operations incident review"
+   },
+   "id": "call_tgpBNLtv8hn0DCA67dTTKHGR",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_SlNYyrv9CLF7OQ1maKccKMEv",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_qnE4oVcJAWClYaUp70CEf1KO",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "final_text": "{\"recommended_outcome\":\"RECOMMEND_APPROVE\",\"alternative\":null,\"confidence\":\"high\",\"findings\":[{\"text\":\"The requester is in the Finance role and is associated with the vendor_onboarding project, which is consistent with the stated purpose of following a vendor onboarding runbook.\",\"evidence_id\":\"IDN\"},{\"text\":\"The requester does not currently hold wiki_read and has no current access path to the team_wiki resource.\",\"evidence_id\":\"PATH-team_wiki-NONE\"},{\"text\":\"The team_wiki resource is classified as INTERNAL by UC4.\",\"evidence_id\":\"CLS-team_wiki\"},{\"text\":\"The deterministic segregation-of-duties check found no conflicts for wiki_read.\",\"evidence_id\":\"SOD-NONE-wiki_read\"},{\"text\":\"The deterministic least-privilege evaluation found no narrower alternative for wiki_read.\",\"evidence_id\":\"LP-wiki_read\"},{\"text\":\"POL-ACC §2 requires least privilege and need to know to be maintained for access decisions.\",\"evidence_id\":\"E5\"},{\"text\":\"POL-ACC §3.1 states that standard access is requested through the Identity portal and approved by the requester's line manager.\",\"evidence_id\":\"E2\"},{\"text\":\"Peer context shows wiki_read is unusual for the finance role, but the evidence explicitly notes peer rarity is not by itself a reason to refuse access.\",\"evidence_id\":\"PEER-wiki_read\"}],\"rationale\":\"The requested access is to an INTERNAL resource, the requester does not already have access, and deterministic controls found no SoD conflict and no narrower alternative. The applicable policy supports standard approval flow for non-privileged access, so the request is appropriate as asked for the requested 30-day period.\",\"missing_evidence\":[],\"human_review_reasons\":[],\"evidence_ids\":[\"IDN\",\"PATH-team_wiki-NONE\",\"CLS-team_wiki\",\"SOD-NONE-wiki_read\",\"LP-wiki_read\",\"E5\",\"E2\",\"PEER-wiki_read\"]}",
+ "key": "d423b8462855b0c9cec533cd10de622190e5d14132b8c501cad0b2d0ca4d7051",
+ "recorded_at": "2026-10-06T21:21:06+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3078,
+ "tokens_out": 403,
+ "tool_calls": []
+}

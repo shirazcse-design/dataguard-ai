@@ -1,0 +1,15 @@
+# UC3: ONE bounded agent. v2 (2026-10-06, approved after live run 1): live run 1 showed the model
+# requesting nearly all 12 tools in ONE parallel batch; the v1 budget of 10 cut 6 of 16 runs off
+# with no recommendation (the harness covered them safely). v2 raises the budget above the tool
+# count and adds a graceful finish. The prompt, tools, golden labels and agent.v1.yaml (frozen) are
+# unchanged. Declared the FINAL agent iteration before run 2: no tuning after it.
+agent_version: 2.0.0
+name: dataguard-access-governance
+prompt_version: uc3-agent.v1        # unchanged: the Foundry agent (v1) needs no update
+prompt_file: prompts/uc3/agent.v1.md
+model_tier: mid
+max_turns: 8
+max_tool_calls: 14                  # v1: 10 (below the 12 available tools)
+finish_on_budget: true              # v1: none. At the budget, one last turn without tools to answer
+max_consecutive_tool_failures: 2
+max_chars: 800

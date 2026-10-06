@@ -1,0 +1,19 @@
+{
+ "final_text": null,
+ "key": "e46d80c70bb1ca537527018705230bbb7c32e825111301ff7f138523700d1af5",
+ "recorded_at": "2026-10-06T21:22:34+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3318,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "policy_id": "POL-ACC",
+    "section": "2"
+   },
+   "id": "call_q5c8pzOblt5T0xg92UoDMj43",
+   "name": "get_policy_section"
+  }
+ ]
+}

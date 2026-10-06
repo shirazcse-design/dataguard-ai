@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "0956d6d96a70279ab88e6dde2ed416c6d072772735d50c2ca5f4623a008cf0ab",
+ "recorded_at": "2026-10-06T21:21:55+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1638,
+ "tokens_out": 230,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-8c45f6a9cd"
+   },
+   "id": "call_GRYyu8Jp6CwxhLLePKC9C0Ac",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-8c45f6a9cd"
+   },
+   "id": "call_7Rsrwt26DtVZ4OlJ8u4NsGl0",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_Txx1MCGrMc1TwkkrSqunNz45",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_7efB8GybAzJWqzvTmn9k9FnO",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_yamJZXZ1YOOvzEdVNlat1jYG",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_TgxaCtjR1T0HTZsZgnIHTyzv",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_9pHFqqBYDIrtXIuwofpJgrGt",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "payment approval segregation of duties least privilege time-bound access finance approvals migration privileged sensitive data"
+   },
+   "id": "call_b1bxukZhnqAJAzWDWIDVuA3E",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_72xbGLh8mWrPmgHLw4SsCfLr",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_TzLUuUjEtbgmRE5qhRkuJjJg",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

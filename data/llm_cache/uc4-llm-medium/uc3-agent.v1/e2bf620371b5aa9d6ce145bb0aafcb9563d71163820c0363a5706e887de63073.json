@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "e2bf620371b5aa9d6ce145bb0aafcb9563d71163820c0363a5706e887de63073",
+ "recorded_at": "2026-10-06T21:21:44+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1621,
+ "tokens_out": 234,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-3703c20488"
+   },
+   "id": "call_ccMF14WS7tiD2RN50PdFF769",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-3703c20488"
+   },
+   "id": "call_woUiIgaV56o4PItheTR2rBsl",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "sales_case_studies"
+   },
+   "id": "call_2Flq13nmYQxiCAmGdxD0aXSk",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "sales_case_studies"
+   },
+   "id": "call_8T5ubkN8Oay9qVO4hHjbtmxj",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "sales_case_studies"
+   },
+   "id": "call_wkB2L5OCpx097o80olH3PhrM",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "case_studies_read"
+   },
+   "id": "call_hxB8rLIhewiy345WaEOYnFZX",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "case_studies_read"
+   },
+   "id": "call_7M8wEJcZQnTzVzy0Ub8iqeYj",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC reporting read access customer case studies product management least privilege time-bound approvals sensitive data internal"
+   },
+   "id": "call_wQsbwkoWVrLoW84WWD8OGPrK",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "case_studies_read"
+   },
+   "id": "call_bMzn0qX0GRfplHWMSmb3QTeR",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "case_studies_read"
+   },
+   "id": "call_xYp76NyiumDHvt9pnpeTKWBv",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

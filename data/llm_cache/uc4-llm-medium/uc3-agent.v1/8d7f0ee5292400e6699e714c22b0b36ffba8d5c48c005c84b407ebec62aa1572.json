@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "8d7f0ee5292400e6699e714c22b0b36ffba8d5c48c005c84b407ebec62aa1572",
+ "recorded_at": "2026-10-06T21:21:15+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3124,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_a75NHvqwl4Wf79x7gwrKoLFc",
+   "name": "get_access_path"
+  }
+ ]
+}

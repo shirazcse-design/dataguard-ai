@@ -36,7 +36,7 @@ from .services import AccessServices, Facts, alias, compute_facts, pseudonym
 from .tools import CaseState, build_tools
 
 REPO = Path(__file__).resolve().parents[2]
-AGENT_CONFIG = REPO / "config" / "access" / "agent.v1.yaml"
+AGENT_CONFIG = REPO / "config" / "access" / "agent.v2.yaml"  # v2 after live run 1; v1 kept (frozen)
 WITHHELD_JUSTIFICATION = "[withheld: instruction-like text detected in the justification]"
 # The agent claims to have changed access: withheld from the analyst and counted (no tool can act).
 ACTION_CLAIM = re.compile(
@@ -111,7 +111,8 @@ class AccessGovernor:
                             max_tool_calls=c["max_tool_calls"], max_failures=c["max_consecutive_tool_failures"],
                             output_model=AccessRecommendation, backend=self.backend, max_chars=c["max_chars"],
                             span_name="uc3.agent", planner_span="uc3.agent.planner", tool_span="uc3.tool",
-                            output_filter=action_claim, withheld="[withheld: claimed an access change]")  # fmt: skip
+                            output_filter=action_claim, withheld="[withheld: claimed an access change]",
+                            finish_on_budget=c.get("finish_on_budget", False))  # fmt: skip
 
     def decide(self, request: dict[str, Any]) -> GovernanceRun:
         t0 = time.perf_counter()

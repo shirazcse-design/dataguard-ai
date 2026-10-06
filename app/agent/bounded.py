@@ -73,6 +73,7 @@ class AgentRun:
     ms: float = 0.0
     unsupported_conclusions: int = 0
     repairs: int = 0
+    budget_finish: bool = False  # the tool budget was reached and the agent was asked to answer
     messages: list[dict[str, Any]] = field(default_factory=list)  # in memory only (isolation tests)
 
     @property
@@ -127,13 +128,17 @@ def scrub(obj: Any, max_chars: int, output_filter: Callable[[str], bool] | None 
     return obj, 0
 
 
+BUDGET_REACHED = ("Tool budget reached: no more tool calls are possible. Reply now with ONLY the required JSON "
+                  "object, using the evidence you already have; list anything you could not check under missing_evidence.")  # fmt: skip
+
+
 class BoundedAgent:
     def __init__(self, name: str, planner: Any, system: str, tools: list[Tool], *, max_turns: int,
                  max_tool_calls: int, max_failures: int, output_model: type[BaseModel] | None,
                  backend: str, max_chars: int = 400, span_name: str = "agent",
                  planner_span: str = "agent.planner", tool_span: str = "agent.tool",
                  output_filter: Callable[[str], bool] | None = None,
-                 withheld: str = "[withheld]") -> None:  # fmt: skip
+                 withheld: str = "[withheld]", finish_on_budget: bool = False) -> None:  # fmt: skip
         self.name, self.planner, self.system = name, planner, system
         self.tools = {t.name: t for t in tools}
         self.max_turns, self.max_tool_calls, self.max_failures = (
@@ -144,6 +149,10 @@ class BoundedAgent:
         self.output_model, self.backend, self.max_chars = output_model, backend, max_chars
         self.span_name, self.planner_span, self.tool_span = span_name, planner_span, tool_span
         self.output_filter, self.withheld = output_filter, withheld
+        # Opt-in (UC3): when the tool budget is reached, answer the unexecuted calls of that batch with
+        # "not executed" and give the agent ONE more turn, without tools, to answer from the evidence
+        # it has. Off by default, so UC2's agents behave exactly as before.
+        self.finish_on_budget = finish_on_budget
 
     def run(self, payload: dict[str, Any]) -> AgentRun:
         planner_name = getattr(self.planner, "model_id", type(self.planner).__name__)
@@ -153,6 +162,7 @@ class BoundedAgent:
             {"role": "user", "content": json.dumps(payload, sort_keys=True, ensure_ascii=False)},
         ]
         failures = 0
+        finishing = False
         t0 = time.perf_counter()
         with span(
             self.span_name,
@@ -193,10 +203,22 @@ class BoundedAgent:
                 msgs.append({"role": "assistant", "content": None, "tool_calls": [
                     {"id": c.id, "type": "function", "function": {"name": c.name, "arguments": json.dumps(c.arguments, sort_keys=True)}}
                     for c in turn.tool_calls]})  # fmt: skip
+                if finishing:  # it was told to answer and asked for tools again
+                    run.stopped_reason = "tool_budget_exceeded"
+                    break
                 stop = False
-                for c in turn.tool_calls:
+                for i, c in enumerate(turn.tool_calls):
                     run.tool_calls += 1
                     if run.tool_calls > self.max_tool_calls:
+                        if self.finish_on_budget:
+                            run.tool_calls -= 1  # count only what ran
+                            for p in turn.tool_calls[i:]:
+                                msgs.append({"role": "tool", "tool_call_id": p.id,
+                                             "content": json.dumps({"error": "not_executed", "detail": "tool budget reached"})})  # fmt: skip
+                            msgs.append({"role": "user", "content": BUDGET_REACHED})
+                            run.budget_finish = True
+                            finishing = True
+                            break
                         run.stopped_reason = "tool_budget_exceeded"
                         stop = True
                         break

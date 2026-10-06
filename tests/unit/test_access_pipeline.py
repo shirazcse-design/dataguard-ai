@@ -229,3 +229,51 @@ def test_cli_exposes_every_documented_command():
         with contextlib.redirect_stdout(io.StringIO()), pytest.raises(SystemExit) as e:
             main(argv)
         assert e.value.code == 0, argv
+
+
+class _BatchPlanner:
+    """Turn 1: three tool calls in one batch. Turn 2: a final answer."""
+
+    name, model_id = "fake", None
+
+    def next_turn(self, messages):
+        from app.agent.types import AgentTurn, ParsedToolCall
+
+        if not any(m["role"] == "tool" for m in messages):
+            return AgentTurn(tool_calls=[ParsedToolCall(f"c{i}", "t", {}) for i in range(3)])
+        return AgentTurn(final_text=json.dumps({"ok": True}))
+
+
+@pytest.mark.parametrize("finish", [True, False])
+def test_graceful_finish_on_budget_is_opt_in(finish):
+    from app.agent.bounded import BoundedAgent, Tool, params
+
+    tool = Tool("t", "x", params({}), lambda a: (True, {"evidence_ids": []}, None))
+    a = BoundedAgent("x", _BatchPlanner(), "s", [tool], max_turns=4, max_tool_calls=2, max_failures=2,
+                     output_model=None, backend="t", finish_on_budget=finish)  # fmt: skip
+    r = a.run({})
+    answered = {m["tool_call_id"] for m in r.messages if m["role"] == "tool"}
+    if finish:
+        assert r.stopped_reason == "final_answer" and r.budget_finish and r.tool_calls == 2
+        assert answered == {
+            "c0",
+            "c1",
+            "c2",
+        }  # every call in the batch has a response (live APIs need it)
+        assert "not_executed" in next(
+            m["content"] for m in r.messages if m.get("tool_call_id") == "c2"
+        )
+    else:
+        assert r.stopped_reason == "tool_budget_exceeded" and not r.budget_finish  # UC2's behaviour
+
+
+def test_agent_v2_budget_exceeds_the_tool_count_and_v1_stays_frozen():
+    from app.access.pipeline import load_agent_config
+
+    c = load_agent_config()
+    assert (
+        c["agent_version"] == "2.0.0"
+        and c["max_tool_calls"] > len(tool_schemas())
+        and c["finish_on_budget"]
+    )
+    assert c["prompt_version"] == "uc3-agent.v1"

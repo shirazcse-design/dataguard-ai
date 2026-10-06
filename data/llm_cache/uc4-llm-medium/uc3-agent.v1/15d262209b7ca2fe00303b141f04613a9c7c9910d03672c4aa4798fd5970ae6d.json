@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "15d262209b7ca2fe00303b141f04613a9c7c9910d03672c4aa4798fd5970ae6d",
+ "recorded_at": "2026-10-06T21:21:35+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1622,
+ "tokens_out": 187,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-e630ef3247"
+   },
+   "id": "call_J3LuB2ZvZfKBMwwfGIgn0hVl",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-e630ef3247"
+   },
+   "id": "call_EBGQSKKeIKMYxwB6j1ndl12n",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_T346PAOkr70wUR4Ixr72sV9T",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_mltOxHxskZMkNWSzsiA0XBAH",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_BdUsTgVKhQnpRm5Uq3oqYmLc",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_x4XRnIb01kYm55wWUpdfRbZS",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_3cyQjnKKD2G5AUKOTl2XVcQY",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC access to production customer data record investigation least privilege time-bound segregation of duties analytics"
+   },
+   "id": "call_nVSUg4z11HsLlOxbKscSFA7s",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "797829bc035faa00c2ac9600b9900341be75fd4ffdd48ef43537d944038c4d83",
+ "recorded_at": "2026-10-06T21:21:09+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1649,
+ "tokens_out": 226,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-1157698bfd"
+   },
+   "id": "call_Ob6Iy3pn1pE3dKIhYUJMzCll",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-1157698bfd"
+   },
+   "id": "call_jQRRAXhxJH9m3aACX2tHH7Oz",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_A2sOf7RtbbAOPA9TSMMAQqi8",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_P95drbR9qtQeBBfz9DWp5VhG",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_iPQ2zj74DGyDOGDlKJNzbTtO",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_kG6xQXFjLA3k9WlWU0sFIOui",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_4h19djKGP9YjoJHy3AKR9P3U",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "production customer data record investigation least privilege read write duration approval Product"
+   },
+   "id": "call_z7hJLctwx8hcIw052f6nFyZF",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_7b18s8Rpge9QEMpgCUrdJsIn",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_Mnzd9oD5FZFLbJscwuOxwhET",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}
