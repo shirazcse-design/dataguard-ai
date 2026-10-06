@@ -52,6 +52,7 @@ dataguard-uc4-mcp = "mcp_adapter.server:main"
 dataguard-policy = "app.policy.cli:main"
 dataguard-dlp = "app.dlp.cli:main"
 dataguard-insider = "app.insider.cli:main"
+dataguard-access = "app.access.cli:main"
 
 [tool.setuptools.package-data]
 "app.demo" = ["static/*"]

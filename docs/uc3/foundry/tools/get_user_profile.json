@@ -1,0 +1,15 @@
+{
+  "name": "get_user_profile",
+  "description": "The requester's access context: role, department, groups, projects, whether they moved role. No HR data.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "subject": {
+        "type": "string",
+        "description": "optional; must be the request's subject pseudonym"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

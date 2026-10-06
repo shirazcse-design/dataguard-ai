@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "Alternative": {
+      "additionalProperties": false,
+      "properties": {
+        "entitlement_id": {
+          "title": "Entitlement Id",
+          "type": "string"
+        },
+        "duration_days": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Days",
+          "type": "number"
+        }
+      },
+      "required": [
+        "entitlement_id",
+        "duration_days"
+      ],
+      "title": "Alternative",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 400,
+          "title": "Text",
+          "type": "string"
+        },
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "claim_type": {
+          "const": "AGENT_INFERENCE",
+          "default": "AGENT_INFERENCE",
+          "title": "Claim Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "evidence_id"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The agent's structured output. Everything here is AGENT_INFERENCE / AGENT_RECOMMENDATION.",
+  "properties": {
+    "recommended_outcome": {
+      "enum": [
+        "RECOMMEND_APPROVE",
+        "RECOMMEND_LIMITED_TIME_BOUND_ACCESS",
+        "HUMAN_REVIEW",
+        "RECOMMEND_REJECT"
+      ],
+      "title": "Recommended Outcome",
+      "type": "string"
+    },
+    "alternative": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Alternative"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "maxItems": 12,
+      "title": "Findings",
+      "type": "array"
+    },
+    "rationale": {
+      "maxLength": 800,
+      "title": "Rationale",
+      "type": "string"
+    },
+    "missing_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Evidence",
+      "type": "array"
+    },
+    "human_review_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Human Review Reasons",
+      "type": "array"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recommended_outcome",
+    "confidence",
+    "rationale"
+  ],
+  "title": "AccessRecommendation",
+  "type": "object"
+}

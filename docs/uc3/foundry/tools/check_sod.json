@@ -1,0 +1,15 @@
+{
+  "name": "check_sod",
+  "description": "Deterministic segregation-of-duties check for an entitlement against what the requester holds.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "entitlement_id": {
+        "type": "string",
+        "description": "the requested entitlement (default) or one in the same family"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

@@ -32,7 +32,7 @@ from .schemas import (
     ContextItem,
     Decision,
 )
-from .services import AccessServices, Facts, compute_facts, pseudonym
+from .services import AccessServices, Facts, alias, compute_facts, pseudonym
 from .tools import CaseState, build_tools
 
 REPO = Path(__file__).resolve().parents[2]
@@ -82,7 +82,7 @@ def initial_context(facts: Facts, resource_id: str) -> AccessDecisionContext:
     if req.get("project_id"):
         summary += f", project {req['project_id']}"
     return AccessDecisionContext(
-        request_id=req["request_id"], subject=pseudonym(req["user_id"]), role_id=ident.get("role_id"),
+        request_id=req["request_id"], subject=alias(req["user_id"]), role_id=ident.get("role_id"),
         department=ident.get("department"), requested_entitlement=req["entitlement_id"], requested_resource=resource_id,
         purpose_category=req.get("purpose_category"), duration_days=req["duration_days"], project_id=req.get("project_id"),
         justification=WITHHELD_JUSTIFICATION if flagged else (req.get("justification") or ""), justification_flagged=flagged,

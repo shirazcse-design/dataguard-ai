@@ -1,0 +1,25 @@
+{
+  "name": "request_human_review",
+  "description": "Ask for an analyst. The only tool with an effect; it records a reason.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "reason": {
+        "type": "string",
+        "enum": [
+          "sensitive_data",
+          "sod_conflict",
+          "privileged_access",
+          "policy_unclear",
+          "conflicting_evidence",
+          "insufficient_evidence",
+          "suspicious_request"
+        ]
+      }
+    },
+    "required": [
+      "reason"
+    ],
+    "additionalProperties": false
+  }
+}

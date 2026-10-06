@@ -1,0 +1,53 @@
+{
+ "mode": "offline",
+ "verification": "OFFLINE (scripted planner)",
+ "privacy_audit": {
+  "clean": true,
+  "spans_audited": 349,
+  "checks": 110,
+  "leaks": [],
+  "unlisted_keys": []
+ },
+ "telemetry": {
+  "spans": 349,
+  "requests": 16,
+  "span_names": {
+   "S0.guardrails": 9,
+   "S1.rules": 9,
+   "S3.llm.mid": 9,
+   "S4.fusion": 9,
+   "S5.result": 9,
+   "llm.call": 9,
+   "uc3.access_request": 16,
+   "uc3.agent": 16,
+   "uc3.agent.planner": 107,
+   "uc3.authorization_harness": 16,
+   "uc3.hitl": 16,
+   "uc3.outcome": 16,
+   "uc3.precheck": 16,
+   "uc3.tool": 92
+  },
+  "outcomes": {
+   "HUMAN_REVIEW": 7,
+   "RECOMMEND_APPROVE": 1,
+   "RECOMMEND_LIMITED_TIME_BOUND_ACCESS": 4,
+   "RECOMMEND_REJECT": 4
+  },
+  "hitl_required": 15,
+  "tool_calls": {
+   "check_sod": 15,
+   "classify_resource": 15,
+   "evaluate_least_privilege": 15,
+   "get_current_entitlements": 16,
+   "get_policy_section": 15,
+   "get_user_profile": 16
+  },
+  "tool_errors": {
+   "tool_unavailable": 2
+  },
+  "genai_operations": {
+   "execute_tool": 92,
+   "invoke_agent": 16
+  }
+ }
+}

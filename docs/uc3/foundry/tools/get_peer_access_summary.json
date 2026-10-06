@@ -1,0 +1,15 @@
+{
+  "name": "get_peer_access_summary",
+  "description": "How many of the requester's role peers hold an entitlement. Context only.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "entitlement_id": {
+        "type": "string",
+        "description": "the requested entitlement (default) or one in the same family"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

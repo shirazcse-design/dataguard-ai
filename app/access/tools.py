@@ -18,7 +18,7 @@ from app.agent.bounded import Tool, params
 
 from .governance import evaluate, load_config, sod_conflicts
 from .requirements import applicable
-from .services import AccessServices, Facts, ServiceError, identity_view, pseudonym
+from .services import AccessServices, Facts, ServiceError, alias, identity_view
 
 REVIEW_REASONS = ("sensitive_data", "sod_conflict", "privileged_access", "policy_unclear", "conflicting_evidence",
                   "insufficient_evidence", "suspicious_request")  # fmt: skip
@@ -39,7 +39,7 @@ class CaseState:
 
     @property
     def subject(self) -> str:
-        return pseudonym(self.req["user_id"])
+        return alias(self.req["user_id"])
 
     def scope_entitlements(self) -> set[str]:
         return set(self.svc.graph.family(self.req["entitlement_id"]))

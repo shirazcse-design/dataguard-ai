@@ -23,8 +23,16 @@ SALT_ENV = "DATAGUARD_TELEMETRY_SALT"
 
 
 def pseudonym(user_id: str) -> str:
+    """Telemetry pseudonym: salted per deployment (DATAGUARD_TELEMETRY_SALT)."""
     salt = os.environ.get(SALT_ENV, "dataguard-uc3-demo")
     return "subj-" + hashlib.sha256(f"{salt}|{user_id}".encode()).hexdigest()[:12]
+
+
+def alias(user_id: str) -> str:
+    """The agent-facing subject alias. A FIXED salt: it is part of the agent's input, so it must
+    not vary by machine or environment, or recorded replays would miss (the lesson of UC2's CI
+    fingerprint bug). It still never exposes the user id to the model."""
+    return "req-" + hashlib.sha256(f"uc3-subject|{user_id}".encode()).hexdigest()[:10]
 
 
 class ServiceError(Exception):
@@ -100,7 +108,7 @@ class Facts:
 def identity_view(graph: AccessGraph, uid: str) -> dict[str, Any]:
     u = graph.user(uid)
     role = graph.nodes[u["role_id"]].attrs
-    return {"subject": pseudonym(uid), "role_id": u["role_id"], "department": role["department"],
+    return {"subject": alias(uid), "role_id": u["role_id"], "department": role["department"],
             "groups": u["groups"], "projects": u["projects"], "role_since": u["role_since"],
             "moved_role": u.get("previous_role_id") is not None}  # fmt: skip
 

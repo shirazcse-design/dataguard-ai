@@ -1,0 +1,15 @@
+{
+  "name": "evaluate_least_privilege",
+  "description": "Deterministic least-privilege findings and the narrowest alternative for an entitlement.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "entitlement_id": {
+        "type": "string",
+        "description": "the requested entitlement (default) or one in the same family"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}
