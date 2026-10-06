@@ -15,6 +15,7 @@ No label, scenario or HR attribute is read here.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from datetime import date
 from typing import Any
@@ -49,8 +50,11 @@ def baseline_from(rows: list[dict[str, Any]], floors: dict[str, float]) -> Basel
 
 def featurize(row: dict[str, Any], b: Baseline) -> dict[str, float]:
     out = {f"z_{f}": (row[f] - b.median[f]) / b.scale[f] for f in FEATURES}
-    out["log_download_ratio"] = float(
-        np.log((row["files_downloaded"] + 1.0) / (b.median["files_downloaded"] + 1.0))
+    # math.log, not np.log: numpy picks a SIMD log by CPU (e.g. AVX-512 on some CI runners) that
+    # can differ in the last bit. That changed the model fingerprint (a hash of the raw training
+    # matrix), which every agent sees, so recorded replays missed on some machines.
+    out["log_download_ratio"] = math.log(
+        (row["files_downloaded"] + 1.0) / (b.median["files_downloaded"] + 1.0)
     )
     return out
 

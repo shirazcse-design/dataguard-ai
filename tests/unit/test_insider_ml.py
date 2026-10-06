@@ -84,3 +84,11 @@ def test_band_thresholds_come_from_training_percentiles(fitted):
     s = det.score(train)
     assert det.elevated == pytest.approx(float(np.percentile(s, 95)))
     assert np.mean(s >= det.high) == pytest.approx(0.01, abs=0.006)
+
+
+def test_model_fingerprint_is_stable_across_platforms(fitted):
+    """The fingerprint (a hash of the raw training matrix) is in every agent's input, so the
+    recorded replays depend on it. np.log gave last-bit differences on some CI CPUs (fingerprint
+    f762eba0fcc6 instead of this); features now use math.log. If this fails on a new platform,
+    the replay recordings will miss there too."""
+    assert fitted[3].fingerprint == "3c540600954b"
