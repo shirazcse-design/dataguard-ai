@@ -118,6 +118,15 @@ def cmd_agent_export(args) -> int:
     return 0
 
 
+def cmd_agent_register(args) -> int:
+    """LIVE (Entra sign-in): create a new version of the Foundry agent, then read it back."""
+    from .service import register_agent
+
+    r = register_agent(args.tenant_id, args.rai_policy_id)
+    print(json.dumps(r, indent=1))
+    return 0 if r["tools_match"] and r["instructions_match"] else 1
+
+
 def cmd_obs_report(args) -> int:
     from evals.access.observability_report import render, run_traced
 
@@ -165,6 +174,10 @@ def main(argv: list[str] | None = None) -> int:
     a.add_parser("export", help="files for creating the Foundry agent by hand").set_defaults(
         func=cmd_agent_export
     )
+    ar = a.add_parser("register", help="LIVE: create a new version of the Foundry agent (additive)")
+    ar.add_argument("--tenant-id", default=None)
+    ar.add_argument("--rai-policy-id", default=None, help="full ARM id of an existing guardrail")
+    ar.set_defaults(func=cmd_agent_register)
     o = sub.add_parser("obs").add_subparsers(dest="sub", required=True)
     orp = o.add_parser("report")
     orp.add_argument("--mode", choices=("offline", "replay"), default="replay")

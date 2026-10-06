@@ -211,3 +211,21 @@ def test_agent_input_does_not_depend_on_the_telemetry_salt(gov, monkeypatch):
     a = gov.decide(REQ["AR-002"]).run.messages[1]["content"]
     monkeypatch.setenv("DATAGUARD_TELEMETRY_SALT", "another-deployment")
     assert gov.decide(REQ["AR-002"]).run.messages[1]["content"] == a
+
+
+def test_cli_exposes_every_documented_command():
+    """The register command once silently failed to wire up (a formatter reflow broke a text edit)."""
+    import contextlib
+    import io
+
+    from app.access.cli import main
+
+    for argv in (
+        ["agent", "register", "--help"],
+        ["agent", "export", "--help"],
+        ["record", "--help"],
+        ["obs", "report", "--help"],
+    ):
+        with contextlib.redirect_stdout(io.StringIO()), pytest.raises(SystemExit) as e:
+            main(argv)
+        assert e.value.code == 0, argv
