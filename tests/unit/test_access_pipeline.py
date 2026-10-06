@@ -277,3 +277,35 @@ def test_agent_v2_budget_exceeds_the_tool_count_and_v1_stays_frozen():
         and c["finish_on_budget"]
     )
     assert c["prompt_version"] == "uc3-agent.v1"
+
+
+def test_obs_live_check_replays_uc4_uc6_and_plants_a_valid_canary_request(capsys):
+    """The live-check failed live once: it built LIVE UC4 services (needs every deployment) and used an
+    invalid request id. Only the agent may be live; the canary request must validate."""
+    from unittest import mock
+
+    import app.access.service as service
+    import app.access.services as services
+    import app.agent.foundry_service as fs
+    from app.access import cli
+
+    real, real_svc, seen = service.build_governor, services.build_services, {}
+
+    def offline(mode, **k):
+        seen.update(mode=mode, has_svc=k.get("svc") is not None)
+        return real("offline", **k)
+
+    def svc(mode="replay"):
+        seen["svc_mode"] = mode
+        return real_svc(mode)
+
+    with mock.patch.object(fs, "project_client"), mock.patch.object(fs, "project_endpoint", return_value="x"), \
+         mock.patch("observability.azure_monitor_sink", return_value=None), \
+         mock.patch("observability.flush_azure_monitor", return_value=True), \
+         mock.patch.object(service, "build_governor", side_effect=offline), \
+         mock.patch.object(services, "build_services", side_effect=svc):  # fmt: skip
+        assert cli.main(["obs", "live-check", "--tenant-id", "t"]) == 0
+    out = json.loads(capsys.readouterr().out)
+    assert seen == {"mode": "live", "has_svc": True, "svc_mode": "replay"}
+    assert [r["request_id"] for r in out["runs"]] == ["AR-001", "AR-990", "AR-015"]
+    assert out["canary"].startswith("CANARY")

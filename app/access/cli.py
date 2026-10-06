@@ -187,7 +187,7 @@ def cmd_obs_live_check(args) -> int:
 
     from . import synth
     from .service import build_governor
-    from .services import pseudonym
+    from .services import build_services, pseudonym
 
     obs_cfg, _ = load_observability_config()
     project = project_client(project_endpoint(), tenant_id=args.tenant_id)
@@ -197,9 +197,15 @@ def cmd_obs_live_check(args) -> int:
     canary = f"CANARY{secrets.token_hex(4).upper()}"
     reqs = {r["request_id"]: r for r in synth.REQUESTS}
     flag = dict(reqs["AR-002"])
-    flag["request_id"] = "AR-OBS"
+    flag["request_id"] = "AR-990"  # the flagship plus a canary
     flag["justification"] = f"{flag['justification']} Ticket reference {canary}."
-    gov = build_governor("live", backend="foundry-service", tenant_id=args.tenant_id, tracer=tracer)
+    gov = build_governor(
+        "live",
+        backend="foundry-service",
+        tenant_id=args.tenant_id,
+        tracer=tracer,
+        svc=build_services("replay"),
+    )  # only the agent is live; UC4/UC6 replay
     out = []
     for req in (reqs["AR-001"], flag, reqs["AR-015"]):
         x = gov.decide(req)
