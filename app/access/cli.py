@@ -127,6 +127,36 @@ def cmd_agent_register(args) -> int:
     return 0 if r["tools_match"] and r["instructions_match"] else 1
 
 
+def cmd_guardrails_verify(args) -> int:
+    """LIVE: the six adversarial probes through the Foundry agent (verdicts only)."""
+    import os
+    from datetime import date
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from evals.access import guardrails_verify as gv
+
+    from .pipeline import load_agent_config
+
+    name = os.environ.get("DATAGUARD_ACCESS_AGENT", "") or load_agent_config()["name"]
+    openai = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    rows = gv.run(
+        openai, os.environ.get("DATAGUARD_LLM_DEPLOYMENT_MID", "") or "uc4-llm-medium", name
+    )
+    prov = {
+        "date": date.today().isoformat(),
+        "agent": f"{name} (latest version)",
+        "guardrail": args.guardrail,
+        "uc4_uc6": "replay",
+    }
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / "guardrails-verification.json").write_text(
+        json.dumps({"provenance": prov, "probes": rows}, indent=1, default=str) + "\n", "utf-8"
+    )
+    (RESULTS / "guardrails-verification.md").write_text(gv.render(rows, prov), encoding="utf-8")
+    print(gv.render(rows, prov))
+    return 0
+
+
 def cmd_obs_report(args) -> int:
     from evals.access.observability_report import render, run_traced
 
@@ -178,6 +208,11 @@ def main(argv: list[str] | None = None) -> int:
     ar.add_argument("--tenant-id", default=None)
     ar.add_argument("--rai-policy-id", default=None, help="full ARM id of an existing guardrail")
     ar.set_defaults(func=cmd_agent_register)
+    gr = sub.add_parser("guardrails").add_subparsers(dest="sub", required=True)
+    grv = gr.add_parser("verify", help="LIVE: the six adversarial probes through the Foundry agent")
+    grv.add_argument("--tenant-id", default=None)
+    grv.add_argument("--guardrail", default="uc3-access-governance-guardrail")
+    grv.set_defaults(func=cmd_guardrails_verify)
     o = sub.add_parser("obs").add_subparsers(dest="sub", required=True)
     orp = o.add_parser("report")
     orp.add_argument("--mode", choices=("offline", "replay"), default="replay")

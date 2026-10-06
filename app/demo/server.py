@@ -29,6 +29,7 @@ from pathlib import Path
 from typing import Any
 
 from . import docs_view, examples, metrics
+from .access import AccessSession
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
 from .dlp import DlpSession
@@ -57,6 +58,7 @@ _STATIC = {
     "/static/policy.js": ("policy.js", "text/javascript; charset=utf-8"),
     "/static/dlp.js": ("dlp.js", "text/javascript; charset=utf-8"),
     "/static/insider.js": ("insider.js", "text/javascript; charset=utf-8"),
+    "/static/access.js": ("access.js", "text/javascript; charset=utf-8"),
 }
 _HEADERS = {
     "Cache-Control": "no-store",
@@ -89,6 +91,8 @@ class DemoApp:
     dlp_review_path: Path | str | None = None
     _insider: InsiderSession | None = None
     insider_review_path: Path | str | None = None
+    _access: AccessSession | None = None
+    access_review_path: Path | str | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -280,6 +284,28 @@ class DemoApp:
             self.insider_session().review_decide(body), data_class="DEMO-ONLY STATE"
         )
 
+    # -- Access Governance (UC3) --------------------------------------------------------------
+    def access_session(self) -> AccessSession:
+        with self._init_lock:
+            if self._access is None:
+                kw = {"review_path": self.access_review_path} if self.access_review_path else {}
+                self._access = AccessSession(self.mode, self.env, **kw)
+            return self._access
+
+    def access_describe(self) -> dict[str, Any]:
+        return self.envelope(self.access_session().describe(), data_class="RECORDED + SYNTHETIC")
+
+    def access_investigate(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(self.access_session().investigate(body), data_class=self.data_class())
+
+    def access_review(self) -> dict[str, Any]:
+        return self.envelope(self.access_session().review_queue(), data_class="DEMO-ONLY STATE")
+
+    def access_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(
+            self.access_session().review_decide(body), data_class="DEMO-ONLY STATE"
+        )
+
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
             self._metrics = metrics.all_metrics()
@@ -330,6 +356,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/dlp/review": app.dlp_review,
                 "/api/insider": app.insider_describe,
                 "/api/insider/review": app.insider_review,
+                "/api/access": app.access_describe,
+                "/api/access/review": app.access_review,
             }
             if path in routes:
                 try:
@@ -353,6 +381,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/dlp/review/decide": app.dlp_review_decide,
                 "/api/insider/investigate": app.insider_investigate,
                 "/api/insider/review/decide": app.insider_review_decide,
+                "/api/access/investigate": app.access_investigate,
+                "/api/access/review/decide": app.access_review_decide,
             }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))
