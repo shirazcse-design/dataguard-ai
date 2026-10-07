@@ -75,8 +75,10 @@ is an alias (`req-…`), but some tool results still carry the requester's **raw
 inherited grant paths (`get_current_entitlements`, `get_access_path`), the SoD `held_via` paths
 (`check_sod`) and an exception record. It happens on 7 of the 16 golden requests (AR-005, 006, 008,
 010, 011, 013, 016), not on the three requests in this live check, which is why the count above is
-0. So raw (synthetic) user ids can reach Foundry's recorded conversation, as in UC2. Fix (open):
-alias the user id inside tool results too.
+0. So raw (synthetic) user ids can reach Foundry's recorded conversation, as in UC2.
+**Decision (product owner, 2026-10-06): known limitation for the synthetic demo**, not fixed now
+(the fix changes the agent's input, so both recorded live runs would need re-recording). Before
+production: alias the user id inside tool results too, then re-record.
 
 **Decision (product owner, 2026-10-06): (a) keep it on for the synthetic demo**, as in UC1, UC2 and
 UC6: all users, requests and resources are synthetic. Before production: turn off agent content recording in the
