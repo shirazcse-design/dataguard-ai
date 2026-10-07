@@ -179,5 +179,41 @@ allowed_attributes:
   - dg.ag.provisioned
   - dg.ag.model_calls
   - dg.ag.tool_calls
+  # UC5 Incident Investigation (docs/uc5/README.md). Codes, counts and versions only: a case id, a
+  # PSEUDONYMOUS subject, UC4 level, UC2 band, rule and correlation codes, severity and review. Never log
+  # text, document or policy text, justifications, tool arguments or agent reasoning.
+  - dg.ic.case_id
+  - dg.ic.subject
+  - dg.ic.trigger_type
+  - dg.ic.files
+  - dg.ic.prompt_version
+  - dg.ic.failures
+  - dg.ic.data_level
+  - dg.ic.anomaly_band
+  - dg.ic.transfers
+  - dg.ic.evidence_count
+  - dg.ic.injection_flagged
+  - dg.ic.correlations
+  - dg.ic.conflicts
+  - dg.ic.gaps
+  - dg.ic.timeline_events
+  - dg.ic.order_uncertain
+  - dg.ic.claims
+  - dg.ic.unsupported_claims
+  - dg.ic.withheld_claims
+  - dg.ic.claim_types
+  - dg.ic.deterministic_severity
+  - dg.ic.severity
+  - dg.ic.rule
+  - dg.ic.agent_effect
+  - dg.ic.rubric_version
+  - dg.ic.potential_sev1
+  - dg.ic.review_status
+  - dg.ic.review_reasons
+  - dg.ic.agent_recommendation
+  - dg.ic.remediation
+  - dg.ic.model_calls
+  - dg.ic.tool_calls
+  - dg.ic.refusals
   # errors (class name only)
   - dg.error.type

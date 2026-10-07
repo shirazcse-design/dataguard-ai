@@ -1,0 +1,15 @@
+{
+  "name": "get_behavior_findings",
+  "description": "UC2's authoritative anomaly score, band and contributing signals for the incident day. An anomaly is not evidence of intent.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "subject": {
+        "type": "string",
+        "description": "optional; must be the case subject's alias"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

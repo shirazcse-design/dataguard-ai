@@ -53,6 +53,7 @@ dataguard-policy = "app.policy.cli:main"
 dataguard-dlp = "app.dlp.cli:main"
 dataguard-insider = "app.insider.cli:main"
 dataguard-access = "app.access.cli:main"
+dataguard-incident = "app.incident.cli:main"
 
 [tool.setuptools.package-data]
 "app.demo" = ["static/*"]
@@ -103,6 +104,8 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "app/agent/bounded.py" = ["E501"]                  # moved from app/insider/agents.py unchanged
 "evals/access/*.py" = ["E501"]                     # UC3 golden table and report rows
 "app/access/*.py" = ["E501"]                       # UC3 data tables and typed records
+"app/incident/*.py" = ["E501"]                     # UC5 data tables, typed records and evidence builders
+"evals/incident/*.py" = ["E501"]                   # UC5 golden table, probes and report rows
 "app/demo/access.py" = ["E501"]                   # UC3 demo case table
 "app/demo/insider.py" = ["E501"]                  # UC2 demo case table
 "app/insider/services.py" = ["E501"]             # UC2 capability payload builders

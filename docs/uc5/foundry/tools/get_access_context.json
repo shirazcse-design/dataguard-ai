@@ -1,0 +1,17 @@
+{
+  "name": "get_access_context",
+  "description": "UC3 access engine: how the subject holds access to one of the case files' resources (role, group, project or direct grant), whether it is active, and stale grants.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "resource_id": {
+        "type": "string",
+        "description": "a resource_id from the case packet's case_files"
+      }
+    },
+    "required": [
+      "resource_id"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "request_human_review",
+  "description": "Ask for an analyst. Records a reason; it does not act.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "reason": {
+        "type": "string",
+        "enum": [
+          "sensitive_data_exposure",
+          "conflicting_evidence",
+          "missing_evidence",
+          "tool_failure",
+          "policy_unclear",
+          "suspicious_input",
+          "high_impact_action_needed"
+        ]
+      }
+    },
+    "required": [
+      "reason"
+    ],
+    "additionalProperties": false
+  }
+}

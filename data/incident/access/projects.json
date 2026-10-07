@@ -1,0 +1,23 @@
+[
+ {
+  "ends": "2026-09-30",
+  "grants": [
+   "billing_exports_read"
+  ],
+  "project_id": "churn_analysis"
+ },
+ {
+  "ends": "2026-08-31",
+  "grants": [
+   "billing_exports_read"
+  ],
+  "project_id": "warehouse_migration"
+ },
+ {
+  "ends": "2026-07-31",
+  "grants": [
+   "billing_exports_read"
+  ],
+  "project_id": "partner_reconciliation"
+ }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "build_timeline",
+  "description": "Deterministic timeline and correlation links (findings, conflicts, gaps) over the evidence you have retrieved so far. Call it after gathering evidence; call again after gathering more.",
+  "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  }
+}

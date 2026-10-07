@@ -1,0 +1,74 @@
+[
+ {
+  "entitlement_id": "billing_exports_read",
+  "family": "customer_billing",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "customer_billing_exports",
+  "scope": "full"
+ },
+ {
+  "entitlement_id": "finance_reports_read",
+  "family": "finance_reports",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "finance_reports",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "repo_payments_read",
+  "family": "payments_code",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "source_repo_payments",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "repo_payments_write",
+  "family": "payments_code",
+  "privilege": "write",
+  "privileged": false,
+  "resource": "source_repo_payments",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "ci_config_read",
+  "family": "ci_config",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "ci_pipeline_config",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "hs_records_read",
+  "family": "hs_records",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "hs_incident_records",
+  "scope": "full"
+ },
+ {
+  "entitlement_id": "research_vault_read",
+  "family": "research",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "research_vault",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "wiki_read",
+  "family": "wiki",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "team_wiki",
+  "scope": "n/a"
+ },
+ {
+  "entitlement_id": "ops_logs_read",
+  "family": "ops_logs",
+  "privilege": "read",
+  "privileged": false,
+  "resource": "ops_logs",
+  "scope": "n/a"
+ }
+]

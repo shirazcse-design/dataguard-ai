@@ -1,0 +1,9 @@
+# UC5 deterministic correlation rules (app/incident/correlate.py). Versioned; changes need a changelog
+# entry and a re-run of the golden evaluation. Rules link evidence; they never decide severity.
+correlation_version: 1.0.0
+transfer_match_minutes: 60          # a logged upload and a DLP alert to the same host within this window
+download_before_transfer_hours: 14  # downloads earlier the same day, at most this many hours before a transfer
+sensitive_levels: [CONFIDENTIAL, HIGHLY_CONFIDENTIAL]
+personal_destinations: [personal_cloud, personal_email, unknown_external, restricted, generative_ai]
+changelog:
+  - {version: 1.0.0, date: 2026-10-07, change: initial rules}

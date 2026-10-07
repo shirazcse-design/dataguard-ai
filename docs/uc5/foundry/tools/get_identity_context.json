@@ -1,0 +1,15 @@
+{
+  "name": "get_identity_context",
+  "description": "The subject's role, privilege, usual working hours and expected data classes. No HR data.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "subject": {
+        "type": "string",
+        "description": "optional; must be the case subject's alias"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,51 @@
+[
+ {
+  "department": "Product",
+  "grants": [
+   "wiki_read"
+  ],
+  "role_id": "product"
+ },
+ {
+  "department": "Finance",
+  "grants": [
+   "finance_reports_read",
+   "billing_exports_read",
+   "wiki_read"
+  ],
+  "role_id": "finance"
+ },
+ {
+  "department": "Sales",
+  "grants": [
+   "wiki_read"
+  ],
+  "role_id": "sales"
+ },
+ {
+  "department": "Engineering",
+  "grants": [
+   "repo_payments_read",
+   "ci_config_read",
+   "wiki_read"
+  ],
+  "role_id": "engineering"
+ },
+ {
+  "department": "Research",
+  "grants": [
+   "research_vault_read",
+   "wiki_read"
+  ],
+  "role_id": "research"
+ },
+ {
+  "department": "IT",
+  "grants": [
+   "ops_logs_read",
+   "ci_config_read",
+   "wiki_read"
+  ],
+  "role_id": "it_operations"
+ }
+]

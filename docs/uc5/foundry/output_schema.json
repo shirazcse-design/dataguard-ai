@@ -1,0 +1,172 @@
+{
+  "$defs": {
+    "ReportClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "topic": {
+          "enum": [
+            "timeline",
+            "data",
+            "behavior",
+            "access",
+            "dlp",
+            "policy",
+            "identity",
+            "correlation",
+            "approval"
+          ],
+          "title": "Topic",
+          "type": "string"
+        },
+        "claim_type": {
+          "enum": [
+            "OBSERVED_FACT",
+            "DETERMINISTIC_FINDING",
+            "POLICY_REQUIREMENT",
+            "AGENT_INFERENCE",
+            "UNKNOWN_OR_GAP"
+          ],
+          "title": "Claim Type",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 400,
+          "minLength": 3,
+          "title": "Text",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "topic",
+        "claim_type",
+        "text"
+      ],
+      "title": "ReportClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "What the agent returns. The harness decides severity and review; the report explains.",
+  "properties": {
+    "schema_version": {
+      "default": "uc5.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "executive_summary": {
+      "maxLength": 900,
+      "title": "Executive Summary",
+      "type": "string"
+    },
+    "incident_status": {
+      "enum": [
+        "POTENTIAL_INCIDENT",
+        "NO_INCIDENT_INDICATED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "title": "Incident Status",
+      "type": "string"
+    },
+    "severity_recommendation": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ],
+      "title": "Severity Recommendation",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/ReportClaim"
+      },
+      "maxItems": 30,
+      "title": "Claims",
+      "type": "array"
+    },
+    "evidence_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Evidence Gaps",
+      "type": "array"
+    },
+    "conflicting_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6,
+      "title": "Conflicting Evidence",
+      "type": "array"
+    },
+    "affected_files": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 12,
+      "title": "Affected Files",
+      "type": "array"
+    },
+    "recommended_next_steps": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6,
+      "title": "Recommended Next Steps",
+      "type": "array"
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "human_review_requested": {
+      "title": "Human Review Requested",
+      "type": "boolean"
+    },
+    "missing_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Missing Evidence",
+      "type": "array"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 60,
+      "title": "Evidence Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "executive_summary",
+    "incident_status",
+    "severity_recommendation",
+    "claims",
+    "confidence",
+    "human_review_requested"
+  ],
+  "title": "IncidentReport",
+  "type": "object"
+}
