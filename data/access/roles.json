@@ -1,0 +1,52 @@
+[
+ {
+  "role_id": "product_management",
+  "department": "Product",
+  "grants": [
+   "wiki_read",
+   "cust_analytics_read"
+  ]
+ },
+ {
+  "role_id": "data_analytics",
+  "department": "Data",
+  "grants": [
+   "wiki_read",
+   "cust_analytics_read",
+   "case_studies_read"
+  ]
+ },
+ {
+  "role_id": "engineering",
+  "department": "Engineering",
+  "grants": [
+   "wiki_read",
+   "repo_core_read"
+  ]
+ },
+ {
+  "role_id": "finance",
+  "department": "Finance",
+  "grants": [
+   "vendor_master_read",
+   "case_studies_read"
+  ]
+ },
+ {
+  "role_id": "payments_operations",
+  "department": "Finance",
+  "grants": [
+   "payments_create",
+   "vendor_master_read"
+  ]
+ },
+ {
+  "role_id": "platform_operations",
+  "department": "Engineering",
+  "grants": [
+   "wiki_read",
+   "repo_core_read",
+   "prod_deploy"
+  ]
+ }
+]

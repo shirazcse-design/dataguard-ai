@@ -1,0 +1,60 @@
+{
+ "final_text": null,
+ "key": "c42bab64f54e1b50b5a6d2c26b56cd4c5622dc1dbc726eecbfe2ee18228bedf3",
+ "recorded_at": "2026-10-06T21:22:37+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1616,
+ "tokens_out": 172,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-256912cdb0"
+   },
+   "id": "call_6a7ePi593J5GVcCbJKD1zgZc",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-256912cdb0"
+   },
+   "id": "call_vQ3Sfd5UBehv3MZtT8hTiqRN",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "source_repo_core"
+   },
+   "id": "call_iekaIcI69tiiR7L8QRywt5tF",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "source_repo_core"
+   },
+   "id": "call_ZAnqEDn2QA9kjsvr48rrpgRy",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "repo_core_write"
+   },
+   "id": "call_bveH2TMtKxTQBKv419bpr7yc",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "repo_core_write"
+   },
+   "id": "call_J5YbaztABLPYP6pEDxQM2S8u",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC code repository write access code_change least privilege time-bound approvals source code sensitive data segregation of duties"
+   },
+   "id": "call_EvgkqCid2rmF9MPFou8aHg6D",
+   "name": "search_policy"
+  }
+ ]
+}

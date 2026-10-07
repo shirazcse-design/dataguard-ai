@@ -1,0 +1,82 @@
+[
+ {
+  "resource_id": "customer_prod_db",
+  "name": "Customer production database",
+  "environment": "production",
+  "resource_class": "production_customer_database",
+  "owner": "data_platform",
+  "uc4_sample": "uc4:uc4-7b2b922f1a"
+ },
+ {
+  "resource_id": "customer_analytics",
+  "name": "Customer analytics dataset (sanitized)",
+  "environment": "analytics",
+  "resource_class": "business_system",
+  "owner": "data_platform",
+  "uc4_sample": "uc4:uc4-acc01a7faa"
+ },
+ {
+  "resource_id": "payments_ledger",
+  "name": "Payments ledger",
+  "environment": "production",
+  "resource_class": "financial_system",
+  "owner": "finance",
+  "uc4_sample": "uc4:uc4-1c81f3c64a"
+ },
+ {
+  "resource_id": "vendor_master",
+  "name": "Vendor master data",
+  "environment": "production",
+  "resource_class": "financial_system",
+  "owner": "finance",
+  "uc4_sample": "uc4:uc4-9a94d05821"
+ },
+ {
+  "resource_id": "source_repo_core",
+  "name": "Core source repository",
+  "environment": "development",
+  "resource_class": "business_system",
+  "owner": "engineering",
+  "uc4_sample": "uc4:uc4-88687009ca"
+ },
+ {
+  "resource_id": "prod_deploy_pipeline",
+  "name": "Production deployment pipeline",
+  "environment": "production",
+  "resource_class": "business_system",
+  "owner": "platform",
+  "uc4_sample": "uc4:uc4-577680a82a"
+ },
+ {
+  "resource_id": "team_wiki",
+  "name": "Team wiki",
+  "environment": "corporate",
+  "resource_class": "business_system",
+  "owner": "it",
+  "uc4_sample": "uc4:uc4-53b989fc54"
+ },
+ {
+  "resource_id": "sales_case_studies",
+  "name": "Sales case studies",
+  "environment": "corporate",
+  "resource_class": "business_system",
+  "owner": "sales",
+  "uc4_sample": "uc4:uc4-2472fae2da"
+ },
+ {
+  "resource_id": "platform_admin_console",
+  "name": "Platform admin console",
+  "environment": "production",
+  "resource_class": "privileged_console",
+  "owner": "platform",
+  "uc4_sample": "uc4:uc4-4fb7c238e1"
+ },
+ {
+  "resource_id": "partner_research_share",
+  "name": "Partner research share",
+  "environment": "external",
+  "resource_class": "external_partner_share",
+  "owner": "research",
+  "uc4_sample": "uc4:uc4-17eb558505"
+ }
+]

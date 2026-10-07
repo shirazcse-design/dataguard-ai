@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "04d147c2b2ee238c92b271c885ddeb1e65c328f1682d1056250a4adfaea5ab42",
+ "recorded_at": "2026-10-06T21:44:22+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1568,
+ "tokens_out": 230,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-1157698bfd"
+   },
+   "id": "call_r93fDGFuDvWdnzGxKjmvfi6F",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-1157698bfd"
+   },
+   "id": "call_NN5zqIbvZsiEerVE0m7Fp8vA",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_yg5zr0fPVsXzhiRTbPogpWM9",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_mlpljW0sbX9B3rBW8iLq5ptb",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_RqoHsPyfJKLJBgUbsBbI94Gu",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_1ysBAO17xJ6NqOtRX4K4Ek9Y",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_Vi5qDHaAndy9XVAnATeubrfT",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "production customer data read write access record investigation least privilege time-bound approval product management"
+   },
+   "id": "call_GIPThM4teTAhCUiFkpW7mtHk",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_l03mSK8C7ighpTAsBnhcdUdd",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_readwrite_full"
+   },
+   "id": "call_lyGnFJUMoJtIaL1O4khERP0z",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

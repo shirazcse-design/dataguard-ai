@@ -1,0 +1,14 @@
+[
+ {
+  "exception_id": "EXC-0417",
+  "user_id": "u-3018",
+  "kind": "sod",
+  "rule_id": "SOD-PAY-01",
+  "entitlement_id": "payments_approve",
+  "approved_by": "compliance",
+  "valid_from": "2026-09-15",
+  "valid_to": "2026-12-15",
+  "status": "approved",
+  "reason": "sole approver cover during month-end, with secondary review"
+ }
+]

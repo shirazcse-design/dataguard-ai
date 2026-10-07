@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "3e23a39770b4bf4343338f40eb61f50c9f5a7da075206a613126ecd116cf8a01",
+ "recorded_at": "2026-10-06T21:22:18+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1604,
+ "tokens_out": 221,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-d377698fd8"
+   },
+   "id": "call_B2P1VsZsU37hImaLp5IyJSBd",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-d377698fd8"
+   },
+   "id": "call_CHvcyIYOUuqI5mftfl7QZrDv",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "vendor_master"
+   },
+   "id": "call_TnRGEZrRybLvMrvVmhlAZHvz",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "vendor_master"
+   },
+   "id": "call_UDJwqejx5FKtiIJaQVUiFY3A",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "vendor_master"
+   },
+   "id": "call_ceev48A9GCGjCo85NGvyeeL7",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "vendor_master_edit"
+   },
+   "id": "call_IeaqkcUg9YYL9pWezNSTSnkz",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "vendor_master_edit"
+   },
+   "id": "call_4kqyS76rBJL8kKeXEsbrABA6",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC vendor master edit finance least privilege segregation of duties time-bound purpose approval sensitive data"
+   },
+   "id": "call_hkx7d70igZvFUVkjgUIqOxMl",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "vendor_master_edit"
+   },
+   "id": "call_HtShaG8JgiqwURZ0n6CAjpcS",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "vendor_master_edit"
+   },
+   "id": "call_XVO7RJfTbEfTqjSYVyJmoGQj",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "frozen_at": "2026-10-06T11:52:33-07:00",
+ "statement": "Golden labels, synthetic access data, governance/rubric/requirements configs and the agent prompt frozen BEFORE any real agent run. Labels are never edited to improve results.",
+ "sha256": {
+  "evals/access/dataset/golden.v1.jsonl": "b5c563180f57703c458a51dfc9a62071467d0db81491f0d572da9bdab3c951cc",
+  "data/access/direct_grants.json": "53831f70dd2275a0fb24327729e9ed52e18d92c15d2e0fa405cd0330627eca39",
+  "data/access/entitlements.json": "8125dec0b5e250bb1b6794096dedcba5385c370babbc42e6979d37692ee7283f",
+  "data/access/exceptions.json": "cf2078bff9442a1608d46cd633996002a5de77fe087b76487021e7ce136869ac",
+  "data/access/groups.json": "a1c1fd17feee665b6d753cfc87fe61b05ffc24d823d294ef59c4e80c321bac6e",
+  "data/access/meta.json": "5adac9d71367ecdb7ed5dd5c011914f1962b737260cd87daaca2e545c062ae41",
+  "data/access/projects.json": "13bce800b6245bb61846a31f5a166fb588fc5e1c983864ec6c65c1e9736e3965",
+  "data/access/requests.json": "46b3370aa8e43a9aad2dd26ddfa112ec3914b8269950e831de3670c026f7e5ea",
+  "data/access/resources.json": "a4ed3b827689ab4e8f760f910bbfc1c35e9ddca99a3f03aa187d9e3f29c7468a",
+  "data/access/roles.json": "6e506ebece1baa96fcbb3b8543fbd0f9a786622567c86b841fe28ffe4f9820ee",
+  "data/access/usage.json": "7da19cc91024cb2e241d0d2f2b370828647d3c95cea752e7571f5708f50992f8",
+  "data/access/users.json": "f020b2683fa8df2fcde79aad2928e45b142fd1124b486a0860aeef18d61a415f",
+  "config/access/agent.v1.yaml": "9bcd0057113ba6d323b6e6c2d5d9f4d4487db6605f8a69007b3fb2e732e9594d",
+  "config/access/governance.v1.yaml": "a12b1b40e35b6e9f927ddaaf2f2a91548ab08421c0d9dcf5bbb897171b1d8efa",
+  "config/access/requirements.v1.yaml": "aca1a9c5232ca68f7b5a2a426c9ade21d031e1b0cb948c58adbb887811b1a900",
+  "config/access/rubric.v1.yaml": "736620297d2911bff9caf729e84cb05a1a88b13befa1cd418263543c57cf151b",
+  "prompts/uc3/agent.v1.md": "92e4abd67fdc21e967cdce786a3a2a89772915c8b2a69cebed37c72c932bf2aa"
+ }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "get_usage_history",
+  "description": "The requester's last use and 90-day use count of an entitlement.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "entitlement_id": {
+        "type": "string",
+        "description": "the requested entitlement (default) or one in the same family"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

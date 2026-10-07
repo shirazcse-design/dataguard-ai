@@ -1,0 +1,26 @@
+[
+ {
+  "group_id": "analytics_power_users",
+  "grants": [
+   "cust_prod_read_full"
+  ]
+ },
+ {
+  "group_id": "eng_committers",
+  "grants": [
+   "repo_core_write"
+  ]
+ },
+ {
+  "group_id": "change_board",
+  "grants": [
+   "prod_change_approve"
+  ]
+ },
+ {
+  "group_id": "payment_approvers",
+  "grants": [
+   "payments_approve"
+  ]
+ }
+]

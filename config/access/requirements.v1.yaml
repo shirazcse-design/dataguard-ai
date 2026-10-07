@@ -1,0 +1,27 @@
+# UC3 policy requirements: which POL-ACC sections apply to a request, and the limits they set.
+# The section TEXT is retrieved from UC6 (data/policy_corpus, unchanged) and citation-checked at run
+# time; this file only says which sections apply. A resource class with no mapped section yields
+# POLICY_EVIDENCE_MISSING: nothing is invented.
+requirements_version: 1.0.0
+policy_id: POL-ACC
+
+always:                      # every request
+  - {req_id: LEAST_PRIVILEGE, section: "2", what: "least privilege, need to know, segregation of duties"}
+
+by_resource_class:
+  production_customer_database:
+    - {req_id: PROD_DB_TIME_BOUND, section: "3.4", what: "time-bound, at most 90 days, never permanent", max_hours: 2160}
+    - {req_id: DATA_OWNER_APPROVAL, section: "3.2", what: "data owner approval for Confidential or Restricted systems"}
+  privileged_console:
+    - {req_id: PRIVILEGED_JIT, section: "3.3", what: "just in time, sessions of at most 8 hours, system owner + Information Security approval", max_hours: 8}
+  financial_system:
+    - {req_id: STANDARD_REQUEST, section: "3.1", what: "requested through the Identity portal, approved by the line manager"}
+  business_system:
+    - {req_id: STANDARD_REQUEST, section: "3.1", what: "requested through the Identity portal, approved by the line manager"}
+  # external_partner_share: deliberately UNMAPPED. POL-ACC does not address partner shares.
+
+by_sensitivity:              # from UC4's level for the resource
+  CONFIDENTIAL:
+    - {req_id: DATA_OWNER_APPROVAL, section: "3.2", what: "data owner approval for Confidential or Restricted systems"}
+  HIGHLY_CONFIDENTIAL:
+    - {req_id: DATA_OWNER_APPROVAL, section: "3.2", what: "data owner approval for Confidential or Restricted systems"}

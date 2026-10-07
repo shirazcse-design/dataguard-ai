@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "a8d969c116cfc318634c8ad7bc084304aa6cfff7981063e5c037bb6e00893ea5",
+ "recorded_at": "2026-10-06T21:44:14+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1538,
+ "tokens_out": 221,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-0e92f00709"
+   },
+   "id": "call_dcdgPuZDSLx3SGChDCmkh5qH",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-0e92f00709"
+   },
+   "id": "call_V2Rdzbl77ifGHJQnOvPJxAyM",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_YlysrzXXjYLVpSy8MdXPSUIn",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_xGk08uBMITypCVd9hntxweU0",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_5OWCFRowJuOyuaCYTJepWOqF",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_cCDwB8qmraROOx1p22C96OM6",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_FFTLbGKL5leMSQuNkqpR8fSo",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "access policy least privilege time-bound access read access internal wiki segregation of duties"
+   },
+   "id": "call_mfxpprjmME9FJOu6s0sLUIQp",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_Gnb0gBhbjWUWQ1Il6mT2XWKF",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_ohUvd4BagsU3FpwOnAehfleb",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

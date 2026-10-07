@@ -1,0 +1,20 @@
+{
+  "name": "get_policy_section",
+  "description": "Fetch one policy section by policy id and section number (UC6), e.g. POL-ACC 3.4.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "policy_id": {
+        "type": "string"
+      },
+      "section": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "policy_id",
+      "section"
+    ],
+    "additionalProperties": false
+  }
+}

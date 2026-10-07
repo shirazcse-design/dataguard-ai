@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "075aeb5930eb81866d4dc3e4a87f50b2b2b495e628b2007a888c7e9c6216b47c",
+ "recorded_at": "2026-10-06T21:22:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1622,
+ "tokens_out": 190,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-8507c50d88"
+   },
+   "id": "call_NO7ywG6LlQCuTmfvk5gns8mm",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-8507c50d88"
+   },
+   "id": "call_nciya5IY8XFMJPp7A090XLNi",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "platform_admin_console"
+   },
+   "id": "call_TcmnJXTT7XC7gcuesTA6l1We",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "platform_admin_console"
+   },
+   "id": "call_mXNlX10JCgek0ADwnsa3JT0d",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "platform_admin_console"
+   },
+   "id": "call_VoKBFqX1LPUXJwzN9AZhtQd0",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "platform_admin"
+   },
+   "id": "call_SLPj8uCEuZaxSAWRuzY0st4E",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "platform_admin"
+   },
+   "id": "call_Etyphot9vO8UyzwuDmZqYsjA",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC admin maintenance privileged access least privilege time-bound access segregation of duties sensitive data admin console platform admin"
+   },
+   "id": "call_hJjl2CaZfqOkl447zLy3eBdK",
+   "name": "search_policy"
+  }
+ ]
+}

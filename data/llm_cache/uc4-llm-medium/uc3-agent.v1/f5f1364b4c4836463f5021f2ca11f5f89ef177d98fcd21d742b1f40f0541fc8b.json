@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "f5f1364b4c4836463f5021f2ca11f5f89ef177d98fcd21d742b1f40f0541fc8b",
+ "recorded_at": "2026-10-06T21:22:54+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1635,
+ "tokens_out": 184,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-583458238a"
+   },
+   "id": "call_mKkTa5isRFo31luev7psuOmd",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-583458238a"
+   },
+   "id": "call_i42Zb9ld64ha7Frvled6764S",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_JXZTwLXYht3Jv1HAcPpuFRC5",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_OGMK7hoM7uuDLMVgD3kzyUas",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_4dD41JTcUindIDnApomCprgW",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_bqYiryIosyrv3ohQPt2S1gZw",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "wiki_read"
+   },
+   "id": "call_Bb6afifGap7vVIlCQyu95AQh",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC access requests reporting read access wiki least privilege duration segregation of duties existing access suspicious justification"
+   },
+   "id": "call_cyfEGGxdPkdVPOv1tm43WSmX",
+   "name": "search_policy"
+  }
+ ]
+}

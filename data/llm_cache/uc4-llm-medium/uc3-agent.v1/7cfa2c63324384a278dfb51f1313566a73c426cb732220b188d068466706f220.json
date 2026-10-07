@@ -1,0 +1,81 @@
+{
+ "final_text": null,
+ "key": "7cfa2c63324384a278dfb51f1313566a73c426cb732220b188d068466706f220",
+ "recorded_at": "2026-10-06T21:21:23+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1633,
+ "tokens_out": 229,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-63221f0c63"
+   },
+   "id": "call_J7XGs5GWA0xRY2HqatVQh100",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-63221f0c63"
+   },
+   "id": "call_PyhShnfrhffZBf3j7MSmumBf",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_s5dDMI1AvHN30w9rNzovxXs0",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_TPibFcgF7InoyUZljVsmNpLI",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_rxGgCN0ELxuHt4P68LvGdmKM",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_paPJl43rFx8FxSzXDU61IR4K",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_rzRzjTNoBZPD5HHe8CTnfL4G",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC customer production data read access incident investigation least privilege time-bound engineering"
+   },
+   "id": "call_k3MlNbj2ls6ndviqAG8GUeOf",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_wrpAePI2zLHS1DiZ1Fx90vso",
+   "name": "get_usage_history"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_CLheOdrTccvh2ApIkkS7QAFi",
+   "name": "get_peer_access_summary"
+  }
+ ]
+}

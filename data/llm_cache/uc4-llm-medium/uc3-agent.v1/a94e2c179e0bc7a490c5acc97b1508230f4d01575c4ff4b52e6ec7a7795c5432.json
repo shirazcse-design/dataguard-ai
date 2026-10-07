@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "a94e2c179e0bc7a490c5acc97b1508230f4d01575c4ff4b52e6ec7a7795c5432",
+ "recorded_at": "2026-10-06T21:22:04+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1621,
+ "tokens_out": 187,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-9702703ae2"
+   },
+   "id": "call_9BoV1VbY0IlNPy86KWxwj7fZ",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-9702703ae2"
+   },
+   "id": "call_3YvWkeut9nq8O6W3Ky7YzqWN",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_gd7oHk8FActvuKhRtC3WqvEA",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_B3Bi4YQkwbbYDEkLnYkwoHZr",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "payments_ledger"
+   },
+   "id": "call_NWqGWj5gtCx5NJTeo7514kcI",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_wPyQiJHeJKt0EcdcvqeUW5Jj",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "payments_approve"
+   },
+   "id": "call_2hzswb2GkM6FW37RRXULRftx",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC payment approval finance sensitive data least privilege segregation of duties temporary access approver cover"
+   },
+   "id": "call_g205VxQ5MFopmna6VO145lOJ",
+   "name": "search_policy"
+  }
+ ]
+}

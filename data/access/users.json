@@ -1,0 +1,232 @@
+[
+ {
+  "user_id": "u-3001",
+  "role_id": "product_management",
+  "groups": [],
+  "projects": [
+   "churn_investigation"
+  ],
+  "role_since": "2024-03-01",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3002",
+  "role_id": "product_management",
+  "groups": [],
+  "projects": [],
+  "role_since": "2023-07-15",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3003",
+  "role_id": "product_management",
+  "groups": [],
+  "projects": [],
+  "role_since": "2025-01-10",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3004",
+  "role_id": "data_analytics",
+  "groups": [
+   "analytics_power_users"
+  ],
+  "projects": [],
+  "role_since": "2022-11-01",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3005",
+  "role_id": "data_analytics",
+  "groups": [
+   "analytics_power_users"
+  ],
+  "projects": [],
+  "role_since": "2023-02-20",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3006",
+  "role_id": "data_analytics",
+  "groups": [],
+  "projects": [
+   "incident_review"
+  ],
+  "role_since": "2024-06-03",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3007",
+  "role_id": "data_analytics",
+  "groups": [],
+  "projects": [
+   "churn_investigation"
+  ],
+  "role_since": "2025-04-14",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3008",
+  "role_id": "engineering",
+  "groups": [
+   "eng_committers"
+  ],
+  "projects": [
+   "payments_migration"
+  ],
+  "role_since": "2021-09-01",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3009",
+  "role_id": "engineering",
+  "groups": [
+   "eng_committers"
+  ],
+  "projects": [],
+  "role_since": "2022-05-16",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3010",
+  "role_id": "engineering",
+  "groups": [],
+  "projects": [
+   "churn_investigation"
+  ],
+  "role_since": "2024-08-19",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3011",
+  "role_id": "engineering",
+  "groups": [
+   "eng_committers"
+  ],
+  "projects": [
+   "incident_review"
+  ],
+  "role_since": "2023-10-02",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3012",
+  "role_id": "finance",
+  "groups": [],
+  "projects": [
+   "vendor_onboarding"
+  ],
+  "role_since": "2022-01-10",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3013",
+  "role_id": "finance",
+  "groups": [],
+  "projects": [],
+  "role_since": "2023-03-06",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3014",
+  "role_id": "finance",
+  "groups": [],
+  "projects": [
+   "vendor_onboarding"
+  ],
+  "role_since": "2024-11-18",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3015",
+  "role_id": "finance",
+  "groups": [
+   "payment_approvers"
+  ],
+  "projects": [],
+  "role_since": "2021-06-07",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3016",
+  "role_id": "payments_operations",
+  "groups": [],
+  "projects": [
+   "payments_migration"
+  ],
+  "role_since": "2022-08-22",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3017",
+  "role_id": "product_management",
+  "groups": [],
+  "projects": [
+   "churn_investigation"
+  ],
+  "role_since": "2023-05-08",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3018",
+  "role_id": "payments_operations",
+  "groups": [],
+  "projects": [],
+  "role_since": "2023-12-04",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3019",
+  "role_id": "product_management",
+  "groups": [],
+  "projects": [],
+  "role_since": "2026-06-15",
+  "previous_role_id": "payments_operations"
+ },
+ {
+  "user_id": "u-3020",
+  "role_id": "payments_operations",
+  "groups": [],
+  "projects": [],
+  "role_since": "2024-02-12",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3021",
+  "role_id": "payments_operations",
+  "groups": [],
+  "projects": [
+   "payments_migration"
+  ],
+  "role_since": "2025-02-03",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3022",
+  "role_id": "platform_operations",
+  "groups": [
+   "change_board"
+  ],
+  "projects": [],
+  "role_since": "2021-04-12",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3023",
+  "role_id": "platform_operations",
+  "groups": [],
+  "projects": [
+   "incident_review"
+  ],
+  "role_since": "2023-09-25",
+  "previous_role_id": null
+ },
+ {
+  "user_id": "u-3024",
+  "role_id": "platform_operations",
+  "groups": [],
+  "projects": [],
+  "role_since": "2024-10-07",
+  "previous_role_id": null
+ }
+]

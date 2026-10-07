@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "1ea5523ce3b860e36f7a724f0a10697ad39aa7c2aed83bb13ea90a93f3b34635",
+ "recorded_at": "2026-10-06T21:21:28+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1619,
+ "tokens_out": 191,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-7c5d21a15b"
+   },
+   "id": "call_quIGzVKsyBur8uJZ9FUpSA8r",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-7c5d21a15b"
+   },
+   "id": "call_DZtJ2wOV73RmhMSIQXOWieFw",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_analytics"
+   },
+   "id": "call_AP8mxxrh8mtK3AQwOpe8bOHn",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_analytics"
+   },
+   "id": "call_0OkuN8s7NA3ATjLHLunOxfzK",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_analytics"
+   },
+   "id": "call_0ZNEW9pCLp4k8CSLKbMf7qnQ",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_analytics_read"
+   },
+   "id": "call_bYhQjCRe1ArZergpSAnKAxyi",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_analytics_read"
+   },
+   "id": "call_7zZJ3mwtRb23tDMgU3p4e5yy",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC reporting access analytics read customer data least privilege time-bound approvals"
+   },
+   "id": "call_w5HmTmrcWd5J36KqEiH5uhxD",
+   "name": "search_policy"
+  }
+ ]
+}

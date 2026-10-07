@@ -1,0 +1,67 @@
+{
+ "final_text": null,
+ "key": "39dda422584ea3fffdc87dff13b0698e47ba374a74d92e4e50b805ad3f9ce7d8",
+ "recorded_at": "2026-10-06T21:22:22+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1621,
+ "tokens_out": 192,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-287ddcbe6b"
+   },
+   "id": "call_m7n2V6m3nvFLNN8ycbCG01WA",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-287ddcbe6b"
+   },
+   "id": "call_Y9iH3IvkX6E6zxAaX18BxXWm",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "partner_research_share"
+   },
+   "id": "call_ioN6eDnriiyzLxcibIX8XCbh",
+   "name": "get_access_path"
+  },
+  {
+   "arguments": {
+    "resource_id": "partner_research_share"
+   },
+   "id": "call_55L5uHG4VqqfVVDFSjpMOXHx",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "partner_research_share"
+   },
+   "id": "call_p38orSz4VMhq72TopNqKB0V0",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "partner_share_read"
+   },
+   "id": "call_yrtlbYlF0kVyvwHLW5uROGYr",
+   "name": "check_sod"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "partner_share_read"
+   },
+   "id": "call_xigg2mkRAmz9qhYKEjzscZyV",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "query": "partner_share_read partner research share reporting least privilege time-bound sensitive data read access POL-ACC"
+   },
+   "id": "call_rh9gafug4WGROeYRvzmqiueG",
+   "name": "search_policy"
+  }
+ ]
+}

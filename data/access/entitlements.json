@@ -1,0 +1,122 @@
+[
+ {
+  "entitlement_id": "cust_prod_readwrite_full",
+  "resource": "customer_prod_db",
+  "privilege": "write",
+  "scope": "full",
+  "family": "customer_data",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "cust_prod_read_full",
+  "resource": "customer_prod_db",
+  "privilege": "read",
+  "scope": "full",
+  "family": "customer_data",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "cust_analytics_read",
+  "resource": "customer_analytics",
+  "privilege": "read",
+  "scope": "sanitized",
+  "family": "customer_data",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "payments_create",
+  "resource": "payments_ledger",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "payments",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "payments_approve",
+  "resource": "payments_ledger",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "payments_approval",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "vendor_master_read",
+  "resource": "vendor_master",
+  "privilege": "read",
+  "scope": "n/a",
+  "family": "vendor_master",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "vendor_master_edit",
+  "resource": "vendor_master",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "vendor_master",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "repo_core_read",
+  "resource": "source_repo_core",
+  "privilege": "read",
+  "scope": "n/a",
+  "family": "source_code",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "repo_core_write",
+  "resource": "source_repo_core",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "source_code",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "prod_deploy",
+  "resource": "prod_deploy_pipeline",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "release",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "prod_change_approve",
+  "resource": "prod_deploy_pipeline",
+  "privilege": "write",
+  "scope": "n/a",
+  "family": "release_approval",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "wiki_read",
+  "resource": "team_wiki",
+  "privilege": "read",
+  "scope": "n/a",
+  "family": "wiki",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "case_studies_read",
+  "resource": "sales_case_studies",
+  "privilege": "read",
+  "scope": "n/a",
+  "family": "case_studies",
+  "privileged": false
+ },
+ {
+  "entitlement_id": "platform_admin",
+  "resource": "platform_admin_console",
+  "privilege": "admin",
+  "scope": "n/a",
+  "family": "platform_admin",
+  "privileged": true
+ },
+ {
+  "entitlement_id": "partner_share_read",
+  "resource": "partner_research_share",
+  "privilege": "read",
+  "scope": "n/a",
+  "family": "partner_share",
+  "privileged": false
+ }
+]

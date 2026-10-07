@@ -1,0 +1,60 @@
+{
+ "final_text": null,
+ "key": "13f68c49b77b49a904fab9509ede87222debff71b4e7561d5100366a58452879",
+ "recorded_at": "2026-10-06T21:21:13+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1630,
+ "tokens_out": 167,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "req-256912cdb0"
+   },
+   "id": "call_UsQGuhNshawscrqSiMHzTry2",
+   "name": "get_user_profile"
+  },
+  {
+   "arguments": {
+    "subject": "req-256912cdb0"
+   },
+   "id": "call_dbvk2qvmdOMOVjk9ocgKgqs7",
+   "name": "get_current_entitlements"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_BWbYaqglZanbkBrpgZtfLAmA",
+   "name": "get_resource_metadata"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_prod_db"
+   },
+   "id": "call_djXERfIecnLqn7HUMuFQ0m3U",
+   "name": "classify_resource"
+  },
+  {
+   "arguments": {
+    "query": "POL-ACC access to production customer data reporting least privilege time-bound engineering"
+   },
+   "id": "call_OC0jdyjARC4ilmJOWK0XQtK0",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_rU0x3W0TdxSNA95vduJl5OsW",
+   "name": "evaluate_least_privilege"
+  },
+  {
+   "arguments": {
+    "entitlement_id": "cust_prod_read_full"
+   },
+   "id": "call_wyJxmVxKIgdlDnRHOLCnWEbn",
+   "name": "check_sod"
+  }
+ ]
+}

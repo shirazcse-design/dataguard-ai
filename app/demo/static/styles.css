@@ -347,3 +347,20 @@ body.interview .dev-only { display: none !important; }
 /* UC2 Insider Risk Investigation: let chip lists wrap inside key-value rows. */
 .kv dd .chip { display: inline-block; margin: 0 4px 4px 0; }
 .kv dd .chip + .chip { margin-left: 0; }
+
+/* UC3 Access Governance: the access-graph drawing */
+.ag-graph { width: 100%; height: auto; }
+.ag-graph-title { font-size: 13px; font-weight: 600; fill: var(--ink); }
+.ag-graph-note { font-size: 11px; fill: var(--ink-3); }
+.ag-node { fill: none; stroke: var(--line); stroke-width: 1.25; }
+.ag-node.ag-res { stroke: var(--ink-3); }
+.ag-node.ag-requested { stroke-dasharray: 5 4; }
+.ag-node.ag-alternative { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; }
+.ag-edge.ag-alternative { stroke: var(--accent); stroke-dasharray: 5 4; }
+.ag-node.ag-expired { stroke-dasharray: 2 3; opacity: 0.6; }
+.ag-node-text { font-size: 12px; fill: var(--ink); }
+.ag-edge { stroke: var(--ink-3); stroke-width: 1.25; }
+.ag-edge.ag-requested { stroke-dasharray: 5 4; }
+.ag-edge-text { font-size: 10.5px; fill: var(--ink-3); }
+.ag-days { width: 4.5em; }
+.examples .t .chip { white-space: nowrap; }

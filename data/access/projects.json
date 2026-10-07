@@ -1,0 +1,24 @@
+[
+ {
+  "project_id": "churn_investigation",
+  "ends": "2026-10-22",
+  "grants": []
+ },
+ {
+  "project_id": "incident_review",
+  "ends": "2026-10-11",
+  "grants": []
+ },
+ {
+  "project_id": "payments_migration",
+  "ends": "2026-11-30",
+  "grants": [
+   "vendor_master_edit"
+  ]
+ },
+ {
+  "project_id": "vendor_onboarding",
+  "ends": "2026-11-15",
+  "grants": []
+ }
+]

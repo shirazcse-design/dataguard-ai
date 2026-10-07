@@ -1,0 +1,11 @@
+# UC3: ONE bounded agent (architectural restraint; UC2 measured a single agent matching four).
+# Budgets are enforced in code (app/agent/bounded.py), not requested in the prompt.
+agent_version: 1.0.0
+name: dataguard-access-governance
+prompt_version: uc3-agent.v1
+prompt_file: prompts/uc3/agent.v1.md
+model_tier: mid             # uc4-llm-medium (the approved reasoning deployment)
+max_turns: 8                # tool turns + the final answer + one schema repair
+max_tool_calls: 10
+max_consecutive_tool_failures: 2
+max_chars: 800              # free-text fields are cut here before the analyst sees them

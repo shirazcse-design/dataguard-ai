@@ -1,0 +1,29 @@
+# UC3 deterministic governance configuration (least privilege + segregation of duties).
+# AUTHORITATIVE: the agent can explain these findings but cannot change them. Changing a value is a
+# new governance_version. Policy grounding: POL-ACC §2 (least privilege, need to know, SoD); the
+# specific SoD pairs and the read/write rules are ORGANISATIONAL controls, not policy text.
+governance_version: 1.0.0
+
+# A STRUCTURED purpose category on the request decides what the work needs; free-text
+# justifications are never parsed for authorization.
+#   privilege: the lowest privilege the purpose needs (read < write < admin)
+#   full_scope: the purpose needs identifiable (full) records rather than a sanitized dataset
+purposes:
+  reporting:            {privilege: read,  full_scope: false}
+  record_investigation: {privilege: read,  full_scope: true}
+  data_correction:      {privilege: write, full_scope: true}
+  code_change:          {privilege: write, full_scope: false}
+  payment_processing:   {privilege: write, full_scope: false}
+  payment_approval:     {privilege: write, full_scope: false}
+  vendor_maintenance:   {privilege: write, full_scope: false}
+  release:              {privilege: write, full_scope: false}
+  admin_maintenance:    {privilege: admin, full_scope: false}
+
+stale_after_days: 90          # an active DIRECT grant unused this long is stale (POL-ACC §4, §5)
+unusual_for_role_below: 0.10  # peer rate under this = UNUSUAL_FOR_ROLE (CONTEXT ONLY: never decides)
+
+# Organisational SoD matrix (POL-ACC §2 states the principle; these pairs are UC3's controls).
+sod_rules:
+  - {rule_id: SOD-PAY-01, a: payments_create,    b: payments_approve,    why: "create and approve the same payments"}
+  - {rule_id: SOD-VEN-01, a: vendor_master_edit, b: payments_approve,    why: "change vendor bank details and approve payments to them"}
+  - {rule_id: SOD-REL-01, a: prod_deploy,        b: prod_change_approve, why: "deploy to production and approve the change"}

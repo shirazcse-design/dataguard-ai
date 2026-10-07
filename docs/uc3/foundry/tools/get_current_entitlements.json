@@ -1,0 +1,15 @@
+{
+  "name": "get_current_entitlements",
+  "description": "The requester's effective entitlements and how each is held (role, group, project, direct; active or expired).",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "subject": {
+        "type": "string",
+        "description": "optional; must be the request's subject pseudonym"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}
