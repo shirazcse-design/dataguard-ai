@@ -1,0 +1,68 @@
+{
+ "final_text": null,
+ "key": "315f0f30be686bf29a8903c8b226df158af6ff5264714403f34160e290587086",
+ "recorded_at": "2026-10-08T02:15:11+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2223,
+ "tokens_out": 203,
+ "tool_calls": [
+  {
+   "arguments": {
+    "file_handles": [
+     "F1",
+     "F2",
+     "F3"
+    ]
+   },
+   "id": "call_GMC0WLBgOmhQyT1G3swq2PIF",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "subject": "subj-39d35f9d82"
+   },
+   "id": "call_9P4cw0bqo71x6I3Ojyyj66ul",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-39d35f9d82"
+   },
+   "id": "call_NPsevqCJuw1bdsUUa5qFUF1G",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {},
+   "id": "call_dHBMTyLyztixIHDZ8hONXiGI",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "end": "2026-08-25",
+    "event_types": [
+     "external_upload",
+     "partner_transfer_approval",
+     "change_ticket",
+     "travel_record",
+     "access_request",
+     "repo_access_new",
+     "after_hours_login",
+     "login"
+    ],
+    "limit": 60,
+    "start": "2026-08-23",
+    "subject": "subj-39d35f9d82"
+   },
+   "id": "call_VVONx1Hv40zlNHe6lOUv2oEt",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_billing_exports"
+   },
+   "id": "call_d3jaJ9XviFg4XbUv04S8XxRk",
+   "name": "get_access_context"
+  }
+ ]
+}

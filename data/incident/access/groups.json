@@ -1,0 +1,8 @@
+[
+ {
+  "grants": [
+   "repo_payments_write"
+  ],
+  "group_id": "payments_committers"
+ }
+]

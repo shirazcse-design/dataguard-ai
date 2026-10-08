@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 166,
+ "input_hash": "2498d3a4b97c4f0061ec7502a128b503f0dea8fdeb15c148509091844dff45c7",
+ "latency_ms": 2588.3979580830783,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1016,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-07T22:59:29+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Confidential information may be sent outside the company only if it is encrypted in transit and sent only to recipients with a business need.\",\"evidence_id\":\"E3\",\"quote\":\"Confidential information sent outside the company must be encrypted in transit (TLS 1.2 or higher, or an encrypted attachment) and sent only to recipients with a business need.\"},{\"text\":\"Sharing Confidential information with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\",\"evidence_id\":\"E1\",\"quote\":\"Sharing Confidential information, including confidential customer information, with a third party requires approval from the data owner after the Vendor Security Assessment has been passed.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

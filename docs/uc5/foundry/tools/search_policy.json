@@ -1,0 +1,24 @@
+{
+  "name": "search_policy",
+  "description": "UC6 verified policy for a topic. external_transfer uses the highest UC4 level among the files you classified and a destination_class returned by get_dlp_findings.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "topic": {
+        "type": "string",
+        "enum": [
+          "external_transfer",
+          "incident_procedure",
+          "access_beyond_role"
+        ]
+      },
+      "destination_class": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "topic"
+    ],
+    "additionalProperties": false
+  }
+}

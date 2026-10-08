@@ -1,0 +1,16 @@
+{
+  "name": "check_approval",
+  "description": "Check an approval or exception reference that appears in this case's evidence.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "ref": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "ref"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+ "final_text": null,
+ "key": "e854fe31f4520cea86ff25fbbf864065aec282aed01fae12e157a0b7ae232581",
+ "recorded_at": "2026-10-08T02:16:17+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 3973,
+ "tokens_out": 80,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "approved_corporate",
+    "topic": "external_transfer"
+   },
+   "id": "call_J33rciPs9s4UPVMvSzBX8aHh",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "destination_class": "restricted",
+    "topic": "external_transfer"
+   },
+   "id": "call_RdFIZSDGjw7gQKEkbvsH5ZnX",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_ZMiLTbxjcmCHcWS0ksHNl0Nb",
+   "name": "search_policy"
+  }
+ ]
+}

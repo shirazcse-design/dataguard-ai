@@ -1,0 +1,66 @@
+{
+ "final_text": null,
+ "key": "1bd35e8da330733297835ae03310420e04b163ae381ea844aa2e9a5397e307d0",
+ "recorded_at": "2026-10-07T23:01:14+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1978,
+ "tokens_out": 197,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-05",
+    "event_types": [
+     "external_upload",
+     "archive_created",
+     "file_download_batch",
+     "bulk_download",
+     "repo_access_new",
+     "partner_transfer_approval",
+     "change_ticket",
+     "log_comment"
+    ],
+    "limit": 20,
+    "start": "2026-08-03",
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_XycUIIJ7zNwoJtz4EAqUr8qF",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_JCtlRVJv3EubXWUtuZxksZck",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_DMMxhKvCTxkT5AltjqMiYHPH",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_FgeN5Y4HoPnwcOWLGanrMADN",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_qL8JFj913xAD4Azb37Lg7Hz5",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_oFnkAiBx8Q4AWu4ZcZxA7zcQ",
+   "name": "get_dlp_findings"
+  }
+ ]
+}

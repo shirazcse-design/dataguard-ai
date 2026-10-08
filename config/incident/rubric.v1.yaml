@@ -1,0 +1,35 @@
+# UC5 deterministic severity rubric (app/incident/harness.py). Severity rests on SECURITY evidence
+# only: data sensitivity (UC4), where data went (DLP + UC1 destination catalogue), approvals, access
+# (UC3 engine), behaviour (UC2). No HR or employment attribute is an input.
+#
+# POL-IR §3 defines Severity 1 as CONFIRMED loss of Restricted information and Severity 4 as a policy
+# violation with no data exposure. Confirmation is an analyst's act, so the harness sets at most HIGH;
+# CRITICAL (Sev 1) is set only by an analyst. LOW/MEDIUM/HIGH below are this rubric's floors, not
+# policy text. The agent may raise a floor (adopted, with review); it can never lower one.
+rubric_version: 1.0.0
+severity_rules:            # first match sets the floor
+  - {id: sensitive_exfiltration,    when: "HIGHLY_CONFIDENTIAL data, transfer to a non-approved destination (an approval never excuses it)", severity: HIGH}
+  - {id: confidential_exfiltration, when: "CONFIDENTIAL data, transfer to a non-approved destination",        severity: MEDIUM}
+  - {id: unclassified_exfiltration, when: "transfer to a non-approved destination, sensitivity not established",                   severity: MEDIUM}
+  - {id: approved_activity,         when: "a verified approval for this subject and date (never covers a non-approved destination)", severity: LOW}
+  - {id: sensitive_access_concern,  when: "sensitive data reached through a stale grant, no active path, or outside expected classes", severity: MEDIUM}
+  - {id: no_exposure_indicated,     when: "otherwise",                                                                             severity: LOW}
+non_approved_destinations: [personal_cloud, personal_email, unknown_external, restricted, generative_ai]
+review_required_when:      # any of these -> review_status REQUIRED
+  - severity_high
+  - capability_failure
+  - conflicting_evidence     # a UC6 policy conflict counts only for CONFIDENTIAL or higher data
+  - policy_insufficient
+  - untrusted_input_flagged
+  - sensitive_access_concern
+  - agent_failed
+  - agent_raised
+  - agent_disagreement
+  - agent_requested_review
+  - unsupported_or_withheld_claims
+  - out_of_scope_attempts
+agent:
+  disagreement_levels: 2   # an agent recommendation this many levels below the floor is logged and reviewed
+potential_sev1_when: "HIGH + HIGHLY_CONFIDENTIAL + non-approved personal destination + HIGH_ANOMALY + a DLP alert"
+changelog:
+  - {version: 1.0.0, date: 2026-10-07, change: initial rubric}

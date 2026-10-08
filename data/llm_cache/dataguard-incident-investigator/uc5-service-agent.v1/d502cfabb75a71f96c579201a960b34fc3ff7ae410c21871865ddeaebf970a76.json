@@ -1,0 +1,33 @@
+{
+ "final_text": null,
+ "key": "d502cfabb75a71f96c579201a960b34fc3ff7ae410c21871865ddeaebf970a76",
+ "recorded_at": "2026-10-07T23:03:45+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 3736,
+ "tokens_out": 77,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "personal_cloud",
+    "topic": "external_transfer"
+   },
+   "id": "call_ABVwJ8GI3MzeqNJXEgOAFcPF",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_Cwl94pofFjclBopQc37YC5N1",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "reason": "suspicious_input"
+   },
+   "id": "call_tdaY7a66LzigFQ34Tl0lPrZq",
+   "name": "request_human_review"
+  }
+ ]
+}

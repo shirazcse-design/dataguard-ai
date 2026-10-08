@@ -1,0 +1,46 @@
+{
+ "final_text": null,
+ "key": "e3e7e48b516011f9c41b112bd4353179ce82fddf422cbc5b42d9ebf0b5ba1475",
+ "recorded_at": "2026-10-07T23:04:13+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 3110,
+ "tokens_out": 115,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_host": "gist.github.com"
+   },
+   "id": "call_4NLC5xEZPJMb8LozW2JxxkaI",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "destination_class": "approved_corporate",
+    "topic": "external_transfer"
+   },
+   "id": "call_lgink6LkfpNiE6GlmleZblCT",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "destination_class": "personal_public_host",
+    "topic": "external_transfer"
+   },
+   "id": "call_1Orrrw6q1IksCMdRWzzaE6p8",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_Ywb62VjkZ1raEHD0VUEX41Dt",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_mmF4CLTMJcoB4cUZGTBa15Th",
+   "name": "build_timeline"
+  }
+ ]
+}

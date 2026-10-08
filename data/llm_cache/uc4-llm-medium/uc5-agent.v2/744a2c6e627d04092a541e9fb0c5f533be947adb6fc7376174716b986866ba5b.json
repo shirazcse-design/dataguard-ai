@@ -1,0 +1,30 @@
+{
+ "final_text": null,
+ "key": "744a2c6e627d04092a541e9fb0c5f533be947adb6fc7376174716b986866ba5b",
+ "recorded_at": "2026-10-07T23:26:16+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3422,
+ "tokens_out": 66,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_h2OEZykyVpwzEPpwOfSxjEbz",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_lAnZzFkPOtd6XDgkGZv8vQLY",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_rjACjrM5GSSiUDUiBSNnbaIW",
+   "name": "search_policy"
+  }
+ ]
+}

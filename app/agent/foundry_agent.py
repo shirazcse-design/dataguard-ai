@@ -45,8 +45,12 @@ class FoundryAgentClient:
         max_output_tokens: int = 2000,
         env: Mapping[str, str] | None = None,
         opener: Callable[..., Any] = urllib.request.urlopen,
+        timeout_s: float = 30.0,
     ) -> None:
         self.cfg = cfg
+        # Per-call timeout. 30 s is the original value (UC1-UC3 unchanged); UC5's agent writes
+        # longer final reports and passes its own (config/incident/agent.v2.yaml, after run 2).
+        self.timeout_s = timeout_s
         self.deployment = deployment
         self.tools = tools
         self.max_output_tokens = max_output_tokens
@@ -89,7 +93,7 @@ class FoundryAgentClient:
         data = json.dumps(body).encode("utf-8")
         request = urllib.request.Request(url, data=data, headers=self._headers(), method="POST")
         try:
-            with self._opener(request, timeout=30) as resp:
+            with self._opener(request, timeout=self.timeout_s) as resp:
                 payload = json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as err:
             raise AgentError("http_error", f"HTTP {err.code}") from None

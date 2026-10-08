@@ -1,0 +1,13 @@
+{
+ "completion_tokens": 150,
+ "input_hash": "46cf293787943e0f9b3fe9fab74d56280607979925dcc1d50eb9e1d8bcc4384b",
+ "latency_ms": 2410.355292027816,
+ "model_id": "uc4-llm-medium",
+ "prompt_tokens": 1017,
+ "prompt_version": "uc6-answer.v2",
+ "recorded_at": "2026-10-07T23:01:40+00:00",
+ "recorded_from": "foundry",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "text": "{\"status\":\"ANSWERED\",\"claims\":[{\"text\":\"Internal information is not approved for public release.\",\"evidence_id\":\"E1\",\"quote\":\"Internal information is intended for use inside Harbourline and is not approved for public release, such as internal announcements, organisation charts and non-sensitive project documents.\"},{\"text\":\"Uploading company source code to a public repository or a public paste site is prohibited unless the Open Source Program Office has approved the release.\",\"evidence_id\":\"E2\",\"quote\":\"Uploading company source code to a public repository, a personal repository account or a public paste site is prohibited unless the Open Source Program Office has approved the release.\"}],\"conflict_evidence_ids\":[],\"conflict_note\":\"\"}"
+}

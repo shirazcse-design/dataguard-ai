@@ -1,0 +1,32 @@
+[
+ {
+  "entitlement_id": "hs_records_read",
+  "last_used": "2026-03-02",
+  "user_id": "u-2036",
+  "uses_90d": 0
+ },
+ {
+  "entitlement_id": "billing_exports_read",
+  "last_used": "2026-07-28",
+  "user_id": "u-2043",
+  "uses_90d": 9
+ },
+ {
+  "entitlement_id": "finance_reports_read",
+  "last_used": "2026-07-31",
+  "user_id": "u-2018",
+  "uses_90d": 61
+ },
+ {
+  "entitlement_id": "billing_exports_read",
+  "last_used": "2026-07-30",
+  "user_id": "u-2052",
+  "uses_90d": 4
+ },
+ {
+  "entitlement_id": "ci_config_read",
+  "last_used": "2026-07-29",
+  "user_id": "u-2010",
+  "uses_90d": 38
+ }
+]

@@ -1,0 +1,60 @@
+{
+ "final_text": null,
+ "key": "befdf1d08570571f2216048f268cde83aae4da40c82e362bad8a809daa37f171",
+ "recorded_at": "2026-10-07T22:57:37+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1995,
+ "tokens_out": 182,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-13",
+    "event_types": [
+     "external_upload",
+     "archive_created",
+     "file_download_batch",
+     "bulk_download",
+     "repo_access_new",
+     "partner_transfer_approval",
+     "change_ticket",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-11",
+    "subject": "subj-44b8d500e4"
+   },
+   "id": "call_vjF9xOOl6W1T6rClFc1BWQz2",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-44b8d500e4"
+   },
+   "id": "call_3AV3Vb9I4m52XhuYPmTvsup8",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-44b8d500e4"
+   },
+   "id": "call_jokeFz9gwgaMfINkOs9wpEWV",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1",
+     "F2"
+    ]
+   },
+   "id": "call_3t5j57kTLFeJaSQjAWRtF9r1",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_3AZ7MndyQeTtCPSXXB7CxNid",
+   "name": "get_dlp_findings"
+  }
+ ]
+}

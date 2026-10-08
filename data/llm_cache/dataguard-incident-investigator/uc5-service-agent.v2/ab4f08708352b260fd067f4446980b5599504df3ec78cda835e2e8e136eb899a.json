@@ -1,0 +1,69 @@
+{
+ "final_text": null,
+ "key": "ab4f08708352b260fd067f4446980b5599504df3ec78cda835e2e8e136eb899a",
+ "recorded_at": "2026-10-08T02:16:14+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2189,
+ "tokens_out": 205,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_UyJc9MsvRD0ohPtpK6l7atUh",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_AiVYuNjZMl89Pr0GNxlOenev",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_5RLvO7gFPT6yLPfupdKU3fKR",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_F4z18ay1PqVdeqeDVkrfEZZg",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_tj6zFjKuTgQdVzYRiQMgYgM1",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {
+    "end": "2026-08-05",
+    "event_types": [
+     "external_upload",
+     "change_ticket",
+     "access_request",
+     "partner_transfer_approval",
+     "travel_record",
+     "repo_access_new",
+     "login",
+     "after_hours_login",
+     "auth_failure",
+     "archive_created",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-03",
+    "subject": "subj-f7e4dfd63f"
+   },
+   "id": "call_bHRHPCjZvamNaFZEjg1YLczO",
+   "name": "search_security_logs"
+  }
+ ]
+}

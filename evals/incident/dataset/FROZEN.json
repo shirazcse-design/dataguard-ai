@@ -1,0 +1,7 @@
+{
+ "file": "golden.v1.jsonl",
+ "sha256": "5e1f46afbb7b24e4455224d25ff64ebcb1783ded68a5ffe0ca4fbcc4ca67e6bf",
+ "cases": 16,
+ "frozen_at": "2026-10-07T15:28",
+ "rule": "labels are not changed to match model output; a change needs a new version and a note"
+}

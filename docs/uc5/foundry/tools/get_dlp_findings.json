@@ -1,0 +1,14 @@
+{
+  "name": "get_dlp_findings",
+  "description": "The case's DLP alerts with the UC1 destination class of each destination; optionally the class of a destination host already seen in this case's evidence.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "destination_host": {
+        "type": "string"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  }
+}

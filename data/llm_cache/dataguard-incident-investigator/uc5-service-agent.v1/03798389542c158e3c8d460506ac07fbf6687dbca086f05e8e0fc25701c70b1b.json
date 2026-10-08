@@ -1,0 +1,62 @@
+{
+ "final_text": null,
+ "key": "03798389542c158e3c8d460506ac07fbf6687dbca086f05e8e0fc25701c70b1b",
+ "recorded_at": "2026-10-07T23:03:24+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 1888,
+ "tokens_out": 176,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "subj-8827744546"
+   },
+   "id": "call_kikkmJ0PaIfVu91m6ch5ZDse",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-8827744546"
+   },
+   "id": "call_JVHtGYAJ6Xfj6cI4qigrR9bg",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "end": "2026-08-12",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "auth_failure",
+     "repo_access_new",
+     "access_request",
+     "change_ticket",
+     "travel_record",
+     "partner_transfer_approval",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-09",
+    "subject": "subj-8827744546"
+   },
+   "id": "call_8rQvVubeKsRp99WaxvipFCMv",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_9XAHCiLXRQQPvFEdF7sO0Di9",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_OC7oujNFynXXlXNybStgkLBy",
+   "name": "classify_files"
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+[
+ {
+  "environment": "production",
+  "name": "Customer billing exports (chargebacks, settlements)",
+  "owner": "finance",
+  "resource_class": "production_customer_database",
+  "resource_id": "customer_billing_exports",
+  "uc4_sample": "uc4:uc4-7b2b922f1a"
+ },
+ {
+  "environment": "corporate",
+  "name": "Finance reports and invoices",
+  "owner": "finance",
+  "resource_class": "financial_system",
+  "resource_id": "finance_reports",
+  "uc4_sample": "uc4:uc4-3a5b7f51af"
+ },
+ {
+  "environment": "development",
+  "name": "Payments service repository",
+  "owner": "engineering",
+  "resource_class": "business_system",
+  "resource_id": "source_repo_payments",
+  "uc4_sample": "uc4:uc4-88687009ca"
+ },
+ {
+  "environment": "development",
+  "name": "CI/CD pipeline configuration",
+  "owner": "platform",
+  "resource_class": "business_system",
+  "resource_id": "ci_pipeline_config",
+  "uc4_sample": "uc4:uc4-577680a82a"
+ },
+ {
+  "environment": "production",
+  "name": "Health and safety incident records",
+  "owner": "safety",
+  "resource_class": "business_system",
+  "resource_id": "hs_incident_records",
+  "uc4_sample": "uc4:uc4-3095e0ae30"
+ },
+ {
+  "environment": "corporate",
+  "name": "Research notebooks and process cards",
+  "owner": "research",
+  "resource_class": "business_system",
+  "resource_id": "research_vault",
+  "uc4_sample": "uc4:uc4-17eb558505"
+ },
+ {
+  "environment": "corporate",
+  "name": "Team wiki and shared notes",
+  "owner": "it",
+  "resource_class": "business_system",
+  "resource_id": "team_wiki",
+  "uc4_sample": "uc4:uc4-53b989fc54"
+ },
+ {
+  "environment": "production",
+  "name": "Platform operations logs",
+  "owner": "platform",
+  "resource_class": "business_system",
+  "resource_id": "ops_logs",
+  "uc4_sample": "uc4:uc4-135033cf6a"
+ }
+]

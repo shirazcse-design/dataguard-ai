@@ -1,0 +1,68 @@
+{
+ "final_text": null,
+ "key": "6ed155f730918420a5350cb06eb61e15f3522a02abbfd459dba0b5626f00dcb6",
+ "recorded_at": "2026-10-08T02:15:35+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 2180,
+ "tokens_out": 189,
+ "tool_calls": [
+  {
+   "arguments": {
+    "subject": "subj-8827744546"
+   },
+   "id": "call_zwtOTQMJnNVuA12DVFMRZqRr",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-8827744546"
+   },
+   "id": "call_LP7EpDNDMLIIrE9e9E8P4kHz",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "end": "2026-08-12",
+    "event_types": [
+     "login",
+     "after_hours_login",
+     "auth_failure",
+     "repo_access_new",
+     "change_ticket",
+     "travel_record",
+     "access_request",
+     "partner_transfer_approval"
+    ],
+    "limit": 60,
+    "start": "2026-08-09",
+    "subject": "subj-8827744546"
+   },
+   "id": "call_JxzCcn3OvWVxaY4D8wFE6RLt",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_wgSYAHErsHngRJsVaTRRvQUO",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "team_wiki"
+   },
+   "id": "call_c6bCPwTqwcc140WFMsWbhdWY",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_AUSVVVdiPlzCOhTB3IysPJAX",
+   "name": "search_policy"
+  }
+ ]
+}

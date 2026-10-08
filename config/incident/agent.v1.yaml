@@ -1,0 +1,12 @@
+# UC5: ONE bounded investigation agent. The UC3 lesson is built in from v1: the tool budget (14) is
+# above the tool count (10) and a graceful finish answers unexecuted calls when the budget is reached.
+agent_version: 1.0.0
+name: dataguard-incident-investigator
+prompt_version: uc5-agent.v1
+prompt_file: prompts/uc5/agent.v1.md
+model_tier: mid
+max_turns: 8
+max_tool_calls: 14
+finish_on_budget: true
+max_consecutive_tool_failures: 3
+max_chars: 600

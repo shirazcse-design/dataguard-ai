@@ -1,0 +1,17 @@
+# UC5 agent v2 (2026-10-07, approved after live run 1): live run 1 showed the model (1) escalating by
+# default (raised severity on 6/16, requested review on 13/16), (2) never verifying approval references
+# found in the logs (INC-003, INC-015), (3) stating an absence as an observed fact. v2 changes the PROMPT
+# only: verify every reference, absences are gaps, a documented severity guide, review only for listed
+# conditions. Tools, budgets, harness, rubric and the frozen golden labels are unchanged; agent.v1.yaml
+# and prompts/uc5/agent.v1.md are kept (frozen). Declared the FINAL agent iteration before run 2.
+agent_version: 2.0.0
+name: dataguard-incident-investigator
+prompt_version: uc5-agent.v2
+prompt_file: prompts/uc5/agent.v2.md
+model_tier: mid
+max_turns: 8
+max_tool_calls: 14
+finish_on_budget: true
+max_consecutive_tool_failures: 3
+max_chars: 600
+call_timeout_s: 120               # per model call; run 2 hit the shared client's 30 s default on 10/16

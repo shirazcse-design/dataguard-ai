@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "0c99e78ec1f9ee6158aa64c1187bc36522ae2b92deb458ddd5b8713a71a82315",
+ "recorded_at": "2026-10-07T23:23:05+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3784,
+ "tokens_out": 22,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "TRV-0310"
+   },
+   "id": "call_p1VfgNOMwr6dzl4Of9rtVs06",
+   "name": "check_approval"
+  }
+ ]
+}

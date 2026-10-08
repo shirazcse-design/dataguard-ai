@@ -1,0 +1,19 @@
+{
+ "final_text": null,
+ "key": "e6146535fa537f6bdb3860afb475fe352f9f3e9e494d011e06ab12f088d82832",
+ "recorded_at": "2026-10-08T01:41:50+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 3961,
+ "tokens_out": 25,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "personal_cloud",
+    "topic": "external_transfer"
+   },
+   "id": "call_nJfp4IOTCSEoSUWz3L7A8Y3z",
+   "name": "search_policy"
+  }
+ ]
+}

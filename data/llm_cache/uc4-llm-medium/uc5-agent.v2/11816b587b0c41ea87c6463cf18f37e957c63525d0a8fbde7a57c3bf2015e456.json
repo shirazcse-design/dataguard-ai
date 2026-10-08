@@ -1,0 +1,23 @@
+{
+ "final_text": null,
+ "key": "11816b587b0c41ea87c6463cf18f37e957c63525d0a8fbde7a57c3bf2015e456",
+ "recorded_at": "2026-10-07T23:21:53+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4436,
+ "tokens_out": 47,
+ "tool_calls": [
+  {
+   "arguments": {
+    "ref": "none"
+   },
+   "id": "call_KLZiXAHIKHJGXad6zaNS2qga",
+   "name": "check_approval"
+  },
+  {
+   "arguments": {},
+   "id": "call_8Y1fFRp3bzZY0Oucqi3M5lz1",
+   "name": "build_timeline"
+  }
+ ]
+}
