@@ -9,6 +9,9 @@ agent register                     LIVE (Entra): create a new version of the Fou
                                    done at the product owner's explicit request, 2026-10-07)
 guardrails verify                  the adversarial suite (offline: scripted compromised agent)
 obs report                         traced golden run + privacy audit
+foundry-eval [--run|--fetch]       write the Foundry evaluation rows (manual portal setup); --run creates
+                                   them through the Evals API ONLY when the product owner asks; --fetch
+                                   reads the newest runs' results (read-only)
 """
 
 from __future__ import annotations
@@ -157,6 +160,50 @@ def cmd_obs_report(args) -> int:
     return 0 if report["privacy_audit"]["clean"] else 1
 
 
+def cmd_foundry_eval(args) -> int:
+    from datetime import datetime
+
+    from evals.incident import foundry_evals as fe
+
+    outcomes, agents = fe.build_rows()
+    fe.write_jsonl(fe.DATA / "outcomes.jsonl", outcomes)
+    fe.write_jsonl(fe.DATA / "agent.jsonl", agents)
+    local = fe.local_outcome_counts(fe.load_rows(fe.DATA / "outcomes.jsonl", fe.OUTCOME_FIELDS))
+    print(
+        f"wrote {len(outcomes)} outcome rows, {len(agents)} agent rows to data/incident/foundry_eval/"
+    )
+    print(
+        "local pass counts: "
+        + ", ".join(f"{k} {v['passed']}/{v['total']}" for k, v in local.items())
+    )
+    if not (args.run or args.fetch):
+        return 0
+    from app.agent.foundry_service import project_client, project_endpoint
+
+    client = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+    stamp = datetime.now().strftime("%Y%m%d-%H%M")
+    out = (
+        fe.fetch_latest(client)
+        if args.fetch
+        else fe.run_all(client, args.judge, stamp, args.which, args.timeout)
+    )
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    (RESULTS / f"foundry-evals-{stamp}.json").write_text(
+        json.dumps(out, indent=1, sort_keys=True, default=str) + "\n", "utf-8"
+    )
+    print(
+        json.dumps(
+            {
+                k: {kk: vv for kk, vv in v.items() if kk != "rows"} if isinstance(v, dict) else v
+                for k, v in out.items()
+            },
+            indent=1,
+            default=str,
+        )
+    )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="dataguard-incident", description="UC5 Data Security Incident Investigation Agent"
@@ -201,6 +248,18 @@ def main(argv: list[str] | None = None) -> int:
     orp = o.add_parser("report")
     orp.add_argument("--mode", choices=("offline", "replay"), default="offline")
     orp.set_defaults(func=cmd_obs_report)
+    fx = sub.add_parser(
+        "foundry-eval", help="write the Foundry evaluation rows; --run creates them"
+    )
+    fx.add_argument("--run", action="store_true")
+    fx.add_argument(
+        "--fetch", action="store_true", help="READ-ONLY: collect the newest runs' results"
+    )
+    fx.add_argument("--which", choices=("outcomes", "agent", "all"), default="all")
+    fx.add_argument("--judge", default="uc4-llm-medium")
+    fx.add_argument("--timeout", type=float, default=900.0)
+    fx.add_argument("--tenant-id", default=None)
+    fx.set_defaults(func=cmd_foundry_eval)
     args = p.parse_args(argv)
     return args.func(args)
 
