@@ -314,18 +314,6 @@ body.interview .dev-only { display: none !important; }
 .trace-pick button.active { border-color: var(--accent); background: var(--accent-soft); }
 
 /* ---- Data Security Policy Copilot (UC6) ---- */
-/* Section headings in the left panel: one per use case, highlighted so the two products read as
-   separate groups. */
-.nav-group { margin: 16px 0 6px; padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--accent);
-  background: var(--accent-soft); color: var(--accent); font-size: 11.5px; font-weight: 700;
-  letter-spacing: 0.04em; line-height: 1.35; text-transform: uppercase; }
-.nav-group:first-child { margin-top: 0; }
-/* Pages that report on both use cases (Evaluations, Guardrails, Observability): brand teal, so the
-   heading reads as "shared", not as a third product. */
-.nav-group-shared { border-left-color: #16a3a3; background: rgba(22, 163, 163, 0.12); color: #0f7f7f; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nav-group-shared { color: #4fd1d1; } }
-:root[data-theme="dark"] .nav-group-shared { color: #4fd1d1; }
-@media (max-width: 760px) { .nav-group { margin: 0 4px; white-space: nowrap; } }
 .uc6-head { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
 #pc-result .verdict .lead { margin-top: 4px; }
 #pc-queue { margin-top: 16px; }
@@ -364,3 +352,37 @@ body.interview .dev-only { display: none !important; }
 .ag-edge-text { font-size: 10.5px; fill: var(--ink-3); }
 .ag-days { width: 4.5em; }
 .examples .t .chip { white-space: nowrap; }
+
+/* ---- left panel as a tree: one collapsible node per use case, pages as children ---- */
+.nav-root { display: flex; align-items: center; gap: 8px; padding: 4px 8px 10px; font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-3); }
+.nav-root-mark { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); }
+.sidenav { position: sticky; top: 52px; align-self: start; max-height: calc(100vh - 52px); overflow-y: auto; }
+.nav-node { margin: 1px 0; }
+.nav-toggle { width: 100%; display: flex; align-items: flex-start; gap: 6px; padding: 7px 8px; border: 0; border-radius: 6px;
+  background: none; color: var(--ink); font: inherit; font-size: 12.5px; font-weight: 600; line-height: 1.35;
+  text-align: left; cursor: pointer; }
+.nav-toggle:hover { background: var(--surface-2); }
+.nav-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-caret { flex: none; width: 10px; margin-top: 4px; height: 10px; position: relative; }
+.nav-caret::before { content: ""; position: absolute; left: 2px; top: 1px; border: 4px solid transparent;
+  border-left: 5px solid var(--ink-3); transition: transform 0.15s ease; transform-origin: 2px 4px; }
+.nav-node.open > .nav-toggle .nav-caret::before { transform: rotate(90deg); }
+.nav-node.has-active > .nav-toggle .nav-label { color: var(--accent); }
+.nav-node-shared > .nav-toggle .nav-label { color: #0f7f7f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nav-node-shared > .nav-toggle .nav-label { color: #4fd1d1; } }
+:root[data-theme="dark"] .nav-node-shared > .nav-toggle .nav-label { color: #4fd1d1; }
+.nav-node-shared.has-active > .nav-toggle .nav-label { color: var(--accent); }
+.nav-children { display: none; flex-direction: column; gap: 1px; margin: 2px 0 6px 13px; padding-left: 12px;
+  border-left: 1px solid var(--line); }
+.nav-node.open > .nav-children { display: flex; }
+.nav-children a { position: relative; padding: 6px 10px; font-size: 13.5px; }
+.nav-children a::before { content: ""; position: absolute; left: -12px; top: 50%; width: 9px; border-top: 1px solid var(--line); }
+.nav-node-shared { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+@media (max-width: 760px) {
+  .sidenav { position: static; max-height: none; }
+  .nav-root, .nav-toggle { display: none; }
+  .nav-node, .nav-node.open > .nav-children, .nav-children { display: contents; }
+  .nav-children a::before { display: none; }
+  .nav-node-shared { margin: 0; padding: 0; border: 0; }
+}
