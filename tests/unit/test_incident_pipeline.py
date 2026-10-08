@@ -388,3 +388,80 @@ def test_model_call_timeout_is_configurable_and_defaults_unchanged(monkeypatch):
     )
     assert seen["timeout"] == 120.0
     assert load_agent_config()["call_timeout_s"] == 120
+
+
+def test_obs_live_check_wiring_offline(capsys):
+    """Only the agent may be live; UC4/UC6 replay; the canary incident validates and keeps its alert."""
+    from unittest import mock
+
+    import app.agent.foundry_service as fs
+    import app.incident.service as service
+    import app.incident.services as services
+    from app.incident import cli
+
+    real, real_svc, seen = service.build_investigator, services.build_services, {}
+
+    def offline(mode, **k):
+        seen.update(mode=mode, has_svc=k.get("svc") is not None)
+        return real("offline", **k)
+
+    def svc(mode="replay"):
+        seen["svc_mode"] = mode
+        return real_svc("offline")
+
+    with mock.patch.object(fs, "project_client"), mock.patch.object(fs, "project_endpoint", return_value="x"), \
+         mock.patch("observability.azure_monitor_sink", return_value=None), \
+         mock.patch("observability.flush_azure_monitor", return_value=True), \
+         mock.patch.object(service, "build_investigator", side_effect=offline), \
+         mock.patch.object(services, "build_services", side_effect=svc):  # fmt: skip
+        assert cli.main(["obs", "live-check", "--tenant-id", "t"]) == 0
+    out = json.loads(capsys.readouterr().out)
+    assert seen == {"mode": "live", "has_svc": True, "svc_mode": "replay"}
+    assert [r["case_id"] for r in out["runs"]] == ["INC-990", "INC-003", "INC-012"]
+    assert out["runs"][0]["severity"] == "HIGH" and out["canary"].startswith("CANARY")
+
+
+def test_live_probe_wiring_offline():
+    """The live suite's plumbing, with the Foundry agent replaced by the offline planner and a direct
+    call that the (fake) guardrail blocks."""
+    from unittest import mock
+
+    import app.agent.foundry_service as fs
+    from app.incident.pipeline import OfflinePlanner
+    from evals.incident import guardrails_verify as gv
+
+    class Blocked(Exception):
+        status_code = 400
+        body = {
+            "error": {
+                "code": "content_filter",
+                "innererror": {
+                    "content_filter_result": {"jailbreak": {"filtered": True, "detected": True}}
+                },
+            }
+        }
+
+    class Fake:
+        class responses:  # noqa: N801
+            @staticmethod
+            def create(**k):
+                raise Blocked()
+
+    with mock.patch.object(
+        fs, "FoundryAgentServiceClient", side_effect=lambda *a, **k: OfflinePlanner()
+    ):
+        rows = gv.run_live(Fake(), "uc4-llm-medium", "dataguard-incident-investigator")
+    assert [r["id"] for r in rows] == [p["id"] for p in gv.LIVE_PROBES]
+    assert all(not r["app"]["unsafe"] for r in rows if "app" in r)
+    assert (
+        rows[0]["app"]["stopped_by"][0] == "input_scanner_withheld"
+    )  # "ignore all previous instructions"
+    assert all(r["direct"]["outcome"] == "blocked" for r in rows if "direct" in r)
+    md = gv.render_live(rows, {"mode": "test"})
+    assert "Foundry blocked" in md and IGNORE_NOT_STORED(md)
+
+
+def IGNORE_NOT_STORED(md: str) -> bool:  # noqa: N802 - helper: verdicts only, no probe text
+    from evals.incident.guardrails_verify import LIVE_TEXTS
+
+    return not any(t[:30] in md for t in LIVE_TEXTS.values())

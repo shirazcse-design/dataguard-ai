@@ -7,8 +7,9 @@ record [--ids ...] --label ...     LIVE: run and record agent turns for replay
 agent export                       the Foundry agent's instructions, tool schemas and I/O schemas as files
 agent register                     LIVE (Entra): create a new version of the Foundry agent (additive;
                                    done at the product owner's explicit request, 2026-10-07)
-guardrails verify                  the adversarial suite (offline: scripted compromised agent)
+guardrails verify [--live]         the adversarial suite (offline: scripted compromised agent; --live: real agent)
 obs report                         traced golden run + privacy audit
+obs live-check                     LIVE: 3 incidents via the Foundry agent -> Application Insights, with a canary
 foundry-eval [--run|--fetch]       write the Foundry evaluation rows (manual portal setup); --run creates
                                    them through the Evals API ONLY when the product owner asks; --fetch
                                    reads the newest runs' results (read-only)
@@ -139,10 +140,28 @@ def cmd_agent_register(args) -> int:
 
 
 def cmd_guardrails_verify(args) -> int:
+    import os
     from datetime import date
 
     from evals.incident import guardrails_verify as gv
 
+    if (
+        args.live
+    ):  # LIVE: Entra sign-in; UC4/UC6 replay; the agent is the Foundry agent with its guardrail
+        from app.agent.foundry_service import project_client, project_endpoint
+
+        from .pipeline import load_agent_config
+
+        name = os.environ.get("DATAGUARD_INCIDENT_AGENT", "") or load_agent_config()["name"]
+        openai = project_client(project_endpoint(), tenant_id=args.tenant_id).get_openai_client()
+        rows = gv.run_live(
+            openai, os.environ.get("DATAGUARD_LLM_DEPLOYMENT_MID", "") or "uc4-llm-medium", name
+        )
+        prov = {"date": date.today().isoformat(), "agent": f"{name} (latest version)", "guardrail": "uc5-incident-investigator-guardrail",
+                "uc4_uc6": "replay"}  # fmt: skip
+        _write("guardrails-live", {"provenance": prov, "probes": rows}, gv.render_live(rows, prov))
+        print(gv.render_live(rows, prov))
+        return 0
     rows = gv.run_offline()
     prov = {"date": date.today().isoformat(), "mode": "OFFLINE (scripted compromised agent; UC4 replay, UC6 offline)",
             "layer_tested": "application guardrails, harness, human review (Foundry guardrail: live run, later)"}  # fmt: skip
@@ -158,6 +177,53 @@ def cmd_obs_report(args) -> int:
     _write("observability", report, render(report))
     print(f"privacy audit clean: {report['privacy_audit']['clean']}")
     return 0 if report["privacy_audit"]["clean"] else 1
+
+
+def live_check(tenant_id: str | None) -> dict:
+    """LIVE: three incidents through the Foundry agent with spans exported to Application Insights. A
+    fresh CANARY is planted as a benign ticket reference in the flagship's DLP user justification and in
+    a log comment, so a search in App Insights shows whether DataGuard's or Foundry's telemetry stores
+    evidence text. Only the agent is live; UC4/UC6 replay. The connection string is read from the
+    Foundry project (Entra sign-in) and held in memory only, never printed."""
+    import copy
+    import secrets
+
+    from app.agent.foundry_service import project_client, project_endpoint
+    from observability import azure_monitor_sink, flush_azure_monitor, load_observability_config
+    from observability.config import build_tracer
+
+    from . import synth
+    from .service import build_investigator
+    from .services import build_services, pseudonym
+
+    obs_cfg, _ = load_observability_config()
+    project = project_client(project_endpoint(), tenant_id=tenant_id)
+    conn = project.telemetry.get_application_insights_connection_string()
+    tracer, _ = build_tracer(obs_cfg, [azure_monitor_sink(conn)])
+    del conn
+    canary = f"CANARY{secrets.token_hex(4).upper()}"
+    incs = {i["case_id"]: i for i in synth.load_incidents()}
+    flag = copy.deepcopy(incs["INC-001"])
+    flag["case_id"] = "INC-990"  # the flagship plus a canary
+    for o in flag["overlays"]:
+        if o["type"] == "dlp_alert":
+            o["user_justification"] = f"Weekly reconciliation export, ticket reference {canary}."
+    flag["overlays"].append(
+        {"type": "log_comment", "hour": 22, "text": f"Batch job note: reference {canary}."}
+    )
+    inv = build_investigator("live", backend="foundry-service", tenant_id=tenant_id, tracer=tracer,
+                             svc=build_services("replay"))  # fmt: skip
+    out = []
+    for inc in (flag, incs["INC-003"], incs["INC-012"]):
+        x = inv.investigate(inc)
+        out.append({"case_id": inc["case_id"], "severity": x.decision.severity, "review": x.decision.review_status,
+                    "subject": pseudonym(inc["user_id"]), "agent_stop": x.run.stopped_reason if x.run else None})  # fmt: skip
+    return {"canary": canary, "flushed": flush_azure_monitor(), "runs": out}
+
+
+def cmd_obs_live_check(args) -> int:
+    print(json.dumps(live_check(args.tenant_id), indent=1))
+    return 0
 
 
 def cmd_foundry_eval(args) -> int:
@@ -241,13 +307,19 @@ def main(argv: list[str] | None = None) -> int:
     ar.add_argument("--rai-policy-id", default=None, help="full ARM id of an existing guardrail")
     ar.set_defaults(func=cmd_agent_register)
     g = sub.add_parser("guardrails").add_subparsers(dest="sub", required=True)
-    g.add_parser("verify", help="the adversarial suite (offline)").set_defaults(
-        func=cmd_guardrails_verify
+    gv_ = g.add_parser(
+        "verify", help="the adversarial suite (offline; --live through the Foundry agent)"
     )
+    gv_.add_argument("--live", action="store_true")
+    gv_.add_argument("--tenant-id", default=None)
+    gv_.set_defaults(func=cmd_guardrails_verify)
     o = sub.add_parser("obs").add_subparsers(dest="sub", required=True)
     orp = o.add_parser("report")
     orp.add_argument("--mode", choices=("offline", "replay"), default="offline")
     orp.set_defaults(func=cmd_obs_report)
+    olc = o.add_parser("live-check", help="LIVE: 3 incidents via the Foundry agent -> App Insights")
+    olc.add_argument("--tenant-id", default=None)
+    olc.set_defaults(func=cmd_obs_live_check)
     fx = sub.add_parser(
         "foundry-eval", help="write the Foundry evaluation rows; --run creates them"
     )
