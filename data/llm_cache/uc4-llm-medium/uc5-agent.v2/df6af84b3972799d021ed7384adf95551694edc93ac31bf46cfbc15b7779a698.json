@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "df6af84b3972799d021ed7384adf95551694edc93ac31bf46cfbc15b7779a698",
+ "recorded_at": "2026-10-07T23:26:17+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4045,
+ "tokens_out": 14,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_5kOIfCB0BmzIE5iXMQDCUkBI",
+   "name": "build_timeline"
+  }
+ ]
+}

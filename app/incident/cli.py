@@ -4,8 +4,9 @@ data build                         regenerate data/incident (deterministic) and 
 investigate INC-001 [--mode ...]   one incident end to end (offline by default)
 eval [--mode ...] [--ids ...]      the frozen golden set (writes docs/uc5/results)
 record [--ids ...] --label ...     LIVE: run and record agent turns for replay
-agent export                       the Foundry agent's instructions, tool schemas and I/O schemas as
-                                   files for MANUAL creation in the portal (nothing is created)
+agent export                       the Foundry agent's instructions, tool schemas and I/O schemas as files
+agent register                     LIVE (Entra): create a new version of the Foundry agent (additive;
+                                   done at the product owner's explicit request, 2026-10-07)
 guardrails verify                  the adversarial suite (offline: scripted compromised agent)
 obs report                         traced golden run + privacy audit
 """
@@ -126,6 +127,14 @@ def cmd_agent_export(args) -> int:
     return 0
 
 
+def cmd_agent_register(args) -> int:
+    from .service import register_agent
+
+    r = register_agent(args.tenant_id, args.rai_policy_id)
+    print(json.dumps(r, indent=1))
+    return 0 if r["tools_match"] and r["instructions_match"] else 1
+
+
 def cmd_guardrails_verify(args) -> int:
     from datetime import date
 
@@ -180,6 +189,10 @@ def main(argv: list[str] | None = None) -> int:
     a.add_parser("export", help="files for creating the Foundry agent by hand").set_defaults(
         func=cmd_agent_export
     )
+    ar = a.add_parser("register", help="LIVE: create a new version of the Foundry agent (additive)")
+    ar.add_argument("--tenant-id", default=None)
+    ar.add_argument("--rai-policy-id", default=None, help="full ARM id of an existing guardrail")
+    ar.set_defaults(func=cmd_agent_register)
     g = sub.add_parser("guardrails").add_subparsers(dest="sub", required=True)
     g.add_parser("verify", help="the adversarial suite (offline)").set_defaults(
         func=cmd_guardrails_verify

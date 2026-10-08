@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "f2c86a653975e52dc31fe0d76e4b5ade4714c4d070cde33a1d445a9a3e1e94d4",
+ "recorded_at": "2026-10-07T22:59:07+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3191,
+ "tokens_out": 19,
+ "tool_calls": [
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_27Tmk6eFSgALOc1dMGY6jNL9",
+   "name": "search_policy"
+  }
+ ]
+}

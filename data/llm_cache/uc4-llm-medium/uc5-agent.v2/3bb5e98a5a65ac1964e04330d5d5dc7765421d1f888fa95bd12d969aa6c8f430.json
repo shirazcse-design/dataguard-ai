@@ -1,0 +1,84 @@
+{
+ "final_text": null,
+ "key": "3bb5e98a5a65ac1964e04330d5d5dc7765421d1f888fa95bd12d969aa6c8f430",
+ "recorded_at": "2026-10-07T23:22:29+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2277,
+ "tokens_out": 232,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-27",
+    "event_types": [
+     "after_hours_login",
+     "bulk_download",
+     "file_download_batch",
+     "external_upload",
+     "repo_access_new",
+     "change_ticket",
+     "travel_record",
+     "partner_transfer_approval",
+     "access_request",
+     "archive_created",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-25",
+    "subject": "subj-ee333d5494"
+   },
+   "id": "call_TpYMiOc6c0fUzxlJw68voaZb",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-ee333d5494"
+   },
+   "id": "call_3gz0xiUd9QlHJUJrGGCNpecz",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-ee333d5494"
+   },
+   "id": "call_v5LwKjQeaypN2Ic8XkuRRD2z",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1",
+     "F2"
+    ]
+   },
+   "id": "call_e4cjpmmyubzhVJgp4FXzdjeq",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "finance_reports"
+   },
+   "id": "call_HaaibmcPGLHhSoSQnmAkJpgp",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_Z9mdfq02GhXd6OHBKBzTKBKZ",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_tDoD5PO546wAp5PHHmfN0mI5",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_IhqXaq3OZXEeOuxFXZMfFMVk",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "final_text": null,
+ "key": "de7f69041d095ea6864b4ab0a2e15152915b5aeb1fa7d58cfd15d4ad23fac57b",
+ "recorded_at": "2026-10-07T23:23:40+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2269,
+ "tokens_out": 218,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-16",
+    "event_types": [
+     "external_upload",
+     "file_download_batch",
+     "bulk_download",
+     "archive_created",
+     "partner_transfer_approval",
+     "change_ticket",
+     "travel_record",
+     "access_request",
+     "repo_access_new",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-14",
+    "subject": "subj-8b0b16172f"
+   },
+   "id": "call_lUgmR9TNm2gnlVPPgg1qkElK",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-8b0b16172f"
+   },
+   "id": "call_gwwa9FL2LoaSeEFvVKf1XSXG",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-8b0b16172f"
+   },
+   "id": "call_wW6cHrxKZNWmO3KP7AueP7Gp",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_skAqnZSt3x4gvAeH5AFWivw0",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "ci_pipeline_config"
+   },
+   "id": "call_q95pp4cWEeeZ6Qq9Em4vXmIn",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_8yr2I8PYXtZYrzzefF4uzATk",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_bbXUcorcSfYAJgA1zX3yadZh",
+   "name": "search_policy"
+  }
+ ]
+}

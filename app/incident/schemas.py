@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 SCHEMA_VERSION = "uc5.v1"
 ClaimType = Literal[
@@ -69,6 +69,12 @@ class Incident(Strict):
     files: list[CaseFile]
     overlays: list[dict[str, Any]] = Field(default_factory=list)
     faults: list[Fault] = Field(default_factory=list)  # SIMULATED, for testing only
+
+    @field_validator("overlays")
+    @classmethod
+    def _canonical(cls, v: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Sorted keys: tool results (part of the replay key) must not depend on how a dict was written."""
+        return [dict(sorted(o.items())) for o in v]
 
 
 class CasePacket(Strict):

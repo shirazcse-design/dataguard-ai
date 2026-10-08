@@ -1,0 +1,71 @@
+{
+ "final_text": null,
+ "key": "4fc511db0375d3768dd72ac18ce1c5b8f0ebd78cd2c7c49bba8e2f79dcd94ccd",
+ "recorded_at": "2026-10-07T23:31:13+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 2284,
+ "tokens_out": 217,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-14",
+    "event_types": [
+     "external_upload",
+     "file_download_batch",
+     "bulk_download",
+     "repo_access_new",
+     "after_hours_login",
+     "login",
+     "partner_transfer_approval",
+     "travel_record",
+     "access_request",
+     "change_ticket",
+     "archive_created",
+     "log_comment"
+    ],
+    "limit": 60,
+    "start": "2026-08-12",
+    "subject": "subj-6e58b5d2a1"
+   },
+   "id": "call_ZYkOeV4L5fhBlxe8Y9cxghht",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-6e58b5d2a1"
+   },
+   "id": "call_HH9bepXCVKAvWmUWt9IE0AfE",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-6e58b5d2a1"
+   },
+   "id": "call_82oAn8G6NjzReILCgJi0bx96",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1",
+     "F2"
+    ]
+   },
+   "id": "call_bUSxiYmsDI1QoQmzBD7Ffq5N",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "finance_reports"
+   },
+   "id": "call_KzNoMiuzy8xeGCYhPqqqJiE4",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_qb7oMDrEulXP6dnLi4chKz6b",
+   "name": "get_dlp_findings"
+  }
+ ]
+}

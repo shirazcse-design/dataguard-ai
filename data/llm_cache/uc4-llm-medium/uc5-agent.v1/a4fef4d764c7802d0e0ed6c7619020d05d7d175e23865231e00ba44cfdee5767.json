@@ -1,0 +1,31 @@
+{
+ "final_text": null,
+ "key": "a4fef4d764c7802d0e0ed6c7619020d05d7d175e23865231e00ba44cfdee5767",
+ "recorded_at": "2026-10-07T22:59:26+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3512,
+ "tokens_out": 69,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "unknown_external",
+    "topic": "external_transfer"
+   },
+   "id": "call_BaXH4RjSrtk1QeSFdXYXU5Tp",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_uSXBLxsWND11HOjk6biSI2NR",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_R3TCVKrNKE2HZCdc2yOUyrXz",
+   "name": "build_timeline"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "final_text": null,
+ "key": "2581f17d349092b7d33ca334136fd23df46f7c362e9c36261832c4750ead9a02",
+ "recorded_at": "2026-10-07T23:30:38+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3845,
+ "tokens_out": 102,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_host": "mft.harbourline.example"
+   },
+   "id": "call_LrPZKZ1nNnNQ6yXIx7P4637r",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "destination_class": "CORPORATE_MANAGED",
+    "topic": "external_transfer"
+   },
+   "id": "call_jzlON6YL21hTAbVniXXivSYX",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "access_beyond_role"
+   },
+   "id": "call_b3MpOpVIzhXS2rltnmEkry8X",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "ref": "TKT-4471"
+   },
+   "id": "call_SpfhWzTd2iVjB1L206yG49tX",
+   "name": "check_approval"
+  }
+ ]
+}

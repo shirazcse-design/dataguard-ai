@@ -1,0 +1,46 @@
+{
+ "final_text": null,
+ "key": "47a66ab5a2d44d387bed74194e9296753222fca3aab63a63dc3013cfa1000c63",
+ "recorded_at": "2026-10-07T23:01:16+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3326,
+ "tokens_out": 112,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_host": "gist.github.com"
+   },
+   "id": "call_SjpB4zKeTS0OMU2NWtISxWyo",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "destination_class": "approved_corporate",
+    "topic": "external_transfer"
+   },
+   "id": "call_LKCj9js0z8ME5fBN8iQzQND7",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "destination_class": "public_external",
+    "topic": "external_transfer"
+   },
+   "id": "call_kOsfmOZA29sMw3QvCAf5PNNY",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_K1smOYENv3n3Le5cpoNEBWGf",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_sNSyWOgZKStsZty2b27fNwjG",
+   "name": "build_timeline"
+  }
+ ]
+}

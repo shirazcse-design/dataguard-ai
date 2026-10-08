@@ -1,0 +1,19 @@
+{
+ "final_text": null,
+ "key": "fe720a41c0fc0e9345dc737bc914b870bbc1d71c1ddd5e120bb4226cd9679b5a",
+ "recorded_at": "2026-10-07T23:26:51+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4339,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "unknown_external",
+    "topic": "external_transfer"
+   },
+   "id": "call_thf9C2QBnKvCrN0FRcDDv1l4",
+   "name": "search_policy"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "adc966257c3ebe0884f1c0827628135846768aba7367bfd7f222a2144a2cee67",
+ "recorded_at": "2026-10-07T23:00:57+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 5378,
+ "tokens_out": 21,
+ "tool_calls": [
+  {
+   "arguments": {
+    "reason": "missing_evidence"
+   },
+   "id": "call_mCjv9ZDfiKKr3VDyvPEWYmqw",
+   "name": "request_human_review"
+  }
+ ]
+}

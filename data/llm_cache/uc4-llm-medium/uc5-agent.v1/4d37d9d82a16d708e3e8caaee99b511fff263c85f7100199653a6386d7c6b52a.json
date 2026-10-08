@@ -1,0 +1,70 @@
+{
+ "final_text": null,
+ "key": "4d37d9d82a16d708e3e8caaee99b511fff263c85f7100199653a6386d7c6b52a",
+ "recorded_at": "2026-10-07T22:59:24+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1977,
+ "tokens_out": 203,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-26",
+    "event_types": [
+     "external_upload",
+     "archive_created",
+     "bulk_download",
+     "file_download_batch",
+     "partner_transfer_approval",
+     "change_ticket",
+     "log_comment",
+     "after_hours_login",
+     "repo_access_new",
+     "login",
+     "auth_failure",
+     "access_request"
+    ],
+    "limit": 60,
+    "start": "2026-08-24",
+    "subject": "subj-fc1449ba79"
+   },
+   "id": "call_belPtbYM286Y8Oy54Mqz8aLI",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-fc1449ba79"
+   },
+   "id": "call_nE4MuRBxilzjGGIhusb6IBPc",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-fc1449ba79"
+   },
+   "id": "call_IjFNSwtxICvIhvEGC723wuJi",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1"
+    ]
+   },
+   "id": "call_ooQrEnQ1mLoA76T4TCU4O6oE",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {
+    "resource_id": "research_vault"
+   },
+   "id": "call_dkr04goRxAHCJU43MBIrthiu",
+   "name": "get_access_context"
+  },
+  {
+   "arguments": {},
+   "id": "call_TaHzHAWf26S26IAVrz4ROGj8",
+   "name": "get_dlp_findings"
+  }
+ ]
+}

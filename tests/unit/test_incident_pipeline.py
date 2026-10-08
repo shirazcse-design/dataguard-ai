@@ -353,3 +353,38 @@ def test_decide_is_pure_given_facts(inv):
     a = decide(f, None, validation={}, review_requests=[], refusals=[], agent_failed=True)
     b = decide(f, None, validation={}, review_requests=[], refusals=[], agent_failed=True)
     assert a == b and a.rule == "sensitive_access_concern" and a.severity == "MEDIUM"
+
+
+def test_model_call_timeout_is_configurable_and_defaults_unchanged(monkeypatch):
+    """Run 2 timed out at the shared client's 30 s. UC5 passes its own; every other caller keeps 30 s."""
+    from app.agent.foundry_agent import FoundryAgentClient
+    from app.incident.pipeline import load_agent_config
+    from app.policy.service import load_llm_config
+
+    seen = {}
+
+    class Resp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return b'{"choices": [{"message": {"content": "{}"}}]}'
+
+    def opener(req, timeout):
+        seen["timeout"] = timeout
+        return Resp()
+
+    cfg = load_llm_config().foundry
+    env = {cfg.endpoint_env: "https://example.test", cfg.api_key_env: "k"}
+    FoundryAgentClient(cfg, "d", tools=[], env=env, opener=opener).next_turn(
+        [{"role": "user", "content": "x"}]
+    )
+    assert seen["timeout"] == 30.0
+    FoundryAgentClient(cfg, "d", tools=[], env=env, opener=opener, timeout_s=120.0).next_turn(
+        [{"role": "user", "content": "x"}]
+    )
+    assert seen["timeout"] == 120.0
+    assert load_agent_config()["call_timeout_s"] == 120

@@ -1,0 +1,70 @@
+{
+ "final_text": null,
+ "key": "05372934fffdab25f5ad2106d12b72b9f38059f339ae2fd527d823cbeab6685f",
+ "recorded_at": "2026-10-07T22:59:48+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 1992,
+ "tokens_out": 200,
+ "tool_calls": [
+  {
+   "arguments": {
+    "end": "2026-08-17",
+    "event_types": [
+     "external_upload",
+     "archive_created",
+     "file_download_batch",
+     "bulk_download",
+     "partner_transfer_approval",
+     "change_ticket",
+     "log_comment",
+     "repo_access_new",
+     "after_hours_login",
+     "login",
+     "auth_failure"
+    ],
+    "limit": 60,
+    "start": "2026-08-15",
+    "subject": "subj-bace912a33"
+   },
+   "id": "call_Uzsr4f29LHlCM29QScQdr74r",
+   "name": "search_security_logs"
+  },
+  {
+   "arguments": {
+    "subject": "subj-bace912a33"
+   },
+   "id": "call_wDypu9IV0eXJtOYBExqg7L11",
+   "name": "get_identity_context"
+  },
+  {
+   "arguments": {
+    "subject": "subj-bace912a33"
+   },
+   "id": "call_WwJwxuuHKAMqfiw6M1fQ6JWt",
+   "name": "get_behavior_findings"
+  },
+  {
+   "arguments": {
+    "file_handles": [
+     "F1",
+     "F2"
+    ]
+   },
+   "id": "call_Od6xronUMC9DZJM09Yh3zYxr",
+   "name": "classify_files"
+  },
+  {
+   "arguments": {},
+   "id": "call_6k2ZVYlYpsONIxn8f0xXVjH1",
+   "name": "get_dlp_findings"
+  },
+  {
+   "arguments": {
+    "resource_id": "customer_billing_exports"
+   },
+   "id": "call_OjEHPlXbQ1cTqm3rx1nBZYnX",
+   "name": "get_access_context"
+  }
+ ]
+}

@@ -35,7 +35,9 @@ from .tools import CaseState, build_tools
 from .validate import WITHHELD, output_filter, validate
 
 REPO = Path(__file__).resolve().parents[2]
-AGENT_CONFIG = REPO / "config" / "incident" / "agent.v1.yaml"
+AGENT_CONFIG = (
+    REPO / "config" / "incident" / "agent.v2.yaml"
+)  # v2 after live run 1; v1 kept (frozen)
 
 
 def load_agent_config(path: Path = AGENT_CONFIG) -> dict[str, Any]:

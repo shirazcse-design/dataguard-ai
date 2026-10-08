@@ -1,0 +1,31 @@
+{
+ "final_text": null,
+ "key": "b9a2facd832c6fb20a947c199f45c6926576803d95e2fd439d6589e01db289c5",
+ "recorded_at": "2026-10-07T23:00:32+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 3766,
+ "tokens_out": 69,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "personal_cloud",
+    "topic": "external_transfer"
+   },
+   "id": "call_MUd2ImjUkEl3nzJKqPJVgloK",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {
+    "topic": "incident_procedure"
+   },
+   "id": "call_F0wbo0noE4pc3DnI1PHBYQoc",
+   "name": "search_policy"
+  },
+  {
+   "arguments": {},
+   "id": "call_fuev30GfCEkK2m6QI5WJd7HV",
+   "name": "build_timeline"
+  }
+ ]
+}

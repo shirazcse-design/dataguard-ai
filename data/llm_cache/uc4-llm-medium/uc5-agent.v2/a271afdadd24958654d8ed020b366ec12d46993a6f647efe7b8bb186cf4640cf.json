@@ -1,0 +1,19 @@
+{
+ "final_text": null,
+ "key": "a271afdadd24958654d8ed020b366ec12d46993a6f647efe7b8bb186cf4640cf",
+ "recorded_at": "2026-10-07T23:30:39+00:00",
+ "schema": 1,
+ "served_model": "gpt-5.4-2026-03-05",
+ "tokens_in": 4476,
+ "tokens_out": 26,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_class": "approved_corporate",
+    "topic": "external_transfer"
+   },
+   "id": "call_Gg816y5xTF8iexIqZZzdHo9d",
+   "name": "search_policy"
+  }
+ ]
+}

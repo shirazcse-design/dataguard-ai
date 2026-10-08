@@ -1,0 +1,16 @@
+{
+ "final_text": null,
+ "key": "d6e60419e01e3b7096967cd3f3031e9f046f5758054be78eb146a192bbdff719",
+ "recorded_at": "2026-10-08T01:41:32+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 4076,
+ "tokens_out": 15,
+ "tool_calls": [
+  {
+   "arguments": {},
+   "id": "call_YmW8CMIy8ud44QVLVwJbJoKh",
+   "name": "build_timeline"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "final_text": null,
+ "key": "1ccbcd0695f1b13cd1da335f119cd6e6f7e8ac0b8a9a3803f083520f9de99953",
+ "recorded_at": "2026-10-08T02:16:15+00:00",
+ "schema": 1,
+ "served_model": "uc4-llm-medium",
+ "tokens_in": 3701,
+ "tokens_out": 24,
+ "tool_calls": [
+  {
+   "arguments": {
+    "destination_host": "gist.github.com"
+   },
+   "id": "call_VVCQ5Nw6mMcDherPVW3gShWN",
+   "name": "get_dlp_findings"
+  }
+ ]
+}
