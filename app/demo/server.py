@@ -33,6 +33,7 @@ from .access import AccessSession
 from .agent import AgentSession
 from .classify import ClassifySession, DemoError
 from .dlp import DlpSession
+from .incident import IncidentSession
 from .insider import InsiderSession
 from .policy import PolicySession
 from .review import DEFAULT_PATH, ReviewStore
@@ -59,6 +60,7 @@ _STATIC = {
     "/static/dlp.js": ("dlp.js", "text/javascript; charset=utf-8"),
     "/static/insider.js": ("insider.js", "text/javascript; charset=utf-8"),
     "/static/access.js": ("access.js", "text/javascript; charset=utf-8"),
+    "/static/incident.js": ("incident.js", "text/javascript; charset=utf-8"),
 }
 _HEADERS = {
     "Cache-Control": "no-store",
@@ -93,6 +95,8 @@ class DemoApp:
     insider_review_path: Path | str | None = None
     _access: AccessSession | None = None
     access_review_path: Path | str | None = None
+    _incident: IncidentSession | None = None
+    incident_review_path: Path | str | None = None
     _init_lock: threading.Lock = field(default_factory=threading.Lock)
 
     def __post_init__(self) -> None:
@@ -306,6 +310,30 @@ class DemoApp:
             self.access_session().review_decide(body), data_class="DEMO-ONLY STATE"
         )
 
+    # -- Incident Investigation (UC5) ---------------------------------------------------------
+    def incident_session(self) -> IncidentSession:
+        with self._init_lock:
+            if self._incident is None:
+                kw = {"review_path": self.incident_review_path} if self.incident_review_path else {}
+                self._incident = IncidentSession(self.mode, self.env, **kw)
+            return self._incident
+
+    def incident_describe(self) -> dict[str, Any]:
+        return self.envelope(self.incident_session().describe(), data_class="RECORDED + SYNTHETIC")
+
+    def incident_investigate(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(
+            self.incident_session().investigate(body), data_class=self.data_class()
+        )
+
+    def incident_review(self) -> dict[str, Any]:
+        return self.envelope(self.incident_session().review_queue(), data_class="DEMO-ONLY STATE")
+
+    def incident_review_decide(self, body: dict[str, Any]) -> dict[str, Any]:
+        return self.envelope(
+            self.incident_session().review_decide(body), data_class="DEMO-ONLY STATE"
+        )
+
     def metrics(self) -> dict[str, Any]:
         if self._metrics is None:
             self._metrics = metrics.all_metrics()
@@ -358,6 +386,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/insider/review": app.insider_review,
                 "/api/access": app.access_describe,
                 "/api/access/review": app.access_review,
+                "/api/incident": app.incident_describe,
+                "/api/incident/review": app.incident_review,
             }
             if path in routes:
                 try:
@@ -383,6 +413,8 @@ def make_handler(app: DemoApp) -> type[BaseHTTPRequestHandler]:
                 "/api/insider/review/decide": app.insider_review_decide,
                 "/api/access/investigate": app.access_investigate,
                 "/api/access/review/decide": app.access_review_decide,
+                "/api/incident/investigate": app.incident_investigate,
+                "/api/incident/review/decide": app.incident_review_decide,
             }
             if path not in routes:
                 self._json(HTTPStatus.NOT_FOUND, app.envelope(None, error="not found"))

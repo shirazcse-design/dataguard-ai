@@ -107,6 +107,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "app/incident/*.py" = ["E501"]                     # UC5 data tables, typed records and evidence builders
 "evals/incident/*.py" = ["E501"]                   # UC5 golden table, probes and report rows
 "app/demo/access.py" = ["E501"]                   # UC3 demo case table
+"app/demo/incident.py" = ["E501"]                 # UC5 demo case table
 "app/demo/insider.py" = ["E501"]                  # UC2 demo case table
 "app/insider/services.py" = ["E501"]             # UC2 capability payload builders
 "app/insider/agents.py" = ["E501"]               # UC2 agent loop (span attribute lines)
