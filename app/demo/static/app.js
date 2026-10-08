@@ -85,6 +85,7 @@ function currentPage() {
 async function route() {
   const key = currentPage();
   document.querySelectorAll(".sidenav a").forEach((a) => a.classList.toggle("active", a.dataset.page === key));
+  navSyncTree();
   const page = document.getElementById("page");
   page.replaceChildren();
   const def = PAGES[key];
@@ -1118,6 +1119,40 @@ function applyInterview() {
   renderDemoBar();
 }
 
+// ---- left-panel tree -------------------------------------------------------------------------
+// One collapsible node per use case. The node holding the current page always opens; the others keep
+// the viewer's own choice (a per-viewer convenience in localStorage, safe to lose).
+const NAV_KEY = "dataguard.nav.open";
+function navLoad() {
+  try { return new Set(JSON.parse(localStorage.getItem(NAV_KEY) || "[]")); } catch (err) { return new Set(); }
+}
+function navSave(open) {
+  try { localStorage.setItem(NAV_KEY, JSON.stringify([...open])); } catch (err) { /* storage unavailable: fine */ }
+}
+function navSetOpen(node, on) {
+  node.classList.toggle("open", on);
+  node.querySelector(".nav-toggle").setAttribute("aria-expanded", on ? "true" : "false");
+}
+function navSyncTree() {
+  const open = navLoad();
+  document.querySelectorAll(".sidenav .nav-node").forEach((n) => {
+    const active = Boolean(n.querySelector("a.active"));
+    n.classList.toggle("has-active", active);
+    navSetOpen(n, active || open.has(n.dataset.node));
+  });
+}
+function navInitTree() {
+  document.querySelectorAll(".sidenav .nav-node").forEach((n) => {
+    n.querySelector(".nav-toggle").addEventListener("click", () => {
+      const on = !n.classList.contains("open");
+      navSetOpen(n, on);
+      const open = navLoad();
+      if (on) open.add(n.dataset.node); else open.delete(n.dataset.node);
+      navSave(open);
+    });
+  });
+}
+
 // ---- boot ------------------------------------------------------------------------------------
 async function boot() {
   try {
@@ -1128,6 +1163,7 @@ async function boot() {
     document.getElementById("mode-badge").textContent = "SERVER UNREACHABLE";
   }
   window.addEventListener("hashchange", route);
+  navInitTree();
   document.getElementById("interview-toggle").addEventListener("click", () => {
     const on = !interviewOn();
     setInterview(on);
