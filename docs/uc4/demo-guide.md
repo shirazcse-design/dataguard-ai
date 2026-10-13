@@ -1,4 +1,4 @@
-# Interview demo dashboard
+# Demo dashboard
 
 > **AI-generated synthetic dataset — reviewed by one human; second independent review pending.** The
 > dashboard shows recorded evaluation results and the behaviour of the real code on synthetic
@@ -7,7 +7,7 @@
 ## Purpose
 
 A local web dashboard for demonstrating the Sensitive Data Discovery & Classification Agent in an AI
-Product Manager interview. It is a **presentation layer over the existing implementation**: it adds
+Product Manager audience. It is a **presentation layer over the existing implementation**: it adds
 no classifier, router, agent or metric of its own (decision D9.37).
 
 It walks one story, **Document → discovery → classification → hybrid decision → explanation → human
@@ -81,7 +81,7 @@ export DATAGUARD_ENTRA_TENANT_ID=<your tenant id>      # needed for a personal M
 dataguard-uc4 demo serve --mode live
 ```
 
-* The first agent run opens a browser sign-in (Entra ID). Do it **before** the interview.
+* The first agent run opens a browser sign-in (Entra ID). Do it **before** the demo.
 * Live classification costs money per call. A document that escalates to the `large` tier can take
   78-245 s, so in LIVE mode stick to documents that the `mid` tier settles.
 * **LIVE rehearsal (2026-09-27): every page worked.** Two live classifications (healthcare, public;
@@ -90,14 +90,14 @@ dataguard-uc4 demo serve --mode live
   the session traces on Observability, all badged LIVE. The live planner makes its own tool choices:
   it looked up taxonomy definitions for three documents, gave the PII notes priority *medium* (the
   offline planner says *high*), and its rationale on the over-labelling document calls the embedded
-  override "untrusted content". The invariant held on all six. Keep REPLAY as the interview default
+  override "untrusted content". The invariant held on all six. Keep REPLAY as the demo default
   and use LIVE only when there is a reason to.
 * **Fixed after the rehearsal (D9.38): LIVE stage latency was over-reported about 2x.** The
   classification service's `telemetry.latency_ms` counted a live LLM call twice (3.6 s reported vs
   1.8 s measured). It now reports the true wall-clock time for live calls; replayed calls still
   report their recorded latency, so REPLAY numbers and every recorded baseline are unchanged.
 
-## 7-minute interview script
+## 7-minute demo script
 
 Turn on **Demo Mode** (top right). It hides developer controls and shows a guided bar with
 **Next Demo Step**. Steps move to the right page and preload the right document; they **never press
@@ -121,7 +121,7 @@ If time is short, skip step 8 and fold one sentence of it into step 9.
 
 All documents are real synthetic **dev-split** documents. Outcomes are pinned by unit tests
 (`tests/unit/test_demo_classify.py`, `test_demo_agent_review.py`), so a document that stops behaving
-as described fails CI rather than an interview.
+as described fails CI rather than a live demo.
 
 **Classify page** (`app/demo/examples.py`):
 
@@ -173,7 +173,7 @@ open"), so it stays current. As of 2026-09-27:
 | Sign-in fails with error **530035** | The directory's security defaults block device-code sign-in | The dashboard uses browser sign-in; set `DATAGUARD_ENTRA_TENANT_ID` |
 | LIVE classification takes over a minute | The document escalated to the `large` tier (78-245 s) | Expected; use a document the `mid` tier settles |
 | The page looks stale after an update | The browser kept the old page | Reload (the server sends `no-store`), or restart the server for Python changes |
-| Interview mode stuck on a step | Step progress is kept per browser tab | Click **Start Demo**, or toggle Demo Mode off and on |
+| Demo Mode stuck on a step | Step progress is kept per browser tab | Click **Start Demo**, or toggle Demo Mode off and on |
 
 ## Implementation
 

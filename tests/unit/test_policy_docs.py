@@ -28,7 +28,7 @@ def test_required_uc6_documents_exist():
         "evaluation-plan",
         "results",
         "responsible-ai",
-        "interview-demo",
+        "demo-guide",
         "foundry-agent-setup",
         "foundry-evals-setup",
         "foundry-guardrails-setup",

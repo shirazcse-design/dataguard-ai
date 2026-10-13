@@ -1,8 +1,8 @@
-# UC1 interview demo
+# UC1 demo guide
 
 ## 1. Run it
 
-**Replay** (no Azure, no keys; the default for interviews):
+**Replay** (no Azure, no keys; the default for demos):
 
 ```
 .venv/bin/dataguard-uc4 demo serve --mode replay --port 8766

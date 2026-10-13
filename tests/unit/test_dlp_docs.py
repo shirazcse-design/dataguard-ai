@@ -31,7 +31,7 @@ def test_required_uc1_documents_exist():
         "evaluation",
         "responsible-ai",
         "lessons-learned",
-        "interview-demo",
+        "demo-guide",
         "foundry-agent-setup",
         "foundry-guardrails-setup",
         "foundry-observability-setup",

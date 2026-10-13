@@ -37,7 +37,7 @@ the corpus, the golden set and the code (see [`responsible-ai.md`](responsible-a
 | [`evaluation-plan.md`](evaluation-plan.md) | Golden set, retrieval vs answer vs agent metrics, deterministic / heuristic / judge labels |
 | [`results.md`](results.md) | All results in one place, with caveats and the decisions they led to |
 | [`responsible-ai.md`](responsible-ai.md) | Grounding, hallucination control, guardrail layers, privacy, human oversight, known gaps |
-| [`interview-demo.md`](interview-demo.md) | How to run the demo, a 7-minute script, and answers to the likely interview questions |
+| [`demo-guide.md`](demo-guide.md) | How to run the demo, a 7-minute script, and answers to the likely questions |
 | [`foundry-embeddings-setup.md`](foundry-embeddings-setup.md) | The embedding deployment (created manually) |
 | [`foundry-agent-setup.md`](foundry-agent-setup.md) | The Foundry agent specification (v5 created at the owner's request) |
 | [`foundry-guardrails-setup.md`](foundry-guardrails-setup.md) | Application vs Foundry guardrails, configuration, findings, decisions |

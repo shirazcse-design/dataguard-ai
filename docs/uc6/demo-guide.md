@@ -1,4 +1,4 @@
-# UC6 interview demo: Data Security Policy Copilot
+# UC6 demo guide: Data Security Policy Copilot
 
 ## Start
 

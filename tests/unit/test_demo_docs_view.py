@@ -1,5 +1,5 @@
 """Overview / Responsible AI / Observability content for the demo (`app/demo/docs_view.py`), and the
-interview mode's no-autoplay rule. Everything is read from committed documents and config; statuses
+Demo Mode's no-autoplay rule. Everything is read from committed documents and config; statuses
 follow the documents, so changing a document changes the page."""
 
 from __future__ import annotations
@@ -141,8 +141,8 @@ def test_the_rai_endpoint_is_static_documentation(tmp_path):
     assert r["data"]["agent"]["safety_invariant_compliance"] == 1.0
 
 
-# ---- Interview mode never autoplays -----------------------------------------------------------
-def test_interview_steps_navigate_and_preload_but_never_trigger_a_run():
+# ---- Demo Mode never autoplays ------------------------------------------------------------
+def test_demo_mode_steps_navigate_and_preload_but_never_trigger_a_run():
     js = (REPO / "app/demo/static/app.js").read_text(encoding="utf-8")
     body = re.search(r"function goStep\(i\) \{(.*?)\n\}", js, re.S).group(1)
     assert "analyze(" not in body and "runAgentBatch(" not in body and "postJSON(" not in body

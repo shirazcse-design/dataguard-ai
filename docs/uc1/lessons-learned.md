@@ -30,7 +30,7 @@
    task adherence 7/30. Shown the whole run, it scored 19/30 for the same agent.
 6. **Measure privacy end to end.** Our spans were clean. The platform's own telemetry was not. Only
    a live canary search showed the difference.
-7. **Report the misses.** Four cautious misses, kept as they are, tell an interviewer more than a
+7. **Report the misses.** Four cautious misses, kept as they are, tell a reviewer more than a
    tuned 100%.
 
 ## 3. Trade-offs

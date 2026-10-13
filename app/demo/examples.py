@@ -3,7 +3,7 @@
 They are dev-split documents because the recorded LLM responses (`data/llm_cache/`) cover them, so
 REPLAY mode reproduces the frozen hybrid's real answers without a network call. The expected
 outcomes below were observed by running the service (replay) and are pinned by a unit test, so an
-example that stops behaving as described fails CI instead of surprising an interview.
+example that stops behaving as described fails CI instead of surprising a live demo.
 
 `llm_tiers: "off"` sets the request option `max_llm_tier: "none"` - a real service option, not a
 UI trick - to show the fail-safe path: without an LLM verdict the router escalates to review

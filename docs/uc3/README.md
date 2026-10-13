@@ -98,7 +98,7 @@ Through the Foundry agent (4 requests: AR-001, 002, 015, 016): 4/4 acceptable; p
 
 | Document | What it covers |
 |---|---|
-| [`product-brief.md`](product-brief.md) | The interview one-pager: problem, users, solution, results, decisions |
+| [`product-brief.md`](product-brief.md) | The one-pager: problem, users, solution, results, decisions |
 | [`foundry/`](foundry/) | The Foundry agent's instructions, 12 tool schemas and output schema (generated) |
 | [`foundry-guardrails-setup.md`](foundry-guardrails-setup.md) | The guardrail, the six live probes, the GP6 gap and fix |
 | [`foundry-observability-setup.md`](foundry-observability-setup.md) | Span tree, App Insights, canary finding, the alias correction |
