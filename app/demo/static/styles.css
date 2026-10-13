@@ -274,7 +274,7 @@ select { font: inherit; font-size: 13.5px; padding: 7px 10px; border-radius: 8px
 .btn-good { background: var(--good); border-color: var(--good); }
 h2.sub { font-size: 13.5px; margin: 16px 0 8px; color: var(--ink-2); }
 
-/* ---- phase 4: overview, rai, observability, interview mode ---- */
+/* ---- phase 4: overview, rai, observability, demo mode ---- */
 .toggle { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--nav-ink); background: transparent;
   border: 1px solid #2b3a52; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
 .toggle[aria-pressed="true"] { background: #16a3a3; border-color: #16a3a3; color: #fff; }
@@ -287,7 +287,7 @@ h2.sub { font-size: 13.5px; margin: 16px 0 8px; color: var(--ink-2); }
 .demo-dots { display: flex; gap: 4px; }
 .demo-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: inline-block; }
 .demo-dots i.on { background: var(--accent); }
-body.interview .dev-only { display: none !important; }
+body.demo-mode .dev-only { display: none !important; }
 .arch svg { width: 100%; height: auto; display: block; }
 .arch text { font: 13px var(--sans); fill: var(--ink); }
 .arch .quiet { fill: var(--ink-3); font-size: 11.5px; }

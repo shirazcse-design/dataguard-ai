@@ -1259,7 +1259,7 @@ def _cmd_eval_fairness_probe(args: argparse.Namespace) -> int:
 
 
 def _cmd_demo_serve(args: argparse.Namespace) -> int:
-    """Serve the interview demo dashboard on a loopback address (docs/uc4/interview-demo.md).
+    """Serve the demo dashboard on a loopback address (docs/uc4/demo-guide.md).
     The mode is fixed for the life of the server and shown on every page: replay (no network) or
     live."""
     from app.demo.server import DemoApp, build_server
@@ -1279,7 +1279,7 @@ def _cmd_demo_serve(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
     print(
-        f"DataGuard AI interview demo ({app.mode.upper()}) at http://{host}:{port}/",
+        f"DataGuard AI demo dashboard ({app.mode.upper()}) at http://{host}:{port}/",
         file=sys.stderr,
     )
     try:
@@ -2142,7 +2142,7 @@ def build_parser() -> argparse.ArgumentParser:
         )
         _add_service_args(ap)
         ap.set_defaults(func=func)
-    demo = sub.add_parser("demo", help="interview demo dashboard (docs/uc4/interview-demo.md)")
+    demo = sub.add_parser("demo", help="demo dashboard (docs/uc4/demo-guide.md)")
     demo_sub = demo.add_subparsers(dest="demo_command", required=True)
     ds = demo_sub.add_parser("serve", help="serve the dashboard on a loopback address")
     ds.add_argument(

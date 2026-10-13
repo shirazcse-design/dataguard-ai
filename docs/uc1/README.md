@@ -52,14 +52,14 @@ These were measured on 30 cases written by one author, so they are indicative, n
 
 | Document | What it covers |
 |---|---|
-| [`product-brief.md`](product-brief.md) | The interview-oriented one-pager: problem, users, solution, results, decisions |
+| [`product-brief.md`](product-brief.md) | The one-pager: problem, users, solution, results, decisions |
 | [`architecture.md`](architecture.md) | Problem, personas, architecture, implementation, reuse of UC4 and UC6, integration contract |
 | [`agent-and-tools.md`](agent-and-tools.md) | Agent design, tool boundaries, the evidence pack, MCP |
 | [`risk-and-response.md`](risk-and-response.md) | Rubric, floors, review triggers, human-in-the-loop, simulated actions |
 | [`evaluation.md`](evaluation.md) | Golden set, metrics, v1 → v2 results, Foundry Evaluations, misses |
 | [`responsible-ai.md`](responsible-ai.md) | Guardrails, observability and privacy, human oversight, data |
 | [`lessons-learned.md`](lessons-learned.md) | Challenges, lessons, trade-offs, limitations, next steps |
-| [`interview-demo.md`](interview-demo.md) | How to run the demo, a 7-minute script, likely questions, tools and technologies |
+| [`demo-guide.md`](demo-guide.md) | How to run the demo, a 7-minute script, likely questions, tools and technologies |
 | [`foundry-agent-setup.md`](foundry-agent-setup.md) | The Foundry agent specification and live check |
 | [`foundry-guardrails-setup.md`](foundry-guardrails-setup.md) | Application and Foundry guardrails, verification findings |
 | [`foundry-observability-setup.md`](foundry-observability-setup.md) | App Insights, canary test, sampling fix, KQL |

@@ -1,5 +1,5 @@
 "use strict";
-// DataGuard AI interview demo. Every value on screen comes from the local demo server, which reads
+// DataGuard AI demo dashboard. Every value on screen comes from the local demo server, which reads
 // committed artifacts or calls the existing service. DOM is built with textContent only (no
 // innerHTML from data), and every panel shows its data class and source.
 
@@ -1068,12 +1068,12 @@ const DEMO_STEPS = [
   { page: "observability", say: "<b>Observability.</b> Redacted spans for the requests you just ran, verified in Microsoft Foundry's Tracing view." },
 ];
 
-function interviewOn() {
-  try { return localStorage.getItem("dg-interview") === "1"; } catch (_) { return false; }
+function demoModeOn() {
+  try { return localStorage.getItem("dg-demo-mode") === "1"; } catch (_) { return false; }
 }
-function setInterview(on) {
-  try { localStorage.setItem("dg-interview", on ? "1" : "0"); } catch (_) { /* per-viewer convenience only */ }
-  applyInterview();
+function setDemoMode(on) {
+  try { localStorage.setItem("dg-demo-mode", on ? "1" : "0"); } catch (_) { /* per-viewer convenience only */ }
+  applyDemoMode();
 }
 function demoStep() {
   try { return Math.max(0, Math.min(DEMO_STEPS.length - 1, Number(sessionStorage.getItem("dg-step") || 0))); } catch (_) { return 0; }
@@ -1092,7 +1092,7 @@ function goStep(i) {
 }
 function renderDemoBar() {
   const bar = document.getElementById("demo-bar");
-  if (!interviewOn()) { bar.hidden = true; return; }
+  if (!demoModeOn()) { bar.hidden = true; return; }
   bar.hidden = false;
   const i = demoStep(), step = DEMO_STEPS[i];
   const say = h("div", { class: "say" });
@@ -1102,7 +1102,7 @@ function renderDemoBar() {
   prev.disabled = i === 0;
   prev.addEventListener("click", () => goStep(i - 1));
   const next = h("button", { class: "btn", type: "button" }, i === DEMO_STEPS.length - 1 ? "Finish" : "Next Demo Step");
-  next.addEventListener("click", () => (i === DEMO_STEPS.length - 1 ? setInterview(false) : goStep(i + 1)));
+  next.addEventListener("click", () => (i === DEMO_STEPS.length - 1 ? setDemoMode(false) : goStep(i + 1)));
   const start = h("button", { class: "btn btn-quiet", type: "button" }, "Start Demo");
   start.addEventListener("click", () => goStep(0));
   bar.replaceChildren(
@@ -1110,10 +1110,10 @@ function renderDemoBar() {
     h("span", { class: "demo-dots" }, DEMO_STEPS.map((_, k) => h("i", { class: k <= i ? "on" : "" }))),
     say, start, prev, next);
 }
-function applyInterview() {
-  const on = interviewOn();
-  document.body.classList.toggle("interview", on);
-  const t = document.getElementById("interview-toggle");
+function applyDemoMode() {
+  const on = demoModeOn();
+  document.body.classList.toggle("demo-mode", on);
+  const t = document.getElementById("demo-toggle");
   t.setAttribute("aria-pressed", on ? "true" : "false");
   renderDemoBar();
 }
@@ -1128,12 +1128,12 @@ async function boot() {
     document.getElementById("mode-badge").textContent = "SERVER UNREACHABLE";
   }
   window.addEventListener("hashchange", route);
-  document.getElementById("interview-toggle").addEventListener("click", () => {
-    const on = !interviewOn();
-    setInterview(on);
+  document.getElementById("demo-toggle").addEventListener("click", () => {
+    const on = !demoModeOn();
+    setDemoMode(on);
     if (on) goStep(demoStep());
   });
-  applyInterview();
+  applyDemoMode();
   route();
 }
 document.addEventListener("DOMContentLoaded", boot);

@@ -1,4 +1,4 @@
-"""The interview demo's local HTTP server (stdlib only; no web framework).
+"""The demo dashboard's local HTTP server (stdlib only; no web framework).
 
 It binds to a loopback address only and serves a fixed set of routes: the static page and a few
 JSON endpoints that call EXISTING interfaces. There is no filesystem path handling (the static files

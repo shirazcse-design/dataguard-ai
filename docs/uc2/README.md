@@ -39,7 +39,7 @@ runs reproduce exactly offline) · **LIVE-VERIFIED** (measured against Foundry) 
 | Guardrails probed live (GA1-GA15) | LIVE-VERIFIED | [`results/guardrails-verification.md`](results/guardrails-verification.md) |
 | Telemetry privacy audit (local) and live canary (App Insights) | REPLAY-VERIFIED / LIVE-VERIFIED | [`results/observability.md`](results/observability.md), [`foundry-observability-setup.md`](foundry-observability-setup.md) |
 | Controlled learning loop (mine → candidate → gate → human approval) | IMPLEMENTED, TESTED | [`learning-loop.md`](learning-loop.md) |
-| Dashboard page and UC2 panels on the shared pages | IMPLEMENTED, TESTED | [`interview-demo.md`](interview-demo.md) |
+| Dashboard page and UC2 panels on the shared pages | IMPLEMENTED, TESTED | [`demo-guide.md`](demo-guide.md) |
 | Harmonising UC1's notice-period input with UC2; production identity and log sources | DOCUMENTED / FUTURE | [`lessons-learned.md`](lessons-learned.md) |
 
 Headline (full 4-agent system, all 36 cases, live run 3, replay reproduces it exactly):
@@ -56,7 +56,7 @@ accuracy at about 40% of the model calls. See [`evaluation.md`](evaluation.md#3-
 
 | Document | What it covers |
 |---|---|
-| [`product-brief.md`](product-brief.md) | The interview one-pager: problem, users, solution, results, decisions |
+| [`product-brief.md`](product-brief.md) | The one-pager: problem, users, solution, results, decisions |
 | [`architecture.md`](architecture.md) | Problem, personas, architecture, reuse of UC1 / UC4 / UC6, data flow |
 | [`ml-design.md`](ml-design.md) | Synthetic data, features, Isolation Forest, statistical baseline, ML evaluation |
 | [`agent-and-tools.md`](agent-and-tools.md) | The four agents, tool allow-lists, budgets, delegation, context isolation, MCP |
@@ -65,7 +65,7 @@ accuracy at about 40% of the model calls. See [`evaluation.md`](evaluation.md#3-
 | [`responsible-ai.md`](responsible-ai.md) | Inputs excluded, anomaly ≠ intent, fairness by role family, guardrails, privacy, oversight |
 | [`learning-loop.md`](learning-loop.md) | The governed feedback loop and its first candidate |
 | [`lessons-learned.md`](lessons-learned.md) | Challenges, lessons, trade-offs, limitations, next steps |
-| [`interview-demo.md`](interview-demo.md) | How to run the demo, an 8-minute script, likely questions |
+| [`demo-guide.md`](demo-guide.md) | How to run the demo, an 8-minute script, likely questions |
 | [`foundry-agents-setup.md`](foundry-agents-setup.md) | The four Foundry agents (generated specification) |
 | [`foundry-guardrails-setup.md`](foundry-guardrails-setup.md) | The guardrail and the live probe findings |
 | [`foundry-observability-setup.md`](foundry-observability-setup.md) | Span tree, App Insights, canary finding, KQL |

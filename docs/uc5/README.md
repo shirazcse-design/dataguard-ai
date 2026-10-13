@@ -82,7 +82,7 @@ p95 28.2 s. 16 incidents written by one author: indicative, not validated.
 
 | Document | What it covers |
 |---|---|
-| [`product-brief.md`](product-brief.md) | The interview one-pager |
+| [`product-brief.md`](product-brief.md) | The one-pager |
 | [`architecture.md`](architecture.md) | Flow, evidence model, timeline and correlation, agent and tools, severity and review, reuse |
 | [`architecture-decisions.md`](architecture-decisions.md) | Decisions (a)-(e) and the refinements |
 | [`evaluation.md`](evaluation.md) | Golden set, metrics, runs 1-2, Foundry Evaluations, misses |
